@@ -51,7 +51,6 @@ void processes_init(t_proc *processes, t_flags *params, header_t bots[4], unsign
 		(*processes).cmd = map[(*processes).current_position];
 		(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
 		(*processes).next = NULL;
-		(*processes).if_ind = -1;
 		processes = (*processes).next;
 		i++;
 	}
@@ -79,39 +78,47 @@ void get_t_dir_value(t_proc *processes, unsigned char *map,
 		tmp_2 = (short)((map[(*id_counter) + 2] << 8) + map[(*id_counter) + 1]);
 		(*processes).argv[arg_ind][1] = tmp_2;
 	}
-
 	(*id_counter) += size;
+	(*processes).argv_vals[1][0] = 1;
+	(*processes).argv_vals[1][1] = (*processes).argv[arg_ind][1];
 }
 
 void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter)
 {
 	short tmp;
+	short res;
 
 	tmp = 0;
+	res = 0;
 	tmp = (short)((map[(*id_counter) + 2] << 8) + map[(*id_counter) + 1]);
 	(*processes).argv[arg_ind][1] = tmp;
 	(*id_counter) += 2;
-	(*processes).if_ind = ((map[(*processes).argv[arg_ind][1] + 3] << 24) + (map[(*processes).argv[arg_ind][1] + 2] << 16) + (map[(*processes).argv[arg_ind][1] + 1] << 8) + map[(*processes).argv[arg_ind][1]]);
+	res = ((map[(*processes).argv[arg_ind][1] + 3] << 24) + (map[(*processes).argv[arg_ind][1] + 2] << 16) +
+		(map[(*processes).argv[arg_ind][1] + 1] << 8) + map[(*processes).argv[arg_ind][1]]);
+	(*processes).argv_vals[2][0] = 1;
+	(*processes).argv_vals[2][1] = res;
 }
 
 void get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter)
 {
 	(*processes).argv[arg_ind][1] = (unsigned char)map[(*id_counter) + 1];
+	(*processes).argv_vals[0][0] = 1;
+	(*processes).argv_vals[0][1] = (*processes).argv[arg_ind][1];
 	(*id_counter)++;
 }
 
 void get_args_values(t_proc *processes, unsigned char *map, int *id_counter)
 {
 	if ((*processes).argv[0][0])
-		get_arg_vals[(*processes).argv[0][0]](processes, map, 0, id_counter);
+		get_arg_vals[(*processes).argv[0][0] - 1](processes, map, 0, id_counter);
 	if ((*processes).argv[1][0])
-		get_arg_vals[(*processes).argv[1][0]](processes, map, 1, id_counter);
+		get_arg_vals[(*processes).argv[1][0] - 1](processes, map, 1, id_counter);
 	if ((*processes).argv[2][0])
-		get_arg_vals[(*processes).argv[2][0]](processes, map, 2, id_counter);
+		get_arg_vals[(*processes).argv[2][0] - 1](processes, map, 2, id_counter);
 
 }
 
-void take_args(unsigned char codage, int argv[3][2])
+void take_args(unsigned char codage, unsigned int argv[3][2])
 {
 	if((codage & 192) == 64)
         argv[0][0] = REG_CODE;
@@ -141,6 +148,13 @@ void clear_argv_arr(t_proc *processes)
 	(*processes).argv[1][1] = 0;
 	(*processes).argv[2][0] = 0;
 	(*processes).argv[2][1] = 0;
+
+	(*processes).argv_vals[0][0] = 0;
+	(*processes).argv_vals[0][1] = 0;
+	(*processes).argv_vals[1][0] = 0;
+	(*processes).argv_vals[1][1] = 0;
+	(*processes).argv_vals[2][0] = 0;
+	(*processes).argv_vals[2][1] = 0;
 }
 
 void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
@@ -158,7 +172,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	processes_init(processes, params, bots, map);
 	head_proc = processes;
 	//ft_printf("%d\n", map[1] & 48);
-	/*while (CYCLE_TO_DIE > 0 && main_cycle.processes > 0)
+	while (CYCLE_TO_DIE > 0 && main_cycle.processes > 0)
 	{
 		i = 0;
 		processes = head_proc;
@@ -167,21 +181,20 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			if ((*processes).if_live && map[(*processes).current_position] >= 1
 				&& map[(*processes).current_position] <= 16)
 			{
-				if (op_tab[map[(*processes).current_position]].codage)
+				if (op_tab[map[(*processes).current_position] - 1].codage)
 				{
 					id_counter = (*processes).current_position + 1;
 					take_args(map[id_counter], (*processes).argv);
 					get_args_values(processes, map, &id_counter);
-					(*processes).current_position = id_counter + 1;
 				}
 				else
 				{
 					id_counter = (*processes).current_position;
 					(*processes).argv[0][0] = DIR_CODE;
-					get_arg_vals[(*processes).argv[0][0]](processes, map, 0, id_counter);
-					(*processes).current_position = id_counter + 1;
+					get_arg_vals[(*processes).argv[0][0]](processes, map, 0, &id_counter);
 				}
-				instruct[map[(*processes).current_position]](head_proc, i);
+				instruct[map[(*processes).current_position] - 1](head_proc, i, &main_cycle);
+				(*processes).current_position = id_counter + 1;
 				clear_argv_arr(processes);
 			}
 			else
@@ -189,5 +202,5 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			processes = processes->next;
 			i++;
 		}
-	}*/
+	}
 }
