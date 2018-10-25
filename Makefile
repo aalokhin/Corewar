@@ -14,27 +14,26 @@ NAME = corewar
 
 LIB_DIR = ./libft/
 
-SFILES = main.c vm_cycle.c l_funcs.c
+SFILES = main.c vm_cycle.c l_funcs.c funcs_2_9.c
 
-OFILES = main.o vm_cycle.o l_funcs.o
+OFILES = main.o vm_cycle.o l_funcs.o funcs_2_9.o
 
 LIBFT = $(LIBFT_DIR)libftprintf.a
 LIBFT_DIR = $(LIB_DIR)
 LIBFT_INC = $(LIBFT_DIR)includes/
 
-CC_FLAGS = -Wall -Wextra -Werror
+CC_FLAGS = -Wall -Wextra -Werror 
 HEADER_FLAGS = -I $(LIBFT_INC)
 
-CC_FLAGS = -Wall -Wextra -Werror
 CC = gcc
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OFILES)
-	$(CC) $(CC_FLAGS) $(OFILES) $(LIBFT) -lncurses -o $(NAME)
+	$(CC) $(CC_FLAGS) $(OFILES) -lncurses $(LIBFT) -o $(NAME)
 
 $(OFILES): %.o:%.c
-	$(CC) -c $< -o $@ $(HEADER_FLAGS)
+	$(CC) -c $< -o $@ $(CC_FLAGS) $(HEADER_FLAGS)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)

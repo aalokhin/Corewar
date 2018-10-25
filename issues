@@ -44,3 +44,6 @@ Usage: ./vm_champs/corewar [-d N -s N -v N | -b --stealth | -n --stealth] [-a] <
 A process that does not abide by this rule will be killed immediately with a virtual foamy bat (bonus for sound effect!)
 If during one of those checkup we notice that there has been at least one NBR_LIVE execution of live since the latest check up, we will decrease CYCLE_TO_DIE of CYCLE_DELTA units.
 For each valid execution of the live instruction, the machine must display: “A process shows that player X (champion_name) is alive”.
+
+
+->zjmp ==> current position issue учитывать карент в главном цикле
