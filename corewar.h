@@ -6,6 +6,7 @@
 # include "libft/get_next_line.h"
 
 # include "op.h"
+# include <ncurses.h>
 
 #define MAGIC_SIZE 1
 #define NAME_SIZE 330
@@ -36,8 +37,9 @@ typedef struct s_proc
 	unsigned int regs[REG_NUMBER];
 	unsigned int if_live;
 	unsigned int cmd;
-	int argv[3][2];
+	unsigned int argv[3][2];
 	unsigned int cycles_wait;
+	unsigned int if_ind;
 	struct s_proc *next;
 }			t_proc;
 
@@ -67,29 +69,35 @@ typedef struct s_op
 	int					label;
 }			t_op;
 
-typedef void (*t_cmd)();
+typedef void (*t_cmd)(t_proc *head_proc, int cur_proc);
+typedef void (*t_aval)(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
 
-void live();
-void load();
-void store();
-void addition();
-void substraction();
-void bit_and();
-void bit_or();
-void bit_xor();
-void zjmp();
-void load_ind();
-void store_ind();
-void ffork();
-void lload();
-void lload_ind();
-void long_fork();
-void aff();
+void live(t_proc *head_proc, int cur_proc);
+void load(t_proc *head_proc, int cur_proc);
+void store(t_proc *head_proc, int cur_proc);
+void addition(t_proc *head_proc, int cur_proc);
+void substraction(t_proc *head_proc, int cur_proc);
+void bit_and(t_proc *head_proc, int cur_proc);
+void bit_or(t_proc *head_proc, int cur_proc);
+void bit_xor(t_proc *head_proc, int cur_proc);
+void zjmp(t_proc *head_proc, int cur_proc);
+void load_ind(t_proc *head_proc, int cur_proc);
+void store_ind(t_proc *head_proc, int cur_proc);
+void ffork(t_proc *head_proc, int cur_proc);
+void lload(t_proc *head_proc, int cur_proc);
+void lload_ind(t_proc *head_proc, int cur_proc);
+void long_fork(t_proc *head_proc, int cur_proc);
+void aff(t_proc *head_proc, int cur_proc);
 
 
 static t_cmd instruct[16] = {&live, &load, &store, &addition, &substraction, &bit_and, &bit_or,
 	&bit_xor, &zjmp, &load_ind, &store_ind, &ffork, &lload, &lload_ind,&long_fork, &aff};
 
+void get_t_dir_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
+void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
+void get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
+
+static t_aval get_arg_vals[3] = {&get_t_reg_value, &get_t_dir_value, &get_t_ind_value};
 
 static t_op    op_tab[17] =
 {

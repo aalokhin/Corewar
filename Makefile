@@ -31,7 +31,7 @@ CC = gcc
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OFILES)
-	$(CC) $(CC_FLAGS) $(OFILES) $(LIBFT) -o $(NAME)
+	$(CC) $(CC_FLAGS) $(OFILES) $(LIBFT) -lncurses -o $(NAME)
 
 $(OFILES): %.o:%.c
 	$(CC) -c $< -o $@ $(HEADER_FLAGS)

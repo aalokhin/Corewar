@@ -34,3 +34,12 @@ Usage: ./vm_champs/corewar [-d N -s N -v N | -b --stealth | -n --stealth] [-a] <
 разобраться с second_limit
 сделать таблицу данных типа какие значения у какого процесса
 добавит флаги в мейк
+надо сделать переменную куда считать сколько раз каждый процесс сказал, что жив за 1 цикл ту дай
+добавить прверки и эррор менеджмент
+
+Один нюанс, если T_REG не последний аргумент в функции, то нужно использовать значения из регистра каретки, т.е. argument1 = karetka->[T_REG].
+Если процессы зародившиеся от одного игрока в сумме скажут, что они живы более 21 раз, то cycle_to_die уменьшается на CYCLE_DELTA
+Если в течение MAX_CHECKS раз проверок Cycle_to_die не уменьшался, то cycle_to_die уменьшается на CYCLE_DELTA
+A process that does not abide by this rule will be killed immediately with a virtual foamy bat (bonus for sound effect!)
+If during one of those checkup we notice that there has been at least one NBR_LIVE execution of live since the latest check up, we will decrease CYCLE_TO_DIE of CYCLE_DELTA units.
+For each valid execution of the live instruction, the machine must display: “A process shows that player X (champion_name) is alive”.

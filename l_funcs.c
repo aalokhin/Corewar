@@ -3,82 +3,82 @@
 
 
 
-void live()
+void live(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void load()
+void load(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void store()
+void store(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void addition()
+void addition(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void substraction()
+void substraction(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void bit_and()
+void bit_and(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void bit_or()
+void bit_or(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void bit_xor()
+void bit_xor(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void zjmp()
+void zjmp(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void load_ind()
+void load_ind(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void store_ind()
+void store_ind(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void ffork()
+void ffork(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void lload()
+void lload(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void lload_ind()
+void lload_ind(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void long_fork()
+void long_fork(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
 
-void aff()
+void aff(t_proc *head_proc, int cur_proc)
 {
 	ft_printf("%s\n", "test");
 }
