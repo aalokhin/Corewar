@@ -18,6 +18,8 @@ void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, i
 	tmp->if_live = 1;
 	ft_printf("ind%d\n", tmp->current_position);
 	tmp->cmd = map[tmp->current_position];
+	(*main_cycle).indexes[(*processes).current_position][0] = tmp->id;
+	(*main_cycle).indexes[(*processes).current_position][1] = 1;
 	tmp->cycles_wait = op_tab[map[tmp->current_position] - 1].cycles_wait;
 	tmp->last_live_cycle = 0;
 	tmp->child_proc_lives = 0;
@@ -51,6 +53,31 @@ void check_if_lives(t_proc *head_proc, t_cycle *main_cycle)
 	(*main_cycle).current_winner = winner;
 }
 
+void fill_start_map_id(t_cycle *main_cycle, header_t bots[4], t_flags *params)
+{
+	unsigned int i;
+	unsigned int j;
+	unsigned int lim;
+
+	i = 0;
+	j = 0;
+	lim = 0;
+	while (j < (*params).bots_quantity)
+	{
+		i = bots[j].start_index;
+		lim = bots[j].prog_size + i;
+		while (i < lim)
+		{
+			(*main_cycle).indexes[i][0] = j + 1;
+			i++;
+		}
+		j++;
+	}	
+}
+
+
+		
+
 void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 {
 	unsigned int i;
@@ -58,18 +85,21 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	t_proc *processes;
 	t_proc *head_proc;
 	int id_counter;
-
+	
 	i = 0;
 	processes = NULL;
 	id_counter = 0;
 	main_cycle_init(&main_cycle, params);
-	processes = processes_init(params, bots, map);
+	fill_start_map_id(&main_cycle, bots, params);
+	processes = processes_init(params, bots, map, main_cycle.indexes);
 	head_proc = processes;
 	while (main_cycle.cycle_die > 0 && main_cycle.processes > 0)
 	{
 		//ft_printf("something weird\n");
 		i = 0;
 		processes = head_proc;
+		if ((*params).ncurses == 1)
+			map_to_screen(map, main_cycle.indexes);
 		while (i < main_cycle.processes && processes)
 		{
 			//ft_printf("Segfault in i == %d \n",  i);
@@ -89,11 +119,14 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					get_arg_vals[(*processes).argv[0][0]](processes, map, 0, &id_counter);
 				}
 				instruct[map[(*processes).current_position] - 1](head_proc, i, &main_cycle, map);
-				(*processes).current_position = id_counter + 1;
+				if (map[(*processes).current_position] != 9)
+					(*processes).current_position = id_counter + 1;
 				clear_argv_arr(processes);
 			}
 			else
 				(*processes).current_position++;
+			main_cycle.indexes[(*processes).current_position][0] = i;
+			main_cycle.indexes[(*processes).current_position][1] = 1;
 			if ((*processes).child_proc_lives > 21)
 			{
 				(*processes).child_proc_lives = 0;
@@ -117,6 +150,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				main_cycle.prev_cycle_die = main_cycle.cycle_die;
 			}
 		}
+		
 		//ft_printf("we are in  main cycle %d \n", main_cycle.cycles);
 		main_cycle.cycles++;
 	}

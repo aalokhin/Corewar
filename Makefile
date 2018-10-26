@@ -16,9 +16,9 @@ ASM := asm
 LIB_DIR = ./libft/
 ASM_DIR = ./assembler/
 
-SFILES = main.c vm_cycle.c l_funcs.c funcs_2_9.c init_funcs.c args_parsing.c
+SFILES = main.c vm_cycle.c l_funcs.c funcs_2_9.c init_funcs.c args_parsing.c visualastia.c
 
-OFILES = main.o vm_cycle.o l_funcs.o funcs_2_9.o init_funcs.o args_parsing.o
+OFILES = main.o vm_cycle.o l_funcs.o funcs_2_9.o init_funcs.o args_parsing.o visualastia.o
 
 ASM_SFILES := ./assembler/main_assembler.c
 

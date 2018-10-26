@@ -40,7 +40,7 @@ void main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).prev_cycle_die = (*main_cycle).cycle_die;
 }
 
-t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
+t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map, int indexes[MEM_SIZE][2])
 {
 	int i;
 	t_proc *processes;
@@ -57,6 +57,7 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 		(*processes).parent_nbr = -1;
 		(*processes).if_live = 1;
 		(*processes).cmd = map[(*processes).current_position];
+		indexes[(*processes).current_position][1] = 1;
 		(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
 		(*processes).last_live_cycle = 0;
 		(*processes).child_proc_lives = 0;

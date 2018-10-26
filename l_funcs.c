@@ -127,7 +127,7 @@ void store_ind(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, un
 	
 
 	map[i] = (*processes).argv[0][1];
-
+	(*main_cycle).indexes[i][0] = cur_proc;
  	ft_printf("%s\n", "test_sti");
 
  	map[0] = map[0];

@@ -56,48 +56,6 @@ void create_map(header_t bots[4], t_flags *params)
 		i++;
 	}
 
-	if ((*params).ncurses == 1)
-	{
-		initscr();
-    	cbreak();
-    	noecho();
-    	start_color();
-	
-    	int  yMax, xMax;
-    	getmaxyx(stdscr, yMax, xMax);
-	
-    	WINDOW * win = newwin(70, xMax-80, yMax-80, 5);
-    	// box(win, 0, 0);
-
-    	// int wborder(WINDOW *win, chtype ls, chtype rs, chtype ts, chtype bs, chtype tl, chtype tr, chtype bl, chtype br);
-		int ls, rs, ts, bs, tl, tr, bl, br;
-		ls = rs = ts = bs = tl = tr = bl = br = 42;
-    	init_pair(12, COLOR_CYAN, COLOR_CYAN);
-    	wattron(win, COLOR_PAIR(12));
-		wborder(win, ls, rs, ts, bs, tl, tr, bl, br);
-		mvwvline(win, 1, 196, 42, 70);
-		wattroff(win, COLOR_PAIR(12));
-		refresh();  
-		i = 0;
-		int y = 2;
-		int x = 3;
-		//mvwprintw(win, y, x,  "%.2x", map[I]);
-    	while (i < MEM_SIZE + 1)
-		{
-			x = 3;
-	   		while (x < 192)
-	    	{
-	    		mvwprintw(win, y, x,  "%.2x", map[i]);
-	    		x += 3;
-	    		i++;
-	    	}
-	   	 y++;
-		}
-		wrefresh(win);
-		getch();
-		endwin();
-	}
-
 	vm_cycle(map, params, bots);
 }
 

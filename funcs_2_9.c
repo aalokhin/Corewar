@@ -52,6 +52,7 @@ void store(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsign
 	{
 		map[(*processes).current_position + (*processes).argv[1][1] % IDX_MOD] =
 		(*processes).regs[(*processes).argv[0][1]];
+		(*main_cycle).indexes[(*processes).current_position + (*processes).argv[1][1] % IDX_MOD][0] = cur_proc;
 	}
 	else if ((*processes).argv[1][0] == REG_CODE)
 		(*processes).regs[(*processes).argv[1][1]] = (*processes).argv[0][1];
@@ -194,6 +195,7 @@ void zjmp(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigne
 	if ((*processes).carry == 1)
 	{
 		(*processes).current_position = (*processes).argv[arg_ind][1] % IDX_MOD;
+		(*main_cycle).indexes[(*processes).current_position][1] = 1;
 	}
 
 	ft_printf("%s\n", "test zjmp");
