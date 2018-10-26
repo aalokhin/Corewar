@@ -11,39 +11,58 @@
 #******************************************************************************#
 
 NAME = corewar
+ASM := asm
 
 LIB_DIR = ./libft/
+ASM_DIR = ./assembler/
 
 SFILES = main.c vm_cycle.c l_funcs.c funcs_2_9.c init_funcs.c args_parsing.c
 
 OFILES = main.o vm_cycle.o l_funcs.o funcs_2_9.o init_funcs.o args_parsing.o
 
+ASM_SFILES := ./assembler/main_assembler.c
+
+ASM_OFILES := ./assembler/main_assembler.o
+
 LIBFT = $(LIBFT_DIR)libftprintf.a
 LIBFT_DIR = $(LIB_DIR)
 LIBFT_INC = $(LIBFT_DIR)includes/
 
+
+
 CC_FLAGS = -Wall -Wextra -Werror 
 HEADER_FLAGS = -I $(LIBFT_INC)
 
+ASSEMBLER_FLAGS = -I .$(LIBFT_INC)
+
 CC = gcc
 
-all: $(NAME)
+all: $(NAME) $(ASM)
 
 $(NAME): $(LIBFT) $(OFILES)
 	$(CC) $(CC_FLAGS) $(OFILES) -lncurses $(LIBFT) -o $(NAME)
 
+$(ASM): $(ASM_OFILES)
+	$(CC) $(CC_FLAGS) $(ASM_OFILES) $(LIBFT) -o $(ASM)
+
+
 $(OFILES): %.o:%.c
 	$(CC) -c $< -o $@ $(CC_FLAGS) $(HEADER_FLAGS)
+
+$(ASM_OFILES): %.o:%.c
+	$(CC) -c $< -o $@ $(CC_FLAGS) $(ASSEMBLER_FLAGS)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 clean:
 	rm -rf $(OFILES)
+
 	make clean -C $(LIBFT_DIR)
 
 fclean: clean
 	rm -rf $(NAME)
+
 	make fclean -C $(LIBFT_DIR)
 
 re: fclean all
