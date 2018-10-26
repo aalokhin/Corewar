@@ -16,8 +16,8 @@ void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, i
 	tmp->carry = 0;
 	tmp->parent_nbr = cur_proc;
 	tmp->if_live = 1;
-	tmp->cmd = map[(*processes).current_position];
-	tmp->cycles_wait = op_tab[tmp->cmd - 1].cycles_wait;
+	tmp->cmd = map[tmp->current_position];
+	tmp->cycles_wait = op_tab[map[tmp->current_position] - 1].cycles_wait;
 	tmp->last_live_cycle = 0;
 	tmp->child_proc_lives = 0;
 	tmp->next = NULL;
@@ -66,10 +66,12 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	head_proc = processes;
 	while (main_cycle.cycle_die > 0 && main_cycle.processes > 0)
 	{
+		//ft_printf("something weird\n");
 		i = 0;
 		processes = head_proc;
 		while (i < main_cycle.processes && processes)
 		{
+			//ft_printf("Segfault in i == %d \n",  i);
 			if ((*processes).if_live && map[(*processes).current_position] >= 1
 				&& map[(*processes).current_position] <= 16)
 			{
@@ -102,6 +104,8 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 
 		if (main_cycle.cycles != 0 && main_cycle.cycles % main_cycle.cycle_die == 0)
 		{
+			//ft_printf("we are in the if number 3) \n");
+
 			check_if_lives(head_proc, &main_cycle);
 			main_cycle.checks_if_die++;
 			if (main_cycle.checks_if_die == 10)
@@ -112,6 +116,9 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				main_cycle.prev_cycle_die = main_cycle.cycle_die;
 			}
 		}
+		//ft_printf("we are in  main cycle %d \n", main_cycle.cycles);
 		main_cycle.cycles++;
 	}
+	ft_printf("we exited main cycle\n");
+
 }

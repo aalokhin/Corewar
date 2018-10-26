@@ -30,7 +30,7 @@ LIBFT_INC = $(LIBFT_DIR)includes/
 
 
 
-CC_FLAGS = -Wall -Wextra -Werror 
+CC_FLAGS = -Wall -Wextra -Werror -g
 HEADER_FLAGS = -I $(LIBFT_INC)
 
 ASSEMBLER_FLAGS = -I .$(LIBFT_INC)

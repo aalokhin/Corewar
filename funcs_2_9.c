@@ -3,18 +3,19 @@
 void load(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
 	unsigned int i;
-
+	int arg_ind;
 
 	i = 0;
-
+	arg_ind = 0;
 	while (i < (*main_cycle).processes && i != cur_proc)
 	{
 		processes = processes->next;
 		i++;
 	}
+	arg_ind = find_arg_index(processes, REG_CODE);
 	if ((*processes).argv[0][0] == DIR_CODE) //t_reg -> index of n array
 	{
-		(*processes).regs[(*processes).argv[0][1]] = (*processes).argv[0][1];
+		(*processes).regs[(*processes).argv[arg_ind][1]] = (*processes).argv[0][1];
 	}
 	else if ((*processes).argv[0][0] == IND_CODE)
 	{
@@ -23,11 +24,11 @@ void load(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigne
 		i = (*processes).current_position + (*processes).argv[0][1];
 		
 
-		(*processes).regs[(*processes).argv[0][1]] =
+		(*processes).regs[(*processes).argv[arg_ind][1]] =
 		(map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
 
 	}
-	if ((*processes).regs[(*processes).argv[0][1]] == 0)
+	if ((*processes).regs[(*processes).argv[arg_ind][1]] == 0)
 		(*processes).carry = 1;
 	else
 		(*processes).carry = 0;
