@@ -1,5 +1,4 @@
 #include "corewar.h"
-#include <stdio.h>
 
 unsigned char	*ft_strcpy_uns(unsigned char *dst, unsigned char *src)
 {
@@ -15,20 +14,6 @@ unsigned char	*ft_strcpy_uns(unsigned char *dst, unsigned char *src)
 	return (dst);
 }
 
-
-void		init_bots(header_t bots[4])
-{
-	int 	i = 0;
-	while(i < 4)
-	{
-		bots[i].magic = 0;
-		bots[i].prog_size = 0;
-		bots[i].exec_part = NULL;
-		bots[i].start_index = 0;
-	}
-
-
-}
 
 void create_map(header_t bots[4], t_flags *params)
 {
@@ -210,23 +195,6 @@ void print_usage(void)
 	ft_printf("%35s\n", "-n        : Ncurses output mode");
 	ft_printf("%53s\n", "--stealth : Hides the real contents of the memory");
 	ft_printf("%s%.22s\n", octos, octos);
-}
-
-void params_init(t_flags *params)
-{
-	(*params).a_aff = -1;
-	(*params).d_dumps_memory = -1;
-	(*params).s_cycles = -1;
-	(*params).v_verbosity = -1;
-	(*params).binary = -1;
-	(*params).b_stealth = -1;
-	(*params).ncurses = -1;
-	(*params).n_stealth = -1;
-	(*params).bots_quantity = 0;
-	(*params).players[0] = NULL;
-	(*params).players[1] = NULL;
-	(*params).players[2] = NULL;
-	(*params).players[3] = NULL;
 }
 
 int check_flags_core(int argc, char **argv, t_flags *params)

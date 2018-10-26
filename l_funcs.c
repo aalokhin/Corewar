@@ -1,6 +1,4 @@
 #include "corewar.h"
-#include <stdio.h>
-
 
 void live(t_proc *head_proc, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
@@ -19,6 +17,19 @@ void live(t_proc *head_proc, unsigned int cur_proc, t_cycle *main_cycle, unsigne
 		i++;
 	}
 	(*tmp).if_live = 1;
+	(*tmp).last_live_cycle = (*main_cycle).cycles;
+	if ((*tmp).parent_nbr > -1)
+	{
+		tmp = head_proc;
+		i = 0;
+		other_proc = (*tmp).parent_nbr;
+		while (i < (*main_cycle).processes && i != other_proc)
+		{
+			tmp = tmp->next;
+			i++;
+		}
+		(*tmp).child_proc_lives++;
+	}
 	arg_ind = find_arg_index(tmp, DIR_CODE);
 	if ((*tmp).argv[arg_ind][0] &&
 		(*tmp).argv[arg_ind][1] < (*main_cycle).processes)
@@ -32,6 +43,19 @@ void live(t_proc *head_proc, unsigned int cur_proc, t_cycle *main_cycle, unsigne
 			i++;
 		}
 		(*tmp).if_live = 1;
+		(*tmp).last_live_cycle = (*main_cycle).cycles;
+		if ((*tmp).parent_nbr > -1)
+		{
+			tmp = head_proc;
+			i = 0;
+			other_proc = (*tmp).parent_nbr;
+			while (i < (*main_cycle).processes && i != other_proc)
+			{
+				tmp = tmp->next;
+				i++;
+			}
+			(*tmp).child_proc_lives++;
+		}
 	}
 	map[0] = map[0];
 }

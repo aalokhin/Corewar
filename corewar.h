@@ -36,9 +36,11 @@ typedef struct s_proc
 	int parent_nbr;
 	unsigned int regs[REG_NUMBER];
 	unsigned int if_live;
+	int last_live_cycle;
 	unsigned int cmd;
 	unsigned int argv[3][2];
 	unsigned int cycles_wait;
+	int child_proc_lives;
 	struct s_proc *next;
 }			t_proc;
 
@@ -47,14 +49,13 @@ static t_proc t_proc8;
 
 typedef struct s_cycle
 {
-	unsigned int cycles;
+	int cycles;
 	unsigned int processes;
-	unsigned int second_limit;
-	unsigned int cycle_die;
-	unsigned int cycle_delta;
-	unsigned char nbr_live;
-	unsigned int max_checks;
+	int second_limit;
+	int cycle_die;
 	int current_winner;
+	int checks_if_die;
+	int prev_cycle_die;
 }			t_cycle;
 
 typedef struct s_op
@@ -129,7 +130,17 @@ static t_op    op_tab[17] =
 
 void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4]);
 int find_arg_index(t_proc *processes, unsigned int target);
-
 void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, int index, int cur_proc);
+void		init_bots(header_t bots[4]);
+void params_init(t_flags *params);
+void main_cycle_init(t_cycle *main_cycle, t_flags *params);
+void processes_init(t_proc *processes, t_flags *params, header_t bots[4], unsigned char *map);
+void clear_argv_arr(t_proc *processes);
+void get_t_dir_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
+void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
+void get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
+void get_args_values(t_proc *processes, unsigned char *map, int *id_counter);
+void take_args(unsigned char codage, unsigned int argv[3][2]);
+
 #endif
 

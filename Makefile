@@ -14,9 +14,9 @@ NAME = corewar
 
 LIB_DIR = ./libft/
 
-SFILES = main.c vm_cycle.c l_funcs.c funcs_2_9.c
+SFILES = main.c vm_cycle.c l_funcs.c funcs_2_9.c init_funcs.c args_parsing.c
 
-OFILES = main.o vm_cycle.o l_funcs.o funcs_2_9.o
+OFILES = main.o vm_cycle.o l_funcs.o funcs_2_9.o init_funcs.o args_parsing.o
 
 LIBFT = $(LIBFT_DIR)libftprintf.a
 LIBFT_DIR = $(LIB_DIR)

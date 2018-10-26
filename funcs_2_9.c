@@ -1,7 +1,4 @@
 #include "corewar.h"
-#include <stdio.h>
-
-
 
 void load(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
