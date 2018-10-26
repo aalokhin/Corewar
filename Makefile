@@ -57,12 +57,12 @@ $(LIBFT):
 
 clean:
 	rm -rf $(OFILES)
-
+	rm -rf $(ASM_OFILES)
 	make clean -C $(LIBFT_DIR)
 
 fclean: clean
 	rm -rf $(NAME)
-
+	rm -rf $(ASM)
 	make fclean -C $(LIBFT_DIR)
 
 re: fclean all
