@@ -140,7 +140,7 @@ void get_t_dir_value(t_proc *processes, unsigned char *map, int arg_ind, int *id
 void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
 void get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
 void get_args_values(t_proc *processes, unsigned char *map, int *id_counter);
-void take_args(unsigned char codage, unsigned int argv[3][2]);
+void take_args(unsigned char codage, t_proc *processes);
 
 #endif
 

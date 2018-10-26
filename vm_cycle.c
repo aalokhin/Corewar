@@ -13,11 +13,13 @@ void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, i
 	tmp = (t_proc *)malloc(sizeof(t_proc));
 	tmp->id = (*main_cycle).processes - 1;
 	tmp->current_position = index;
-	tmp->carry = -1;
+	tmp->carry = 0;
 	tmp->parent_nbr = cur_proc;
 	tmp->if_live = 1;
 	tmp->cmd = map[(*processes).current_position];
 	tmp->cycles_wait = op_tab[tmp->cmd - 1].cycles_wait;
+	tmp->last_live_cycle = 0;
+	tmp->child_proc_lives = 0;
 	tmp->next = NULL;
 	processes = tmp;
 }
@@ -62,17 +64,11 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	main_cycle_init(&main_cycle, params);
 	processes = processes_init(params, bots, map);
 	head_proc = processes;
-	/*while (processes)
-	{
-		ft_printf("%d\n", (*processes).id);
-		ft_printf("test%s\n", "test");
-		processes = processes->next;
-	}*/
 	while (main_cycle.cycle_die > 0 && main_cycle.processes > 0)
 	{
 		i = 0;
 		processes = head_proc;
-		while (i < main_cycle.processes)
+		while (i < main_cycle.processes && processes)
 		{
 			if ((*processes).if_live && map[(*processes).current_position] >= 1
 				&& map[(*processes).current_position] <= 16)
@@ -80,7 +76,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				if (op_tab[map[(*processes).current_position] - 1].codage)
 				{
 					id_counter = (*processes).current_position + 1;
-					take_args(map[id_counter], (*processes).argv);
+					take_args(map[id_counter], processes);
 					get_args_values(processes, map, &id_counter);
 				}
 				else
@@ -103,7 +99,8 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			processes = processes->next;
 			i++;
 		}
-		if (main_cycle.cycles != 0 && main_cycle.cycles % main_cycle.cycle_die)
+
+		if (main_cycle.cycles != 0 && main_cycle.cycles % main_cycle.cycle_die == 0)
 		{
 			check_if_lives(head_proc, &main_cycle);
 			main_cycle.checks_if_die++;

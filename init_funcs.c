@@ -55,10 +55,10 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 		(*processes).current_position = bots[i].start_index;
 		(*processes).carry = 0;
 		(*processes).parent_nbr = -1;
-		(*processes).if_live = 0;
+		(*processes).if_live = 1;
 		(*processes).cmd = map[(*processes).current_position];
 		(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
-		(*processes).last_live_cycle = -1;
+		(*processes).last_live_cycle = 0;
 		(*processes).child_proc_lives = 0;
 		(*processes).next = tmp;
 		tmp = processes;

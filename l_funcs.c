@@ -57,6 +57,7 @@ void live(t_proc *head_proc, unsigned int cur_proc, t_cycle *main_cycle, unsigne
 			(*tmp).child_proc_lives++;
 		}
 	}
+	ft_printf("%s\n", "test live");
 	map[0] = map[0];
 }
 
@@ -86,13 +87,14 @@ void load_ind(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, uns
 	(*processes).argv[2][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
 	
 
-	ft_printf("%s\n", "test");
+	ft_printf("%s\n", "test load_ind");
 
 	map[0] = map[0];
 }
 
 void store_ind(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
+	
 	unsigned int i;
 	int arg_ind;
 
@@ -174,44 +176,9 @@ void lload(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsign
 	else
 		(*processes).carry = 0;
 	ft_printf("%s\n", "test_load load");
-
-
 	map[0] = map[0];
 
 }
-
-
-
-// int i;
-
-
-// i = 0;
-
-// while (i < (*main_cycle).processes && i != cur_proc)
-// {
-// 	*processes = *processes->next;
-// 	i++;
-// }
-// if ((*processes).argv[0][0] == DIR_CODE) //t_reg -> index of n array
-// {
-// 	(*processes).regs[(*processes).argv[0][1]] = (*processes).argv[0][1];
-// }
-// else if ((*processes).argv[0][0] == IND_CODE)
-// {
-
-// 	(*processes).argv[0][1] = (*processes).argv[0][1] % IDX_MOD;
-// 	i = (*processes).current_position + (*processes).argv[0][1];
-	
-
-// 	(*processes).regs[(*processes).argv[0][1]] =
-// 	(map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
-
-// }
-// if ((*processes).regs[(*processes).argv[0][1]] == 0)
-// 	(*processes).carry = 1;
-// else
-// 	(*processes).carry = 0;
-// ft_printf("%s\n", "test_load");
 
 void lload_ind(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
@@ -250,16 +217,12 @@ void lload_ind(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, un
 	else
 		(*processes).carry = 0;
 
-	ft_printf("%s\n", "test_load load");
 
 	map[0] = map[0];
 
 	//***********************************************************************!!!!!! FAAAAAAAAKE
 
-
-
-
-	ft_printf("%s\n", "test_load load2");
+	ft_printf("%s\n", "test_load lload_ind");
 }
 
 void long_fork(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -298,6 +261,6 @@ void aff(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned
 		i++;
 	}
 	ft_printf("%s\n", "aff -> test");
-	ft_printf("%c\n", ((*processes).regs[(*processes).argv[0][1]] % 256));
+	//ft_printf("%c\n", ((*processes).regs[(*processes).argv[0][1]] % 256));
 	map[0] = map[0];
 }
