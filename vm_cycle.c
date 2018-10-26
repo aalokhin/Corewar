@@ -16,6 +16,7 @@ void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, i
 	tmp->carry = 0;
 	tmp->parent_nbr = cur_proc;
 	tmp->if_live = 1;
+	ft_printf("ind%d\n", tmp->current_position);
 	tmp->cmd = map[tmp->current_position];
 	tmp->cycles_wait = op_tab[map[tmp->current_position] - 1].cycles_wait;
 	tmp->last_live_cycle = 0;
@@ -29,7 +30,7 @@ int find_arg_index(t_proc *processes, unsigned int target)
 	int i;
 
 	i = 0;
-	while((*processes).argv[i][0] != target)
+	while(i < 3 && (*processes).argv[i][0] != target)
 		i++;
 	return (i);
 }

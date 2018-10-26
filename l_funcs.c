@@ -16,8 +16,11 @@ void live(t_proc *head_proc, unsigned int cur_proc, t_cycle *main_cycle, unsigne
 		tmp = tmp->next;
 		i++;
 	}
-	(*tmp).if_live = 1;
-	(*tmp).last_live_cycle = (*main_cycle).cycles;
+	if (tmp)
+	{
+		(*tmp).if_live = 1;
+		(*tmp).last_live_cycle = (*main_cycle).cycles;
+	}
 	if ((*tmp).parent_nbr > -1)
 	{
 		tmp = head_proc;
@@ -37,14 +40,18 @@ void live(t_proc *head_proc, unsigned int cur_proc, t_cycle *main_cycle, unsigne
 		i = 0;
 		other_proc = (*tmp).argv[arg_ind][1];
 		tmp = head_proc;
-		while (i < (*main_cycle).processes && i != other_proc)
+		while (tmp && i != other_proc)
 		{
 			tmp = tmp->next;
 			i++;
 		}
-		(*tmp).if_live = 1;
-		(*tmp).last_live_cycle = (*main_cycle).cycles;
-		if ((*tmp).parent_nbr > -1)
+		if (tmp)
+		{
+			(*tmp).if_live = 1;
+			(*tmp).last_live_cycle = (*main_cycle).cycles;
+		}
+		
+		if (tmp && (*tmp).parent_nbr > -1)
 		{
 			tmp = head_proc;
 			i = 0;
@@ -54,7 +61,11 @@ void live(t_proc *head_proc, unsigned int cur_proc, t_cycle *main_cycle, unsigne
 				tmp = tmp->next;
 				i++;
 			}
-			(*tmp).child_proc_lives++;
+			if (tmp)
+			{
+				(*tmp).child_proc_lives++;
+			}
+			
 		}
 	}
 	ft_printf("%s\n", "test live");
@@ -136,6 +147,7 @@ void ffork(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsign
 		i++;
 	}
 	arg_ind = find_arg_index(processes, DIR_CODE);
+	//ft_printf("(*processes).argv[arg_ind][1]%d\n", (*processes).argv[arg_ind][1]);
 	i = ((*processes).argv[arg_ind][1] % IDX_MOD) + (*processes).current_position;
 	processes_add(processes, map, main_cycle, i, (*processes).id);
 
@@ -240,7 +252,9 @@ void long_fork(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, un
 		i++;
 	}
 	arg_ind = find_arg_index(processes, DIR_CODE);
+	//ft_printf("(*processes).argv[arg_ind][1]%d\n", (*processes).argv[arg_ind][1]);//
 	i = (*processes).argv[arg_ind][1] + (*processes).current_position;
+	//ft_printf("i%d\n", i);
 	processes_add(processes, map, main_cycle, i, (*processes).id);
 
 	ft_printf("%s\n", "long->fork");

@@ -51,7 +51,7 @@ void store(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsign
 	if ((*processes).argv[1][0] == IND_CODE)
 	{
 		map[(*processes).current_position + (*processes).argv[1][1] % IDX_MOD] =
-		(*processes).regs[(*processes).argv[1][1]];
+		(*processes).regs[(*processes).argv[0][1]];
 	}
 	else if ((*processes).argv[1][0] == REG_CODE)
 		(*processes).regs[(*processes).argv[1][1]] = (*processes).argv[0][1];
