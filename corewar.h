@@ -134,13 +134,13 @@ void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, i
 void		init_bots(header_t bots[4]);
 void params_init(t_flags *params);
 void main_cycle_init(t_cycle *main_cycle, t_flags *params);
-void processes_init(t_proc *processes, t_flags *params, header_t bots[4], unsigned char *map);
+t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map);
 void clear_argv_arr(t_proc *processes);
 void get_t_dir_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
 void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
 void get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
 void get_args_values(t_proc *processes, unsigned char *map, int *id_counter);
-void take_args(unsigned char codage, unsigned int argv[3][2]);
+void take_args(unsigned char codage, t_proc *processes);
 
 #endif
 

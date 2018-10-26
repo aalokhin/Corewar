@@ -10,11 +10,11 @@ void get_t_dir_value(t_proc *processes, unsigned char *map,
 	size = 0;
 	tmp_2 = 0;
 	tmp_4 = 0;
-	if (!op_tab[map[(*processes).current_position]].label)
+	if (!op_tab[map[(*processes).current_position] - 1].label)
 	{
 		size = 4;
-		tmp_2 = (unsigned int)((map[(*id_counter) + 4] << 24) + (map[(*id_counter) + 3] << 16) + (map[(*id_counter) + 2] << 8) + map[(*id_counter) + 1]);
-		(*processes).argv[arg_ind][1] = tmp_2;
+		tmp_4 = (unsigned int)((map[(*id_counter) + 4] << 24) + (map[(*id_counter) + 3] << 16) + (map[(*id_counter) + 2] << 8) + map[(*id_counter) + 1]);
+		(*processes).argv[arg_ind][1] = tmp_4;
 	}
 	else
 	{
@@ -35,8 +35,8 @@ void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id
 	tmp = (short)((map[(*id_counter) + 2] << 8) + map[(*id_counter) + 1]);
 	(*processes).argv[arg_ind][1] = tmp;
 	(*id_counter) += 2;
-	res = ((map[(*processes).argv[arg_ind][1] + 3] << 24) + (map[(*processes).argv[arg_ind][1] + 2] << 16) +
-		(map[(*processes).argv[arg_ind][1] + 1] << 8) + map[(*processes).argv[arg_ind][1]]);
+	//res = ((map[(*processes).argv[arg_ind][1] + 3] << 24) + (map[(*processes).argv[arg_ind][1] + 2] << 16) +
+		//(map[(*processes).argv[arg_ind][1] + 1] << 8) + map[(*processes).argv[arg_ind][1]]);
 }
 
 void get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter)
@@ -56,24 +56,24 @@ void get_args_values(t_proc *processes, unsigned char *map, int *id_counter)
 
 }
 
-void take_args(unsigned char codage, unsigned int argv[3][2])
+void take_args(unsigned char codage, t_proc *processes)
 {
 	if((codage & 192) == 64)
-        argv[0][0] = REG_CODE;
+        (*processes).argv[0][0] = REG_CODE;
     else if((codage & 192) == 192)
-        argv[0][0] = IND_CODE;
+        (*processes).argv[0][0] = IND_CODE;
     else if((codage & 192) == 128 )
-        argv[0][0] = DIR_CODE;
+        (*processes).argv[0][0] = DIR_CODE;
     if((codage & 48 ) == 32)
-        argv[1][0] = DIR_CODE;
+        (*processes).argv[1][0] = DIR_CODE;
     else if((codage & 48 ) == 48 )
-        argv[1][0] = IND_CODE;
+        (*processes).argv[1][0] = IND_CODE;
     else if((codage & 48 ) == 16)
-        argv[1][0] = REG_CODE;
+        (*processes).argv[1][0] = REG_CODE;
     if((codage & 12) == 8 )
-        argv[2][0] = DIR_CODE;
+        (*processes).argv[2][0] = DIR_CODE;
     else if((codage & 12) == 12)
-        argv[2][0] = IND_CODE;
+        (*processes).argv[2][0] = IND_CODE;
     else if((codage & 12) == 4)
-        argv[2][0] = REG_CODE;
+        (*processes).argv[2][0] = REG_CODE;
 }

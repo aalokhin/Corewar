@@ -195,7 +195,7 @@ void zjmp(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigne
 		(*processes).current_position = (*processes).argv[arg_ind][1] % IDX_MOD;
 	}
 
-	ft_printf("%s\n", "test");
+	ft_printf("%s\n", "test zjmp");
 
 	map[0] = map[0];
 }

@@ -40,12 +40,15 @@ void main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).prev_cycle_die = (*main_cycle).cycle_die;
 }
 
-void processes_init(t_proc *processes, t_flags *params, header_t bots[4], unsigned char *map)
+t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 {
-	unsigned int i;
-	
-	i = 0;
-	while (i < (*params).bots_quantity)
+	int i;
+	t_proc *processes;
+	t_proc *tmp;
+
+	i = (*params).bots_quantity - 1;
+	tmp = NULL;
+	while (i >= 0)
 	{
 		processes = (t_proc *)malloc(sizeof(t_proc));
 		(*processes).id = i;
@@ -55,10 +58,14 @@ void processes_init(t_proc *processes, t_flags *params, header_t bots[4], unsign
 		(*processes).if_live = 1;
 		(*processes).cmd = map[(*processes).current_position];
 		(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
-		(*processes).next = NULL;
-		processes = (*processes).next;
-		i++;
+		(*processes).last_live_cycle = 0;
+		(*processes).child_proc_lives = 0;
+		(*processes).next = tmp;
+		tmp = processes;
+		ft_printf("bots%d\n", (*processes).id);
+		i--;
 	}
+	return (processes);
 }
 
 void clear_argv_arr(t_proc *processes)
