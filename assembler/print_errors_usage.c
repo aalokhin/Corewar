@@ -14,11 +14,12 @@ void 			ft_print_inv_f()
 }
 
 
-// Dumping annotated program on standard output
-// Program size : 347 bytes
-// Name : "shit_champ"
 
 
+void	ft_print_inv_input()
+{
+	ft_printf("Input error\n");
+}
 
 void	ft_print_flag_a(t_binfile *bin)
 {
