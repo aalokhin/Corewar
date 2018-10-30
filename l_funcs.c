@@ -1,9 +1,9 @@
 #include "corewar.h"
 
-void live(t_proc *head_proc, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
-	unsigned int other_proc;
+	int i;
+	int other_proc;
 	t_proc *tmp;
 	int arg_ind;
 
@@ -34,7 +34,7 @@ void live(t_proc *head_proc, unsigned int cur_proc, t_cycle *main_cycle, unsigne
 		(*tmp).child_proc_lives++;
 	}
 	arg_ind = find_arg_index(tmp, DIR_CODE);
-	if ((*tmp).argv[arg_ind][0] &&
+	if (arg_ind >= 0 && arg_ind < 3 && (*tmp).argv[arg_ind][0] &&
 		(*tmp).argv[arg_ind][1] < (*main_cycle).processes)
 	{
 		i = 0;
@@ -73,11 +73,10 @@ void live(t_proc *head_proc, unsigned int cur_proc, t_cycle *main_cycle, unsigne
 }
 
 
-void load_ind(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
+	int i;
 	int arg_ind;
-
 
 	i = 0;
 	arg_ind = 0;
@@ -90,25 +89,21 @@ void load_ind(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, uns
 	if ((*processes).argv[0][1] == IND_CODE)
 	{
 		i = ((*processes).argv[2][1] % IDX_MOD) + (*processes).current_position;
-		(*processes).argv[0][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+		if (i >= 0 && i < MEM_SIZE)
+			(*processes).argv[0][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
 	}
-
 	i = (((*processes).argv[0][1] + (*processes).argv[1][1]) % IDX_MOD) + (*processes).current_position;
-
-	(*processes).argv[2][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+	if (i >= 0 && i < MEM_SIZE)
+		(*processes).argv[2][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
 	
-
 	ft_printf("%s\n", "test load_ind");
 
-	map[0] = map[0];
 }
 
-void store_ind(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	
-	unsigned int i;
+	int i;
 	int arg_ind;
-
 
 	i = 0;
 	arg_ind = 0;
@@ -120,22 +115,21 @@ void store_ind(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, un
 	if ((*processes).argv[1][1] == IND_CODE)
 	{
 		i = (*processes).argv[1][1] % IDX_MOD;
-		(*processes).argv[1][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+		if (i >= 0 && i < MEM_SIZE)
+			(*processes).argv[1][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
 	}
-
-	i = ( ((*processes).argv[1][1] + (*processes).argv[2][1] ) % IDX_MOD) + (*processes).current_position;
-	
-
-	map[i] = (*processes).argv[0][1];
-	(*main_cycle).indexes[i][0] = cur_proc;
+	i = (((*processes).argv[1][1] + (*processes).argv[2][1] ) % IDX_MOD) + (*processes).current_position;
+	if (i >= 0 && i < MEM_SIZE)
+	{
+		map[i] = (*processes).argv[0][1];
+		(*main_cycle).indexes[i][0] = cur_proc;
+	}
  	ft_printf("%s\n", "test_sti");
-
- 	map[0] = map[0];
 }
 
-void ffork(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
+	int i;
 	int arg_ind;
 
 
@@ -149,17 +143,14 @@ void ffork(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsign
 	arg_ind = find_arg_index(processes, DIR_CODE);
 	//ft_printf("(*processes).argv[arg_ind][1]%d\n", (*processes).argv[arg_ind][1]);
 	i = ((*processes).argv[arg_ind][1] % IDX_MOD) + (*processes).current_position;
-	processes_add(processes, map, main_cycle, i, (*processes).id);
-
+	if (i >= 0 && i < MEM_SIZE)
+		processes_add(processes, map, main_cycle, i, (*processes).id);
 	ft_printf("%s\n", "test_>fork");
-
-	map[0] = map[0];
 }
 
-void lload(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void lload(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
-
+	int i;
 
 	i = 0;
 
@@ -177,9 +168,8 @@ void lload(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsign
 
 		(*processes).argv[0][1] = (*processes).argv[0][1];
 		i = (*processes).current_position + (*processes).argv[0][1];
-		
-
-		(*processes).regs[(*processes).argv[0][1]] =
+		if (i >= 0 && i < MEM_SIZE)
+			(*processes).regs[(*processes).argv[0][1]] =
 		(map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
 
 	}
@@ -192,14 +182,14 @@ void lload(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsign
 
 }
 
-void lload_ind(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
 
 	//надо разобраться 
 
 	//**********************************************************!!!!!! FAAAAAAAAKE
 
-	unsigned int i;
+	int i;
 
 
 	i = 0;
@@ -237,12 +227,10 @@ void lload_ind(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, un
 	ft_printf("%s\n", "test_load lload_ind");
 }
 
-void long_fork(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-
-	unsigned int i;
+	int i;
 	int arg_ind;
-
 
 	i = 0;
 	arg_ind = 0;
@@ -252,20 +240,16 @@ void long_fork(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, un
 		i++;
 	}
 	arg_ind = find_arg_index(processes, DIR_CODE);
-	//ft_printf("(*processes).argv[arg_ind][1]%d\n", (*processes).argv[arg_ind][1]);//
 	i = (*processes).argv[arg_ind][1] + (*processes).current_position;
-	//ft_printf("i%d\n", i);
-	processes_add(processes, map, main_cycle, i, (*processes).id);
-
+	if (i >= 0 && i < MEM_SIZE)
+		processes_add(processes, map, main_cycle, i, (*processes).id);
 	ft_printf("%s\n", "long->fork");
-
-	map[0] = map[0];
-
 }
 
-void aff(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void aff(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
+	// надо узнать куда печатать символ и правильно прописать функцию
+	int i;
 
 	i = 0;
 

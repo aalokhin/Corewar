@@ -1,6 +1,56 @@
 #include "corewar.h"
 
-void 	map_to_screen(unsigned char *map, int indexes[MEM_SIZE][2])
+void print_map_info(WINDOW * win, t_cycle main_cycle, t_flags *params, t_proc *processes)
+{
+	unsigned int i;
+	int x;
+	int y;
+
+	i = 0;
+	x = 199;
+	y = 2;
+	mvwprintw(win, y, x,  "** PAUSED **");
+	y += 2;
+	mvwprintw(win, y, x,  "Cycles/second limit : %d", main_cycle.second_limit);
+	y += 3;
+	mvwprintw(win, y, x,  "Cycles: %d", main_cycle.cycles);
+	y += 2;
+	mvwprintw(win, y, x,  "Processes: %d", main_cycle.processes);
+	while (i < (*params).bots_quantity)
+	{
+		y += 2;
+		mvwprintw(win, y, x,  "Player: -%d : ", (*processes).id + 1);
+		x+=2;
+		y++;
+		mvwprintw(win, y, x,  "Last live: %d ", (*processes).last_live_cycle);
+		y++;
+		mvwprintw(win, y, x,  "Lives in current period : %d ", (*processes).child_proc_lives);
+		processes = processes->next;
+		i++;
+	}
+	y += 2;
+	x-=2;
+	mvwprintw(win, y, x,  "Live breakdown for current period :");
+	y += 2;
+	wattron(win, COLOR_PAIR(7));
+	mvwprintw(win, y, x,  "[--------------------------------------------------]");
+	wattroff(win, COLOR_PAIR(7));
+	y += 2;
+	mvwprintw(win, y, x,  "Live breakdown for last period :");
+	y += 2;
+	mvwprintw(win, y, x,  "Live breakdown for last period :");
+	wattron(win, COLOR_PAIR(7));
+	mvwprintw(win, y, x,  "[--------------------------------------------------]");
+	wattroff(win, COLOR_PAIR(7));
+	y += 2;
+	mvwprintw(win, y, x,  "CYCLE_TO_DIE : %d", main_cycle.cycle_die);
+	y += 2;
+	mvwprintw(win, y, x,  "NBR_LIVE : %d", NBR_LIVE);
+	y += 2;
+	mvwprintw(win, y, x,  "MAX_CHECKS : %d", MAX_CHECKS);
+}
+
+void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes)
 {
 	int i = 0;
 	int y = 2;
@@ -37,8 +87,6 @@ void 	map_to_screen(unsigned char *map, int indexes[MEM_SIZE][2])
 	init_pair(33, COLOR_BLACK, COLOR_RED);
 	init_pair(44, COLOR_BLACK, COLOR_CYAN);
 	
-	//indexes[1] = indexes[1]; 
-
 
 
 	wattron(win, COLOR_PAIR(12));
@@ -48,7 +96,6 @@ void 	map_to_screen(unsigned char *map, int indexes[MEM_SIZE][2])
 	refresh();  
 
 
-map[0] = map[0];
 	 i = 0;
 	 y = 2;
 	 x = 3;
@@ -58,9 +105,9 @@ map[0] = map[0];
 		x = 3;
    		while ( x < 194)
     	{
-    		if (indexes[i][0] == 1)
+    		if ((*main_cycle).indexes[i][0] == 1)
     		{
-    			if(indexes[i][1] == 1)
+    			if((*main_cycle).indexes[i][1] == 1)
     			{
 	    			wattron(win, COLOR_PAIR(11));
 		    		mvwprintw(win, y, x,  "%.2x", map[i]);
@@ -73,9 +120,9 @@ map[0] = map[0];
 		    		wattroff(win, COLOR_PAIR(1));
 		    	}
     		}
-    		else if (indexes[i][0] == 2)
+    		else if ((*main_cycle).indexes[i][0] == 2)
     		{
-    			if(indexes[i][1] == 1)
+    			if((*main_cycle).indexes[i][1] == 1)
     			{
 	    			wattron(win, COLOR_PAIR(22));
 		    		mvwprintw(win, y, x,  "%.2x", map[i]);
@@ -88,9 +135,9 @@ map[0] = map[0];
 		    		wattroff(win, COLOR_PAIR(2));
 	    		}
     		}
-    		else if (indexes[i][0] == 3)
+    		else if ((*main_cycle).indexes[i][0] == 3)
     		{
-    			if(indexes[i][1] == 1)
+    			if((*main_cycle).indexes[i][1] == 1)
     			{
 	    			wattron(win, COLOR_PAIR(33));
 		    		mvwprintw(win, y, x,  "%.2x", map[i]);
@@ -103,9 +150,9 @@ map[0] = map[0];
 		    		wattroff(win, COLOR_PAIR(3));
 		    	}
     		}
-    		else if (indexes[i][0] == 4)
+    		else if ((*main_cycle).indexes[i][0] == 4)
     		{
-    			if(indexes[i][1] == 1)
+    			if((*main_cycle).indexes[i][1] == 1)
     			{
 	    			wattron(win, COLOR_PAIR(44));
 		    		mvwprintw(win, y, x,  "%.2x", map[i]);
@@ -128,67 +175,10 @@ map[0] = map[0];
     		x += 3;
     		i++;
     	}
-
+    	print_map_info(win, *main_cycle, params, processes);
     	y++;
 	}
-	x = 199;
-	y = 2;
-	char name[] = "name";
-	mvwprintw(win, y, x,  "** PAUSED **");
-
-
-	y += 2;
 	
-	int replace = 0;
-	mvwprintw(win, y, x,  "Cycles/second limit : %d", replace);
-
-	y += 4;
-
-	mvwprintw(win, y, x,  "Cycles: %d", replace);
-	y += 2;
-
-	mvwprintw(win, y, x,  "Processes: %d", replace);
-	y += 2;
-	mvwprintw(win, y, x,  "Player: %d : ", replace, name);
-	x+=2;
-	y++;
-	mvwprintw(win, y, x,  "Last live: %d : ", replace, name);
-	y++;
-
-	mvwprintw(win, y, x,  "Lives in current period : %d ", replace, name);
-	y += 2;
-	x-=2;
-	mvwprintw(win, y, x,  "Live breakdown for current period :");
-
-	y += 2;
-
-wattron(win, COLOR_PAIR(7));
-	mvwprintw(win, y, x,  "[--------------------------------------------------]");
-	wattroff(win, COLOR_PAIR(7));
-
-	y += 2;
-
-	mvwprintw(win, y, x,  "Live breakdown for last period :");
-
-	y += 2;
-
-
-	mvwprintw(win, y, x,  "Live breakdown for last period :");
-
-	wattron(win, COLOR_PAIR(7));
-		mvwprintw(win, y, x,  "[--------------------------------------------------]");
-		wattroff(win, COLOR_PAIR(7));
-
-		y += 2;
-
-		mvwprintw(win, y, x,  "CYCLE_TO_DIE : %d", replace);
-		y += 2;
-
-		mvwprintw(win, y, x,  "NBR_LIVE : %d", replace);
-		y += 2;
-
-		mvwprintw(win, y, x,  "MAX_CHECKS : %d", replace);
-
 	
 	
 

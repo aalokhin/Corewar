@@ -3,11 +3,15 @@
 void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, int index, int cur_proc)
 {
 	t_proc *tmp;
+	t_proc *parent;
 
 	tmp = NULL;
+
 	(*main_cycle).processes++;
 	while (processes)
 	{
+		if ((*processes).id == cur_proc)
+			parent = processes;
 		processes = processes->next;
 	}
 	tmp = (t_proc *)malloc(sizeof(t_proc));
@@ -18,16 +22,19 @@ void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, i
 	tmp->if_live = 1;
 	ft_printf("ind%d\n", tmp->current_position);
 	tmp->cmd = map[tmp->current_position];
-	(*main_cycle).indexes[(*processes).current_position][0] = tmp->id;
-	(*main_cycle).indexes[(*processes).current_position][1] = 1;
+	ft_printf("ind%d\n", tmp->current_position);
+	(*main_cycle).indexes[tmp->current_position][0] = tmp->id;
+	ft_printf("ind%d\n", tmp->current_position);
+	(*main_cycle).indexes[tmp->current_position][1] = 1;
 	tmp->cycles_wait = op_tab[map[tmp->current_position] - 1].cycles_wait;
 	tmp->last_live_cycle = 0;
 	tmp->child_proc_lives = 0;
 	tmp->next = NULL;
 	processes = tmp;
+
 }
 
-int find_arg_index(t_proc *processes, unsigned int target)
+int find_arg_index(t_proc *processes, int target)
 {
 	int i;
 
@@ -80,7 +87,7 @@ void fill_start_map_id(t_cycle *main_cycle, header_t bots[4], t_flags *params)
 
 void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 {
-	unsigned int i;
+	int i;
 	t_cycle main_cycle;
 	t_proc *processes;
 	t_proc *head_proc;
@@ -99,12 +106,11 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		i = 0;
 		processes = head_proc;
 		if ((*params).ncurses == 1)
-			map_to_screen(map, main_cycle.indexes);
+			map_to_screen(map, &main_cycle, params, head_proc);
 		while (i < main_cycle.processes && processes)
 		{
 			//ft_printf("Segfault in i == %d \n",  i);
-			if ((*processes).if_live && map[(*processes).current_position] >= 1
-				&& map[(*processes).current_position] <= 16)
+			if ((*processes).current_position >= 0 && (*processes).current_position < MEM_SIZE)
 			{
 				if (op_tab[map[(*processes).current_position] - 1].codage)
 				{
@@ -118,13 +124,20 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					(*processes).argv[0][0] = DIR_CODE;
 					get_arg_vals[(*processes).argv[0][0]](processes, map, 0, &id_counter);
 				}
-				instruct[map[(*processes).current_position] - 1](head_proc, i, &main_cycle, map);
-				if (map[(*processes).current_position] != 9)
-					(*processes).current_position = id_counter + 1;
-				clear_argv_arr(processes);
+				if ((*processes).if_live && map[(*processes).current_position] >= 1
+				&& map[(*processes).current_position] <= 16)
+				{
+					instruct[map[(*processes).current_position] - 1](head_proc, i, &main_cycle, map);
+					if (map[(*processes).current_position] != 9)
+						(*processes).current_position = id_counter + 1;
+					clear_argv_arr(processes);
+				}
+				else
+					(*processes).current_position++;
 			}
 			else
-				(*processes).current_position++;
+				(*processes).current_position = (*processes).current_position + ((*processes).argv[find_arg_index(processes, IND_CODE)][1]% IDX_MOD);
+			
 			main_cycle.indexes[(*processes).current_position][0] = i;
 			main_cycle.indexes[(*processes).current_position][1] = 1;
 			if ((*processes).child_proc_lives > 21)

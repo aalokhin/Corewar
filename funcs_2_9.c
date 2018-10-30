@@ -1,8 +1,8 @@
 #include "corewar.h"
 
-void load(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
+	int i;
 	int arg_ind;
 
 	i = 0;
@@ -13,32 +13,36 @@ void load(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigne
 		i++;
 	}
 	arg_ind = find_arg_index(processes, REG_CODE);
-	if ((*processes).argv[0][0] == DIR_CODE) //t_reg -> index of n array
+	if (arg_ind >= 0 && arg_ind < (*main_cycle).processes)
 	{
-		(*processes).regs[(*processes).argv[arg_ind][1]] = (*processes).argv[0][1];
+		if ((*processes).argv[0][0] == DIR_CODE) //t_reg -> index of n array
+		{
+			if ((*processes).argv[arg_ind][1] >= 0 && (*processes).argv[arg_ind][1] < 16)
+			(*processes).regs[(*processes).argv[arg_ind][1]] = (*processes).argv[0][1];
+		}
+		else if ((*processes).argv[0][0] == IND_CODE)
+		{
+
+			(*processes).argv[0][1] = (*processes).argv[0][1] % IDX_MOD;
+			i = (*processes).current_position + (*processes).argv[0][1];
+			if (i >= 0 && i < MEM_SIZE)
+				(*processes).regs[(*processes).argv[arg_ind][1]] =
+			(map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+
+		}
+		if ((*processes).regs[(*processes).argv[arg_ind][1]] == 0)
+			(*processes).carry = 1;
+		else
+			(*processes).carry = 0;
 	}
-	else if ((*processes).argv[0][0] == IND_CODE)
-	{
-
-		(*processes).argv[0][1] = (*processes).argv[0][1] % IDX_MOD;
-		i = (*processes).current_position + (*processes).argv[0][1];
-		
-
-		(*processes).regs[(*processes).argv[arg_ind][1]] =
-		(map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
-
-	}
-	if ((*processes).regs[(*processes).argv[arg_ind][1]] == 0)
-		(*processes).carry = 1;
-	else
-		(*processes).carry = 0;
 	ft_printf("%s\n", "test_load");
 	map[0] = map[0];
 }
 
-void store(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
+	ft_printf("%s\n", "test LLL");
+	int i;
 
 
 	i = 0;
@@ -62,9 +66,9 @@ void store(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsign
 	map[0] = map[0];
 }
 
-void addition(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void addition(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
+	int i;
 
 
 	i = 0;
@@ -85,9 +89,9 @@ void addition(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, uns
 	map[0] = map[0];
 }
 
-void substraction(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
+	int i;
 
 
 	i = 0;
@@ -108,9 +112,9 @@ void substraction(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle,
 	map[0] = map[0];
 }
 
-void bit_and(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void bit_and(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
+	int i;
 
 
 	i = 0;
@@ -131,9 +135,9 @@ void bit_and(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsi
 	map[0] = map[0];
 }
 
-void bit_or(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void bit_or(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
+	int i;
 
 
 	i = 0;
@@ -154,9 +158,9 @@ void bit_or(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsig
 	map[0] = map[0];
 }
 
-void bit_xor(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
+	int i;
 
 
 	i = 0;
@@ -178,9 +182,9 @@ void bit_xor(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsi
 	map[0] = map[0];
 }
 
-void zjmp(t_proc *processes, unsigned int cur_proc, t_cycle *main_cycle, unsigned char *map)
+void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	unsigned int i;
+	int i;
 	int arg_ind;
 
 

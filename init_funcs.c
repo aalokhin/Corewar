@@ -52,6 +52,7 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map, i
 	{
 		processes = (t_proc *)malloc(sizeof(t_proc));
 		(*processes).id = i;
+		(*processes).name = bots[i].prog_name;
 		(*processes).current_position = bots[i].start_index;
 		(*processes).carry = 0;
 		(*processes).parent_nbr = -1;
