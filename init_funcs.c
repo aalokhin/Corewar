@@ -54,17 +54,20 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map, i
 		(*processes).id = i;
 		(*processes).name = bots[i].prog_name;
 		(*processes).current_position = bots[i].start_index;
-		(*processes).carry = 0;
+		(*processes).carry = 1;
 		(*processes).parent_nbr = -1;
 		(*processes).if_live = 1;
 		(*processes).cmd = map[(*processes).current_position];
+		indexes[(*processes).current_position][0] = i;
 		indexes[(*processes).current_position][1] = 1;
-		(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
+		if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
+			(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
+		else
+			(*processes).cycles_wait = -1;
 		(*processes).last_live_cycle = 0;
 		(*processes).child_proc_lives = 0;
 		(*processes).next = tmp;
 		tmp = processes;
-		ft_printf("bots%d\n", (*processes).id);
 		i--;
 	}
 	return (processes);

@@ -122,7 +122,10 @@ void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 	if (i >= 0 && i < MEM_SIZE)
 	{
 		map[i] = (*processes).argv[0][1];
-		(*main_cycle).indexes[i][0] = cur_proc;
+		if ((*processes).parent_nbr == -1)
+			(*main_cycle).indexes[i][0] = cur_proc;
+		else
+			(*main_cycle).indexes[i][0] = (*processes).parent_nbr;
 	}
  	ft_printf("%s\n", "test_sti");
 }
@@ -131,6 +134,7 @@ void ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 {
 	int i;
 	int arg_ind;
+
 
 
 	i = 0;
@@ -144,7 +148,8 @@ void ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 	//ft_printf("(*processes).argv[arg_ind][1]%d\n", (*processes).argv[arg_ind][1]);
 	i = ((*processes).argv[arg_ind][1] % IDX_MOD) + (*processes).current_position;
 	if (i >= 0 && i < MEM_SIZE)
-		processes_add(processes, map, main_cycle, i, (*processes).id);
+		i %= MEM_SIZE;
+	processes_add(processes, map, main_cycle, i, (*processes).id);
 	ft_printf("%s\n", "test_>fork");
 }
 
@@ -242,7 +247,8 @@ void long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 	arg_ind = find_arg_index(processes, DIR_CODE);
 	i = (*processes).argv[arg_ind][1] + (*processes).current_position;
 	if (i >= 0 && i < MEM_SIZE)
-		processes_add(processes, map, main_cycle, i, (*processes).id);
+		i %= MEM_SIZE;
+	processes_add(processes, map, main_cycle, i, (*processes).id);
 	ft_printf("%s\n", "long->fork");
 }
 

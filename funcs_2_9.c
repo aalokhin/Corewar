@@ -13,7 +13,7 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 		i++;
 	}
 	arg_ind = find_arg_index(processes, REG_CODE);
-	if (arg_ind >= 0 && arg_ind < (*main_cycle).processes)
+	if (arg_ind >= 0 && arg_ind < 3)
 	{
 		if ((*processes).argv[0][0] == DIR_CODE) //t_reg -> index of n array
 		{
@@ -22,11 +22,11 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 		}
 		else if ((*processes).argv[0][0] == IND_CODE)
 		{
-
 			(*processes).argv[0][1] = (*processes).argv[0][1] % IDX_MOD;
 			i = (*processes).current_position + (*processes).argv[0][1];
 			if (i >= 0 && i < MEM_SIZE)
-				(*processes).regs[(*processes).argv[arg_ind][1]] =
+				i %= MEM_SIZE;
+			(*processes).regs[(*processes).argv[arg_ind][1]] =
 			(map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
 
 		}
@@ -41,10 +41,7 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 
 void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	ft_printf("%s\n", "test LLL");
 	int i;
-
-
 	i = 0;
 
 	while (i < (*main_cycle).processes && i != cur_proc)
@@ -184,6 +181,7 @@ void bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 
 void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
+
 	int i;
 	int arg_ind;
 
@@ -198,7 +196,13 @@ void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 	arg_ind = find_arg_index(processes, DIR_CODE);
 	if ((*processes).carry == 1)
 	{
-		(*processes).current_position = (*processes).argv[arg_ind][1] % IDX_MOD;
+		(*processes).current_position = (*processes).current_position + ((*processes).argv[arg_ind][1] % IDX_MOD);
+		if ((*processes).current_position < 0 || (*processes).current_position >= MEM_SIZE)
+			(*processes).current_position %= MEM_SIZE;
+		if ((*processes).parent_nbr == -1)
+			(*main_cycle).indexes[i][0] = cur_proc;
+		else
+			(*main_cycle).indexes[i][0] = (*processes).parent_nbr;
 		(*main_cycle).indexes[(*processes).current_position][1] = 1;
 	}
 

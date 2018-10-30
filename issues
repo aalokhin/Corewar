@@ -60,3 +60,13 @@ For each valid execution of the live instruction, the machine must display: “A
 
 
 ->zjmp ==> current position issue учитывать карент в главном цикле
+Can't read source file vm_champs/champs/42.c - если некоректный файл
+682 bytes - максимальный размер бота
+Error: File vm_champs/champs/barriere.cor has too large a code (1023 bytes > 682 bytes)
+
+zjmp раюотает неправильно
+лд - более менее, стал на нужную каретку
+не срабатывает каретка дочернего процесса
+добавить ожидание перед выполнением функции
+в визуалке проверить цвета, у дочерних ботов цвета стартовых процессов
+назначать правильный цветовой индекс дочерним процессам если они срзданы от дочерних процессов
