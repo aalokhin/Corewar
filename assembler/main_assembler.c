@@ -30,12 +30,12 @@ void 	print_struct(t_binfile	*bin)
 	printf("bin.fd ====>%d\n", bin->fd);
 	printf("arg length ====>%u\n\n", bin->arg_length);
 	//attroff( COLOR_PAIR(11));
-	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~MAGIC\n");
+	// printf("~~~~~~~~~~~~~~~~~~~~~~~~~~MAGIC\n");
 	
-	printf("%x\n", 	(*bin).magic_start[3]);
-	printf("%x\n", (*bin).magic_start[2]);
-	printf("%x\n", (*bin).magic_start[1]);
-	printf("%x\n", (*bin).magic_start[0]);
+	// printf("%x\n", 	(*bin).magic_start[3]);
+	// printf("%x\n", (*bin).magic_start[2]);
+	// printf("%x\n", (*bin).magic_start[1]);
+	// printf("%x\n", (*bin).magic_start[0]);
 
 }
 
@@ -68,52 +68,29 @@ int 		main(int argc, char **argv)
 		return (0);
 	}
 
-	bin.arg_name = ft_memalloc(sizeof(ft_strlen(argv[i]) + 1));
-	ft_strcpy(bin.arg_name, argv[i]);
 
-
+	bin.arg_name = ft_strdup(argv[i]);
 	bin.fd = open(argv[i],  O_RDONLY);
-
-
-
-
 	if (bin.fd < 0)
 	{
 		ft_print_inv_f(bin);
 		return (0);
 	}
+
 	bin.arg_length = (unsigned int)lseek(bin.fd, 0, SEEK_END);
 	//lseek(bin.fd, 0, SEEK_SET); //what is that???????
 	fill_magic_start(&bin);
-
-
 	create_cor_file(&bin); //O_CREAT|O_WRONLY|O_TRUNC
-
-
 	if (bin.flag_a == 1)
 		ft_print_flag_a(&bin);
+	char *exp;
+
+	exp = ft_memalloc(sizeof(char) + 12);
 
 	ft_printf("all good so far\n");
-	print_struct(&bin);
+	//print_struct(&bin);
 	
 	return 0;
 }
 
 
-
-
-
-// void	ft_dir_n(char *arg, int lb, char **res, int *j)
-// {
-// 	unsigned int	num;
-
-// 	num = (unsigned int)ft_atoi(&arg[1]);
-// 	if (lb == 2)
-// 		num = (unsigned short)num;
-// 	if (lb == 4)
-// 		(*res)[(*j)++] = (char)((num >> 24) & 255);
-// 	if (lb == 4)
-// 		(*res)[(*j)++] = (char)((num >> 16) & 255);
-// 	(*res)[(*j)++] = (char)((num >> 8) & 255);
-// 	(*res)[(*j)++] = (char)(num & 255);
-// }
