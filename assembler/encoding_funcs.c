@@ -64,14 +64,11 @@ void	fill_corfile_contents(t_binfile *bin)
 	printf("name of the champ is {%s} \n", bin->name);
 
 	str = ft_strstr(bin->f_contents, ".comment");
-
 	i = 0;
 	tmp = 0;
-
 	while(str[i] != '"')
 		i++;
 	tmp = ++i;
-	
 	while(str[i] != '"')
 		i++;
 	bin->comment = ft_strnew(i - tmp);
@@ -79,13 +76,23 @@ void	fill_corfile_contents(t_binfile *bin)
 	printf("comment is of the champ is {%s} \n", bin->comment);
 
 	i = 0;
-	while (i <= PROG_NAME_LENGTH)
+	while (i <= PROG_NAME_LENGTH + 1)
 	{
-		printf("writing name  ....\n");
+		//printf("writing name  ....\n");
 		write(bin->fd_file_out, &bin->name[i], 1);
 		i++;
 
 	}
+
+
+	// i = 0;
+	// while (i <= COMMENT_LENGTH + 1)
+	// {
+	// 	printf("writing comment  ....\n");
+	// 	write(bin->fd_file_out, &bin->comment[i], 1);
+	// 	i++;
+
+	// }
 
 
 
