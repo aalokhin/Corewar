@@ -59,7 +59,10 @@ void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 			i %= MEM_SIZE;
 		if ((*processes).argv[0][1] >= 0 && (*processes).argv[0][1] < 16)
 			map[i] = (*processes).regs[(*processes).argv[0][1]];
-		(*main_cycle).indexes[i][0] = cur_proc;
+		if ((*processes).parent_nbr == -1)
+			(*main_cycle).indexes[i][0] = cur_proc;
+		else
+			(*main_cycle).indexes[i][0] = (*processes).parent_nbr;
 	}
 	else if ((*processes).argv[1][0] == REG_CODE)
 		(*processes).regs[(*processes).argv[1][1]] = (*processes).argv[0][1];

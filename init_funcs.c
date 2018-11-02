@@ -38,9 +38,12 @@ void main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).current_winner = -1;
 	(*main_cycle).checks_if_die = 0;
 	(*main_cycle).prev_cycle_die = (*main_cycle).cycle_die;
+	(*main_cycle).winner_str = 0;
+	(*main_cycle).winner_name = NULL;
+	(*main_cycle).winner_id = 0;
 }
 
-t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map, int indexes[MEM_SIZE][2])
+t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 {
 	int i;
 	t_proc *processes;
@@ -54,12 +57,10 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map, i
 		(*processes).id = i;
 		(*processes).name = bots[i].prog_name;
 		(*processes).current_position = bots[i].start_index;
-		(*processes).carry = 1;
+		(*processes).carry = 0;
 		(*processes).parent_nbr = -1;
 		(*processes).if_live = 1;
 		(*processes).cmd = map[(*processes).current_position];
-		indexes[(*processes).current_position][0] = i;
-		indexes[(*processes).current_position][1] = 1;
 		if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
 			(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
 		else

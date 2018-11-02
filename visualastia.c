@@ -1,6 +1,6 @@
 #include "corewar.h"
 
-void print_map_info(WINDOW * win, t_cycle main_cycle, t_flags *params, t_proc *processes)
+void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params, t_proc *processes)
 {
 	unsigned int i;
 	int x;
@@ -11,11 +11,11 @@ void print_map_info(WINDOW * win, t_cycle main_cycle, t_flags *params, t_proc *p
 	y = 2;
 	mvwprintw(win, y, x,  "** PAUSED **");
 	y += 2;
-	mvwprintw(win, y, x,  "Cycles/second limit : %d", main_cycle.second_limit);
+	mvwprintw(win, y, x,  "Cycles/second limit : %d", (*main_cycle).second_limit);
 	y += 3;
-	mvwprintw(win, y, x,  "Cycles: %d", main_cycle.cycles);
+	mvwprintw(win, y, x,  "Cycles: %d", (*main_cycle).cycles);
 	y += 2;
-	mvwprintw(win, y, x,  "Processes: %d", main_cycle.processes);
+	mvwprintw(win, y, x,  "Processes: %d", (*main_cycle).processes);
 	while (i < (*params).bots_quantity)
 	{
 		y += 2;
@@ -43,11 +43,28 @@ void print_map_info(WINDOW * win, t_cycle main_cycle, t_flags *params, t_proc *p
 	mvwprintw(win, y, x,  "[--------------------------------------------------]");
 	wattroff(win, COLOR_PAIR(7));
 	y += 2;
-	mvwprintw(win, y, x,  "CYCLE_TO_DIE : %d", main_cycle.cycle_die);
+	mvwprintw(win, y, x,  "CYCLE_TO_DIE : %d", (*main_cycle).cycle_die);
+	y += 2;
+	mvwprintw(win, y, x,  "CYCLE_DELTA : %d", CYCLE_DELTA);
 	y += 2;
 	mvwprintw(win, y, x,  "NBR_LIVE : %d", NBR_LIVE);
 	y += 2;
 	mvwprintw(win, y, x,  "MAX_CHECKS : %d", MAX_CHECKS);
+	(*main_cycle).winner_str = y + 2;
+}
+
+void print_winner(WINDOW * win, t_cycle main_cycle)
+{
+	int x;
+	int y;
+
+	x = 199;
+	y = main_cycle.winner_str;
+	wattron(win, COLOR_PAIR(main_cycle.winner_id + 1));
+	mvwprintw(win, y, x,  "The winner is : %s", main_cycle.winner_name);
+	wattroff(win, COLOR_PAIR(main_cycle.winner_id + 1));
+	wrefresh(win);
+	getch();
 }
 
 void visual_init(WINDOW **win)
@@ -60,7 +77,7 @@ void visual_init(WINDOW **win)
 	int  yMax, xMax;
 	getmaxyx(stdscr, yMax, xMax);
 
-	*win = newwin(69, xMax-100, yMax-80, 5); //*newwin(int nlines, int ncols, int begin_y, int begin_x);
+	*win = newwin(68, xMax-100, yMax-80, 5); //*newwin(int nlines, int ncols, int begin_y, int begin_x);
 	// box(win, 0, 0);
 
 	// int wborder(WINDOW *win, chtype ls, chtype rs, chtype ts, chtype bs, chtype tl, chtype tr, chtype bl, chtype br);
@@ -82,7 +99,7 @@ void visual_init(WINDOW **win)
 	init_pair(22, COLOR_BLACK, COLOR_BLUE);
 	init_pair(33, COLOR_BLACK, COLOR_RED);
 	init_pair(44, COLOR_BLACK, COLOR_CYAN);
-	
+	init_pair(55, COLOR_BLACK, COLOR_WHITE);
 
 
 	wattron(*win, COLOR_PAIR(12));
@@ -103,7 +120,7 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
 	x = 3;
 	
 	refresh();  
-	while (i < MEM_SIZE + 1)
+	while (i < MEM_SIZE)
 	{
 		x = 3;
    		while ( x < 194)
@@ -170,15 +187,25 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
     		}
     		else
 			{
-				wattron(win, COLOR_PAIR(5));
-				mvwprintw(win, y, x,  "%.2x", map[i]);
-				wattroff(win, COLOR_PAIR(5));
+				if((*main_cycle).indexes[i][1] == 1)
+    			{
+	    			wattron(win, COLOR_PAIR(55));
+		    		mvwprintw(win, y, x,  "%.2x", map[i]);
+		    		wattroff(win, COLOR_PAIR(55));
+    			}
+    			else
+    			{
+    				wattron(win, COLOR_PAIR(5));
+					mvwprintw(win, y, x,  "%.2x", map[i]);
+					wattroff(win, COLOR_PAIR(5));
+    			}
+				
 			}
 
     		x += 3;
     		i++;
     	}
-    	print_map_info(win, *main_cycle, params, processes);
+    	print_map_info(win, main_cycle, params, processes);
     	y++;
 	}
 	wrefresh(win);

@@ -42,42 +42,60 @@ int find_arg_index(t_proc *processes, int target)
 
 void check_if_lives(t_proc *head_proc, t_cycle *main_cycle)
 {
-	int winner;
-
-	winner = 0;
 	while (head_proc)
 	{
 		if ((*head_proc).last_live_cycle < (*main_cycle).cycles - (*main_cycle).cycle_die)
+		{
 			(*head_proc).if_live = 0;
-		if ((*head_proc).last_live_cycle > winner)
-			(*head_proc).last_live_cycle = winner;
+			(*main_cycle).processes--;
+		}
+		if ((*head_proc).last_live_cycle > (*main_cycle).current_winner)
+		{
+			(*main_cycle).current_winner = (*head_proc).last_live_cycle;
+			if ((*head_proc).parent_nbr == -1)
+				(*main_cycle).winner_id = (*head_proc).id;
+			else
+				(*main_cycle).winner_id = (*head_proc).parent_nbr;
+			(*main_cycle).winner_name = (*head_proc).name;
+		}
 		head_proc = head_proc->next;
 	}
-	(*main_cycle).current_winner = winner;
 }
 
 void fill_start_map_id(t_cycle *main_cycle, header_t bots[4], t_flags *params)
 {
 	unsigned int i;
 	unsigned int j;
-	unsigned int lim;
+	unsigned int k;
 
 	i = 0;
 	j = 0;
-	lim = 0;
-	while (j < (*params).bots_quantity)
+	k = 0;
+	while (i < MEM_SIZE)
 	{
-		i = bots[j].start_index;
-		lim = bots[j].prog_size + i;
-		while (i < lim)
-		{
-			(*main_cycle).indexes[i][0] = j + 1;
-			i++;
-		}
-		j++;
-	}	
-}
 
+		(*main_cycle).indexes[i][0] = 0;
+		(*main_cycle).indexes[i][1] = 0;
+		i++;
+	}
+	i = 0;
+	while (i < MEM_SIZE && j < (*params).bots_quantity)
+	{
+		if (i == bots[j].start_index)
+		{
+			(*main_cycle).indexes[i][1] = 1;
+			k = 0;
+			while (k < bots[j].prog_size)
+			{
+				(*main_cycle).indexes[i][0] = j + 1;
+				i++;
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 {
@@ -94,7 +112,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	id_counter = 0;
 	main_cycle_init(&main_cycle, params);
 	fill_start_map_id(&main_cycle, bots, params);
-	processes = processes_init(params, bots, map, main_cycle.indexes);
+	processes = processes_init(params, bots, map);
 	head_proc = processes;
 	if ((*params).ncurses == 1)
 		visual_init(&win);
@@ -135,8 +153,9 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				(*processes).current_position++;
 			if ((*processes).current_position < 0 || (*processes).current_position >= MEM_SIZE)
 				(*processes).current_position %= MEM_SIZE;
+
 			if ((*processes).parent_nbr == -1)
-				main_cycle.indexes[(*processes).current_position][0] = i;
+				main_cycle.indexes[(*processes).current_position][0] = i + 1;
 			else
 				main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr;
 			main_cycle.indexes[(*processes).current_position][1] = 1;
@@ -162,6 +181,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		}
 		main_cycle.cycles++;
 	}
+	print_winner(win, main_cycle);
 	if ((*params).ncurses == 1)
 		endwin();
 	ft_printf("we exited main cycle\n");

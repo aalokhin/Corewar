@@ -55,9 +55,12 @@ typedef struct s_cycle
 	int second_limit;
 	int cycle_die;
 	int current_winner;
+	char *winner_name;
 	int checks_if_die;
 	int prev_cycle_die;
 	int indexes[MEM_SIZE][2];
+	int winner_str;
+	int winner_id;
 }			t_cycle;
 
 typedef struct s_op
@@ -136,7 +139,7 @@ void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, i
 void init_bots(header_t bots[4]);
 void params_init(t_flags *params);
 void main_cycle_init(t_cycle *main_cycle, t_flags *params);
-t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map, int indexes[MEM_SIZE][2]);
+t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map);
 void clear_argv_arr(t_proc *processes);
 void get_t_dir_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
 void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
@@ -145,6 +148,7 @@ void get_args_values(t_proc *processes, unsigned char *map, int *id_counter);
 void take_args(unsigned char codage, t_proc *processes);
 void map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes, WINDOW *win);
 void visual_init(WINDOW **win);
+void print_winner(WINDOW * win, t_cycle main_cycle);
 
 #endif
 
