@@ -76,10 +76,7 @@ void fill_start_map_id(t_cycle *main_cycle, header_t bots[4], t_flags *params)
 		}
 		j++;
 	}	
-}
-
-
-		
+}	
 
 void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 {
@@ -98,7 +95,8 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	fill_start_map_id(&main_cycle, bots, params);
 	processes = processes_init(params, bots, map, main_cycle.indexes);
 	head_proc = processes;
-	visual_init(&win);
+	if ((*params).ncurses == 1)
+		visual_init(&win);
 	while (main_cycle.cycle_die > 0 && main_cycle.processes > 0)
 	{
 		//ft_printf("something weird\n");
@@ -146,13 +144,13 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			}
 			else
 				(*processes).current_position++;
+			if ((*processes).current_position < 0 || (*processes).current_position >= MEM_SIZE)
+				(*processes).current_position %= MEM_SIZE;
 			if ((*processes).parent_nbr == -1)
 				main_cycle.indexes[(*processes).current_position][0] = i;
 			else
 				main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr;
 			main_cycle.indexes[(*processes).current_position][1] = 1;
-			if ((*processes).current_position < 0 || (*processes).current_position >= MEM_SIZE)
-				(*processes).current_position %= MEM_SIZE;
 			if ((*processes).child_proc_lives > 21)
 			{
 				(*processes).child_proc_lives = 0;
@@ -164,8 +162,6 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 
 		if (main_cycle.cycles != 0 && main_cycle.cycles % main_cycle.cycle_die == 0)
 		{
-			//ft_printf("we are in the if number 3) \n");
-
 			check_if_lives(head_proc, &main_cycle);
 			main_cycle.checks_if_die++;
 			if (main_cycle.checks_if_die == 10)
@@ -176,14 +172,10 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				main_cycle.prev_cycle_die = main_cycle.cycle_die;
 			}
 		}
-		
 		//ft_printf("we are in  main cycle %d \n", main_cycle.cycles);
 		main_cycle.cycles++;
 	}
-	
-	
-	endwin();
-	
+	if ((*params).ncurses == 1)
+		endwin();
 	ft_printf("we exited main cycle\n");
-
 }

@@ -133,7 +133,7 @@ static t_op    op_tab[17] =
 void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4]);
 int find_arg_index(t_proc *processes, int target);
 void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, int index);
-void init_bots(header_t bots[4]);
+void		init_bots(header_t bots[4]);
 void params_init(t_flags *params);
 void main_cycle_init(t_cycle *main_cycle, t_flags *params);
 t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map, int indexes[MEM_SIZE][2]);
@@ -143,7 +143,7 @@ void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id
 void get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
 void get_args_values(t_proc *processes, unsigned char *map, int *id_counter);
 void take_args(unsigned char codage, t_proc *processes);
-void map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes, WINDOW *win);
+void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes, WINDOW *win);
 void visual_init(WINDOW **win);
 
 #endif
