@@ -50,12 +50,8 @@ void print_map_info(WINDOW * win, t_cycle main_cycle, t_flags *params, t_proc *p
 	mvwprintw(win, y, x,  "MAX_CHECKS : %d", MAX_CHECKS);
 }
 
-void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes)
+void visual_init(WINDOW **win)
 {
-	int i = 0;
-	int y = 2;
-	int x = 3;
-
 	initscr();
 	cbreak();
 	noecho();
@@ -64,7 +60,7 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
 	int  yMax, xMax;
 	getmaxyx(stdscr, yMax, xMax);
 
-	WINDOW * win = newwin(69, xMax-100, yMax-80, 5); //*newwin(int nlines, int ncols, int begin_y, int begin_x);
+	*win = newwin(69, xMax-100, yMax-80, 5); //*newwin(int nlines, int ncols, int begin_y, int begin_x);
 	// box(win, 0, 0);
 
 	// int wborder(WINDOW *win, chtype ls, chtype rs, chtype ts, chtype bs, chtype tl, chtype tr, chtype bl, chtype br);
@@ -89,17 +85,24 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
 	
 
 
-	wattron(win, COLOR_PAIR(12));
-	wborder(win, ls, rs, ts, bs, tl, tr, bl, br);
-	mvwvline(win, 1, 196, 42, 70);
-	wattroff(win, COLOR_PAIR(12));
-	refresh();  
-
-
-	 i = 0;
-	 y = 2;
-	 x = 3;
+	wattron(*win, COLOR_PAIR(12));
+	wborder(*win, ls, rs, ts, bs, tl, tr, bl, br);
+	mvwvline(*win, 1, 196, 42, 70);
+	wattroff(*win, COLOR_PAIR(12));
 	
+}
+
+void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes, WINDOW *win)
+{
+	int i;
+	int y;
+	int x;
+	
+	i = 0;
+	y = 2;
+	x = 3;
+	
+	refresh();  
 	while (i < MEM_SIZE + 1)
 	{
 		x = 3;
@@ -178,13 +181,6 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
     	print_map_info(win, *main_cycle, params, processes);
     	y++;
 	}
-	
-	
-	
-
-	
 	wrefresh(win);
-	 getch();
-	endwin();
-	
+	getch();
 }

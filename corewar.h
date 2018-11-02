@@ -143,7 +143,8 @@ void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id
 void get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
 void get_args_values(t_proc *processes, unsigned char *map, int *id_counter);
 void take_args(unsigned char codage, t_proc *processes);
-void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes);
+void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes, WINDOW *win);
+void visual_init(WINDOW **win);
 
 #endif
 

@@ -93,7 +93,9 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	t_proc *processes;
 	t_proc *head_proc;
 	int id_counter;
-	
+	WINDOW *win;
+
+	win = NULL;
 	i = 0;
 	processes = NULL;
 	id_counter = 0;
@@ -101,22 +103,19 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	fill_start_map_id(&main_cycle, bots, params);
 	processes = processes_init(params, bots, map, main_cycle.indexes);
 	head_proc = processes;
+	visual_init(&win);
 	while (main_cycle.cycle_die > 0 && main_cycle.processes > 0)
 	{
 		//ft_printf("something weird\n");
 		i = 0;
 		processes = head_proc;
 		if ((*params).ncurses == 1)
-			map_to_screen(map, &main_cycle, params, head_proc);
+			map_to_screen(map, &main_cycle, params, head_proc, win);
 		while (i < main_cycle.processes && processes)
 		{
 			//ft_printf("Segfault in i == %d \n",  (*processes).current_position);
 			//ft_printf("Segfault in i == %d \n",  (*processes).id);
-			ft_printf("Segfault in i == %d \n",  i);
-
-
-
-
+			/*ft_printf("Segfault in i == %d \n",  i);
 			ft_printf("Segfault in i == %s \n",  (*processes).name);
 			ft_printf("Segfault in i == %d \n",  (*processes).carry);
 			ft_printf("Segfault in i == %d \n",  (*processes).parent_nbr);
@@ -124,14 +123,14 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			ft_printf("Segfault in i == %d \n",  (*processes).last_live_cycle);
 			ft_printf("Segfault in i == %d \n",  (*processes).cmd);
 			ft_printf("Segfault in i == %d \n",  (*processes).cycles_wait);
-			ft_printf("Segfault in i == %d \n",  (*processes).child_proc_lives);
+			ft_printf("Segfault in i == %d \n",  (*processes).child_proc_lives);*/
 	
 			if (map[(*processes).current_position] >= 1 && map[(*processes).current_position] <= 16)
 			{
-				ft_printf("Segfault in i == %s \n",  "test");
+				//ft_printf("Segfault in i == %s \n",  "test");
 				if (op_tab[map[(*processes).current_position] - 1].codage)
 				{
-					ft_printf("Segfault in i == %s \n",  "test");
+					//ft_printf("Segfault in i == %s \n",  "test");
 					id_counter = (*processes).current_position + 1;
 					take_args(map[id_counter], processes);
 					get_args_values(processes, map, &id_counter);
@@ -186,6 +185,10 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		//ft_printf("we are in  main cycle %d \n", main_cycle.cycles);
 		main_cycle.cycles++;
 	}
+	wrefresh(win);
+	getch();
+	endwin();
+	
 	ft_printf("we exited main cycle\n");
 
 }
