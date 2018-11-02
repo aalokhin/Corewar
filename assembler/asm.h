@@ -61,9 +61,9 @@ void			fill_magic_start(t_binfile *bin);
 
 
 
-
 //**********************************FILE FUNCTIONS****************
 void			create_cor_file(t_binfile *bin); 
+void			fill_corfile_contents(t_binfile *bin);
 
 //********************************* FREEEING FUNCTIONS******************
 

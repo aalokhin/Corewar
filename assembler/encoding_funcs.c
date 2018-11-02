@@ -15,40 +15,33 @@ void	fill_magic_start(t_binfile *bin)
 
 void	create_cor_file(t_binfile *bin)
 {
-	char	*new_name;
+	char			*corfile;
+	unsigned int	len;
 
-	new_name = ft_strdup(bin->arg_name);
-	new_name[ft_strlen(new_name) - 1] = 'f'; //fix this im doing something wrong
-	bin->fd_file_out = open(new_name, O_CREAT|O_WRONLY|O_TRUNC);
+	len = ft_strlen(bin->arg_name);
+	printf("stirng 1  %s\n", bin->arg_name);
+	corfile = ft_memalloc(sizeof(len + 3)); //fix this im doing something wrong
+	corfile[len + 3] = '\0';
+	ft_strncpy(corfile, bin->arg_name, len - 1);
+	ft_strcpy(&corfile[len - 1], "cor");
+	printf("stirng 2 %s\n", corfile);
+	bin->fd_file_out = open(corfile, O_CREAT|O_WRONLY|O_TRUNC, 0777);
+	ft_strdel(&corfile);
+	fill_corfile_contents(bin);
 
 }
 
-// void	ft_print_cr(t_cor c, char *argv, int exec_len)
-// {
-// 	int		fd;
-// 	int		l;
-// 	char	*file;
 
-// 	ft_name(c.f_n, &(c.name), PROG_NAME_LENGTH);
-// 	ft_name(c.f_c, &(c.comment), COMMENT_LENGTH);
-// 	file = ft_out(argv);
-// 	if (!file)
-// 		return ;
-// 	fd = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0777);
-// 	ft_strdel(&file);
-// 	l = 4;
-// 	ft_print_cor(c.magic, l, fd);
-// 	l = PROG_NAME_LENGTH;
-// 	ft_print_cor(c.name, l, fd);
-// 	l = 4;
-// 	ft_print_cor("\0\0\0\0", l, fd);
-// 	ft_print_cor(c.exec_size, l, fd);
-// 	l = COMMENT_LENGTH;
-// 	ft_print_cor(c.comment, l, fd);
-// 	l = 4;
-// 	ft_print_cor("\0\0\0\0", l, fd);
-// 	l = exec_len;
-// 	ft_print_cor(c.exec, l, fd);
-// 	close(fd);
-// }
+void	fill_corfile_contents(t_binfile *bin)
+{
+	int i;
 
+	i = 0;
+	while(i < 4)
+	{
+		printf("writing .... %c\n", bin->magic_start[i]);
+		write(bin->fd_file_out, &bin->magic_start[i], 1);
+		i++;
+	}
+
+}
