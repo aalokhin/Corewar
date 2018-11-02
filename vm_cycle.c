@@ -1,25 +1,22 @@
 #include "corewar.h"
 
-void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, int index, int cur_proc)
+void processes_add(t_proc *parent_process, unsigned char *map, t_cycle *main_cycle, int index)
 {
 	t_proc *tmp;
 	t_proc *parent;
 
 	tmp = NULL;
+	parent = parent_process;
 	(*main_cycle).processes++;
-	while (processes)
-	{
-		if ((*processes).id == cur_proc)
-			parent = processes;
-		processes = processes->next;
-	}
+	while (parent_process)
+		parent_process = parent_process->next;
 	tmp = (t_proc *)malloc(sizeof(t_proc));
 	tmp->id = (*main_cycle).processes - 1;
-	tmp->name = NULL;
+	tmp->name = (*parent).name;
 	tmp->current_position = index;
-	tmp->carry = 1;
-	tmp->parent_nbr = cur_proc;
-	tmp->if_live = 1;
+	tmp->carry = (*parent).carry;
+	tmp->parent_nbr = (*parent).id;
+	tmp->if_live = (*parent).if_live;
 	tmp->cmd = map[tmp->current_position];
 	(*main_cycle).indexes[tmp->current_position][0] = tmp->parent_nbr;
 	(*main_cycle).indexes[tmp->current_position][1] = 1;
@@ -27,12 +24,10 @@ void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, i
 		tmp->cycles_wait = op_tab[tmp->cmd - 1].cycles_wait;
 	else
 		tmp->cycles_wait = -1;
-	tmp->cycles_wait = op_tab[map[tmp->current_position] - 1].cycles_wait;
-	tmp->last_live_cycle = 0;
+	tmp->last_live_cycle = (*parent).last_live_cycle;
 	tmp->child_proc_lives = 0;
 	tmp->next = NULL;
-	processes = tmp;
-
+	parent_process = tmp;
 }
 
 int find_arg_index(t_proc *processes, int target)
@@ -185,8 +180,8 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		//ft_printf("we are in  main cycle %d \n", main_cycle.cycles);
 		main_cycle.cycles++;
 	}
-	wrefresh(win);
-	getch();
+	
+	
 	endwin();
 	
 	ft_printf("we exited main cycle\n");

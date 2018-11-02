@@ -70,22 +70,18 @@ void addition(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 {
 	int i;
 
-
 	i = 0;
-
 	while (i < (*main_cycle).processes && i != cur_proc)
 	{
 		processes = processes->next;
 		i++;
 	}
-	(*processes).argv[2][1] = (*processes).argv[0][1] + (*processes).argv[1][1];
-
-	if ((*processes).argv[2][1] == 0)
+	if (((*processes).argv[0][1] + (*processes).argv[1][1]) == 0)
 		(*processes).carry = 1;
 	else
 		(*processes).carry = 0;
+	(*processes).argv[2][1] = (*processes).argv[0][1] + (*processes).argv[1][1];	
 	ft_printf("%s\n", "tets_addition");
-
 	map[0] = map[0];
 }
 
@@ -93,22 +89,18 @@ void substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned
 {
 	int i;
 
-
 	i = 0;
-
 	while (i < (*main_cycle).processes && i != cur_proc)
 	{
 		processes = processes->next;
 		i++;
 	}
-	(*processes).argv[2][1] = (*processes).argv[0][1] - (*processes).argv[1][1];
-
-	if ((*processes).argv[2][1] == 0)
+	if (((*processes).argv[0][1] - (*processes).argv[1][1]) == 0)
 			(*processes).carry = 1;
 	else
 		(*processes).carry = 0;
+	(*processes).argv[2][1] = (*processes).argv[0][1] - (*processes).argv[1][1];	
 	ft_printf("%s\n", "tets_SUSCTRACTION");
-
 	map[0] = map[0];
 }
 
@@ -116,22 +108,18 @@ void bit_and(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 {
 	int i;
 
-
 	i = 0;
-
 	while (i < (*main_cycle).processes && i != cur_proc)
 	{
 		processes = processes->next;
 		i++;
 	}
-	(*processes).argv[2][1] = (*processes).argv[0][1] & (*processes).argv[1][1];
-
-	if ((*processes).argv[2][1] == 0)
+	if (((*processes).argv[0][1] & (*processes).argv[1][1]) == 0)
 			(*processes).carry = 1;
 	else
 		(*processes).carry = 0;
+	(*processes).argv[2][1] = (*processes).argv[0][1] & (*processes).argv[1][1];
 	ft_printf("%s\n", "TESE->BIT->AND");
-
 	map[0] = map[0];
 }
 
@@ -139,22 +127,18 @@ void bit_or(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char 
 {
 	int i;
 
-
 	i = 0;
-
 	while (i < (*main_cycle).processes && i != cur_proc)
 	{
 		processes = processes->next;
 		i++;
 	}
-	(*processes).argv[2][1] = (*processes).argv[0][1] | (*processes).argv[1][1];
-
-	if ((*processes).argv[2][1] == 0)
+	if (((*processes).argv[0][1] | (*processes).argv[1][1]) == 0)
 			(*processes).carry = 1;
 	else
 		(*processes).carry = 0;
+	(*processes).argv[2][1] = (*processes).argv[0][1] | (*processes).argv[1][1];	
 	ft_printf("%s\n", "TESE->BIT->OR");
-
 	map[0] = map[0];
 }
 
@@ -170,21 +154,17 @@ void bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 		processes = processes->next;
 		i++;
 	}
-	(*processes).argv[2][1] = (*processes).argv[0][1] ^ (*processes).argv[1][1];
-
-	if ((*processes).argv[2][1] == 0)
+	if (((*processes).argv[0][1] ^ (*processes).argv[1][1]) == 0)
 			(*processes).carry = 1;
 	else
 		(*processes).carry = 0;
-	
+	(*processes).argv[2][1] = (*processes).argv[0][1] ^ (*processes).argv[1][1];	
 	ft_printf("%s\n", "TESE->BIT->XOR");
-
 	map[0] = map[0];
 }
 
 void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-
 	int i;
 	int arg_ind;
 
