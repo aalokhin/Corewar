@@ -73,8 +73,8 @@ typedef struct		header_s
   char				prog_name[PROG_NAME_LENGTH + 1];
   unsigned int		prog_size;
   char				comment[COMMENT_LENGTH + 1];
-  unsigned char		*exec_part;
-  unsigned int 		start_index;
+  unsigned char				*exec_part;
+  unsigned int start_index;
 }					header_t;
 
 

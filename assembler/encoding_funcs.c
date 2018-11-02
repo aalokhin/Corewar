@@ -59,7 +59,7 @@ void	fill_corfile_contents(t_binfile *bin)
 	tmp = ++i;
 	while(str[i] != '"')
 		i++;
-	bin->name = ft_strnew(i - tmp);
+	bin->name = ft_strnew(PROG_NAME_LENGTH );
 	ft_strncpy(bin->name, &str[tmp], i - tmp);
 	printf("name of the champ is {%s} \n", bin->name);
 
@@ -71,24 +71,32 @@ void	fill_corfile_contents(t_binfile *bin)
 	tmp = ++i;
 	while(str[i] != '"')
 		i++;
-	bin->comment = ft_strnew(i - tmp);
+	bin->comment = ft_strnew(COMMENT_LENGTH);
+	
 	ft_strncpy(bin->comment, &str[tmp], i - tmp);
 	printf("comment is of the champ is {%s} \n", bin->comment);
 
 	i = 0;
-	while (i <= PROG_NAME_LENGTH + 1)
+	while (i < PROG_NAME_LENGTH)
 	{
 		//printf("writing name  ....\n");
 		write(bin->fd_file_out, &bin->name[i], 1);
 		i++;
-
 	}
+	write(bin->fd_file_out, "\0\0\0\0", 4);
+	write(bin->fd_file_out, "\0\0\0\0", 4);
+	//write(bin->fd_file_out, "a", 2);
+
+
+	
+
+
 
 
 	// i = 0;
-	// while (i <= COMMENT_LENGTH + 1)
+	// while (i < COMMENT_LENGTH)
 	// {
-	// 	printf("writing comment  ....\n");
+	// 	//printf("writing comment  ....\n");
 	// 	write(bin->fd_file_out, &bin->comment[i], 1);
 	// 	i++;
 
@@ -99,30 +107,32 @@ void	fill_corfile_contents(t_binfile *bin)
 }
 
 
-/* ************************************************************************** */
-
-// #include "includes/libft.h"
-
-// char	*ft_strstr(const char *big, const char *little)
+// void	ft_print_cr(t_cor c, char *argv, int exec_len)
 // {
-// 	int i;
-// 	int j;
-// 	int res;
+// 	int		fd;
+// 	int		l;
+// 	char	*file;
 
-// 	i = 0;
-// 	if (little[i] == 0)
-// 		return (char *)(big);
-// 	while (big[i] != 0)
-// 	{
-// 		res = i;
-// 		j = 0;
-// 		while (big[i + j] == little[j] && little[j] != 0 && big[i + j] != 0)
-// 			j++;
-// 		if (little[j] == 0)
-// 			return (char *)(&big[res]);
-// 		else
-// 			i++;
-// 	}
-// 	return (NULL);
+// 	ft_name(c.f_n, &(c.name), PROG_NAME_LENGTH);
+// 	ft_name(c.f_c, &(c.comment), COMMENT_LENGTH);
+// 	file = ft_out(argv);
+// 	if (!file)
+// 		return ;
+// 	fd = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0777);
+// 	ft_strdel(&file);
+// 	l = 4;
+// 	ft_print_cor(c.magic, l, fd);
+// 	l = PROG_NAME_LENGTH;
+// 	printf("die NAME =====> %s\n", c.name);
+// 	ft_print_cor(c.name, l, fd);
+// 	l = 4;
+// 	ft_print_cor("\0\0\0\0", l, fd);
+// 	ft_print_cor(c.exec_size, l, fd);
+// 	l = COMMENT_LENGTH;
+// 	ft_print_cor(c.comment, l, fd);
+// 	l = 4;
+// 	ft_print_cor("\0\0\0\0", l, fd);
+// 	l = exec_len;
+// 	ft_print_cor(c.exec, l, fd);
+// 	close(fd);
 // }
-
