@@ -2,7 +2,7 @@
 #ifndef __ASM_H
 # define __ASM_H
 
-# include <fcntl.h>
+# include <fcntl.h>          
 # include "../libft/includes/libft.h"
 # include "../libft/includes/ft_printf.h"
 # include "../libft/get_next_line.h"
@@ -14,11 +14,13 @@
 
 typedef struct	s_binfile
 {
-	int				fd;
-	int 			fd_file_out;
+	int				fd;//incoming file
+	int 			fd_file_out;//resulting file
 
-	int				flag_a;
-	char			*arg_name;//argv[i]
+	char 			*f_contents;//a buf where all the data is stored written as a single line
+
+	int				flag_a;//flag a
+	char			*arg_name;//string argv[i]
 
 
 
@@ -27,7 +29,7 @@ typedef struct	s_binfile
 
 	char 			*name;			
 	char 			*comment;
-	unsigned int	champ_size_nbr;
+	unsigned int	champ_size_nbr;//
 
 
 	char			magic_start[4];
@@ -37,7 +39,7 @@ typedef struct	s_binfile
 
 
 
-	char 			*exec_code;
+	char 			*exec_code;//executable code
 
 	
 }				t_binfile;

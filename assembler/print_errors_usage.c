@@ -31,3 +31,4 @@ void	ft_print_flag_a(t_binfile *bin)
 	
 }
 
+

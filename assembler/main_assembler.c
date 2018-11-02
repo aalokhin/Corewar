@@ -5,15 +5,14 @@ void		init_bin(t_binfile	*bin)
 {
 	(*bin).fd = 0;
 	(*bin).flag_a = 0;
-	(*bin).arg_name = NULL;
+
 	(*bin).arg_length = 0;
-	(*bin).exec_code = NULL;
+
 	(*bin).champ_size_nbr = 0;
-	(*bin).comment = NULL;
-	(*bin).name = NULL;
+
 	(*bin).fd_file_out = 0;
-
-
+	(*bin).arg_name = NULL;
+	(*bin).f_contents = NULL;
 
 
 	// printf(" ================>[%s]\n", bin->magic_start);
@@ -36,6 +35,7 @@ void 	print_struct(t_binfile	*bin)
 	// printf("%x\n", (*bin).magic_start[2]);
 	// printf("%x\n", (*bin).magic_start[1]);
 	// printf("%x\n", (*bin).magic_start[0]);
+	printf(" =>>>> [%s]\n", bin->f_contents);
 
 }
 
@@ -52,7 +52,6 @@ int 		main(int argc, char **argv)
 		return (0);
 	}
 	init_bin(&bin);
-
 	while(argv[i + 1])
 	{
 		if (!(ft_strcmp(argv[i], "-a")))
@@ -67,30 +66,55 @@ int 		main(int argc, char **argv)
 		ft_print_inv_f(bin);
 		return (0);
 	}
-
-
 	bin.arg_name = ft_strdup(argv[i]);
 	bin.fd = open(argv[i],  O_RDONLY);
+
 	if (bin.fd < 0)
 	{
 		ft_print_inv_f(bin);
 		return (0);
 	}
-
 	bin.arg_length = (unsigned int)lseek(bin.fd, 0, SEEK_END);
-	//lseek(bin.fd, 0, SEEK_SET); //what is that???????
+	lseek(bin.fd, 0, SEEK_SET);
+
+	//bin.f_contents = ft_memalloc(sizeof(bin.arg_length + 1));
+	// if (!bin.f_contents)
+	// {
+	// 	printf("SOMETHING GOING WRONG\n");
+	// 	return (0);
+	// }
+	
+	//read(bin.fd, bin.f_contents, bin.arg_length);
+
+
+//printf("1111 =>>>> %s\n", bin.f_contents);
+	
+
+ 	//what is that???????
+ 	char file_contents[bin.arg_length + 1];
+ 	read(bin.fd, file_contents, bin.arg_length);
+ 	file_contents[bin.arg_length] = '\0';
+ 	bin.f_contents = ft_strdup(file_contents);
+ 	//printf(" =>>>> %s\n", file_contents);
+
+
 	fill_magic_start(&bin);
 	create_cor_file(&bin); //O_CREAT|O_WRONLY|O_TRUNC
-	if (bin.flag_a == 1)
-		ft_print_flag_a(&bin);
-	char *exp;
+	
+	
 
-	exp = ft_memalloc(sizeof(char) + 12);
+	if (bin.flag_a == 1)
+	 	ft_print_flag_a(&bin);
+
+	
 
 	ft_printf("all good so far\n");
 	//print_struct(&bin);
-	
+	close(bin.fd);
+
+	ft_strdel(&(bin.arg_name));
+
+
 	return 0;
 }
-
 
