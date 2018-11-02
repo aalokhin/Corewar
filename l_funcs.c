@@ -72,6 +72,7 @@ void live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *m
 	map[0] = map[0];
 }
 
+
 void load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
 	int i;
@@ -84,10 +85,10 @@ void load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 		processes = processes->next;
 		i++;
 	}
-	arg_ind = find_arg_index(processes, DIR_CODE);
 	if ((*processes).argv[0][0] == IND_CODE)
 	{
-		i = ((*processes).argv[2][1] % IDX_MOD) + (*processes).current_position;
+		arg_ind = find_arg_index(processes, IND_CODE);
+		i = ((*processes).argv[arg_ind][1] % IDX_MOD) + (*processes).current_position;
 		if (i < 0 || i >= MEM_SIZE)
 			i %= MEM_SIZE;
 		(*processes).argv[0][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
@@ -118,17 +119,14 @@ void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 			i %= MEM_SIZE;
 		(*processes).argv[1][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
 	}
-	i = (((*processes).argv[1][1] + (*processes).argv[2][1] ) % IDX_MOD) + (*processes).current_position;
+	i = (((*processes).argv[1][1] + (*processes).argv[2][1]) % IDX_MOD) + (*processes).current_position;
 	if (i < 0 || i >= MEM_SIZE)
 		i %= MEM_SIZE;
-	if (i >= 0 && i < MEM_SIZE)
-	{
-		map[i] = (*processes).argv[0][1];
-		if ((*processes).parent_nbr == -1)
-			(*main_cycle).indexes[i][0] = cur_proc;
-		else
-			(*main_cycle).indexes[i][0] = (*processes).parent_nbr;
-	}
+	map[i] = (*processes).argv[0][1];
+	if ((*processes).parent_nbr == -1)
+		(*main_cycle).indexes[i][0] = cur_proc;
+	else
+		(*main_cycle).indexes[i][0] = (*processes).parent_nbr;
  	ft_printf("%s\n", "test_sti");
 }
 
@@ -145,7 +143,6 @@ void ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 		i++;
 	}
 	arg_ind = find_arg_index(processes, DIR_CODE);
-	//ft_printf("(*processes).argv[arg_ind][1]%d\n", (*processes).argv[arg_ind][1]);
 	i = ((*processes).argv[arg_ind][1] % IDX_MOD) + (*processes).current_position;
 	if (i < 0 || i >= MEM_SIZE)
 		i %= MEM_SIZE;
@@ -170,7 +167,7 @@ void lload(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 	{
 		if ((*processes).argv[arg_ind][1] >= 0 && (*processes).argv[arg_ind][1] < 16)
 		{
-			if (((*processes).argv[0][1]) == 0)
+			if ((*processes).argv[0][1] == 0)
 				(*processes).carry = 1;
 			else
 				(*processes).carry = 0;
@@ -182,15 +179,14 @@ void lload(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 		i = (*processes).current_position + (*processes).argv[0][1];
 		if (i < 0 || i >= MEM_SIZE)
 			i %= MEM_SIZE;
+		if (((map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i]) == 0)
+			(*processes).carry = 1;
+		else
+			(*processes).carry = 0;
 		if ((*processes).argv[arg_ind][1] >= 0 && (*processes).argv[arg_ind][1] < 16)
-		{
-			if (((map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i]) == 0)
-				(*processes).carry = 1;
-			else
-				(*processes).carry = 0;
-			(*processes).regs[(*processes).argv[arg_ind][1]] =
+		(*processes).regs[(*processes).argv[arg_ind][1]] =
 		(map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
-		}
+
 	}
 	ft_printf("%s\n", "test_load load");
 }
@@ -207,18 +203,21 @@ void lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 		processes = processes->next;
 		i++;
 	}
-	arg_ind = find_arg_index(processes, DIR_CODE);
-	if ((*processes).argv[0][0] == IND_CODE)
+	if ((*processes).argv[1][0] == IND_CODE)
 	{
-		i = ((*processes).argv[2][1] % IDX_MOD) + (*processes).current_position;
+		i = (*processes).argv[1][1] % IDX_MOD;
 		if (i < 0 || i >= MEM_SIZE)
 			i %= MEM_SIZE;
-		(*processes).argv[0][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+		(*processes).argv[1][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
 	}
-	i = (((*processes).argv[0][1] + (*processes).argv[1][1])) + (*processes).current_position;
+	i = (((*processes).argv[1][1] + (*processes).argv[2][1])) + (*processes).current_position;
 	if (i < 0 || i >= MEM_SIZE)
 		i %= MEM_SIZE;
-	(*processes).argv[2][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+	map[i] = (*processes).argv[0][1];
+	if ((*processes).parent_nbr == -1)
+		(*main_cycle).indexes[i][0] = cur_proc;
+	else
+		(*main_cycle).indexes[i][0] = (*processes).parent_nbr;
 	ft_printf("%s\n", "test_load lload_ind");
 }
 
@@ -235,7 +234,6 @@ void long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 		i++;
 	}
 	arg_ind = find_arg_index(processes, DIR_CODE);
-	//ft_printf("(*processes).argv[arg_ind][1]%d\n", (*processes).argv[arg_ind][1]);
 	i = ((*processes).argv[arg_ind][1]) + (*processes).current_position;
 	if (i < 0 || i >= MEM_SIZE)
 		i %= MEM_SIZE;
@@ -255,6 +253,6 @@ void aff(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 		i++;
 	}
 	ft_printf("%s\n", "aff -> test");
-	ft_printf("%c\n", ((*processes).regs[(*processes).argv[0][1]] % 256));
+	ft_printf("%c\n", ((*processes).argv[0][1] % 256));
 	map[0] = map[0];
 }

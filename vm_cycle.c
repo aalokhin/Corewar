@@ -76,7 +76,8 @@ void fill_start_map_id(t_cycle *main_cycle, header_t bots[4], t_flags *params)
 		}
 		j++;
 	}	
-}	
+}
+
 
 void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 {
@@ -106,18 +107,6 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			map_to_screen(map, &main_cycle, params, head_proc, win);
 		while (i < main_cycle.processes && processes)
 		{
-			//ft_printf("Segfault in i == %d \n",  (*processes).current_position);
-			//ft_printf("Segfault in i == %d \n",  (*processes).id);
-			/*ft_printf("Segfault in i == %d \n",  i);
-			ft_printf("Segfault in i == %s \n",  (*processes).name);
-			ft_printf("Segfault in i == %d \n",  (*processes).carry);
-			ft_printf("Segfault in i == %d \n",  (*processes).parent_nbr);
-			ft_printf("Segfault in i == %d \n",  (*processes).if_live);
-			ft_printf("Segfault in i == %d \n",  (*processes).last_live_cycle);
-			ft_printf("Segfault in i == %d \n",  (*processes).cmd);
-			ft_printf("Segfault in i == %d \n",  (*processes).cycles_wait);
-			ft_printf("Segfault in i == %d \n",  (*processes).child_proc_lives);*/
-	
 			if (map[(*processes).current_position] >= 1 && map[(*processes).current_position] <= 16)
 			{
 				//ft_printf("Segfault in i == %s \n",  "test");
@@ -159,7 +148,6 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			processes = processes->next;
 			i++;
 		}
-
 		if (main_cycle.cycles != 0 && main_cycle.cycles % main_cycle.cycle_die == 0)
 		{
 			check_if_lives(head_proc, &main_cycle);
@@ -172,10 +160,10 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				main_cycle.prev_cycle_die = main_cycle.cycle_die;
 			}
 		}
-		//ft_printf("we are in  main cycle %d \n", main_cycle.cycles);
 		main_cycle.cycles++;
 	}
 	if ((*params).ncurses == 1)
 		endwin();
 	ft_printf("we exited main cycle\n");
+
 }

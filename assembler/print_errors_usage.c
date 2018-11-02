@@ -14,11 +14,12 @@ void 			ft_print_inv_f()
 }
 
 
-// Dumping annotated program on standard output
-// Program size : 347 bytes
-// Name : "shit_champ"
 
 
+void	ft_print_inv_input()
+{
+	ft_printf("Input error\n");
+}
 
 void	ft_print_flag_a(t_binfile *bin)
 {
@@ -30,16 +31,3 @@ void	ft_print_flag_a(t_binfile *bin)
 	
 }
 
-
-
-// void	(int num, char *name, char *com)
-// {
-// 	write(1, "Dumping annotated program on standard output\n", 45);
-// 	write(1, "Program size : ", 15);
-// 	ft_putnbr(num);
-// 	write(1, " bytes\nName : \"", 15);
-// 	write(1, name, ft_strlen(name));
-// 	write(1, "\"\nComment : \"", 13);
-// 	write(1, com, ft_strlen(com));
-// 	write(1, "\"\n\n", 3);
-// }
