@@ -87,20 +87,15 @@ void	fill_corfile_contents(t_binfile *bin)
 	write(bin->fd_file_out, "\0\0\0\0", 4);
 	//write(bin->fd_file_out, "a", 2);
 
+	i = 0;
+	while (i < COMMENT_LENGTH)
+	{
+		//printf("i am here \n");
+		//printf("writing comment  ....\n");
+		write(bin->fd_file_out, &bin->comment[i], 1);
+		i++;
 
-	
-
-
-
-
-	// i = 0;
-	// while (i < COMMENT_LENGTH)
-	// {
-	// 	//printf("writing comment  ....\n");
-	// 	write(bin->fd_file_out, &bin->comment[i], 1);
-	// 	i++;
-
-	// }
+	}
 
 
 
