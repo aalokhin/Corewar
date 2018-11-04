@@ -77,15 +77,6 @@ int 		main(int argc, char **argv)
 	bin.arg_length = (unsigned int)lseek(bin.fd, 0, SEEK_END);
 	lseek(bin.fd, 0, SEEK_SET);
 
-	//bin.f_contents = ft_memalloc(sizeof(bin.arg_length + 1));
-	// if (!bin.f_contents)
-	// {
-	// 	printf("SOMETHING GOING WRONG\n");
-	// 	return (0);
-	// }
-	
-	//read(bin.fd, bin.f_contents, bin.arg_length);
-
 
 //printf("1111 =>>>> %s\n", bin.f_contents);
 	
@@ -95,10 +86,15 @@ int 		main(int argc, char **argv)
  	read(bin.fd, file_contents, bin.arg_length);
  	file_contents[bin.arg_length] = '\0';
  	bin.f_contents = ft_strdup(file_contents);
- 	//printf(" =>>>> %s\n", file_contents);
-
-
+ 	parse_file(&bin, &file_contents);
+ 	//printf("{%s}", file_contents);
 	fill_magic_start(&bin);
+	fill_name_comment(&bin);
+
+	ft_strdel(&(bin.f_contents)); //*********************** magic ept
+	bin.f_contents = ft_strdup(file_contents); //*********************** magic ept
+	printf("===>%s<===\n", bin.f_contents); 
+
 	create_cor_file(&bin); //O_CREAT|O_WRONLY|O_TRUNC
 	
 	

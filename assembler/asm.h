@@ -60,6 +60,7 @@ void			ft_print_inv_input();
 
 
 void			fill_magic_start(t_binfile *bin);
+void			fill_name_comment(t_binfile *bin);
 
 
 
@@ -70,6 +71,7 @@ void			fill_corfile_contents(t_binfile *bin);
 
 
 void			fill_corfile_contents(t_binfile *bin);
+void 		parse_file(t_binfile *bin, char (*contents)[]);
 
 //********************************* FREEEING FUNCTIONS******************
 
