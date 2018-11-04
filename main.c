@@ -1,38 +1,17 @@
 #include "corewar.h"
 
-unsigned char	*ft_strcpy_uns(unsigned char *dst, unsigned char *src)
-{
-	int i;
-
-	i = 0;
-	while (src[i] != 0)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = src[i];
-	return (dst);
-}
-
-
 void create_map(header_t bots[4], t_flags *params)
 {
 	unsigned int i;
 	unsigned int j;
 	unsigned int k;
-	static unsigned char *map;
+	static unsigned char map[MEM_SIZE];
 
 	i = 0;
 	j = 0;
 	k = 0;
-	map = (unsigned char *)malloc(sizeof(unsigned char) * (MEM_SIZE + 1));
-	while (i < MEM_SIZE + 1)
-	{
-		map[i] = 0;
-		i++;
-	}
-	i = 0;
-	while (i <= MEM_SIZE && j < (*params).bots_quantity)
+	ft_bzero(map, MEM_SIZE);
+	while (i < MEM_SIZE && j < (*params).bots_quantity)
 	{
 		if (i == bots[j].start_index)
 		{
@@ -48,33 +27,40 @@ void create_map(header_t bots[4], t_flags *params)
 		i++;
 	}
 	i = 0;
-	while (i < MEM_SIZE + 1)
+	while (i < MEM_SIZE)
 	{
 		if (i % 128 == 0)
 			ft_printf("\n");
 		ft_printf("%.2x ", map[i]);
 		i++;
 	}
-
 	vm_cycle(map, params, bots);
 }
 
-void read_bots(t_flags *params)
+int read_bots(t_flags *params)
 {
-	unsigned int 		i = 0;
-	int j = 0;
-	int 		fd = 0;
-	header_t bots[4];
+	unsigned int 		i;
+	int j;
+	int 		fd;
+	static header_t bots[4];
 	unsigned int len;
 	unsigned int	size;
 	unsigned int	buf;
 	unsigned char *str;
+
+	i = 0;
+	j = 0;
+	fd = 0;
+	init_bots(bots);
 	while ((*params).players[j] != NULL)
 	{
 		i = 0;
 		fd = open((*params).players[j], O_RDONLY);
 		if (fd < 0)
-			break;
+		{
+			ft_printf("%s %s\n", "Can't read source file", (*params).players[j]);
+			return (0);
+		}
 		len = (int)lseek(fd, 0, SEEK_END);
 		lseek(fd, 0, SEEK_SET);
 		str = (unsigned char *)malloc(sizeof(unsigned char) * len + 1);
@@ -98,22 +84,24 @@ void read_bots(t_flags *params)
 		size |= buf;
 		size |= str[139];
 		bots[j].prog_size = size;
+		if (size > 682)
+		{
+			ft_printf("Error: %s has too large a code (%d bytes > 682 bytes)\n", (*params).players[j], size);
+			ft_strdel((char **)(&str));
+			return (0);
+		}
 		ft_strncpy(bots[j].comment, (const char *)(&str[140]), COMMENT_LENGTH);
 		bots[j].exec_part = (unsigned char *)malloc(sizeof(unsigned char) * (bots[j].prog_size + 1));
-		bots[j].exec_part[bots[j].prog_size] = '\0';
+		ft_bzero(bots[j].exec_part, bots[j].prog_size + 1);
 		//ft_strncpy((char *)(bots[j].exec_part), (const char *)(&str[2192]), bots[j].prog_size); ?why in cycle and not in strncpy
 		ft_printf("\n%s\n", bots[j].prog_name);
 		ft_printf("%d\n", bots[j].prog_size);
 		ft_printf("%s\n", bots[j].comment);
-
 		bots[j].start_index = (MEM_SIZE / (*params).bots_quantity) * j;
 		i = 0;
 		while (i < bots[j].prog_size)
 		{
-			//ft_printf("%x\n", bots[j].exec_part[i]);
 			bots[j].exec_part[i] = str[2192 + i];
-
-
 			if (i % 64 == 0)
 				ft_printf("\n");
 			ft_printf("%.2x ", bots[j].exec_part[i]);
@@ -124,6 +112,7 @@ void read_bots(t_flags *params)
 		j++;
 	}
 	create_map(bots, params);
+	return (1);
 }
 
 void print_usage(void)
@@ -158,30 +147,29 @@ void print_usage(void)
 int check_flags_core(int argc, char **argv, t_flags *params)
 {
 	int i;
-	int j;
 
 	i = 1;
-	j = 0;
 	while (i < argc)
 	{
 		if (ft_strcmp(argv[i], "-a") == 0)
-		{
 			(*params).a_aff = 1;
-		}
-		else if (ft_strcmp(argv[i], "-d") == 0)
+		else if (ft_strcmp(argv[i], "-d") == 0 && argv[i + 1][0] >= 0 && argv[i + 1][0] <= 9)
 		{
 			(*params).d_dumps_memory = ft_atoi(argv[i + 1]);
 			i++;
+			continue ;
 		}
-		else if (ft_strcmp(argv[i], "-s") == 0)
+		else if (ft_strcmp(argv[i], "-s") == 0 && argv[i + 1][0] >= 0 && argv[i + 1][0] <= 9)
 		{
 			(*params).s_cycles = ft_atoi(argv[i + 1]);
 			i++;
+			continue ;
 		}
-		else if (ft_strcmp(argv[i], "-v") == 0)
+		else if (ft_strcmp(argv[i], "-v") == 0 && argv[i + 1][0] >= 0 && argv[i + 1][0] <= 9)
 		{
 			(*params).v_verbosity = ft_atoi(argv[i + 1]);
 			i++;
+			continue ;
 		}
 		else if (ft_strcmp(argv[i], "-b") == 0)
 			(*params).binary = 1;
@@ -193,10 +181,18 @@ int check_flags_core(int argc, char **argv, t_flags *params)
 			(*params).n_stealth = 1;
 		else if (ft_strchr(argv[i], '.') && ft_strcmp(&(argv[i][ft_strlen(argv[i]) - 4]), ".cor") == 0)
 		{
-			ft_printf("%s\n", (*params).players[j]);
-			(*params).players[j] = ft_strdup(argv[i]);
+			if ((*params).bots_quantity == 4)
+			{
+				ft_printf("%s\n", "Too many champions");
+				return (0);
+			}
+			(*params).players[(*params).bots_quantity] = argv[i];
 			(*params).bots_quantity++;
-			j++;
+		}
+		else
+		{
+			ft_printf("%s %s\n", "Can't read source file", argv[i]);
+			return (0);
 		}
 		i++;
 	}
@@ -212,7 +208,8 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	params_init(&params);
-	check_flags_core(argc, argv, &params);
+	if (!check_flags_core(argc, argv, &params))
+		exit(0);
 	ft_printf("%d\n", params.a_aff);
 	ft_printf("%d\n", params.d_dumps_memory);
 	ft_printf("%d\n", params.s_cycles);
@@ -225,7 +222,6 @@ int main(int argc, char **argv)
 	ft_printf("%s\n", params.players[1]);
 	ft_printf("%s\n", params.players[2]);
 	ft_printf("%s\n", params.players[3]);
-	read_bots(&params);
-	
-	argv = NULL;
+	if (!read_bots(&params))
+		exit(0);
 }

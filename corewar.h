@@ -45,9 +45,6 @@ typedef struct s_proc
 	struct s_proc *next;
 }			t_proc;
 
-static t_proc t_proc7;
-static t_proc t_proc8;
-
 typedef struct s_cycle
 {
 	int cycles;

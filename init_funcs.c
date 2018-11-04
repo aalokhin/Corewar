@@ -9,6 +9,9 @@ void		init_bots(header_t bots[4])
 		bots[i].prog_size = 0;
 		bots[i].exec_part = NULL;
 		bots[i].start_index = 0;
+		ft_bzero(bots[i].prog_name, ft_strlen(bots[i].prog_name));
+		ft_bzero(bots[i].comment, ft_strlen(bots[i].comment));
+		i++;
 	}
 }
 

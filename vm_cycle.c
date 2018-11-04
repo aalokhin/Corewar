@@ -16,7 +16,7 @@ void processes_add(t_proc *parent_process, unsigned char *map, t_cycle *main_cyc
 	tmp->current_position = index;
 	tmp->carry = (*parent).carry;
 	tmp->parent_nbr = (*parent).id;
-	tmp->if_live = (*parent).if_live;
+	tmp->if_live = 0;
 	tmp->cmd = map[tmp->current_position];
 	(*main_cycle).indexes[tmp->current_position][0] = tmp->parent_nbr;
 	(*main_cycle).indexes[tmp->current_position][1] = 1;
@@ -125,7 +125,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			map_to_screen(map, &main_cycle, params, head_proc, win);
 		while (i < main_cycle.processes && processes)
 		{
-			if (map[(*processes).current_position] >= 1 && map[(*processes).current_position] <= 16)
+			if ((unsigned)map[(*processes).current_position] >= 1 && (unsigned)map[(*processes).current_position] <= 16)
 			{
 				//ft_printf("Segfault in i == %s \n",  "test");
 				if (op_tab[map[(*processes).current_position] - 1].codage)

@@ -28,15 +28,11 @@ void get_t_dir_value(t_proc *processes, unsigned char *map,
 void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter)
 {
 	short tmp;
-	short res;
 
 	tmp = 0;
-	res = 0;
 	tmp = (short)((map[(*id_counter) + 2] << 8) + map[(*id_counter) + 1]);
 	(*processes).argv[arg_ind][1] = tmp;
 	(*id_counter) += 2;
-	//res = ((map[(*processes).argv[arg_ind][1] + 3] << 24) + (map[(*processes).argv[arg_ind][1] + 2] << 16) +
-		//(map[(*processes).argv[arg_ind][1] + 1] << 8) + map[(*processes).argv[arg_ind][1]]);
 }
 
 void get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter)
