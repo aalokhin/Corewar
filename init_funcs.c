@@ -49,13 +49,16 @@ void main_cycle_init(t_cycle *main_cycle, t_flags *params)
 t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 {
 	int i;
+	int j;
 	t_proc *processes;
 	t_proc *tmp;
 
+	j = 0;
 	i = (*params).bots_quantity - 1;
 	tmp = NULL;
 	while (i >= 0)
 	{
+		j = 0;
 		processes = (t_proc *)malloc(sizeof(t_proc));
 		(*processes).id = i;
 		(*processes).name = bots[i].prog_name;
@@ -71,6 +74,12 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 		(*processes).last_live_cycle = 0;
 		(*processes).child_proc_lives = 0;
 		(*processes).next = tmp;
+		clear_argv_arr(processes);
+		while (j < REG_NUMBER)
+		{
+			(*processes).regs[j] = 0;
+			j++;
+		}
 		tmp = processes;
 		i--;
 	}

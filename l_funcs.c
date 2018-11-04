@@ -103,10 +103,12 @@ void load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
 	int i;
-	int arg_ind;
+	unsigned int arg1;
+	unsigned int arg2;
 
 	i = 0;
-	arg_ind = 0;
+	arg1 = 0;
+	arg2 = 0;
 	while (i < (*main_cycle).processes && i != cur_proc)
 	{
 		processes = processes->next;
@@ -114,15 +116,37 @@ void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 	}
 	if ((*processes).argv[1][0] == IND_CODE)
 	{
-		i = (*processes).argv[1][1] % IDX_MOD;
+		i = (short)((*processes).argv[1][1]) % IDX_MOD;
 		if (i < 0 || i >= MEM_SIZE)
 			i %= MEM_SIZE;
-		(*processes).argv[1][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+		(*processes).argv[1][1] = (map[(i + 3) % MEM_SIZE] << 24) + (map[(i + 2) % MEM_SIZE] << 16) + (map[(i + 1) % MEM_SIZE] << 8) + map[i];
 	}
+	/*if ((*processes).argv[1][0] == REG_CODE)
+		arg1 = (unsigned char)(*processes).argv[1][1];
+	else if ((*processes).argv[1][0] == IND_CODE || ((*processes).argv[1][0] == DIR_CODE && op_tab[map[(*processes).current_position] - 1].label))
+		arg1 = (short)(*processes).argv[1][1];
+	else if ((*processes).argv[1][0] == DIR_CODE && !op_tab[map[(*processes).current_position] - 1].label)
+		arg1 = (unsigned int)(*processes).argv[1][1];
+	if ((*processes).argv[2][0] == REG_CODE)
+		arg2 = (unsigned char)(*processes).argv[2][1];
+	else if ((*processes).argv[2][0] == IND_CODE || ((*processes).argv[2][0] == DIR_CODE && op_tab[map[(*processes).current_position] - 1].label))
+		arg2 = (short)(*processes).argv[2][1];
+	else if ((*processes).argv[2][0] == DIR_CODE && !op_tab[map[(*processes).current_position] - 1].label)
+		arg2 = (unsigned int)(*processes).argv[2][1];
+	i = ((arg1 + arg2) % IDX_MOD) + (*processes).current_position;*/
 	i = (((*processes).argv[1][1] + (*processes).argv[2][1]) % IDX_MOD) + (*processes).current_position;
+	ft_printf("III%d %d %d %d \n", i, (*processes).argv[0][1], (*processes).argv[1][1], (*processes).argv[2][1], (*processes).current_position);
 	if (i < 0 || i >= MEM_SIZE)
 		i %= MEM_SIZE;
-	map[i] = (*processes).argv[0][1];
+	ft_printf("III%d %d %d %d \n", i, (*processes).argv[0][1], (*processes).argv[1][1], (*processes).argv[2][1], (*processes).current_position);
+	/*map[i] = (*processes).regs[(*processes).argv[0][1]] & 0x000000FF;
+	map[i + 1] = ((*processes).regs[(*processes).argv[0][1]] & 0x0000FF00) >> 8;
+	map[i + 2] = ((*processes).regs[(*processes).argv[0][1]] & 0x00FF0000) >> 16;
+	map[i + 3] = ((*processes).regs[(*processes).argv[0][1]] & 0xFF000000) >> 24;*/
+	map[i] = 1;
+	map[i + 1] = 2;
+	map[i + 2] = 3;
+	map[i + 3] = 4;
 	if ((*processes).parent_nbr == -1)
 		(*main_cycle).indexes[i][0] = cur_proc;
 	else

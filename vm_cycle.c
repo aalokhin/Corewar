@@ -118,7 +118,6 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		visual_init(&win);
 	while (main_cycle.cycle_die > 0 && main_cycle.processes > 0)
 	{
-		//ft_printf("something weird\n");
 		i = 0;
 		processes = head_proc;
 		if ((*params).ncurses == 1)
@@ -127,10 +126,8 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		{
 			if ((unsigned)map[(*processes).current_position] >= 1 && (unsigned)map[(*processes).current_position] <= 16)
 			{
-				//ft_printf("Segfault in i == %s \n",  "test");
 				if (op_tab[map[(*processes).current_position] - 1].codage)
 				{
-					//ft_printf("Segfault in i == %s \n",  "test");
 					id_counter = (*processes).current_position + 1;
 					take_args(map[id_counter], processes);
 					get_args_values(processes, map, &id_counter);
@@ -146,20 +143,19 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					instruct[map[(*processes).current_position] - 1](head_proc, i, &main_cycle, map);
 					if (map[(*processes).current_position] != 9)
 						(*processes).current_position = id_counter + 1;
-					clear_argv_arr(processes);
 				}
+				clear_argv_arr(processes);
 			}
 			else
 				(*processes).current_position++;
 			if ((*processes).current_position < 0 || (*processes).current_position >= MEM_SIZE)
 				(*processes).current_position %= MEM_SIZE;
-
 			if ((*processes).parent_nbr == -1)
 				main_cycle.indexes[(*processes).current_position][0] = i + 1;
 			else
 				main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr;
 			main_cycle.indexes[(*processes).current_position][1] = 1;
-			if ((*processes).child_proc_lives > 21)
+			if ((*processes).child_proc_lives > NBR_LIVE)
 			{
 				(*processes).child_proc_lives = 0;
 				main_cycle.cycle_die -= CYCLE_DELTA;
@@ -171,7 +167,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		{
 			check_if_lives(head_proc, &main_cycle);
 			main_cycle.checks_if_die++;
-			if (main_cycle.checks_if_die == 10)
+			if (main_cycle.checks_if_die == MAX_CHECKS)
 			{
 				main_cycle.checks_if_die = 0;
 				if (main_cycle.cycle_die == main_cycle.prev_cycle_die)
