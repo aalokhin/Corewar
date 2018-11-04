@@ -81,79 +81,7 @@ void		clean_spaces(t_binfile *bin, char (*contents)[])
 
 	i = 0;
 
-	// while((*contents)[i])
-	// {
-	// 	if (ft_whitespaces((*contents)[i]) && (*contents)[i] != '\n')
-	// 	{
-	// 		// printf("okoko\n");
-	// 		len = 0;
-	// 		while(ft_whitespaces((*contents)[i]) && (*contents)[i] != '\n')
-	// 		{
-	// 			len++;
-	// 			i++;
-	// 		}
-			
 
-	// 	}
-	// 	ft_memmove(&(*contents)[k], &(*contents)[i], len);
-	// 	k++;
-	// 	i++;
-	// }
-
-
-
-	// k = 0;
-
-	
-	// len = 0;
-
-	// i = 0;
-
-	// while((*contents)[i])
-	// {
-	// 	if (i == 0 && (*contents)[i])
-	// 	{
-	// 		while((*contents)[i] != '\n')
-	// 			i++;
-	// 	}
-	// 	if ((*contents)[i] == '\n' && (*contents)[i + 1] == '\n')
-	// 	{
-	// 		// printf("okoko\n");
-	// 		// len = 0;
-	// 		// while((*contents)[i] == '\n' )
-	// 		// {
-	// 		// 	len++;
-	// 		// 	i++;
-	// 		// }
-	// 		ft_memmove(&(*contents)[i], &(*contents)[i + 1], 1);
-	// 	}
-		
-	// 	// k++;
-	// 	i++;
-	// }
-
-
-	//ft_zero_what_left(bin, &k, contents);
-
-	// void	ft_space(char (*f)[], int len)
-	// {
-	// 	int i;
-	// 	int j;
-
-	// 	i = -1;
-	// 	j = 0;
-	// 	while ((*f)[++i])
-	// 	{
-	// 		while ((*f)[i] != '\n' && ft_isspace((*f)[i]))
-	// 			++i;
-	// 		if (j > 0 && (*f)[j - 1] != '\n' && i > 0 && ft_isspace((*f)[i - 1]))
-	// 			(*f)[j++] = ' ';
-	// 		if ((*f)[i] && ((*f)[i] == '\n' || !ft_isspace((*f)[i])))
-	// 			(*f)[j++] = (*f)[i];
-	// 	}
-	// 	while (j < len)
-	// 		(*f)[j++] = '\0';
-	// }
 }
 
 void 		parse_file(t_binfile *bin, char (*contents)[]) //cleaning from  comments and extra lines
@@ -196,38 +124,5 @@ void 		parse_file(t_binfile *bin, char (*contents)[]) //cleaning from  comments 
 	i = 0;
 	k = 0;
 	len = 0;
-	// while ((*contents)[i] == '\n')
-	// 	i++;
-	// while ((*contents)[i])//(i < bin->arg_length)
-	// {
-		
-	// }
-	//ft_zero_what_left(bin, &k, contents);
-
-
-
-
-		// int i;
-		// int j;
-
-		// i = 0;
-		// j = 0;
-		// while ((*f)[i])
-		// {
-		// 	if (i == 0)
-		// 		while ((*f)[i] == '\n')
-		// 			++i;
-		// 	if ((*f)[i] == '\n')
-		// 		while ((*f)[i + 1] == '\n')
-		// 			++i;
-		// 	if (!(*f)[i])
-		// 		return ;
-		// 	(*f)[j++] = (*f)[i++];
-		// }
-		// while (j < len)
-		// 	(*f)[j++] = '\0';
-
-	//skip_name_comment(&i, contents);
-	// printf("yooo [[%lu]]", k);
-	// printf("[%s]<+=======\n", contents);
+	
 }
