@@ -70,7 +70,16 @@ void			fill_corfile_contents(t_binfile *bin);
 
 
 
-void			fill_corfile_contents(t_binfile *bin);
+void		skip_name_comment(size_t	*count,  char (*contents)[]);
+
+void		ft_zero_what_left(t_binfile *bin, size_t	*count,  char (*contents)[]);
+
+void		clean_name_comment(t_binfile *bin, char (*contents)[]);
+
+
+
+
+void		fill_corfile_contents(t_binfile *bin);
 void 		parse_file(t_binfile *bin, char (*contents)[]);
 
 //********************************* FREEEING FUNCTIONS******************
