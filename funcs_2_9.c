@@ -15,13 +15,13 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 	arg_ind = find_arg_index(processes, REG_CODE);
 	if ((*processes).argv[0][0] == DIR_CODE) //t_reg -> index of n array
 	{
-		if ((*processes).argv[arg_ind][1] >= 0 && (*processes).argv[arg_ind][1] < 16)
+		if ((*processes).argv[arg_ind][1] >= 1 && (*processes).argv[arg_ind][1] <= 16)
 		{
 			if ((*processes).argv[0][1] == 0)
 				(*processes).carry = 1;
 			else
 				(*processes).carry = 0;
-			(*processes).regs[(*processes).argv[arg_ind][1]] = (*processes).argv[0][1];
+			(*processes).regs[(*processes).argv[arg_ind][1] - 1] = (*processes).argv[0][1];
 		}
 	}
 	else if ((*processes).argv[0][0] == IND_CODE)
@@ -30,13 +30,13 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 		i = (*processes).current_position + (*processes).argv[0][1];
 		if (i < 0 || i >= MEM_SIZE)
 			i %= MEM_SIZE;
-		if (((map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i]) == 0)
+		if (((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]) == 0)
 			(*processes).carry = 1;
 		else
 			(*processes).carry = 0;
-		if ((*processes).argv[arg_ind][1] >= 0 && (*processes).argv[arg_ind][1] < 16)
-		(*processes).regs[(*processes).argv[arg_ind][1]] =
-		(map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+		if ((*processes).argv[arg_ind][1] >= 1 && (*processes).argv[arg_ind][1] <= 16)
+		(*processes).regs[(*processes).argv[arg_ind][1] - 1] =
+		(map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
 
 	}
 	ft_printf("%s\n", "test_load");
@@ -57,15 +57,25 @@ void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 		i = (*processes).current_position + ((*processes).argv[1][1] % IDX_MOD);
 		if (i < 0 || i >= MEM_SIZE)
 			i %= MEM_SIZE;
-		if ((*processes).argv[0][1] >= 0 && (*processes).argv[0][1] < 16)
-			map[i] = (*processes).regs[(*processes).argv[0][1]];
+		if ((*processes).argv[0][1] >= 1 && (*processes).argv[0][1] <= 16)
+		{
+			map[i] = ((*processes).regs[(*processes).argv[0][1] - 1] & 0xff);
+			map[i + 1] = (((*processes).regs[(*processes).argv[0][1] - 1] >> 8) & 0xff);
+		}
+			
 		if ((*processes).parent_nbr == -1)
-			(*main_cycle).indexes[i][0] = cur_proc;
+		{
+			(*main_cycle).indexes[i][0] = cur_proc + 1;
+			(*main_cycle).indexes[i + 1][0] = cur_proc + 1;
+		}
 		else
-			(*main_cycle).indexes[i][0] = (*processes).parent_nbr;
+		{
+			(*main_cycle).indexes[i][0] = (*processes).parent_nbr + 1;
+			(*main_cycle).indexes[i + 1][0] = (*processes).parent_nbr + 1;
+		}
 	}
 	else if ((*processes).argv[1][0] == REG_CODE)
-		(*processes).regs[(*processes).argv[1][1]] = (*processes).argv[0][1];
+		(*processes).regs[(*processes).argv[1][1] - 1] = (*processes).argv[0][1];
 	ft_printf("%s\n", "store_test");
 }
 
@@ -185,9 +195,9 @@ void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 		if ((*processes).current_position < 0 || (*processes).current_position >= MEM_SIZE)
 			(*processes).current_position %= MEM_SIZE;
 		if ((*processes).parent_nbr == -1)
-			(*main_cycle).indexes[(*processes).current_position][0] = cur_proc;
+			(*main_cycle).indexes[(*processes).current_position][0] = cur_proc + 1;
 		else
-			(*main_cycle).indexes[(*processes).current_position][0] = (*processes).parent_nbr;
+			(*main_cycle).indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
 		(*main_cycle).indexes[(*processes).current_position][1] = 1;
 	}
 	ft_printf("%s\n", "test zjmp");

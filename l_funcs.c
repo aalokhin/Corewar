@@ -91,12 +91,12 @@ void load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 		i = ((*processes).argv[arg_ind][1] % IDX_MOD) + (*processes).current_position;
 		if (i < 0 || i >= MEM_SIZE)
 			i %= MEM_SIZE;
-		(*processes).argv[0][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+		(*processes).argv[0][1] = (map[i] << 24) + (map[i + 1] << 16) + (map[i + 2] << 8) + map[i + 3];
 	}
 	i = (((*processes).argv[0][1] + (*processes).argv[1][1]) % IDX_MOD) + (*processes).current_position;
 	if (i < 0 || i >= MEM_SIZE)
 		i %= MEM_SIZE;
-	(*processes).argv[2][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+	(*processes).argv[2][1] = (map[i] << 24) + (map[i + 1] << 16) + (map[i + 2] << 8) + map[i + 3];
 	ft_printf("%s\n", "test load_ind");
 }
 
@@ -119,38 +119,32 @@ void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 		i = (short)((*processes).argv[1][1]) % IDX_MOD;
 		if (i < 0 || i >= MEM_SIZE)
 			i %= MEM_SIZE;
-		(*processes).argv[1][1] = (map[(i + 3) % MEM_SIZE] << 24) + (map[(i + 2) % MEM_SIZE] << 16) + (map[(i + 1) % MEM_SIZE] << 8) + map[i];
+		(*processes).argv[1][1] = (map[(i) % MEM_SIZE] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[i + 3];
 	}
-	/*if ((*processes).argv[1][0] == REG_CODE)
-		arg1 = (unsigned char)(*processes).argv[1][1];
-	else if ((*processes).argv[1][0] == IND_CODE || ((*processes).argv[1][0] == DIR_CODE && op_tab[map[(*processes).current_position] - 1].label))
-		arg1 = (short)(*processes).argv[1][1];
-	else if ((*processes).argv[1][0] == DIR_CODE && !op_tab[map[(*processes).current_position] - 1].label)
-		arg1 = (unsigned int)(*processes).argv[1][1];
-	if ((*processes).argv[2][0] == REG_CODE)
-		arg2 = (unsigned char)(*processes).argv[2][1];
-	else if ((*processes).argv[2][0] == IND_CODE || ((*processes).argv[2][0] == DIR_CODE && op_tab[map[(*processes).current_position] - 1].label))
-		arg2 = (short)(*processes).argv[2][1];
-	else if ((*processes).argv[2][0] == DIR_CODE && !op_tab[map[(*processes).current_position] - 1].label)
-		arg2 = (unsigned int)(*processes).argv[2][1];
-	i = ((arg1 + arg2) % IDX_MOD) + (*processes).current_position;*/
 	i = (((*processes).argv[1][1] + (*processes).argv[2][1]) % IDX_MOD) + (*processes).current_position;
-	ft_printf("III%d %d %d %d \n", i, (*processes).argv[0][1], (*processes).argv[1][1], (*processes).argv[2][1], (*processes).current_position);
 	if (i < 0 || i >= MEM_SIZE)
 		i %= MEM_SIZE;
-	ft_printf("III%d %d %d %d \n", i, (*processes).argv[0][1], (*processes).argv[1][1], (*processes).argv[2][1], (*processes).current_position);
-	/*map[i] = (*processes).regs[(*processes).argv[0][1]] & 0x000000FF;
-	map[i + 1] = ((*processes).regs[(*processes).argv[0][1]] & 0x0000FF00) >> 8;
-	map[i + 2] = ((*processes).regs[(*processes).argv[0][1]] & 0x00FF0000) >> 16;
-	map[i + 3] = ((*processes).regs[(*processes).argv[0][1]] & 0xFF000000) >> 24;*/
-	map[i] = 1;
-	map[i + 1] = 2;
-	map[i + 2] = 3;
-	map[i + 3] = 4;
+	if ((*processes).argv[0][1] >= 1 && (*processes).argv[0][1] <= 16)
+	{
+		map[i] = ((*processes).regs[(*processes).argv[0][1] - 1] & 0x000000FF); 
+		map[i + 1] = ((*processes).regs[(*processes).argv[0][1] - 1] & 0x0000FF00) >> 8; 
+		map[i + 2] = ((*processes).regs[(*processes).argv[0][1] - 1] & 0x00FF0000) >> 16; 
+		map[i + 3] = ((*processes).regs[(*processes).argv[0][1] - 1] & 0xFF000000) >> 24;
+	}
 	if ((*processes).parent_nbr == -1)
-		(*main_cycle).indexes[i][0] = cur_proc;
+	{
+		(*main_cycle).indexes[i][0] = cur_proc + 1;
+		(*main_cycle).indexes[i + 1][0] = cur_proc + 1;
+		(*main_cycle).indexes[i + 2][0] = cur_proc + 1;
+		(*main_cycle).indexes[i + 3][0] = cur_proc + 1;
+	}
 	else
-		(*main_cycle).indexes[i][0] = (*processes).parent_nbr;
+	{
+		(*main_cycle).indexes[i][0] = (*processes).parent_nbr + 1;
+		(*main_cycle).indexes[i + 1][0] = (*processes).parent_nbr + 1;
+		(*main_cycle).indexes[i + 2][0] = (*processes).parent_nbr + 1;
+		(*main_cycle).indexes[i + 3][0] = (*processes).parent_nbr + 1;
+	}
  	ft_printf("%s\n", "test_sti");
 }
 
@@ -189,13 +183,13 @@ void lload(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 	arg_ind = find_arg_index(processes, REG_CODE);
 	if ((*processes).argv[0][0] == DIR_CODE) //t_reg -> index of n array
 	{
-		if ((*processes).argv[arg_ind][1] >= 0 && (*processes).argv[arg_ind][1] < 16)
+		if ((*processes).argv[arg_ind][1] >= 1 && (*processes).argv[arg_ind][1] <= 16)
 		{
 			if ((*processes).argv[0][1] == 0)
 				(*processes).carry = 1;
 			else
 				(*processes).carry = 0;
-			(*processes).regs[(*processes).argv[arg_ind][1]] = (*processes).argv[0][1];
+			(*processes).regs[(*processes).argv[arg_ind][1] - 1] = (*processes).argv[0][1];
 		}
 	}
 	else if ((*processes).argv[0][0] == IND_CODE)
@@ -203,13 +197,13 @@ void lload(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 		i = (*processes).current_position + (*processes).argv[0][1];
 		if (i < 0 || i >= MEM_SIZE)
 			i %= MEM_SIZE;
-		if (((map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i]) == 0)
+		if (((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]) == 0)
 			(*processes).carry = 1;
 		else
 			(*processes).carry = 0;
-		if ((*processes).argv[arg_ind][1] >= 0 && (*processes).argv[arg_ind][1] < 16)
-		(*processes).regs[(*processes).argv[arg_ind][1]] =
-		(map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+		if ((*processes).argv[arg_ind][1] >= 1 && (*processes).argv[arg_ind][1] <= 16)
+		(*processes).regs[(*processes).argv[arg_ind][1] - 1] =
+		(map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
 
 	}
 	ft_printf("%s\n", "test_load load");
@@ -233,12 +227,12 @@ void lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 		i = ((*processes).argv[arg_ind][1] % IDX_MOD) + (*processes).current_position;
 		if (i < 0 || i >= MEM_SIZE)
 			i %= MEM_SIZE;
-		(*processes).argv[0][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+		(*processes).argv[0][1] = (map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
 	}
 	i = (((*processes).argv[0][1] + (*processes).argv[1][1])) + (*processes).current_position;
 	if (i < 0 || i >= MEM_SIZE)
 		i %= MEM_SIZE;
-	(*processes).argv[2][1] = (map[i + 3] << 24) + (map[i + 2] << 16) + (map[i + 1] << 8) + map[i];
+	(*processes).argv[2][1] = (map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
 	ft_printf("%s\n", "test_load lload_ind");
 }
 

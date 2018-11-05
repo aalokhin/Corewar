@@ -4,7 +4,9 @@ void processes_add(t_proc *parent_process, unsigned char *map, t_cycle *main_cyc
 {
 	t_proc *tmp;
 	t_proc *parent;
+	int j;
 
+	j = 0;
 	tmp = NULL;
 	parent = parent_process;
 	(*main_cycle).processes++;
@@ -18,15 +20,22 @@ void processes_add(t_proc *parent_process, unsigned char *map, t_cycle *main_cyc
 	tmp->parent_nbr = (*parent).id;
 	tmp->if_live = 0;
 	tmp->cmd = map[tmp->current_position];
-	(*main_cycle).indexes[tmp->current_position][0] = tmp->parent_nbr;
+	(*main_cycle).indexes[tmp->current_position][0] = tmp->parent_nbr + 1;
 	(*main_cycle).indexes[tmp->current_position][1] = 1;
 	if (tmp->cmd >= 1 && tmp->cmd <= 16)
 		tmp->cycles_wait = op_tab[tmp->cmd - 1].cycles_wait;
 	else
-		tmp->cycles_wait = -1;
+		tmp->cycles_wait = 0;
 	tmp->last_live_cycle = (*parent).last_live_cycle;
 	tmp->child_proc_lives = 0;
 	tmp->next = NULL;
+	clear_argv_arr(tmp);
+	while (j < REG_NUMBER)
+	{
+		tmp->regs[j] = 0;
+		j++;
+	}
+	tmp->regs[0] = (unsigned int)((tmp->id + 1) * -1);
 	parent_process = tmp;
 }
 
@@ -124,7 +133,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			map_to_screen(map, &main_cycle, params, head_proc, win);
 		while (i < main_cycle.processes && processes)
 		{
-			if ((unsigned)map[(*processes).current_position] >= 1 && (unsigned)map[(*processes).current_position] <= 16)
+			if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
 			{
 				if (op_tab[map[(*processes).current_position] - 1].codage)
 				{
@@ -140,9 +149,14 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				}
 				if ((*processes).if_live)
 				{
-					instruct[map[(*processes).current_position] - 1](head_proc, i, &main_cycle, map);
-					if (map[(*processes).current_position] != 9)
-						(*processes).current_position = id_counter + 1;
+					if ((*processes).cycles_wait == 1)
+					{
+						instruct[(*processes).cmd - 1](head_proc, i, &main_cycle, map);
+						if (map[(*processes).current_position] != 9)
+							(*processes).current_position = id_counter + 1;
+					}
+					else
+						(*processes).cycles_wait--;
 				}
 				clear_argv_arr(processes);
 			}
@@ -150,10 +164,11 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				(*processes).current_position++;
 			if ((*processes).current_position < 0 || (*processes).current_position >= MEM_SIZE)
 				(*processes).current_position %= MEM_SIZE;
+			(*processes).cmd = map[(*processes).current_position];
 			if ((*processes).parent_nbr == -1)
 				main_cycle.indexes[(*processes).current_position][0] = i + 1;
 			else
-				main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr;
+				main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
 			main_cycle.indexes[(*processes).current_position][1] = 1;
 			if ((*processes).child_proc_lives > NBR_LIVE)
 			{
