@@ -70,7 +70,7 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 		if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
 			(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
 		else
-			(*processes).cycles_wait = -1;
+			(*processes).cycles_wait = 0;
 		(*processes).last_live_cycle = 0;
 		(*processes).child_proc_lives = 0;
 		(*processes).next = tmp;
@@ -80,6 +80,7 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 			(*processes).regs[j] = 0;
 			j++;
 		}
+		(*processes).regs[0] = (unsigned int)(((*processes).id + 1) * -1);
 		tmp = processes;
 		i--;
 	}

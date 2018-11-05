@@ -38,7 +38,7 @@ typedef struct s_proc
 	unsigned int regs[REG_NUMBER];
 	unsigned int if_live;
 	int last_live_cycle;
-	unsigned int cmd;
+	unsigned char cmd;
 	int argv[3][2];
 	unsigned int cycles_wait;
 	int child_proc_lives;
