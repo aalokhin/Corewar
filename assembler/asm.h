@@ -11,6 +11,14 @@
 #include <stdio.h>
 
 
+typedef struct s_t
+{
+	char *type;
+	char *label;
+	int		c_name;
+	struct s_t *next;
+
+}				t_t;
 
 typedef struct	s_binfile
 {
@@ -40,11 +48,11 @@ typedef struct	s_binfile
 
 
 	char 			*exec_code;//executable code
+	t_t				*test;
 
 	
 }				t_binfile;
 
-					
 
 //********************************* PRINTING FUNCTIONS******************
 
@@ -83,5 +91,7 @@ void		fill_corfile_contents(t_binfile *bin);
 void 		parse_file(t_binfile *bin, char (*contents)[]);
 
 //********************************* FREEEING FUNCTIONS******************
+
+void	test(t_binfile *bin);
 
 #endif
