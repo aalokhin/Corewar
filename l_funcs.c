@@ -163,9 +163,9 @@ void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 	else if ((*processes).argv[2][0] == DIR_CODE)
 		three = (*processes).argv[2][1];
 
-	i = ((two + three) % IDX_MOD) + (*processes).current_position;
-	if (i < 0 || i >= MEM_SIZE)
-		i %= MEM_SIZE;
+	i = (two + three + (*processes).current_position) % IDX_MOD;
+	ft_printf("%d %d \n", i, (*processes).current_position);
+	i %= MEM_SIZE;
 	map[i] = ((*processes).regs[(*processes).argv[0][1] - 1] & 0x000000FF); 
 	map[i + 1] = ((*processes).regs[(*processes).argv[0][1] - 1] & 0x0000FF00) >> 8; 
 	map[i + 2] = ((*processes).regs[(*processes).argv[0][1] - 1] & 0x00FF0000) >> 16; 

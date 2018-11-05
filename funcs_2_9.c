@@ -298,7 +298,8 @@ void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 			processes = processes->next;
 			i++;
 		}
-		(*processes).current_position = ((*processes).argv[0][1] % IDX_MOD);
+		(*main_cycle).indexes[(*processes).current_position][1] = 0;
+		(*processes).current_position += ((*processes).argv[0][1] % IDX_MOD);
 		if ((*processes).current_position < 0 || (*processes).current_position >= MEM_SIZE)
 			(*processes).current_position %= MEM_SIZE;
 		if ((*processes).parent_nbr == -1)
