@@ -25,9 +25,9 @@ void 	print_struct(t_binfile	*bin)
 // 	start_color();
 // init_pair(1 , COLOR_GREEN, COLOR_BLACK);
 // attron(COLOR_PAIR(11));
-	printf("\nbin.arg_name ====>%s\n", bin->arg_name);
-	printf("bin.fd ====>%d\n", bin->fd);
-	printf("arg length ====>%u\n\n", bin->arg_length);
+	// printf("\nbin.arg_name ====>%s\n", bin->arg_name);
+	// printf("bin.fd ====>%d\n", bin->fd);
+	// printf("arg length ====>%u\n\n", bin->arg_length);
 	//attroff( COLOR_PAIR(11));
 	// printf("~~~~~~~~~~~~~~~~~~~~~~~~~~MAGIC\n");
 	
@@ -57,7 +57,7 @@ int 		main(int argc, char **argv)
 		if (!(ft_strcmp(argv[i], "-a")))
 		{
 			bin.flag_a = 1;
-			ft_printf("Oh God wee need to print a stripped version\n");
+			//ft_printf("Oh God wee need to print a stripped version\n");
 		}
 		i++;
 	}
@@ -93,18 +93,17 @@ int 		main(int argc, char **argv)
 
 	ft_strdel(&(bin.f_contents)); //*********************** magic ept
 	bin.f_contents = ft_strdup(file_contents); //*********************** magic ept
-	printf("===>%s<===\n", bin.f_contents); 
-
+	//printf("===>%s<===\n", bin.f_contents); 
 	create_cor_file(&bin); //O_CREAT|O_WRONLY|O_TRUNC
 	
 	
-
+	test(&bin);
 	if (bin.flag_a == 1)
 	 	ft_print_flag_a(&bin);
 
 	
 
-	ft_printf("all good so far\n");
+	//ft_printf("all good so far\n");
 	//print_struct(&bin);
 	close(bin.fd);
 
