@@ -121,8 +121,6 @@ void 		parse_file(t_binfile *bin, char (*contents)[]) //cleaning from  comments 
 	ft_zero_what_left(bin, &k, contents);
 	clean_spaces(bin, contents);
 
-	i = 0;
-	k = 0;
-	len = 0;
+
 	
 }

@@ -1,7 +1,5 @@
 #include "asm.h"
 
-
-
 typedef struct			s_op
 {
 	char				*name;
@@ -102,7 +100,7 @@ int		has_digit(char *str)
 	return (0);
 }
 
-void	test(t_binfile *file)
+void	parse_commands(t_binfile *file)
 {
 	char	**str = NULL;
 	t_t 	*token = NULL;
@@ -139,6 +137,11 @@ void	test(t_binfile *file)
 				ft_linker(file, token);
 			token = (t_t *)ft_memalloc(sizeof(t_t));
 			token->c_name = command_name(str[i]); //command_name(str[i]);
+			token->arguments = ft_cmd_arguments(str[i]);
+			token->lbl = ft_cmd_lbls(str[i]);
+
+			printf("\n command: [%s] ===> ft_cmd_arguments : ===>%d and cmd_label is : %d \n ", str[i], token->arguments, token->lbl);
+
 		}
 		i++;
 	}

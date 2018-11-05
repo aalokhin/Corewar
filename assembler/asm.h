@@ -10,15 +10,26 @@
 
 #include <stdio.h>
 
+// # define ARG1(c) (s = {"aff", "fork" "zjmp" || "live", "lfork"
+// # define ARG2(c) (c == 'C' || c == 's' || c == 'S' || c == 'u')
 
-typedef struct s_t
+
+typedef struct		s_t
 {
-	char *type;
-	char *label;
-	int		c_name;
-	struct s_t *next;
+	char			*type;
+	char			*label;
+	int				c_name;
 
-}				t_t;
+
+	int 			arguments; // 1 || 2 || 3 
+	int 			lbl;//label 2 or 4
+
+	struct s_t		*next;
+
+}					t_t;
+
+
+
 
 typedef struct	s_binfile
 {
@@ -92,6 +103,10 @@ void 		parse_file(t_binfile *bin, char (*contents)[]);
 
 //********************************* FREEEING FUNCTIONS******************
 
-void	test(t_binfile *bin);
+void	parse_commands(t_binfile *file);
+int			ft_cmd_arguments(char	*c_name);
+
+int			ft_cmd_lbls(char	*c_name);
+
 
 #endif

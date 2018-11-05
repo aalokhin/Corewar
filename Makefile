@@ -20,9 +20,9 @@ SFILES = main.c vm_cycle.c l_funcs.c funcs_2_9.c init_funcs.c args_parsing.c vis
 
 OFILES = main.o vm_cycle.o l_funcs.o funcs_2_9.o init_funcs.o args_parsing.o visualastia.o
 
-ASM_SFILES := ./assembler/main_assembler.c ./assembler/print_errors_usage.c ./assembler/encoding_funcs.c ./assembler/output_to_file.c ./assembler/parse_file_funcs.c ./assembler/test.c
+ASM_SFILES := ./assembler/main_assembler.c ./assembler/print_errors_usage.c ./assembler/encoding_funcs.c ./assembler/output_to_file.c ./assembler/parse_file_funcs.c  ./assembler/parse_commands.c ./assembler/commands_help_funcs.c
 
-ASM_OFILES := ./assembler/main_assembler.o ./assembler/print_errors_usage.o  ./assembler/encoding_funcs.o ./assembler/output_to_file.o ./assembler/parse_file_funcs.o ./assembler/test.o
+ASM_OFILES := ./assembler/main_assembler.o ./assembler/print_errors_usage.o  ./assembler/encoding_funcs.o ./assembler/output_to_file.o ./assembler/parse_file_funcs.o  ./assembler/parse_commands.o ./assembler/commands_help_funcs.o
 
 LIBFT = $(LIBFT_DIR)libftprintf.a
 LIBFT_DIR = $(LIB_DIR)

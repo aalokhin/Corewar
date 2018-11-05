@@ -22,9 +22,9 @@ void		init_bin(t_binfile	*bin)
 void 	print_struct(t_binfile	*bin)
 {
 
-// 	start_color();
-// init_pair(1 , COLOR_GREEN, COLOR_BLACK);
-// attron(COLOR_PAIR(11));
+	// 	start_color();
+	// init_pair(1 , COLOR_GREEN, COLOR_BLACK);
+	// attron(COLOR_PAIR(11));
 	// printf("\nbin.arg_name ====>%s\n", bin->arg_name);
 	// printf("bin.fd ====>%d\n", bin->fd);
 	// printf("arg length ====>%u\n\n", bin->arg_length);
@@ -36,6 +36,43 @@ void 	print_struct(t_binfile	*bin)
 	// printf("%x\n", (*bin).magic_start[1]);
 	// printf("%x\n", (*bin).magic_start[0]);
 	printf(" =>>>> [%s]\n", bin->f_contents);
+
+}
+
+int	 	ft_opening_file(t_binfile	*bin)
+{
+ 	char file_contents[(*bin).arg_length + 1];
+ 	read((*bin).fd, file_contents, (*bin).arg_length);
+ 	file_contents[(*bin).arg_length] = '\0';
+ 	(*bin).f_contents = ft_strdup(file_contents);
+ 	parse_file(&(*bin), &file_contents);
+
+	fill_magic_start(&(*bin));
+	fill_name_comment(&(*bin));
+
+	ft_strdel(&((*bin).f_contents)); //*********************** magic ept
+	(*bin).f_contents = ft_strdup(file_contents); //*********************** magic ept
+	printf("===>%s<===\n", (*bin).f_contents); 
+	
+
+
+
+	parse_commands(&(*bin)); //collecting commands labels and staff
+
+	// 
+	if ((*bin).flag_a == 1)
+	{
+	 	ft_print_flag_a(&(*bin));
+	 	return (0);
+	}
+
+
+	 create_cor_file(&(*bin)); //creates the file iteslf and fills out the contents
+
+	
+
+	close((*bin).fd);
+	return (1);
 
 }
 
@@ -76,38 +113,17 @@ int 		main(int argc, char **argv)
 	}
 	bin.arg_length = (unsigned int)lseek(bin.fd, 0, SEEK_END);
 	lseek(bin.fd, 0, SEEK_SET);
-
+	ft_opening_file(&bin);
 
 //printf("1111 =>>>> %s\n", bin.f_contents);
 	
 
  	//what is that???????
- 	char file_contents[bin.arg_length + 1];
- 	read(bin.fd, file_contents, bin.arg_length);
- 	file_contents[bin.arg_length] = '\0';
- 	bin.f_contents = ft_strdup(file_contents);
- 	parse_file(&bin, &file_contents);
- 	//printf("{%s}", file_contents);
-	fill_magic_start(&bin);
-	fill_name_comment(&bin);
-
-	ft_strdel(&(bin.f_contents)); //*********************** magic ept
-	bin.f_contents = ft_strdup(file_contents); //*********************** magic ept
-	//printf("===>%s<===\n", bin.f_contents); 
-	create_cor_file(&bin); //O_CREAT|O_WRONLY|O_TRUNC
-	
-	
-	test(&bin);
-	if (bin.flag_a == 1)
-	 	ft_print_flag_a(&bin);
-
-	
-
-	//ft_printf("all good so far\n");
+ 	
 	//print_struct(&bin);
-	close(bin.fd);
 
 	ft_strdel(&(bin.arg_name));
+	ft_printf("all good so far\n");
 
 
 	return 0;
