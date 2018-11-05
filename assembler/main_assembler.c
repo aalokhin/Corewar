@@ -39,6 +39,7 @@ void 	print_struct(t_binfile	*bin)
 
 }
 
+
 int	 	ft_opening_file(t_binfile	*bin)
 {
  	char file_contents[(*bin).arg_length + 1];
@@ -46,6 +47,7 @@ int	 	ft_opening_file(t_binfile	*bin)
  	file_contents[(*bin).arg_length] = '\0';
  	(*bin).f_contents = ft_strdup(file_contents);
  	parse_file(&(*bin), &file_contents);
+ 	//ft_space(&file_contents, (int)bin->arg_length);
 
 	fill_magic_start(&(*bin));
 	fill_name_comment(&(*bin));
@@ -57,20 +59,18 @@ int	 	ft_opening_file(t_binfile	*bin)
 
 
 
-	parse_commands(&(*bin)); //collecting commands labels and staff
+	parse_commands(&(*bin)); //collecting commands labels and staff <==================== Molly
 
 	// 
+
+
+
 	if ((*bin).flag_a == 1)
 	{
 	 	ft_print_flag_a(&(*bin));
 	 	return (0);
 	}
-
-
-	 create_cor_file(&(*bin)); //creates the file iteslf and fills out the contents
-
-	
-
+	create_cor_file(&(*bin)); //creates the file iteslf and fills out the contents
 	close((*bin).fd);
 	return (1);
 

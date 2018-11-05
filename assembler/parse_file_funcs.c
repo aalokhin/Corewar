@@ -24,18 +24,12 @@ void		ft_zero_what_left(t_binfile *bin, size_t	*count,  char (*contents)[])
 	}
 }
 
-int		ft_whitespaces(int c)
-{
-	if ((c > 8 && c < 14) || c == 32)
-		return (1);
-	return (0);
-}
+
 
 
 void		clean_name_comment(t_binfile *bin, char (*contents)[])
 {
 	size_t		i;
-	
 	size_t		len;
 	size_t		k;
 	
@@ -67,22 +61,49 @@ void		clean_name_comment(t_binfile *bin, char (*contents)[])
 
 void		clean_spaces(t_binfile *bin, char (*contents)[])
 {
-	bin->arg_length = bin->arg_length;
-	(*contents)[0] = (*contents)[0];
-	size_t		i;
-
-	size_t		len;
-	size_t		k;
-
-	k = 0;
-
-	
-	len = 0;
+	size_t i;
+	size_t j;
 
 	i = 0;
-
+	j = 0;
+	while ((*contents)[i])
+	{
+		while ((*contents)[i] != '\n' && WHITESPACE((*contents)[i]))
+			++i;
+		if (j > 0 && (*contents)[j - 1] != '\n' && i > 0 && WHITESPACE((*contents)[i - 1]))
+		{
+			(*contents)[j] = ' ';
+			j++;
+		}
+		if ((*contents)[i] && ((*contents)[i] == '\n' || !WHITESPACE((*contents)[i])))
+		{
+			ft_memmove(&(*contents)[j], &(*contents)[i], 1);
+			j++;
+			
+		}
+		i++;
+	}
+	ft_zero_what_left(bin, &j, contents);
+	i = 0;
+	while ((*contents)[i])
+	{
+		if ((*contents)[i] == ',')
+			(*contents)[i] = ' ';
+		i++;
+	}
 
 }
+
+
+
+
+// int		ft_whitespaces(int c)
+// {
+// 	if ((c > 8 && c < 14) || c == 32)
+// 		return (1);
+// 	return (0);
+// }
+
 
 void 		parse_file(t_binfile *bin, char (*contents)[]) //cleaning from  comments and extra lines
 {
@@ -118,7 +139,9 @@ void 		parse_file(t_binfile *bin, char (*contents)[]) //cleaning from  comments 
 		k++;
 		i++;
 	}
+	clean_name_comment(bin, contents);
 	ft_zero_what_left(bin, &k, contents);
+
 	clean_spaces(bin, contents);
 
 

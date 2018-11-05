@@ -14,21 +14,30 @@
 // # define ARG2(c) (c == 'C' || c == 's' || c == 'S' || c == 'u')
 
 
-typedef struct		s_t
+typedef struct			s_t  //minimum
 {
-	char			*type;
-	char			*label;
-	int				c_name;
+	char				*type; //
+
+	char				*label;//
+
+	int					c_name; // order number of "live"
 
 
-	int 			arguments; // 1 || 2 || 3 
-	int 			lbl;//label 2 or 4
+	int 				arguments; //  {T_DIR} 1 || 2 || 3   
+	int 				lbl; //label size ===> 2 or 4
 
-	struct s_t		*next;
+	struct s_t			*next;
 
-}					t_t;
+}						t_t;
 
 
+typedef struct 				s_lable
+{
+	t_t						*instruct; //
+	struct s_lable			*next;
+}							t_lable;
+
+//{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 
 
 typedef struct	s_binfile

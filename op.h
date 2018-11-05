@@ -67,6 +67,13 @@ typedef char	t_arg_type;
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3 //00ea 83f3
 
+
+
+#define WHITESPACE(c) (c == ' ' || c == '\t' || c =='\n') //augment
+
+#define NEW_LINE(c) (c =='\n')
+
+
 typedef struct		header_s
 {
   unsigned int		magic;
