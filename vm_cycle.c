@@ -152,8 +152,10 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					if ((*processes).cycles_wait == 1)
 					{
 						instruct[(*processes).cmd - 1](head_proc, i, &main_cycle, map);
-						if (map[(*processes).current_position] != 9)
+						if ((*processes).cmd != 9)
 							(*processes).current_position = id_counter + 1;
+						else if ((*processes).cmd == 9 && (*processes).carry == 0)
+							(*processes).current_position++;
 					}
 					else
 						(*processes).cycles_wait--;
