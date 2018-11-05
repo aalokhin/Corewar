@@ -54,13 +54,13 @@ void	create_cor_file(t_binfile *bin)
 
 	
 	len = ft_strlen(bin->arg_name);
-	printf("stirng of length %d :  %s\n", len, bin->arg_name);
+	//printf("stirng of length %d :  %s\n", len, bin->arg_name);
 	corfile = ft_strnew(len + 3);
 	if (!corfile)
 		return ;
 	ft_strncpy(corfile, bin->arg_name, len - 1);
 	ft_strcpy(&corfile[len - 1], "cor");
-	printf("stirng 2 %s\n", corfile);
+	//printf("stirng 2 %s\n", corfile);
 	bin->fd_file_out = open(corfile, O_CREAT|O_WRONLY|O_TRUNC, 0777);
 	ft_strdel(&corfile);
 	
