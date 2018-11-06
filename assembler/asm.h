@@ -23,6 +23,9 @@ typedef struct			s_t  //minimum
 	int 				arguments; //  {T_DIR} 1 || 2 || 3   
 	int 				lbl; //label size ===> 2 or 4
 
+	int 				codage;
+	int 				has_codage;
+
 	struct s_t			*next;
 
 }						t_t;
@@ -115,6 +118,7 @@ void	parse_commands(t_binfile *file);
 int			ft_cmd_arguments(char	*c_name);
 
 int			ft_cmd_lbls(char	*c_name);
+int			has_codage(char	*c_name);
 
 
 #endif

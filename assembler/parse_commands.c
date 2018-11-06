@@ -158,7 +158,8 @@ void	parse_commands(t_binfile *file)
 			token->c_name = command_name(str[i]);
 			token->arguments = ft_cmd_arguments(str[i]);
 			token->lbl = ft_cmd_lbls(str[i]);
-			printf("\n command: [%s] ===> ft_cmd_arguments : ===>%d and cmd_label is : %d \n ", str[i], token->arguments, token->lbl);
+			token->has_codage = has_codage(str[i]);
+			printf(" command: [%s] ===> ft_cmd_arguments : ===>%d and cmd_label is : %d  and has_codage is [%d]\n ", str[i], token->arguments, token->lbl, token->has_codage);
 		}
 		else
 		{
