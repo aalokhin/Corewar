@@ -16,12 +16,9 @@
 
 typedef struct			s_t  //minimum
 {
-	char				*type; //
-
-	char				*label;//
-
 	int					c_name; // order number of "live"
-
+	int					arg[3];	// copy of arguments
+	char 				*a[4]; // for codage T_REG r 01 T_DIR % 10 T_IND 11 
 
 	int 				arguments; //  {T_DIR} 1 || 2 || 3   
 	int 				lbl; //label size ===> 2 or 4
@@ -34,6 +31,7 @@ typedef struct			s_t  //minimum
 typedef struct 				s_lable
 {
 	t_t						*instruct; //
+	char 					*label_name;
 	struct s_lable			*next;
 }							t_lable;
 
@@ -68,7 +66,8 @@ typedef struct	s_binfile
 
 
 	char 			*exec_code;//executable code
-	t_t				*test;
+	t_lable			*labels_list;
+
 
 	
 }				t_binfile;
