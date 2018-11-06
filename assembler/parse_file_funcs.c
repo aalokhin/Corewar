@@ -95,7 +95,59 @@ void		clean_spaces(t_binfile *bin, char (*contents)[])
 }
 
 
+void			clean_new_lines(t_binfile *bin, char (*contents)[])
+{
+	size_t		j;
+	size_t		i;
+	size_t		len;
 
+	j = 0;
+	i = 0;
+	len = 0;
+	
+
+
+
+	while((*contents)[i])
+	{
+	
+		if ((*contents)[i] == '\n')
+			while ((*contents)[i + 1] == '\n')
+				++i;
+		// if (!(*contents)[i])
+		// 	return ;
+		ft_memmove(&(*contents)[j], &(*contents)[i], 1);
+		j++;
+		i++;
+
+	}
+	ft_zero_what_left(bin, &j, contents);
+
+
+}
+
+// void	ft_skip_nl(char (*f)[], int len)
+// {
+// 	int i;
+// 	int j;
+
+// 	i = 0;
+// 	j = 0;
+// 	while ((*f)[i])
+// 	{
+// 		if (i == 0)
+// 			while ((*f)[i] == '\n')
+// 				++i;
+// 		if ((*f)[i] == '\n')
+// 			while ((*f)[i + 1] == '\n')
+// 				++i;
+// 		if (!(*f)[i])
+// 			return ;
+// 		(*f)[j++] = (*f)[i++];
+// 	}
+// 	while (j < len)
+// 		(*f)[j++] = '\0';
+// }
 
 // int		ft_whitespaces(int c)
 // {
@@ -143,6 +195,8 @@ void 		parse_file(t_binfile *bin, char (*contents)[]) //cleaning from  comments 
 	ft_zero_what_left(bin, &k, contents);
 
 	clean_spaces(bin, contents);
+	//ft_skip_nl(contents, (int)bin->arg_length);
+	clean_new_lines(bin, contents);
 
 
 	
