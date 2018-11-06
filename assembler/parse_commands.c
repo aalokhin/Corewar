@@ -54,31 +54,65 @@ int  command_name(char *name)
 	 return (-1);
 }
 
-void			ft_linker(t_binfile *file, t_t 	*token)
+void			labels_linker(t_binfile *file, t_lable 	*label)
 {
-	t_t		*tmp;
+	t_lable		*tmp;
 
-	if (!file->test)
+	if (!file->labels_list)
 	{
-		file->test = token;
-		file->test->next = NULL;
+		file->labels_list = label;
+		file->labels_list->next = NULL;
 	}
 	else
 	{
-		tmp = file->test;
+		tmp = file->labels_list;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = label;
+	}
+}
+
+void			command_linker(t_lable 	*label, t_t 	*token)
+{
+	t_t		*tmp;
+
+	if (!label->instruct)
+	{
+		label->instruct = token;
+		label->instruct->next = NULL;
+	}
+	else
+	{
+		tmp = label->instruct;
 		while (tmp->next != NULL)
 			tmp = tmp->next;
 		tmp->next = token;
 	}
 }
-void	printer(t_binfile *file)
-{
-	t_t		*tmp;
 
-	tmp = file->test;
+void	command_printer(t_lable *label)
+{
+	t_t *tmp;
+
+	tmp = label->instruct;
 	while (tmp)
 	{
-		printf("%s\n", g_op_tab[tmp->c_name].name);
+		printf(" COMMAND == %s ", g_op_tab[tmp->c_name].name);
+		printf("Arguments = %d %d %d %d\n", tmp->arg[0], tmp->arg[1], tmp->arg[2], 00);
+		printf("Arguments =  %s %s %s\n", tmp->a[0], tmp->a[1], tmp->a[2]);
+		tmp = tmp->next;
+	}
+}
+
+void	labels_printer(t_binfile *file)
+{
+	t_lable		*tmp;
+
+	tmp = file->labels_list;
+	while (tmp)
+	{
+		printf("LABEL ==== %s ", tmp->label_name);
+		command_printer(tmp);
 		tmp = tmp->next;
 	}
 }
@@ -91,59 +125,60 @@ int		has_digit(char *str)
 	while (i < 10)
 	{
 		if (ft_strchr(str, '0' + i))
-		{
-			printf("%s\n","digit" );
 			return (1);
-		}
 		i++;
 	}
 	return (0);
 }
 
+// T_REG r 01 T_DIR % 10 T_IND 11
+// int	 	arguments_filler()
 void	parse_commands(t_binfile *file)
 {
 	char	**str = NULL;
 	t_t 	*token = NULL;
+	t_lable	*label = NULL;
 	int i = 0;
+	int arg1 = 0;
 
-	file->test = NULL;
-	str = ft_strsplit(file->f_contents, ' '); 
+	file->labels_list = NULL;
+	str = ft_strsplit(file->f_contents, ' ');
 	while (str[i])
 	{
-		if (ft_strchr(str[i] , '.'))
-			printf("%s\n", "name or comment");
-		else if (ft_strchr(str[i], ':') && ft_strchr(str[i] ,'%'))
+		if (!(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':')))
 		{
-			printf("%s\n", "%:LABEL_used");
+			if (label != NULL)
+				labels_linker(file, label);
+			label = (t_lable *)ft_memalloc(sizeof(t_lable));
+			label->label_name = ft_strdup(str[i]);
 		}
-		else if (ft_strchr(str[i], ':'))
+		else if (!token || (token && arg1 == token->arguments))
 		{
-			if (token != NULL)
-				token->label = ft_strdup(str[i]);
-			printf("%s\n", "label");
-		}
-		else if (ft_strchr(str[i] ,'%'))
-		{
-			printf("%s\n", "%DIGIT");
-		}
-		else if (ft_strchr(str[i] , ',') || has_digit(str[i]))
-		{
-			printf("%s\n", "comma");
+			token = (t_t *)ft_memalloc(sizeof(t_t));
+			token->c_name = command_name(str[i]);
+			token->arguments = ft_cmd_arguments(str[i]);
+			token->lbl = ft_cmd_lbls(str[i]);
+			printf("\n command: [%s] ===> ft_cmd_arguments : ===>%d and cmd_label is : %d \n ", str[i], token->arguments, token->lbl);
 		}
 		else
 		{
-			printf("%s %s\n", "command == ",str[i]);
-			if (token != NULL)
-				ft_linker(file, token);
-			token = (t_t *)ft_memalloc(sizeof(t_t));
-			token->c_name = command_name(str[i]); //command_name(str[i]);
-			token->arguments = ft_cmd_arguments(str[i]);
-			token->lbl = ft_cmd_lbls(str[i]);
-
-			printf("\n command: [%s] ===> ft_cmd_arguments : ===>%d and cmd_label is : %d \n ", str[i], token->arguments, token->lbl);
-
+			if (ft_strchr(str[i] ,'r'))
+				token->arg[arg1] = 01;
+			else if (ft_strchr(str[i] ,'%'))
+				token->arg[arg1] = 10;
+			else
+				token->arg[arg1] = 11;
+			token->a[arg1++] = ft_strdup(str[i]);
+			if (arg1 == token->arguments)
+			{
+				command_linker(label, token);
+				arg1  = 0;
+				token = NULL;
+			}
 		}
 		i++;
 	}
-	printer(file);
+	if (label != NULL)
+		labels_linker(file, label);
+	labels_printer(file);
 }  
