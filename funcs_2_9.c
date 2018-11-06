@@ -14,12 +14,11 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 	}
 	if((*tmp).argv[1][0] != REG_CODE || (*tmp).argv[1][1] < 1 || (*tmp).argv[1][1] > 16 || (*tmp).argv[2][0])
 		return ;
+	(*tmp).carry = 0;
 	if ((*tmp).argv[0][0] == DIR_CODE) //t_reg -> index of n array
 	{
 		if ((*tmp).argv[0][1] == 0)
 			(*tmp).carry = 1;
-		else
-			(*tmp).carry = 0;
 		(*tmp).regs[(*tmp).argv[1][1] - 1] = (*tmp).argv[0][1];
 	}
 	else if ((*tmp).argv[0][0] == IND_CODE)
@@ -30,8 +29,6 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 			i %= MEM_SIZE;
 		if (((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]) == 0)
 			(*tmp).carry = 1;
-		else
-			(*tmp).carry = 0;
 		(*tmp).regs[(*tmp).argv[1][1] - 1] =
 		(map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
 
@@ -58,8 +55,8 @@ void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 		i = (*tmp).current_position + ((*tmp).argv[1][1] % IDX_MOD);
 		if (i < 0 || i >= MEM_SIZE)
 			i %= MEM_SIZE;
-		map[i] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0xff);
-		map[i + 1] = (((*tmp).regs[(*tmp).argv[0][1] - 1] >> 8) & 0xff);
+		map[i + 1] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0xff);
+		map[i] = (((*tmp).regs[(*tmp).argv[0][1] - 1] >> 8) & 0xff);
 		if ((*tmp).parent_nbr == -1)
 		{
 			(*main_cycle).indexes[i][0] = cur_proc + 1;
@@ -93,10 +90,9 @@ void addition(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 	if ((*tmp).argv[0][1] < 0 || (*tmp).argv[0][1] > 16 || (*tmp).argv[1][1] < 0 ||
 		(*tmp).argv[1][1] > 16 || (*tmp).argv[2][1] < 0 || (*tmp).argv[2][1] > 16)
 		return ;
+	(*tmp).carry = 0;
 	if (((*tmp).regs[(*tmp).argv[0][1] - 1] + (*tmp).regs[(*tmp).argv[1][1] - 1]) == 0)
 		(*tmp).carry = 1;
-	else
-		(*tmp).carry = 0;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = (*tmp).regs[(*tmp).argv[0][1] - 1] +
 	(*tmp).regs[(*tmp).argv[1][1] - 1];	
 	ft_printf("%s\n", "tets_addition");
@@ -120,10 +116,9 @@ void substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned
 	if ((*tmp).argv[0][1] < 0 || (*tmp).argv[0][1] > 16 || (*tmp).argv[1][1] < 0 ||
 		(*tmp).argv[1][1] > 16 || (*tmp).argv[2][1] < 0 || (*tmp).argv[2][1] > 16)
 		return ;
+	(*tmp).carry = 0;
 	if (((*tmp).regs[(*tmp).argv[0][1] - 1] - (*tmp).regs[(*tmp).argv[1][1] - 1]) == 0)
 		(*tmp).carry = 1;
-	else
-		(*tmp).carry = 0;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = (*tmp).regs[(*tmp).argv[0][1] - 1] -
 	(*tmp).regs[(*tmp).argv[1][1] - 1];	
 	ft_printf("%s\n", "tets_SUSCTRACTION");
@@ -177,12 +172,10 @@ void bit_and(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 			i %= MEM_SIZE;
 		two = ((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]);
 	}
-
+	(*tmp).carry = 0;
 	if ((one & two) == 0)
-		(*tmp).carry = 1;
-	else
-		(*tmp).carry = 0;
-	(*tmp).argv[2][1] = one & two;
+		(*tmp).carry = 1;	
+	(*tmp).regs[(*tmp).argv[2][1] - 1] = one & two;
 	ft_printf("%s\n", "TESE->BIT->AND");
 }
 
@@ -233,14 +226,11 @@ void bit_or(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char 
 			i %= MEM_SIZE;
 		two = ((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]);
 	}
-
+	(*tmp).carry = 0;
 	if ((one | two) == 0)
 		(*tmp).carry = 1;
-	else
-		(*tmp).carry = 0;
-	(*tmp).argv[2][1] = one | two;
+	(*tmp).regs[(*tmp).argv[2][1] - 1] = one | two;
 	ft_printf("%s\n", "TESE->BIT->OR");
-	map[0] = map[0];
 }
 
 void bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -290,14 +280,11 @@ void bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 			i %= MEM_SIZE;
 		two = ((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]);
 	}
-
+	(*tmp).carry = 0;
 	if ((one ^ two) == 0)
 		(*tmp).carry = 1;
-	else
-		(*tmp).carry = 0;
-	(*tmp).argv[2][1] = one ^ two;
+	(*tmp).regs[(*tmp).argv[2][1] - 1] = one ^ two;
 	ft_printf("%s\n", "TESE->BIT->XOR");
-	map[0] = map[0];
 }
 
 void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -324,6 +311,7 @@ void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 			(*main_cycle).indexes[(*tmp).current_position][0] = (*tmp).parent_nbr + 1;
 		(*main_cycle).indexes[(*tmp).current_position][1] = 1;
 	}
+	ft_printf("%d %d %d %d\n", (*tmp).current_position, i, (*tmp).argv[0][1], (*main_cycle).cycles);
 	ft_printf("%s\n", "test zjmp");
 	map[0] = map[0];
 }

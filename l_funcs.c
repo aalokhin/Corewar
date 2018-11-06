@@ -104,9 +104,8 @@ void load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 		one = (*tmp).argv[0][1];
 	else if ((*tmp).argv[0][0] == IND_CODE)
 	{
-		i = ((*tmp).argv[0][1] % IDX_MOD) + (*tmp).current_position;
-		if (i < 0 || i >= MEM_SIZE)
-			i %= MEM_SIZE;
+		i = ((*tmp).argv[0][1] + (*tmp).current_position) % IDX_MOD;
+		i %= MEM_SIZE;
 		one = (map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
 	}
 	if ((*tmp).argv[1][0] == REG_CODE)
@@ -115,17 +114,16 @@ void load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 		two = (*tmp).argv[1][1];
 	else if ((*tmp).argv[1][0] == IND_CODE)
 	{
-		i = ((*tmp).argv[1][1] % IDX_MOD) + (*tmp).current_position;
-		if (i < 0 || i >= MEM_SIZE)
-			i %= MEM_SIZE;
+		i = ((*tmp).argv[1][1] + (*tmp).current_position) % IDX_MOD;
+		i %= MEM_SIZE;
 		two = (map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
 	}
 
-	i = ((one + two) % IDX_MOD) + (*tmp).current_position;
-	if (i < 0 || i >= MEM_SIZE)
-		i %= MEM_SIZE;
+	i = (one + two + (*tmp).current_position) % IDX_MOD;
+	i %= MEM_SIZE;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = (map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) +
 	(map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
+	ft_printf("%d %d %d %d %d %d %d %d %d\n", cur_proc, i, (*tmp).current_position, (*main_cycle).cycles, (*tmp).argv[1][1], (*tmp).argv[2][1], (*tmp).regs[(*tmp).argv[0][1] - 1], one, two);
 	ft_printf("%s\n", "test load_ind");
 }
 
@@ -169,13 +167,14 @@ void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 	else if ((*tmp).argv[2][0] == DIR_CODE)
 		three = (*tmp).argv[2][1];
 
-	i = (two + three + (*tmp).current_position) % IDX_MOD;
-	ft_printf("%d %d \n", i, (*tmp).current_position);
+	i = ((two + three) + (*tmp).current_position) % IDX_MOD;
+	ft_printf("%d %d %d %d %d %d %d %d\n", i, (*tmp).current_position, (*main_cycle).cycles, (*tmp).argv[1][1], (*tmp).argv[2][1], (*tmp).regs[(*tmp).argv[0][1] - 1], two, three);
+
 	i %= MEM_SIZE;
-	map[i] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x000000FF); 
-	map[i + 1] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x0000FF00) >> 8; 
-	map[i + 2] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x00FF0000) >> 16; 
-	map[i + 3] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0xFF000000) >> 24;
+	map[i + 3] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x000000FF); 
+	map[i + 2] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x0000FF00) >> 8; 
+	map[i + 1] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x00FF0000) >> 16; 
+	map[i] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0xFF000000) >> 24;
 	if ((*tmp).parent_nbr == -1)
 	{
 		(*main_cycle).indexes[i][0] = cur_proc + 1;
@@ -227,12 +226,11 @@ void lload(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 	}
 	if((*tmp).argv[1][0] != REG_CODE || (*tmp).argv[1][1] < 1 || (*tmp).argv[1][1] > 16 || (*tmp).argv[2][0])
 		return ;
+	(*tmp).carry = 0;
 	if ((*tmp).argv[0][0] == DIR_CODE) //t_reg -> index of n array
 	{
 		if ((*tmp).argv[0][1] == 0)
 			(*tmp).carry = 1;
-		else
-			(*tmp).carry = 0;
 		(*tmp).regs[(*tmp).argv[1][1] - 1] = (*tmp).argv[0][1];
 	}
 	else if ((*tmp).argv[0][0] == IND_CODE)
@@ -242,8 +240,6 @@ void lload(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 			i %= MEM_SIZE;
 		if (((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]) == 0)
 			(*tmp).carry = 1;
-		else
-			(*tmp).carry = 0;
 		(*tmp).regs[(*tmp).argv[1][1] - 1] =
 		(map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
 
@@ -277,6 +273,7 @@ void lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 		return ;
 	if ((*tmp).argv[1][0] != REG_CODE && (*tmp).argv[1][0] != DIR_CODE)
 		return ;
+	(*tmp).carry = 0;
 	if ((*tmp).argv[0][0] == REG_CODE)
 		one = (*tmp).regs[(*tmp).argv[0][1] - 1];
 	else if ((*tmp).argv[0][0] == DIR_CODE)
@@ -303,6 +300,9 @@ void lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 	i = (one + two) + (*tmp).current_position;
 	if (i < 0 || i >= MEM_SIZE)
 		i %= MEM_SIZE;
+	if (((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) +
+	(map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]) == 0)
+			(*tmp).carry = 1;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = (map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) +
 	(map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
 	ft_printf("%s\n", "test_load lload_ind");

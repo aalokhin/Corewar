@@ -36,10 +36,9 @@ void processes_add(t_proc *parent_process, unsigned char *map, t_cycle *main_cyc
 	clear_argv_arr(tmp);
 	while (j < REG_NUMBER)
 	{
-		tmp->regs[j] = 0;
+		tmp->regs[j] = (*parent_process).regs[j];
 		j++;
 	}
-	tmp->regs[0] = (unsigned int)((tmp->id + 1) * -1);
 	tail->next = tmp;
 }
 
@@ -115,7 +114,6 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	int i;
 	t_cycle main_cycle;
 	t_proc *processes;
-	t_proc *head_proc;
 	int id_counter;
 	WINDOW *win;
 
@@ -126,18 +124,18 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	main_cycle_init(&main_cycle, params);
 	fill_start_map_id(&main_cycle, bots, params);
 	processes = processes_init(params, bots, map);
-	head_proc = processes;
+	main_cycle.head_proc = processes;
 	if ((*params).ncurses == 1)
 		visual_init(&win);
 	while (main_cycle.cycle_die > 0 && main_cycle.processes > 0)
 	{
 		i = 0;
-		processes = head_proc;
+		processes = main_cycle.head_proc;
 		if ((*params).ncurses == 1)
-			map_to_screen(map, &main_cycle, params, head_proc, win);
+			map_to_screen(map, &main_cycle, params, main_cycle.head_proc, win);
 		while (i < main_cycle.prev_processes && processes)
 		{
-			if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
+			if ((*processes).if_live && (*processes).cmd >= 1 && (*processes).cmd <= 16)
 			{
 				if (op_tab[map[(*processes).current_position] - 1].codage)
 				{
@@ -151,31 +149,28 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					(*processes).argv[0][0] = DIR_CODE;
 					get_arg_vals[(*processes).argv[0][0] - 1](processes, map, 0, &id_counter);
 				}
-				if ((*processes).if_live)
+				if ((*processes).cycles_wait == 1)
 				{
-					if ((*processes).cycles_wait == 1)
+					instruct[(*processes).cmd - 1](main_cycle.head_proc, i, &main_cycle, map);
+					if ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))
 					{
-						instruct[(*processes).cmd - 1](head_proc, i, &main_cycle, map);
-						if ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))
-						{
-							main_cycle.indexes[(*processes).current_position][1] = 0;
-							(*processes).current_position = id_counter + 1;
-							(*processes).current_position %= MEM_SIZE;
-							(*processes).cmd = map[(*processes).current_position];
-							if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
-								(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
-							else
-								(*processes).cycles_wait = 1;
-							if ((*processes).parent_nbr == -1)
-								main_cycle.indexes[(*processes).current_position][0] = i + 1;
-							else
-								main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
-							main_cycle.indexes[(*processes).current_position][1] = 1;
-						}
+						main_cycle.indexes[(*processes).current_position][1] = 0;
+						(*processes).current_position = id_counter + 1;
 					}
+					(*processes).current_position %= MEM_SIZE;
+					(*processes).cmd = map[(*processes).current_position];
+					if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
+						(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
 					else
-						(*processes).cycles_wait--;
+						(*processes).cycles_wait = 1;
+					if ((*processes).parent_nbr == -1)
+						main_cycle.indexes[(*processes).current_position][0] = i + 1;
+					else
+						main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
+					main_cycle.indexes[(*processes).current_position][1] = 1;
 				}
+				else
+					(*processes).cycles_wait--;
 				clear_argv_arr(processes);
 			}
 			else
@@ -193,7 +188,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				else
 					main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
 				main_cycle.indexes[(*processes).current_position][1] = 1;
-			}		
+			}			
 			if ((*processes).child_proc_lives > NBR_LIVE)
 			{
 				(*processes).child_proc_lives = 0;
@@ -205,7 +200,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		main_cycle.prev_processes = main_cycle.processes;
 		if (main_cycle.cycles != 0 && main_cycle.cycles % main_cycle.cycle_die == 0)
 		{
-			check_if_lives(head_proc, &main_cycle);
+			check_if_lives(main_cycle.head_proc, &main_cycle);
 			main_cycle.checks_if_die++;
 			if (main_cycle.checks_if_die == MAX_CHECKS)
 			{

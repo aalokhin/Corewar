@@ -59,6 +59,7 @@ typedef struct s_cycle
 	int indexes[MEM_SIZE][2];
 	int winner_str;
 	int winner_id;
+	t_proc *head_proc;
 }			t_cycle;
 
 typedef struct s_op

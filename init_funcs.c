@@ -45,19 +45,20 @@ void main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).winner_str = 0;
 	(*main_cycle).winner_name = NULL;
 	(*main_cycle).winner_id = 0;
+	(*main_cycle).head_proc = NULL;
 }
 
 t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 {
-	int i;
+	unsigned int i;
 	int j;
 	t_proc *processes;
 	t_proc *tmp;
 
 	j = 0;
-	i = (*params).bots_quantity - 1;
+	i = 0;
 	tmp = NULL;
-	while (i >= 0)
+	while (i < (*params).bots_quantity)
 	{
 		j = 0;
 		processes = (t_proc *)malloc(sizeof(t_proc));
@@ -83,7 +84,7 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 		}
 		(*processes).regs[0] = (unsigned int)(((*processes).id + 1) * -1);
 		tmp = processes;
-		i--;
+		i++;
 	}
 	return (processes);
 }
