@@ -126,35 +126,6 @@ void			clean_new_lines(t_binfile *bin, char (*contents)[])
 
 }
 
-// void	ft_skip_nl(char (*f)[], int len)
-// {
-// 	int i;
-// 	int j;
-
-// 	i = 0;
-// 	j = 0;
-// 	while ((*f)[i])
-// 	{
-// 		if (i == 0)
-// 			while ((*f)[i] == '\n')
-// 				++i;
-// 		if ((*f)[i] == '\n')
-// 			while ((*f)[i + 1] == '\n')
-// 				++i;
-// 		if (!(*f)[i])
-// 			return ;
-// 		(*f)[j++] = (*f)[i++];
-// 	}
-// 	while (j < len)
-// 		(*f)[j++] = '\0';
-// }
-
-// int		ft_whitespaces(int c)
-// {
-// 	if ((c > 8 && c < 14) || c == 32)
-// 		return (1);
-// 	return (0);
-// }
 
 
 void 		parse_file(t_binfile *bin, char (*contents)[]) //cleaning from  comments and extra lines
