@@ -49,6 +49,7 @@ typedef struct s_cycle
 {
 	int cycles;
 	int processes;
+	int prev_processes;
 	int second_limit;
 	int cycle_die;
 	int current_winner;

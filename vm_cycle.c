@@ -3,30 +3,34 @@
 void processes_add(t_proc *parent_process, unsigned char *map, t_cycle *main_cycle, int index)
 {
 	t_proc *tmp;
-	t_proc *parent;
+
+	t_proc *tail;
 	int j;
 
 	j = 0;
 	tmp = NULL;
-	parent = parent_process;
+	tail = parent_process;
 	(*main_cycle).processes++;
-	while (parent_process)
-		parent_process = parent_process->next;
+	while (tail->next)
+		tail = tail->next;
 	tmp = (t_proc *)malloc(sizeof(t_proc));
 	tmp->id = (*main_cycle).processes - 1;
-	tmp->name = (*parent).name;
+	tmp->name = (*parent_process).name;
 	tmp->current_position = index;
-	tmp->carry = (*parent).carry;
-	tmp->parent_nbr = (*parent).id;
-	tmp->if_live = 0;
+	tmp->carry = (*parent_process).carry;
+	if ((*parent_process).parent_nbr == -1)
+		tmp->parent_nbr = (*parent_process).id;
+	else
+		tmp->parent_nbr = (*parent_process).parent_nbr;
+	tmp->if_live = 1;
 	tmp->cmd = map[tmp->current_position];
-	(*main_cycle).indexes[tmp->current_position][0] = tmp->parent_nbr + 1;
-	(*main_cycle).indexes[tmp->current_position][1] = 1;
+	(*main_cycle).indexes[index][0] = tmp->parent_nbr + 1;
+	(*main_cycle).indexes[index][1] = 1;
 	if (tmp->cmd >= 1 && tmp->cmd <= 16)
 		tmp->cycles_wait = op_tab[tmp->cmd - 1].cycles_wait;
 	else
-		tmp->cycles_wait = 0;
-	tmp->last_live_cycle = (*parent).last_live_cycle;
+		tmp->cycles_wait = 1;
+	tmp->last_live_cycle = 0;
 	tmp->child_proc_lives = 0;
 	tmp->next = NULL;
 	clear_argv_arr(tmp);
@@ -36,7 +40,7 @@ void processes_add(t_proc *parent_process, unsigned char *map, t_cycle *main_cyc
 		j++;
 	}
 	tmp->regs[0] = (unsigned int)((tmp->id + 1) * -1);
-	parent_process = tmp;
+	tail->next = tmp;
 }
 
 int find_arg_index(t_proc *processes, int target)
@@ -131,7 +135,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		processes = head_proc;
 		if ((*params).ncurses == 1)
 			map_to_screen(map, &main_cycle, params, head_proc, win);
-		while (i < main_cycle.processes && processes)
+		while (i < main_cycle.prev_processes && processes)
 		{
 			if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
 			{
@@ -156,6 +160,17 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 						{
 							main_cycle.indexes[(*processes).current_position][1] = 0;
 							(*processes).current_position = id_counter + 1;
+							(*processes).current_position %= MEM_SIZE;
+							(*processes).cmd = map[(*processes).current_position];
+							if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
+								(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
+							else
+								(*processes).cycles_wait = 1;
+							if ((*processes).parent_nbr == -1)
+								main_cycle.indexes[(*processes).current_position][0] = i + 1;
+							else
+								main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
+							main_cycle.indexes[(*processes).current_position][1] = 1;
 						}
 					}
 					else
@@ -167,21 +182,18 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			{
 				main_cycle.indexes[(*processes).current_position][1] = 0;
 				(*processes).current_position++;
-			}
-			if ((*processes).current_position < 0 || (*processes).current_position >= MEM_SIZE)
 				(*processes).current_position %= MEM_SIZE;
-			(*processes).cmd = map[(*processes).current_position];
-
-			/*if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
-				(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
-			else
-				(*processes).cycles_wait = 0;*/
-
-			if ((*processes).parent_nbr == -1)
-				main_cycle.indexes[(*processes).current_position][0] = i + 1;
-			else
-				main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
-			main_cycle.indexes[(*processes).current_position][1] = 1;
+				(*processes).cmd = map[(*processes).current_position];
+				if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
+					(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
+				else
+					(*processes).cycles_wait = 1;
+				if ((*processes).parent_nbr == -1)
+					main_cycle.indexes[(*processes).current_position][0] = i + 1;
+				else
+					main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
+				main_cycle.indexes[(*processes).current_position][1] = 1;
+			}		
 			if ((*processes).child_proc_lives > NBR_LIVE)
 			{
 				(*processes).child_proc_lives = 0;
@@ -190,6 +202,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			processes = processes->next;
 			i++;
 		}
+		main_cycle.prev_processes = main_cycle.processes;
 		if (main_cycle.cycles != 0 && main_cycle.cycles % main_cycle.cycle_die == 0)
 		{
 			check_if_lives(head_proc, &main_cycle);
@@ -202,6 +215,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				main_cycle.prev_cycle_die = main_cycle.cycle_die;
 			}
 		}
+		usleep((useconds_t)((int)1000000 / main_cycle.second_limit));
 		main_cycle.cycles++;
 	}
 	print_winner(win, main_cycle);

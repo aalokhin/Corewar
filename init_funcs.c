@@ -36,7 +36,8 @@ void main_cycle_init(t_cycle *main_cycle, t_flags *params)
 {
 	(*main_cycle).cycles = 0;
 	(*main_cycle).processes = (*params).bots_quantity;
-	(*main_cycle).second_limit = 0;
+	(*main_cycle).prev_processes = (*main_cycle).processes;
+	(*main_cycle).second_limit = 50;
 	(*main_cycle).cycle_die = CYCLE_TO_DIE;
 	(*main_cycle).current_winner = -1;
 	(*main_cycle).checks_if_die = 0;
@@ -70,7 +71,7 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 		if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
 			(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
 		else
-			(*processes).cycles_wait = 0;
+			(*processes).cycles_wait = 1;
 		(*processes).last_live_cycle = 0;
 		(*processes).child_proc_lives = 0;
 		(*processes).next = tmp;
