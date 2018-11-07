@@ -15,19 +15,19 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 		if ((*tmp).argv[0][1] == 0)
 			(*tmp).carry = 1;
 		(*tmp).regs[(*tmp).argv[1][1] - 1] = (*tmp).argv[0][1];
-		ft_printf("P%5d | ld %d r%d\n", (*tmp).id + 1, (*tmp).argv[0][1], (*tmp).argv[1][1]);
+		ft_printf("P%5d | ld %d r%d\n", cur_proc + 1, (*tmp).argv[0][1], (*tmp).argv[1][1]);
 	}
 	else if ((*tmp).argv[0][0] == IND_CODE)
 	{
-		(*tmp).argv[0][1] %= IDX_MOD;
-		i = (*tmp).current_position + (*tmp).argv[0][1];
-		if (i < 0 || i >= MEM_SIZE)
-			i %= MEM_SIZE;
-		if (((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]) == 0)
+		i = (*tmp).current_position + (*tmp).argv[0][1] % IDX_MOD;
+		while (i < 0)
+			i += MEM_SIZE;
+		i %= MEM_SIZE;
+		(*tmp).argv[0][1] = ((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]);
+		if ((*tmp).argv[0][1] == 0)
 			(*tmp).carry = 1;
-		(*tmp).regs[(*tmp).argv[1][1] - 1] =
-		(map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
-		ft_printf("P%5d | ld %d r%d\n", cur_proc + 1, (*tmp).regs[(*tmp).argv[1][1] - 1], (*tmp).argv[1][1]);
+		(*tmp).regs[(*tmp).argv[1][1] - 1] = (*tmp).argv[0][1];
+		ft_printf("P%5d | ld %d r%d\n", cur_proc + 1, (*tmp).argv[0][1], (*tmp).argv[1][1]);
 	}
 	(*main_cycle).cycles = (*main_cycle).cycles;
 }
@@ -43,7 +43,7 @@ void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 		return ;
 	if ((*tmp).argv[1][0] == IND_CODE)
 	{
-		i = (*tmp).current_position + ((*tmp).argv[1][1] % IDX_MOD);
+		i = (*tmp).current_position + (*tmp).argv[1][1] % IDX_MOD;
 		if (i < 0 || i >= MEM_SIZE)
 			i %= MEM_SIZE;
 		map[i + 1] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0xff);
@@ -58,10 +58,13 @@ void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 			(*main_cycle).indexes[i][0] = (*tmp).parent_nbr + 1;
 			(*main_cycle).indexes[i + 1][0] = (*tmp).parent_nbr + 1;
 		}
+		ft_printf("P%5d | st r%d %d\n", cur_proc + 1, (*tmp).argv[0][1], (*tmp).argv[1][1]);
 	}
 	else if ((*tmp).argv[1][0] == REG_CODE && (*tmp).argv[1][1] >= 1 && (*tmp).argv[1][1] <= 16)
+	{
 		(*tmp).regs[(*tmp).argv[1][1] - 1] = (*tmp).regs[(*tmp).argv[0][1] - 1];
-	ft_printf("%d %s\n", cur_proc + 1, "store_test");
+		ft_printf("P%5d | st r%d %d\n", cur_proc + 1, (*tmp).argv[0][1], (*tmp).argv[1][1]);
+	}
 }
 
 void addition(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)

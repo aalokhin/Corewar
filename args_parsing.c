@@ -10,6 +10,7 @@ void get_t_dir_value(t_proc *processes, unsigned char *map,
 	size = 0;
 	tmp_2 = 0;
 	tmp_4 = 0;
+
 	if (!op_tab[(int)(*processes).cmd - 1].label)
 	{
 		size = 4;
@@ -31,6 +32,7 @@ void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id
 	short tmp;
 
 	tmp = 0;
+
 	tmp = (short)((map[((*id_counter) + 1) % MEM_SIZE] << 8) + map[((*id_counter) + 2) % MEM_SIZE]);
 	(*processes).argv[arg_ind][1] = tmp;
 	(*id_counter) += 2;

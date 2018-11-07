@@ -1,0 +1,126 @@
+Introducing contestants...
+* Player 1, weighing 301 bytes, " maxidef " (" module de defense") !
+It is now cycle 1
+It is now cycle 2
+It is now cycle 3
+It is now cycle 4
+It is now cycle 5
+It is now cycle 6
+It is now cycle 7
+It is now cycle 8
+It is now cycle 9
+It is now cycle 10
+P    1 | live 0
+It is now cycle 11
+It is now cycle 12
+It is now cycle 13
+It is now cycle 14
+It is now cycle 15
+It is now cycle 16
+It is now cycle 17
+It is now cycle 18
+It is now cycle 19
+It is now cycle 20
+It is now cycle 21
+It is now cycle 22
+It is now cycle 23
+It is now cycle 24
+It is now cycle 25
+It is now cycle 26
+It is now cycle 27
+It is now cycle 28
+It is now cycle 29
+It is now cycle 30
+P    1 | zjmp 8 FAILED
+It is now cycle 31
+It is now cycle 32
+It is now cycle 33
+It is now cycle 34
+It is now cycle 35
+P    1 | st r1 6
+It is now cycle 36
+It is now cycle 37
+It is now cycle 38
+It is now cycle 39
+It is now cycle 40
+It is now cycle 41
+It is now cycle 42
+It is now cycle 43
+It is now cycle 44
+It is now cycle 45
+P    1 | live -65470
+It is now cycle 46
+It is now cycle 47
+It is now cycle 48
+It is now cycle 49
+It is now cycle 50
+P    1 | ld -65470 r1
+It is now cycle 51
+It is now cycle 52
+It is now cycle 53
+It is now cycle 54
+It is now cycle 55
+P    1 | st r2 -14
+It is now cycle 56
+It is now cycle 57
+It is now cycle 58
+It is now cycle 59
+It is now cycle 60
+P    1 | ld 0 r5
+It is now cycle 61
+It is now cycle 62
+It is now cycle 63
+It is now cycle 64
+It is now cycle 65
+It is now cycle 66
+It is now cycle 67
+It is now cycle 68
+It is now cycle 69
+It is now cycle 70
+It is now cycle 71
+It is now cycle 72
+It is now cycle 73
+It is now cycle 74
+It is now cycle 75
+It is now cycle 76
+It is now cycle 77
+It is now cycle 78
+It is now cycle 79
+It is now cycle 80
+P    1 | zjmp 144 OK
+It is now cycle 81
+It is now cycle 82
+It is now cycle 83
+It is now cycle 84
+It is now cycle 85
+P    1 | ld 57672703 r3
+It is now cycle 86
+It is now cycle 87
+It is now cycle 88
+It is now cycle 89
+It is now cycle 90
+It is now cycle 91
+It is now cycle 92
+It is now cycle 93
+It is now cycle 94
+It is now cycle 95
+It is now cycle 96
+It is now cycle 97
+It is now cycle 98
+It is now cycle 99
+It is now cycle 100
+It is now cycle 101
+It is now cycle 102
+It is now cycle 103
+It is now cycle 104
+It is now cycle 105
+It is now cycle 106
+It is now cycle 107
+It is now cycle 108
+It is now cycle 109
+It is now cycle 110
+P    1 | sti r1 -186 1
+       | -> store to -186 + 1 = -185 (with pc and mod 1)
+It is now cycle 111
+It is now cycle 112
+It is now cycle 113

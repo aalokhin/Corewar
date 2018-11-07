@@ -33,7 +33,7 @@ It is now cycle 28
 It is now cycle 29
 It is now cycle 30
 It is now cycle 31
-TESE->BIT->AND
+P    1 | and -1 0 r1
 It is now cycle 32
 It is now cycle 33
 It is now cycle 34
@@ -3076,4 +3076,4 @@ It is now cycle 3069
 It is now cycle 3070
 It is now cycle 3071
 It is now cycle 3072
-It is now cycle 3073
+Contestant 1, "zork", has won !

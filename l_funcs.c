@@ -12,18 +12,12 @@ void live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *m
 	tmp = head_proc;
 	child_proc = NULL;
 
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
+	while (tmp && (*tmp).id != cur_proc)
 		tmp = tmp->next;
-		i++;
-	}
-	if (tmp)
-	{
-		(*tmp).if_live = 1;
-		(*tmp).last_live_cycle = (*main_cycle).cycles;
-	}
+	(*tmp).if_live = 1;
+	(*tmp).last_live_cycle = (*main_cycle).cycles;
 	child_proc = tmp;
-	ft_printf("P%5d | live %d\n", (*tmp).id + 1, (*child_proc).argv[0][1]);
+	ft_printf("P%5d | live %d\n", (*tmp).id + 1, (*tmp).argv[0][1]);
 	if ((*tmp).parent_nbr > -1)
 	{
 		tmp = head_proc;
@@ -160,7 +154,7 @@ void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 
 	i = (two + three) + (*tmp).current_position % IDX_MOD;
 	//ft_printf("%d %d %d %d %d %d %d %d\n", i, (*tmp).current_position, (*main_cycle).cycles, (*tmp).argv[1][1], (*tmp).argv[2][1], (*tmp).regs[(*tmp).argv[0][1] - 1], two, three);
-	i = i % MEM_SIZE;
+	i %= MEM_SIZE;
 	ft_printf("P%5d | sti r%d %d %d\n", cur_proc + 1, (*tmp).argv[0][1], two, three);
  	ft_printf("%8c -> store to %d + %d = %d (with pc and mod %d)\n", '|', two, three, two + three, (i % MEM_SIZE));
 	map[i + 3] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x000000FF); 

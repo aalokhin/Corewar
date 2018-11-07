@@ -151,7 +151,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			{
 				if (op_tab[map[(*processes).current_position] - 1].codage)
 				{
-					id_counter = (*processes).current_position + 1;
+					id_counter = ((*processes).current_position + 1) % MEM_SIZE;
 					take_args(map[id_counter], processes);
 					get_args_values(processes, map, &id_counter);
 				}

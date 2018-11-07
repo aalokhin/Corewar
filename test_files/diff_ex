@@ -1,8 +1,0 @@
-36c36
-< P    1 | and -1 0 r1
----
-> TESE->BIT->AND
-3079c3079
-< Contestant 1, "zork", has won !
----
-> It is now cycle 3073
