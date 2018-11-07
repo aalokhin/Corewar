@@ -165,7 +165,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				{
 					if ((*processes).cmd == 1 || (*processes).cmd == 12 || (*processes).cmd == 15)
 						instruct[(*processes).cmd - 1](main_cycle.head_proc, (*processes).id, &main_cycle, map);
-					else
+					else if ((*processes).cmd != 16 || ((*processes).cmd == 16 && (*params).a_aff))
 						instruct[(*processes).cmd - 1](processes, (*processes).id, &main_cycle, map);
 					if ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))
 					{
@@ -230,13 +230,15 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		else
 			main_cycle.second_limit = 1;
 		main_cycle.cycles++;
+		if ((*params).d_dumps_memory > 0 && main_cycle.cycles == (*params).d_dumps_memory)
+			break ;
 	}
 	if ((*params).ncurses == 1)
 	{
 		print_winner(win, main_cycle);
 		endwin();
 	}
-	else
+	else if ((*params).d_dumps_memory <= 0)
 		ft_printf("Contestant %d, \"%s\", has won !\n", main_cycle.winner_id + 1, main_cycle.winner_name);
 	//ft_printf("we exited main cycle\n");
 

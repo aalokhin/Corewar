@@ -153,19 +153,19 @@ int check_flags_core(int argc, char **argv, t_flags *params)
 	{
 		if (ft_strcmp(argv[i], "-a") == 0)
 			(*params).a_aff = 1;
-		else if (ft_strcmp(argv[i], "-d") == 0 && argv[i + 1][0] >= 0 && argv[i + 1][0] <= 9)
+		else if (ft_strcmp(argv[i], "-d") == 0 && argv[i + 1][0] > 0 && argv[i + 1][0] <= 9)
 		{
 			(*params).d_dumps_memory = ft_atoi(argv[i + 1]);
 			i++;
 			continue ;
 		}
-		else if (ft_strcmp(argv[i], "-s") == 0 && argv[i + 1][0] >= 0 && argv[i + 1][0] <= 9)
+		else if (ft_strcmp(argv[i], "-s") == 0 && argv[i + 1][0] > 0 && argv[i + 1][0] <= 9)
 		{
 			(*params).s_cycles = ft_atoi(argv[i + 1]);
 			i++;
 			continue ;
 		}
-		else if (ft_strcmp(argv[i], "-v") == 0 && argv[i + 1][0] >= 0 && argv[i + 1][0] <= 9)
+		else if (ft_strcmp(argv[i], "-v") == 0 && argv[i + 1][0] > 0 && argv[i + 1][0] <= 9)
 		{
 			(*params).v_verbosity = ft_atoi(argv[i + 1]);
 			i++;

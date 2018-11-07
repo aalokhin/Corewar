@@ -317,7 +317,7 @@ void aff(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[0][1] < 1 || (*tmp).argv[0][1] > 16 ||
 		(*tmp).argv[1][0] || (*tmp).argv[2][0])
 		return ;
-	ft_printf("%d %s\n", cur_proc + 1, "aff -> test");
+	//ft_printf("%d %s\n", cur_proc + 1, "aff -> test");
 	ft_printf("%c\n", ((*tmp).regs[(*tmp).argv[0][1] - 1] % 256));
 	(*main_cycle).cycles = (*main_cycle).cycles;
 	map[0] = map[0];

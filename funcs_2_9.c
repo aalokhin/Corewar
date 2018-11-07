@@ -20,8 +20,6 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 	else if ((*tmp).argv[0][0] == IND_CODE)
 	{
 		i = (*tmp).current_position + (*tmp).argv[0][1] % IDX_MOD;
-		while (i < 0)
-			i += MEM_SIZE;
 		i %= MEM_SIZE;
 		(*tmp).argv[0][1] = ((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]);
 		if ((*tmp).argv[0][1] == 0)
