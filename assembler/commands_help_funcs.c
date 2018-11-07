@@ -57,3 +57,22 @@ int			ft_cmd_lbls(char	*c_name)
  	}
  	return (0);
 }
+
+
+int			has_codage(char	*c_name)
+{
+	char		*cod1[4] = {"fork", "zjmp", "live", "lfork"};
+	int 		i;
+
+	i = -1;
+	if (!c_name)
+ 		return(0);
+ 	while(++i < 4)
+ 	{
+ 		if (ft_strcmp(cod1[i], c_name) == 0)
+ 			return(1);
+ 	}
+ 	return (0);
+
+
+}

@@ -90,49 +90,87 @@ void			command_linker(t_lable 	*label, t_t 	*token)
 	}
 }
 
-void	command_printer(t_lable *label)
+void	token_length(t_t *token, int i)
 {
-	t_t *tmp;
-
-	tmp = label->instruct;
-	while (tmp)
+	token->c_len = 1;
+	token->c_len += token->has_codage;
+	while (i < 4)
 	{
-		printf(" COMMAND == %s ", g_op_tab[tmp->c_name].name);
-		printf("Arguments = %d %d %d %d\n", tmp->arg[0], tmp->arg[1], tmp->arg[2], 00);
-		printf("Arguments =  %s %s %s\n", tmp->a[0], tmp->a[1], tmp->a[2]);
-		tmp = tmp->next;
+
+		token->c_len += token->arg[i] == 0 ? 0 : token->arg[i] == 1 ? 1 : token->arg[i] == 11 ? 2 : token->lbl;
+		i++;
 	}
+	//printf("token length -- ====== %d\n", token->c_len);
 }
 
-void	labels_printer(t_binfile *file)
+void 	length_of_bytes_above(t_binfile *file)
 {
-	t_lable		*tmp;
+	t_lable *tmp;
 
 	tmp = file->labels_list;
 	while (tmp)
 	{
-		printf("LABEL ==== %s ", tmp->label_name);
-		command_printer(tmp);
+		tmp->bytes_above += tmp->lbl_len;
 		tmp = tmp->next;
 	}
 }
 
-int		has_digit(char *str)
+void label_length(t_binfile *file, t_lable	*label)
 {
-	int i;
+	t_t		*tmp;
 
-	i = 0;
-	while (i < 10)
+	tmp = label->instruct;
+	label->lbl_len = 0;
+	length_of_bytes_above(file);
+	while (tmp)
 	{
-		if (ft_strchr(str, '0' + i))
-			return (1);
-		i++;
+		label->lbl_len += tmp->c_len;
+		tmp = tmp->next;
 	}
-	return (0);
 }
 
-// T_REG r 01 T_DIR % 10 T_IND 11
-// int	 	arguments_filler()
+void	file_length(t_binfile *file)
+{
+	t_lable	*tmp;
+
+	tmp = file->labels_list;
+	file->file_length  = 0;
+	while (tmp)
+	{
+		file->file_length += tmp->lbl_len;
+		tmp = tmp->next;
+	}
+}
+
+int 	token_codage(t_t *token, int i)
+{
+	int	dec = 0;
+	int k = 128;
+
+	while (i < 4)
+	{
+		if (token->arg[i] == 11 || token->arg[i] == 10)
+			dec += k;
+		k /= 2;
+		if (token->arg[i] == 11 || token->arg[i] == 1)
+			dec += k;
+		k /= 2;
+		i++;
+	}
+	return (dec);
+}
+void	tabs_remover(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		if (str[i] == '\t' || str[i] == '\n')
+			str[i] = ' ';
+		i++;
+	}
+}
+
 void	parse_commands(t_binfile *file)
 {
 	char	**str = NULL;
@@ -142,28 +180,38 @@ void	parse_commands(t_binfile *file)
 	int arg1 = 0;
 
 	file->labels_list = NULL;
+	tabs_remover(file->f_contents);
 	str = ft_strsplit(file->f_contents, ' ');
 	while (str[i])
 	{
 		if (!(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':')))
 		{
 			if (label != NULL)
+			{
+				label_length(file, label);
 				labels_linker(file, label);
+				label = NULL;
+			}
 			label = (t_lable *)ft_memalloc(sizeof(t_lable));
 			label->label_name = ft_strdup(str[i]);
 		}
 		else if (!token || (token && arg1 == token->arguments))
 		{
+			if (!label)
+				label = (t_lable *)ft_memalloc(sizeof(t_lable));
 			token = (t_t *)ft_memalloc(sizeof(t_t));
 			token->c_name = command_name(str[i]);
-			token->arguments = ft_cmd_arguments(str[i]);
-			token->lbl = ft_cmd_lbls(str[i]);
-			printf("\n command: [%s] ===> ft_cmd_arguments : ===>%d and cmd_label is : %d \n ", str[i], token->arguments, token->lbl);
+			token->name_c = ft_strdup(str[i]);
+			token->arguments = ft_cmd_arguments(token->name_c);
+			token->lbl = ft_cmd_lbls(token->name_c);
+			token->has_codage = has_codage(token->name_c);
+			//printf(" command: [%s] ===> ft_cmd_arguments : ===>%d and cmd_label is : %d  and has_codage is [%d]\n ",
+	//token->name_c, token->arguments, token->lbl, token->has_codage);
 		}
 		else
 		{
-			if (ft_strchr(str[i] ,'r'))
-				token->arg[arg1] = 01;
+			if (ft_strchr(str[i] ,'r') && !(ft_strchr(str[i] ,'%')))
+				token->arg[arg1] = 1;
 			else if (ft_strchr(str[i] ,'%'))
 				token->arg[arg1] = 10;
 			else
@@ -172,6 +220,9 @@ void	parse_commands(t_binfile *file)
 			if (arg1 == token->arguments)
 			{
 				command_linker(label, token);
+				if (token->has_codage)
+					token->codage = token_codage(token, 0);
+				token_length(token, 0);
 				arg1  = 0;
 				token = NULL;
 			}
@@ -179,6 +230,12 @@ void	parse_commands(t_binfile *file)
 		i++;
 	}
 	if (label != NULL)
+	{
 		labels_linker(file, label);
-	labels_printer(file);
+		label_length(file, label);
+		label = NULL;
+	}
+	//labels_printer(file);
+	file_length(file);
+	printf("length of this file DECIMAL === %d HEX  === %x\n", file->file_length, file->file_length);
 }  
