@@ -1,27 +1,29 @@
 #include "corewar.h"
 
-void processes_add(t_proc *parent_process, unsigned char *map, t_cycle *main_cycle, int index)
+void processes_add(t_proc **head, unsigned char *map, t_cycle *main_cycle, int index, int cur_proc)
 {
 	t_proc *tmp;
-
+	t_proc *parent;
 	t_proc *tail;
 	int j;
 
 	j = 0;
 	tmp = NULL;
-	tail = parent_process;
+	parent = NULL;
+	tail = *head;
 	(*main_cycle).processes++;
-	while (tail->next)
+	while (tail && (*tail).id != cur_proc)
 		tail = tail->next;
+	parent = tail;
 	tmp = (t_proc *)malloc(sizeof(t_proc));
 	tmp->id = (*main_cycle).processes - 1;
-	tmp->name = (*parent_process).name;
+	tmp->name = (*parent).name;
 	tmp->current_position = index;
-	tmp->carry = (*parent_process).carry;
-	if ((*parent_process).parent_nbr == -1)
-		tmp->parent_nbr = (*parent_process).id;
+	tmp->carry = (*parent).carry;
+	if ((*parent).parent_nbr == -1)
+		tmp->parent_nbr = (*parent).id;
 	else
-		tmp->parent_nbr = (*parent_process).parent_nbr;
+		tmp->parent_nbr = (*parent).parent_nbr;
 	tmp->if_live = 1;
 	tmp->cmd = map[tmp->current_position];
 	(*main_cycle).indexes[index][0] = tmp->parent_nbr + 1;
@@ -32,14 +34,15 @@ void processes_add(t_proc *parent_process, unsigned char *map, t_cycle *main_cyc
 		tmp->cycles_wait = 1;
 	tmp->last_live_cycle = 0;
 	tmp->child_proc_lives = 0;
-	tmp->next = NULL;
 	clear_argv_arr(tmp);
 	while (j < REG_NUMBER)
 	{
-		tmp->regs[j] = (*parent_process).regs[j];
+		tmp->regs[j] = (*parent).regs[j];
 		j++;
 	}
-	tail->next = tmp;
+	tmp->next = *head;
+	*head = tmp;
+	(*main_cycle).head_proc = *head;
 }
 
 int find_arg_index(t_proc *processes, int target)
@@ -127,8 +130,17 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	main_cycle.head_proc = processes;
 	if ((*params).ncurses == 1)
 		visual_init(&win);
+	ft_printf("%s\n", "Introducing contestants...");
+	
+	while ((unsigned int)i < (*params).bots_quantity)
+	{
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1, bots[i].prog_size, bots[i].prog_name, bots[i].comment);
+		i++;
+	}
+	i = 0;
 	while (main_cycle.cycle_die > 0 && main_cycle.processes > 0)
 	{
+		ft_printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
 		i = 0;
 		processes = main_cycle.head_proc;
 		if ((*params).ncurses == 1)
@@ -151,7 +163,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				}
 				if ((*processes).cycles_wait == 1)
 				{
-					instruct[(*processes).cmd - 1](main_cycle.head_proc, i, &main_cycle, map);
+					instruct[(*processes).cmd - 1](main_cycle.head_proc, (*processes).id, &main_cycle, map);
 					if ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))
 					{
 						main_cycle.indexes[(*processes).current_position][1] = 0;
@@ -164,7 +176,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					else
 						(*processes).cycles_wait = 1;
 					if ((*processes).parent_nbr == -1)
-						main_cycle.indexes[(*processes).current_position][0] = i + 1;
+						main_cycle.indexes[(*processes).current_position][0] = (*processes).id + 1;
 					else
 						main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
 					main_cycle.indexes[(*processes).current_position][1] = 1;
@@ -184,7 +196,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				else
 					(*processes).cycles_wait = 1;
 				if ((*processes).parent_nbr == -1)
-					main_cycle.indexes[(*processes).current_position][0] = i + 1;
+					main_cycle.indexes[(*processes).current_position][0] = (*processes).id + 1;
 				else
 					main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
 				main_cycle.indexes[(*processes).current_position][1] = 1;
@@ -216,6 +228,6 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	print_winner(win, main_cycle);
 	if ((*params).ncurses == 1)
 		endwin();
-	ft_printf("we exited main cycle\n");
+	//ft_printf("we exited main cycle\n");
 
 }

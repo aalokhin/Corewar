@@ -54,7 +54,7 @@ int	 	ft_opening_file(t_binfile	*bin)
 
 	ft_strdel(&((*bin).f_contents)); //*********************** magic ept
 	(*bin).f_contents = ft_strdup(file_contents); //*********************** magic ept
-	//printf("===>%s<===\n", (*bin).f_contents); 
+	printf("===>%s<===\n", (*bin).f_contents); 
 	
 
 
@@ -62,7 +62,7 @@ int	 	ft_opening_file(t_binfile	*bin)
 	parse_commands(&(*bin)); //collecting commands labels and staff <==================== Molly
 
 	// 
-	main_printer(&(*bin)); // printing stuff <==================== Molly
+
 
 
 	if ((*bin).flag_a == 1)

@@ -95,37 +95,14 @@ void		clean_spaces(t_binfile *bin, char (*contents)[])
 }
 
 
-void			clean_new_lines(t_binfile *bin, char (*contents)[])
-{
-	size_t		j;
-	size_t		i;
-	size_t		len;
-
-	j = 0;
-	i = 0;
-	len = 0;
-	
 
 
-
-	while((*contents)[i])
-	{
-	
-		if ((*contents)[i] == '\n')
-			while ((*contents)[i + 1] == '\n')
-				++i;
-		// if (!(*contents)[i])
-		// 	return ;
-		ft_memmove(&(*contents)[j], &(*contents)[i], 1);
-		j++;
-		i++;
-
-	}
-	ft_zero_what_left(bin, &j, contents);
-
-
-}
-
+// int		ft_whitespaces(int c)
+// {
+// 	if ((c > 8 && c < 14) || c == 32)
+// 		return (1);
+// 	return (0);
+// }
 
 
 void 		parse_file(t_binfile *bin, char (*contents)[]) //cleaning from  comments and extra lines
@@ -166,8 +143,6 @@ void 		parse_file(t_binfile *bin, char (*contents)[]) //cleaning from  comments 
 	ft_zero_what_left(bin, &k, contents);
 
 	clean_spaces(bin, contents);
-	//ft_skip_nl(contents, (int)bin->arg_length);
-	clean_new_lines(bin, contents);
 
 
 	

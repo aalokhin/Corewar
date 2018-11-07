@@ -134,7 +134,7 @@ static t_op    op_tab[17] =
 
 void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4]);
 int find_arg_index(t_proc *processes, int target);
-void processes_add(t_proc *processes, unsigned char *map, t_cycle *main_cycle, int index);
+void processes_add(t_proc **processes, unsigned char *map, t_cycle *main_cycle, int index, int cur_proc);
 void init_bots(header_t bots[4]);
 void params_init(t_flags *params);
 void main_cycle_init(t_cycle *main_cycle, t_flags *params);

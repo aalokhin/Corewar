@@ -17,16 +17,11 @@
 typedef struct			s_t  //minimum
 {
 	int					c_name; // order number of "live"
-	char 				*name_c; // 
-	int				arg[4];	// copy of arguments
+	int					arg[3];	// copy of arguments
 	char 				*a[4]; // for codage T_REG r 01 T_DIR % 10 T_IND 11 
 
 	int 				arguments; //  {T_DIR} 1 || 2 || 3   
 	int 				lbl; //label size ===> 2 or 4
-
-	int 				codage;
-	int 				has_codage;
-	int 				c_len;//byte length of the instruction
 
 	struct s_t			*next;
 
@@ -38,9 +33,6 @@ typedef struct 				s_lable
 	t_t						*instruct; //
 	char 					*label_name;
 	struct s_lable			*next;
-	int 					lbl_len; //length of lable
-	int 					bytes_above;
-	//int 					bytes_below; 
 }							t_lable;
 
 //{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
@@ -59,7 +51,6 @@ typedef struct	s_binfile
 
 
 	unsigned int 	arg_length; //file length
-	unsigned int 	file_length; // my file length
 
 
 	char 			*name;			
@@ -124,12 +115,6 @@ void	parse_commands(t_binfile *file);
 int			ft_cmd_arguments(char	*c_name);
 
 int			ft_cmd_lbls(char	*c_name);
-int			has_codage(char	*c_name);
-
-
-//********************************* PRINTING FUNCTIONS******************
-
-void	main_printer(t_binfile *file);
 
 
 #endif

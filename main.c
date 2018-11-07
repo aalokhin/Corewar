@@ -26,14 +26,14 @@ void create_map(header_t bots[4], t_flags *params)
 		}
 		i++;
 	}
-	i = 0;
+	/*i = 0;
 	while (i < MEM_SIZE)
 	{
 		if (i % 128 == 0)
 			ft_printf("\n");
 		ft_printf("%.2x ", map[i]);
 		i++;
-	}
+	}*/
 	vm_cycle(map, params, bots);
 }
 
@@ -65,14 +65,14 @@ int read_bots(t_flags *params)
 		lseek(fd, 0, SEEK_SET);
 		str = (unsigned char *)malloc(sizeof(unsigned char) * len + 1);
 		read(fd, str, len);
-		str[i] = '\0';
-		while (i < len)
+		//str[i] = '\0';
+		/*while (i < len)
 		{
 			if (i % 64 == 0)
 				ft_printf("\n");
 			ft_printf("%.2x ", str[i]);
 			i++;
-		}
+		}*/
 		ft_strncpy(bots[j].prog_name, (const char *)(&str[4]), PROG_NAME_LENGTH);
 		size = 0;
 		buf = 0;
@@ -94,21 +94,21 @@ int read_bots(t_flags *params)
 		bots[j].exec_part = (unsigned char *)malloc(sizeof(unsigned char) * (bots[j].prog_size + 1));
 		ft_bzero(bots[j].exec_part, bots[j].prog_size + 1);
 		//ft_strncpy((char *)(bots[j].exec_part), (const char *)(&str[2192]), bots[j].prog_size); ?why in cycle and not in strncpy
-		ft_printf("\n%s\n", bots[j].prog_name);
-		ft_printf("%d\n", bots[j].prog_size);
-		ft_printf("%s\n", bots[j].comment);
+		//ft_printf("\n%s\n", bots[j].prog_name);
+		//ft_printf("%d\n", bots[j].prog_size);
+		//ft_printf("%s\n", bots[j].comment);
 		bots[j].start_index = (MEM_SIZE / (*params).bots_quantity) * j;
 		i = 0;
 		while (i < bots[j].prog_size)
 		{
 			bots[j].exec_part[i] = str[2192 + i];
-			if (i % 64 == 0)
+			/*if (i % 64 == 0)
 				ft_printf("\n");
-			ft_printf("%.2x ", bots[j].exec_part[i]);
+			ft_printf("%.2x ", bots[j].exec_part[i]);*/
 			i++;
 		}
 		ft_strdel((char **)(&str));
-		ft_printf("\n");
+		//ft_printf("\n");
 		j++;
 	}
 	create_map(bots, params);
@@ -210,7 +210,7 @@ int main(int argc, char **argv)
 	params_init(&params);
 	if (!check_flags_core(argc, argv, &params))
 		exit(0);
-	ft_printf("%d\n", params.a_aff);
+	/*ft_printf("%d\n", params.a_aff);
 	ft_printf("%d\n", params.d_dumps_memory);
 	ft_printf("%d\n", params.s_cycles);
 	ft_printf("%d\n", params.v_verbosity);
@@ -221,7 +221,7 @@ int main(int argc, char **argv)
 	ft_printf("%s\n", params.players[0]);
 	ft_printf("%s\n", params.players[1]);
 	ft_printf("%s\n", params.players[2]);
-	ft_printf("%s\n", params.players[3]);
+	ft_printf("%s\n", params.players[3]);*/
 	if (!read_bots(&params))
 		exit(0);
 }

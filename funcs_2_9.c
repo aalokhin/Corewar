@@ -7,7 +7,7 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 
 	i = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && i != cur_proc)
+	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
 	{
 		tmp = tmp->next;
 		i++;
@@ -20,6 +20,7 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 		if ((*tmp).argv[0][1] == 0)
 			(*tmp).carry = 1;
 		(*tmp).regs[(*tmp).argv[1][1] - 1] = (*tmp).argv[0][1];
+		ft_printf("P%5d | ld %d r%d\n", (*tmp).id + 1, (*tmp).argv[0][1], (*tmp).argv[1][1]);
 	}
 	else if ((*tmp).argv[0][0] == IND_CODE)
 	{
@@ -31,9 +32,8 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 			(*tmp).carry = 1;
 		(*tmp).regs[(*tmp).argv[1][1] - 1] =
 		(map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
-
+		ft_printf("P%5d | ld %d r%d\n", (*tmp).id + 1, (*tmp).regs[(*tmp).argv[1][1] - 1], (*tmp).argv[1][1]);
 	}
-	ft_printf("%s\n", "test_load");
 }
 
 void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -43,7 +43,7 @@ void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 
 	i = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && i != cur_proc)
+	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
 	{
 		tmp = tmp->next;
 		i++;
@@ -80,7 +80,7 @@ void addition(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 
 	i = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && i != cur_proc)
+	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
 	{
 		tmp = tmp->next;
 		i++;
@@ -95,7 +95,10 @@ void addition(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 		(*tmp).carry = 1;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = (*tmp).regs[(*tmp).argv[0][1] - 1] +
 	(*tmp).regs[(*tmp).argv[1][1] - 1];	
-	ft_printf("%s\n", "tets_addition");
+	//ft_printf("%s\n", "tets_addition");
+	ft_printf("P%5d | add r%d r%d r%d\n", (*tmp).id + 1, (*tmp).argv[0][1], (*tmp).argv[1][1], (*tmp).argv[2][1]);
+
+	//P    1 | add r4 r12 r4
 	map[0] = map[0];
 }
 
@@ -106,7 +109,7 @@ void substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned
 
 	i = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && i != cur_proc)
+	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
 	{
 		tmp = tmp->next;
 		i++;
@@ -121,7 +124,8 @@ void substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned
 		(*tmp).carry = 1;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = (*tmp).regs[(*tmp).argv[0][1] - 1] -
 	(*tmp).regs[(*tmp).argv[1][1] - 1];	
-	ft_printf("%s\n", "tets_SUSCTRACTION");
+	//ft_printf("%s\n", "tets_SUSCTRACTION");
+	ft_printf("P%5d | sub r%d r%d r%d\n", (*tmp).id + 1, (*tmp).argv[0][1], (*tmp).argv[1][1], (*tmp).argv[2][1]);
 	map[0] = map[0];
 }
 
@@ -136,7 +140,7 @@ void bit_and(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 	one = 0;
 	two = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && i != cur_proc)
+	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
 	{
 		tmp = tmp->next;
 		i++;
@@ -190,7 +194,7 @@ void bit_or(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char 
 	one = 0;
 	two = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && i != cur_proc)
+	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
 	{
 		tmp = tmp->next;
 		i++;
@@ -244,7 +248,7 @@ void bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 	one = 0;
 	two = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && i != cur_proc)
+	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
 	{
 		tmp = tmp->next;
 		i++;
@@ -291,16 +295,18 @@ void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 {
 	int i;
 	t_proc *tmp;
+	char *res;
 
 	i = 0;
+	res = "FAILED";
 	tmp = processes;
+	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
+	{
+		tmp = tmp->next;
+		i++;
+	}
 	if ((*tmp).carry == 1)
 	{
-		while (i < (*main_cycle).processes && i != cur_proc)
-		{
-			tmp = tmp->next;
-			i++;
-		}
 		(*main_cycle).indexes[(*tmp).current_position][1] = 0;
 		(*tmp).current_position += ((*tmp).argv[0][1] % IDX_MOD);
 		if ((*tmp).current_position < 0 || (*tmp).current_position >= MEM_SIZE)
@@ -310,8 +316,10 @@ void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 		else
 			(*main_cycle).indexes[(*tmp).current_position][0] = (*tmp).parent_nbr + 1;
 		(*main_cycle).indexes[(*tmp).current_position][1] = 1;
+		res = "OK";
 	}
-	ft_printf("%d %d %d %d\n", (*tmp).current_position, i, (*tmp).argv[0][1], (*main_cycle).cycles);
-	ft_printf("%s\n", "test zjmp");
+	//ft_printf("%d %d %d %d\n", (*tmp).current_position, i, (*tmp).argv[0][1], (*main_cycle).cycles);
+	//ft_printf("%s\n", "test zjmp");
+	ft_printf("P%5d | zjmp %d %s\n", (*tmp).id + 1, (*tmp).argv[0][1], res);
 	map[0] = map[0];
 }
