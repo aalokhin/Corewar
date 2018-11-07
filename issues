@@ -206,3 +206,6 @@ live функция обратить внимание, на боте кар бы
 добавить увеличнение и уменьш скорости
 сегфолт EXC_BAD_INSTRUCTION в гагнанте в цикле > 193          (*processes).cmd = map[(*processes).current_position]; цикл 4655
 наверное надо удялать узел процеса
+срочно ускорять корвар!
+
+сегфолт на таком кейсе ./corewar vm_champs/champs/Gagnant.cor -v 6> test_origin_gagnant

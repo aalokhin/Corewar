@@ -68,7 +68,6 @@ void live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *m
 				(*tmp).child_proc_lives++;
 		}
 	}
-	//ft_printf("%s\n", "test live");
 	map[0] = map[0];
 }
 
@@ -86,11 +85,6 @@ void load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 	one = 0;
 	two = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if ((*tmp).argv[2][0] != REG_CODE || (*tmp).argv[2][1] < 1 || (*tmp).argv[2][1] > 16)
 		return ;
 	if ((*tmp).argv[0][0] == REG_CODE && ((*tmp).argv[0][1] < 1 || (*tmp).argv[0][1] > 16))
@@ -124,11 +118,9 @@ void load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 	i %= MEM_SIZE;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = (map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) +
 	(map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
-	//ft_printf("%d %d %d %d %d %d %d %d %d\n", cur_proc, i, (*tmp).current_position, (*main_cycle).cycles, (*tmp).argv[1][1], (*tmp).argv[2][1], (*tmp).regs[(*tmp).argv[0][1] - 1], one, two);
-	//ft_printf("%s\n", "test load_ind");
-
-	ft_printf("P%5d | ldi %d %d r%d\n", (*tmp).id + 1, one, two, (*tmp).argv[2][1]);
+	ft_printf("P%5d | ldi %d %d r%d\n", cur_proc + 1, one, two, (*tmp).argv[2][1]);
  	ft_printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|', one, two, one + two, i);
+ 	(*main_cycle).cycles = (*main_cycle).cycles;
 }
 
 void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -142,11 +134,6 @@ void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 	two = 0;
 	three = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[0][1] < 1 || (*tmp).argv[0][1] > 16)
 		return ;
 	if ((*tmp).argv[2][0] != REG_CODE && (*tmp).argv[2][0] != DIR_CODE)
@@ -174,7 +161,7 @@ void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 	i = (two + three) + (*tmp).current_position % IDX_MOD;
 	//ft_printf("%d %d %d %d %d %d %d %d\n", i, (*tmp).current_position, (*main_cycle).cycles, (*tmp).argv[1][1], (*tmp).argv[2][1], (*tmp).regs[(*tmp).argv[0][1] - 1], two, three);
 	i = i % MEM_SIZE;
-	ft_printf("P%5d | sti r%d %d %d\n", (*tmp).id + 1, (*tmp).argv[0][1], two, three);
+	ft_printf("P%5d | sti r%d %d %d\n", cur_proc + 1, (*tmp).argv[0][1], two, three);
  	ft_printf("%8c -> store to %d + %d = %d (with pc and mod %d)\n", '|', two, three, two + three, (i % MEM_SIZE));
 	map[i + 3] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x000000FF); 
 	map[i + 2] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x0000FF00) >> 8; 
@@ -193,9 +180,7 @@ void store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 		(*main_cycle).indexes[i + 1][0] = (*tmp).parent_nbr + 1;
 		(*main_cycle).indexes[i + 2][0] = (*tmp).parent_nbr + 1;
 		(*main_cycle).indexes[i + 3][0] = (*tmp).parent_nbr + 1;
-	}
- 	//ft_printf("%s\n", "test_sti");
- 	
+	}	
 }
 
 void ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -216,9 +201,6 @@ void ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 	if (i < 0 || i >= MEM_SIZE)
 		i %= MEM_SIZE;
 	processes_add(&head, map, main_cycle, i, cur_proc);
-	//ft_printf("III%d %d\n", i, (*tmp).argv[0][1]);
-	//ft_printf("%s\n", "test_>fork");
-	//ft_printf("%s\n", "test_>fork");
 	ft_printf("P%5d | fork %d (%d)\n", (*tmp).id + 1, (*tmp).argv[0][1], i);
 }
 
@@ -229,11 +211,6 @@ void lload(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 
 	i = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if((*tmp).argv[1][0] != REG_CODE || (*tmp).argv[1][1] < 1 || (*tmp).argv[1][1] > 16 || (*tmp).argv[2][0])
 		return ;
 	(*tmp).carry = 0;
@@ -252,9 +229,9 @@ void lload(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 			(*tmp).carry = 1;
 		(*tmp).regs[(*tmp).argv[1][1] - 1] =
 		(map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
-
 	}
-	ft_printf("%s\n", "test_load load");
+	ft_printf("%d %s\n", cur_proc + 1, "test_load load");
+	(*main_cycle).cycles = (*main_cycle).cycles;
 }
 
 void lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -270,11 +247,6 @@ void lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 	one = 0;
 	two = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if ((*tmp).argv[2][0] != REG_CODE || (*tmp).argv[2][1] < 1 || (*tmp).argv[2][1] > 16)
 		return ;
 	if ((*tmp).argv[0][0] == REG_CODE && ((*tmp).argv[0][1] < 1 || (*tmp).argv[0][1] > 16))
@@ -315,7 +287,8 @@ void lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned ch
 			(*tmp).carry = 1;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = (map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) +
 	(map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
-	ft_printf("%s\n", "test_load lload_ind");
+	ft_printf("%d %s %d\n", cur_proc + 1, "test_load lload_ind", (*main_cycle).cycles);
+	(*main_cycle).cycles = (*main_cycle).cycles;
 }
 
 void long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -347,15 +320,11 @@ void aff(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 
 	i = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[0][1] < 1 || (*tmp).argv[0][1] > 16 ||
 		(*tmp).argv[1][0] || (*tmp).argv[2][0])
 		return ;
-	ft_printf("%s\n", "aff -> test");
+	ft_printf("%d %s\n", cur_proc + 1, "aff -> test");
 	ft_printf("%c\n", ((*tmp).regs[(*tmp).argv[0][1] - 1] % 256));
+	(*main_cycle).cycles = (*main_cycle).cycles;
 	map[0] = map[0];
 }

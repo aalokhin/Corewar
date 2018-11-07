@@ -163,7 +163,10 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				}
 				if ((*processes).cycles_wait == 1)
 				{
-					instruct[(*processes).cmd - 1](main_cycle.head_proc, (*processes).id, &main_cycle, map);
+					if ((*processes).cmd == 1 || (*processes).cmd == 12 || (*processes).cmd == 15)
+						instruct[(*processes).cmd - 1](main_cycle.head_proc, (*processes).id, &main_cycle, map);
+					else
+						instruct[(*processes).cmd - 1](processes, (*processes).id, &main_cycle, map);
 					if ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))
 					{
 						main_cycle.indexes[(*processes).current_position][1] = 0;
@@ -210,7 +213,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			i++;
 		}
 		main_cycle.prev_processes = main_cycle.processes;
-		if (main_cycle.cycles != 0 && main_cycle.cycles % main_cycle.cycle_die == 0)
+		if (main_cycle.cycles != 0 && (main_cycle.cycles + 1) % main_cycle.cycle_die == 0)
 		{
 			check_if_lives(main_cycle.head_proc, &main_cycle);
 			main_cycle.checks_if_die++;
@@ -222,12 +225,19 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				main_cycle.prev_cycle_die = main_cycle.cycle_die;
 			}
 		}
-		usleep((useconds_t)((int)1000000 / main_cycle.second_limit));
+		if (main_cycle.second_limit > 0)
+			usleep((useconds_t)((int)1000000 / main_cycle.second_limit));
+		else
+			main_cycle.second_limit = 1;
 		main_cycle.cycles++;
 	}
-	print_winner(win, main_cycle);
 	if ((*params).ncurses == 1)
+	{
+		print_winner(win, main_cycle);
 		endwin();
+	}
+	else
+		ft_printf("Contestant %d, \"%s\", has won !\n", main_cycle.winner_id + 1, main_cycle.winner_name);
 	//ft_printf("we exited main cycle\n");
 
 }

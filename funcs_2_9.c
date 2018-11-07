@@ -7,11 +7,6 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 
 	i = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if((*tmp).argv[1][0] != REG_CODE || (*tmp).argv[1][1] < 1 || (*tmp).argv[1][1] > 16 || (*tmp).argv[2][0])
 		return ;
 	(*tmp).carry = 0;
@@ -32,8 +27,9 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 			(*tmp).carry = 1;
 		(*tmp).regs[(*tmp).argv[1][1] - 1] =
 		(map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE];
-		ft_printf("P%5d | ld %d r%d\n", (*tmp).id + 1, (*tmp).regs[(*tmp).argv[1][1] - 1], (*tmp).argv[1][1]);
+		ft_printf("P%5d | ld %d r%d\n", cur_proc + 1, (*tmp).regs[(*tmp).argv[1][1] - 1], (*tmp).argv[1][1]);
 	}
+	(*main_cycle).cycles = (*main_cycle).cycles;
 }
 
 void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -43,11 +39,6 @@ void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 
 	i = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[0][1] < 1 || (*tmp).argv[0][1] > 16 || (*tmp).argv[2][0])
 		return ;
 	if ((*tmp).argv[1][0] == IND_CODE)
@@ -70,7 +61,7 @@ void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 	}
 	else if ((*tmp).argv[1][0] == REG_CODE && (*tmp).argv[1][1] >= 1 && (*tmp).argv[1][1] <= 16)
 		(*tmp).regs[(*tmp).argv[1][1] - 1] = (*tmp).regs[(*tmp).argv[0][1] - 1];
-	ft_printf("%s\n", "store_test");
+	ft_printf("%d %s\n", cur_proc + 1, "store_test");
 }
 
 void addition(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -80,11 +71,6 @@ void addition(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 
 	i = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[1][0] != REG_CODE || (*tmp).argv[2][0] != REG_CODE)
 		return ;
 	if ((*tmp).argv[0][1] < 0 || (*tmp).argv[0][1] > 16 || (*tmp).argv[1][1] < 0 ||
@@ -95,11 +81,9 @@ void addition(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 		(*tmp).carry = 1;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = (*tmp).regs[(*tmp).argv[0][1] - 1] +
 	(*tmp).regs[(*tmp).argv[1][1] - 1];	
-	//ft_printf("%s\n", "tets_addition");
-	ft_printf("P%5d | add r%d r%d r%d\n", (*tmp).id + 1, (*tmp).argv[0][1], (*tmp).argv[1][1], (*tmp).argv[2][1]);
-
-	//P    1 | add r4 r12 r4
+	ft_printf("P%5d | add r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1], (*tmp).argv[1][1], (*tmp).argv[2][1]);
 	map[0] = map[0];
+	(*main_cycle).cycles = (*main_cycle).cycles;
 }
 
 void substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -109,11 +93,6 @@ void substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned
 
 	i = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[1][0] != REG_CODE || (*tmp).argv[2][0] != REG_CODE)
 		return ;
 	if ((*tmp).argv[0][1] < 0 || (*tmp).argv[0][1] > 16 || (*tmp).argv[1][1] < 0 ||
@@ -124,9 +103,9 @@ void substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned
 		(*tmp).carry = 1;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = (*tmp).regs[(*tmp).argv[0][1] - 1] -
 	(*tmp).regs[(*tmp).argv[1][1] - 1];	
-	//ft_printf("%s\n", "tets_SUSCTRACTION");
-	ft_printf("P%5d | sub r%d r%d r%d\n", (*tmp).id + 1, (*tmp).argv[0][1], (*tmp).argv[1][1], (*tmp).argv[2][1]);
+	ft_printf("P%5d | sub r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1], (*tmp).argv[1][1], (*tmp).argv[2][1]);
 	map[0] = map[0];
+	(*main_cycle).cycles = (*main_cycle).cycles;
 }
 
 void bit_and(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -140,11 +119,6 @@ void bit_and(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 	one = 0;
 	two = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if ((*tmp).argv[2][0] != REG_CODE || (*tmp).argv[2][1] < 1 || (*tmp).argv[2][1] > 16)
 		return ;
 	if ((*tmp).argv[0][0] == REG_CODE && ((*tmp).argv[0][1] < 1 || (*tmp).argv[0][1] > 16))
@@ -180,7 +154,8 @@ void bit_and(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 	if ((one & two) == 0)
 		(*tmp).carry = 1;	
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = one & two;
-	ft_printf("%s\n", "TESE->BIT->AND");
+	ft_printf("P%5d | and %d %d r%d\n", cur_proc + 1, one, two, (*tmp).argv[2][1]);
+	(*main_cycle).cycles = (*main_cycle).cycles;
 }
 
 void bit_or(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -194,11 +169,6 @@ void bit_or(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char 
 	one = 0;
 	two = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if ((*tmp).argv[2][0] != REG_CODE || (*tmp).argv[2][1] < 1 || (*tmp).argv[2][1] > 16)
 		return ;
 	if ((*tmp).argv[0][0] == REG_CODE && ((*tmp).argv[0][1] < 1 || (*tmp).argv[0][1] > 16))
@@ -234,7 +204,8 @@ void bit_or(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char 
 	if ((one | two) == 0)
 		(*tmp).carry = 1;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = one | two;
-	ft_printf("%s\n", "TESE->BIT->OR");
+	ft_printf("P%5d | or %d %d r%d\n", cur_proc + 1, one, two, (*tmp).argv[2][1]);
+	(*main_cycle).cycles = (*main_cycle).cycles;
 }
 
 void bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -248,11 +219,6 @@ void bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 	one = 0;
 	two = 0;
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if ((*tmp).argv[2][0] != REG_CODE || (*tmp).argv[2][1] < 1 || (*tmp).argv[2][1] > 16)
 		return ;
 	if ((*tmp).argv[0][0] == REG_CODE && ((*tmp).argv[0][1] < 1 || (*tmp).argv[0][1] > 16))
@@ -288,7 +254,8 @@ void bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 	if ((one ^ two) == 0)
 		(*tmp).carry = 1;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = one ^ two;
-	ft_printf("%s\n", "TESE->BIT->XOR");
+	ft_printf("P%5d | xor %d %d r%d\n", cur_proc + 1, one, two, (*tmp).argv[2][1]);
+	(*main_cycle).cycles = (*main_cycle).cycles;
 }
 
 void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
@@ -300,11 +267,6 @@ void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 	i = 0;
 	res = "FAILED";
 	tmp = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
-		tmp = tmp->next;
-		i++;
-	}
 	if ((*tmp).carry == 1)
 	{
 		(*main_cycle).indexes[(*tmp).current_position][1] = 0;
@@ -318,8 +280,6 @@ void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 		(*main_cycle).indexes[(*tmp).current_position][1] = 1;
 		res = "OK";
 	}
-	//ft_printf("%d %d %d %d\n", (*tmp).current_position, i, (*tmp).argv[0][1], (*main_cycle).cycles);
-	//ft_printf("%s\n", "test zjmp");
-	ft_printf("P%5d | zjmp %d %s\n", (*tmp).id + 1, (*tmp).argv[0][1], res);
+	ft_printf("P%5d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);
 	map[0] = map[0];
 }
