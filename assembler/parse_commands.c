@@ -198,7 +198,7 @@ int 	token_arg_length(t_t *token, int i)
 {
 	int	byte_len = 1; //opcode + has_codage + args_len
 
-
+	printf("================================> %d\n", token->lbl_size);
 	while (i < 4)
 	{
 		if (token->arg[i] == 11) 
@@ -211,7 +211,8 @@ int 	token_arg_length(t_t *token, int i)
 		i++;
 	}
 	byte_len += token->has_codage;
-	// printf("\n BYTE_LENGTH ==> %d \n", byte_len);
+	printf("hhhhhhhhhas coooooooodage %d\n", token->has_codage);
+	 printf("\n BYTE_LENGTH ==> %d \n", byte_len);
 	token->c_len = byte_len;
 	return (token->c_len);
 }
@@ -343,7 +344,7 @@ void	parse_commands(t_binfile *file)
 				command_linker(label, token);
 				if (token->has_codage)
 					token->codage = token_codage(token, 0);
-				//token_length(token, 0);
+				token_length(token, 0);
 				token_arg_length(token, 0);
 				arg1  = 0;
 				token = NULL;
