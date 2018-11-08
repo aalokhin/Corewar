@@ -14,18 +14,41 @@
 // # define ARG2(c) (c == 'C' || c == 's' || c == 'S' || c == 'u')
 
 
+// typedef struct 			s_arg
+// {
+// 	int 			bytes_len;
+// 	char 			*line;
+// 	unsigned char  	*arg;
+	
+
+// 	int 			is_dir;
+// 	int 			distance;
+// 	struct s_arg	*next;
+// }						t_arg;
+
 typedef struct			s_t  //minimum
 {
 	int					c_name; // order number of "live"
 	char 				*name_c; // 
-	int					arg[4];	// copy of arguments
+	int					arg[3];	// copy of arguments
 	char 				*a[4]; // for codage T_REG r 01 T_DIR % 10 T_IND 11 
+	
+
+
 
 	int 				arguments; //  {T_DIR} 1 || 2 || 3   
 	int 				lbl_size; //label size ===> 2 or 4
 
 
 	int 				codage;
+
+
+
+	// int 				inst_nbr;
+	// t_arg 				*inst;
+	int 				args[3][2];
+	int 				bytes_above_i;
+
 
 
 	int 				has_codage;

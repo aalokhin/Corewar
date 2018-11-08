@@ -123,10 +123,28 @@ void			command_linker(t_lable 	*label, t_t 	*token)
 	}
 }
 
-void	token_length(t_t *token, int i) //int 	token_arg_length(t_t *token, int i) by nastia 
+int 	bytes_above_i(t_lable *label)
+{
+	t_t *tmp;
+	int count;
+
+	count = 0;
+	tmp = label->instruct;
+	while (tmp->next)
+	{
+		count += tmp->c_len;
+		tmp = tmp->next;
+	}
+	count += label->bytes_above;
+	//printf(" =================================%d %d\n", count, label->bytes_above);
+	return (count);
+}
+
+void	token_length(t_t *token, int i, t_lable *label) //int 	token_arg_length(t_t *token, int i) by nastia 
 {
 	token->c_len = 1;
 	token->c_len += token->has_codage;
+	token->bytes_above_i = bytes_above_i(label);
 	while (i < 4)
 	{
 
@@ -136,18 +154,18 @@ void	token_length(t_t *token, int i) //int 	token_arg_length(t_t *token, int i) 
 	//printf("token length -- ====== %d\n", token->c_len);
 }
 
-void 	length_of_bytes_above(t_binfile *file)
-{
-	t_lable *tmp;
+// void 	length_of_bytes_above(t_binfile *file, t_lable *current_label)
+// {
+// 	t_lable *tmp;
 
-	tmp = file->labels_list;
-	while (tmp)
-	{
-		tmp->bytes_above += tmp->lbl_len;
-		tmp = tmp->next;
-	}
+// 	tmp = file->labels_list;
+// 	while (tmp)
+// 	{
+// 		current_label->bytes_above += tmp->lbl_len;
+// 		tmp = tmp->next;
+// 	}
 
-}
+// }
 
 void label_length(t_binfile *file, t_lable	*label)
 {
@@ -155,7 +173,11 @@ void label_length(t_binfile *file, t_lable	*label)
 
 	tmp = label->instruct;
 	label->lbl_len = 0;
-	length_of_bytes_above(file);
+	if (label->prev)
+		label->bytes_above += label->prev->lbl_len;
+	file->fd = file->fd;
+	// length_of_bytes_above(file, label);
+ printf(" ========= %d\n", label->bytes_above);
 	while (tmp)
 	{
 		label->lbl_len += tmp->c_len;
@@ -212,7 +234,7 @@ int 	token_arg_length(t_t *token, int i)
 	}
 	byte_len += token->has_codage;
 	//printf("hhhhhhhhhas coooooooodage %d\n", token->has_codage);
-	 printf("\n BYTE_LENGTH ==> %d \n", byte_len);
+//	 printf("\n BYTE_LENGTH ==> %d \n", byte_len);
 	token->c_len = byte_len;
 	return (token->c_len);
 }
@@ -314,7 +336,9 @@ void	parse_commands(t_binfile *file)
 				label = NULL;
 			}
 			label = (t_lable *)ft_memalloc(sizeof(t_lable));
-			label->label_name = ft_strdup(str[i]);
+			label->label_name = label->label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(str[i]));
+			ft_strncpy(label->label_name, str[i], ft_strlen(str[i]) - 1);
+			//printf("label = ||%s||\n", label->label_name);
 		}
 		else if (!token || (token && arg1 == token->arguments))
 		{
@@ -344,8 +368,8 @@ void	parse_commands(t_binfile *file)
 				command_linker(label, token);
 				if (token->has_codage)
 					token->codage = token_codage(token, 0);
-				token_length(token, 0);
-				token_arg_length(token, 0);
+				token_length(token, 0, label);
+				//token_arg_length(token, 0);
 				arg1  = 0;
 				token = NULL;
 			}
