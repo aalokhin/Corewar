@@ -198,7 +198,7 @@ int 	token_arg_length(t_t *token, int i)
 {
 	int	byte_len = 1; //opcode + has_codage + args_len
 
-	printf("================================> %d\n", token->lbl_size);
+	//printf("================================> %d\n", token->lbl_size);
 	while (i < 4)
 	{
 		if (token->arg[i] == 11) 
@@ -211,7 +211,7 @@ int 	token_arg_length(t_t *token, int i)
 		i++;
 	}
 	byte_len += token->has_codage;
-	printf("hhhhhhhhhas coooooooodage %d\n", token->has_codage);
+	//printf("hhhhhhhhhas coooooooodage %d\n", token->has_codage);
 	 printf("\n BYTE_LENGTH ==> %d \n", byte_len);
 	token->c_len = byte_len;
 	return (token->c_len);

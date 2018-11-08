@@ -4,6 +4,7 @@ void	label_distance(t_binfile 	*bin)
 {
 	bin->arg_length = bin->arg_length;
 	bin->champ_size_nbr = 0;
+	int k;
 
 
 	t_lable *tmp;
@@ -38,11 +39,20 @@ void	label_distance(t_binfile 	*bin)
 		// 	printf("label->next \"%s\" \n", tmp->next->label_name);
 		// else
 		// 	printf("no next\n");
+		k = 0;
 
 		while(tmpi)
 		{
+
 			bin->champ_size_nbr += tmpi->c_len;
-			printf("		=>instruction is: %s and it's size  %d\n", tmpi->name_c, tmpi->c_len);
+			printf("	=>instruction is: %s and it's size  %d\n", tmpi->name_c, tmpi->c_len);
+			printf("		args: ");
+			while(tmpi->a[k])
+			{
+				printf("{%s} ", tmpi->a[k]);
+				k++;
+			}
+			printf("\n");
 			tmpi = tmpi->next;
 		}
 		tmp = tmp->next;
