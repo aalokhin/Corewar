@@ -117,120 +117,80 @@
 
 
 // }
+//bee_gees
+// 0b 68 01 00 45 00 01
+// 0b 68 01 00 22 00 01 
+// 02 90 00 00 00 01 03
+// 02 90 00 00 00 21 06
+// 04 54 02 03 02
+// 08 64 02 00 00 00 0f 04 
+// live 2
+// 01 00 00 00 04 
+// 09 00 10 
+// 0c ff eb 
+// 02 90 00 00 00 00 04
+// 09 ff e1 
+// 02 90 00 00 00 00 04 
+// 01 00 00 00 04 
+// 09 ff fb
 
-
-
-int 		find_arg_value(t_binfile 	*bin, char *str, t_t *instruct, t_lable *lable)
+int 		find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 {
-
 	char 		*search;
 	t_lable		*tmp_lbl;
-	int 		ret;
-	int 		byte_len;
-
-	ret = 0;
 
 	tmp_lbl = bin->labels_list;
-	bin->arg_length = bin->arg_length;
-	byte_len = instruct->lbl_size;
-	//printf("~~~~~~~~~~~~~~~~~~~~~%s\n", lable->label_name);
 	if (ft_strstr(str, "%:"))
 	{
 		search = ft_strstr(str, "%:") + 2;
 		while(tmp_lbl)
 		{
-			if (strcmp(search, tmp_lbl->label_name) == 0)
+			if (tmp_lbl->label_name)
 			{
-				if (lable->bytes_above < tmp_lbl->bytes_above)
-					ret = tmp_lbl->bytes_above - lable->bytes_above;
-				else
-					ret = tmp_lbl->bytes_above - bin->file_length + instruct->c_len;
-				// printf("lable name [%s]", tmp_lbl->label_name);
-				// printf("\n\ncurrent: %d\n", lable->bytes_above);
-				// printf("tmp: %d\n", tmp_lbl->bytes_above);
-				printf("===================================> return : %d", ret);
+				if (strcmp(search, tmp_lbl->label_name) == 0)
+				{
+					if (label->bytes_above < tmp_lbl->bytes_above)
+						return (tmp_lbl->bytes_above - label->bytes_above - instruct->bytes_above_i);
+					else
+						return (tmp_lbl->bytes_above - (label->bytes_above +  instruct->bytes_above_i));
+				}
 			}
 			tmp_lbl = tmp_lbl->next;
 		}
 		
-		// printf("********************%s\n", search);
-
-
 	}
-	return (ret);
-
+	return (ft_strstr(str, "r") ? ft_atoi(ft_strstr(str, "r") + 1) : ft_atoi(ft_strstr(str, "%") + 1));
 }
 
 void	label_distance(t_binfile 	*bin)
 {
-	
-	bin->champ_size_nbr = 0;
-	
 	int k;
-
-
 	t_lable *tmp;
 	t_t		*tmpi;	
 
 	tmp = bin->labels_list;
-
-
-	// tmp = bin->labels_list; //****************************** bytes above ***********
-	// while(tmp)
-	// {
-	// 	if (!tmp->prev)
-	// 		tmp->bytes_above = 0;
-	// 	else
-	// 		tmp->bytes_above = tmp->prev->lbl_len;
-	// 	tmp = tmp->next;
-	// }
-
-	// tmp = bin->labels_list;
-	
-
 	while(tmp)
 	{
 	
 		tmpi = tmp->instruct;
-		printf("label  name is: {%s} with %d bytes_above)\n", tmp->label_name, tmp->bytes_above);
-		//printf(" label name is \"%s\" - ",  tmp->label_name);
-		// if (tmp->prev)
-		// 	printf("label<-prev \"%s\" -", tmp->prev->label_name);
-		// else
-		// 	printf("no prev\n");
-		// if (tmp->next)
-		// 	printf("label->next \"%s\" \n", tmp->next->label_name);
-		// else
-		// 	printf("no next\n");
+		printf(" === label  name is: {%s} with %d bytes_above) ===\n", tmp->label_name, tmp->bytes_above);
 		k = 0;
-
 		while(tmpi)
 		{
 			k = 0;
-
-			bin->champ_size_nbr += tmpi->c_len;
 			printf("	=>instruction is: %s and it's size  %d\n", tmpi->name_c, tmpi->c_len);
-			printf("		args: ");
+			// printf("				args: ");
 			while(tmpi->a[k])
 			{
-				// if (ft_strstr(a[k]), "%:")
-				// {
-
-				// }
-				tmpi->args[k][0] = tmpi->arg[k];
-				tmpi->args[k][1] = find_arg_value(bin, tmpi->a[k], tmpi, tmp);
-
 				printf("{%s} ", tmpi->a[k]);
+				tmpi->args[k][1] = find_arg_value(bin, tmpi->a[k], tmpi, tmp);
+				printf(" argument {%s}       ---  distance in dec  %d in hex  %x\n", tmpi->a[k], tmpi->args[k][1], tmpi->args[k][1]);
 				k++;
 			}
-			// tmpi->inst_nbr = k;
-			printf("\n");
 			tmpi = tmpi->next;
+			printf("\n");
 		}
 		tmp = tmp->next;
 	}
-	printf("executable code length: %x\n", bin->champ_size_nbr);
-	//fill_arguments_array(bin);
-
 }
 

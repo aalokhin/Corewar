@@ -30,7 +30,6 @@ typedef struct			s_t  //minimum
 {
 	int					c_name; // order number of "live"
 	char 				*name_c; // 
-	int					arg[3];	// copy of arguments
 	char 				*a[4]; // for codage T_REG r 01 T_DIR % 10 T_IND 11 
 	
 
@@ -42,12 +41,8 @@ typedef struct			s_t  //minimum
 
 	int 				codage;
 
-
-
-	// int 				inst_nbr;
-	// t_arg 				*inst;
-	int 				args[3][2];
-	int 				bytes_above_i;
+	int 				args[3][2]; // 0 - for codage T_REG r 01 T_DIR % 10 T_IND 11 /// 1 - distance 
+	int 				bytes_above_i; // in label length 
 
 
 
@@ -70,8 +65,6 @@ typedef struct 				s_lable
 	//int 					bytes_below; 
 }							t_lable;
 
-//{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
-
 
 typedef struct	s_binfile
 {
@@ -86,7 +79,7 @@ typedef struct	s_binfile
 
 
 	unsigned int 	arg_length; //file length
-	unsigned int 	file_length; // my file length
+	unsigned int 	file_length; // my file length 
 
 
 	char 			*name;			

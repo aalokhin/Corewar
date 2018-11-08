@@ -84,6 +84,18 @@ int  command_name(char *name)
 // }
 
 
+void 	bytes_above_filler(t_binfile *file, t_lable *label)
+{
+	t_lable *tmp;
+
+	label->bytes_above = 0;
+	tmp = file->labels_list;
+	while (tmp)
+	{
+		label->bytes_above += tmp->lbl_len;
+		tmp = tmp->next;
+	}
+}
 
 void			labels_linker(t_binfile *file, t_lable 	*label)
 {
@@ -128,56 +140,38 @@ int 	bytes_above_i(t_lable *label)
 	t_t *tmp;
 	int count;
 
+
 	count = 0;
 	tmp = label->instruct;
-	while (tmp->next)
+	while (tmp)
 	{
 		count += tmp->c_len;
 		tmp = tmp->next;
 	}
-	count += label->bytes_above;
-	//printf(" =================================%d %d\n", count, label->bytes_above);
 	return (count);
 }
 
-void	token_length(t_t *token, int i, t_lable *label) //int 	token_arg_length(t_t *token, int i) by nastia 
+void	token_length(t_t *token, int i, t_lable 	*label) //int 	token_arg_length(t_t *token, int i) by nastia 
 {
-	token->c_len = 1;
-	token->c_len += token->has_codage;
 	token->bytes_above_i = bytes_above_i(label);
+	token->c_len += token->has_codage;
+	token->c_len += 1;
 	while (i < 4)
 	{
-
-		token->c_len += token->arg[i] == 0 ? 0 : token->arg[i] == 1 ? 1 : token->arg[i] == 11 ? 2 : token->lbl_size;
+		token->c_len += token->args[i][0] == 0 ? 0 : token->args[i][0] == 1 ? 1 : token->args[i][0] == 11 ? 2 : token->lbl_size;
 		i++;
 	}
-	//printf("token length -- ====== %d\n", token->c_len);
 }
 
-// void 	length_of_bytes_above(t_binfile *file, t_lable *current_label)
-// {
-// 	t_lable *tmp;
-
-// 	tmp = file->labels_list;
-// 	while (tmp)
-// 	{
-// 		current_label->bytes_above += tmp->lbl_len;
-// 		tmp = tmp->next;
-// 	}
-
-// }
 
 void label_length(t_binfile *file, t_lable	*label)
 {
 	t_t		*tmp;
 
+	bytes_above_filler(file, label);
 	tmp = label->instruct;
 	label->lbl_len = 0;
-	if (label->prev)
-		label->bytes_above += label->prev->lbl_len;
 	file->fd = file->fd;
-	// length_of_bytes_above(file, label);
- printf(" ========= %d\n", label->bytes_above);
 	while (tmp)
 	{
 		label->lbl_len += tmp->c_len;
@@ -205,10 +199,10 @@ int 	token_codage(t_t *token, int i)
 
 	while (i < 4)
 	{
-		if (token->arg[i] == 11 || token->arg[i] == 10)
+		if (token->args[i][0] == 11 || token->args[i][0] == 10)
 			dec += k;
 		k /= 2;
-		if (token->arg[i] == 11 || token->arg[i] == 1)
+		if (token->args[i][0] == 11 || token->args[i][0] == 1)
 			dec += k;
 		k /= 2;
 		i++;
@@ -216,28 +210,7 @@ int 	token_codage(t_t *token, int i)
 	return (dec);
 }
 
-int 	token_arg_length(t_t *token, int i)
-{
-	int	byte_len = 1; //opcode + has_codage + args_len
-
-	//printf("================================> %d\n", token->lbl_size);
-	while (i < 4)
-	{
-		if (token->arg[i] == 11) 
-			byte_len += 2;
-		else if (token->arg[i] == 10)
-			byte_len += token->lbl_size;
-		else if (token->arg[i] == 1)
-			byte_len += 1;
-
-		i++;
-	}
-	byte_len += token->has_codage;
-	//printf("hhhhhhhhhas coooooooodage %d\n", token->has_codage);
-//	 printf("\n BYTE_LENGTH ==> %d \n", byte_len);
-	token->c_len = byte_len;
-	return (token->c_len);
-}
+// і
 
 void	tabs_remover(char *str)
 {
@@ -250,6 +223,115 @@ void	tabs_remover(char *str)
 		i++;
 	}
 }
+
+
+void	parse_commands(t_binfile *file)
+{
+	char	**str = NULL;
+	t_t 	*token = NULL;
+
+	t_lable	*label = NULL;
+	int i = 0;
+	int arg1 = 0;
+	file->labels_list = NULL;
+	tabs_remover(file->f_contents);
+	str = ft_strsplit(file->f_contents, ' ');
+	while (str[i])
+	{
+		if (!(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':')))
+		{
+			if (label != NULL)
+			{
+				label_length(file, label);
+				labels_linker(file, label);
+				label = NULL;
+			}
+			label = (t_lable *)ft_memalloc(sizeof(t_lable));
+			label->label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(str[i]));
+			ft_strncpy(label->label_name, str[i], ft_strlen(str[i]) - 1);
+		}
+		else if (!token || (token && arg1 == token->arguments))
+		{
+			if (!label)
+				label = (t_lable *)ft_memalloc(sizeof(t_lable));
+			token = (t_t *)ft_memalloc(sizeof(t_t));
+			token->c_name = command_name(str[i]);
+			token->name_c = ft_strdup(str[i]);
+			token->arguments = ft_cmd_arguments(token->name_c);
+			token->lbl_size = ft_cmd_lbls(token->name_c);
+			token->has_codage = has_codage(token->name_c);
+		}
+		else
+		{
+			token->args[arg1][0] = (ft_strchr(str[i] ,'r') && !(ft_strchr(str[i] ,'%'))) ? 1 : ft_strchr(str[i] ,'%') ? 10 : 11;
+			token->a[arg1++]= ft_strdup(str[i]);
+			if (arg1 == token->arguments)
+			{
+				command_linker(label, token);
+				if (token->has_codage)
+					token->codage = token_codage(token, 0);
+				token_length(token, 0, label);
+				arg1  = 0;
+				token = NULL;
+			}
+		}
+		i++;
+	}
+	if (label != NULL)
+	{
+		label_length(file, label);
+		labels_linker(file, label);
+		label = NULL;
+	}
+	file_length(file);
+	printf("length of this file DECIMAL === %d HEX  === %x\n", file->file_length, file->file_length);
+
+	
+	// printf("pkokokokokok\n");
+	// int f = 0;
+
+	// char	*arguments[3] = {"r1", "%0", "r1"};
+	// // r1, %0, r1
+	// int z = 0;
+	// f = 7;
+	// while(z < 3)
+	// {
+		
+	// 	if (ft_strchr(arguments[z] ,'r') && !(ft_strchr(arguments[z] ,'%')))
+	// 	{
+	// 		f--;
+	// 		printf("f1 ==> %d\n", f);
+
+	// 		my_cod |= 1 << f;
+	// 		f -= 1;
+	// 		printf("f1 ==> %d\n", f);
+
+	// 	}
+	// 	else if (ft_strchr(arguments[z] ,'%'))
+	// 	{
+	// 		printf("f2 ==> %d\n", f);
+
+			
+	// 		my_cod |= 1 << f;
+	// 		f -= 2;
+	// 		printf("f2 ==> %d\n", f);
+
+	// 	}
+	// 	else
+	// 	{
+	// 		printf("f3 ==> %d\n", f);	
+	// 		my_cod |= 1 << f;
+	// 		f--;
+	// 		my_cod |= 1 << f;
+	// 		f-= 2;
+	// 		printf("f3 ==> %d\n", f);
+
+	// 	}
+	// 	z++;
+	// }
+	// printf("codage===================> [%x]\n", my_cod);
+
+}  
 
 
 // void		lookup_line()
@@ -311,128 +393,6 @@ void	tabs_remover(char *str)
 // 	}
 // 	ft_clean_parse(parse);
 // }
-
-
-
-void	parse_commands(t_binfile *file)
-{
-	char	**str = NULL;
-	t_t 	*token = NULL;
-
-	t_lable	*label = NULL;
-	int i = 0;
-	int arg1 = 0;
-	file->labels_list = NULL;
-	tabs_remover(file->f_contents);
-	str = ft_strsplit(file->f_contents, ' ');
-	while (str[i])
-	{
-		if (!(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':')))
-		{
-			if (label != NULL)
-			{
-				label_length(file, label);
-				labels_linker(file, label);
-				label = NULL;
-			}
-			label = (t_lable *)ft_memalloc(sizeof(t_lable));
-			label->label_name = label->label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(str[i]));
-			ft_strncpy(label->label_name, str[i], ft_strlen(str[i]) - 1);
-			//printf("label = ||%s||\n", label->label_name);
-		}
-		else if (!token || (token && arg1 == token->arguments))
-		{
-			if (!label)
-				label = (t_lable *)ft_memalloc(sizeof(t_lable));
-			token = (t_t *)ft_memalloc(sizeof(t_t));
-			token->c_name = command_name(str[i]);
-			token->name_c = ft_strdup(str[i]);
-			token->arguments = ft_cmd_arguments(token->name_c);
-			token->lbl_size = ft_cmd_lbls(token->name_c);
-			token->has_codage = has_codage(token->name_c);
-			//printf(" command: [%s] ===> ft_cmd_arguments : ===>%d and cmd_label is : %d  and has_codage is [%d]\n ",
-	//token->name_c, token->arguments, token->lbl_size, token->has_codage);
-		}
-		else
-		{
-
-			if (ft_strchr(str[i] ,'r') && !(ft_strchr(str[i] ,'%')))
-				token->arg[arg1] = 1;
-			else if (ft_strchr(str[i] ,'%'))
-				token->arg[arg1] = 10;
-			else
-				token->arg[arg1] = 11;
-			token->a[arg1++] = ft_strdup(str[i]);
-			if (arg1 == token->arguments)
-			{
-				command_linker(label, token);
-				if (token->has_codage)
-					token->codage = token_codage(token, 0);
-				token_length(token, 0, label);
-				//token_arg_length(token, 0);
-				arg1  = 0;
-				token = NULL;
-			}
-			//printf("DONE\n");
-		}
-		i++;
-	}
-	if (label != NULL)
-	{
-		labels_linker(file, label);
-		label_length(file, label);
-		label = NULL;
-	}
-	//labels_printer(file);
-	file_length(file);
-	printf("length of this file DECIMAL === %d HEX  === %x\n", file->file_length, file->file_length);
-
-	
-	// printf("pkokokokokok\n");
-	// int f = 0;
-
-	// char	*arguments[3] = {"r1", "%0", "r1"};
-	// // r1, %0, r1
-	// int z = 0;
-	// f = 7;
-	// while(z < 3)
-	// {
-		
-	// 	if (ft_strchr(arguments[z] ,'r') && !(ft_strchr(arguments[z] ,'%')))
-	// 	{
-	// 		f--;
-	// 		printf("f1 ==> %d\n", f);
-
-	// 		my_cod |= 1 << f;
-	// 		f -= 1;
-	// 		printf("f1 ==> %d\n", f);
-
-	// 	}
-	// 	else if (ft_strchr(arguments[z] ,'%'))
-	// 	{
-	// 		printf("f2 ==> %d\n", f);
-
-			
-	// 		my_cod |= 1 << f;
-	// 		f -= 2;
-	// 		printf("f2 ==> %d\n", f);
-
-	// 	}
-	// 	else
-	// 	{
-	// 		printf("f3 ==> %d\n", f);	
-	// 		my_cod |= 1 << f;
-	// 		f--;
-	// 		my_cod |= 1 << f;
-	// 		f-= 2;
-	// 		printf("f3 ==> %d\n", f);
-
-	// 	}
-	// 	z++;
-	// }
-	// printf("codage===================> [%x]\n", my_cod);
-
-}  
 
 
 
