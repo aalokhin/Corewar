@@ -225,10 +225,10 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				main_cycle.prev_cycle_die = main_cycle.cycle_die;
 			}
 		}
-		if (main_cycle.second_limit > 0)
+		/*if (main_cycle.second_limit > 0)
 			usleep((useconds_t)((int)1000000 / main_cycle.second_limit));
 		else
-			main_cycle.second_limit = 1;
+			main_cycle.second_limit = 1;*/
 		main_cycle.cycles++;
 		if ((*params).d_dumps_memory > 0 && main_cycle.cycles == (*params).d_dumps_memory)
 			break ;

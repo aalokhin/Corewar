@@ -20,6 +20,7 @@ void load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 	else if ((*tmp).argv[0][0] == IND_CODE)
 	{
 		i = (*tmp).current_position + (*tmp).argv[0][1] % IDX_MOD;
+		i %= MEM_SIZE;
 		(*tmp).argv[0][1] = ((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]);
 		if ((*tmp).argv[0][1] == 0)
 			(*tmp).carry = 1;
@@ -41,18 +42,26 @@ void store(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *
 	if ((*tmp).argv[1][0] == IND_CODE)
 	{
 		i = (*tmp).current_position + (*tmp).argv[1][1] % IDX_MOD;
-		map[i + 1] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0xff);
-		map[i] = (((*tmp).regs[(*tmp).argv[0][1] - 1] >> 8) & 0xff);
+		i %= MEM_SIZE;
+		map[i + 3] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x000000FF); 
+		map[i + 2] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x0000FF00) >> 8; 
+		map[i + 1] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x00FF0000) >> 16; 
+		map[i] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0xFF000000) >> 24;
 		if ((*tmp).parent_nbr == -1)
 		{
 			(*main_cycle).indexes[i][0] = cur_proc + 1;
 			(*main_cycle).indexes[i + 1][0] = cur_proc + 1;
+			(*main_cycle).indexes[i + 2][0] = cur_proc + 1;
+			(*main_cycle).indexes[i + 3][0] = cur_proc + 1;
 		}
 		else
 		{
 			(*main_cycle).indexes[i][0] = (*tmp).parent_nbr + 1;
 			(*main_cycle).indexes[i + 1][0] = (*tmp).parent_nbr + 1;
-		}
+			(*main_cycle).indexes[i + 2][0] = (*tmp).parent_nbr + 1;
+			(*main_cycle).indexes[i + 3][0] = (*tmp).parent_nbr + 1;
+		}	
+
 		ft_printf("P%5d | st r%d %d\n", cur_proc + 1, (*tmp).argv[0][1], (*tmp).argv[1][1]);
 	}
 	else if ((*tmp).argv[1][0] == REG_CODE && (*tmp).argv[1][1] >= 1 && (*tmp).argv[1][1] <= 16)
@@ -130,7 +139,8 @@ void bit_and(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 		one = (*tmp).argv[0][1];
 	else if ((*tmp).argv[0][0] == IND_CODE)
 	{
-		i = ((*tmp).current_position + (*tmp).argv[0][1]) % MEM_SIZE;
+		i = (*tmp).current_position + ((*tmp).argv[0][1] % IDX_MOD);
+		i %= MEM_SIZE;
 		one = ((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]);
 	}
 	if ((*tmp).argv[1][0] == REG_CODE)
@@ -139,7 +149,8 @@ void bit_and(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 		two = (*tmp).argv[1][1];
 	else if ((*tmp).argv[1][0] == IND_CODE)
 	{
-		i = ((*tmp).current_position + (*tmp).argv[1][1]) % MEM_SIZE;
+		i = (*tmp).current_position + ((*tmp).argv[1][1] % IDX_MOD);
+		i %= MEM_SIZE;
 		two = ((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]);
 	}
 	(*tmp).carry = 0;
@@ -174,7 +185,10 @@ void bit_or(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char 
 		one = (*tmp).argv[0][1];
 	else if ((*tmp).argv[0][0] == IND_CODE)
 	{
-		i = ((*tmp).current_position + (*tmp).argv[0][1]) % MEM_SIZE;
+		(*tmp).argv[0][1] %= IDX_MOD;
+		i = (*tmp).current_position + (*tmp).argv[0][1];
+		if (i < 0 || i >= MEM_SIZE)
+			i %= MEM_SIZE;
 		one = ((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]);
 	}
 	if ((*tmp).argv[1][0] == REG_CODE)
@@ -183,7 +197,8 @@ void bit_or(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char 
 		two = (*tmp).argv[1][1];
 	else if ((*tmp).argv[1][0] == IND_CODE)
 	{
-		i = ((*tmp).current_position + (*tmp).argv[1][1]) % MEM_SIZE;
+		i = (*tmp).current_position + ((*tmp).argv[1][1] % IDX_MOD);
+		i %= MEM_SIZE;
 		two = ((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]);
 	}
 	(*tmp).carry = 0;
@@ -218,7 +233,8 @@ void bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 		one = (*tmp).argv[0][1];
 	else if ((*tmp).argv[0][0] == IND_CODE)
 	{
-		i = ((*tmp).current_position + (*tmp).argv[0][1]) % MEM_SIZE;
+		i = (*tmp).current_position + ((*tmp).argv[0][1] % IDX_MOD);
+		i %= MEM_SIZE;
 		one = ((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]);
 	}
 	if ((*tmp).argv[1][0] == REG_CODE)
@@ -227,7 +243,8 @@ void bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char
 		two = (*tmp).argv[1][1];
 	else if ((*tmp).argv[1][0] == IND_CODE)
 	{
-		i = ((*tmp).current_position + (*tmp).argv[1][1]) % MEM_SIZE;
+		i = (*tmp).current_position + ((*tmp).argv[1][1] % IDX_MOD);
+		i %= MEM_SIZE;
 		two = ((map[i] << 24) + (map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8) + map[(i + 3) % MEM_SIZE]);
 	}
 	(*tmp).carry = 0;
@@ -250,10 +267,9 @@ void zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 	if ((*tmp).carry == 1)
 	{
 		(*main_cycle).indexes[(*tmp).current_position][1] = 0;
-		(*tmp).argv[0][1] %= IDX_MOD;
-		(*tmp).current_position = ((*tmp).current_position + (*tmp).argv[0][1] + MEM_SIZE) % MEM_SIZE;
-		if ((*tmp).current_position < 0 || (*tmp).current_position >= MEM_SIZE)
-			(*tmp).current_position %= MEM_SIZE;
+		(*tmp).current_position += ((*tmp).argv[0][1] % IDX_MOD);
+		//if ((*tmp).current_position < 0 || (*tmp).current_position >= MEM_SIZE)
+			//*tmp).current_position %= MEM_SIZE;
 		if ((*tmp).parent_nbr == -1)
 			(*main_cycle).indexes[(*tmp).current_position][0] = cur_proc + 1;
 		else

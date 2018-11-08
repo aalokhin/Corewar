@@ -1,0 +1,1252 @@
+2638c2638
+<        | -> store to 4 + 400 = 404 (with pc and mod 1029)
+---
+>        | -> store to 4 + 400 = 404 (with pc and mod 517)
+2640c2640
+<        | -> store to 0 + 400 = 400 (with pc and mod 1025)
+---
+>        | -> store to 0 + 400 = 400 (with pc and mod 513)
+2647c2647
+<        | -> store to 4 + -272 = -268 (with pc and mod 3755)
+---
+>        | -> store to 4 + -272 = -268 (with pc and mod -341)
+2653c2653
+<        | -> store to 0 + -272 = -272 (with pc and mod 3751)
+---
+>        | -> store to 0 + -272 = -272 (with pc and mod -345)
+2700,2703d2699
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 1429)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 1425)
+2710c2706
+<        | -> store to 4 + -272 = -268 (with pc and mod 3483)
+---
+>        | -> store to 4 + -272 = -268 (with pc and mod -613)
+2712c2708
+<        | -> store to 4 + -202 = -198 (with pc and mod 3745)
+---
+>        | -> store to 4 + -202 = -198 (with pc and mod -351)
+2714c2710
+<        | -> store to 0 + -202 = -202 (with pc and mod 3741)
+---
+>        | -> store to 0 + -202 = -202 (with pc and mod -355)
+2716c2712
+<        | -> store to 0 + -272 = -272 (with pc and mod 3479)
+---
+>        | -> store to 0 + -272 = -272 (with pc and mod -617)
+2732,2733d2727
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+2763,2766d2756
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 1829)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 1825)
+2773c2763
+<        | -> store to 4 + -272 = -268 (with pc and mod 3211)
+---
+>        | -> store to 4 + -272 = -268 (with pc and mod -373)
+2775c2765
+<        | -> store to 4 + -202 = -198 (with pc and mod 3543)
+---
+>        | -> store to 4 + -202 = -198 (with pc and mod -553)
+2777c2767
+<        | -> store to 0 + -202 = -202 (with pc and mod 3539)
+---
+>        | -> store to 0 + -202 = -202 (with pc and mod -557)
+2779c2769
+<        | -> store to 0 + -272 = -272 (with pc and mod 3207)
+---
+>        | -> store to 0 + -272 = -272 (with pc and mod -377)
+2795,2796d2784
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+2826,2829d2813
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 2229)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 2225)
+2835,2836d2818
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 2939)
+2838c2820
+<        | -> store to 4 + -202 = -198 (with pc and mod 3341)
+---
+>        | -> store to 4 + -202 = -198 (with pc and mod -243)
+2840,2842c2822
+<        | -> store to 0 + -202 = -202 (with pc and mod 3337)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 2935)
+---
+>        | -> store to 0 + -202 = -202 (with pc and mod -247)
+2858,2859d2837
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+2865d2842
+< P    8 | zjmp -277 OK
+2868d2844
+< P    1 | zjmp -277 OK
+2889,2892d2864
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 2629)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 2625)
+2898,2905d2869
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 2667)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 3139)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 3135)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 2663)
+2921,2922d2884
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+2928,2931d2889
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+2952,2955d2909
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 3029)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 3025)
+2961,2968d2914
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 2395)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 2937)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 2933)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 2391)
+2984,2985d2929
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+2991,2994d2934
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3015,3018d2954
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 3429)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 3425)
+3024,3031d2959
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 2123)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 2735)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 2731)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 2119)
+3047,3048d2974
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3054,3057d2979
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3078,3081d2999
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 3829)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 3825)
+3087,3094d3004
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 1851)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 2533)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 2529)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 1847)
+3110,3111d3019
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3117,3120d3024
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3141,3144d3044
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 4229)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 4225)
+3150,3157d3049
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 1579)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 2331)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 2327)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 1575)
+3173,3174d3064
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3180,3183d3069
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3204,3207d3089
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 533)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 529)
+3213,3220d3094
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 1307)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 2129)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 2125)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 1303)
+3236,3237d3109
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3243,3246d3114
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3267,3270d3134
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 933)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 929)
+3276,3283d3139
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 1035)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 1927)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 1923)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 1031)
+3299,3300d3154
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3306,3309d3159
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3330,3333d3179
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 1333)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 1329)
+3339,3346d3184
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 763)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 1725)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 1721)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 759)
+3362,3363d3199
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3369,3372d3204
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3393,3396d3224
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 1733)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 1729)
+3402,3409d3229
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 491)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 1523)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 1519)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 487)
+3425,3426d3244
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3432,3435d3249
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3456,3459d3269
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 2133)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 2129)
+3465,3472d3274
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 219)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 1321)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 1317)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 215)
+3488,3489d3289
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3495,3498d3294
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3519,3522d3314
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 2533)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 2529)
+3528,3535d3319
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod -53)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 1119)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 1115)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod -57)
+3551,3552d3334
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3558,3561d3339
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3582,3585d3359
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 2933)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 2929)
+3591,3598d3364
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 3771)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 917)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 913)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 3767)
+3614d3379
+< P    6 | zjmp 395 OK
+3617d3381
+< P    2 | zjmp 395 OK
+3623,3626d3386
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3651,3654d3410
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 3333)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 3329)
+3660,3663d3415
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 3499)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 715)
+3665,3666d3416
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 711)
+3668,3669d3417
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 3495)
+3685,3686d3432
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3692,3695d3437
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3716,3719d3457
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 3733)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 3729)
+3725,3732d3462
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 3227)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 513)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 509)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 3223)
+3748,3749d3477
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3755,3758d3482
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3779,3782d3502
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 4133)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 4129)
+3788,3795d3507
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 2955)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 311)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 307)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 2951)
+3811,3812d3522
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3818,3821d3527
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3842,3845d3547
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 437)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 433)
+3851,3858d3552
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 2683)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 109)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 105)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 2679)
+3874,3875d3567
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3881,3884d3572
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3905,3908d3592
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 837)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 833)
+3914,3921d3597
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 2411)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod -93)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod -97)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 2407)
+3937,3938d3612
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+3944,3947d3617
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+3968,3971d3637
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 1237)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 1233)
+3977,3984d3642
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 2139)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 3801)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 3797)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 2135)
+4000,4001d3657
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4007,4010d3662
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4031,4034d3682
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 1637)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 1633)
+4040,4047d3687
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 1867)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 3599)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 3595)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 1863)
+4063,4064d3702
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4070,4073d3707
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4094,4097d3727
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 2037)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 2033)
+4103,4110d3732
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 1595)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 3397)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 3393)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 1591)
+4126,4127d3747
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4133,4136d3752
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4157,4160d3772
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 2437)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 2433)
+4166,4173d3777
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 1323)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 3195)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 3191)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 1319)
+4189,4190d3792
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4196,4199d3797
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4213a3812,3813
+> long->fork
+> long->fork
+4220,4223d3819
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 2837)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 2833)
+4229,4236c3825,3826
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 1051)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 2993)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 2989)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 1047)
+---
+> P   12 | live 83886083
+> P   11 | live 83886083
+4250a3841,3842
+> P    8 | live 917504
+> P    1 | live 917504
+4252,4253d3843
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4259,4262d3848
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4281a3868,3871
+> P   12 | sti r6 0 -272
+>        | -> store to 0 + -272 = -272 (with pc and mod -377)
+> P   11 | sti r6 4 -272
+>        | -> store to 4 + -272 = -268 (with pc and mod -373)
+4283,4286d3872
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 3237)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 3233)
+4292,4299d3877
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 779)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 2791)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 2787)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 775)
+4313a3892,3893
+> P   12 | zjmp -277 OK
+> P   11 | zjmp -277 OK
+4315,4316d3894
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4322,4325d3899
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4332a3907,3908
+> long->fork
+> long->fork
+4344a3921,3922
+> P    7 | live 2
+> P    4 | live 2
+4346,4349d3923
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 3637)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 3633)
+4355,4362d3928
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 507)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 2589)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 2585)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 503)
+4369a3936,3937
+> P    7 | live 10
+> P    4 | live 10
+4378,4379d3945
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4385,4388d3950
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4409,4412d3970
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 4037)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 4033)
+4418,4425d3975
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 235)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 2387)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 2383)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 231)
+4441,4442d3990
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4448,4451d3995
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4472,4475d4015
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 4437)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 4433)
+4481,4488d4020
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod -37)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 2185)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 2181)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod -41)
+4504,4505d4035
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4511,4514d4040
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4535,4538d4060
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 741)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 737)
+4544,4551d4065
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 3787)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 1983)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 1979)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 3783)
+4567,4568d4080
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4574,4577d4085
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4598,4601d4105
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 1141)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 1137)
+4607,4614d4110
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 3515)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 1781)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 1777)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 3511)
+4630,4631d4125
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4637,4640d4130
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4661,4664d4150
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 1541)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 1537)
+4670,4677d4155
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 3243)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 1579)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 1575)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 3239)
+4693,4694d4170
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4700,4703d4175
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4724,4727d4195
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 1941)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 1937)
+4733,4740d4200
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 2971)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 1377)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 1373)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 2967)
+4758,4759d4217
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4765,4768d4222
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4774,4775c4228,4229
+< P   12 | live 1
+< P   11 | live 1
+---
+> P   16 | live 1
+> P   15 | live 1
+4795,4798d4248
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 2341)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 2337)
+4804,4805c4254,4255
+< P   14 | live 1
+< P   13 | live 1
+---
+> P   18 | live 1
+> P   17 | live 1
+4808,4815d4257
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 2699)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 1175)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 1171)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 2695)
+4833,4834d4274
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4840,4841d4279
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+4843d4280
+< P    4 | zjmp -207 OK
+4845d4281
+< P    1 | zjmp -277 OK
+4866,4869d4301
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 2741)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 2737)
+4875,4882d4306
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 2427)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 973)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 969)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 2423)
+4898,4899d4321
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4905,4908d4326
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4929,4932d4346
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 3141)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 3137)
+4938,4945d4351
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 2155)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 771)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 767)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 2151)
+4961,4962d4366
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+4968,4971d4371
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+4992,4995d4391
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 3541)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 3537)
+5001,5008d4396
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 1883)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 569)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 565)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 1879)
+5024,5025d4411
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+5031,5034d4416
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+5055,5058d4436
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 3941)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 3937)
+5064,5071d4441
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 1611)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 367)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 363)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 1607)
+5087,5088d4456
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+5094,5097d4461
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+5118,5121d4481
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 4341)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 4337)
+5127,5134d4486
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 1339)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 165)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 161)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 1335)
+5150,5151d4501
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+5157,5160d4506
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+5181,5184d4526
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 645)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 641)
+5190,5197d4531
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 1067)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod -37)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod -41)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 1063)
+5213,5214d4546
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+5220,5223d4551
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+5244,5247d4571
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 1045)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 1041)
+5253,5260d4576
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 795)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 3857)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 3853)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 791)
+5276,5277d4591
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+5283,5286d4596
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+5307,5310d4616
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 1445)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 1441)
+5316,5323d4621
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 523)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 3655)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 3651)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 519)
+5339,5340d4636
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+5346,5349d4641
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+5370,5373d4661
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 1845)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 1841)
+5379,5386d4666
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 251)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 3453)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 3449)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 247)
+5402,5403d4681
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+5409,5412d4686
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+5433,5436d4706
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 2245)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 2241)
+5442,5449d4711
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod -21)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 3251)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 3247)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod -25)
+5465,5466d4726
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+5472,5475d4731
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+5496,5499d4751
+< P    6 | sti r6 4 400
+<        | -> store to 4 + 400 = 404 (with pc and mod 2645)
+< P    2 | sti r6 0 400
+<        | -> store to 0 + 400 = 400 (with pc and mod 2641)
+5505,5512d4756
+< P    8 | sti r6 4 -272
+<        | -> store to 4 + -272 = -268 (with pc and mod 3803)
+< P    7 | sti r6 4 -202
+<        | -> store to 4 + -202 = -198 (with pc and mod 3049)
+< P    4 | sti r6 0 -202
+<        | -> store to 0 + -202 = -202 (with pc and mod 3045)
+< P    1 | sti r6 0 -272
+<        | -> store to 0 + -272 = -272 (with pc and mod 3799)
+5528,5529d4771
+< P    6 | zjmp 395 OK
+< P    2 | zjmp 395 OK
+5535,5538d4776
+< P    8 | zjmp -277 OK
+< P    7 | zjmp -207 OK
+< P    4 | zjmp -207 OK
+< P    1 | zjmp -277 OK
+5640a4879
+> long->fork
+5652a4892
+> P    8 | live 1
+5681a4922,4923
+> long->fork
+> long->fork
+5692a4935,4936
+> P   17 | live 83886083
+> P   16 | live 83886083
+5706a4951,4952
+> P   12 | live 917504
+> P   11 | live 917504
+5721a4968
+> long->fork
+5731a4979,4982
+> P   17 | sti r6 4 -272
+>        | -> store to 4 + -272 = -268 (with pc and mod -373)
+> P   16 | sti r6 0 -272
+>        | -> store to 0 + -272 = -272 (with pc and mod -377)
+5751a5003,5004
+> P   17 | zjmp -277 OK
+> P   16 | zjmp -277 OK
+5804,5805c5057,5058
+< P   12 | fork -5 (270)
+< P   11 | fork -5 (259)
+---
+> P   16 | fork 0 (-885)
+> P   15 | fork 0 (-597)
+5816,5817d5068
+< P   16 | live 1
+< P   15 | live 1
+5828,5831c5079,5082
+< P   14 | fork -5 (259)
+< P   13 | fork -5 (270)
+< P   12 | zjmp -8 OK
+< P   11 | zjmp -8 OK
+---
+> P   18 | fork 0 (-437)
+> P   17 | fork 0 (-885)
+> P   16 | zjmp -8 OK
+> P   15 | zjmp -8 OK
+5844,5849c5095,5098
+< P   20 | live 1
+< P   19 | live 1
+< P   18 | live 1
+< P   17 | live 1
+< P   12 | live 1
+< P   11 | live 1
+---
+> P   24 | live 1
+> P   23 | live 1
+> P   16 | live 0
+> P   15 | live 0
+5860,5861c5109,5110
+< P   14 | zjmp -8 OK
+< P   13 | zjmp -8 OK
+---
+> P   18 | zjmp -8 OK
+> P   17 | zjmp -8 OK
+5865d5113
+< P    3 | fork -5 (259)
+5876,5879c5124,5126
+< P   22 | live 1
+< P   21 | live 1
+< P   14 | live 1
+< P   13 | live 1
+---
+> P   25 | live 1
+> P   18 | live 0
+> P   17 | live 0
+5893d5139
+< P    3 | zjmp -8 OK
+5905d5150
+< P    3 | live 1
+5966,6029c5211,5265
+< 0x0000 : 0c 00 6a 02 90 ff ff fe f0 03 01 00 00 00 00 0c 00 2f 02 90 ff ff fe f0 03 0c 00 14 02 90 00 00 00 0b 54 06 02 03 09 01 8b 04 09 00 8b 02 90 00 00 0b 54 06 02 03 09 ff 31 00 04 09 00 7a 02 90 
+< 0x0040 : ff ff ff 36 03 0c 00 14 02 90 00 00 00 00 02 02 90 00 00 00 00 04 09 00 93 02 90 00 00 00 04 02 02 90 00 00 00 00 04 09 00 0b 54 06 02 03 09 ff 31 01 00 00 00 00 0c 00 28 0c 00 14 02 90 00 00 
+< 0x0080 : 00 0b 54 06 02 03 09 01 8b 04 09 00 45 02 90 00 00 00 04 02 02 90 00 00 00 00 04 09 00 34 0c 00 0d 0b 54 06 02 03 09 ff 31 00 5b 02 90 00 00 00 00 04 09 00 5c 0a 64 02 00 12 06 02 90 00 00 00 
+< 0x00c0 : 00 04 01 00 00 00 01 0b 54 06 02 03 09 fe eb 0a 64 02 00 12 06 02 90 0b 54 06 02 03 09 fe eb 00 01 0b 54 06 02 03 09 0b 54 06 02 03 09 fe eb 02 90 0b 54 06 02 03 09 0b 54 06 02 03 09 fe eb 03 
+< 0x0100 : 09 ff 31 01 00 00 00 01 0c ff fb 09 ff f8 01 00 00 00 01 0c ff fb 09 ff f8 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 
+< 0x0140 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0180 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 
+< 0x01c0 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 06 
+< 0x0200 : 02 03 09 ff 31 00 00 0b 54 06 02 03 09 fe eb 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 
+< 0x0240 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 
+< 0x0280 : 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x02c0 : 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 0b 
+< 0x0300 : 54 06 02 03 09 ff 31 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0340 : 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0380 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x03c0 : 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0400 : 00 0b 54 06 02 03 09 0b 54 06 02 03 09 fe eb 00 00 0b 54 06 02 03 09 01 8b 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0440 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 
+< 0x0480 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x04c0 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0500 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 0b 54 0b 54 06 02 03 09 fe eb 00 00 0b 54 06 02 03 09 0b 54 06 02 03 09 fe eb 00 
+< 0x0540 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0580 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x05c0 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 
+< 0x0600 : 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 
+< 0x0640 : 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0680 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 
+< 0x06c0 : 31 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 
+< 0x0700 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 06 02 03 09 fe eb 00 
+< 0x0740 : 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0780 : 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 
+< 0x07c0 : 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 
+< 0x0800 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0840 : 00 00 00 00 00 00 00 0b 54 06 02 03 09 0b 54 06 02 0b 54 06 02 03 09 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0880 : 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 
+< 0x08c0 : 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0900 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0940 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 
+< 0x0980 : 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x09c0 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0a00 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0a40 : 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 
+< 0x0a80 : 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 
+< 0x0ac0 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0b00 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0b40 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 03 09 ff 31 fe eb 00 
+< 0x0b80 : 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0bc0 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0c00 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 
+< 0x0c40 : 54 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 
+< 0x0c80 : 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 0b 54 06 02 03 09 0b 54 06 02 03 09 fe eb 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 
+< 0x0cc0 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0d00 : 00 0b 54 06 02 03 09 01 8b 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0d40 : 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 
+< 0x0d80 : 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 
+< 0x0dc0 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0e00 : 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 
+< 0x0e40 : 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0e80 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 
+< 0x0ec0 : 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 0b 54 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 00 00 00 00 00 00 00 
+< 0x0f00 : 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0f40 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 01 8b 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< 0x0f80 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 
+< 0x0fc0 : 00 0b 54 06 02 03 09 01 8b 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+---
+> It is now cycle 5001
+> It is now cycle 5002
+> It is now cycle 5003
+> It is now cycle 5004
+> It is now cycle 5005
+> It is now cycle 5006
+> It is now cycle 5007
+> It is now cycle 5008
+> It is now cycle 5009
+> It is now cycle 5010
+> It is now cycle 5011
+> It is now cycle 5012
+> It is now cycle 5013
+> It is now cycle 5014
+> It is now cycle 5015
+> It is now cycle 5016
+> It is now cycle 5017
+> It is now cycle 5018
+> It is now cycle 5019
+> It is now cycle 5020
+> It is now cycle 5021
+> It is now cycle 5022
+> It is now cycle 5023
+> It is now cycle 5024
+> It is now cycle 5025
+> It is now cycle 5026
+> It is now cycle 5027
+> It is now cycle 5028
+> It is now cycle 5029
+> It is now cycle 5030
+> It is now cycle 5031
+> It is now cycle 5032
+> It is now cycle 5033
+> It is now cycle 5034
+> It is now cycle 5035
+> It is now cycle 5036
+> It is now cycle 5037
+> It is now cycle 5038
+> It is now cycle 5039
+> It is now cycle 5040
+> It is now cycle 5041
+> It is now cycle 5042
+> It is now cycle 5043
+> It is now cycle 5044
+> It is now cycle 5045
+> It is now cycle 5046
+> It is now cycle 5047
+> It is now cycle 5048
+> It is now cycle 5049
+> It is now cycle 5050
+> It is now cycle 5051
+> It is now cycle 5052
+> It is now cycle 5053
+> It is now cycle 5054
+> It is now cycle 5055

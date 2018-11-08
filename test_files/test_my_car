@@ -2907,10 +2907,6 @@ It is now cycle 2777
 It is now cycle 2778
 It is now cycle 2779
 It is now cycle 2780
-P    7 | sti r3 -1 0
-       | -> store to -1 + 0 = -1 (with pc and mod -208)
-P    4 | sti r3 -1 0
-       | -> store to -1 + 0 = -1 (with pc and mod -208)
 It is now cycle 2781
 It is now cycle 2782
 It is now cycle 2783
@@ -2922,8 +2918,6 @@ It is now cycle 2788
 It is now cycle 2789
 It is now cycle 2790
 It is now cycle 2791
-P    7 | live 2
-P    4 | live 2
 It is now cycle 2792
 It is now cycle 2793
 It is now cycle 2794
@@ -2937,8 +2931,6 @@ It is now cycle 2801
 It is now cycle 2802
 It is now cycle 2803
 It is now cycle 2804
-P    7 | live 10
-P    4 | live 10
 It is now cycle 2805
 It is now cycle 2806
 It is now cycle 2807
@@ -2968,10 +2960,6 @@ It is now cycle 2830
 It is now cycle 2831
 It is now cycle 2832
 It is now cycle 2833
-P    7 | sti r3 -1 0
-       | -> store to -1 + 0 = -1 (with pc and mod -184)
-P    4 | sti r3 -1 0
-       | -> store to -1 + 0 = -1 (with pc and mod -184)
 It is now cycle 2834
 It is now cycle 2835
 It is now cycle 2836
@@ -3007,10 +2995,6 @@ It is now cycle 2865
 It is now cycle 2866
 It is now cycle 2867
 It is now cycle 2868
-P    7 | sti r3 -1 0
-       | -> store to -1 + 0 = -1 (with pc and mod -168)
-P    4 | sti r3 -1 0
-       | -> store to -1 + 0 = -1 (with pc and mod -168)
 It is now cycle 2869
 It is now cycle 2870
 It is now cycle 2871
@@ -3072,10 +3056,6 @@ It is now cycle 2926
 It is now cycle 2927
 It is now cycle 2928
 It is now cycle 2929
-P    7 | sti r3 -1 0
-       | -> store to -1 + 0 = -1 (with pc and mod -144)
-P    4 | sti r3 -1 0
-       | -> store to -1 + 0 = -1 (with pc and mod -144)
 It is now cycle 2930
 It is now cycle 2931
 It is now cycle 2932
@@ -3087,8 +3067,6 @@ It is now cycle 2937
 It is now cycle 2938
 It is now cycle 2939
 It is now cycle 2940
-P    7 | live 0
-P    4 | live 0
 It is now cycle 2941
 It is now cycle 2942
 It is now cycle 2943
@@ -3118,10 +3096,6 @@ It is now cycle 2966
 It is now cycle 2967
 It is now cycle 2968
 It is now cycle 2969
-P    7 | sti r3 -1 0
-       | -> store to -1 + 0 = -1 (with pc and mod -128)
-P    4 | sti r3 -1 0
-       | -> store to -1 + 0 = -1 (with pc and mod -128)
 It is now cycle 2970
 It is now cycle 2971
 It is now cycle 2972
@@ -3140,8 +3114,6 @@ It is now cycle 2984
 It is now cycle 2985
 It is now cycle 2986
 It is now cycle 2987
-P    7 | live 83886083
-P    4 | live 83886083
 It is now cycle 2988
 It is now cycle 2989
 It is now cycle 2990
@@ -3181,10 +3153,6 @@ It is now cycle 3023
 It is now cycle 3024
 It is now cycle 3025
 It is now cycle 3026
-P    7 | sti r6 4 -202
-       | -> store to 4 + -202 = -198 (with pc and mod -303)
-P    4 | sti r6 0 -202
-       | -> store to 0 + -202 = -202 (with pc and mod -307)
 It is now cycle 3027
 It is now cycle 3028
 It is now cycle 3029
@@ -3205,8 +3173,6 @@ It is now cycle 3043
 It is now cycle 3044
 It is now cycle 3045
 It is now cycle 3046
-P    7 | zjmp -277 OK
-P    4 | zjmp -277 OK
 It is now cycle 3047
 It is now cycle 3048
 It is now cycle 3049
@@ -3641,25 +3607,17 @@ It is now cycle 3469
 It is now cycle 3470
 It is now cycle 3471
 It is now cycle 3472
-P    8 | fork 22531 (140)
-P    1 | fork 22531 (140)
 It is now cycle 3473
 It is now cycle 3474
 It is now cycle 3475
 It is now cycle 3476
 It is now cycle 3477
 It is now cycle 3478
-P   12 | ld 4 r2
-P   11 | ld 4 r2
 It is now cycle 3479
 It is now cycle 3480
 It is now cycle 3481
 It is now cycle 3482
-P    8 | live 3
-P    1 | live 3
 It is now cycle 3483
-P   12 | ld 0 r4
-P   11 | ld 0 r4
 It is now cycle 3484
 It is now cycle 3485
 It is now cycle 3486
@@ -3678,12 +3636,8 @@ It is now cycle 3498
 It is now cycle 3499
 It is now cycle 3500
 It is now cycle 3501
-P    8 | live 917504
-P    1 | live 917504
 It is now cycle 3502
 It is now cycle 3503
-P   12 | zjmp 52 OK
-P   11 | zjmp 52 OK
 It is now cycle 3504
 It is now cycle 3505
 It is now cycle 3506
@@ -3709,17 +3663,11 @@ It is now cycle 3525
 It is now cycle 3526
 It is now cycle 3527
 It is now cycle 3528
-P   12 | ldi 4 18 r6
-       | -> load from 4 + 18 = 22 (with pc and mod 229)
-P   11 | ldi 4 18 r6
-       | -> load from 4 + 18 = 22 (with pc and mod 229)
 It is now cycle 3529
 It is now cycle 3530
 It is now cycle 3531
 It is now cycle 3532
 It is now cycle 3533
-P   12 | ld 0 r4
-P   11 | ld 0 r4
 It is now cycle 3534
 It is now cycle 3535
 It is now cycle 3536
@@ -3730,8 +3678,6 @@ It is now cycle 3540
 It is now cycle 3541
 It is now cycle 3542
 It is now cycle 3543
-P   12 | live 1
-P   11 | live 1
 It is now cycle 3544
 It is now cycle 3545
 It is now cycle 3546
@@ -3757,10 +3703,6 @@ It is now cycle 3565
 It is now cycle 3566
 It is now cycle 3567
 It is now cycle 3568
-P   12 | sti r6 4 -272
-       | -> store to 4 + -272 = -268 (with pc and mod -43)
-P   11 | sti r6 4 -272
-       | -> store to 4 + -272 = -268 (with pc and mod -43)
 It is now cycle 3569
 It is now cycle 3570
 It is now cycle 3571
@@ -3781,8 +3723,6 @@ It is now cycle 3585
 It is now cycle 3586
 It is now cycle 3587
 It is now cycle 3588
-P   12 | zjmp 395 OK
-P   11 | zjmp 395 OK
 It is now cycle 3589
 It is now cycle 3590
 It is now cycle 3591
@@ -3808,10 +3748,6 @@ It is now cycle 3610
 It is now cycle 3611
 It is now cycle 3612
 It is now cycle 3613
-P   12 | sti r6 4 -272
-       | -> store to 4 + -272 = -268 (with pc and mod -155)
-P   11 | sti r6 4 -272
-       | -> store to 4 + -272 = -268 (with pc and mod -155)
 It is now cycle 3614
 It is now cycle 3615
 It is now cycle 3616
@@ -3832,8 +3768,6 @@ It is now cycle 3630
 It is now cycle 3631
 It is now cycle 3632
 It is now cycle 3633
-P   12 | zjmp 395 OK
-P   11 | zjmp 395 OK
 It is now cycle 3634
 It is now cycle 3635
 It is now cycle 3636
@@ -3875,6 +3809,8 @@ It is now cycle 3671
 It is now cycle 3672
 It is now cycle 3673
 It is now cycle 3674
+long->fork
+long->fork
 It is now cycle 3675
 It is now cycle 3676
 It is now cycle 3677
@@ -3886,6 +3822,8 @@ It is now cycle 3682
 It is now cycle 3683
 It is now cycle 3684
 It is now cycle 3685
+P   12 | live 83886083
+P   11 | live 83886083
 It is now cycle 3686
 It is now cycle 3687
 It is now cycle 3688
@@ -3900,6 +3838,8 @@ It is now cycle 3696
 It is now cycle 3697
 It is now cycle 3698
 It is now cycle 3699
+P    8 | live 917504
+P    1 | live 917504
 It is now cycle 3700
 It is now cycle 3701
 It is now cycle 3702
@@ -3925,6 +3865,10 @@ It is now cycle 3721
 It is now cycle 3722
 It is now cycle 3723
 It is now cycle 3724
+P   12 | sti r6 0 -272
+       | -> store to 0 + -272 = -272 (with pc and mod -377)
+P   11 | sti r6 4 -272
+       | -> store to 4 + -272 = -268 (with pc and mod -373)
 It is now cycle 3725
 It is now cycle 3726
 It is now cycle 3727
@@ -3945,6 +3889,8 @@ It is now cycle 3741
 It is now cycle 3742
 It is now cycle 3743
 It is now cycle 3744
+P   12 | zjmp -277 OK
+P   11 | zjmp -277 OK
 It is now cycle 3745
 It is now cycle 3746
 It is now cycle 3747
@@ -3958,6 +3904,8 @@ It is now cycle 3754
 It is now cycle 3755
 It is now cycle 3756
 It is now cycle 3757
+long->fork
+long->fork
 It is now cycle 3758
 It is now cycle 3759
 It is now cycle 3760
@@ -3970,6 +3918,8 @@ It is now cycle 3766
 It is now cycle 3767
 It is now cycle 3768
 It is now cycle 3769
+P    7 | live 2
+P    4 | live 2
 It is now cycle 3770
 It is now cycle 3771
 It is now cycle 3772
@@ -3983,6 +3933,8 @@ It is now cycle 3779
 It is now cycle 3780
 It is now cycle 3781
 It is now cycle 3782
+P    7 | live 10
+P    4 | live 10
 It is now cycle 3783
 It is now cycle 3784
 It is now cycle 3785
@@ -4049,25 +4001,17 @@ It is now cycle 3845
 It is now cycle 3846
 It is now cycle 3847
 It is now cycle 3848
-P    7 | fork 22531 (140)
-P    4 | fork 22531 (140)
 It is now cycle 3849
 It is now cycle 3850
 It is now cycle 3851
 It is now cycle 3852
 It is now cycle 3853
 It is now cycle 3854
-P   14 | ld 4 r2
-P   13 | ld 4 r2
 It is now cycle 3855
 It is now cycle 3856
 It is now cycle 3857
 It is now cycle 3858
-P    7 | live 3
-P    4 | live 3
 It is now cycle 3859
-P   14 | ld 0 r4
-P   13 | ld 0 r4
 It is now cycle 3860
 It is now cycle 3861
 It is now cycle 3862
@@ -4086,12 +4030,8 @@ It is now cycle 3874
 It is now cycle 3875
 It is now cycle 3876
 It is now cycle 3877
-P    7 | live 917504
-P    4 | live 917504
 It is now cycle 3878
 It is now cycle 3879
-P   14 | zjmp 52 OK
-P   13 | zjmp 52 OK
 It is now cycle 3880
 It is now cycle 3881
 It is now cycle 3882
@@ -4117,17 +4057,11 @@ It is now cycle 3901
 It is now cycle 3902
 It is now cycle 3903
 It is now cycle 3904
-P   14 | ldi 4 18 r6
-       | -> load from 4 + 18 = 22 (with pc and mod 229)
-P   13 | ldi 4 18 r6
-       | -> load from 4 + 18 = 22 (with pc and mod 229)
 It is now cycle 3905
 It is now cycle 3906
 It is now cycle 3907
 It is now cycle 3908
 It is now cycle 3909
-P   14 | ld 0 r4
-P   13 | ld 0 r4
 It is now cycle 3910
 It is now cycle 3911
 It is now cycle 3912
@@ -4138,8 +4072,6 @@ It is now cycle 3916
 It is now cycle 3917
 It is now cycle 3918
 It is now cycle 3919
-P   14 | live 1
-P   13 | live 1
 It is now cycle 3920
 It is now cycle 3921
 It is now cycle 3922
@@ -4165,10 +4097,6 @@ It is now cycle 3941
 It is now cycle 3942
 It is now cycle 3943
 It is now cycle 3944
-P   14 | sti r6 4 -202
-       | -> store to 4 + -202 = -198 (with pc and mod 27)
-P   13 | sti r6 4 -202
-       | -> store to 4 + -202 = -198 (with pc and mod 27)
 It is now cycle 3945
 It is now cycle 3946
 It is now cycle 3947
@@ -4189,8 +4117,6 @@ It is now cycle 3961
 It is now cycle 3962
 It is now cycle 3963
 It is now cycle 3964
-P   14 | zjmp 395 OK
-P   13 | zjmp 395 OK
 It is now cycle 3965
 It is now cycle 3966
 It is now cycle 3967
@@ -4216,10 +4142,6 @@ It is now cycle 3986
 It is now cycle 3987
 It is now cycle 3988
 It is now cycle 3989
-P   14 | sti r6 4 -202
-       | -> store to 4 + -202 = -198 (with pc and mod -85)
-P   13 | sti r6 4 -202
-       | -> store to 4 + -202 = -198 (with pc and mod -85)
 It is now cycle 3990
 It is now cycle 3991
 It is now cycle 3992
@@ -4240,8 +4162,6 @@ It is now cycle 4006
 It is now cycle 4007
 It is now cycle 4008
 It is now cycle 4009
-P   14 | zjmp 395 OK
-P   13 | zjmp 395 OK
 It is now cycle 4010
 It is now cycle 4011
 It is now cycle 4012
@@ -4556,8 +4476,6 @@ It is now cycle 4304
 It is now cycle 4305
 It is now cycle 4306
 It is now cycle 4307
-P    8 | fork 22531 (164)
-P    1 | fork 22531 (164)
 It is now cycle 4308
 It is now cycle 4309
 It is now cycle 4310
@@ -4568,8 +4486,6 @@ It is now cycle 4314
 It is now cycle 4315
 It is now cycle 4316
 It is now cycle 4317
-P    8 | live 1
-P    1 | live 1
 It is now cycle 4318
 It is now cycle 4319
 It is now cycle 4320
@@ -4583,8 +4499,6 @@ It is now cycle 4327
 It is now cycle 4328
 It is now cycle 4329
 It is now cycle 4330
-P    8 | live 82
-P    1 | live 82
 It is now cycle 4331
 It is now cycle 4332
 It is now cycle 4333
@@ -4629,8 +4543,6 @@ It is now cycle 4371
 It is now cycle 4372
 It is now cycle 4373
 It is now cycle 4374
-P   20 | live 190055938
-P   19 | live 190055938
 It is now cycle 4375
 It is now cycle 4376
 It is now cycle 4377
@@ -4676,8 +4588,6 @@ It is now cycle 4416
 It is now cycle 4417
 It is now cycle 4418
 It is now cycle 4419
-P   20 | live 190055938
-P   19 | live 190055938
 It is now cycle 4420
 It is now cycle 4421
 It is now cycle 4422
@@ -4723,8 +4633,6 @@ It is now cycle 4461
 It is now cycle 4462
 It is now cycle 4463
 It is now cycle 4464
-P   20 | live 190055938
-P   19 | live 190055938
 It is now cycle 4465
 It is now cycle 4466
 It is now cycle 4467
@@ -4742,8 +4650,6 @@ It is now cycle 4478
 It is now cycle 4479
 It is now cycle 4480
 It is now cycle 4481
-P   20 | live 218102537
-P   19 | live 218102537
 It is now cycle 4482
 It is now cycle 4483
 It is now cycle 4484
@@ -4756,8 +4662,6 @@ It is now cycle 4490
 It is now cycle 4491
 It is now cycle 4492
 It is now cycle 4493
-P   20 | live 1
-P   19 | live 1
 It is now cycle 4494
 It is now cycle 4495
 It is now cycle 4496
@@ -4948,8 +4852,6 @@ It is now cycle 4680
 It is now cycle 4681
 It is now cycle 4682
 It is now cycle 4683
-P    7 | fork 22531 (164)
-P    4 | fork 22531 (164)
 It is now cycle 4684
 It is now cycle 4685
 It is now cycle 4686
@@ -4960,8 +4862,6 @@ It is now cycle 4690
 It is now cycle 4691
 It is now cycle 4692
 It is now cycle 4693
-P    7 | live 1
-P    4 | live 1
 It is now cycle 4694
 It is now cycle 4695
 It is now cycle 4696
@@ -4975,9 +4875,8 @@ It is now cycle 4703
 It is now cycle 4704
 It is now cycle 4705
 It is now cycle 4706
-P    7 | live 82
-P    4 | live 82
 It is now cycle 4707
+long->fork
 It is now cycle 4708
 It is now cycle 4709
 It is now cycle 4710
@@ -4990,6 +4889,7 @@ It is now cycle 4716
 It is now cycle 4717
 It is now cycle 4718
 It is now cycle 4719
+P    8 | live 1
 It is now cycle 4720
 It is now cycle 4721
 It is now cycle 4722
@@ -5019,10 +4919,10 @@ It is now cycle 4745
 It is now cycle 4746
 It is now cycle 4747
 It is now cycle 4748
+long->fork
+long->fork
 It is now cycle 4749
 It is now cycle 4750
-P   20 | live 190055938
-P   19 | live 190055938
 It is now cycle 4751
 It is now cycle 4752
 It is now cycle 4753
@@ -5032,6 +4932,8 @@ It is now cycle 4756
 It is now cycle 4757
 It is now cycle 4758
 It is now cycle 4759
+P   17 | live 83886083
+P   16 | live 83886083
 It is now cycle 4760
 It is now cycle 4761
 It is now cycle 4762
@@ -5046,6 +4948,8 @@ It is now cycle 4770
 It is now cycle 4771
 It is now cycle 4772
 It is now cycle 4773
+P   12 | live 917504
+P   11 | live 917504
 It is now cycle 4774
 It is now cycle 4775
 It is now cycle 4776
@@ -5061,6 +4965,7 @@ It is now cycle 4785
 It is now cycle 4786
 It is now cycle 4787
 It is now cycle 4788
+long->fork
 It is now cycle 4789
 It is now cycle 4790
 It is now cycle 4791
@@ -5068,11 +4973,13 @@ It is now cycle 4792
 It is now cycle 4793
 It is now cycle 4794
 It is now cycle 4795
-P   20 | live 190055938
-P   19 | live 190055938
 It is now cycle 4796
 It is now cycle 4797
 It is now cycle 4798
+P   17 | sti r6 4 -272
+       | -> store to 4 + -272 = -268 (with pc and mod -373)
+P   16 | sti r6 0 -272
+       | -> store to 0 + -272 = -272 (with pc and mod -377)
 It is now cycle 4799
 It is now cycle 4800
 It is now cycle 4801
@@ -5093,6 +5000,8 @@ It is now cycle 4815
 It is now cycle 4816
 It is now cycle 4817
 It is now cycle 4818
+P   17 | zjmp -277 OK
+P   16 | zjmp -277 OK
 It is now cycle 4819
 It is now cycle 4820
 It is now cycle 4821
@@ -5115,8 +5024,6 @@ It is now cycle 4837
 It is now cycle 4838
 It is now cycle 4839
 It is now cycle 4840
-P   20 | live 190055938
-P   19 | live 190055938
 It is now cycle 4841
 It is now cycle 4842
 It is now cycle 4843
@@ -5134,8 +5041,6 @@ It is now cycle 4854
 It is now cycle 4855
 It is now cycle 4856
 It is now cycle 4857
-P   20 | live 218102537
-P   19 | live 218102537
 It is now cycle 4858
 It is now cycle 4859
 It is now cycle 4860
@@ -5148,11 +5053,9 @@ It is now cycle 4866
 It is now cycle 4867
 It is now cycle 4868
 It is now cycle 4869
-P   20 | live 1
-P   19 | live 1
 It is now cycle 4870
-P   16 | fork -5 (270)
-P   15 | fork -5 (259)
+P   16 | fork 0 (-885)
+P   15 | fork 0 (-597)
 It is now cycle 4871
 It is now cycle 4872
 It is now cycle 4873
@@ -5163,8 +5066,6 @@ It is now cycle 4877
 It is now cycle 4878
 It is now cycle 4879
 It is now cycle 4880
-P   22 | live 1
-P   21 | live 1
 It is now cycle 4881
 It is now cycle 4882
 It is now cycle 4883
@@ -5175,8 +5076,8 @@ It is now cycle 4887
 It is now cycle 4888
 It is now cycle 4889
 It is now cycle 4890
-P   18 | fork -5 (259)
-P   17 | fork -5 (270)
+P   18 | fork 0 (-437)
+P   17 | fork 0 (-885)
 P   16 | zjmp -8 OK
 P   15 | zjmp -8 OK
 P   10 | fork -5 (259)
@@ -5191,12 +5092,10 @@ It is now cycle 4897
 It is now cycle 4898
 It is now cycle 4899
 It is now cycle 4900
-P   26 | live 1
-P   25 | live 1
 P   24 | live 1
 P   23 | live 1
-P   16 | live 1
-P   15 | live 1
+P   16 | live 0
+P   15 | live 0
 It is now cycle 4901
 It is now cycle 4902
 It is now cycle 4903
@@ -5212,7 +5111,6 @@ P   17 | zjmp -8 OK
 P   10 | zjmp -8 OK
 P    9 | zjmp -8 OK
 P    5 | fork -5 (270)
-P    3 | fork -5 (259)
 It is now cycle 4911
 It is now cycle 4912
 It is now cycle 4913
@@ -5223,10 +5121,9 @@ It is now cycle 4917
 It is now cycle 4918
 It is now cycle 4919
 It is now cycle 4920
-P   28 | live 1
-P   27 | live 1
-P   18 | live 1
-P   17 | live 1
+P   25 | live 1
+P   18 | live 0
+P   17 | live 0
 P   10 | live 1
 P    9 | live 1
 It is now cycle 4921
@@ -5240,7 +5137,6 @@ It is now cycle 4928
 It is now cycle 4929
 It is now cycle 4930
 P    5 | zjmp -8 OK
-P    3 | zjmp -8 OK
 It is now cycle 4931
 It is now cycle 4932
 It is now cycle 4933
@@ -5252,7 +5148,6 @@ It is now cycle 4938
 It is now cycle 4939
 It is now cycle 4940
 P    5 | live 1
-P    3 | live 1
 It is now cycle 4941
 It is now cycle 4942
 It is now cycle 4943
@@ -5368,561 +5263,3 @@ It is now cycle 5052
 It is now cycle 5053
 It is now cycle 5054
 It is now cycle 5055
-It is now cycle 5056
-It is now cycle 5057
-It is now cycle 5058
-It is now cycle 5059
-It is now cycle 5060
-It is now cycle 5061
-It is now cycle 5062
-It is now cycle 5063
-It is now cycle 5064
-It is now cycle 5065
-It is now cycle 5066
-It is now cycle 5067
-It is now cycle 5068
-It is now cycle 5069
-It is now cycle 5070
-It is now cycle 5071
-It is now cycle 5072
-It is now cycle 5073
-It is now cycle 5074
-It is now cycle 5075
-It is now cycle 5076
-It is now cycle 5077
-It is now cycle 5078
-It is now cycle 5079
-It is now cycle 5080
-It is now cycle 5081
-It is now cycle 5082
-It is now cycle 5083
-It is now cycle 5084
-It is now cycle 5085
-It is now cycle 5086
-It is now cycle 5087
-It is now cycle 5088
-It is now cycle 5089
-It is now cycle 5090
-It is now cycle 5091
-It is now cycle 5092
-It is now cycle 5093
-It is now cycle 5094
-It is now cycle 5095
-It is now cycle 5096
-It is now cycle 5097
-It is now cycle 5098
-It is now cycle 5099
-It is now cycle 5100
-It is now cycle 5101
-It is now cycle 5102
-It is now cycle 5103
-It is now cycle 5104
-It is now cycle 5105
-It is now cycle 5106
-It is now cycle 5107
-It is now cycle 5108
-It is now cycle 5109
-It is now cycle 5110
-It is now cycle 5111
-It is now cycle 5112
-It is now cycle 5113
-It is now cycle 5114
-It is now cycle 5115
-It is now cycle 5116
-It is now cycle 5117
-It is now cycle 5118
-It is now cycle 5119
-It is now cycle 5120
-It is now cycle 5121
-It is now cycle 5122
-It is now cycle 5123
-It is now cycle 5124
-It is now cycle 5125
-It is now cycle 5126
-It is now cycle 5127
-It is now cycle 5128
-It is now cycle 5129
-It is now cycle 5130
-P    8 | fork 22531 (180)
-It is now cycle 5131
-It is now cycle 5132
-It is now cycle 5133
-It is now cycle 5134
-It is now cycle 5135
-It is now cycle 5136
-It is now cycle 5137
-It is now cycle 5138
-It is now cycle 5139
-It is now cycle 5140
-P    8 | live 1
-It is now cycle 5141
-It is now cycle 5142
-It is now cycle 5143
-It is now cycle 5144
-It is now cycle 5145
-It is now cycle 5146
-It is now cycle 5147
-It is now cycle 5148
-It is now cycle 5149
-It is now cycle 5150
-It is now cycle 5151
-It is now cycle 5152
-It is now cycle 5153
-It is now cycle 5154
-It is now cycle 5155
-It is now cycle 5156
-P   29 | ldi 4 18 r6
-       | -> load from 4 + 18 = 22 (with pc and mod 203)
-It is now cycle 5157
-It is now cycle 5158
-It is now cycle 5159
-It is now cycle 5160
-It is now cycle 5161
-P   29 | ld 0 r4
-It is now cycle 5162
-It is now cycle 5163
-It is now cycle 5164
-It is now cycle 5165
-It is now cycle 5166
-It is now cycle 5167
-It is now cycle 5168
-It is now cycle 5169
-It is now cycle 5170
-It is now cycle 5171
-P   29 | live 1
-It is now cycle 5172
-It is now cycle 5173
-It is now cycle 5174
-It is now cycle 5175
-It is now cycle 5176
-It is now cycle 5177
-It is now cycle 5178
-It is now cycle 5179
-It is now cycle 5180
-It is now cycle 5181
-It is now cycle 5182
-It is now cycle 5183
-It is now cycle 5184
-It is now cycle 5185
-It is now cycle 5186
-It is now cycle 5187
-It is now cycle 5188
-It is now cycle 5189
-It is now cycle 5190
-It is now cycle 5191
-It is now cycle 5192
-It is now cycle 5193
-It is now cycle 5194
-It is now cycle 5195
-It is now cycle 5196
-P   29 | sti r6 4 -272
-       | -> store to 4 + -272 = -268 (with pc and mod -69)
-It is now cycle 5197
-It is now cycle 5198
-It is now cycle 5199
-It is now cycle 5200
-It is now cycle 5201
-It is now cycle 5202
-It is now cycle 5203
-It is now cycle 5204
-It is now cycle 5205
-It is now cycle 5206
-It is now cycle 5207
-It is now cycle 5208
-It is now cycle 5209
-It is now cycle 5210
-It is now cycle 5211
-It is now cycle 5212
-It is now cycle 5213
-It is now cycle 5214
-It is now cycle 5215
-It is now cycle 5216
-P   29 | zjmp -277 OK
-It is now cycle 5217
-It is now cycle 5218
-It is now cycle 5219
-It is now cycle 5220
-It is now cycle 5221
-It is now cycle 5222
-It is now cycle 5223
-It is now cycle 5224
-It is now cycle 5225
-It is now cycle 5226
-It is now cycle 5227
-It is now cycle 5228
-It is now cycle 5229
-It is now cycle 5230
-It is now cycle 5231
-It is now cycle 5232
-It is now cycle 5233
-It is now cycle 5234
-It is now cycle 5235
-It is now cycle 5236
-It is now cycle 5237
-It is now cycle 5238
-It is now cycle 5239
-It is now cycle 5240
-It is now cycle 5241
-P   29 | sti r6 4 -272
-       | -> store to 4 + -272 = -268 (with pc and mod -341)
-It is now cycle 5242
-It is now cycle 5243
-It is now cycle 5244
-It is now cycle 5245
-It is now cycle 5246
-It is now cycle 5247
-It is now cycle 5248
-It is now cycle 5249
-It is now cycle 5250
-It is now cycle 5251
-It is now cycle 5252
-It is now cycle 5253
-It is now cycle 5254
-It is now cycle 5255
-It is now cycle 5256
-It is now cycle 5257
-It is now cycle 5258
-It is now cycle 5259
-It is now cycle 5260
-It is now cycle 5261
-P   29 | zjmp -277 OK
-It is now cycle 5262
-It is now cycle 5263
-It is now cycle 5264
-It is now cycle 5265
-It is now cycle 5266
-It is now cycle 5267
-It is now cycle 5268
-It is now cycle 5269
-It is now cycle 5270
-It is now cycle 5271
-It is now cycle 5272
-It is now cycle 5273
-It is now cycle 5274
-It is now cycle 5275
-It is now cycle 5276
-It is now cycle 5277
-It is now cycle 5278
-It is now cycle 5279
-It is now cycle 5280
-It is now cycle 5281
-It is now cycle 5282
-It is now cycle 5283
-It is now cycle 5284
-It is now cycle 5285
-It is now cycle 5286
-P   29 | sti r6 4 -272
-       | -> store to 4 + -272 = -268 (with pc and mod -613)
-It is now cycle 5287
-It is now cycle 5288
-It is now cycle 5289
-It is now cycle 5290
-It is now cycle 5291
-It is now cycle 5292
-It is now cycle 5293
-P   20 | fork 0 (275)
-P   19 | fork 0 (275)
-It is now cycle 5294
-It is now cycle 5295
-It is now cycle 5296
-It is now cycle 5297
-It is now cycle 5298
-It is now cycle 5299
-It is now cycle 5300
-It is now cycle 5301
-It is now cycle 5302
-It is now cycle 5303
-It is now cycle 5304
-It is now cycle 5305
-It is now cycle 5306
-P   29 | zjmp -277 OK
-It is now cycle 5307
-It is now cycle 5308
-It is now cycle 5309
-It is now cycle 5310
-It is now cycle 5311
-It is now cycle 5312
-It is now cycle 5313
-P   20 | zjmp -8 OK
-P   19 | zjmp -8 OK
-It is now cycle 5314
-It is now cycle 5315
-It is now cycle 5316
-It is now cycle 5317
-It is now cycle 5318
-It is now cycle 5319
-It is now cycle 5320
-It is now cycle 5321
-It is now cycle 5322
-It is now cycle 5323
-P   20 | live 0
-P   19 | live 0
-It is now cycle 5324
-It is now cycle 5325
-It is now cycle 5326
-It is now cycle 5327
-It is now cycle 5328
-It is now cycle 5329
-It is now cycle 5330
-It is now cycle 5331
-P   29 | sti r6 4 -272
-       | -> store to 4 + -272 = -268 (with pc and mod -373)
-It is now cycle 5332
-It is now cycle 5333
-It is now cycle 5334
-It is now cycle 5335
-It is now cycle 5336
-It is now cycle 5337
-It is now cycle 5338
-It is now cycle 5339
-It is now cycle 5340
-It is now cycle 5341
-It is now cycle 5342
-It is now cycle 5343
-It is now cycle 5344
-It is now cycle 5345
-It is now cycle 5346
-It is now cycle 5347
-It is now cycle 5348
-It is now cycle 5349
-It is now cycle 5350
-It is now cycle 5351
-P   29 | zjmp -277 OK
-It is now cycle 5352
-It is now cycle 5353
-It is now cycle 5354
-It is now cycle 5355
-It is now cycle 5356
-It is now cycle 5357
-It is now cycle 5358
-It is now cycle 5359
-It is now cycle 5360
-It is now cycle 5361
-It is now cycle 5362
-It is now cycle 5363
-It is now cycle 5364
-It is now cycle 5365
-It is now cycle 5366
-It is now cycle 5367
-It is now cycle 5368
-It is now cycle 5369
-It is now cycle 5370
-It is now cycle 5371
-It is now cycle 5372
-It is now cycle 5373
-It is now cycle 5374
-It is now cycle 5375
-It is now cycle 5376
-It is now cycle 5377
-It is now cycle 5378
-It is now cycle 5379
-It is now cycle 5380
-It is now cycle 5381
-It is now cycle 5382
-It is now cycle 5383
-It is now cycle 5384
-It is now cycle 5385
-It is now cycle 5386
-It is now cycle 5387
-It is now cycle 5388
-It is now cycle 5389
-It is now cycle 5390
-It is now cycle 5391
-It is now cycle 5392
-It is now cycle 5393
-It is now cycle 5394
-It is now cycle 5395
-It is now cycle 5396
-It is now cycle 5397
-It is now cycle 5398
-It is now cycle 5399
-It is now cycle 5400
-It is now cycle 5401
-It is now cycle 5402
-It is now cycle 5403
-It is now cycle 5404
-It is now cycle 5405
-It is now cycle 5406
-It is now cycle 5407
-It is now cycle 5408
-It is now cycle 5409
-It is now cycle 5410
-It is now cycle 5411
-It is now cycle 5412
-It is now cycle 5413
-It is now cycle 5414
-It is now cycle 5415
-It is now cycle 5416
-It is now cycle 5417
-It is now cycle 5418
-It is now cycle 5419
-It is now cycle 5420
-It is now cycle 5421
-It is now cycle 5422
-It is now cycle 5423
-It is now cycle 5424
-It is now cycle 5425
-It is now cycle 5426
-It is now cycle 5427
-It is now cycle 5428
-It is now cycle 5429
-It is now cycle 5430
-It is now cycle 5431
-It is now cycle 5432
-It is now cycle 5433
-It is now cycle 5434
-It is now cycle 5435
-It is now cycle 5436
-It is now cycle 5437
-It is now cycle 5438
-It is now cycle 5439
-It is now cycle 5440
-It is now cycle 5441
-It is now cycle 5442
-It is now cycle 5443
-It is now cycle 5444
-It is now cycle 5445
-It is now cycle 5446
-It is now cycle 5447
-It is now cycle 5448
-It is now cycle 5449
-It is now cycle 5450
-It is now cycle 5451
-It is now cycle 5452
-It is now cycle 5453
-It is now cycle 5454
-It is now cycle 5455
-It is now cycle 5456
-It is now cycle 5457
-It is now cycle 5458
-It is now cycle 5459
-It is now cycle 5460
-It is now cycle 5461
-It is now cycle 5462
-It is now cycle 5463
-It is now cycle 5464
-It is now cycle 5465
-It is now cycle 5466
-It is now cycle 5467
-It is now cycle 5468
-It is now cycle 5469
-It is now cycle 5470
-It is now cycle 5471
-It is now cycle 5472
-It is now cycle 5473
-It is now cycle 5474
-It is now cycle 5475
-It is now cycle 5476
-It is now cycle 5477
-It is now cycle 5478
-It is now cycle 5479
-It is now cycle 5480
-It is now cycle 5481
-It is now cycle 5482
-It is now cycle 5483
-It is now cycle 5484
-It is now cycle 5485
-It is now cycle 5486
-It is now cycle 5487
-It is now cycle 5488
-It is now cycle 5489
-It is now cycle 5490
-It is now cycle 5491
-It is now cycle 5492
-It is now cycle 5493
-It is now cycle 5494
-It is now cycle 5495
-It is now cycle 5496
-It is now cycle 5497
-It is now cycle 5498
-It is now cycle 5499
-It is now cycle 5500
-It is now cycle 5501
-It is now cycle 5502
-It is now cycle 5503
-It is now cycle 5504
-It is now cycle 5505
-It is now cycle 5506
-P    7 | fork 22531 (180)
-P    4 | fork 22531 (180)
-It is now cycle 5507
-It is now cycle 5508
-It is now cycle 5509
-It is now cycle 5510
-It is now cycle 5511
-It is now cycle 5512
-It is now cycle 5513
-It is now cycle 5514
-It is now cycle 5515
-It is now cycle 5516
-P    7 | live 1
-P    4 | live 1
-It is now cycle 5517
-It is now cycle 5518
-It is now cycle 5519
-It is now cycle 5520
-It is now cycle 5521
-It is now cycle 5522
-It is now cycle 5523
-It is now cycle 5524
-It is now cycle 5525
-It is now cycle 5526
-It is now cycle 5527
-It is now cycle 5528
-It is now cycle 5529
-It is now cycle 5530
-It is now cycle 5531
-It is now cycle 5532
-P   33 | ldi 0 18 r6
-       | -> load from 0 + 18 = 18 (with pc and mod 199)
-P   32 | ldi 4 18 r6
-       | -> load from 4 + 18 = 22 (with pc and mod 203)
-It is now cycle 5533
-It is now cycle 5534
-It is now cycle 5535
-It is now cycle 5536
-It is now cycle 5537
-P   33 | ld 0 r4
-P   32 | ld 0 r4
-It is now cycle 5538
-It is now cycle 5539
-It is now cycle 5540
-It is now cycle 5541
-It is now cycle 5542
-It is now cycle 5543
-It is now cycle 5544
-It is now cycle 5545
-It is now cycle 5546
-It is now cycle 5547
-P   33 | live 1
-P   32 | live 1
-It is now cycle 5548
-It is now cycle 5549
-It is now cycle 5550
-It is now cycle 5551
-It is now cycle 5552
-It is now cycle 5553
-It is now cycle 5554
-It is now cycle 5555
-It is now cycle 5556
-It is now cycle 5557
-It is now cycle 5558
-It is now cycle 5559
-It is now cycle 5560
-It is now cycle 5561
-It is now cycle 5562
-It is now cycle 5563
-It is now cycle 5564
-It is now cycle 5565
-It is now cycle 5566
-It is now cycle 5567
-It is now cycle 5568
-It is now cycle 5569
-It is now cycle 5570
-It is now cycle 5571
-It is now cycle 5572
-P   33 | sti r6 0 -202
-       | -> store to 0 + -202 = -202 (with pc and mod -3)
-P   32 | sti r6 4 -202
-       | -> store to 4 + -202 = -198 (with pc and mod 1)
-Contestant 1, "Tching tching(Intercepteur), Bouh!Bouh!(bruits d'anti-jeu)", has won !
