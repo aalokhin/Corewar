@@ -36,6 +36,7 @@ void	command_printer(t_lable *label)
 	tmp = label->instruct;
 	while (tmp)
 	{
+
 		ft_printf("%x ", tmp->c_name + 1);
 		if (tmp->has_codage)
 			ft_printf("%x ", tmp->codage);

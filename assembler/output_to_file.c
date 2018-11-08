@@ -27,11 +27,11 @@ void	fill_corfile_contents(t_binfile *bin)
 	write(bin->fd_file_out, "\0\0\0\0", 4);
 
 	i = 0;
-	printf("BIN_COMMENT:          %s\n",bin->comment );
+	// printf("BIN_COMMENT:          %s\n",bin->comment );
 	while (i < COMMENT_LENGTH)
 	{
-		if (i <= 10)
-			printf("===444444=====>%c\n", bin->comment[i]);
+		// if (i <= 10)
+		// 	printf("===444444=====>%c\n", bin->comment[i]);
 		write(bin->fd_file_out, &bin->comment[i], 1);
 		i++;
 

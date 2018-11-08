@@ -54,6 +54,37 @@ int  command_name(char *name)
 	 return (-1);
 }
 
+
+
+// void				add_copy_chain(t_chain **head, t_anthill *room)
+// {
+// 	t_chain			*new;
+// 	t_chain			*last;
+
+// 	if (!head)
+// 		return ;
+// 	new = ft_memalloc(sizeof(t_chain));
+// 	new->ngbr = room;
+// 	new->next = NULL;
+// 	new->nombre = room->name;
+// 	new->id = 0;
+// 	new->start = room->is_start;
+// 	new->end = room->is_end;
+// 	if (*head == NULL)
+// 	{
+// 		new->prev = NULL;
+// 		*head = new;
+// 		return ;
+// 	}
+// 	last = *head;
+// 	while (last->next != NULL)
+// 		last = last->next;
+// 	last->next = new;
+// 	new->prev = last;
+// }
+
+
+
 void			labels_linker(t_binfile *file, t_lable 	*label)
 {
 	t_lable		*tmp;
@@ -62,6 +93,7 @@ void			labels_linker(t_binfile *file, t_lable 	*label)
 	{
 		file->labels_list = label;
 		file->labels_list->next = NULL;
+		file->labels_list->prev = NULL;
 	}
 	else
 	{
@@ -69,6 +101,7 @@ void			labels_linker(t_binfile *file, t_lable 	*label)
 		while (tmp->next != NULL)
 			tmp = tmp->next;
 		tmp->next = label;
+		label->prev = tmp;
 	}
 }
 
@@ -90,14 +123,14 @@ void			command_linker(t_lable 	*label, t_t 	*token)
 	}
 }
 
-void	token_length(t_t *token, int i)
+void	token_length(t_t *token, int i) //int 	token_arg_length(t_t *token, int i) by nastia 
 {
 	token->c_len = 1;
 	token->c_len += token->has_codage;
 	while (i < 4)
 	{
 
-		token->c_len += token->arg[i] == 0 ? 0 : token->arg[i] == 1 ? 1 : token->arg[i] == 11 ? 2 : token->lbl;
+		token->c_len += token->arg[i] == 0 ? 0 : token->arg[i] == 1 ? 1 : token->arg[i] == 11 ? 2 : token->lbl_size;
 		i++;
 	}
 	//printf("token length -- ====== %d\n", token->c_len);
@@ -113,6 +146,7 @@ void 	length_of_bytes_above(t_binfile *file)
 		tmp->bytes_above += tmp->lbl_len;
 		tmp = tmp->next;
 	}
+
 }
 
 void label_length(t_binfile *file, t_lable	*label)
@@ -159,6 +193,29 @@ int 	token_codage(t_t *token, int i)
 	}
 	return (dec);
 }
+
+int 	token_arg_length(t_t *token, int i)
+{
+	int	byte_len = 1; //opcode + has_codage + args_len
+
+
+	while (i < 4)
+	{
+		if (token->arg[i] == 11) 
+			byte_len += 2;
+		else if (token->arg[i] == 10)
+			byte_len += token->lbl_size;
+		else if (token->arg[i] == 1)
+			byte_len += 1;
+
+		i++;
+	}
+	byte_len += token->has_codage;
+	// printf("\n BYTE_LENGTH ==> %d \n", byte_len);
+	token->c_len = byte_len;
+	return (token->c_len);
+}
+
 void	tabs_remover(char *str)
 {
 	int i = 0;
@@ -171,14 +228,77 @@ void	tabs_remover(char *str)
 	}
 }
 
+
+// void		lookup_line()
+// {
+// 	size_t 	k;
+
+
+
+// 	k = 0;
+// 	if (!(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':')))
+// 	{
+// 		if (label != NULL)
+// 		{
+// 			label_length(file, label);
+// 			labels_linker(file, label);
+// 			label = NULL;
+// 		}
+// 		label = (t_lable *)ft_memalloc(sizeof(t_lable));
+// 		label->label_name = ft_strdup(str[i]);
+// 	}
+
+// }
+
+// void 		parse_commands(t_binfile *file)
+// {
+// 	char	**parse	 = NULL;
+// 	t_t 	*token;
+// 	t_lable	*label;
+// 	size_t i = 0;
+// 	size_t k = 0; 
+
+// 	token = NULL;
+// 	label = NULL;
+
+// 	parse = ft_strsplit(file->f_contents, '\n');
+// 	while(parse[i])
+// 	{
+// 		if (ft_strcmp(parse[i], "\n") == 0) //kostyl first empty line
+// 			printf("empty line\n");
+
+// 		i++;
+// 	}
+// 	size_t length;
+
+// 	length = i;
+// 	i = 0;
+
+// 	char	**str = NULL;
+// 	while(i < length)
+// 	{
+// 		if (ft_strcmp(parse[i], "\n"))
+// 			continue; 
+// 		str = ft_strsplit(parse[i], ' ');
+		
+
+// 		printf("line is: [%s]\n", parse[i]);
+// 		ft_clean_parse(str);
+// 		i++;
+// 	}
+// 	ft_clean_parse(parse);
+// }
+
+
+
 void	parse_commands(t_binfile *file)
 {
 	char	**str = NULL;
 	t_t 	*token = NULL;
+
 	t_lable	*label = NULL;
 	int i = 0;
 	int arg1 = 0;
-
 	file->labels_list = NULL;
 	tabs_remover(file->f_contents);
 	str = ft_strsplit(file->f_contents, ' ');
@@ -203,13 +323,14 @@ void	parse_commands(t_binfile *file)
 			token->c_name = command_name(str[i]);
 			token->name_c = ft_strdup(str[i]);
 			token->arguments = ft_cmd_arguments(token->name_c);
-			token->lbl = ft_cmd_lbls(token->name_c);
+			token->lbl_size = ft_cmd_lbls(token->name_c);
 			token->has_codage = has_codage(token->name_c);
 			//printf(" command: [%s] ===> ft_cmd_arguments : ===>%d and cmd_label is : %d  and has_codage is [%d]\n ",
-	//token->name_c, token->arguments, token->lbl, token->has_codage);
+	//token->name_c, token->arguments, token->lbl_size, token->has_codage);
 		}
 		else
 		{
+
 			if (ft_strchr(str[i] ,'r') && !(ft_strchr(str[i] ,'%')))
 				token->arg[arg1] = 1;
 			else if (ft_strchr(str[i] ,'%'))
@@ -222,10 +343,12 @@ void	parse_commands(t_binfile *file)
 				command_linker(label, token);
 				if (token->has_codage)
 					token->codage = token_codage(token, 0);
-				token_length(token, 0);
+				//token_length(token, 0);
+				token_arg_length(token, 0);
 				arg1  = 0;
 				token = NULL;
 			}
+			//printf("DONE\n");
 		}
 		i++;
 	}
@@ -238,4 +361,54 @@ void	parse_commands(t_binfile *file)
 	//labels_printer(file);
 	file_length(file);
 	printf("length of this file DECIMAL === %d HEX  === %x\n", file->file_length, file->file_length);
+
+	
+	// printf("pkokokokokok\n");
+	// int f = 0;
+
+	// char	*arguments[3] = {"r1", "%0", "r1"};
+	// // r1, %0, r1
+	// int z = 0;
+	// f = 7;
+	// while(z < 3)
+	// {
+		
+	// 	if (ft_strchr(arguments[z] ,'r') && !(ft_strchr(arguments[z] ,'%')))
+	// 	{
+	// 		f--;
+	// 		printf("f1 ==> %d\n", f);
+
+	// 		my_cod |= 1 << f;
+	// 		f -= 1;
+	// 		printf("f1 ==> %d\n", f);
+
+	// 	}
+	// 	else if (ft_strchr(arguments[z] ,'%'))
+	// 	{
+	// 		printf("f2 ==> %d\n", f);
+
+			
+	// 		my_cod |= 1 << f;
+	// 		f -= 2;
+	// 		printf("f2 ==> %d\n", f);
+
+	// 	}
+	// 	else
+	// 	{
+	// 		printf("f3 ==> %d\n", f);	
+	// 		my_cod |= 1 << f;
+	// 		f--;
+	// 		my_cod |= 1 << f;
+	// 		f-= 2;
+	// 		printf("f3 ==> %d\n", f);
+
+	// 	}
+	// 	z++;
+	// }
+	// printf("codage===================> [%x]\n", my_cod);
+
 }  
+
+
+
+

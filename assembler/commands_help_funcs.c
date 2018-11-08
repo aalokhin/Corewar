@@ -10,7 +10,7 @@ int			ft_cmd_arguments(char	*c_name)
 	int 	i;
 
 	i = -1;
-	printf("okokokok\n");
+	// printf("okokokok\n");
 	if (!c_name)
  		return(0) ;
 	while(++i < 5)
@@ -75,4 +75,15 @@ int			has_codage(char	*c_name)
  	return (0);
 
 
+}
+
+
+void			ft_clean_parse(char **parse)
+{
+	int i;
+
+	i = 0;
+	while (parse[i])
+		ft_strdel(&parse[i++]);
+	free(parse);
 }

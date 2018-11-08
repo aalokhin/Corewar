@@ -61,8 +61,10 @@ int	 	ft_opening_file(t_binfile	*bin)
 
 	parse_commands(&(*bin)); //collecting commands labels and staff <==================== Molly
 
+	label_distance(&(*bin));
+
 	// 
-	main_printer(&(*bin)); // printing stuff <==================== Molly
+	//main_printer(&(*bin)); // printing stuff <==================== Molly
 
 
 	if ((*bin).flag_a == 1)
