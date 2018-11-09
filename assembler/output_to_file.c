@@ -35,6 +35,7 @@ void	fill_corfile_contents(t_binfile *bin)
 //******************************* filling botsize *************************
 
 	i = 0; 
+	printf("LENGTH is %u\n", bin->file_length);
 
 	a[3] = bin->file_length & 255;
 	a[2] = (bin->file_length >> 8) & 255;
@@ -77,12 +78,12 @@ void	fill_corfile_contents(t_binfile *bin)
 				write (bin->fd_file_out, &a, 1);
 			}
 			i = 0;
-			printf("arguments in instruction [%d]: \n",  tmp->arguments);
+			//printf("arguments in instruction [%d]: \n",  tmp->arguments);
 
 			while(i < (size_t)tmp->arguments)
 			{
-				printf("writing arg:   %d\n", tmp->args[i][0]);
-				printf("writing arg_value:   %d\n", tmp->args[i][1]);
+				//printf("writing arg:   %d\n", tmp->args[i][0]);
+				//printf("writing arg_value:   %d\n", tmp->args[i][1]);
 
 
 				if (tmp->args[i][0] == 10)

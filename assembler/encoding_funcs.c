@@ -42,7 +42,7 @@ void	fill_name_comment(t_binfile *bin)
 	bin->comment = ft_strnew(COMMENT_LENGTH);
 	//printf("bin->commet:%s\n", );
 	ft_strncpy(bin->comment, &str[tmp], i - tmp);
-	printf("\ncomment is of the champ is {%s} \n", bin->comment);
+	//printf("\ncomment is of the champ is {%s} \n", bin->comment);
 }
 
 

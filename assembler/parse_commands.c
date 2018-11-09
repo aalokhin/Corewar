@@ -257,9 +257,9 @@ void	parse_commands(t_binfile *file)
 			token = (t_t *)ft_memalloc(sizeof(t_t));
 			token->c_name = command_name(str[i]);
 			token->name_c = ft_strdup(str[i]);
-			token->arguments = ft_cmd_arguments(token->name_c);
+			token->arguments =  g_op_tab[token->c_name].nb_params; //ft_cmd_arguments(token->name_c);
 			token->lbl_size = ft_cmd_lbls(token->name_c);
-			token->has_codage = has_codage(token->name_c);
+			token->has_codage = g_op_tab[token->c_name].has_pcode;//has_codage(token->name_c);
 			token->opcode = g_op_tab[token->c_name].opcode;
 		}
 		else
