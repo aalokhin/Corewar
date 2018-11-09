@@ -2,6 +2,7 @@
 
 
 
+
 void	fill_corfile_contents(t_binfile *bin)
 {
 	//******************************* filling magic *************************
@@ -45,28 +46,87 @@ void	fill_corfile_contents(t_binfile *bin)
 	write(bin->fd_file_out, "\0\0\0\0", 4);
 
 	i = 0;
+	int z = 0;
 
 	while(lable)
 	{
 		tmp = lable->instruct;
 		while(tmp)
 		{
-			a[0] = tmp->opcode & 0x000000FF;
-			a[1] = (tmp->opcode & 0x000000FF) >> 8;
+			a[0] = tmp->opcode & 0xFF;
+			a[1] = (tmp->opcode >> 8) & 0xFF;
 			
 			write (bin->fd_file_out, &a, 1);
 			if (tmp->has_codage)
 			{
-				a[0] = tmp->codage & 0x000000FF;
-				a[1] = (tmp->codage & 0x000000FF) >> 8;
+				a[0] = tmp->codage & 0xFF;
+				a[1] = (tmp->codage >> 8) & 0xFF;
 				i = 0;
 				write (bin->fd_file_out, &a, 1);
 			}
 			i = 0;
+			printf("arguments in instruction [%d]: \n",  tmp->arguments);
+
 			while(i < (size_t)tmp->arguments)
 			{
-				write(bin->fd_file_out, &tmp->args[i][0], 1);
-				//write(bin->fd_file_out, &tmp->args[i][1], 1);
+				printf("writing arg:   %d\n", tmp->args[i][0]);
+				printf("writing arg_value:   %d\n", tmp->args[i][1]);
+
+
+				//write(bin->fd_file_out, &tmp->args[i][0], 1);
+				
+				// if(&tmp->args[i][0])
+				// {
+				if (tmp->args[i][0] == 10)
+				{
+					if (tmp->lbl_size == 4)
+					{
+						a[0] = tmp->args[i][1] & 0x000000FF;
+						a[1] = (tmp->args[i][1] & 0x0000FF00) >> 8;
+						a[2] = (tmp->args[i][1] & 0x00FF0000) >> 16;
+						a[2] = (tmp->args[i][1] & 0xFF000000) >> 24;
+						z =  0;
+						while(z < 4)
+						{
+							write(bin->fd_file_out, &a[z], 1);
+							z++;
+						}
+					}
+					else // == 2
+					{
+						a[0] = tmp->args[i][1] & 0xFF;
+						a[1] = (tmp->args[i][1] >> 8) & 0xFF;
+						z =  0;
+						while(z < 2)
+						{
+							write(bin->fd_file_out, &a[z], 1);
+							z++;
+						}
+					}
+					
+				}
+				else if (tmp->args[i][0] == 11)
+				{
+					a[0] = tmp->args[i][1] & 0xFF;
+					a[1] = (tmp->args[i][1] >> 8) & 0xFF;
+					z =  0;
+					while(z < 2)
+					{
+						write(bin->fd_file_out, &a[z], 1);
+						z++;
+					}
+				}
+				else if (tmp->args[i][0] == 1)
+				{
+					a[0] = tmp->args[i][1] & 0xFF;
+					write(bin->fd_file_out, &a[0], 1);
+				}
+				//write(bin->fd_file_out, &a[0], 1);
+				
+
+
+
+				// }
 				i++;
 			}
 
