@@ -150,9 +150,16 @@ int 		find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 				if (strcmp(search, tmp_lbl->label_name) == 0)
 				{
 					if (label->bytes_above < tmp_lbl->bytes_above)
+					{
+						printf("\n\n~~~~~~~~~~~~~~~.1st case %d\n", tmp_lbl->bytes_above - label->bytes_above - instruct->bytes_above_i);
+						printf("		===>%d\n", instruct->bytes_above_i);
 						return (tmp_lbl->bytes_above - label->bytes_above - instruct->bytes_above_i);
+					}
 					else
+					{
+						printf("\n\n~~~~~~~~~~~~~~~~2ND case %d\n", tmp_lbl->bytes_above - label->bytes_above - instruct->bytes_above_i);
 						return (tmp_lbl->bytes_above - (label->bytes_above +  instruct->bytes_above_i));
+					}
 				}
 			}
 			tmp_lbl = tmp_lbl->next;
@@ -178,7 +185,7 @@ void	label_distance(t_binfile 	*bin)
 		while(tmpi)
 		{
 			k = 0;
-			printf("	=>instruction is: %s and it's size  %d\n", tmpi->name_c, tmpi->c_len);
+			printf("	=>instruction  is: %s (opcode %d) and it's size  %d\n", tmpi->name_c, tmpi->opcode,  tmpi->c_len);
 			// printf("				args: ");
 			while(tmpi->a[k])
 			{

@@ -260,6 +260,7 @@ void	parse_commands(t_binfile *file)
 			token->arguments = ft_cmd_arguments(token->name_c);
 			token->lbl_size = ft_cmd_lbls(token->name_c);
 			token->has_codage = has_codage(token->name_c);
+			token->opcode = g_op_tab[token->c_name].opcode;
 		}
 		else
 		{

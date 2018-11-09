@@ -29,6 +29,7 @@
 typedef struct			s_t  //minimum
 {
 	int					c_name; // order number of "live"
+	int 				opcode;
 	char 				*name_c; // 
 	char 				*a[4]; // for codage T_REG r 01 T_DIR % 10 T_IND 11 
 	
@@ -70,6 +71,7 @@ typedef struct	s_binfile
 {
 	int				fd;//incoming file
 	int 			fd_file_out;//resulting file
+	unsigned char	a[4];
 
 	char 			*f_contents;//a buf where all the data is stored written as a single line
 
