@@ -29,8 +29,25 @@ void	fill_corfile_contents(t_binfile *bin)
 		write(bin->fd_file_out, &bin->name[i], 1);
 		i++;
 	}
+
 	write(bin->fd_file_out, "\0\0\0\0", 4);
-	write(bin->fd_file_out, "\0\0\0\0", 4);
+
+//******************************* filling botsize *************************
+
+	i = 0; 
+
+	a[3] = bin->file_length & 255;
+	a[2] = (bin->file_length >> 8) & 255;
+	a[1] = (bin->file_length >> 16) & 255;
+	a[0] = (bin->file_length >> 24) & 255;
+	while (i < 4)
+	{
+		write(bin->fd_file_out, &a[i], 1);
+		i++;
+	}
+	
+	
+	//******************************* filling comment *************************
 
 	i = 0;
 	while (i < COMMENT_LENGTH)
@@ -41,6 +58,8 @@ void	fill_corfile_contents(t_binfile *bin)
 	}
 	write(bin->fd_file_out, "\0\0\0\0", 4);
 
+//******************************* filling exec part *************************
+	
 	i = 0;
 	int z = 0;
 
