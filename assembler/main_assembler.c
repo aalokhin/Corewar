@@ -19,35 +19,15 @@ void		init_bin(t_binfile	*bin)
 
 }
 
-// void 	print_struct(t_binfile	*bin)
-// {
-
-// 	// 	start_color();
-// 	// init_pair(1 , COLOR_GREEN, COLOR_BLACK);
-// 	// attron(COLOR_PAIR(11));
-// 	// printf("\nbin.arg_name ====>%s\n", bin->arg_name);
-// 	// printf("bin.fd ====>%d\n", bin->fd);
-// 	// printf("arg length ====>%u\n\n", bin->arg_length);
-// 	//attroff( COLOR_PAIR(11));
-// 	// printf("~~~~~~~~~~~~~~~~~~~~~~~~~~MAGIC\n");
-	
-// 	// printf("%x\n", 	(*bin).magic_start[3]);
-// 	// printf("%x\n", (*bin).magic_start[2]);
-// 	// printf("%x\n", (*bin).magic_start[1]);
-// 	// printf("%x\n", (*bin).magic_start[0]);
-// 	printf(" =>>>> [%s]\n", bin->f_contents);
-
-// }
-
-
-int	 	ft_opening_file(t_binfile	*bin)
+int 	file_processing(t_binfile *bin)
 {
- 	char file_contents[(*bin).arg_length + 1];
- 	read((*bin).fd, file_contents, (*bin).arg_length);
- 	file_contents[(*bin).arg_length] = '\0';
- 	(*bin).f_contents = ft_strdup(file_contents);
- 	parse_file(&(*bin), &file_contents);
- 	//ft_space(&file_contents, (int)bin->arg_length);
+	char file_contents[(*bin).arg_length + 1];
+	
+	read((*bin).fd, file_contents, (*bin).arg_length);
+	file_contents[(*bin).arg_length] = '\0';
+	(*bin).f_contents = ft_strdup(file_contents);
+	parse_file(&(*bin), &file_contents);
+	//ft_space(&file_contents, (int)bin->arg_length);
 
 	fill_magic_start(&(*bin));
 	if (!fill_name_comment(&(*bin)))
@@ -59,11 +39,11 @@ int	 	ft_opening_file(t_binfile	*bin)
 	ft_strdel(&((*bin).f_contents)); //*********************** magic ept
 	(*bin).f_contents = ft_strdup(file_contents); //*********************** magic ept
 	//printf("===>%s<===\n", (*bin).f_contents); 
-	
-
-
 	if (!(parse_commands(&(*bin))))//collecting commands labels and staff <==================== Molly
+	{
+		printf("return in parsing\n");
 		return (0);
+	}
 
 	label_distance(&(*bin));
 
@@ -78,49 +58,102 @@ int	 	ft_opening_file(t_binfile	*bin)
 	}
 	create_cor_file(&(*bin)); //creates the file iteslf and fills out the contents
 	close((*bin).fd);
+	ft_strdel(&((*bin).arg_name));
+	//ft_printf("all good so far\n");
 	return (1);
+}
 
+
+
+int	 	ft_opening_file(char *s_file, int flag_a)
+{
+	t_binfile	bin;
+	printf("============> %s\n", s_file);
+
+	init_bin(&bin);
+	if (flag_a == 1)
+	{
+		bin.flag_a = 1;
+	}
+	if (ft_strcmp(&s_file[ft_strlen(s_file) - 2], ".s") != 0)
+	{
+		ft_print_inv_f();
+		return (0);
+	}
+	bin.arg_name = ft_strdup(s_file);
+	bin.fd = open(s_file,  O_RDONLY);
+
+	if (bin.fd < 0)
+	{
+		ft_print_inv_f();
+		return (0);
+	}
+	bin.arg_length = (unsigned int)lseek(bin.fd, 0, SEEK_END);
+	lseek(bin.fd, 0, SEEK_SET);
+
+
+
+	return (file_processing(&bin));
+
+}
+
+int 		ft_opening_directory(char *input, int flag_d, int flag_a)
+{
+	DIR 	*dir;
+
+	flag_d = flag_a;
+
+	dir = opendir(input);
+	if (dir == NULL)
+		return (0);
+	else
+	{
+		printf("hurra it's dir \n");
+		return (0);
+	}
 }
 
 int 		main(int argc, char **argv)
 {
 	int 		i;
-	t_binfile	bin;
+	int 		flag_a;
+	int 		flag_d;
 
-
+	flag_a = 0;
 	i = 0;
 	if (argc == 1)
 	{
 		ft_print_usage();
 		return (0);
 	}
-	init_bin(&bin);
+
+	if (!(ft_strcmp(argv[1], "-D")))
+	{
+		flag_d = 1;		
+		//ft_printf("Oh God wee need to print a stripped version\n");
+	}
+	
 	while(argv[i + 1])
 	{
 		if (!(ft_strcmp(argv[i], "-a")))
 		{
-			bin.flag_a = 1;
+			flag_a = 1;		
 			//ft_printf("Oh God wee need to print a stripped version\n");
 		}
 		i++;
 	}
-	if (ft_strcmp(&argv[i][ft_strlen(argv[i]) - 2], ".s") != 0)
-	{
-		ft_print_inv_f(bin);
-		return (0);
-	}
-	bin.arg_name = ft_strdup(argv[i]);
-	bin.fd = open(argv[i],  O_RDONLY);
+	i = 1;
 
-	if (bin.fd < 0)
+
+	while (i < argc)
 	{
-		ft_print_inv_f(bin);
-		return (0);
+		//printf("%s\n", argv[i]);
+		if (!ft_opening_directory(argv[i], flag_d, flag_a))
+			if (!ft_opening_file(argv[i], flag_a))
+				return (0);
+		i++;
 	}
-	bin.arg_length = (unsigned int)lseek(bin.fd, 0, SEEK_END);
-	lseek(bin.fd, 0, SEEK_SET);
-	if (!(ft_opening_file(&bin)))
-		return (0);
+	
 
 //printf("1111 =>>>> %s\n", bin.f_contents);
 	
@@ -129,8 +162,8 @@ int 		main(int argc, char **argv)
  	
 	//print_struct(&bin);
 
-	ft_strdel(&(bin.arg_name));
-	ft_printf("all good so far\n");
+
+	//ft_printf("all good so far\n");
 
 
 	return 0;

@@ -9,6 +9,7 @@
 # include "../op.h"
 
 #include <stdio.h>
+#include <dirent.h>
 
 // # define ARG1(c) (s = {"aff", "fork" "zjmp" || "live", "lfork"
 // # define ARG2(c) (c == 'C' || c == 's' || c == 'S' || c == 'u')
