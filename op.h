@@ -69,9 +69,7 @@ typedef char	t_arg_type;
 
 
 
-#define WHITESPACE(c) (c == ' ' || c == '\t' || c =='\n') //augment
 
-#define NEW_LINE(c) (c =='\n')
 
 
 typedef struct		header_s

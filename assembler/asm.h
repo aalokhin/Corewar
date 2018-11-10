@@ -11,21 +11,24 @@
 #include <stdio.h>
 #include <dirent.h>
 
-// # define ARG1(c) (s = {"aff", "fork" "zjmp" || "live", "lfork"
-// # define ARG2(c) (c == 'C' || c == 's' || c == 'S' || c == 'u')
+
+#define WHITESPACE(c) (c == ' ' || c == '\t' || c =='\n') //augment
+
+#define NEW_LINE(c) (c == '\n')
+
+#define CUR_DIR(c) (c == '.')
 
 
-// typedef struct 			s_arg
+// struct dirent
 // {
-// 	int 			bytes_len;
-// 	char 			*line;
-// 	unsigned char  	*arg;
-	
+//                ino_t          d_ino;       /* Inode number */
+//                off_t          d_off;       /* Not an offset; see below */
+//                unsigned short d_reclen;    /* Length of this record */
+//                unsigned char  d_type;      /* Type of file; not supported
+//                                               by all filesystem types */
+//                char           d_name[256]; /* Null-terminated filename */
+//       };
 
-// 	int 			is_dir;
-// 	int 			distance;
-// 	struct s_arg	*next;
-// }						t_arg;
 
 typedef struct			s_t  //minimum
 {
@@ -116,7 +119,7 @@ void	label_distance(t_binfile 	*bin);
 //********************************* PRINTING FUNCTIONS******************
 
 void			ft_print_usage();
-void	 		ft_print_inv_f();
+void 			ft_print_inv_f(char *s_file);
 void			ft_print_flag_a(t_binfile *bin);
 void			ft_print_inv_input();
 

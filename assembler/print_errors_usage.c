@@ -6,9 +6,9 @@ void			ft_print_usage()
 	ft_printf("%117s\n", "-a : Instead of creating a .cor file, outputs a stripped and annotated version of the code to the standard output");
 }
 
-void 			ft_print_inv_f()
+void 			ft_print_inv_f(char *s_file)
 {
-	ft_printf("Source file error\n");
+	ft_printf("Source file error ====>[%s]<=== \n", s_file);
 
 	// should be something like  ft_printf("Syntax error at token [TOKEN][001:001] END \"(null)\"");
 }

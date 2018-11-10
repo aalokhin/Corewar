@@ -1,6 +1,5 @@
 #include "asm.h"
 
-
 void		init_bin(t_binfile	*bin)
 {
 	(*bin).fd = 0;
@@ -77,7 +76,7 @@ int	 	ft_opening_file(char *s_file, int flag_a)
 	}
 	if (ft_strcmp(&s_file[ft_strlen(s_file) - 2], ".s") != 0)
 	{
-		ft_print_inv_f();
+		ft_print_inv_f(s_file);
 		return (0);
 	}
 	bin.arg_name = ft_strdup(s_file);
@@ -85,7 +84,7 @@ int	 	ft_opening_file(char *s_file, int flag_a)
 
 	if (bin.fd < 0)
 	{
-		ft_print_inv_f();
+		ft_print_inv_f(s_file);
 		return (0);
 	}
 	bin.arg_length = (unsigned int)lseek(bin.fd, 0, SEEK_END);
@@ -97,20 +96,69 @@ int	 	ft_opening_file(char *s_file, int flag_a)
 
 }
 
-int 		ft_opening_directory(char *input, int flag_d, int flag_a)
+char 				*join_name_path(char *curdir, char *file)
 {
-	DIR 	*dir;
+	int 			len;
+	char 			*path;
+	char 			*new;
 
-	flag_d = flag_a;
-
-	dir = opendir(input);
-	if (dir == NULL)
-		return (0);
+	len = ft_strlen(curdir);
+	path = NULL;
+	new = NULL;
+	
+	if (curdir[len - 1] == '/')
+	{
+		path = ft_strjoin(curdir, file);
+	}
 	else
 	{
-		printf("hurra it's dir \n");
-		return (0);
+		new = ft_strnew(len + 1);
+		new = ft_strncpy(new, curdir, len);
+		new[len] = '/';
+		//printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~%s\n", new);
+		path = ft_strjoin(new, file); 
+		ft_strdel(&new);
 	}
+	return(path);
+}
+
+
+int 				ft_opening_directory(char *input, int flag_d, int flag_a)
+{
+	DIR 			*dfd; //fd of dir
+	struct dirent 	*dp; //pointer dir
+	//char 			*s_file; //file name  .s
+	char 			*filename;
+
+	filename = NULL;
+
+	
+	//printf("input ==> %s\n", input);
+
+	if ((dfd = opendir(input)) == NULL)
+		return (0);
+	//printf("hurra it's dir \n");
+	while((dp = readdir(dfd)) != NULL)
+	{
+		//printf("~~~~~~~~~~~~~~~~~~~~>>>>> filename in dir: is  %s\n", dp->d_name);
+
+		filename = join_name_path(input, dp->d_name);
+
+
+		if (!CUR_DIR(dp->d_name[0]))
+		{
+			//printf("======================> resulting filename is  %s\n", filename);
+
+			ft_opening_file(filename, flag_a);
+			if(flag_d == 1)
+				ft_opening_directory(filename, flag_d, flag_a);
+
+		}
+	}
+
+	closedir(dfd);
+
+	return (1);
 }
 
 int 		main(int argc, char **argv)
@@ -127,7 +175,7 @@ int 		main(int argc, char **argv)
 		return (0);
 	}
 
-	if (!(ft_strcmp(argv[1], "-D")))
+	if (!(ft_strcmp(argv[1], "-d")))
 	{
 		flag_d = 1;		
 		//ft_printf("Oh God wee need to print a stripped version\n");
@@ -142,9 +190,10 @@ int 		main(int argc, char **argv)
 		}
 		i++;
 	}
-	i = 1;
-
-
+	if (flag_d || flag_a)
+		i = 2;
+	else
+		i = 1;
 	while (i < argc)
 	{
 		//printf("%s\n", argv[i]);
