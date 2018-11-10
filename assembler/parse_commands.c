@@ -198,8 +198,9 @@ int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string,
 
 	str = ft_strsplit(string, ' ');
 	// printf("%d %d\n", arg1, g_op_tab[token->c_name].nb_params );
-	while (arg1 < g_op_tab[token->c_name].nb_params)
+	while (str[*i] && arg1 < g_op_tab[token->c_name].nb_params)
 	{
+		printf("%s\n",str[*i] );
 		if (str[*i] == '\0')
 			return (error_message(str[*i]));
 		file->fd = file->fd;
@@ -218,6 +219,11 @@ int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string,
 			break ;
 		}
 		(*i)++;
+	}
+	if (str[*i])
+	{
+		printf("%s\n", "not enough argumetns");
+		return (0);
 	}
 	return (1);
 }
