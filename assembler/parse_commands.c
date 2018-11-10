@@ -54,36 +54,6 @@ int  command_name(char *name)
 	 return (-1);
 }
 
-
-
-// void				add_copy_chain(t_chain **head, t_anthill *room)
-// {
-// 	t_chain			*new;
-// 	t_chain			*last;
-
-// 	if (!head)
-// 		return ;
-// 	new = ft_memalloc(sizeof(t_chain));
-// 	new->ngbr = room;
-// 	new->next = NULL;
-// 	new->nombre = room->name;
-// 	new->id = 0;
-// 	new->start = room->is_start;
-// 	new->end = room->is_end;
-// 	if (*head == NULL)
-// 	{
-// 		new->prev = NULL;
-// 		*head = new;
-// 		return ;
-// 	}
-// 	last = *head;
-// 	while (last->next != NULL)
-// 		last = last->next;
-// 	last->next = new;
-// 	new->prev = last;
-// }
-
-
 void 	bytes_above_filler(t_binfile *file, t_lable *label)
 {
 	t_lable *tmp;
@@ -154,9 +124,9 @@ int 	bytes_above_i(t_lable *label)
 void	token_length(t_t *token, int i, t_lable 	*label) //int 	token_arg_length(t_t *token, int i) by nastia 
 {
 	token->bytes_above_i = bytes_above_i(label);
+	token->c_len = 1;
 	token->c_len += token->has_codage;
-	token->c_len += 1;
-	while (i < 4)
+	while (i < g_op_tab[token->c_name].nb_params)
 	{
 		token->c_len += token->args[i][0] == 0 ? 0 : token->args[i][0] == 1 ? 1 : token->args[i][0] == 11 ? 2 : token->lbl_size;
 		i++;
@@ -171,7 +141,6 @@ void label_length(t_binfile *file, t_lable	*label)
 	bytes_above_filler(file, label);
 	tmp = label->instruct;
 	label->lbl_len = 0;
-	file->fd = file->fd;
 	while (tmp)
 	{
 		label->lbl_len += tmp->c_len;
@@ -184,7 +153,7 @@ void	file_length(t_binfile *file)
 	t_lable	*tmp;
 
 	tmp = file->labels_list;
-	file->file_length  = 0;
+	file->file_length = 0;
 	while (tmp)
 	{
 		file->file_length += tmp->lbl_len;
@@ -210,82 +179,115 @@ int 	token_codage(t_t *token, int i)
 	return (dec);
 }
 
-// і
-
 void	tabs_remover(char *str)
 {
 	int i = 0;
 
 	while (str[i])
 	{
-		if (str[i] == '\t' || str[i] == '\n')
+		if (str[i] == '\t')
 			str[i] = ' ';
 		i++;
 	}
 }
 
-
-void	parse_commands(t_binfile *file)
+int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string, int *i)
 {
 	char	**str = NULL;
+	int		arg1 = 0;
+
+	str = ft_strsplit(string, ' ');
+	while (arg1 < g_op_tab[token->c_name].nb_params)
+	{
+		if (str[*i] == '\0')
+		{
+			printf("%s\n", "not enough arguments");
+			return (0);
+		}
+		file->fd = file->fd;
+		// if (!(arguments_validator(file, token, str[*i], arg1)))
+		// {
+		// 	printf("%s\n", "invalid argument ");
+		// 	return (0);
+		// }
+		token->args[arg1][0] = (ft_strchr(str[*i] ,'r') && !(ft_strchr(str[*i] ,'%'))) ? 1 : ft_strchr(str[*i] ,'%') ? 10 : 11;
+		token->a[arg1++] = ft_strdup(str[*i]);
+		if (arg1 == g_op_tab[token->c_name].nb_params)
+		{
+			command_linker(label, token);
+			if (token->has_codage)
+				token->codage = token_codage(token, 0);
+			token_length(token, 0, label);
+			if (str[*i + 1])
+			{
+				printf("%s\n", "too many arguments");
+				return (0);
+			}
+			break ;
+		}
+		(*i)++;
+	}
+	return (1);
+}
+
+int		parse_commands(t_binfile *file)
+{
+	char	**str = NULL;
+	char	**str_n = NULL;
 	t_t 	*token = NULL;
 
 	t_lable	*label = NULL;
 	int i = 0;
-	int arg1 = 0;
+	int n = 0;
 	file->labels_list = NULL;
 	tabs_remover(file->f_contents);
-	str = ft_strsplit(file->f_contents, ' ');
-	while (str[i])
+	str_n = (ft_strsplit(file->f_contents, '\n'));
+	while (str_n[n])
 	{
+		i = 0;
+		printf("%s\n", str_n[n]);
+		str = ft_strsplit(str_n[n], ' ');
 		if (!(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':')))
 		{
-			if (label != NULL)
+			if (label)
 			{
 				label_length(file, label);
 				labels_linker(file, label);
 				label = NULL;
 			}
 			label = (t_lable *)ft_memalloc(sizeof(t_lable));
-			label->label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(str[i]));
-			ft_strncpy(label->label_name, str[i], ft_strlen(str[i]) - 1);
+			label->label_name = label_name_is_valid(file, str[i++]);
+			if (label->label_name == NULL)
+				return (0);
 		}
-		else if (!token || (token && arg1 == token->arguments))
+		if (str[i])
 		{
 			if (!label)
 				label = (t_lable *)ft_memalloc(sizeof(t_lable));
+			if (command_name(str[i]) == -1)
+				return (0);
 			token = (t_t *)ft_memalloc(sizeof(t_t));
 			token->c_name = command_name(str[i]);
-			token->name_c = ft_strdup(str[i]);
+			token->name_c = ft_strdup(str[i++]);
 			token->arguments =  g_op_tab[token->c_name].nb_params; //ft_cmd_arguments(token->name_c);
 			token->lbl_size = ft_cmd_lbls(token->name_c);
+			//printf(" token->lbl_size %d\n",token->lbl_size );
 			token->has_codage = g_op_tab[token->c_name].has_pcode;//has_codage(token->name_c);
 			token->opcode = g_op_tab[token->c_name].opcode;
+			if (!arguments_filler(file, label, token, str_n[n], &i))
+				return (0);
 		}
-		else
-		{
-			token->args[arg1][0] = (ft_strchr(str[i] ,'r') && !(ft_strchr(str[i] ,'%'))) ? 1 : ft_strchr(str[i] ,'%') ? 10 : 11;
-			token->a[arg1++]= ft_strdup(str[i]);
-			if (arg1 == token->arguments)
-			{
-				command_linker(label, token);
-				if (token->has_codage)
-					token->codage = token_codage(token, 0);
-				token_length(token, 0, label);
-				arg1  = 0;
-				token = NULL;
-			}
-		}
-		i++;
+		n++;
+		//// delete str to avoid leaks
 	}
 	if (label != NULL)
 	{
 		label_length(file, label);
 		labels_linker(file, label);
-		label = NULL;
 	}
 	file_length(file);
-	printf("length of this file DECIMAL === %d HEX  === %x\n", file->file_length, file->file_length);
+	return (1);
+	//printf(" === length of this file DECIMAL === %d HEX  === %x\n", file->file_length, file->file_length);
 
 	
 	// printf("pkokokokokok\n");

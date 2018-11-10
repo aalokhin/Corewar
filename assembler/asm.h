@@ -126,8 +126,7 @@ void			ft_print_inv_input();
 
 
 void			fill_magic_start(t_binfile *bin);
-void			fill_name_comment(t_binfile *bin);
-
+int				fill_name_comment(t_binfile *bin);
 
 
 //**********************************FILE FUNCTIONS****************
@@ -153,16 +152,15 @@ void			ft_clean_parse(char **parse);//strdel char * array
 
 
 
-void		parse_commands(t_binfile *file);
+int			parse_commands(t_binfile *file);
 int			ft_cmd_arguments(char	*c_name);
 
 int			ft_cmd_lbls(char	*c_name);
 int			has_codage(char	*c_name);
 
+//********************************* VALIDATION FUNCTIONS******************
 
-//********************************* PRINTING FUNCTIONS******************
-
-void	main_printer(t_binfile *file);
-
+char		*label_name_is_valid(t_binfile *file, char *str);
+int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i);
 
 #endif

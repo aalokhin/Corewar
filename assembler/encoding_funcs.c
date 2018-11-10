@@ -11,38 +11,43 @@ void	fill_magic_start(t_binfile *bin)
 
 }
 
-void	fill_name_comment(t_binfile *bin)
+int		fill_name_comment(t_binfile *bin)
 {
 	size_t i;
 
 	i = 0;
 	char 		*str;
 	//printf("~~~~~~~~~~~~~~~okoko\n");
-	str = ft_strstr(bin->f_contents, ".name");
-	i = 0;
-	size_t tmp = 0;
+	if (ft_strstr(bin->f_contents, ".name") && ft_strstr(bin->f_contents, ".comment"))
+	{
+		str = ft_strstr(bin->f_contents, ".name");
+		i = 0;
+		size_t tmp = 0;
 
-	while(str[i] != '"')
-		i++;
-	tmp = ++i;
-	while(str[i] != '"')
-		i++;
-	bin->name = ft_strnew(PROG_NAME_LENGTH );
-	ft_strncpy(bin->name, &str[tmp], i - tmp);
-	//printf("name of the champ is {%s} \n", bin->name);
+		while(str[i] != '"')
+			i++;
+		tmp = ++i;
+		while(str[i] != '"')
+			i++;
+		bin->name = ft_strnew(PROG_NAME_LENGTH );
+		ft_strncpy(bin->name, &str[tmp], i - tmp);
+		//printf("name of the champ is {%s} \n", bin->name);
 
-	str = ft_strstr(bin->f_contents, ".comment");
-	i = 0;
-	tmp = 0;
-	while(str[i] != '"')
-		i++;
-	tmp = ++i;
-	while(str[i] != '"')
-		i++;
-	bin->comment = ft_strnew(COMMENT_LENGTH);
-	//printf("bin->commet:%s\n", );
-	ft_strncpy(bin->comment, &str[tmp], i - tmp);
-	//printf("\ncomment is of the champ is {%s} \n", bin->comment);
+		str = ft_strstr(bin->f_contents, ".comment");
+		i = 0;
+		tmp = 0;
+		while(str[i] != '"')
+			i++;
+		tmp = ++i;
+		while(str[i] != '"')
+			i++;
+		bin->comment = ft_strnew(COMMENT_LENGTH);
+		//printf("bin->commet:%s\n", );
+		ft_strncpy(bin->comment, &str[tmp], i - tmp);
+		return (1);
+	}
+	else
+		return (0);
 }
 
 

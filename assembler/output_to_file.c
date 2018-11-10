@@ -1,8 +1,5 @@
 #include "asm.h"
 
-
-
-
 void	fill_corfile_contents(t_binfile *bin)
 {
 	//******************************* filling magic *************************
