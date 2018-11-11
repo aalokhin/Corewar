@@ -78,7 +78,7 @@ typedef struct	s_binfile
 	unsigned char	a[4];
 
 	char 			*f_contents;//a buf where all the data is stored written as a single line
-
+	char			*copy; // copy of f_contents - will be used for validation
 	int				flag_a;//flag a
 	char			*arg_name;//string argv[i]
 
@@ -166,5 +166,8 @@ int			has_codage(char	*c_name);
 
 char		*label_name_is_valid(t_binfile *file, char *str);
 int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i);
+int			error_message(char *arg);
+int 		error_invalid_arg_type(t_t *command, int arg, int type);
+int			error_message_label(char *label, char *arg);
 
 #endif

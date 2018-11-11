@@ -41,28 +41,26 @@ static t_op	g_op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-// int			label_name_is_duplicate(t_binfile *file, char *label_name)
-// {
-// 	t_lable	*tmp;
-
-// 	if (file->labels_list)
-// 	{
-// 		tmp = file->labels_list;
-// 		while (tmp)
-// 		{
-// 			if (tmp->label_name)
-// 			{
-// 				if (!(ft_strcmp(tmp->label_name, label_name)))
-// 				{
-// 					printf("%s\n", "duplicate labels name");
-// 					return (1);
-// 				}
-// 			}
-// 			tmp = tmp->next;
-// 		}
-// 	}
-// 	return (0);
-// }
+int			label_name_is_duplicate(t_binfile *file, char *label_name)
+{
+	t_lable	*tmp;
+	if (file->labels_list)
+	{
+		tmp = file->labels_list;
+		while (tmp)
+		{
+			if (tmp->label_name)
+			{
+				if (!(ft_strcmp(tmp->label_name, label_name)))
+				{
+					printf("%s\n", "duplicate labels name");
+					return (1);
+				}
+			}
+			tmp = tmp->next;		}
+	}
+	return (0);
+}
 
 char		*label_name_is_valid(t_binfile *file, char *str) /// only label chars copier :)
 {
@@ -81,38 +79,41 @@ char		*label_name_is_valid(t_binfile *file, char *str) /// only label chars copi
 	}
 	label_name[i] = '\0';
 	file->fd = file->fd;
-	//label_name_is_duplicate(file, label_name) ? NULL : 
-	return (label_name);
+	return (label_name_is_duplicate(file, label_name) ? NULL : label_name);
 }
 
 int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i) /// перевіряємо чи існує такий лейбл і чи аргументи співпадають з табличкою  
 {
 	int		size = 0;
 	char	*label_name;
+	int		to_count;
 
+ 	to_count = g_op_tab[token->c_name].param_types[i];
 	size = (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%'))) ? 1 : ft_strchr(arg ,'%') ? 2 : 4;
-	if (size == g_op_tab[token->c_name].param_types[i] || g_op_tab[token->c_name].param_types[i] == 7
-		|| (size < g_op_tab[token->c_name].param_types[i]
-		&& (g_op_tab[token->c_name].param_types[i] - size == T_REG
-		|| g_op_tab[token->c_name].param_types[i] - size == T_DIR
-		||  g_op_tab[token->c_name].param_types[i] - size == T_IND)))
-	{
-		if (size == T_REG)
-		{
-			if (ft_atoi(arg + 1)  > 16)
-				return (0);
-		}
-		else if (ft_strstr(arg, "%:"))
-		{
-			label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(arg));
-			label_name = arg + 2;
-			label_name[ft_strlen(arg) - 2] = ':';
-			label_name[ft_strlen(arg) - 1] = '\0';
-			if (!(ft_strstr(file->f_contents, label_name)))
-				return (0);
-		}
-		return (1);
-	}
-	return (0);
-}
+	file->fd = file->fd;
+ 	if (size == to_count || to_count == 7 || (size < to_count && to_count - size != size  && (to_count - size == T_REG
+ 		|| to_count  - size == T_DIR ||  to_count - size == T_IND)))
+ 	{
+	//printf("%s\n", arg );
+ 		// if (size == T_REG)
+ 		// {
+ 		// 	if (ft_atoi(arg + 1)  > 16) /// not sure if needed  reg less than 16 :)
+ 		// 		return (0);
+ 		// }
+ 		if (ft_strstr(arg, "%:"))
+ 		{
+ 			label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(arg));
+ 			label_name = arg + 2;
+ 			label_name[ft_strlen(arg) - 2] = ':';
+ 			label_name[ft_strlen(arg) - 1] = '\0';
+ 			if (!(ft_strstr(file->f_contents, label_name)))
+ 			{
+ 				label_name[ft_strlen(label_name) - 1] = '\0';
+ 				return (error_message_label(label_name, arg));
+ 			}
+ 		}
+ 		return (1);
+ 	}
+ 		return (error_invalid_arg_type(token, i, size));
+ 	}
 //label_exist

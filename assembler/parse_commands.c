@@ -200,16 +200,10 @@ int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string,
 	while (arg1 < g_op_tab[token->c_name].nb_params)
 	{
 		if (str[*i] == '\0')
-		{
-			printf("%s\n", "not enough arguments");
-			return (0);
-		}
+			return (error_message(str[*i]));
 		file->fd = file->fd;
-		// if (!(arguments_validator(file, token, str[*i], arg1)))
-		// {
-		// 	printf("%s\n", "invalid argument ");
-		// 	return (0);
-		// }
+		if (!(arguments_validator(file, token, str[*i], arg1)))
+ 			return (0);
 		token->args[arg1][0] = (ft_strchr(str[*i] ,'r') && !(ft_strchr(str[*i] ,'%'))) ? 1 : ft_strchr(str[*i] ,'%') ? 10 : 11;
 		token->a[arg1++] = ft_strdup(str[*i]);
 		if (arg1 == g_op_tab[token->c_name].nb_params)
@@ -219,10 +213,7 @@ int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string,
 				token->codage = token_codage(token, 0);
 			token_length(token, 0, label);
 			if (str[*i + 1])
-			{
-				printf("%s\n", "too many arguments");
-				return (0);
-			}
+				return (error_message(str[*i + 1]));
 			break ;
 		}
 		(*i)++;
@@ -245,7 +236,7 @@ int		parse_commands(t_binfile *file)
 	while (str_n[n])
 	{
 		i = 0;
-		printf("%s\n", str_n[n]);
+		//printf("%s\n", str_n[n]);
 		str = ft_strsplit(str_n[n], ' ');
 		if (!(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':')))
 		{
@@ -265,7 +256,7 @@ int		parse_commands(t_binfile *file)
 			if (!label)
 				label = (t_lable *)ft_memalloc(sizeof(t_lable));
 			if (command_name(str[i]) == -1)
-				return (0);
+				return (error_message(str[i]));
 			token = (t_t *)ft_memalloc(sizeof(t_t));
 			token->c_name = command_name(str[i]);
 			token->name_c = ft_strdup(str[i++]);
