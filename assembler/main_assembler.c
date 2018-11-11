@@ -51,6 +51,7 @@ int 	file_processing(t_binfile *bin)
 	if ((*bin).flag_a == 1)
 	{
 	 	ft_print_flag_a(&(*bin));
+	 	flag_a_output(&(*bin));
 	 	return (0);
 	}
 	create_cor_file(&(*bin)); //creates the file iteslf and fills out the contents
@@ -195,10 +196,8 @@ int 		main(int argc, char **argv)
 		}
 		i++;
 	}
-	if (flag_d || flag_a)
-		i = 2;
-	else
-		i = 1;
+	i = (flag_d || flag_a) ?  2 : 1; 
+
 	while (i < argc)
 	{
 		//printf("%s\n", argv[i]);

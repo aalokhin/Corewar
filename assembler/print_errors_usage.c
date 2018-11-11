@@ -33,15 +33,6 @@ void	ft_print_inv_input()
 	ft_printf("Input error\n");
 }
 
-void	ft_print_flag_a(t_binfile *bin)
-{
-	ft_printf("Dumping annotated program on standard output\n");
-	printf("Program size : %u bytes\n", bin->champ_size_nbr);
-	printf("Name : %s \n", bin->name);
-	printf("Comment : %s\n\n", bin->comment);
-
-	
-}
 
 
 int			error_message_label(char *label, char *arg)

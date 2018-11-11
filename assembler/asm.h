@@ -171,4 +171,9 @@ int			error_message(char *arg);
 int 		error_invalid_arg_type(t_t *command, int arg, int type);
 int			error_message_label(char *label, char *arg);
 
+
+//*************************** FLAG A ***********************************
+void	 	flag_a_output(t_binfile *bin);
+
+
 #endif
