@@ -20,9 +20,9 @@ SFILES = main.c vm_cycle.c l_funcs.c funcs_2_9.c init_funcs.c args_parsing.c vis
 
 OFILES = main.o vm_cycle.o l_funcs.o funcs_2_9.o init_funcs.o args_parsing.o visualastia.o
 
-ASM_SFILES := ./assembler/a_flag_output_funcs.c ./assembler/validation_funcs.c ./assembler/labels_nastia.c ./assembler/main_assembler.c ./assembler/print_errors_usage.c ./assembler/encoding_funcs.c ./assembler/output_to_file.c ./assembler/parse_file_funcs.c  ./assembler/parse_commands.c ./assembler/commands_help_funcs.c
+ASM_SFILES := ./assembler/validation_funcs.c ./assembler/labels_nastia.c ./assembler/main_assembler.c ./assembler/print_errors_usage.c ./assembler/encoding_funcs.c ./assembler/output_to_file.c ./assembler/parse_file_funcs.c  ./assembler/parse_commands.c ./assembler/commands_help_funcs.c
 
-ASM_OFILES :=  ./assembler/a_flag_output_funcs.o ./assembler/validation_funcs.o ./assembler/labels_nastia.o ./assembler/main_assembler.o ./assembler/print_errors_usage.o  ./assembler/encoding_funcs.o ./assembler/output_to_file.o ./assembler/parse_file_funcs.o  ./assembler/parse_commands.o ./assembler/commands_help_funcs.o
+ASM_OFILES := ./assembler/validation_funcs.o ./assembler/labels_nastia.o ./assembler/main_assembler.o ./assembler/print_errors_usage.o  ./assembler/encoding_funcs.o ./assembler/output_to_file.o ./assembler/parse_file_funcs.o  ./assembler/parse_commands.o ./assembler/commands_help_funcs.o
 
 LIBFT = $(LIBFT_DIR)libftprintf.a
 LIBFT_DIR = $(LIB_DIR)
@@ -52,23 +52,23 @@ all: $(NAME) $(ASM)
 $(NAME): $(LIBFT) $(OFILES)
 	@echo "$(GREEN)compiling libft... ready"
 	@echo "$(BLUE)compiling virtual machine..."
-	$(CC) $(CC_FLAGS) $(OFILES) -lncurses $(LIBFT) -o $(NAME)
+	$(CC) $(OFILES) -lncurses $(LIBFT) -o $(NAME)
 	
 	@echo "$(CYAN)Ready!"
 	@echo "$(PURPLE)comiling assembler ..."
 
 $(ASM): $(ASM_OFILES)
 	@echo "$(PURPLE)comiling assembler ..."
-	$(CC) $(CC_FLAGS) $(ASM_OFILES) $(LIBFT) -o $(ASM)
+	$(CC) $(ASM_OFILES) $(LIBFT) -o $(ASM)
 	@echo "$(CYAN)Assembler Ready!"
 	@echo "$(COLOR_OFF)"
 
 
 $(OFILES): %.o:%.c
-	$(CC) -c $< -o $@ $(CC_FLAGS) $(HEADER_FLAGS)
+	$(CC) -c $< -o $@ $(HEADER_FLAGS)
 
 $(ASM_OFILES): %.o:%.c
-	$(CC) -c $< -o $@ $(CC_FLAGS) $(ASSEMBLER_FLAGS)
+	$(CC) -c $< -o $@ $(ASSEMBLER_FLAGS)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)

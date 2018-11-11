@@ -44,6 +44,7 @@ static t_op	g_op_tab[17] =
 int			label_name_is_duplicate(t_binfile *file, char *label_name)
 {
 	t_lable	*tmp;
+
 	if (file->labels_list)
 	{
 		tmp = file->labels_list;
@@ -57,7 +58,8 @@ int			label_name_is_duplicate(t_binfile *file, char *label_name)
 					return (1);
 				}
 			}
-			tmp = tmp->next;		}
+			tmp = tmp->next;
+		}
 	}
 	return (0);
 }
@@ -88,32 +90,33 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i) /// Ð¿Ð
 	char	*label_name;
 	int		to_count;
 
- 	to_count = g_op_tab[token->c_name].param_types[i];
+	to_count = g_op_tab[token->c_name].param_types[i];
 	size = (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%'))) ? 1 : ft_strchr(arg ,'%') ? 2 : 4;
+	//printf("%s == %d %d\n",token->name_c, to_count, size);
 	file->fd = file->fd;
- 	if (size == to_count || to_count == 7 || (size < to_count && to_count - size != size  && (to_count - size == T_REG
- 		|| to_count  - size == T_DIR ||  to_count - size == T_IND)))
- 	{
-	//printf("%s\n", arg );
- 		// if (size == T_REG)
- 		// {
- 		// 	if (ft_atoi(arg + 1)  > 16) /// not sure if needed  reg less than 16 :)
- 		// 		return (0);
- 		// }
- 		if (ft_strstr(arg, "%:"))
- 		{
- 			label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(arg));
- 			label_name = arg + 2;
- 			label_name[ft_strlen(arg) - 2] = ':';
- 			label_name[ft_strlen(arg) - 1] = '\0';
- 			if (!(ft_strstr(file->f_contents, label_name)))
- 			{
- 				label_name[ft_strlen(label_name) - 1] = '\0';
- 				return (error_message_label(label_name, arg));
- 			}
- 		}
- 		return (1);
- 	}
- 		return (error_invalid_arg_type(token, i, size));
- 	}
+	if (size == to_count || to_count == 7 || (size < to_count && to_count - size != size  && (to_count - size == T_REG
+		|| to_count  - size == T_DIR ||  to_count - size == T_IND)))
+	{
+		//printf("%s\n", arg );
+		// if (size == T_REG)
+		// {
+		// 	if (ft_atoi(arg + 1)  > 16) /// not sure if needed  reg less than 16 :)
+		// 		return (0);
+		// }
+		if (ft_strstr(arg, "%:"))
+		{
+			label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(arg));
+			label_name = arg + 2;
+			label_name[ft_strlen(arg) - 2] = ':';
+			label_name[ft_strlen(arg) - 1] = '\0';
+			if (!(ft_strstr(file->f_contents, label_name)))
+			{
+				label_name[ft_strlen(label_name) - 1] = '\0';
+				return (error_message_label(label_name, arg));
+			}
+		}
+		return (1);
+	}
+	return (error_invalid_arg_type(token, i, size));
+}
 //label_exist

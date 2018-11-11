@@ -148,7 +148,7 @@ void 		parse_file(t_binfile *bin, char (*contents)[]) //cleaning from  comments 
 	k = 0;
 	while (i < bin->arg_length)//(i < bin->arg_length)
 	{
-		if ((*contents)[i] == '#' || (*contents)[i] == ';')
+		if ((*contents)[i] == '#')
 		{
 			len = 0;
 			//printf("1==>%c<==1\n", (*contents)[i]);

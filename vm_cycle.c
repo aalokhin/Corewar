@@ -149,15 +149,15 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		{
 			if ((*processes).if_live && (*processes).cmd >= 1 && (*processes).cmd <= 16)
 			{
-				if (op_tab[map[(*processes).current_position] - 1].codage)
+				if (op_tab[(*processes).cmd - 1].codage)
 				{
-					id_counter = ((*processes).current_position + 1) % MEM_SIZE;
+					id_counter = ((*processes).current_position + 1 + MEM_SIZE) % MEM_SIZE;
 					take_args(map[id_counter], processes);
 					get_args_values(processes, map, &id_counter);
 				}
 				else
 				{
-					id_counter = (*processes).current_position;
+					id_counter = ((*processes).current_position + MEM_SIZE) % MEM_SIZE;
 					(*processes).argv[0][0] = DIR_CODE;
 					get_arg_vals[(*processes).argv[0][0] - 1](processes, map, 0, &id_counter);
 				}
@@ -169,20 +169,20 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 						instruct[(*processes).cmd - 1](processes, (*processes).id, &main_cycle, map);
 					if ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))
 					{
-						main_cycle.indexes[(*processes).current_position][1] = 0;
+						main_cycle.indexes[((*processes).current_position + MEM_SIZE) % MEM_SIZE][1] = 0;
 						(*processes).current_position = id_counter + 1;
 					}
-					(*processes).current_position %= MEM_SIZE;
-					(*processes).cmd = map[(*processes).current_position];
+					(*processes).current_position = ((*processes).current_position + MEM_SIZE) % MEM_SIZE;
+					(*processes).cmd = map[((*processes).current_position + MEM_SIZE) % MEM_SIZE];
 					if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
 						(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
 					else
 						(*processes).cycles_wait = 1;
 					if ((*processes).parent_nbr == -1)
-						main_cycle.indexes[(*processes).current_position][0] = (*processes).id + 1;
+						main_cycle.indexes[((*processes).current_position + MEM_SIZE) % MEM_SIZE][0] = (*processes).id + 1;
 					else
-						main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
-					main_cycle.indexes[(*processes).current_position][1] = 1;
+						main_cycle.indexes[(*processes).current_position % MEM_SIZE][0] = (*processes).parent_nbr + 1;
+					main_cycle.indexes[((*processes).current_position + MEM_SIZE) % MEM_SIZE][1] = 1;
 				}
 				else
 					(*processes).cycles_wait--;
@@ -190,19 +190,19 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			}
 			else
 			{
-				main_cycle.indexes[(*processes).current_position][1] = 0;
+				main_cycle.indexes[((*processes).current_position + MEM_SIZE) % MEM_SIZE][1] = 0;
 				(*processes).current_position++;
-				(*processes).current_position %= MEM_SIZE;
-				(*processes).cmd = map[(*processes).current_position];
+				(*processes).current_position = ((*processes).current_position + MEM_SIZE) % MEM_SIZE;
+				(*processes).cmd = map[(*processes).current_position % MEM_SIZE];
 				if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
 					(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
 				else
 					(*processes).cycles_wait = 1;
 				if ((*processes).parent_nbr == -1)
-					main_cycle.indexes[(*processes).current_position][0] = (*processes).id + 1;
+					main_cycle.indexes[((*processes).current_position + MEM_SIZE) % MEM_SIZE][0] = (*processes).id + 1;
 				else
-					main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
-				main_cycle.indexes[(*processes).current_position][1] = 1;
+					main_cycle.indexes[((*processes).current_position + MEM_SIZE) % MEM_SIZE][0] = (*processes).parent_nbr + 1;
+				main_cycle.indexes[((*processes).current_position + MEM_SIZE) % MEM_SIZE][1] = 1;
 			}			
 			if ((*processes).child_proc_lives > NBR_LIVE)
 			{

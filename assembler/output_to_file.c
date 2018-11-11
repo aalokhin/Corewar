@@ -168,6 +168,7 @@ void	fill_corfile_contents(t_binfile *bin)
 		}
 		lable = lable->next;
 	}
-	ft_print_success(bin);
+	printf("Writing output program...\n");
+
 
 }
