@@ -25,7 +25,6 @@ int 	file_processing(t_binfile *bin)
 	read((*bin).fd, file_contents, (*bin).arg_length);
 	file_contents[(*bin).arg_length] = '\0';
 	(*bin).f_contents = ft_strdup(file_contents);
-	(*bin).copy = ft_strdup(file_contents);
 	parse_file(&(*bin), &file_contents);
 	//ft_space(&file_contents, (int)bin->arg_length);
 
@@ -40,7 +39,10 @@ int 	file_processing(t_binfile *bin)
 	(*bin).f_contents = ft_strdup(file_contents); //*********************** magic ept
 	//printf("===>%s<===\n", (*bin).f_contents); 
 	if (!(parse_commands(&(*bin))))//collecting commands labels and staff <==================== Molly
+	{
+		printf("return in parsing\n");
 		return (0);
+	}
 
 	label_distance(&(*bin));
 
