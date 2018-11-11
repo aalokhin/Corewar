@@ -81,6 +81,7 @@ typedef struct	s_binfile
 	char			*copy; // copy of f_contents - will be used for validation
 	int				flag_a;//flag a
 	char			*arg_name;//string argv[i]
+	char			*res_arg_name;
 
 
 
@@ -122,7 +123,7 @@ void			ft_print_usage();
 void 			ft_print_inv_f(char *s_file);
 void			ft_print_flag_a(t_binfile *bin);
 void			ft_print_inv_input();
-
+void 			ft_print_success(t_binfile *bin);
 
 
 

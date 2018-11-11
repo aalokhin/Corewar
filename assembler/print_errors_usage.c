@@ -1,9 +1,21 @@
 #include "asm.h"
 
+void 			ft_print_success(t_binfile *bin)
+{
+	int 		len;
+
+
+	len = ft_strlen(bin->arg_name);
+	printf("Writing output program to %s\n", bin->res_arg_name);
+
+}
+
 void			ft_print_usage()
 {
 	ft_printf("Usage: ./asm [-a] <sourcefile.s>\n");
 	ft_printf("%117s\n", "-a : Instead of creating a .cor file, outputs a stripped and annotated version of the code to the standard output");
+	ft_printf("%117s\n", "-d : Compiles all files in the given directory");
+	ft_printf("%117s\n", "-D : Compiles all files in the given directory and its subdirectories");
 }
 
 void 			ft_print_inv_f(char *s_file)

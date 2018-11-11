@@ -66,6 +66,7 @@ void	create_cor_file(t_binfile *bin)
 		return ;
 	ft_strncpy(corfile, bin->arg_name, len - 1);
 	ft_strcpy(&corfile[len - 1], "cor");
+	bin->res_arg_name = ft_strdup(corfile);
 	//printf("stirng 2 %s\n", corfile);
 	bin->fd_file_out = open(corfile, O_CREAT|O_WRONLY|O_TRUNC, 0777);
 	ft_strdel(&corfile);
