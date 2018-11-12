@@ -15,10 +15,17 @@ int 		find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 			{
 				if (strcmp(search, tmp_lbl->label_name) == 0)
 				{
+					printf("%d %d\n", label->bytes_above, tmp_lbl->bytes_above);
 					if (label->bytes_above < tmp_lbl->bytes_above)
+					{
+						printf("%d\n", tmp_lbl->bytes_above - label->bytes_above - instruct->bytes_above_i);
 						return (tmp_lbl->bytes_above - label->bytes_above - instruct->bytes_above_i);
+					}
 					else
+					{
+						printf("%d\n",tmp_lbl->bytes_above - (label->bytes_above +  instruct->bytes_above_i) );
 						return (tmp_lbl->bytes_above - (label->bytes_above +  instruct->bytes_above_i));
+					}
 				}
 			}
 			tmp_lbl = tmp_lbl->next;
@@ -49,6 +56,7 @@ void	label_distance(t_binfile 	*bin)
 			while(tmpi->a[k])
 			{
 				tmpi->args[k][1] = find_arg_value(bin, tmpi->a[k], tmpi, tmp);
+				//printf(" === = ++++++%d\n", tmpi->args[k][1]);
 				k++;
 			}
 			tmpi = tmpi->next;

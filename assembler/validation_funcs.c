@@ -68,7 +68,7 @@ char		*label_name_is_valid(t_binfile *file, char *str) /// only label chars copi
 	char	*label_name;
 
 	i = 0;
-	if (!(label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(str))))
+	if (!(label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(str) + 1)))
 		return (NULL);
 	while (str[i] && str[i] != LABEL_CHAR)
 	{
@@ -77,7 +77,8 @@ char		*label_name_is_valid(t_binfile *file, char *str) /// only label chars copi
 		label_name[i] = str[i];
 		i++;
 	}
-	label_name[i] = '\0';
+	label_name[i] = ':';
+	label_name[i + 1] = '\0';
 	file->fd = file->fd;
 	return (label_name_is_duplicate(file, label_name) ? NULL : label_name);
 }

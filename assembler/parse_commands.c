@@ -65,6 +65,7 @@ void 	bytes_above_filler(t_binfile *file, t_lable *label)
 		label->bytes_above += tmp->lbl_len;
 		tmp = tmp->next;
 	}
+	printf("%d\n", label->bytes_above );
 }
 
 void			labels_linker(t_binfile *file, t_lable 	*label)
@@ -277,6 +278,7 @@ int		parse_commands(t_binfile *file)
 		labels_linker(file, label);
 	}
 	file_length(file);
+	printf("%x\n", file->file_length );
 	return (1);
 
 
