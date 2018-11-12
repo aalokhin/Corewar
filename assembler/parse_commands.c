@@ -197,15 +197,13 @@ int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string,
 	int		arg1 = 0;
 
 	str = ft_strsplit(string, ' ');
-	// printf("%d %d\n", arg1, g_op_tab[token->c_name].nb_params );
-	while (str[*i] && arg1 < g_op_tab[token->c_name].nb_params)
+	while (arg1 < g_op_tab[token->c_name].nb_params)
 	{
-		printf("%s\n",str[*i] );
 		if (str[*i] == '\0')
 			return (error_message(str[*i]));
 		file->fd = file->fd;
 		if (!(arguments_validator(file, token, str[*i], arg1)))
-			return (0);
+ 			return (0);
 		token->args[arg1][0] = (ft_strchr(str[*i] ,'r') && !(ft_strchr(str[*i] ,'%'))) ? 1 : ft_strchr(str[*i] ,'%') ? 10 : 11;
 		token->a[arg1++] = ft_strdup(str[*i]);
 		if (arg1 == g_op_tab[token->c_name].nb_params)
@@ -219,11 +217,6 @@ int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string,
 			break ;
 		}
 		(*i)++;
-	}
-	if (str[*i])
-	{
-		printf("%s\n", "not enough argumetns");
-		return (0);
 	}
 	return (1);
 }
