@@ -4342,7 +4342,7 @@ It is now cycle 3955
 P    5 | sti r11 -346 20
        | -> store to -346 + 20 = -326 (with pc and mod 55)
 P    4 | ldi -12 0 r3
-       | -> load from -12 + 0 = -12 (with pc and mod 261)
+       | -> load from -12 + 0 = -12 (with pc and mod 773)
 It is now cycle 3956
 It is now cycle 3957
 It is now cycle 3958
@@ -4374,7 +4374,7 @@ It is now cycle 3979
 It is now cycle 3980
 P    6 | live -1
 P    4 | sti r3 438 0
-       | -> store to 438 + 0 = 438 (with pc and mod 717)
+       | -> store to 438 + 0 = 438 (with pc and mod 1229)
 It is now cycle 3981
 It is now cycle 3982
 It is now cycle 3983
@@ -4495,7 +4495,7 @@ It is now cycle 4076
 P    5 | sti r11 -346 24
        | -> store to -346 + 24 = -322 (with pc and mod 59)
 P    4 | ldi -12 4 r3
-       | -> load from -12 + 4 = -8 (with pc and mod 265)
+       | -> load from -12 + 4 = -8 (with pc and mod 777)
 It is now cycle 4077
 It is now cycle 4078
 It is now cycle 4079
@@ -4526,7 +4526,7 @@ It is now cycle 4100
 P    6 | live -1
 It is now cycle 4101
 P    4 | sti r3 438 4
-       | -> store to 438 + 4 = 442 (with pc and mod 721)
+       | -> store to 438 + 4 = 442 (with pc and mod 1233)
 It is now cycle 4102
 It is now cycle 4103
 It is now cycle 4104
@@ -4665,7 +4665,7 @@ It is now cycle 4197
 P    5 | sti r11 -346 28
        | -> store to -346 + 28 = -318 (with pc and mod 63)
 P    4 | ldi -12 8 r3
-       | -> load from -12 + 8 = -4 (with pc and mod 269)
+       | -> load from -12 + 8 = -4 (with pc and mod 781)
 It is now cycle 4198
 It is now cycle 4199
 It is now cycle 4200
@@ -4701,7 +4701,7 @@ It is now cycle 4221
 P    8 | zjmp 415 FAILED
 It is now cycle 4222
 P    4 | sti r3 438 8
-       | -> store to 438 + 8 = 446 (with pc and mod 725)
+       | -> store to 438 + 8 = 446 (with pc and mod 1237)
 It is now cycle 4223
 It is now cycle 4224
 It is now cycle 4225
@@ -4840,7 +4840,7 @@ It is now cycle 4318
 P    5 | sti r11 -346 32
        | -> store to -346 + 32 = -314 (with pc and mod 67)
 P    4 | ldi -12 12 r3
-       | -> load from -12 + 12 = 0 (with pc and mod 273)
+       | -> load from -12 + 12 = 0 (with pc and mod 785)
 It is now cycle 4319
 It is now cycle 4320
 P    6 | live -1
@@ -4875,7 +4875,7 @@ It is now cycle 4342
 P    8 | zjmp 415 FAILED
 It is now cycle 4343
 P    4 | sti r3 438 12
-       | -> store to 438 + 12 = 450 (with pc and mod 729)
+       | -> store to 438 + 12 = 450 (with pc and mod 1241)
 It is now cycle 4344
 It is now cycle 4345
 P    9 | live -1
@@ -5022,7 +5022,7 @@ It is now cycle 4439
 P    5 | sti r11 -346 36
        | -> store to -346 + 36 = -310 (with pc and mod 71)
 P    4 | ldi -12 16 r3
-       | -> load from -12 + 16 = 4 (with pc and mod 277)
+       | -> load from -12 + 16 = 4 (with pc and mod 789)
 It is now cycle 4440
 P   10 | live -1
 P    6 | live -1
@@ -5061,7 +5061,7 @@ It is now cycle 4463
 P    8 | zjmp 415 FAILED
 It is now cycle 4464
 P    4 | sti r3 438 16
-       | -> store to 438 + 16 = 454 (with pc and mod 733)
+       | -> store to 438 + 16 = 454 (with pc and mod 1245)
 It is now cycle 4465
 P    9 | live -1
 It is now cycle 4466
@@ -5211,7 +5211,7 @@ P    6 | live -1
 P    5 | sti r11 -346 40
        | -> store to -346 + 40 = -306 (with pc and mod 75)
 P    4 | ldi -12 20 r3
-       | -> load from -12 + 20 = 8 (with pc and mod 281)
+       | -> load from -12 + 20 = 8 (with pc and mod 793)
 It is now cycle 4561
 It is now cycle 4562
 It is now cycle 4563
@@ -5249,7 +5249,7 @@ P    8 | zjmp 415 FAILED
 It is now cycle 4585
 P    9 | live -1
 P    4 | sti r3 438 20
-       | -> store to 438 + 20 = 458 (with pc and mod 737)
+       | -> store to 438 + 20 = 458 (with pc and mod 1249)
 It is now cycle 4586
 It is now cycle 4587
 It is now cycle 4588
@@ -5405,7 +5405,7 @@ It is now cycle 4681
 P    5 | sti r11 -346 44
        | -> store to -346 + 44 = -302 (with pc and mod 79)
 P    4 | ldi -12 24 r3
-       | -> load from -12 + 24 = 12 (with pc and mod 285)
+       | -> load from -12 + 24 = 12 (with pc and mod 797)
 It is now cycle 4682
 It is now cycle 4683
 It is now cycle 4684
@@ -5446,7 +5446,7 @@ P    9 | live -1
 P    8 | zjmp 415 FAILED
 It is now cycle 4706
 P    4 | sti r3 438 24
-       | -> store to 438 + 24 = 462 (with pc and mod 741)
+       | -> store to 438 + 24 = 462 (with pc and mod 1253)
 It is now cycle 4707
 It is now cycle 4708
 It is now cycle 4709
@@ -5605,7 +5605,7 @@ P    6 | live -1
 It is now cycle 4801
 It is now cycle 4802
 P    4 | ldi -12 28 r3
-       | -> load from -12 + 28 = 16 (with pc and mod 289)
+       | -> load from -12 + 28 = 16 (with pc and mod 801)
 It is now cycle 4803
 It is now cycle 4804
 It is now cycle 4805
@@ -5646,7 +5646,7 @@ It is now cycle 4826
 P    8 | zjmp 415 FAILED
 It is now cycle 4827
 P    4 | sti r3 438 28
-       | -> store to 438 + 28 = 466 (with pc and mod 745)
+       | -> store to 438 + 28 = 466 (with pc and mod 1257)
 It is now cycle 4828
 It is now cycle 4829
 It is now cycle 4830
@@ -5797,7 +5797,7 @@ P    8 | add r2 r4 r2
 It is now cycle 4922
 It is now cycle 4923
 P    4 | ldi -12 32 r3
-       | -> load from -12 + 32 = 20 (with pc and mod 293)
+       | -> load from -12 + 32 = 20 (with pc and mod 805)
 It is now cycle 4924
 It is now cycle 4925
 P    9 | zjmp -120 OK
@@ -5839,7 +5839,7 @@ It is now cycle 4947
 P    8 | zjmp 415 FAILED
 It is now cycle 4948
 P    4 | sti r3 438 32
-       | -> store to 438 + 32 = 470 (with pc and mod 749)
+       | -> store to 438 + 32 = 470 (with pc and mod 1261)
 It is now cycle 4949
 It is now cycle 4950
 P   10 | live -1
@@ -6008,7 +6008,7 @@ P    8 | add r2 r4 r2
 It is now cycle 5043
 It is now cycle 5044
 P    4 | ldi -12 36 r3
-       | -> load from -12 + 36 = 24 (with pc and mod 297)
+       | -> load from -12 + 36 = 24 (with pc and mod 809)
 It is now cycle 5045
 P    9 | live -1
 It is now cycle 5046
@@ -6050,7 +6050,7 @@ It is now cycle 5068
 P    8 | zjmp 415 FAILED
 It is now cycle 5069
 P    4 | sti r3 438 36
-       | -> store to 438 + 36 = 474 (with pc and mod 753)
+       | -> store to 438 + 36 = 474 (with pc and mod 1265)
 It is now cycle 5070
 P   13 | live -1
 P   10 | live -1
@@ -6216,7 +6216,7 @@ It is now cycle 5164
 It is now cycle 5165
 P    9 | live -1
 P    4 | ldi -12 40 r3
-       | -> load from -12 + 40 = 28 (with pc and mod 301)
+       | -> load from -12 + 40 = 28 (with pc and mod 813)
 It is now cycle 5166
 It is now cycle 5167
 It is now cycle 5168
@@ -6259,7 +6259,7 @@ P   13 | live -1
 P   10 | live -1
 P    6 | live -1
 P    4 | sti r3 438 40
-       | -> store to 438 + 40 = 478 (with pc and mod 757)
+       | -> store to 438 + 40 = 478 (with pc and mod 1269)
 It is now cycle 5191
 It is now cycle 5192
 It is now cycle 5193
@@ -6434,7 +6434,7 @@ P   14 | live -1
 P    9 | live -1
 It is now cycle 5286
 P    4 | ldi -12 44 r3
-       | -> load from -12 + 44 = 32 (with pc and mod 305)
+       | -> load from -12 + 44 = 32 (with pc and mod 817)
 It is now cycle 5287
 It is now cycle 5288
 It is now cycle 5289
@@ -6480,7 +6480,7 @@ P    8 | zjmp 415 FAILED
 P    6 | live -1
 It is now cycle 5311
 P    4 | sti r3 438 44
-       | -> store to 438 + 44 = 482 (with pc and mod 761)
+       | -> store to 438 + 44 = 482 (with pc and mod 1273)
 It is now cycle 5312
 It is now cycle 5313
 It is now cycle 5314
@@ -6567,6 +6567,7 @@ It is now cycle 5360
 P   13 | live -1
 P   10 | live -1
 P    6 | live -1
+P    4 | ld 0 r2
 It is now cycle 5361
 It is now cycle 5362
 P    5 | ldi -12 20 r11
@@ -6587,6 +6588,7 @@ P   10 | live -1
 P    8 | ldi -12 40 r3
        | -> load from -12 + 40 = 28 (with pc and mod 357)
 P    6 | live -1
+P    4 | live -1
 It is now cycle 5371
 It is now cycle 5372
 It is now cycle 5373
@@ -6629,6 +6631,8 @@ P   14 | live -1
 P    9 | live -1
 P    8 | sti r3 438 40
        | -> store to 438 + 40 = 478 (with pc and mod 813)
+P    4 | ldi -12 0 r3
+       | -> load from -12 + 0 = -12 (with pc and mod 1229)
 It is now cycle 5396
 It is now cycle 5397
 P    5 | add r10 r4 r10
@@ -6955,22 +6959,18 @@ It is now cycle 5583
 It is now cycle 5584
 It is now cycle 5585
 P   14 | live -1
-P    9 | live -1
 It is now cycle 5586
 It is now cycle 5587
 It is now cycle 5588
 It is now cycle 5589
 It is now cycle 5590
 P   13 | live -1
-P   10 | live -1
-P    6 | live -1
 It is now cycle 5591
 It is now cycle 5592
 It is now cycle 5593
 It is now cycle 5594
 It is now cycle 5595
 P   14 | live -1
-P    9 | live -1
 It is now cycle 5596
 It is now cycle 5597
 It is now cycle 5598
@@ -6979,19 +6979,12 @@ It is now cycle 5600
 P   13 | live -1
 P   12 | sti r11 -346 20
        | -> store to -346 + 20 = -326 (with pc and mod 55)
-P   10 | live -1
-P    8 | ldi -12 0 r3
-       | -> load from -12 + 0 = -12 (with pc and mod 261)
-P    6 | live -1
 It is now cycle 5601
 It is now cycle 5602
 It is now cycle 5603
 It is now cycle 5604
-P    5 | ldi -12 28 r11
-       | -> load from -12 + 28 = 16 (with pc and mod 63)
 It is now cycle 5605
 P   14 | live -1
-P    9 | live -1
 It is now cycle 5606
 It is now cycle 5607
 It is now cycle 5608
@@ -6999,15 +6992,12 @@ It is now cycle 5609
 It is now cycle 5610
 P   13 | live -1
 P   12 | add r10 r4 r10
-P   10 | live -1
-P    6 | live -1
 It is now cycle 5611
 It is now cycle 5612
 It is now cycle 5613
 It is now cycle 5614
 It is now cycle 5615
 P   14 | live -1
-P    9 | live -1
 It is now cycle 5616
 P   12 | xor 48 24 r7
 It is now cycle 5617
@@ -7015,96 +7005,69 @@ It is now cycle 5618
 It is now cycle 5619
 It is now cycle 5620
 P   13 | live -1
-P   10 | live -1
-P    6 | live -1
 It is now cycle 5621
 It is now cycle 5622
 It is now cycle 5623
 It is now cycle 5624
 It is now cycle 5625
 P   14 | live -1
-P    9 | live -1
-P    8 | sti r3 438 0
-       | -> store to 438 + 0 = 438 (with pc and mod 717)
 It is now cycle 5626
 It is now cycle 5627
 It is now cycle 5628
 It is now cycle 5629
-P    5 | sti r11 -346 28
-       | -> store to -346 + 28 = -318 (with pc and mod -265)
 It is now cycle 5630
 P   13 | live -1
-P   10 | live -1
-P    6 | live -1
 It is now cycle 5631
 It is now cycle 5632
 It is now cycle 5633
 It is now cycle 5634
 It is now cycle 5635
 P   14 | live -1
-P    9 | live -1
-P    8 | add r2 r4 r2
 It is now cycle 5636
 P   12 | zjmp -361 FAILED
 It is now cycle 5637
 It is now cycle 5638
 It is now cycle 5639
-P    5 | add r10 r4 r10
 It is now cycle 5640
 P   13 | live -1
-P   10 | live -1
 It is now cycle 5641
 P   12 | ld 0 r15
-P    8 | xor 48 4 r7
 It is now cycle 5642
 It is now cycle 5643
 It is now cycle 5644
 It is now cycle 5645
 P   14 | live -1
-P    9 | live -1
-P    5 | xor 48 32 r7
 It is now cycle 5646
 It is now cycle 5647
 It is now cycle 5648
 It is now cycle 5649
 It is now cycle 5650
 P   13 | live -1
-P   10 | live -1
-P    6 | zjmp -120 OK
 It is now cycle 5651
 It is now cycle 5652
 It is now cycle 5653
 It is now cycle 5654
 It is now cycle 5655
 P   14 | live -1
-P    9 | live -1
 It is now cycle 5656
 It is now cycle 5657
 It is now cycle 5658
 It is now cycle 5659
 It is now cycle 5660
 P   13 | live -1
-P   10 | live -1
-P    6 | live -1
 It is now cycle 5661
 P   12 | zjmp -36 OK
-P    8 | zjmp 415 FAILED
 It is now cycle 5662
 It is now cycle 5663
 It is now cycle 5664
 It is now cycle 5665
 P   14 | live -1
-P    9 | live -1
-P    5 | zjmp -361 FAILED
 It is now cycle 5666
-P    8 | ld 0 r15
 It is now cycle 5667
 It is now cycle 5668
 It is now cycle 5669
 It is now cycle 5670
 P   13 | live -1
-P    6 | live -1
-P    5 | ld 0 r15
 It is now cycle 5671
 P   12 | live -1
 It is now cycle 5672
@@ -7112,7 +7075,6 @@ It is now cycle 5673
 It is now cycle 5674
 It is now cycle 5675
 P   14 | live -1
-P    9 | live -1
 It is now cycle 5676
 It is now cycle 5677
 It is now cycle 5678
@@ -7138,6 +7100,8 @@ It is now cycle 5694
 It is now cycle 5695
 P   14 | live -1
 It is now cycle 5696
+P   12 | ldi -12 24 r11
+       | -> load from -12 + 24 = 12 (with pc and mod 387)
 It is now cycle 5697
 It is now cycle 5698
 It is now cycle 5699
@@ -7157,62 +7121,4 @@ It is now cycle 5710
 P   13 | live -1
 It is now cycle 5711
 It is now cycle 5712
-It is now cycle 5713
-It is now cycle 5714
-It is now cycle 5715
-P   14 | live -1
-It is now cycle 5716
-It is now cycle 5717
-It is now cycle 5718
-It is now cycle 5719
-It is now cycle 5720
-P   13 | live -1
-It is now cycle 5721
-It is now cycle 5722
-It is now cycle 5723
-It is now cycle 5724
-It is now cycle 5725
-It is now cycle 5726
-It is now cycle 5727
-It is now cycle 5728
-It is now cycle 5729
-It is now cycle 5730
-P   13 | live -1
-It is now cycle 5731
-It is now cycle 5732
-It is now cycle 5733
-It is now cycle 5734
-It is now cycle 5735
-P   14 | zjmp -120 OK
-It is now cycle 5736
-It is now cycle 5737
-It is now cycle 5738
-It is now cycle 5739
-It is now cycle 5740
-P   13 | live -1
-It is now cycle 5741
-It is now cycle 5742
-It is now cycle 5743
-It is now cycle 5744
-It is now cycle 5745
-P   14 | live -1
-It is now cycle 5746
-It is now cycle 5747
-It is now cycle 5748
-It is now cycle 5749
-It is now cycle 5750
-It is now cycle 5751
-It is now cycle 5752
-It is now cycle 5753
-It is now cycle 5754
-It is now cycle 5755
-P   14 | live -1
-It is now cycle 5756
-It is now cycle 5757
-It is now cycle 5758
-It is now cycle 5759
-It is now cycle 5760
-P   13 | zjmp -120 OK
-It is now cycle 5761
-It is now cycle 5762
 Contestant 1, "Sliders", has won !

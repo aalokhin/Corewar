@@ -46,6 +46,7 @@ void main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).winner_name = NULL;
 	(*main_cycle).winner_id = 0;
 	(*main_cycle).head_proc = NULL;
+	(*main_cycle).start_bots = (*params).bots_quantity;
 }
 
 t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
@@ -68,6 +69,7 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 		(*processes).carry = 0;
 		(*processes).parent_nbr = -1;
 		(*processes).if_live = 1;
+		(*processes).lives = 0;
 		(*processes).cmd = map[(*processes).current_position];
 		if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
 			(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;

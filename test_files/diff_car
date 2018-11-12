@@ -1,1102 +1,293 @@
-2638c2638
-<        | -> store to 4 + 400 = 404 (with pc and mod 1029)
+5816,5817c5816,5817
+< P   16 | live 1
+< P   15 | live 1
 ---
->        | -> store to 4 + 400 = 404 (with pc and mod 517)
-2640c2640
-<        | -> store to 0 + 400 = 400 (with pc and mod 1025)
+> P   10 | live 1
+> P    9 | live 1
+5832,5833c5832,5833
+< P   10 | fork -5 (259)
+< P    9 | fork -5 (270)
 ---
->        | -> store to 0 + 400 = 400 (with pc and mod 513)
-2647c2647
-<        | -> store to 4 + -272 = -268 (with pc and mod 3755)
+> P   10 | fork 0 (264)
+> P    9 | fork 0 (275)
+5844,5847d5843
+< P   20 | live 1
+< P   19 | live 1
+< P   18 | live 1
+< P   17 | live 1
+5849a5846,5847
+> P   12 | live 0
+> P   11 | live 0
+5864,5865d5861
+< P    5 | fork -5 (270)
+< P    3 | fork -5 (259)
+5876,5881c5872,5875
+< P   22 | live 1
+< P   21 | live 1
+< P   14 | live 1
+< P   13 | live 1
+< P   10 | live 1
+< P    9 | live 1
 ---
->        | -> store to 4 + -272 = -268 (with pc and mod -341)
-2653c2653
-<        | -> store to 0 + -272 = -272 (with pc and mod 3751)
+> P   14 | live 0
+> P   13 | live 0
+> P   10 | live 0
+> P    9 | live 0
+5892,5893d5885
+< P    5 | zjmp -8 OK
+< P    3 | zjmp -8 OK
+5904,5905d5895
+< P    5 | live 1
+< P    3 | live 1
+6646,6647c6636,6637
+< P   16 | fork -5 (259)
+< P   15 | fork -5 (270)
 ---
->        | -> store to 0 + -272 = -272 (with pc and mod -345)
-2700,2703d2699
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 1429)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 1425)
-2710c2706
-<        | -> store to 4 + -272 = -268 (with pc and mod 3483)
----
->        | -> store to 4 + -272 = -268 (with pc and mod -613)
-2712c2708
-<        | -> store to 4 + -202 = -198 (with pc and mod 3745)
----
->        | -> store to 4 + -202 = -198 (with pc and mod -351)
-2714c2710
-<        | -> store to 0 + -202 = -202 (with pc and mod 3741)
----
->        | -> store to 0 + -202 = -202 (with pc and mod -355)
-2716c2712
-<        | -> store to 0 + -272 = -272 (with pc and mod 3479)
----
->        | -> store to 0 + -272 = -272 (with pc and mod -617)
-2732,2733d2727
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-2763,2766d2756
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 1829)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 1825)
-2773c2763
-<        | -> store to 4 + -272 = -268 (with pc and mod 3211)
----
->        | -> store to 4 + -272 = -268 (with pc and mod -373)
-2775c2765
-<        | -> store to 4 + -202 = -198 (with pc and mod 3543)
----
->        | -> store to 4 + -202 = -198 (with pc and mod -553)
-2777c2767
-<        | -> store to 0 + -202 = -202 (with pc and mod 3539)
----
->        | -> store to 0 + -202 = -202 (with pc and mod -557)
-2779c2769
-<        | -> store to 0 + -272 = -272 (with pc and mod 3207)
----
->        | -> store to 0 + -272 = -272 (with pc and mod -377)
-2795,2796d2784
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-2826,2829d2813
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 2229)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 2225)
-2835,2836d2818
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 2939)
-2838c2820
-<        | -> store to 4 + -202 = -198 (with pc and mod 3341)
----
->        | -> store to 4 + -202 = -198 (with pc and mod -243)
-2840,2842c2822
-<        | -> store to 0 + -202 = -202 (with pc and mod 3337)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 2935)
----
->        | -> store to 0 + -202 = -202 (with pc and mod -247)
-2858,2859d2837
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-2865d2842
-< P    8 | zjmp -277 OK
-2868d2844
-< P    1 | zjmp -277 OK
-2889,2892d2864
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 2629)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 2625)
-2898,2905d2869
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 2667)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 3139)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 3135)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 2663)
-2921,2922d2884
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-2928,2931d2889
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-2952,2955d2909
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 3029)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 3025)
-2961,2968d2914
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 2395)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 2937)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 2933)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 2391)
-2984,2985d2929
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-2991,2994d2934
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3015,3018d2954
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 3429)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 3425)
-3024,3031d2959
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 2123)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 2735)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 2731)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 2119)
-3047,3048d2974
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3054,3057d2979
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3078,3081d2999
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 3829)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 3825)
-3087,3094d3004
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 1851)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 2533)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 2529)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 1847)
-3110,3111d3019
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3117,3120d3024
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3141,3144d3044
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 4229)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 4225)
-3150,3157d3049
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 1579)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 2331)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 2327)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 1575)
-3173,3174d3064
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3180,3183d3069
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3204,3207d3089
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 533)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 529)
-3213,3220d3094
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 1307)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 2129)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 2125)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 1303)
-3236,3237d3109
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3243,3246d3114
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3267,3270d3134
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 933)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 929)
-3276,3283d3139
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 1035)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 1927)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 1923)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 1031)
-3299,3300d3154
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3306,3309d3159
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3330,3333d3179
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 1333)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 1329)
-3339,3346d3184
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 763)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 1725)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 1721)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 759)
-3362,3363d3199
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3369,3372d3204
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3393,3396d3224
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 1733)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 1729)
-3402,3409d3229
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 491)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 1523)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 1519)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 487)
-3425,3426d3244
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3432,3435d3249
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3456,3459d3269
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 2133)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 2129)
-3465,3472d3274
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 219)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 1321)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 1317)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 215)
-3488,3489d3289
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3495,3498d3294
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3519,3522d3314
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 2533)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 2529)
-3528,3535d3319
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod -53)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 1119)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 1115)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod -57)
-3551,3552d3334
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3558,3561d3339
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3582,3585d3359
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 2933)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 2929)
-3591,3598d3364
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 3771)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 917)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 913)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 3767)
-3614d3379
-< P    6 | zjmp 395 OK
-3617d3381
-< P    2 | zjmp 395 OK
-3623,3626d3386
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3651,3654d3410
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 3333)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 3329)
-3660,3663d3415
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 3499)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 715)
-3665,3666d3416
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 711)
-3668,3669d3417
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 3495)
-3685,3686d3432
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3692,3695d3437
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3716,3719d3457
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 3733)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 3729)
-3725,3732d3462
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 3227)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 513)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 509)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 3223)
-3748,3749d3477
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3755,3758d3482
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3779,3782d3502
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 4133)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 4129)
-3788,3795d3507
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 2955)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 311)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 307)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 2951)
-3811,3812d3522
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3818,3821d3527
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3842,3845d3547
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 437)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 433)
-3851,3858d3552
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 2683)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 109)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 105)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 2679)
-3874,3875d3567
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3881,3884d3572
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3905,3908d3592
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 837)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 833)
-3914,3921d3597
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 2411)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod -93)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod -97)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 2407)
-3937,3938d3612
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-3944,3947d3617
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-3968,3971d3637
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 1237)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 1233)
-3977,3984d3642
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 2139)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 3801)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 3797)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 2135)
-4000,4001d3657
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4007,4010d3662
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4031,4034d3682
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 1637)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 1633)
-4040,4047d3687
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 1867)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 3599)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 3595)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 1863)
-4063,4064d3702
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4070,4073d3707
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4094,4097d3727
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 2037)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 2033)
-4103,4110d3732
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 1595)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 3397)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 3393)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 1591)
-4126,4127d3747
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4133,4136d3752
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4157,4160d3772
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 2437)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 2433)
-4166,4173d3777
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 1323)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 3195)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 3191)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 1319)
-4189,4190d3792
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4196,4199d3797
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4213a3812,3813
-> long->fork
-> long->fork
-4220,4223d3819
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 2837)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 2833)
-4229,4236c3825,3826
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 1051)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 2993)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 2989)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 1047)
----
-> P   12 | live 83886083
-> P   11 | live 83886083
-4250a3841,3842
-> P    8 | live 917504
-> P    1 | live 917504
-4252,4253d3843
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4259,4262d3848
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4281a3868,3871
-> P   12 | sti r6 0 -272
->        | -> store to 0 + -272 = -272 (with pc and mod -377)
-> P   11 | sti r6 4 -272
->        | -> store to 4 + -272 = -268 (with pc and mod -373)
-4283,4286d3872
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 3237)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 3233)
-4292,4299d3877
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 779)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 2791)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 2787)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 775)
-4313a3892,3893
-> P   12 | zjmp -277 OK
-> P   11 | zjmp -277 OK
-4315,4316d3894
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4322,4325d3899
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4332a3907,3908
-> long->fork
-> long->fork
-4344a3921,3922
-> P    7 | live 2
-> P    4 | live 2
-4346,4349d3923
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 3637)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 3633)
-4355,4362d3928
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 507)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 2589)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 2585)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 503)
-4369a3936,3937
-> P    7 | live 10
-> P    4 | live 10
-4378,4379d3945
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4385,4388d3950
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4409,4412d3970
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 4037)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 4033)
-4418,4425d3975
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 235)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 2387)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 2383)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 231)
-4441,4442d3990
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4448,4451d3995
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4472,4475d4015
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 4437)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 4433)
-4481,4488d4020
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod -37)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 2185)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 2181)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod -41)
-4504,4505d4035
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4511,4514d4040
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4535,4538d4060
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 741)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 737)
-4544,4551d4065
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 3787)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 1983)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 1979)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 3783)
-4567,4568d4080
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4574,4577d4085
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4598,4601d4105
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 1141)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 1137)
-4607,4614d4110
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 3515)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 1781)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 1777)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 3511)
-4630,4631d4125
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4637,4640d4130
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4661,4664d4150
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 1541)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 1537)
-4670,4677d4155
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 3243)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 1579)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 1575)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 3239)
-4693,4694d4170
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4700,4703d4175
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4724,4727d4195
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 1941)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 1937)
-4733,4740d4200
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 2971)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 1377)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 1373)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 2967)
-4758,4759d4217
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4765,4768d4222
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4774,4775c4228,4229
-< P   12 | live 1
-< P   11 | live 1
+> P   10 | fork -5 (259)
+> P    9 | fork -5 (270)
+6658,6659c6648,6651
+< P   24 | live 1
+< P   23 | live 1
 ---
 > P   16 | live 1
 > P   15 | live 1
-4795,4798d4248
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 2341)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 2337)
-4804,4805c4254,4255
-< P   14 | live 1
-< P   13 | live 1
+> P   14 | fork -5 (270)
+> P   13 | fork -5 (259)
+6670,6675c6662,6663
+< P   20 | fork -5 (270)
+< P   19 | fork -5 (259)
+< P   18 | fork -5 (270)
+< P   17 | fork -5 (259)
+< P   16 | zjmp -8 OK
+< P   15 | zjmp -8 OK
 ---
 > P   18 | live 1
 > P   17 | live 1
-4808,4815d4257
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 2699)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 1175)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 1171)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 2695)
-4833,4834d4274
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4840,4841d4279
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-4843d4280
-< P    4 | zjmp -207 OK
-4845d4281
-< P    1 | zjmp -277 OK
-4866,4869d4301
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 2741)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 2737)
-4875,4882d4306
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 2427)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 973)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 969)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 2423)
-4898,4899d4321
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4905,4908d4326
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4929,4932d4346
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 3141)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 3137)
-4938,4945d4351
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 2155)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 771)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 767)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 2151)
-4961,4962d4366
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-4968,4971d4371
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-4992,4995d4391
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 3541)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 3537)
-5001,5008d4396
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 1883)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 569)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 565)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 1879)
-5024,5025d4411
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-5031,5034d4416
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-5055,5058d4436
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 3941)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 3937)
-5064,5071d4441
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 1611)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 367)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 363)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 1607)
-5087,5088d4456
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-5094,5097d4461
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-5118,5121d4481
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 4341)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 4337)
-5127,5134d4486
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 1339)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 165)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 161)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 1335)
-5150,5151d4501
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-5157,5160d4506
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-5181,5184d4526
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 645)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 641)
-5190,5197d4531
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 1067)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod -37)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod -41)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 1063)
-5213,5214d4546
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-5220,5223d4551
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-5244,5247d4571
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 1045)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 1041)
-5253,5260d4576
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 795)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 3857)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 3853)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 791)
-5276,5277d4591
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-5283,5286d4596
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-5307,5310d4616
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 1445)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 1441)
-5316,5323d4621
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 523)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 3655)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 3651)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 519)
-5339,5340d4636
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-5346,5349d4641
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-5370,5373d4661
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 1845)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 1841)
-5379,5386d4666
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 251)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 3453)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 3449)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 247)
-5402,5403d4681
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-5409,5412d4686
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-5433,5436d4706
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 2245)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 2241)
-5442,5449d4711
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod -21)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 3251)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 3247)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod -25)
-5465,5466d4726
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-5472,5475d4731
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-5496,5499d4751
-< P    6 | sti r6 4 400
-<        | -> store to 4 + 400 = 404 (with pc and mod 2645)
-< P    2 | sti r6 0 400
-<        | -> store to 0 + 400 = 400 (with pc and mod 2641)
-5505,5512d4756
-< P    8 | sti r6 4 -272
-<        | -> store to 4 + -272 = -268 (with pc and mod 3803)
-< P    7 | sti r6 4 -202
-<        | -> store to 4 + -202 = -198 (with pc and mod 3049)
-< P    4 | sti r6 0 -202
-<        | -> store to 0 + -202 = -202 (with pc and mod 3045)
-< P    1 | sti r6 0 -272
-<        | -> store to 0 + -272 = -272 (with pc and mod 3799)
-5528,5529d4771
-< P    6 | zjmp 395 OK
-< P    2 | zjmp 395 OK
-5535,5538d4776
-< P    8 | zjmp -277 OK
-< P    7 | zjmp -207 OK
-< P    4 | zjmp -207 OK
-< P    1 | zjmp -277 OK
-5640a4879
-> long->fork
-5652a4892
-> P    8 | live 1
-5681a4922,4923
-> long->fork
-> long->fork
-5692a4935,4936
-> P   17 | live 83886083
-> P   16 | live 83886083
-5706a4951,4952
-> P   12 | live 917504
-> P   11 | live 917504
-5721a4968
-> long->fork
-5731a4979,4982
-> P   17 | sti r6 4 -272
->        | -> store to 4 + -272 = -268 (with pc and mod -373)
-> P   16 | sti r6 0 -272
->        | -> store to 0 + -272 = -272 (with pc and mod -377)
-5751a5003,5004
-> P   17 | zjmp -277 OK
-> P   16 | zjmp -277 OK
-5804,5805c5057,5058
+6677a6666,6669
+> P   10 | zjmp -8 OK
+> P    9 | zjmp -8 OK
+> P   12 | fork 0 (278)
+> P   11 | fork 0 (267)
+6688,6695c6680,6685
+< P   30 | live 1
+< P   29 | live 1
+< P   28 | live 1
+< P   27 | live 1
+< P   26 | live 1
+< P   25 | live 1
+< P   16 | live 1
+< P   15 | live 1
+---
+> P   20 | live 1
+> P   19 | live 1
+> P   14 | zjmp -8 OK
+> P   13 | zjmp -8 OK
+> P   10 | live 1
+> P    9 | live 1
+6706,6713c6696,6699
+< P   22 | fork -5 (259)
+< P   21 | fork -5 (270)
+< P   20 | zjmp -8 OK
+< P   19 | zjmp -8 OK
+< P   18 | zjmp -8 OK
+< P   17 | zjmp -8 OK
+< P   14 | fork -5 (259)
+< P   13 | fork -5 (270)
+---
+> P   22 | zjmp -8 OK
+> P   21 | zjmp -8 OK
+> P   14 | live 1
+> P   13 | live 1
+6716,6717c6702,6707
+< P   10 | fork -5 (259)
+< P    9 | fork -5 (270)
+---
+> P   14 | fork 0 (275)
+> P   13 | fork 0 (264)
+> P   12 | zjmp -8 OK
+> P   11 | zjmp -8 OK
+> P   10 | fork 0 (264)
+> P    9 | fork 0 (275)
+6728,6737c6718,6719
+< P   36 | live 1
+< P   35 | live 1
+< P   34 | live 1
+< P   33 | live 1
+< P   32 | live 1
+< P   31 | live 1
+< P   20 | live 1
+< P   19 | live 1
+< P   18 | live 1
+< P   17 | live 1
+---
+> P   22 | live 1
+> P   21 | live 1
+6739a6722,6723
+> P   12 | live 0
+> P   11 | live 0
+6750,6751d6733
+< P   22 | zjmp -8 OK
+< P   21 | zjmp -8 OK
+6756,6757d6737
+< P    5 | fork -5 (270)
+< P    3 | fork -5 (259)
+6768,6775c6748,6751
+< P   38 | live 1
+< P   37 | live 1
+< P   22 | live 1
+< P   21 | live 1
+< P   14 | live 1
+< P   13 | live 1
+< P   10 | live 1
+< P    9 | live 1
+---
+> P   14 | live 0
+> P   13 | live 0
+> P   10 | live 0
+> P    9 | live 0
+6786,6787d6761
+< P    5 | zjmp -8 OK
+< P    3 | zjmp -8 OK
+6798,6799d6771
+< P    5 | live 1
+< P    3 | live 1
+7521,7522d7492
+< P   24 | fork -5 (270)
+< P   23 | fork -5 (259)
+7533,7534c7503
+< P   40 | live 1
+< P   39 | live 1
+---
+> P   18 | fork -5 (259)
+7545,7554c7514,7516
+< P   30 | fork -5 (259)
+< P   29 | fork -5 (270)
+< P   28 | fork -5 (259)
+< P   27 | fork -5 (270)
+< P   26 | fork -5 (259)
+< P   25 | fork -5 (270)
+< P   24 | zjmp -8 OK
+< P   23 | zjmp -8 OK
+< P   16 | fork -5 (259)
+< P   15 | fork -5 (270)
+---
+> P   10 | live 1
+> P   20 | fork -5 (259)
+> P   19 | fork -5 (270)
+7565,7574c7527,7530
+< P   48 | live 1
+< P   47 | live 1
+< P   46 | live 1
+< P   45 | live 1
+< P   44 | live 1
+< P   43 | live 1
+< P   42 | live 1
+< P   41 | live 1
+< P   24 | live 1
+< P   23 | live 1
+---
+> P   12 | live 1
+> P   11 | live 1
+> P   25 | fork -5 (259)
+> P   18 | zjmp -8 OK
+7585,7604c7541,7546
+< P   36 | fork -5 (270)
+< P   35 | fork -5 (259)
+< P   34 | fork -5 (270)
+< P   33 | fork -5 (259)
+< P   32 | fork -5 (270)
+< P   31 | fork -5 (259)
+< P   30 | zjmp -8 OK
+< P   29 | zjmp -8 OK
+< P   28 | zjmp -8 OK
+< P   27 | zjmp -8 OK
+< P   26 | zjmp -8 OK
+< P   25 | zjmp -8 OK
+< P   20 | fork -5 (270)
+< P   19 | fork -5 (259)
+< P   18 | fork -5 (270)
+< P   17 | fork -5 (259)
+< P   16 | zjmp -8 OK
+< P   15 | zjmp -8 OK
 < P   12 | fork -5 (270)
 < P   11 | fork -5 (259)
 ---
-> P   16 | fork 0 (-885)
-> P   15 | fork 0 (-597)
-5816,5817d5068
+> P   13 | live 1
+> P   22 | fork -5 (259)
+> P   21 | fork -5 (270)
+> P   20 | zjmp -8 OK
+> P   19 | zjmp -8 OK
+> P   18 | live 1
+7608a7551,7552
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 1041)
+7615,7633d7558
+< P   60 | live 1
+< P   59 | live 1
+< P   58 | live 1
+< P   57 | live 1
+< P   56 | live 1
+< P   55 | live 1
+< P   54 | live 1
+< P   53 | live 1
+< P   52 | live 1
+< P   51 | live 1
+< P   50 | live 1
+< P   49 | live 1
+< P   30 | live 1
+< P   29 | live 1
+< P   28 | live 1
+< P   27 | live 1
+< P   26 | live 1
+< P   25 | live 1
 < P   16 | live 1
-< P   15 | live 1
-5828,5831c5079,5082
+7634a7560,7563
+> P   14 | live 1
+> P   25 | zjmp -8 OK
+> P   20 | live 1
+> P   19 | live 1
+7645,7664c7574,7576
+< P   38 | fork -5 (259)
+< P   37 | fork -5 (270)
+< P   36 | zjmp -8 OK
+< P   35 | zjmp -8 OK
+< P   34 | zjmp -8 OK
+< P   33 | zjmp -8 OK
+< P   32 | zjmp -8 OK
+< P   31 | zjmp -8 OK
+< P   22 | fork -5 (259)
+< P   21 | fork -5 (270)
+< P   20 | zjmp -8 OK
+< P   19 | zjmp -8 OK
+< P   18 | zjmp -8 OK
+< P   17 | zjmp -8 OK
 < P   14 | fork -5 (259)
 < P   13 | fork -5 (270)
 < P   12 | zjmp -8 OK
 < P   11 | zjmp -8 OK
+< P   10 | fork -5 (259)
+< P    9 | fork -5 (270)
 ---
-> P   18 | fork 0 (-437)
-> P   17 | fork 0 (-885)
-> P   16 | zjmp -8 OK
-> P   15 | zjmp -8 OK
-5844,5849c5095,5098
+> P   25 | live 1
+> P   22 | zjmp -8 OK
+> P   21 | zjmp -8 OK
+7668a7581
+> P   26 | zjmp 395 OK
+7675,7694c7588,7589
+< P   68 | live 1
+< P   67 | live 1
+< P   66 | live 1
+< P   65 | live 1
+< P   64 | live 1
+< P   63 | live 1
+< P   62 | live 1
+< P   61 | live 1
+< P   36 | live 1
+< P   35 | live 1
+< P   34 | live 1
+< P   33 | live 1
+< P   32 | live 1
+< P   31 | live 1
 < P   20 | live 1
 < P   19 | live 1
 < P   18 | live 1
@@ -1104,32 +295,4980 @@
 < P   12 | live 1
 < P   11 | live 1
 ---
-> P   24 | live 1
-> P   23 | live 1
-> P   16 | live 0
-> P   15 | live 0
-5860,5861c5109,5110
+> P   22 | live 1
+> P   21 | live 1
+7705,7714d7599
+< P   38 | zjmp -8 OK
+< P   37 | zjmp -8 OK
+< P   22 | zjmp -8 OK
+< P   21 | zjmp -8 OK
 < P   14 | zjmp -8 OK
 < P   13 | zjmp -8 OK
----
-> P   18 | zjmp -8 OK
-> P   17 | zjmp -8 OK
-5865d5113
+< P   10 | zjmp -8 OK
+< P    9 | zjmp -8 OK
+< P    5 | fork -5 (270)
 < P    3 | fork -5 (259)
-5876,5879c5124,5126
+7725,7734d7609
+< P   70 | live 1
+< P   69 | live 1
+< P   38 | live 1
+< P   37 | live 1
 < P   22 | live 1
 < P   21 | live 1
 < P   14 | live 1
 < P   13 | live 1
+< P   10 | live 1
+< P    9 | live 1
+7745,7746d7619
+< P    5 | zjmp -8 OK
+< P    3 | zjmp -8 OK
+7755a7629,7630
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 1463)
+7757,7758d7631
+< P    5 | live 1
+< P    3 | live 1
+7777a7651
+> P   26 | zjmp -277 OK
+7802a7677,7678
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 1191)
+7822a7699
+> P   26 | zjmp -277 OK
+7847a7725,7726
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 919)
+7867a7747
+> P   26 | zjmp -277 OK
+7892a7773,7774
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 647)
+7912a7795
+> P   26 | zjmp -277 OK
+7937a7821,7822
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 4471)
+7957a7843
+> P   26 | zjmp -277 OK
+7982a7869,7870
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 4199)
+8002a7891
+> P   26 | zjmp -277 OK
+8037a7927,7928
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 3937)
+8057a7949
+> P   26 | zjmp 395 OK
+8142a8035,8036
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 4399)
+8162a8057
+> P   26 | zjmp -207 OK
+8212a8108
+> P   26 | zjmp -277 OK
+8247a8144,8145
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 3937)
+8267a8166
+> P   26 | zjmp 395 OK
+8352a8252,8253
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 4399)
+8372a8274
+> P   26 | zjmp -207 OK
+8422a8325
+> P   26 | zjmp -277 OK
+8457a8361,8362
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 3937)
+8459,8460d8363
+< P   40 | fork -5 (259)
+< P   39 | fork -5 (270)
+8471,8472c8374
+< P   72 | live 1
+< P   71 | live 1
+---
+> P   10 | fork -5 (259)
+8481a8384
+> P   26 | zjmp 395 OK
+8483,8494c8386,8388
+< P   48 | fork -5 (270)
+< P   47 | fork -5 (259)
+< P   46 | fork -5 (270)
+< P   45 | fork -5 (259)
+< P   44 | fork -5 (270)
+< P   43 | fork -5 (259)
+< P   42 | fork -5 (270)
+< P   41 | fork -5 (259)
+< P   40 | zjmp -8 OK
+< P   39 | zjmp -8 OK
+< P   24 | fork -5 (270)
+< P   23 | fork -5 (259)
+---
+> P   16 | live 1
+> P   12 | fork -5 (270)
+> P   11 | fork -5 (259)
+8505,8516c8399,8403
+< P   82 | live 1
+< P   81 | live 1
+< P   80 | live 1
+< P   79 | live 1
+< P   78 | live 1
+< P   77 | live 1
+< P   76 | live 1
+< P   75 | live 1
+< P   74 | live 1
+< P   73 | live 1
+< P   40 | live 1
+< P   39 | live 1
+---
+> P   18 | live 1
+> P   17 | live 1
+> P   13 | fork -5 (259)
+> P   10 | zjmp -8 OK
+> P   18 | fork 0 (264)
+8527,8555c8414
+< P   60 | fork -5 (259)
+< P   59 | fork -5 (270)
+< P   58 | fork -5 (259)
+< P   57 | fork -5 (270)
+< P   56 | fork -5 (259)
+< P   55 | fork -5 (270)
+< P   54 | fork -5 (259)
+< P   53 | fork -5 (270)
+< P   52 | fork -5 (259)
+< P   51 | fork -5 (270)
+< P   50 | fork -5 (259)
+< P   49 | fork -5 (270)
+< P   48 | zjmp -8 OK
+< P   47 | zjmp -8 OK
+< P   46 | zjmp -8 OK
+< P   45 | zjmp -8 OK
+< P   44 | zjmp -8 OK
+< P   43 | zjmp -8 OK
+< P   42 | zjmp -8 OK
+< P   41 | zjmp -8 OK
+< P   30 | fork -5 (259)
+< P   29 | fork -5 (270)
+< P   28 | fork -5 (259)
+< P   27 | fork -5 (270)
+< P   26 | fork -5 (259)
+< P   25 | fork -5 (270)
+< P   24 | zjmp -8 OK
+< P   23 | zjmp -8 OK
+< P   16 | fork -5 (259)
+---
+> P   19 | live 1
+8556a8416,8421
+> P   14 | fork -5 (259)
+> P   12 | zjmp -8 OK
+> P   11 | zjmp -8 OK
+> P   10 | live 1
+> P   20 | fork 0 (264)
+> P   19 | fork 0 (264)
+8567,8596c8432,8438
+< P  102 | live 1
+< P  101 | live 1
+< P  100 | live 1
+< P   99 | live 1
+< P   98 | live 1
+< P   97 | live 1
+< P   96 | live 1
+< P   95 | live 1
+< P   94 | live 1
+< P   93 | live 1
+< P   92 | live 1
+< P   91 | live 1
+< P   90 | live 1
+< P   89 | live 1
+< P   88 | live 1
+< P   87 | live 1
+< P   86 | live 1
+< P   85 | live 1
+< P   84 | live 1
+< P   83 | live 1
+< P   48 | live 1
+< P   47 | live 1
+< P   46 | live 1
+< P   45 | live 1
+< P   44 | live 1
+< P   43 | live 1
+< P   42 | live 1
+< P   41 | live 1
+< P   24 | live 1
+< P   23 | live 1
+---
+> P   22 | live 1
+> P   21 | live 1
+> P   13 | zjmp -8 OK
+> P   12 | live 1
+> P   11 | live 1
+> P   25 | fork -5 (259)
+> P   18 | zjmp -8 OK
+8607,8643c8449
+< P   68 | fork -5 (270)
+< P   67 | fork -5 (259)
+< P   66 | fork -5 (270)
+< P   65 | fork -5 (259)
+< P   64 | fork -5 (270)
+< P   63 | fork -5 (259)
+< P   62 | fork -5 (270)
+< P   61 | fork -5 (259)
+< P   60 | zjmp -8 OK
+< P   59 | zjmp -8 OK
+< P   58 | zjmp -8 OK
+< P   57 | zjmp -8 OK
+< P   56 | zjmp -8 OK
+< P   55 | zjmp -8 OK
+< P   54 | zjmp -8 OK
+< P   53 | zjmp -8 OK
+< P   52 | zjmp -8 OK
+< P   51 | zjmp -8 OK
+< P   50 | zjmp -8 OK
+< P   49 | zjmp -8 OK
+< P   36 | fork -5 (270)
+< P   35 | fork -5 (259)
+< P   34 | fork -5 (270)
+< P   33 | fork -5 (259)
+< P   32 | fork -5 (270)
+< P   31 | fork -5 (259)
+< P   30 | zjmp -8 OK
+< P   29 | zjmp -8 OK
+< P   28 | zjmp -8 OK
+< P   27 | zjmp -8 OK
+< P   26 | zjmp -8 OK
+< P   25 | zjmp -8 OK
+< P   20 | fork -5 (270)
+< P   19 | fork -5 (259)
+< P   18 | fork -5 (270)
+< P   17 | fork -5 (259)
+< P   16 | zjmp -8 OK
 ---
 > P   25 | live 1
+8645,8646c8451,8457
+< P   12 | fork -5 (270)
+< P   11 | fork -5 (259)
+---
+> P   14 | zjmp -8 OK
+> P   13 | live 1
+> P   22 | fork 0 (264)
+> P   21 | fork 0 (275)
+> P   20 | zjmp -8 OK
+> P   19 | zjmp -8 OK
 > P   18 | live 0
-> P   17 | live 0
-5893d5139
+8657,8695d8467
+< P  122 | live 1
+< P  121 | live 1
+< P  120 | live 1
+< P  119 | live 1
+< P  118 | live 1
+< P  117 | live 1
+< P  116 | live 1
+< P  115 | live 1
+< P  114 | live 1
+< P  113 | live 1
+< P  112 | live 1
+< P  111 | live 1
+< P  110 | live 1
+< P  109 | live 1
+< P  108 | live 1
+< P  107 | live 1
+< P  106 | live 1
+< P  105 | live 1
+< P  104 | live 1
+< P  103 | live 1
+< P   60 | live 1
+< P   59 | live 1
+< P   58 | live 1
+< P   57 | live 1
+< P   56 | live 1
+< P   55 | live 1
+< P   54 | live 1
+< P   53 | live 1
+< P   52 | live 1
+< P   51 | live 1
+< P   50 | live 1
+< P   49 | live 1
+< P   30 | live 1
+< P   29 | live 1
+< P   28 | live 1
+< P   27 | live 1
+< P   26 | live 1
+< P   25 | live 1
+< P   16 | live 1
+8696a8469,8472
+> P   14 | live 1
+> P   25 | zjmp -8 OK
+> P   20 | live 0
+> P   19 | live 0
+8707,8736c8483,8485
+< P   70 | fork -5 (259)
+< P   69 | fork -5 (270)
+< P   68 | zjmp -8 OK
+< P   67 | zjmp -8 OK
+< P   66 | zjmp -8 OK
+< P   65 | zjmp -8 OK
+< P   64 | zjmp -8 OK
+< P   63 | zjmp -8 OK
+< P   62 | zjmp -8 OK
+< P   61 | zjmp -8 OK
+< P   38 | fork -5 (259)
+< P   37 | fork -5 (270)
+< P   36 | zjmp -8 OK
+< P   35 | zjmp -8 OK
+< P   34 | zjmp -8 OK
+< P   33 | zjmp -8 OK
+< P   32 | zjmp -8 OK
+< P   31 | zjmp -8 OK
+< P   22 | fork -5 (259)
+< P   21 | fork -5 (270)
+< P   20 | zjmp -8 OK
+< P   19 | zjmp -8 OK
+< P   18 | zjmp -8 OK
+< P   17 | zjmp -8 OK
+< P   14 | fork -5 (259)
+< P   13 | fork -5 (270)
+< P   12 | zjmp -8 OK
+< P   11 | zjmp -8 OK
+< P   10 | fork -5 (259)
+< P    9 | fork -5 (270)
+---
+> P   25 | live 0
+> P   22 | zjmp -8 OK
+> P   21 | zjmp -8 OK
+8747,8776c8496,8497
+< P  132 | live 1
+< P  131 | live 1
+< P  130 | live 1
+< P  129 | live 1
+< P  128 | live 1
+< P  127 | live 1
+< P  126 | live 1
+< P  125 | live 1
+< P  124 | live 1
+< P  123 | live 1
+< P   68 | live 1
+< P   67 | live 1
+< P   66 | live 1
+< P   65 | live 1
+< P   64 | live 1
+< P   63 | live 1
+< P   62 | live 1
+< P   61 | live 1
+< P   36 | live 1
+< P   35 | live 1
+< P   34 | live 1
+< P   33 | live 1
+< P   32 | live 1
+< P   31 | live 1
+< P   20 | live 1
+< P   19 | live 1
+< P   18 | live 1
+< P   17 | live 1
+< P   12 | live 1
+< P   11 | live 1
+---
+> P   22 | live 0
+> P   21 | live 0
+8787,8798d8507
+< P   70 | zjmp -8 OK
+< P   69 | zjmp -8 OK
+< P   38 | zjmp -8 OK
+< P   37 | zjmp -8 OK
+< P   22 | zjmp -8 OK
+< P   21 | zjmp -8 OK
+< P   14 | zjmp -8 OK
+< P   13 | zjmp -8 OK
+< P   10 | zjmp -8 OK
+< P    9 | zjmp -8 OK
+< P    5 | fork -5 (270)
+< P    3 | fork -5 (259)
+8802a8512,8513
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 4399)
+8809,8820d8519
+< P  134 | live 1
+< P  133 | live 1
+< P   70 | live 1
+< P   69 | live 1
+< P   38 | live 1
+< P   37 | live 1
+< P   22 | live 1
+< P   21 | live 1
+< P   14 | live 1
+< P   13 | live 1
+< P   10 | live 1
+< P    9 | live 1
+8831,8832d8529
+< P    5 | zjmp -8 OK
 < P    3 | zjmp -8 OK
-5905d5150
+8836a8534
+> P   26 | zjmp -207 OK
+8843,8844d8540
+< P    5 | live 1
 < P    3 | live 1
-5966,6029c5211,5265
+8888a8585
+> P   26 | zjmp -277 OK
+8923a8621,8622
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 3937)
+8943a8643
+> P   26 | zjmp 395 OK
+9028a8729,8730
+> P   26 | sti r6 0 400
+>        | -> store to 0 + 400 = 400 (with pc and mod 4399)
+9526,9527d9227
+< P   72 | fork -5 (270)
+< P   71 | fork -5 (259)
+9538,9539d9237
+< P  136 | live 1
+< P  135 | live 1
+9550,9563d9247
+< P   82 | fork -5 (259)
+< P   81 | fork -5 (270)
+< P   80 | fork -5 (259)
+< P   79 | fork -5 (270)
+< P   78 | fork -5 (259)
+< P   77 | fork -5 (270)
+< P   76 | fork -5 (259)
+< P   75 | fork -5 (270)
+< P   74 | fork -5 (259)
+< P   73 | fork -5 (270)
+< P   72 | zjmp -8 OK
+< P   71 | zjmp -8 OK
+< P   40 | fork -5 (259)
+< P   39 | fork -5 (270)
+9574,9587d9257
+< P  148 | live 1
+< P  147 | live 1
+< P  146 | live 1
+< P  145 | live 1
+< P  144 | live 1
+< P  143 | live 1
+< P  142 | live 1
+< P  141 | live 1
+< P  140 | live 1
+< P  139 | live 1
+< P  138 | live 1
+< P  137 | live 1
+< P   72 | live 1
+< P   71 | live 1
+9598,9639d9267
+< P  102 | fork -5 (270)
+< P  101 | fork -5 (259)
+< P  100 | fork -5 (270)
+< P   99 | fork -5 (259)
+< P   98 | fork -5 (270)
+< P   97 | fork -5 (259)
+< P   96 | fork -5 (270)
+< P   95 | fork -5 (259)
+< P   94 | fork -5 (270)
+< P   93 | fork -5 (259)
+< P   92 | fork -5 (270)
+< P   91 | fork -5 (259)
+< P   90 | fork -5 (270)
+< P   89 | fork -5 (259)
+< P   88 | fork -5 (270)
+< P   87 | fork -5 (259)
+< P   86 | fork -5 (270)
+< P   85 | fork -5 (259)
+< P   84 | fork -5 (270)
+< P   83 | fork -5 (259)
+< P   82 | zjmp -8 OK
+< P   81 | zjmp -8 OK
+< P   80 | zjmp -8 OK
+< P   79 | zjmp -8 OK
+< P   78 | zjmp -8 OK
+< P   77 | zjmp -8 OK
+< P   76 | zjmp -8 OK
+< P   75 | zjmp -8 OK
+< P   74 | zjmp -8 OK
+< P   73 | zjmp -8 OK
+< P   48 | fork -5 (270)
+< P   47 | fork -5 (259)
+< P   46 | fork -5 (270)
+< P   45 | fork -5 (259)
+< P   44 | fork -5 (270)
+< P   43 | fork -5 (259)
+< P   42 | fork -5 (270)
+< P   41 | fork -5 (259)
+< P   40 | zjmp -8 OK
+< P   39 | zjmp -8 OK
+< P   24 | fork -5 (270)
+< P   23 | fork -5 (259)
+9650,9691d9277
+< P  178 | live 1
+< P  177 | live 1
+< P  176 | live 1
+< P  175 | live 1
+< P  174 | live 1
+< P  173 | live 1
+< P  172 | live 1
+< P  171 | live 1
+< P  170 | live 1
+< P  169 | live 1
+< P  168 | live 1
+< P  167 | live 1
+< P  166 | live 1
+< P  165 | live 1
+< P  164 | live 1
+< P  163 | live 1
+< P  162 | live 1
+< P  161 | live 1
+< P  160 | live 1
+< P  159 | live 1
+< P  158 | live 1
+< P  157 | live 1
+< P  156 | live 1
+< P  155 | live 1
+< P  154 | live 1
+< P  153 | live 1
+< P  152 | live 1
+< P  151 | live 1
+< P  150 | live 1
+< P  149 | live 1
+< P   82 | live 1
+< P   81 | live 1
+< P   80 | live 1
+< P   79 | live 1
+< P   78 | live 1
+< P   77 | live 1
+< P   76 | live 1
+< P   75 | live 1
+< P   74 | live 1
+< P   73 | live 1
+< P   40 | live 1
+< P   39 | live 1
+9702,9771d9287
+< P  122 | fork -5 (259)
+< P  121 | fork -5 (270)
+< P  120 | fork -5 (259)
+< P  119 | fork -5 (270)
+< P  118 | fork -5 (259)
+< P  117 | fork -5 (270)
+< P  116 | fork -5 (259)
+< P  115 | fork -5 (270)
+< P  114 | fork -5 (259)
+< P  113 | fork -5 (270)
+< P  112 | fork -5 (259)
+< P  111 | fork -5 (270)
+< P  110 | fork -5 (259)
+< P  109 | fork -5 (270)
+< P  108 | fork -5 (259)
+< P  107 | fork -5 (270)
+< P  106 | fork -5 (259)
+< P  105 | fork -5 (270)
+< P  104 | fork -5 (259)
+< P  103 | fork -5 (270)
+< P  102 | zjmp -8 OK
+< P  101 | zjmp -8 OK
+< P  100 | zjmp -8 OK
+< P   99 | zjmp -8 OK
+< P   98 | zjmp -8 OK
+< P   97 | zjmp -8 OK
+< P   96 | zjmp -8 OK
+< P   95 | zjmp -8 OK
+< P   94 | zjmp -8 OK
+< P   93 | zjmp -8 OK
+< P   92 | zjmp -8 OK
+< P   91 | zjmp -8 OK
+< P   90 | zjmp -8 OK
+< P   89 | zjmp -8 OK
+< P   88 | zjmp -8 OK
+< P   87 | zjmp -8 OK
+< P   86 | zjmp -8 OK
+< P   85 | zjmp -8 OK
+< P   84 | zjmp -8 OK
+< P   83 | zjmp -8 OK
+< P   60 | fork -5 (259)
+< P   59 | fork -5 (270)
+< P   58 | fork -5 (259)
+< P   57 | fork -5 (270)
+< P   56 | fork -5 (259)
+< P   55 | fork -5 (270)
+< P   54 | fork -5 (259)
+< P   53 | fork -5 (270)
+< P   52 | fork -5 (259)
+< P   51 | fork -5 (270)
+< P   50 | fork -5 (259)
+< P   49 | fork -5 (270)
+< P   48 | zjmp -8 OK
+< P   47 | zjmp -8 OK
+< P   46 | zjmp -8 OK
+< P   45 | zjmp -8 OK
+< P   44 | zjmp -8 OK
+< P   43 | zjmp -8 OK
+< P   42 | zjmp -8 OK
+< P   41 | zjmp -8 OK
+< P   30 | fork -5 (259)
+< P   29 | fork -5 (270)
+< P   28 | fork -5 (259)
+< P   27 | fork -5 (270)
+< P   26 | fork -5 (259)
+< P   25 | fork -5 (270)
+< P   24 | zjmp -8 OK
+< P   23 | zjmp -8 OK
+< P   16 | fork -5 (259)
+< P   15 | fork -5 (270)
+9782,9851d9297
+< P  218 | live 1
+< P  217 | live 1
+< P  216 | live 1
+< P  215 | live 1
+< P  214 | live 1
+< P  213 | live 1
+< P  212 | live 1
+< P  211 | live 1
+< P  210 | live 1
+< P  209 | live 1
+< P  208 | live 1
+< P  207 | live 1
+< P  206 | live 1
+< P  205 | live 1
+< P  204 | live 1
+< P  203 | live 1
+< P  202 | live 1
+< P  201 | live 1
+< P  200 | live 1
+< P  199 | live 1
+< P  198 | live 1
+< P  197 | live 1
+< P  196 | live 1
+< P  195 | live 1
+< P  194 | live 1
+< P  193 | live 1
+< P  192 | live 1
+< P  191 | live 1
+< P  190 | live 1
+< P  189 | live 1
+< P  188 | live 1
+< P  187 | live 1
+< P  186 | live 1
+< P  185 | live 1
+< P  184 | live 1
+< P  183 | live 1
+< P  182 | live 1
+< P  181 | live 1
+< P  180 | live 1
+< P  179 | live 1
+< P  102 | live 1
+< P  101 | live 1
+< P  100 | live 1
+< P   99 | live 1
+< P   98 | live 1
+< P   97 | live 1
+< P   96 | live 1
+< P   95 | live 1
+< P   94 | live 1
+< P   93 | live 1
+< P   92 | live 1
+< P   91 | live 1
+< P   90 | live 1
+< P   89 | live 1
+< P   88 | live 1
+< P   87 | live 1
+< P   86 | live 1
+< P   85 | live 1
+< P   84 | live 1
+< P   83 | live 1
+< P   48 | live 1
+< P   47 | live 1
+< P   46 | live 1
+< P   45 | live 1
+< P   44 | live 1
+< P   43 | live 1
+< P   42 | live 1
+< P   41 | live 1
+< P   24 | live 1
+< P   23 | live 1
+9862,9931d9307
+< P  132 | fork -5 (270)
+< P  131 | fork -5 (259)
+< P  130 | fork -5 (270)
+< P  129 | fork -5 (259)
+< P  128 | fork -5 (270)
+< P  127 | fork -5 (259)
+< P  126 | fork -5 (270)
+< P  125 | fork -5 (259)
+< P  124 | fork -5 (270)
+< P  123 | fork -5 (259)
+< P  122 | zjmp -8 OK
+< P  121 | zjmp -8 OK
+< P  120 | zjmp -8 OK
+< P  119 | zjmp -8 OK
+< P  118 | zjmp -8 OK
+< P  117 | zjmp -8 OK
+< P  116 | zjmp -8 OK
+< P  115 | zjmp -8 OK
+< P  114 | zjmp -8 OK
+< P  113 | zjmp -8 OK
+< P  112 | zjmp -8 OK
+< P  111 | zjmp -8 OK
+< P  110 | zjmp -8 OK
+< P  109 | zjmp -8 OK
+< P  108 | zjmp -8 OK
+< P  107 | zjmp -8 OK
+< P  106 | zjmp -8 OK
+< P  105 | zjmp -8 OK
+< P  104 | zjmp -8 OK
+< P  103 | zjmp -8 OK
+< P   68 | fork -5 (270)
+< P   67 | fork -5 (259)
+< P   66 | fork -5 (270)
+< P   65 | fork -5 (259)
+< P   64 | fork -5 (270)
+< P   63 | fork -5 (259)
+< P   62 | fork -5 (270)
+< P   61 | fork -5 (259)
+< P   60 | zjmp -8 OK
+< P   59 | zjmp -8 OK
+< P   58 | zjmp -8 OK
+< P   57 | zjmp -8 OK
+< P   56 | zjmp -8 OK
+< P   55 | zjmp -8 OK
+< P   54 | zjmp -8 OK
+< P   53 | zjmp -8 OK
+< P   52 | zjmp -8 OK
+< P   51 | zjmp -8 OK
+< P   50 | zjmp -8 OK
+< P   49 | zjmp -8 OK
+< P   36 | fork -5 (270)
+< P   35 | fork -5 (259)
+< P   34 | fork -5 (270)
+< P   33 | fork -5 (259)
+< P   32 | fork -5 (270)
+< P   31 | fork -5 (259)
+< P   30 | zjmp -8 OK
+< P   29 | zjmp -8 OK
+< P   28 | zjmp -8 OK
+< P   27 | zjmp -8 OK
+< P   26 | zjmp -8 OK
+< P   25 | zjmp -8 OK
+< P   20 | fork -5 (270)
+< P   19 | fork -5 (259)
+< P   18 | fork -5 (270)
+< P   17 | fork -5 (259)
+< P   16 | zjmp -8 OK
+< P   15 | zjmp -8 OK
+< P   12 | fork -5 (270)
+< P   11 | fork -5 (259)
+9942,10011d9317
+< P  248 | live 1
+< P  247 | live 1
+< P  246 | live 1
+< P  245 | live 1
+< P  244 | live 1
+< P  243 | live 1
+< P  242 | live 1
+< P  241 | live 1
+< P  240 | live 1
+< P  239 | live 1
+< P  238 | live 1
+< P  237 | live 1
+< P  236 | live 1
+< P  235 | live 1
+< P  234 | live 1
+< P  233 | live 1
+< P  232 | live 1
+< P  231 | live 1
+< P  230 | live 1
+< P  229 | live 1
+< P  228 | live 1
+< P  227 | live 1
+< P  226 | live 1
+< P  225 | live 1
+< P  224 | live 1
+< P  223 | live 1
+< P  222 | live 1
+< P  221 | live 1
+< P  220 | live 1
+< P  219 | live 1
+< P  122 | live 1
+< P  121 | live 1
+< P  120 | live 1
+< P  119 | live 1
+< P  118 | live 1
+< P  117 | live 1
+< P  116 | live 1
+< P  115 | live 1
+< P  114 | live 1
+< P  113 | live 1
+< P  112 | live 1
+< P  111 | live 1
+< P  110 | live 1
+< P  109 | live 1
+< P  108 | live 1
+< P  107 | live 1
+< P  106 | live 1
+< P  105 | live 1
+< P  104 | live 1
+< P  103 | live 1
+< P   60 | live 1
+< P   59 | live 1
+< P   58 | live 1
+< P   57 | live 1
+< P   56 | live 1
+< P   55 | live 1
+< P   54 | live 1
+< P   53 | live 1
+< P   52 | live 1
+< P   51 | live 1
+< P   50 | live 1
+< P   49 | live 1
+< P   30 | live 1
+< P   29 | live 1
+< P   28 | live 1
+< P   27 | live 1
+< P   26 | live 1
+< P   25 | live 1
+< P   16 | live 1
+< P   15 | live 1
+10022,10063d9327
+< P  134 | fork -5 (259)
+< P  133 | fork -5 (270)
+< P  132 | zjmp -8 OK
+< P  131 | zjmp -8 OK
+< P  130 | zjmp -8 OK
+< P  129 | zjmp -8 OK
+< P  128 | zjmp -8 OK
+< P  127 | zjmp -8 OK
+< P  126 | zjmp -8 OK
+< P  125 | zjmp -8 OK
+< P  124 | zjmp -8 OK
+< P  123 | zjmp -8 OK
+< P   70 | fork -5 (259)
+< P   69 | fork -5 (270)
+< P   68 | zjmp -8 OK
+< P   67 | zjmp -8 OK
+< P   66 | zjmp -8 OK
+< P   65 | zjmp -8 OK
+< P   64 | zjmp -8 OK
+< P   63 | zjmp -8 OK
+< P   62 | zjmp -8 OK
+< P   61 | zjmp -8 OK
+< P   38 | fork -5 (259)
+< P   37 | fork -5 (270)
+< P   36 | zjmp -8 OK
+< P   35 | zjmp -8 OK
+< P   34 | zjmp -8 OK
+< P   33 | zjmp -8 OK
+< P   32 | zjmp -8 OK
+< P   31 | zjmp -8 OK
+< P   22 | fork -5 (259)
+< P   21 | fork -5 (270)
+< P   20 | zjmp -8 OK
+< P   19 | zjmp -8 OK
+< P   18 | zjmp -8 OK
+< P   17 | zjmp -8 OK
+< P   14 | fork -5 (259)
+< P   13 | fork -5 (270)
+< P   12 | zjmp -8 OK
+< P   11 | zjmp -8 OK
+< P   10 | fork -5 (259)
+< P    9 | fork -5 (270)
+10074,10115d9337
+< P  260 | live 1
+< P  259 | live 1
+< P  258 | live 1
+< P  257 | live 1
+< P  256 | live 1
+< P  255 | live 1
+< P  254 | live 1
+< P  253 | live 1
+< P  252 | live 1
+< P  251 | live 1
+< P  250 | live 1
+< P  249 | live 1
+< P  132 | live 1
+< P  131 | live 1
+< P  130 | live 1
+< P  129 | live 1
+< P  128 | live 1
+< P  127 | live 1
+< P  126 | live 1
+< P  125 | live 1
+< P  124 | live 1
+< P  123 | live 1
+< P   68 | live 1
+< P   67 | live 1
+< P   66 | live 1
+< P   65 | live 1
+< P   64 | live 1
+< P   63 | live 1
+< P   62 | live 1
+< P   61 | live 1
+< P   36 | live 1
+< P   35 | live 1
+< P   34 | live 1
+< P   33 | live 1
+< P   32 | live 1
+< P   31 | live 1
+< P   20 | live 1
+< P   19 | live 1
+< P   18 | live 1
+< P   17 | live 1
+< P   12 | live 1
+< P   11 | live 1
+10126,10139d9347
+< P  134 | zjmp -8 OK
+< P  133 | zjmp -8 OK
+< P   70 | zjmp -8 OK
+< P   69 | zjmp -8 OK
+< P   38 | zjmp -8 OK
+< P   37 | zjmp -8 OK
+< P   22 | zjmp -8 OK
+< P   21 | zjmp -8 OK
+< P   14 | zjmp -8 OK
+< P   13 | zjmp -8 OK
+< P   10 | zjmp -8 OK
+< P    9 | zjmp -8 OK
+< P    5 | fork -5 (270)
+< P    3 | fork -5 (259)
+10150,10163d9357
+< P  262 | live 1
+< P  261 | live 1
+< P  134 | live 1
+< P  133 | live 1
+< P   70 | live 1
+< P   69 | live 1
+< P   38 | live 1
+< P   37 | live 1
+< P   22 | live 1
+< P   21 | live 1
+< P   14 | live 1
+< P   13 | live 1
+< P   10 | live 1
+< P    9 | live 1
+10174,10175d9367
+< P    5 | zjmp -8 OK
+< P    3 | zjmp -8 OK
+10186,10187d9377
+< P    5 | live 1
+< P    3 | live 1
+10848,10849d10037
+< P  136 | fork -5 (259)
+< P  135 | fork -5 (270)
+10860,10861d10047
+< P  264 | live 1
+< P  263 | live 1
+10872,10887d10057
+< P  148 | fork -5 (270)
+< P  147 | fork -5 (259)
+< P  146 | fork -5 (270)
+< P  145 | fork -5 (259)
+< P  144 | fork -5 (270)
+< P  143 | fork -5 (259)
+< P  142 | fork -5 (270)
+< P  141 | fork -5 (259)
+< P  140 | fork -5 (270)
+< P  139 | fork -5 (259)
+< P  138 | fork -5 (270)
+< P  137 | fork -5 (259)
+< P  136 | zjmp -8 OK
+< P  135 | zjmp -8 OK
+< P   72 | fork -5 (270)
+< P   71 | fork -5 (259)
+10898,10913d10067
+< P  278 | live 1
+< P  277 | live 1
+< P  276 | live 1
+< P  275 | live 1
+< P  274 | live 1
+< P  273 | live 1
+< P  272 | live 1
+< P  271 | live 1
+< P  270 | live 1
+< P  269 | live 1
+< P  268 | live 1
+< P  267 | live 1
+< P  266 | live 1
+< P  265 | live 1
+< P  136 | live 1
+< P  135 | live 1
+10924,10979d10077
+< P  178 | fork -5 (259)
+< P  177 | fork -5 (270)
+< P  176 | fork -5 (259)
+< P  175 | fork -5 (270)
+< P  174 | fork -5 (259)
+< P  173 | fork -5 (270)
+< P  172 | fork -5 (259)
+< P  171 | fork -5 (270)
+< P  170 | fork -5 (259)
+< P  169 | fork -5 (270)
+< P  168 | fork -5 (259)
+< P  167 | fork -5 (270)
+< P  166 | fork -5 (259)
+< P  165 | fork -5 (270)
+< P  164 | fork -5 (259)
+< P  163 | fork -5 (270)
+< P  162 | fork -5 (259)
+< P  161 | fork -5 (270)
+< P  160 | fork -5 (259)
+< P  159 | fork -5 (270)
+< P  158 | fork -5 (259)
+< P  157 | fork -5 (270)
+< P  156 | fork -5 (259)
+< P  155 | fork -5 (270)
+< P  154 | fork -5 (259)
+< P  153 | fork -5 (270)
+< P  152 | fork -5 (259)
+< P  151 | fork -5 (270)
+< P  150 | fork -5 (259)
+< P  149 | fork -5 (270)
+< P  148 | zjmp -8 OK
+< P  147 | zjmp -8 OK
+< P  146 | zjmp -8 OK
+< P  145 | zjmp -8 OK
+< P  144 | zjmp -8 OK
+< P  143 | zjmp -8 OK
+< P  142 | zjmp -8 OK
+< P  141 | zjmp -8 OK
+< P  140 | zjmp -8 OK
+< P  139 | zjmp -8 OK
+< P  138 | zjmp -8 OK
+< P  137 | zjmp -8 OK
+< P   82 | fork -5 (259)
+< P   81 | fork -5 (270)
+< P   80 | fork -5 (259)
+< P   79 | fork -5 (270)
+< P   78 | fork -5 (259)
+< P   77 | fork -5 (270)
+< P   76 | fork -5 (259)
+< P   75 | fork -5 (270)
+< P   74 | fork -5 (259)
+< P   73 | fork -5 (270)
+< P   72 | zjmp -8 OK
+< P   71 | zjmp -8 OK
+< P   40 | fork -5 (259)
+< P   39 | fork -5 (270)
+10990,11045d10087
+< P  320 | live 1
+< P  319 | live 1
+< P  318 | live 1
+< P  317 | live 1
+< P  316 | live 1
+< P  315 | live 1
+< P  314 | live 1
+< P  313 | live 1
+< P  312 | live 1
+< P  311 | live 1
+< P  310 | live 1
+< P  309 | live 1
+< P  308 | live 1
+< P  307 | live 1
+< P  306 | live 1
+< P  305 | live 1
+< P  304 | live 1
+< P  303 | live 1
+< P  302 | live 1
+< P  301 | live 1
+< P  300 | live 1
+< P  299 | live 1
+< P  298 | live 1
+< P  297 | live 1
+< P  296 | live 1
+< P  295 | live 1
+< P  294 | live 1
+< P  293 | live 1
+< P  292 | live 1
+< P  291 | live 1
+< P  290 | live 1
+< P  289 | live 1
+< P  288 | live 1
+< P  287 | live 1
+< P  286 | live 1
+< P  285 | live 1
+< P  284 | live 1
+< P  283 | live 1
+< P  282 | live 1
+< P  281 | live 1
+< P  280 | live 1
+< P  279 | live 1
+< P  148 | live 1
+< P  147 | live 1
+< P  146 | live 1
+< P  145 | live 1
+< P  144 | live 1
+< P  143 | live 1
+< P  142 | live 1
+< P  141 | live 1
+< P  140 | live 1
+< P  139 | live 1
+< P  138 | live 1
+< P  137 | live 1
+< P   72 | live 1
+< P   71 | live 1
+11056,11167d10097
+< P  218 | fork -5 (270)
+< P  217 | fork -5 (259)
+< P  216 | fork -5 (270)
+< P  215 | fork -5 (259)
+< P  214 | fork -5 (270)
+< P  213 | fork -5 (259)
+< P  212 | fork -5 (270)
+< P  211 | fork -5 (259)
+< P  210 | fork -5 (270)
+< P  209 | fork -5 (259)
+< P  208 | fork -5 (270)
+< P  207 | fork -5 (259)
+< P  206 | fork -5 (270)
+< P  205 | fork -5 (259)
+< P  204 | fork -5 (270)
+< P  203 | fork -5 (259)
+< P  202 | fork -5 (270)
+< P  201 | fork -5 (259)
+< P  200 | fork -5 (270)
+< P  199 | fork -5 (259)
+< P  198 | fork -5 (270)
+< P  197 | fork -5 (259)
+< P  196 | fork -5 (270)
+< P  195 | fork -5 (259)
+< P  194 | fork -5 (270)
+< P  193 | fork -5 (259)
+< P  192 | fork -5 (270)
+< P  191 | fork -5 (259)
+< P  190 | fork -5 (270)
+< P  189 | fork -5 (259)
+< P  188 | fork -5 (270)
+< P  187 | fork -5 (259)
+< P  186 | fork -5 (270)
+< P  185 | fork -5 (259)
+< P  184 | fork -5 (270)
+< P  183 | fork -5 (259)
+< P  182 | fork -5 (270)
+< P  181 | fork -5 (259)
+< P  180 | fork -5 (270)
+< P  179 | fork -5 (259)
+< P  178 | zjmp -8 OK
+< P  177 | zjmp -8 OK
+< P  176 | zjmp -8 OK
+< P  175 | zjmp -8 OK
+< P  174 | zjmp -8 OK
+< P  173 | zjmp -8 OK
+< P  172 | zjmp -8 OK
+< P  171 | zjmp -8 OK
+< P  170 | zjmp -8 OK
+< P  169 | zjmp -8 OK
+< P  168 | zjmp -8 OK
+< P  167 | zjmp -8 OK
+< P  166 | zjmp -8 OK
+< P  165 | zjmp -8 OK
+< P  164 | zjmp -8 OK
+< P  163 | zjmp -8 OK
+< P  162 | zjmp -8 OK
+< P  161 | zjmp -8 OK
+< P  160 | zjmp -8 OK
+< P  159 | zjmp -8 OK
+< P  158 | zjmp -8 OK
+< P  157 | zjmp -8 OK
+< P  156 | zjmp -8 OK
+< P  155 | zjmp -8 OK
+< P  154 | zjmp -8 OK
+< P  153 | zjmp -8 OK
+< P  152 | zjmp -8 OK
+< P  151 | zjmp -8 OK
+< P  150 | zjmp -8 OK
+< P  149 | zjmp -8 OK
+< P  102 | fork -5 (270)
+< P  101 | fork -5 (259)
+< P  100 | fork -5 (270)
+< P   99 | fork -5 (259)
+< P   98 | fork -5 (270)
+< P   97 | fork -5 (259)
+< P   96 | fork -5 (270)
+< P   95 | fork -5 (259)
+< P   94 | fork -5 (270)
+< P   93 | fork -5 (259)
+< P   92 | fork -5 (270)
+< P   91 | fork -5 (259)
+< P   90 | fork -5 (270)
+< P   89 | fork -5 (259)
+< P   88 | fork -5 (270)
+< P   87 | fork -5 (259)
+< P   86 | fork -5 (270)
+< P   85 | fork -5 (259)
+< P   84 | fork -5 (270)
+< P   83 | fork -5 (259)
+< P   82 | zjmp -8 OK
+< P   81 | zjmp -8 OK
+< P   80 | zjmp -8 OK
+< P   79 | zjmp -8 OK
+< P   78 | zjmp -8 OK
+< P   77 | zjmp -8 OK
+< P   76 | zjmp -8 OK
+< P   75 | zjmp -8 OK
+< P   74 | zjmp -8 OK
+< P   73 | zjmp -8 OK
+< P   48 | fork -5 (270)
+< P   47 | fork -5 (259)
+< P   46 | fork -5 (270)
+< P   45 | fork -5 (259)
+< P   44 | fork -5 (270)
+< P   43 | fork -5 (259)
+< P   42 | fork -5 (270)
+< P   41 | fork -5 (259)
+< P   40 | zjmp -8 OK
+< P   39 | zjmp -8 OK
+< P   24 | fork -5 (270)
+< P   23 | fork -5 (259)
+11178,11289d10107
+< P  390 | live 1
+< P  389 | live 1
+< P  388 | live 1
+< P  387 | live 1
+< P  386 | live 1
+< P  385 | live 1
+< P  384 | live 1
+< P  383 | live 1
+< P  382 | live 1
+< P  381 | live 1
+< P  380 | live 1
+< P  379 | live 1
+< P  378 | live 1
+< P  377 | live 1
+< P  376 | live 1
+< P  375 | live 1
+< P  374 | live 1
+< P  373 | live 1
+< P  372 | live 1
+< P  371 | live 1
+< P  370 | live 1
+< P  369 | live 1
+< P  368 | live 1
+< P  367 | live 1
+< P  366 | live 1
+< P  365 | live 1
+< P  364 | live 1
+< P  363 | live 1
+< P  362 | live 1
+< P  361 | live 1
+< P  360 | live 1
+< P  359 | live 1
+< P  358 | live 1
+< P  357 | live 1
+< P  356 | live 1
+< P  355 | live 1
+< P  354 | live 1
+< P  353 | live 1
+< P  352 | live 1
+< P  351 | live 1
+< P  350 | live 1
+< P  349 | live 1
+< P  348 | live 1
+< P  347 | live 1
+< P  346 | live 1
+< P  345 | live 1
+< P  344 | live 1
+< P  343 | live 1
+< P  342 | live 1
+< P  341 | live 1
+< P  340 | live 1
+< P  339 | live 1
+< P  338 | live 1
+< P  337 | live 1
+< P  336 | live 1
+< P  335 | live 1
+< P  334 | live 1
+< P  333 | live 1
+< P  332 | live 1
+< P  331 | live 1
+< P  330 | live 1
+< P  329 | live 1
+< P  328 | live 1
+< P  327 | live 1
+< P  326 | live 1
+< P  325 | live 1
+< P  324 | live 1
+< P  323 | live 1
+< P  322 | live 1
+< P  321 | live 1
+< P  178 | live 1
+< P  177 | live 1
+< P  176 | live 1
+< P  175 | live 1
+< P  174 | live 1
+< P  173 | live 1
+< P  172 | live 1
+< P  171 | live 1
+< P  170 | live 1
+< P  169 | live 1
+< P  168 | live 1
+< P  167 | live 1
+< P  166 | live 1
+< P  165 | live 1
+< P  164 | live 1
+< P  163 | live 1
+< P  162 | live 1
+< P  161 | live 1
+< P  160 | live 1
+< P  159 | live 1
+< P  158 | live 1
+< P  157 | live 1
+< P  156 | live 1
+< P  155 | live 1
+< P  154 | live 1
+< P  153 | live 1
+< P  152 | live 1
+< P  151 | live 1
+< P  150 | live 1
+< P  149 | live 1
+< P   82 | live 1
+< P   81 | live 1
+< P   80 | live 1
+< P   79 | live 1
+< P   78 | live 1
+< P   77 | live 1
+< P   76 | live 1
+< P   75 | live 1
+< P   74 | live 1
+< P   73 | live 1
+< P   40 | live 1
+< P   39 | live 1
+11300,11439d10117
+< P  248 | fork -5 (259)
+< P  247 | fork -5 (270)
+< P  246 | fork -5 (259)
+< P  245 | fork -5 (270)
+< P  244 | fork -5 (259)
+< P  243 | fork -5 (270)
+< P  242 | fork -5 (259)
+< P  241 | fork -5 (270)
+< P  240 | fork -5 (259)
+< P  239 | fork -5 (270)
+< P  238 | fork -5 (259)
+< P  237 | fork -5 (270)
+< P  236 | fork -5 (259)
+< P  235 | fork -5 (270)
+< P  234 | fork -5 (259)
+< P  233 | fork -5 (270)
+< P  232 | fork -5 (259)
+< P  231 | fork -5 (270)
+< P  230 | fork -5 (259)
+< P  229 | fork -5 (270)
+< P  228 | fork -5 (259)
+< P  227 | fork -5 (270)
+< P  226 | fork -5 (259)
+< P  225 | fork -5 (270)
+< P  224 | fork -5 (259)
+< P  223 | fork -5 (270)
+< P  222 | fork -5 (259)
+< P  221 | fork -5 (270)
+< P  220 | fork -5 (259)
+< P  219 | fork -5 (270)
+< P  218 | zjmp -8 OK
+< P  217 | zjmp -8 OK
+< P  216 | zjmp -8 OK
+< P  215 | zjmp -8 OK
+< P  214 | zjmp -8 OK
+< P  213 | zjmp -8 OK
+< P  212 | zjmp -8 OK
+< P  211 | zjmp -8 OK
+< P  210 | zjmp -8 OK
+< P  209 | zjmp -8 OK
+< P  208 | zjmp -8 OK
+< P  207 | zjmp -8 OK
+< P  206 | zjmp -8 OK
+< P  205 | zjmp -8 OK
+< P  204 | zjmp -8 OK
+< P  203 | zjmp -8 OK
+< P  202 | zjmp -8 OK
+< P  201 | zjmp -8 OK
+< P  200 | zjmp -8 OK
+< P  199 | zjmp -8 OK
+< P  198 | zjmp -8 OK
+< P  197 | zjmp -8 OK
+< P  196 | zjmp -8 OK
+< P  195 | zjmp -8 OK
+< P  194 | zjmp -8 OK
+< P  193 | zjmp -8 OK
+< P  192 | zjmp -8 OK
+< P  191 | zjmp -8 OK
+< P  190 | zjmp -8 OK
+< P  189 | zjmp -8 OK
+< P  188 | zjmp -8 OK
+< P  187 | zjmp -8 OK
+< P  186 | zjmp -8 OK
+< P  185 | zjmp -8 OK
+< P  184 | zjmp -8 OK
+< P  183 | zjmp -8 OK
+< P  182 | zjmp -8 OK
+< P  181 | zjmp -8 OK
+< P  180 | zjmp -8 OK
+< P  179 | zjmp -8 OK
+< P  122 | fork -5 (259)
+< P  121 | fork -5 (270)
+< P  120 | fork -5 (259)
+< P  119 | fork -5 (270)
+< P  118 | fork -5 (259)
+< P  117 | fork -5 (270)
+< P  116 | fork -5 (259)
+< P  115 | fork -5 (270)
+< P  114 | fork -5 (259)
+< P  113 | fork -5 (270)
+< P  112 | fork -5 (259)
+< P  111 | fork -5 (270)
+< P  110 | fork -5 (259)
+< P  109 | fork -5 (270)
+< P  108 | fork -5 (259)
+< P  107 | fork -5 (270)
+< P  106 | fork -5 (259)
+< P  105 | fork -5 (270)
+< P  104 | fork -5 (259)
+< P  103 | fork -5 (270)
+< P  102 | zjmp -8 OK
+< P  101 | zjmp -8 OK
+< P  100 | zjmp -8 OK
+< P   99 | zjmp -8 OK
+< P   98 | zjmp -8 OK
+< P   97 | zjmp -8 OK
+< P   96 | zjmp -8 OK
+< P   95 | zjmp -8 OK
+< P   94 | zjmp -8 OK
+< P   93 | zjmp -8 OK
+< P   92 | zjmp -8 OK
+< P   91 | zjmp -8 OK
+< P   90 | zjmp -8 OK
+< P   89 | zjmp -8 OK
+< P   88 | zjmp -8 OK
+< P   87 | zjmp -8 OK
+< P   86 | zjmp -8 OK
+< P   85 | zjmp -8 OK
+< P   84 | zjmp -8 OK
+< P   83 | zjmp -8 OK
+< P   60 | fork -5 (259)
+< P   59 | fork -5 (270)
+< P   58 | fork -5 (259)
+< P   57 | fork -5 (270)
+< P   56 | fork -5 (259)
+< P   55 | fork -5 (270)
+< P   54 | fork -5 (259)
+< P   53 | fork -5 (270)
+< P   52 | fork -5 (259)
+< P   51 | fork -5 (270)
+< P   50 | fork -5 (259)
+< P   49 | fork -5 (270)
+< P   48 | zjmp -8 OK
+< P   47 | zjmp -8 OK
+< P   46 | zjmp -8 OK
+< P   45 | zjmp -8 OK
+< P   44 | zjmp -8 OK
+< P   43 | zjmp -8 OK
+< P   42 | zjmp -8 OK
+< P   41 | zjmp -8 OK
+< P   30 | fork -5 (259)
+< P   29 | fork -5 (270)
+< P   28 | fork -5 (259)
+< P   27 | fork -5 (270)
+< P   26 | fork -5 (259)
+< P   25 | fork -5 (270)
+< P   24 | zjmp -8 OK
+< P   23 | zjmp -8 OK
+< P   16 | fork -5 (259)
+< P   15 | fork -5 (270)
+11450,11589d10127
+< P  460 | live 1
+< P  459 | live 1
+< P  458 | live 1
+< P  457 | live 1
+< P  456 | live 1
+< P  455 | live 1
+< P  454 | live 1
+< P  453 | live 1
+< P  452 | live 1
+< P  451 | live 1
+< P  450 | live 1
+< P  449 | live 1
+< P  448 | live 1
+< P  447 | live 1
+< P  446 | live 1
+< P  445 | live 1
+< P  444 | live 1
+< P  443 | live 1
+< P  442 | live 1
+< P  441 | live 1
+< P  440 | live 1
+< P  439 | live 1
+< P  438 | live 1
+< P  437 | live 1
+< P  436 | live 1
+< P  435 | live 1
+< P  434 | live 1
+< P  433 | live 1
+< P  432 | live 1
+< P  431 | live 1
+< P  430 | live 1
+< P  429 | live 1
+< P  428 | live 1
+< P  427 | live 1
+< P  426 | live 1
+< P  425 | live 1
+< P  424 | live 1
+< P  423 | live 1
+< P  422 | live 1
+< P  421 | live 1
+< P  420 | live 1
+< P  419 | live 1
+< P  418 | live 1
+< P  417 | live 1
+< P  416 | live 1
+< P  415 | live 1
+< P  414 | live 1
+< P  413 | live 1
+< P  412 | live 1
+< P  411 | live 1
+< P  410 | live 1
+< P  409 | live 1
+< P  408 | live 1
+< P  407 | live 1
+< P  406 | live 1
+< P  405 | live 1
+< P  404 | live 1
+< P  403 | live 1
+< P  402 | live 1
+< P  401 | live 1
+< P  400 | live 1
+< P  399 | live 1
+< P  398 | live 1
+< P  397 | live 1
+< P  396 | live 1
+< P  395 | live 1
+< P  394 | live 1
+< P  393 | live 1
+< P  392 | live 1
+< P  391 | live 1
+< P  218 | live 1
+< P  217 | live 1
+< P  216 | live 1
+< P  215 | live 1
+< P  214 | live 1
+< P  213 | live 1
+< P  212 | live 1
+< P  211 | live 1
+< P  210 | live 1
+< P  209 | live 1
+< P  208 | live 1
+< P  207 | live 1
+< P  206 | live 1
+< P  205 | live 1
+< P  204 | live 1
+< P  203 | live 1
+< P  202 | live 1
+< P  201 | live 1
+< P  200 | live 1
+< P  199 | live 1
+< P  198 | live 1
+< P  197 | live 1
+< P  196 | live 1
+< P  195 | live 1
+< P  194 | live 1
+< P  193 | live 1
+< P  192 | live 1
+< P  191 | live 1
+< P  190 | live 1
+< P  189 | live 1
+< P  188 | live 1
+< P  187 | live 1
+< P  186 | live 1
+< P  185 | live 1
+< P  184 | live 1
+< P  183 | live 1
+< P  182 | live 1
+< P  181 | live 1
+< P  180 | live 1
+< P  179 | live 1
+< P  102 | live 1
+< P  101 | live 1
+< P  100 | live 1
+< P   99 | live 1
+< P   98 | live 1
+< P   97 | live 1
+< P   96 | live 1
+< P   95 | live 1
+< P   94 | live 1
+< P   93 | live 1
+< P   92 | live 1
+< P   91 | live 1
+< P   90 | live 1
+< P   89 | live 1
+< P   88 | live 1
+< P   87 | live 1
+< P   86 | live 1
+< P   85 | live 1
+< P   84 | live 1
+< P   83 | live 1
+< P   48 | live 1
+< P   47 | live 1
+< P   46 | live 1
+< P   45 | live 1
+< P   44 | live 1
+< P   43 | live 1
+< P   42 | live 1
+< P   41 | live 1
+< P   24 | live 1
+< P   23 | live 1
+11600,11711d10137
+< P  260 | fork -5 (270)
+< P  259 | fork -5 (259)
+< P  258 | fork -5 (270)
+< P  257 | fork -5 (259)
+< P  256 | fork -5 (270)
+< P  255 | fork -5 (259)
+< P  254 | fork -5 (270)
+< P  253 | fork -5 (259)
+< P  252 | fork -5 (270)
+< P  251 | fork -5 (259)
+< P  250 | fork -5 (270)
+< P  249 | fork -5 (259)
+< P  248 | zjmp -8 OK
+< P  247 | zjmp -8 OK
+< P  246 | zjmp -8 OK
+< P  245 | zjmp -8 OK
+< P  244 | zjmp -8 OK
+< P  243 | zjmp -8 OK
+< P  242 | zjmp -8 OK
+< P  241 | zjmp -8 OK
+< P  240 | zjmp -8 OK
+< P  239 | zjmp -8 OK
+< P  238 | zjmp -8 OK
+< P  237 | zjmp -8 OK
+< P  236 | zjmp -8 OK
+< P  235 | zjmp -8 OK
+< P  234 | zjmp -8 OK
+< P  233 | zjmp -8 OK
+< P  232 | zjmp -8 OK
+< P  231 | zjmp -8 OK
+< P  230 | zjmp -8 OK
+< P  229 | zjmp -8 OK
+< P  228 | zjmp -8 OK
+< P  227 | zjmp -8 OK
+< P  226 | zjmp -8 OK
+< P  225 | zjmp -8 OK
+< P  224 | zjmp -8 OK
+< P  223 | zjmp -8 OK
+< P  222 | zjmp -8 OK
+< P  221 | zjmp -8 OK
+< P  220 | zjmp -8 OK
+< P  219 | zjmp -8 OK
+< P  132 | fork -5 (270)
+< P  131 | fork -5 (259)
+< P  130 | fork -5 (270)
+< P  129 | fork -5 (259)
+< P  128 | fork -5 (270)
+< P  127 | fork -5 (259)
+< P  126 | fork -5 (270)
+< P  125 | fork -5 (259)
+< P  124 | fork -5 (270)
+< P  123 | fork -5 (259)
+< P  122 | zjmp -8 OK
+< P  121 | zjmp -8 OK
+< P  120 | zjmp -8 OK
+< P  119 | zjmp -8 OK
+< P  118 | zjmp -8 OK
+< P  117 | zjmp -8 OK
+< P  116 | zjmp -8 OK
+< P  115 | zjmp -8 OK
+< P  114 | zjmp -8 OK
+< P  113 | zjmp -8 OK
+< P  112 | zjmp -8 OK
+< P  111 | zjmp -8 OK
+< P  110 | zjmp -8 OK
+< P  109 | zjmp -8 OK
+< P  108 | zjmp -8 OK
+< P  107 | zjmp -8 OK
+< P  106 | zjmp -8 OK
+< P  105 | zjmp -8 OK
+< P  104 | zjmp -8 OK
+< P  103 | zjmp -8 OK
+< P   68 | fork -5 (270)
+< P   67 | fork -5 (259)
+< P   66 | fork -5 (270)
+< P   65 | fork -5 (259)
+< P   64 | fork -5 (270)
+< P   63 | fork -5 (259)
+< P   62 | fork -5 (270)
+< P   61 | fork -5 (259)
+< P   60 | zjmp -8 OK
+< P   59 | zjmp -8 OK
+< P   58 | zjmp -8 OK
+< P   57 | zjmp -8 OK
+< P   56 | zjmp -8 OK
+< P   55 | zjmp -8 OK
+< P   54 | zjmp -8 OK
+< P   53 | zjmp -8 OK
+< P   52 | zjmp -8 OK
+< P   51 | zjmp -8 OK
+< P   50 | zjmp -8 OK
+< P   49 | zjmp -8 OK
+< P   36 | fork -5 (270)
+< P   35 | fork -5 (259)
+< P   34 | fork -5 (270)
+< P   33 | fork -5 (259)
+< P   32 | fork -5 (270)
+< P   31 | fork -5 (259)
+< P   30 | zjmp -8 OK
+< P   29 | zjmp -8 OK
+< P   28 | zjmp -8 OK
+< P   27 | zjmp -8 OK
+< P   26 | zjmp -8 OK
+< P   25 | zjmp -8 OK
+< P   20 | fork -5 (270)
+< P   19 | fork -5 (259)
+< P   18 | fork -5 (270)
+< P   17 | fork -5 (259)
+< P   16 | zjmp -8 OK
+< P   15 | zjmp -8 OK
+< P   12 | fork -5 (270)
+< P   11 | fork -5 (259)
+11722,11833d10147
+< P  502 | live 1
+< P  501 | live 1
+< P  500 | live 1
+< P  499 | live 1
+< P  498 | live 1
+< P  497 | live 1
+< P  496 | live 1
+< P  495 | live 1
+< P  494 | live 1
+< P  493 | live 1
+< P  492 | live 1
+< P  491 | live 1
+< P  490 | live 1
+< P  489 | live 1
+< P  488 | live 1
+< P  487 | live 1
+< P  486 | live 1
+< P  485 | live 1
+< P  484 | live 1
+< P  483 | live 1
+< P  482 | live 1
+< P  481 | live 1
+< P  480 | live 1
+< P  479 | live 1
+< P  478 | live 1
+< P  477 | live 1
+< P  476 | live 1
+< P  475 | live 1
+< P  474 | live 1
+< P  473 | live 1
+< P  472 | live 1
+< P  471 | live 1
+< P  470 | live 1
+< P  469 | live 1
+< P  468 | live 1
+< P  467 | live 1
+< P  466 | live 1
+< P  465 | live 1
+< P  464 | live 1
+< P  463 | live 1
+< P  462 | live 1
+< P  461 | live 1
+< P  248 | live 1
+< P  247 | live 1
+< P  246 | live 1
+< P  245 | live 1
+< P  244 | live 1
+< P  243 | live 1
+< P  242 | live 1
+< P  241 | live 1
+< P  240 | live 1
+< P  239 | live 1
+< P  238 | live 1
+< P  237 | live 1
+< P  236 | live 1
+< P  235 | live 1
+< P  234 | live 1
+< P  233 | live 1
+< P  232 | live 1
+< P  231 | live 1
+< P  230 | live 1
+< P  229 | live 1
+< P  228 | live 1
+< P  227 | live 1
+< P  226 | live 1
+< P  225 | live 1
+< P  224 | live 1
+< P  223 | live 1
+< P  222 | live 1
+< P  221 | live 1
+< P  220 | live 1
+< P  219 | live 1
+< P  122 | live 1
+< P  121 | live 1
+< P  120 | live 1
+< P  119 | live 1
+< P  118 | live 1
+< P  117 | live 1
+< P  116 | live 1
+< P  115 | live 1
+< P  114 | live 1
+< P  113 | live 1
+< P  112 | live 1
+< P  111 | live 1
+< P  110 | live 1
+< P  109 | live 1
+< P  108 | live 1
+< P  107 | live 1
+< P  106 | live 1
+< P  105 | live 1
+< P  104 | live 1
+< P  103 | live 1
+< P   60 | live 1
+< P   59 | live 1
+< P   58 | live 1
+< P   57 | live 1
+< P   56 | live 1
+< P   55 | live 1
+< P   54 | live 1
+< P   53 | live 1
+< P   52 | live 1
+< P   51 | live 1
+< P   50 | live 1
+< P   49 | live 1
+< P   30 | live 1
+< P   29 | live 1
+< P   28 | live 1
+< P   27 | live 1
+< P   26 | live 1
+< P   25 | live 1
+< P   16 | live 1
+< P   15 | live 1
+11844,11899d10157
+< P  262 | fork -5 (259)
+< P  261 | fork -5 (270)
+< P  260 | zjmp -8 OK
+< P  259 | zjmp -8 OK
+< P  258 | zjmp -8 OK
+< P  257 | zjmp -8 OK
+< P  256 | zjmp -8 OK
+< P  255 | zjmp -8 OK
+< P  254 | zjmp -8 OK
+< P  253 | zjmp -8 OK
+< P  252 | zjmp -8 OK
+< P  251 | zjmp -8 OK
+< P  250 | zjmp -8 OK
+< P  249 | zjmp -8 OK
+< P  134 | fork -5 (259)
+< P  133 | fork -5 (270)
+< P  132 | zjmp -8 OK
+< P  131 | zjmp -8 OK
+< P  130 | zjmp -8 OK
+< P  129 | zjmp -8 OK
+< P  128 | zjmp -8 OK
+< P  127 | zjmp -8 OK
+< P  126 | zjmp -8 OK
+< P  125 | zjmp -8 OK
+< P  124 | zjmp -8 OK
+< P  123 | zjmp -8 OK
+< P   70 | fork -5 (259)
+< P   69 | fork -5 (270)
+< P   68 | zjmp -8 OK
+< P   67 | zjmp -8 OK
+< P   66 | zjmp -8 OK
+< P   65 | zjmp -8 OK
+< P   64 | zjmp -8 OK
+< P   63 | zjmp -8 OK
+< P   62 | zjmp -8 OK
+< P   61 | zjmp -8 OK
+< P   38 | fork -5 (259)
+< P   37 | fork -5 (270)
+< P   36 | zjmp -8 OK
+< P   35 | zjmp -8 OK
+< P   34 | zjmp -8 OK
+< P   33 | zjmp -8 OK
+< P   32 | zjmp -8 OK
+< P   31 | zjmp -8 OK
+< P   22 | fork -5 (259)
+< P   21 | fork -5 (270)
+< P   20 | zjmp -8 OK
+< P   19 | zjmp -8 OK
+< P   18 | zjmp -8 OK
+< P   17 | zjmp -8 OK
+< P   14 | fork -5 (259)
+< P   13 | fork -5 (270)
+< P   12 | zjmp -8 OK
+< P   11 | zjmp -8 OK
+< P   10 | fork -5 (259)
+< P    9 | fork -5 (270)
+11910,11965d10167
+< P  516 | live 1
+< P  515 | live 1
+< P  514 | live 1
+< P  513 | live 1
+< P  512 | live 1
+< P  511 | live 1
+< P  510 | live 1
+< P  509 | live 1
+< P  508 | live 1
+< P  507 | live 1
+< P  506 | live 1
+< P  505 | live 1
+< P  504 | live 1
+< P  503 | live 1
+< P  260 | live 1
+< P  259 | live 1
+< P  258 | live 1
+< P  257 | live 1
+< P  256 | live 1
+< P  255 | live 1
+< P  254 | live 1
+< P  253 | live 1
+< P  252 | live 1
+< P  251 | live 1
+< P  250 | live 1
+< P  249 | live 1
+< P  132 | live 1
+< P  131 | live 1
+< P  130 | live 1
+< P  129 | live 1
+< P  128 | live 1
+< P  127 | live 1
+< P  126 | live 1
+< P  125 | live 1
+< P  124 | live 1
+< P  123 | live 1
+< P   68 | live 1
+< P   67 | live 1
+< P   66 | live 1
+< P   65 | live 1
+< P   64 | live 1
+< P   63 | live 1
+< P   62 | live 1
+< P   61 | live 1
+< P   36 | live 1
+< P   35 | live 1
+< P   34 | live 1
+< P   33 | live 1
+< P   32 | live 1
+< P   31 | live 1
+< P   20 | live 1
+< P   19 | live 1
+< P   18 | live 1
+< P   17 | live 1
+< P   12 | live 1
+< P   11 | live 1
+11976,11991d10177
+< P  262 | zjmp -8 OK
+< P  261 | zjmp -8 OK
+< P  134 | zjmp -8 OK
+< P  133 | zjmp -8 OK
+< P   70 | zjmp -8 OK
+< P   69 | zjmp -8 OK
+< P   38 | zjmp -8 OK
+< P   37 | zjmp -8 OK
+< P   22 | zjmp -8 OK
+< P   21 | zjmp -8 OK
+< P   14 | zjmp -8 OK
+< P   13 | zjmp -8 OK
+< P   10 | zjmp -8 OK
+< P    9 | zjmp -8 OK
+< P    5 | fork -5 (270)
+< P    3 | fork -5 (259)
+11998,15064c10184
+< Cycle to die is now 1386
+< It is now cycle 9067
+< It is now cycle 9068
+< It is now cycle 9069
+< It is now cycle 9070
+< P  518 | live 1
+< P  517 | live 1
+< P  262 | live 1
+< P  261 | live 1
+< P  134 | live 1
+< P  133 | live 1
+< P   70 | live 1
+< P   69 | live 1
+< P   38 | live 1
+< P   37 | live 1
+< P   22 | live 1
+< P   21 | live 1
+< P   14 | live 1
+< P   13 | live 1
+< P   10 | live 1
+< P    9 | live 1
+< It is now cycle 9071
+< It is now cycle 9072
+< It is now cycle 9073
+< It is now cycle 9074
+< It is now cycle 9075
+< It is now cycle 9076
+< It is now cycle 9077
+< It is now cycle 9078
+< It is now cycle 9079
+< It is now cycle 9080
+< P    5 | zjmp -8 OK
+< P    3 | zjmp -8 OK
+< It is now cycle 9081
+< It is now cycle 9082
+< It is now cycle 9083
+< It is now cycle 9084
+< It is now cycle 9085
+< It is now cycle 9086
+< It is now cycle 9087
+< It is now cycle 9088
+< It is now cycle 9089
+< It is now cycle 9090
+< P    5 | live 1
+< P    3 | live 1
+< It is now cycle 9091
+< It is now cycle 9092
+< It is now cycle 9093
+< It is now cycle 9094
+< It is now cycle 9095
+< It is now cycle 9096
+< It is now cycle 9097
+< It is now cycle 9098
+< It is now cycle 9099
+< It is now cycle 9100
+< It is now cycle 9101
+< It is now cycle 9102
+< It is now cycle 9103
+< It is now cycle 9104
+< It is now cycle 9105
+< It is now cycle 9106
+< It is now cycle 9107
+< It is now cycle 9108
+< It is now cycle 9109
+< It is now cycle 9110
+< It is now cycle 9111
+< It is now cycle 9112
+< It is now cycle 9113
+< It is now cycle 9114
+< It is now cycle 9115
+< It is now cycle 9116
+< It is now cycle 9117
+< It is now cycle 9118
+< It is now cycle 9119
+< It is now cycle 9120
+< It is now cycle 9121
+< It is now cycle 9122
+< It is now cycle 9123
+< It is now cycle 9124
+< It is now cycle 9125
+< It is now cycle 9126
+< It is now cycle 9127
+< It is now cycle 9128
+< It is now cycle 9129
+< It is now cycle 9130
+< It is now cycle 9131
+< It is now cycle 9132
+< It is now cycle 9133
+< It is now cycle 9134
+< It is now cycle 9135
+< It is now cycle 9136
+< It is now cycle 9137
+< It is now cycle 9138
+< It is now cycle 9139
+< It is now cycle 9140
+< It is now cycle 9141
+< It is now cycle 9142
+< It is now cycle 9143
+< It is now cycle 9144
+< It is now cycle 9145
+< It is now cycle 9146
+< It is now cycle 9147
+< It is now cycle 9148
+< It is now cycle 9149
+< It is now cycle 9150
+< It is now cycle 9151
+< It is now cycle 9152
+< It is now cycle 9153
+< It is now cycle 9154
+< It is now cycle 9155
+< It is now cycle 9156
+< It is now cycle 9157
+< It is now cycle 9158
+< It is now cycle 9159
+< It is now cycle 9160
+< It is now cycle 9161
+< It is now cycle 9162
+< It is now cycle 9163
+< It is now cycle 9164
+< It is now cycle 9165
+< It is now cycle 9166
+< It is now cycle 9167
+< It is now cycle 9168
+< It is now cycle 9169
+< It is now cycle 9170
+< It is now cycle 9171
+< It is now cycle 9172
+< It is now cycle 9173
+< It is now cycle 9174
+< It is now cycle 9175
+< It is now cycle 9176
+< It is now cycle 9177
+< It is now cycle 9178
+< It is now cycle 9179
+< It is now cycle 9180
+< It is now cycle 9181
+< It is now cycle 9182
+< It is now cycle 9183
+< It is now cycle 9184
+< It is now cycle 9185
+< It is now cycle 9186
+< It is now cycle 9187
+< It is now cycle 9188
+< It is now cycle 9189
+< It is now cycle 9190
+< It is now cycle 9191
+< It is now cycle 9192
+< It is now cycle 9193
+< It is now cycle 9194
+< It is now cycle 9195
+< It is now cycle 9196
+< It is now cycle 9197
+< It is now cycle 9198
+< It is now cycle 9199
+< It is now cycle 9200
+< It is now cycle 9201
+< It is now cycle 9202
+< It is now cycle 9203
+< It is now cycle 9204
+< It is now cycle 9205
+< It is now cycle 9206
+< It is now cycle 9207
+< It is now cycle 9208
+< It is now cycle 9209
+< It is now cycle 9210
+< It is now cycle 9211
+< It is now cycle 9212
+< It is now cycle 9213
+< It is now cycle 9214
+< It is now cycle 9215
+< It is now cycle 9216
+< It is now cycle 9217
+< It is now cycle 9218
+< It is now cycle 9219
+< It is now cycle 9220
+< It is now cycle 9221
+< It is now cycle 9222
+< It is now cycle 9223
+< It is now cycle 9224
+< It is now cycle 9225
+< It is now cycle 9226
+< It is now cycle 9227
+< It is now cycle 9228
+< It is now cycle 9229
+< It is now cycle 9230
+< It is now cycle 9231
+< It is now cycle 9232
+< It is now cycle 9233
+< It is now cycle 9234
+< It is now cycle 9235
+< It is now cycle 9236
+< It is now cycle 9237
+< It is now cycle 9238
+< It is now cycle 9239
+< It is now cycle 9240
+< It is now cycle 9241
+< It is now cycle 9242
+< It is now cycle 9243
+< It is now cycle 9244
+< It is now cycle 9245
+< It is now cycle 9246
+< It is now cycle 9247
+< It is now cycle 9248
+< It is now cycle 9249
+< It is now cycle 9250
+< It is now cycle 9251
+< It is now cycle 9252
+< It is now cycle 9253
+< It is now cycle 9254
+< It is now cycle 9255
+< It is now cycle 9256
+< It is now cycle 9257
+< It is now cycle 9258
+< It is now cycle 9259
+< It is now cycle 9260
+< It is now cycle 9261
+< It is now cycle 9262
+< It is now cycle 9263
+< It is now cycle 9264
+< It is now cycle 9265
+< It is now cycle 9266
+< It is now cycle 9267
+< It is now cycle 9268
+< It is now cycle 9269
+< It is now cycle 9270
+< It is now cycle 9271
+< It is now cycle 9272
+< It is now cycle 9273
+< It is now cycle 9274
+< It is now cycle 9275
+< It is now cycle 9276
+< It is now cycle 9277
+< It is now cycle 9278
+< It is now cycle 9279
+< It is now cycle 9280
+< It is now cycle 9281
+< It is now cycle 9282
+< It is now cycle 9283
+< It is now cycle 9284
+< It is now cycle 9285
+< It is now cycle 9286
+< It is now cycle 9287
+< It is now cycle 9288
+< It is now cycle 9289
+< It is now cycle 9290
+< It is now cycle 9291
+< It is now cycle 9292
+< It is now cycle 9293
+< It is now cycle 9294
+< It is now cycle 9295
+< It is now cycle 9296
+< It is now cycle 9297
+< It is now cycle 9298
+< It is now cycle 9299
+< It is now cycle 9300
+< It is now cycle 9301
+< It is now cycle 9302
+< It is now cycle 9303
+< It is now cycle 9304
+< It is now cycle 9305
+< It is now cycle 9306
+< It is now cycle 9307
+< It is now cycle 9308
+< It is now cycle 9309
+< It is now cycle 9310
+< It is now cycle 9311
+< It is now cycle 9312
+< It is now cycle 9313
+< It is now cycle 9314
+< It is now cycle 9315
+< It is now cycle 9316
+< It is now cycle 9317
+< It is now cycle 9318
+< It is now cycle 9319
+< It is now cycle 9320
+< It is now cycle 9321
+< It is now cycle 9322
+< It is now cycle 9323
+< It is now cycle 9324
+< It is now cycle 9325
+< It is now cycle 9326
+< It is now cycle 9327
+< It is now cycle 9328
+< It is now cycle 9329
+< It is now cycle 9330
+< It is now cycle 9331
+< It is now cycle 9332
+< It is now cycle 9333
+< It is now cycle 9334
+< It is now cycle 9335
+< It is now cycle 9336
+< It is now cycle 9337
+< It is now cycle 9338
+< It is now cycle 9339
+< It is now cycle 9340
+< It is now cycle 9341
+< It is now cycle 9342
+< It is now cycle 9343
+< It is now cycle 9344
+< It is now cycle 9345
+< It is now cycle 9346
+< It is now cycle 9347
+< It is now cycle 9348
+< It is now cycle 9349
+< It is now cycle 9350
+< It is now cycle 9351
+< It is now cycle 9352
+< It is now cycle 9353
+< It is now cycle 9354
+< It is now cycle 9355
+< It is now cycle 9356
+< It is now cycle 9357
+< It is now cycle 9358
+< It is now cycle 9359
+< It is now cycle 9360
+< It is now cycle 9361
+< It is now cycle 9362
+< It is now cycle 9363
+< It is now cycle 9364
+< It is now cycle 9365
+< It is now cycle 9366
+< It is now cycle 9367
+< It is now cycle 9368
+< It is now cycle 9369
+< It is now cycle 9370
+< It is now cycle 9371
+< It is now cycle 9372
+< It is now cycle 9373
+< It is now cycle 9374
+< It is now cycle 9375
+< It is now cycle 9376
+< It is now cycle 9377
+< It is now cycle 9378
+< It is now cycle 9379
+< It is now cycle 9380
+< It is now cycle 9381
+< It is now cycle 9382
+< It is now cycle 9383
+< It is now cycle 9384
+< It is now cycle 9385
+< It is now cycle 9386
+< It is now cycle 9387
+< It is now cycle 9388
+< It is now cycle 9389
+< It is now cycle 9390
+< It is now cycle 9391
+< It is now cycle 9392
+< It is now cycle 9393
+< It is now cycle 9394
+< It is now cycle 9395
+< It is now cycle 9396
+< It is now cycle 9397
+< It is now cycle 9398
+< It is now cycle 9399
+< It is now cycle 9400
+< It is now cycle 9401
+< It is now cycle 9402
+< It is now cycle 9403
+< It is now cycle 9404
+< It is now cycle 9405
+< It is now cycle 9406
+< It is now cycle 9407
+< It is now cycle 9408
+< It is now cycle 9409
+< It is now cycle 9410
+< It is now cycle 9411
+< It is now cycle 9412
+< It is now cycle 9413
+< It is now cycle 9414
+< It is now cycle 9415
+< It is now cycle 9416
+< It is now cycle 9417
+< It is now cycle 9418
+< It is now cycle 9419
+< It is now cycle 9420
+< It is now cycle 9421
+< It is now cycle 9422
+< It is now cycle 9423
+< It is now cycle 9424
+< It is now cycle 9425
+< It is now cycle 9426
+< It is now cycle 9427
+< It is now cycle 9428
+< It is now cycle 9429
+< It is now cycle 9430
+< It is now cycle 9431
+< It is now cycle 9432
+< It is now cycle 9433
+< It is now cycle 9434
+< It is now cycle 9435
+< It is now cycle 9436
+< It is now cycle 9437
+< It is now cycle 9438
+< It is now cycle 9439
+< It is now cycle 9440
+< It is now cycle 9441
+< It is now cycle 9442
+< It is now cycle 9443
+< It is now cycle 9444
+< It is now cycle 9445
+< It is now cycle 9446
+< It is now cycle 9447
+< It is now cycle 9448
+< It is now cycle 9449
+< It is now cycle 9450
+< It is now cycle 9451
+< It is now cycle 9452
+< It is now cycle 9453
+< It is now cycle 9454
+< It is now cycle 9455
+< It is now cycle 9456
+< It is now cycle 9457
+< It is now cycle 9458
+< It is now cycle 9459
+< It is now cycle 9460
+< It is now cycle 9461
+< It is now cycle 9462
+< It is now cycle 9463
+< It is now cycle 9464
+< It is now cycle 9465
+< It is now cycle 9466
+< It is now cycle 9467
+< It is now cycle 9468
+< It is now cycle 9469
+< It is now cycle 9470
+< It is now cycle 9471
+< It is now cycle 9472
+< It is now cycle 9473
+< It is now cycle 9474
+< It is now cycle 9475
+< It is now cycle 9476
+< It is now cycle 9477
+< It is now cycle 9478
+< It is now cycle 9479
+< It is now cycle 9480
+< It is now cycle 9481
+< It is now cycle 9482
+< It is now cycle 9483
+< It is now cycle 9484
+< It is now cycle 9485
+< It is now cycle 9486
+< It is now cycle 9487
+< It is now cycle 9488
+< It is now cycle 9489
+< It is now cycle 9490
+< It is now cycle 9491
+< It is now cycle 9492
+< It is now cycle 9493
+< It is now cycle 9494
+< It is now cycle 9495
+< It is now cycle 9496
+< It is now cycle 9497
+< It is now cycle 9498
+< It is now cycle 9499
+< It is now cycle 9500
+< It is now cycle 9501
+< It is now cycle 9502
+< It is now cycle 9503
+< It is now cycle 9504
+< It is now cycle 9505
+< It is now cycle 9506
+< It is now cycle 9507
+< It is now cycle 9508
+< It is now cycle 9509
+< It is now cycle 9510
+< It is now cycle 9511
+< It is now cycle 9512
+< It is now cycle 9513
+< It is now cycle 9514
+< It is now cycle 9515
+< It is now cycle 9516
+< It is now cycle 9517
+< It is now cycle 9518
+< It is now cycle 9519
+< It is now cycle 9520
+< It is now cycle 9521
+< It is now cycle 9522
+< It is now cycle 9523
+< It is now cycle 9524
+< It is now cycle 9525
+< It is now cycle 9526
+< It is now cycle 9527
+< It is now cycle 9528
+< It is now cycle 9529
+< It is now cycle 9530
+< It is now cycle 9531
+< It is now cycle 9532
+< It is now cycle 9533
+< It is now cycle 9534
+< It is now cycle 9535
+< It is now cycle 9536
+< It is now cycle 9537
+< It is now cycle 9538
+< It is now cycle 9539
+< It is now cycle 9540
+< It is now cycle 9541
+< It is now cycle 9542
+< It is now cycle 9543
+< It is now cycle 9544
+< It is now cycle 9545
+< It is now cycle 9546
+< It is now cycle 9547
+< It is now cycle 9548
+< It is now cycle 9549
+< It is now cycle 9550
+< It is now cycle 9551
+< It is now cycle 9552
+< It is now cycle 9553
+< It is now cycle 9554
+< It is now cycle 9555
+< It is now cycle 9556
+< It is now cycle 9557
+< It is now cycle 9558
+< It is now cycle 9559
+< It is now cycle 9560
+< It is now cycle 9561
+< It is now cycle 9562
+< It is now cycle 9563
+< It is now cycle 9564
+< It is now cycle 9565
+< It is now cycle 9566
+< It is now cycle 9567
+< It is now cycle 9568
+< It is now cycle 9569
+< It is now cycle 9570
+< It is now cycle 9571
+< It is now cycle 9572
+< It is now cycle 9573
+< It is now cycle 9574
+< It is now cycle 9575
+< It is now cycle 9576
+< It is now cycle 9577
+< It is now cycle 9578
+< It is now cycle 9579
+< It is now cycle 9580
+< It is now cycle 9581
+< It is now cycle 9582
+< It is now cycle 9583
+< It is now cycle 9584
+< It is now cycle 9585
+< It is now cycle 9586
+< It is now cycle 9587
+< It is now cycle 9588
+< It is now cycle 9589
+< It is now cycle 9590
+< It is now cycle 9591
+< It is now cycle 9592
+< It is now cycle 9593
+< It is now cycle 9594
+< It is now cycle 9595
+< It is now cycle 9596
+< It is now cycle 9597
+< It is now cycle 9598
+< It is now cycle 9599
+< It is now cycle 9600
+< It is now cycle 9601
+< It is now cycle 9602
+< It is now cycle 9603
+< It is now cycle 9604
+< It is now cycle 9605
+< It is now cycle 9606
+< It is now cycle 9607
+< It is now cycle 9608
+< It is now cycle 9609
+< It is now cycle 9610
+< It is now cycle 9611
+< It is now cycle 9612
+< It is now cycle 9613
+< It is now cycle 9614
+< It is now cycle 9615
+< It is now cycle 9616
+< It is now cycle 9617
+< It is now cycle 9618
+< It is now cycle 9619
+< It is now cycle 9620
+< It is now cycle 9621
+< It is now cycle 9622
+< It is now cycle 9623
+< It is now cycle 9624
+< It is now cycle 9625
+< It is now cycle 9626
+< It is now cycle 9627
+< It is now cycle 9628
+< It is now cycle 9629
+< It is now cycle 9630
+< It is now cycle 9631
+< It is now cycle 9632
+< It is now cycle 9633
+< It is now cycle 9634
+< It is now cycle 9635
+< It is now cycle 9636
+< It is now cycle 9637
+< It is now cycle 9638
+< It is now cycle 9639
+< It is now cycle 9640
+< It is now cycle 9641
+< It is now cycle 9642
+< It is now cycle 9643
+< It is now cycle 9644
+< It is now cycle 9645
+< It is now cycle 9646
+< It is now cycle 9647
+< It is now cycle 9648
+< It is now cycle 9649
+< It is now cycle 9650
+< It is now cycle 9651
+< It is now cycle 9652
+< It is now cycle 9653
+< It is now cycle 9654
+< It is now cycle 9655
+< It is now cycle 9656
+< It is now cycle 9657
+< It is now cycle 9658
+< It is now cycle 9659
+< It is now cycle 9660
+< It is now cycle 9661
+< It is now cycle 9662
+< It is now cycle 9663
+< It is now cycle 9664
+< It is now cycle 9665
+< It is now cycle 9666
+< It is now cycle 9667
+< It is now cycle 9668
+< It is now cycle 9669
+< It is now cycle 9670
+< It is now cycle 9671
+< It is now cycle 9672
+< It is now cycle 9673
+< It is now cycle 9674
+< It is now cycle 9675
+< It is now cycle 9676
+< It is now cycle 9677
+< It is now cycle 9678
+< It is now cycle 9679
+< It is now cycle 9680
+< It is now cycle 9681
+< It is now cycle 9682
+< It is now cycle 9683
+< It is now cycle 9684
+< It is now cycle 9685
+< It is now cycle 9686
+< It is now cycle 9687
+< It is now cycle 9688
+< It is now cycle 9689
+< It is now cycle 9690
+< It is now cycle 9691
+< It is now cycle 9692
+< It is now cycle 9693
+< It is now cycle 9694
+< It is now cycle 9695
+< It is now cycle 9696
+< It is now cycle 9697
+< It is now cycle 9698
+< It is now cycle 9699
+< It is now cycle 9700
+< It is now cycle 9701
+< It is now cycle 9702
+< It is now cycle 9703
+< It is now cycle 9704
+< It is now cycle 9705
+< It is now cycle 9706
+< It is now cycle 9707
+< It is now cycle 9708
+< It is now cycle 9709
+< It is now cycle 9710
+< It is now cycle 9711
+< It is now cycle 9712
+< It is now cycle 9713
+< It is now cycle 9714
+< It is now cycle 9715
+< It is now cycle 9716
+< It is now cycle 9717
+< It is now cycle 9718
+< It is now cycle 9719
+< It is now cycle 9720
+< It is now cycle 9721
+< It is now cycle 9722
+< It is now cycle 9723
+< It is now cycle 9724
+< It is now cycle 9725
+< It is now cycle 9726
+< It is now cycle 9727
+< It is now cycle 9728
+< It is now cycle 9729
+< It is now cycle 9730
+< P  264 | fork -5 (270)
+< P  263 | fork -5 (259)
+< It is now cycle 9731
+< It is now cycle 9732
+< It is now cycle 9733
+< It is now cycle 9734
+< It is now cycle 9735
+< It is now cycle 9736
+< It is now cycle 9737
+< It is now cycle 9738
+< It is now cycle 9739
+< It is now cycle 9740
+< P  520 | live 1
+< P  519 | live 1
+< It is now cycle 9741
+< It is now cycle 9742
+< It is now cycle 9743
+< It is now cycle 9744
+< It is now cycle 9745
+< It is now cycle 9746
+< It is now cycle 9747
+< It is now cycle 9748
+< It is now cycle 9749
+< It is now cycle 9750
+< P  278 | fork -5 (259)
+< P  277 | fork -5 (270)
+< P  276 | fork -5 (259)
+< P  275 | fork -5 (270)
+< P  274 | fork -5 (259)
+< P  273 | fork -5 (270)
+< P  272 | fork -5 (259)
+< P  271 | fork -5 (270)
+< P  270 | fork -5 (259)
+< P  269 | fork -5 (270)
+< P  268 | fork -5 (259)
+< P  267 | fork -5 (270)
+< P  266 | fork -5 (259)
+< P  265 | fork -5 (270)
+< P  264 | zjmp -8 OK
+< P  263 | zjmp -8 OK
+< P  136 | fork -5 (259)
+< P  135 | fork -5 (270)
+< It is now cycle 9751
+< It is now cycle 9752
+< It is now cycle 9753
+< It is now cycle 9754
+< It is now cycle 9755
+< It is now cycle 9756
+< It is now cycle 9757
+< It is now cycle 9758
+< It is now cycle 9759
+< It is now cycle 9760
+< P  536 | live 1
+< P  535 | live 1
+< P  534 | live 1
+< P  533 | live 1
+< P  532 | live 1
+< P  531 | live 1
+< P  530 | live 1
+< P  529 | live 1
+< P  528 | live 1
+< P  527 | live 1
+< P  526 | live 1
+< P  525 | live 1
+< P  524 | live 1
+< P  523 | live 1
+< P  522 | live 1
+< P  521 | live 1
+< P  264 | live 1
+< P  263 | live 1
+< It is now cycle 9761
+< It is now cycle 9762
+< It is now cycle 9763
+< It is now cycle 9764
+< It is now cycle 9765
+< It is now cycle 9766
+< It is now cycle 9767
+< It is now cycle 9768
+< It is now cycle 9769
+< It is now cycle 9770
+< P  320 | fork -5 (270)
+< P  319 | fork -5 (259)
+< P  318 | fork -5 (270)
+< P  317 | fork -5 (259)
+< P  316 | fork -5 (270)
+< P  315 | fork -5 (259)
+< P  314 | fork -5 (270)
+< P  313 | fork -5 (259)
+< P  312 | fork -5 (270)
+< P  311 | fork -5 (259)
+< P  310 | fork -5 (270)
+< P  309 | fork -5 (259)
+< P  308 | fork -5 (270)
+< P  307 | fork -5 (259)
+< P  306 | fork -5 (270)
+< P  305 | fork -5 (259)
+< P  304 | fork -5 (270)
+< P  303 | fork -5 (259)
+< P  302 | fork -5 (270)
+< P  301 | fork -5 (259)
+< P  300 | fork -5 (270)
+< P  299 | fork -5 (259)
+< P  298 | fork -5 (270)
+< P  297 | fork -5 (259)
+< P  296 | fork -5 (270)
+< P  295 | fork -5 (259)
+< P  294 | fork -5 (270)
+< P  293 | fork -5 (259)
+< P  292 | fork -5 (270)
+< P  291 | fork -5 (259)
+< P  290 | fork -5 (270)
+< P  289 | fork -5 (259)
+< P  288 | fork -5 (270)
+< P  287 | fork -5 (259)
+< P  286 | fork -5 (270)
+< P  285 | fork -5 (259)
+< P  284 | fork -5 (270)
+< P  283 | fork -5 (259)
+< P  282 | fork -5 (270)
+< P  281 | fork -5 (259)
+< P  280 | fork -5 (270)
+< P  279 | fork -5 (259)
+< P  278 | zjmp -8 OK
+< P  277 | zjmp -8 OK
+< P  276 | zjmp -8 OK
+< P  275 | zjmp -8 OK
+< P  274 | zjmp -8 OK
+< P  273 | zjmp -8 OK
+< P  272 | zjmp -8 OK
+< P  271 | zjmp -8 OK
+< P  270 | zjmp -8 OK
+< P  269 | zjmp -8 OK
+< P  268 | zjmp -8 OK
+< P  267 | zjmp -8 OK
+< P  266 | zjmp -8 OK
+< P  265 | zjmp -8 OK
+< P  148 | fork -5 (270)
+< P  147 | fork -5 (259)
+< P  146 | fork -5 (270)
+< P  145 | fork -5 (259)
+< P  144 | fork -5 (270)
+< P  143 | fork -5 (259)
+< P  142 | fork -5 (270)
+< P  141 | fork -5 (259)
+< P  140 | fork -5 (270)
+< P  139 | fork -5 (259)
+< P  138 | fork -5 (270)
+< P  137 | fork -5 (259)
+< P  136 | zjmp -8 OK
+< P  135 | zjmp -8 OK
+< P   72 | fork -5 (270)
+< P   71 | fork -5 (259)
+< It is now cycle 9771
+< It is now cycle 9772
+< It is now cycle 9773
+< It is now cycle 9774
+< It is now cycle 9775
+< It is now cycle 9776
+< It is now cycle 9777
+< It is now cycle 9778
+< It is now cycle 9779
+< It is now cycle 9780
+< P  592 | live 1
+< P  591 | live 1
+< P  590 | live 1
+< P  589 | live 1
+< P  588 | live 1
+< P  587 | live 1
+< P  586 | live 1
+< P  585 | live 1
+< P  584 | live 1
+< P  583 | live 1
+< P  582 | live 1
+< P  581 | live 1
+< P  580 | live 1
+< P  579 | live 1
+< P  578 | live 1
+< P  577 | live 1
+< P  576 | live 1
+< P  575 | live 1
+< P  574 | live 1
+< P  573 | live 1
+< P  572 | live 1
+< P  571 | live 1
+< P  570 | live 1
+< P  569 | live 1
+< P  568 | live 1
+< P  567 | live 1
+< P  566 | live 1
+< P  565 | live 1
+< P  564 | live 1
+< P  563 | live 1
+< P  562 | live 1
+< P  561 | live 1
+< P  560 | live 1
+< P  559 | live 1
+< P  558 | live 1
+< P  557 | live 1
+< P  556 | live 1
+< P  555 | live 1
+< P  554 | live 1
+< P  553 | live 1
+< P  552 | live 1
+< P  551 | live 1
+< P  550 | live 1
+< P  549 | live 1
+< P  548 | live 1
+< P  547 | live 1
+< P  546 | live 1
+< P  545 | live 1
+< P  544 | live 1
+< P  543 | live 1
+< P  542 | live 1
+< P  541 | live 1
+< P  540 | live 1
+< P  539 | live 1
+< P  538 | live 1
+< P  537 | live 1
+< P  278 | live 1
+< P  277 | live 1
+< P  276 | live 1
+< P  275 | live 1
+< P  274 | live 1
+< P  273 | live 1
+< P  272 | live 1
+< P  271 | live 1
+< P  270 | live 1
+< P  269 | live 1
+< P  268 | live 1
+< P  267 | live 1
+< P  266 | live 1
+< P  265 | live 1
+< P  136 | live 1
+< P  135 | live 1
+< It is now cycle 9781
+< It is now cycle 9782
+< It is now cycle 9783
+< It is now cycle 9784
+< It is now cycle 9785
+< It is now cycle 9786
+< It is now cycle 9787
+< It is now cycle 9788
+< It is now cycle 9789
+< It is now cycle 9790
+< P  390 | fork -5 (259)
+< P  389 | fork -5 (270)
+< P  388 | fork -5 (259)
+< P  387 | fork -5 (270)
+< P  386 | fork -5 (259)
+< P  385 | fork -5 (270)
+< P  384 | fork -5 (259)
+< P  383 | fork -5 (270)
+< P  382 | fork -5 (259)
+< P  381 | fork -5 (270)
+< P  380 | fork -5 (259)
+< P  379 | fork -5 (270)
+< P  378 | fork -5 (259)
+< P  377 | fork -5 (270)
+< P  376 | fork -5 (259)
+< P  375 | fork -5 (270)
+< P  374 | fork -5 (259)
+< P  373 | fork -5 (270)
+< P  372 | fork -5 (259)
+< P  371 | fork -5 (270)
+< P  370 | fork -5 (259)
+< P  369 | fork -5 (270)
+< P  368 | fork -5 (259)
+< P  367 | fork -5 (270)
+< P  366 | fork -5 (259)
+< P  365 | fork -5 (270)
+< P  364 | fork -5 (259)
+< P  363 | fork -5 (270)
+< P  362 | fork -5 (259)
+< P  361 | fork -5 (270)
+< P  360 | fork -5 (259)
+< P  359 | fork -5 (270)
+< P  358 | fork -5 (259)
+< P  357 | fork -5 (270)
+< P  356 | fork -5 (259)
+< P  355 | fork -5 (270)
+< P  354 | fork -5 (259)
+< P  353 | fork -5 (270)
+< P  352 | fork -5 (259)
+< P  351 | fork -5 (270)
+< P  350 | fork -5 (259)
+< P  349 | fork -5 (270)
+< P  348 | fork -5 (259)
+< P  347 | fork -5 (270)
+< P  346 | fork -5 (259)
+< P  345 | fork -5 (270)
+< P  344 | fork -5 (259)
+< P  343 | fork -5 (270)
+< P  342 | fork -5 (259)
+< P  341 | fork -5 (270)
+< P  340 | fork -5 (259)
+< P  339 | fork -5 (270)
+< P  338 | fork -5 (259)
+< P  337 | fork -5 (270)
+< P  336 | fork -5 (259)
+< P  335 | fork -5 (270)
+< P  334 | fork -5 (259)
+< P  333 | fork -5 (270)
+< P  332 | fork -5 (259)
+< P  331 | fork -5 (270)
+< P  330 | fork -5 (259)
+< P  329 | fork -5 (270)
+< P  328 | fork -5 (259)
+< P  327 | fork -5 (270)
+< P  326 | fork -5 (259)
+< P  325 | fork -5 (270)
+< P  324 | fork -5 (259)
+< P  323 | fork -5 (270)
+< P  322 | fork -5 (259)
+< P  321 | fork -5 (270)
+< P  320 | zjmp -8 OK
+< P  319 | zjmp -8 OK
+< P  318 | zjmp -8 OK
+< P  317 | zjmp -8 OK
+< P  316 | zjmp -8 OK
+< P  315 | zjmp -8 OK
+< P  314 | zjmp -8 OK
+< P  313 | zjmp -8 OK
+< P  312 | zjmp -8 OK
+< P  311 | zjmp -8 OK
+< P  310 | zjmp -8 OK
+< P  309 | zjmp -8 OK
+< P  308 | zjmp -8 OK
+< P  307 | zjmp -8 OK
+< P  306 | zjmp -8 OK
+< P  305 | zjmp -8 OK
+< P  304 | zjmp -8 OK
+< P  303 | zjmp -8 OK
+< P  302 | zjmp -8 OK
+< P  301 | zjmp -8 OK
+< P  300 | zjmp -8 OK
+< P  299 | zjmp -8 OK
+< P  298 | zjmp -8 OK
+< P  297 | zjmp -8 OK
+< P  296 | zjmp -8 OK
+< P  295 | zjmp -8 OK
+< P  294 | zjmp -8 OK
+< P  293 | zjmp -8 OK
+< P  292 | zjmp -8 OK
+< P  291 | zjmp -8 OK
+< P  290 | zjmp -8 OK
+< P  289 | zjmp -8 OK
+< P  288 | zjmp -8 OK
+< P  287 | zjmp -8 OK
+< P  286 | zjmp -8 OK
+< P  285 | zjmp -8 OK
+< P  284 | zjmp -8 OK
+< P  283 | zjmp -8 OK
+< P  282 | zjmp -8 OK
+< P  281 | zjmp -8 OK
+< P  280 | zjmp -8 OK
+< P  279 | zjmp -8 OK
+< P  178 | fork -5 (259)
+< P  177 | fork -5 (270)
+< P  176 | fork -5 (259)
+< P  175 | fork -5 (270)
+< P  174 | fork -5 (259)
+< P  173 | fork -5 (270)
+< P  172 | fork -5 (259)
+< P  171 | fork -5 (270)
+< P  170 | fork -5 (259)
+< P  169 | fork -5 (270)
+< P  168 | fork -5 (259)
+< P  167 | fork -5 (270)
+< P  166 | fork -5 (259)
+< P  165 | fork -5 (270)
+< P  164 | fork -5 (259)
+< P  163 | fork -5 (270)
+< P  162 | fork -5 (259)
+< P  161 | fork -5 (270)
+< P  160 | fork -5 (259)
+< P  159 | fork -5 (270)
+< P  158 | fork -5 (259)
+< P  157 | fork -5 (270)
+< P  156 | fork -5 (259)
+< P  155 | fork -5 (270)
+< P  154 | fork -5 (259)
+< P  153 | fork -5 (270)
+< P  152 | fork -5 (259)
+< P  151 | fork -5 (270)
+< P  150 | fork -5 (259)
+< P  149 | fork -5 (270)
+< P  148 | zjmp -8 OK
+< P  147 | zjmp -8 OK
+< P  146 | zjmp -8 OK
+< P  145 | zjmp -8 OK
+< P  144 | zjmp -8 OK
+< P  143 | zjmp -8 OK
+< P  142 | zjmp -8 OK
+< P  141 | zjmp -8 OK
+< P  140 | zjmp -8 OK
+< P  139 | zjmp -8 OK
+< P  138 | zjmp -8 OK
+< P  137 | zjmp -8 OK
+< P   82 | fork -5 (259)
+< P   81 | fork -5 (270)
+< P   80 | fork -5 (259)
+< P   79 | fork -5 (270)
+< P   78 | fork -5 (259)
+< P   77 | fork -5 (270)
+< P   76 | fork -5 (259)
+< P   75 | fork -5 (270)
+< P   74 | fork -5 (259)
+< P   73 | fork -5 (270)
+< P   72 | zjmp -8 OK
+< P   71 | zjmp -8 OK
+< P   40 | fork -5 (259)
+< P   39 | fork -5 (270)
+< It is now cycle 9791
+< It is now cycle 9792
+< It is now cycle 9793
+< It is now cycle 9794
+< It is now cycle 9795
+< It is now cycle 9796
+< It is now cycle 9797
+< It is now cycle 9798
+< It is now cycle 9799
+< It is now cycle 9800
+< P  704 | live 1
+< P  703 | live 1
+< P  702 | live 1
+< P  701 | live 1
+< P  700 | live 1
+< P  699 | live 1
+< P  698 | live 1
+< P  697 | live 1
+< P  696 | live 1
+< P  695 | live 1
+< P  694 | live 1
+< P  693 | live 1
+< P  692 | live 1
+< P  691 | live 1
+< P  690 | live 1
+< P  689 | live 1
+< P  688 | live 1
+< P  687 | live 1
+< P  686 | live 1
+< P  685 | live 1
+< P  684 | live 1
+< P  683 | live 1
+< P  682 | live 1
+< P  681 | live 1
+< P  680 | live 1
+< P  679 | live 1
+< P  678 | live 1
+< P  677 | live 1
+< P  676 | live 1
+< P  675 | live 1
+< P  674 | live 1
+< P  673 | live 1
+< P  672 | live 1
+< P  671 | live 1
+< P  670 | live 1
+< P  669 | live 1
+< P  668 | live 1
+< P  667 | live 1
+< P  666 | live 1
+< P  665 | live 1
+< P  664 | live 1
+< P  663 | live 1
+< P  662 | live 1
+< P  661 | live 1
+< P  660 | live 1
+< P  659 | live 1
+< P  658 | live 1
+< P  657 | live 1
+< P  656 | live 1
+< P  655 | live 1
+< P  654 | live 1
+< P  653 | live 1
+< P  652 | live 1
+< P  651 | live 1
+< P  650 | live 1
+< P  649 | live 1
+< P  648 | live 1
+< P  647 | live 1
+< P  646 | live 1
+< P  645 | live 1
+< P  644 | live 1
+< P  643 | live 1
+< P  642 | live 1
+< P  641 | live 1
+< P  640 | live 1
+< P  639 | live 1
+< P  638 | live 1
+< P  637 | live 1
+< P  636 | live 1
+< P  635 | live 1
+< P  634 | live 1
+< P  633 | live 1
+< P  632 | live 1
+< P  631 | live 1
+< P  630 | live 1
+< P  629 | live 1
+< P  628 | live 1
+< P  627 | live 1
+< P  626 | live 1
+< P  625 | live 1
+< P  624 | live 1
+< P  623 | live 1
+< P  622 | live 1
+< P  621 | live 1
+< P  620 | live 1
+< P  619 | live 1
+< P  618 | live 1
+< P  617 | live 1
+< P  616 | live 1
+< P  615 | live 1
+< P  614 | live 1
+< P  613 | live 1
+< P  612 | live 1
+< P  611 | live 1
+< P  610 | live 1
+< P  609 | live 1
+< P  608 | live 1
+< P  607 | live 1
+< P  606 | live 1
+< P  605 | live 1
+< P  604 | live 1
+< P  603 | live 1
+< P  602 | live 1
+< P  601 | live 1
+< P  600 | live 1
+< P  599 | live 1
+< P  598 | live 1
+< P  597 | live 1
+< P  596 | live 1
+< P  595 | live 1
+< P  594 | live 1
+< P  593 | live 1
+< P  320 | live 1
+< P  319 | live 1
+< P  318 | live 1
+< P  317 | live 1
+< P  316 | live 1
+< P  315 | live 1
+< P  314 | live 1
+< P  313 | live 1
+< P  312 | live 1
+< P  311 | live 1
+< P  310 | live 1
+< P  309 | live 1
+< P  308 | live 1
+< P  307 | live 1
+< P  306 | live 1
+< P  305 | live 1
+< P  304 | live 1
+< P  303 | live 1
+< P  302 | live 1
+< P  301 | live 1
+< P  300 | live 1
+< P  299 | live 1
+< P  298 | live 1
+< P  297 | live 1
+< P  296 | live 1
+< P  295 | live 1
+< P  294 | live 1
+< P  293 | live 1
+< P  292 | live 1
+< P  291 | live 1
+< P  290 | live 1
+< P  289 | live 1
+< P  288 | live 1
+< P  287 | live 1
+< P  286 | live 1
+< P  285 | live 1
+< P  284 | live 1
+< P  283 | live 1
+< P  282 | live 1
+< P  281 | live 1
+< P  280 | live 1
+< P  279 | live 1
+< P  148 | live 1
+< P  147 | live 1
+< P  146 | live 1
+< P  145 | live 1
+< P  144 | live 1
+< P  143 | live 1
+< P  142 | live 1
+< P  141 | live 1
+< P  140 | live 1
+< P  139 | live 1
+< P  138 | live 1
+< P  137 | live 1
+< P   72 | live 1
+< P   71 | live 1
+< It is now cycle 9801
+< It is now cycle 9802
+< It is now cycle 9803
+< It is now cycle 9804
+< It is now cycle 9805
+< It is now cycle 9806
+< It is now cycle 9807
+< It is now cycle 9808
+< It is now cycle 9809
+< It is now cycle 9810
+< P  460 | fork -5 (270)
+< P  459 | fork -5 (259)
+< P  458 | fork -5 (270)
+< P  457 | fork -5 (259)
+< P  456 | fork -5 (270)
+< P  455 | fork -5 (259)
+< P  454 | fork -5 (270)
+< P  453 | fork -5 (259)
+< P  452 | fork -5 (270)
+< P  451 | fork -5 (259)
+< P  450 | fork -5 (270)
+< P  449 | fork -5 (259)
+< P  448 | fork -5 (270)
+< P  447 | fork -5 (259)
+< P  446 | fork -5 (270)
+< P  445 | fork -5 (259)
+< P  444 | fork -5 (270)
+< P  443 | fork -5 (259)
+< P  442 | fork -5 (270)
+< P  441 | fork -5 (259)
+< P  440 | fork -5 (270)
+< P  439 | fork -5 (259)
+< P  438 | fork -5 (270)
+< P  437 | fork -5 (259)
+< P  436 | fork -5 (270)
+< P  435 | fork -5 (259)
+< P  434 | fork -5 (270)
+< P  433 | fork -5 (259)
+< P  432 | fork -5 (270)
+< P  431 | fork -5 (259)
+< P  430 | fork -5 (270)
+< P  429 | fork -5 (259)
+< P  428 | fork -5 (270)
+< P  427 | fork -5 (259)
+< P  426 | fork -5 (270)
+< P  425 | fork -5 (259)
+< P  424 | fork -5 (270)
+< P  423 | fork -5 (259)
+< P  422 | fork -5 (270)
+< P  421 | fork -5 (259)
+< P  420 | fork -5 (270)
+< P  419 | fork -5 (259)
+< P  418 | fork -5 (270)
+< P  417 | fork -5 (259)
+< P  416 | fork -5 (270)
+< P  415 | fork -5 (259)
+< P  414 | fork -5 (270)
+< P  413 | fork -5 (259)
+< P  412 | fork -5 (270)
+< P  411 | fork -5 (259)
+< P  410 | fork -5 (270)
+< P  409 | fork -5 (259)
+< P  408 | fork -5 (270)
+< P  407 | fork -5 (259)
+< P  406 | fork -5 (270)
+< P  405 | fork -5 (259)
+< P  404 | fork -5 (270)
+< P  403 | fork -5 (259)
+< P  402 | fork -5 (270)
+< P  401 | fork -5 (259)
+< P  400 | fork -5 (270)
+< P  399 | fork -5 (259)
+< P  398 | fork -5 (270)
+< P  397 | fork -5 (259)
+< P  396 | fork -5 (270)
+< P  395 | fork -5 (259)
+< P  394 | fork -5 (270)
+< P  393 | fork -5 (259)
+< P  392 | fork -5 (270)
+< P  391 | fork -5 (259)
+< P  390 | zjmp -8 OK
+< P  389 | zjmp -8 OK
+< P  388 | zjmp -8 OK
+< P  387 | zjmp -8 OK
+< P  386 | zjmp -8 OK
+< P  385 | zjmp -8 OK
+< P  384 | zjmp -8 OK
+< P  383 | zjmp -8 OK
+< P  382 | zjmp -8 OK
+< P  381 | zjmp -8 OK
+< P  380 | zjmp -8 OK
+< P  379 | zjmp -8 OK
+< P  378 | zjmp -8 OK
+< P  377 | zjmp -8 OK
+< P  376 | zjmp -8 OK
+< P  375 | zjmp -8 OK
+< P  374 | zjmp -8 OK
+< P  373 | zjmp -8 OK
+< P  372 | zjmp -8 OK
+< P  371 | zjmp -8 OK
+< P  370 | zjmp -8 OK
+< P  369 | zjmp -8 OK
+< P  368 | zjmp -8 OK
+< P  367 | zjmp -8 OK
+< P  366 | zjmp -8 OK
+< P  365 | zjmp -8 OK
+< P  364 | zjmp -8 OK
+< P  363 | zjmp -8 OK
+< P  362 | zjmp -8 OK
+< P  361 | zjmp -8 OK
+< P  360 | zjmp -8 OK
+< P  359 | zjmp -8 OK
+< P  358 | zjmp -8 OK
+< P  357 | zjmp -8 OK
+< P  356 | zjmp -8 OK
+< P  355 | zjmp -8 OK
+< P  354 | zjmp -8 OK
+< P  353 | zjmp -8 OK
+< P  352 | zjmp -8 OK
+< P  351 | zjmp -8 OK
+< P  350 | zjmp -8 OK
+< P  349 | zjmp -8 OK
+< P  348 | zjmp -8 OK
+< P  347 | zjmp -8 OK
+< P  346 | zjmp -8 OK
+< P  345 | zjmp -8 OK
+< P  344 | zjmp -8 OK
+< P  343 | zjmp -8 OK
+< P  342 | zjmp -8 OK
+< P  341 | zjmp -8 OK
+< P  340 | zjmp -8 OK
+< P  339 | zjmp -8 OK
+< P  338 | zjmp -8 OK
+< P  337 | zjmp -8 OK
+< P  336 | zjmp -8 OK
+< P  335 | zjmp -8 OK
+< P  334 | zjmp -8 OK
+< P  333 | zjmp -8 OK
+< P  332 | zjmp -8 OK
+< P  331 | zjmp -8 OK
+< P  330 | zjmp -8 OK
+< P  329 | zjmp -8 OK
+< P  328 | zjmp -8 OK
+< P  327 | zjmp -8 OK
+< P  326 | zjmp -8 OK
+< P  325 | zjmp -8 OK
+< P  324 | zjmp -8 OK
+< P  323 | zjmp -8 OK
+< P  322 | zjmp -8 OK
+< P  321 | zjmp -8 OK
+< P  218 | fork -5 (270)
+< P  217 | fork -5 (259)
+< P  216 | fork -5 (270)
+< P  215 | fork -5 (259)
+< P  214 | fork -5 (270)
+< P  213 | fork -5 (259)
+< P  212 | fork -5 (270)
+< P  211 | fork -5 (259)
+< P  210 | fork -5 (270)
+< P  209 | fork -5 (259)
+< P  208 | fork -5 (270)
+< P  207 | fork -5 (259)
+< P  206 | fork -5 (270)
+< P  205 | fork -5 (259)
+< P  204 | fork -5 (270)
+< P  203 | fork -5 (259)
+< P  202 | fork -5 (270)
+< P  201 | fork -5 (259)
+< P  200 | fork -5 (270)
+< P  199 | fork -5 (259)
+< P  198 | fork -5 (270)
+< P  197 | fork -5 (259)
+< P  196 | fork -5 (270)
+< P  195 | fork -5 (259)
+< P  194 | fork -5 (270)
+< P  193 | fork -5 (259)
+< P  192 | fork -5 (270)
+< P  191 | fork -5 (259)
+< P  190 | fork -5 (270)
+< P  189 | fork -5 (259)
+< P  188 | fork -5 (270)
+< P  187 | fork -5 (259)
+< P  186 | fork -5 (270)
+< P  185 | fork -5 (259)
+< P  184 | fork -5 (270)
+< P  183 | fork -5 (259)
+< P  182 | fork -5 (270)
+< P  181 | fork -5 (259)
+< P  180 | fork -5 (270)
+< P  179 | fork -5 (259)
+< P  178 | zjmp -8 OK
+< P  177 | zjmp -8 OK
+< P  176 | zjmp -8 OK
+< P  175 | zjmp -8 OK
+< P  174 | zjmp -8 OK
+< P  173 | zjmp -8 OK
+< P  172 | zjmp -8 OK
+< P  171 | zjmp -8 OK
+< P  170 | zjmp -8 OK
+< P  169 | zjmp -8 OK
+< P  168 | zjmp -8 OK
+< P  167 | zjmp -8 OK
+< P  166 | zjmp -8 OK
+< P  165 | zjmp -8 OK
+< P  164 | zjmp -8 OK
+< P  163 | zjmp -8 OK
+< P  162 | zjmp -8 OK
+< P  161 | zjmp -8 OK
+< P  160 | zjmp -8 OK
+< P  159 | zjmp -8 OK
+< P  158 | zjmp -8 OK
+< P  157 | zjmp -8 OK
+< P  156 | zjmp -8 OK
+< P  155 | zjmp -8 OK
+< P  154 | zjmp -8 OK
+< P  153 | zjmp -8 OK
+< P  152 | zjmp -8 OK
+< P  151 | zjmp -8 OK
+< P  150 | zjmp -8 OK
+< P  149 | zjmp -8 OK
+< P  102 | fork -5 (270)
+< P  101 | fork -5 (259)
+< P  100 | fork -5 (270)
+< P   99 | fork -5 (259)
+< P   98 | fork -5 (270)
+< P   97 | fork -5 (259)
+< P   96 | fork -5 (270)
+< P   95 | fork -5 (259)
+< P   94 | fork -5 (270)
+< P   93 | fork -5 (259)
+< P   92 | fork -5 (270)
+< P   91 | fork -5 (259)
+< P   90 | fork -5 (270)
+< P   89 | fork -5 (259)
+< P   88 | fork -5 (270)
+< P   87 | fork -5 (259)
+< P   86 | fork -5 (270)
+< P   85 | fork -5 (259)
+< P   84 | fork -5 (270)
+< P   83 | fork -5 (259)
+< P   82 | zjmp -8 OK
+< P   81 | zjmp -8 OK
+< P   80 | zjmp -8 OK
+< P   79 | zjmp -8 OK
+< P   78 | zjmp -8 OK
+< P   77 | zjmp -8 OK
+< P   76 | zjmp -8 OK
+< P   75 | zjmp -8 OK
+< P   74 | zjmp -8 OK
+< P   73 | zjmp -8 OK
+< P   48 | fork -5 (270)
+< P   47 | fork -5 (259)
+< P   46 | fork -5 (270)
+< P   45 | fork -5 (259)
+< P   44 | fork -5 (270)
+< P   43 | fork -5 (259)
+< P   42 | fork -5 (270)
+< P   41 | fork -5 (259)
+< P   40 | zjmp -8 OK
+< P   39 | zjmp -8 OK
+< P   24 | fork -5 (270)
+< P   23 | fork -5 (259)
+< It is now cycle 9811
+< It is now cycle 9812
+< It is now cycle 9813
+< It is now cycle 9814
+< It is now cycle 9815
+< It is now cycle 9816
+< It is now cycle 9817
+< It is now cycle 9818
+< It is now cycle 9819
+< It is now cycle 9820
+< P  844 | live 1
+< P  843 | live 1
+< P  842 | live 1
+< P  841 | live 1
+< P  840 | live 1
+< P  839 | live 1
+< P  838 | live 1
+< P  837 | live 1
+< P  836 | live 1
+< P  835 | live 1
+< P  834 | live 1
+< P  833 | live 1
+< P  832 | live 1
+< P  831 | live 1
+< P  830 | live 1
+< P  829 | live 1
+< P  828 | live 1
+< P  827 | live 1
+< P  826 | live 1
+< P  825 | live 1
+< P  824 | live 1
+< P  823 | live 1
+< P  822 | live 1
+< P  821 | live 1
+< P  820 | live 1
+< P  819 | live 1
+< P  818 | live 1
+< P  817 | live 1
+< P  816 | live 1
+< P  815 | live 1
+< P  814 | live 1
+< P  813 | live 1
+< P  812 | live 1
+< P  811 | live 1
+< P  810 | live 1
+< P  809 | live 1
+< P  808 | live 1
+< P  807 | live 1
+< P  806 | live 1
+< P  805 | live 1
+< P  804 | live 1
+< P  803 | live 1
+< P  802 | live 1
+< P  801 | live 1
+< P  800 | live 1
+< P  799 | live 1
+< P  798 | live 1
+< P  797 | live 1
+< P  796 | live 1
+< P  795 | live 1
+< P  794 | live 1
+< P  793 | live 1
+< P  792 | live 1
+< P  791 | live 1
+< P  790 | live 1
+< P  789 | live 1
+< P  788 | live 1
+< P  787 | live 1
+< P  786 | live 1
+< P  785 | live 1
+< P  784 | live 1
+< P  783 | live 1
+< P  782 | live 1
+< P  781 | live 1
+< P  780 | live 1
+< P  779 | live 1
+< P  778 | live 1
+< P  777 | live 1
+< P  776 | live 1
+< P  775 | live 1
+< P  774 | live 1
+< P  773 | live 1
+< P  772 | live 1
+< P  771 | live 1
+< P  770 | live 1
+< P  769 | live 1
+< P  768 | live 1
+< P  767 | live 1
+< P  766 | live 1
+< P  765 | live 1
+< P  764 | live 1
+< P  763 | live 1
+< P  762 | live 1
+< P  761 | live 1
+< P  760 | live 1
+< P  759 | live 1
+< P  758 | live 1
+< P  757 | live 1
+< P  756 | live 1
+< P  755 | live 1
+< P  754 | live 1
+< P  753 | live 1
+< P  752 | live 1
+< P  751 | live 1
+< P  750 | live 1
+< P  749 | live 1
+< P  748 | live 1
+< P  747 | live 1
+< P  746 | live 1
+< P  745 | live 1
+< P  744 | live 1
+< P  743 | live 1
+< P  742 | live 1
+< P  741 | live 1
+< P  740 | live 1
+< P  739 | live 1
+< P  738 | live 1
+< P  737 | live 1
+< P  736 | live 1
+< P  735 | live 1
+< P  734 | live 1
+< P  733 | live 1
+< P  732 | live 1
+< P  731 | live 1
+< P  730 | live 1
+< P  729 | live 1
+< P  728 | live 1
+< P  727 | live 1
+< P  726 | live 1
+< P  725 | live 1
+< P  724 | live 1
+< P  723 | live 1
+< P  722 | live 1
+< P  721 | live 1
+< P  720 | live 1
+< P  719 | live 1
+< P  718 | live 1
+< P  717 | live 1
+< P  716 | live 1
+< P  715 | live 1
+< P  714 | live 1
+< P  713 | live 1
+< P  712 | live 1
+< P  711 | live 1
+< P  710 | live 1
+< P  709 | live 1
+< P  708 | live 1
+< P  707 | live 1
+< P  706 | live 1
+< P  705 | live 1
+< P  390 | live 1
+< P  389 | live 1
+< P  388 | live 1
+< P  387 | live 1
+< P  386 | live 1
+< P  385 | live 1
+< P  384 | live 1
+< P  383 | live 1
+< P  382 | live 1
+< P  381 | live 1
+< P  380 | live 1
+< P  379 | live 1
+< P  378 | live 1
+< P  377 | live 1
+< P  376 | live 1
+< P  375 | live 1
+< P  374 | live 1
+< P  373 | live 1
+< P  372 | live 1
+< P  371 | live 1
+< P  370 | live 1
+< P  369 | live 1
+< P  368 | live 1
+< P  367 | live 1
+< P  366 | live 1
+< P  365 | live 1
+< P  364 | live 1
+< P  363 | live 1
+< P  362 | live 1
+< P  361 | live 1
+< P  360 | live 1
+< P  359 | live 1
+< P  358 | live 1
+< P  357 | live 1
+< P  356 | live 1
+< P  355 | live 1
+< P  354 | live 1
+< P  353 | live 1
+< P  352 | live 1
+< P  351 | live 1
+< P  350 | live 1
+< P  349 | live 1
+< P  348 | live 1
+< P  347 | live 1
+< P  346 | live 1
+< P  345 | live 1
+< P  344 | live 1
+< P  343 | live 1
+< P  342 | live 1
+< P  341 | live 1
+< P  340 | live 1
+< P  339 | live 1
+< P  338 | live 1
+< P  337 | live 1
+< P  336 | live 1
+< P  335 | live 1
+< P  334 | live 1
+< P  333 | live 1
+< P  332 | live 1
+< P  331 | live 1
+< P  330 | live 1
+< P  329 | live 1
+< P  328 | live 1
+< P  327 | live 1
+< P  326 | live 1
+< P  325 | live 1
+< P  324 | live 1
+< P  323 | live 1
+< P  322 | live 1
+< P  321 | live 1
+< P  178 | live 1
+< P  177 | live 1
+< P  176 | live 1
+< P  175 | live 1
+< P  174 | live 1
+< P  173 | live 1
+< P  172 | live 1
+< P  171 | live 1
+< P  170 | live 1
+< P  169 | live 1
+< P  168 | live 1
+< P  167 | live 1
+< P  166 | live 1
+< P  165 | live 1
+< P  164 | live 1
+< P  163 | live 1
+< P  162 | live 1
+< P  161 | live 1
+< P  160 | live 1
+< P  159 | live 1
+< P  158 | live 1
+< P  157 | live 1
+< P  156 | live 1
+< P  155 | live 1
+< P  154 | live 1
+< P  153 | live 1
+< P  152 | live 1
+< P  151 | live 1
+< P  150 | live 1
+< P  149 | live 1
+< P   82 | live 1
+< P   81 | live 1
+< P   80 | live 1
+< P   79 | live 1
+< P   78 | live 1
+< P   77 | live 1
+< P   76 | live 1
+< P   75 | live 1
+< P   74 | live 1
+< P   73 | live 1
+< P   40 | live 1
+< P   39 | live 1
+< It is now cycle 9821
+< It is now cycle 9822
+< It is now cycle 9823
+< It is now cycle 9824
+< It is now cycle 9825
+< It is now cycle 9826
+< It is now cycle 9827
+< It is now cycle 9828
+< It is now cycle 9829
+< It is now cycle 9830
+< P  502 | fork -5 (259)
+< P  501 | fork -5 (270)
+< P  500 | fork -5 (259)
+< P  499 | fork -5 (270)
+< P  498 | fork -5 (259)
+< P  497 | fork -5 (270)
+< P  496 | fork -5 (259)
+< P  495 | fork -5 (270)
+< P  494 | fork -5 (259)
+< P  493 | fork -5 (270)
+< P  492 | fork -5 (259)
+< P  491 | fork -5 (270)
+< P  490 | fork -5 (259)
+< P  489 | fork -5 (270)
+< P  488 | fork -5 (259)
+< P  487 | fork -5 (270)
+< P  486 | fork -5 (259)
+< P  485 | fork -5 (270)
+< P  484 | fork -5 (259)
+< P  483 | fork -5 (270)
+< P  482 | fork -5 (259)
+< P  481 | fork -5 (270)
+< P  480 | fork -5 (259)
+< P  479 | fork -5 (270)
+< P  478 | fork -5 (259)
+< P  477 | fork -5 (270)
+< P  476 | fork -5 (259)
+< P  475 | fork -5 (270)
+< P  474 | fork -5 (259)
+< P  473 | fork -5 (270)
+< P  472 | fork -5 (259)
+< P  471 | fork -5 (270)
+< P  470 | fork -5 (259)
+< P  469 | fork -5 (270)
+< P  468 | fork -5 (259)
+< P  467 | fork -5 (270)
+< P  466 | fork -5 (259)
+< P  465 | fork -5 (270)
+< P  464 | fork -5 (259)
+< P  463 | fork -5 (270)
+< P  462 | fork -5 (259)
+< P  461 | fork -5 (270)
+< P  460 | zjmp -8 OK
+< P  459 | zjmp -8 OK
+< P  458 | zjmp -8 OK
+< P  457 | zjmp -8 OK
+< P  456 | zjmp -8 OK
+< P  455 | zjmp -8 OK
+< P  454 | zjmp -8 OK
+< P  453 | zjmp -8 OK
+< P  452 | zjmp -8 OK
+< P  451 | zjmp -8 OK
+< P  450 | zjmp -8 OK
+< P  449 | zjmp -8 OK
+< P  448 | zjmp -8 OK
+< P  447 | zjmp -8 OK
+< P  446 | zjmp -8 OK
+< P  445 | zjmp -8 OK
+< P  444 | zjmp -8 OK
+< P  443 | zjmp -8 OK
+< P  442 | zjmp -8 OK
+< P  441 | zjmp -8 OK
+< P  440 | zjmp -8 OK
+< P  439 | zjmp -8 OK
+< P  438 | zjmp -8 OK
+< P  437 | zjmp -8 OK
+< P  436 | zjmp -8 OK
+< P  435 | zjmp -8 OK
+< P  434 | zjmp -8 OK
+< P  433 | zjmp -8 OK
+< P  432 | zjmp -8 OK
+< P  431 | zjmp -8 OK
+< P  430 | zjmp -8 OK
+< P  429 | zjmp -8 OK
+< P  428 | zjmp -8 OK
+< P  427 | zjmp -8 OK
+< P  426 | zjmp -8 OK
+< P  425 | zjmp -8 OK
+< P  424 | zjmp -8 OK
+< P  423 | zjmp -8 OK
+< P  422 | zjmp -8 OK
+< P  421 | zjmp -8 OK
+< P  420 | zjmp -8 OK
+< P  419 | zjmp -8 OK
+< P  418 | zjmp -8 OK
+< P  417 | zjmp -8 OK
+< P  416 | zjmp -8 OK
+< P  415 | zjmp -8 OK
+< P  414 | zjmp -8 OK
+< P  413 | zjmp -8 OK
+< P  412 | zjmp -8 OK
+< P  411 | zjmp -8 OK
+< P  410 | zjmp -8 OK
+< P  409 | zjmp -8 OK
+< P  408 | zjmp -8 OK
+< P  407 | zjmp -8 OK
+< P  406 | zjmp -8 OK
+< P  405 | zjmp -8 OK
+< P  404 | zjmp -8 OK
+< P  403 | zjmp -8 OK
+< P  402 | zjmp -8 OK
+< P  401 | zjmp -8 OK
+< P  400 | zjmp -8 OK
+< P  399 | zjmp -8 OK
+< P  398 | zjmp -8 OK
+< P  397 | zjmp -8 OK
+< P  396 | zjmp -8 OK
+< P  395 | zjmp -8 OK
+< P  394 | zjmp -8 OK
+< P  393 | zjmp -8 OK
+< P  392 | zjmp -8 OK
+< P  391 | zjmp -8 OK
+< P  248 | fork -5 (259)
+< P  247 | fork -5 (270)
+< P  246 | fork -5 (259)
+< P  245 | fork -5 (270)
+< P  244 | fork -5 (259)
+< P  243 | fork -5 (270)
+< P  242 | fork -5 (259)
+< P  241 | fork -5 (270)
+< P  240 | fork -5 (259)
+< P  239 | fork -5 (270)
+< P  238 | fork -5 (259)
+< P  237 | fork -5 (270)
+< P  236 | fork -5 (259)
+< P  235 | fork -5 (270)
+< P  234 | fork -5 (259)
+< P  233 | fork -5 (270)
+< P  232 | fork -5 (259)
+< P  231 | fork -5 (270)
+< P  230 | fork -5 (259)
+< P  229 | fork -5 (270)
+< P  228 | fork -5 (259)
+< P  227 | fork -5 (270)
+< P  226 | fork -5 (259)
+< P  225 | fork -5 (270)
+< P  224 | fork -5 (259)
+< P  223 | fork -5 (270)
+< P  222 | fork -5 (259)
+< P  221 | fork -5 (270)
+< P  220 | fork -5 (259)
+< P  219 | fork -5 (270)
+< P  218 | zjmp -8 OK
+< P  217 | zjmp -8 OK
+< P  216 | zjmp -8 OK
+< P  215 | zjmp -8 OK
+< P  214 | zjmp -8 OK
+< P  213 | zjmp -8 OK
+< P  212 | zjmp -8 OK
+< P  211 | zjmp -8 OK
+< P  210 | zjmp -8 OK
+< P  209 | zjmp -8 OK
+< P  208 | zjmp -8 OK
+< P  207 | zjmp -8 OK
+< P  206 | zjmp -8 OK
+< P  205 | zjmp -8 OK
+< P  204 | zjmp -8 OK
+< P  203 | zjmp -8 OK
+< P  202 | zjmp -8 OK
+< P  201 | zjmp -8 OK
+< P  200 | zjmp -8 OK
+< P  199 | zjmp -8 OK
+< P  198 | zjmp -8 OK
+< P  197 | zjmp -8 OK
+< P  196 | zjmp -8 OK
+< P  195 | zjmp -8 OK
+< P  194 | zjmp -8 OK
+< P  193 | zjmp -8 OK
+< P  192 | zjmp -8 OK
+< P  191 | zjmp -8 OK
+< P  190 | zjmp -8 OK
+< P  189 | zjmp -8 OK
+< P  188 | zjmp -8 OK
+< P  187 | zjmp -8 OK
+< P  186 | zjmp -8 OK
+< P  185 | zjmp -8 OK
+< P  184 | zjmp -8 OK
+< P  183 | zjmp -8 OK
+< P  182 | zjmp -8 OK
+< P  181 | zjmp -8 OK
+< P  180 | zjmp -8 OK
+< P  179 | zjmp -8 OK
+< P  122 | fork -5 (259)
+< P  121 | fork -5 (270)
+< P  120 | fork -5 (259)
+< P  119 | fork -5 (270)
+< P  118 | fork -5 (259)
+< P  117 | fork -5 (270)
+< P  116 | fork -5 (259)
+< P  115 | fork -5 (270)
+< P  114 | fork -5 (259)
+< P  113 | fork -5 (270)
+< P  112 | fork -5 (259)
+< P  111 | fork -5 (270)
+< P  110 | fork -5 (259)
+< P  109 | fork -5 (270)
+< P  108 | fork -5 (259)
+< P  107 | fork -5 (270)
+< P  106 | fork -5 (259)
+< P  105 | fork -5 (270)
+< P  104 | fork -5 (259)
+< P  103 | fork -5 (270)
+< P  102 | zjmp -8 OK
+< P  101 | zjmp -8 OK
+< P  100 | zjmp -8 OK
+< P   99 | zjmp -8 OK
+< P   98 | zjmp -8 OK
+< P   97 | zjmp -8 OK
+< P   96 | zjmp -8 OK
+< P   95 | zjmp -8 OK
+< P   94 | zjmp -8 OK
+< P   93 | zjmp -8 OK
+< P   92 | zjmp -8 OK
+< P   91 | zjmp -8 OK
+< P   90 | zjmp -8 OK
+< P   89 | zjmp -8 OK
+< P   88 | zjmp -8 OK
+< P   87 | zjmp -8 OK
+< P   86 | zjmp -8 OK
+< P   85 | zjmp -8 OK
+< P   84 | zjmp -8 OK
+< P   83 | zjmp -8 OK
+< P   60 | fork -5 (259)
+< P   59 | fork -5 (270)
+< P   58 | fork -5 (259)
+< P   57 | fork -5 (270)
+< P   56 | fork -5 (259)
+< P   55 | fork -5 (270)
+< P   54 | fork -5 (259)
+< P   53 | fork -5 (270)
+< P   52 | fork -5 (259)
+< P   51 | fork -5 (270)
+< P   50 | fork -5 (259)
+< P   49 | fork -5 (270)
+< P   48 | zjmp -8 OK
+< P   47 | zjmp -8 OK
+< P   46 | zjmp -8 OK
+< P   45 | zjmp -8 OK
+< P   44 | zjmp -8 OK
+< P   43 | zjmp -8 OK
+< P   42 | zjmp -8 OK
+< P   41 | zjmp -8 OK
+< P   30 | fork -5 (259)
+< P   29 | fork -5 (270)
+< P   28 | fork -5 (259)
+< P   27 | fork -5 (270)
+< P   26 | fork -5 (259)
+< P   25 | fork -5 (270)
+< P   24 | zjmp -8 OK
+< P   23 | zjmp -8 OK
+< P   16 | fork -5 (259)
+< P   15 | fork -5 (270)
+< It is now cycle 9831
+< It is now cycle 9832
+< It is now cycle 9833
+< It is now cycle 9834
+< It is now cycle 9835
+< It is now cycle 9836
+< It is now cycle 9837
+< It is now cycle 9838
+< It is now cycle 9839
+< It is now cycle 9840
+< P  956 | live 1
+< P  955 | live 1
+< P  954 | live 1
+< P  953 | live 1
+< P  952 | live 1
+< P  951 | live 1
+< P  950 | live 1
+< P  949 | live 1
+< P  948 | live 1
+< P  947 | live 1
+< P  946 | live 1
+< P  945 | live 1
+< P  944 | live 1
+< P  943 | live 1
+< P  942 | live 1
+< P  941 | live 1
+< P  940 | live 1
+< P  939 | live 1
+< P  938 | live 1
+< P  937 | live 1
+< P  936 | live 1
+< P  935 | live 1
+< P  934 | live 1
+< P  933 | live 1
+< P  932 | live 1
+< P  931 | live 1
+< P  930 | live 1
+< P  929 | live 1
+< P  928 | live 1
+< P  927 | live 1
+< P  926 | live 1
+< P  925 | live 1
+< P  924 | live 1
+< P  923 | live 1
+< P  922 | live 1
+< P  921 | live 1
+< P  920 | live 1
+< P  919 | live 1
+< P  918 | live 1
+< P  917 | live 1
+< P  916 | live 1
+< P  915 | live 1
+< P  914 | live 1
+< P  913 | live 1
+< P  912 | live 1
+< P  911 | live 1
+< P  910 | live 1
+< P  909 | live 1
+< P  908 | live 1
+< P  907 | live 1
+< P  906 | live 1
+< P  905 | live 1
+< P  904 | live 1
+< P  903 | live 1
+< P  902 | live 1
+< P  901 | live 1
+< P  900 | live 1
+< P  899 | live 1
+< P  898 | live 1
+< P  897 | live 1
+< P  896 | live 1
+< P  895 | live 1
+< P  894 | live 1
+< P  893 | live 1
+< P  892 | live 1
+< P  891 | live 1
+< P  890 | live 1
+< P  889 | live 1
+< P  888 | live 1
+< P  887 | live 1
+< P  886 | live 1
+< P  885 | live 1
+< P  884 | live 1
+< P  883 | live 1
+< P  882 | live 1
+< P  881 | live 1
+< P  880 | live 1
+< P  879 | live 1
+< P  878 | live 1
+< P  877 | live 1
+< P  876 | live 1
+< P  875 | live 1
+< P  874 | live 1
+< P  873 | live 1
+< P  872 | live 1
+< P  871 | live 1
+< P  870 | live 1
+< P  869 | live 1
+< P  868 | live 1
+< P  867 | live 1
+< P  866 | live 1
+< P  865 | live 1
+< P  864 | live 1
+< P  863 | live 1
+< P  862 | live 1
+< P  861 | live 1
+< P  860 | live 1
+< P  859 | live 1
+< P  858 | live 1
+< P  857 | live 1
+< P  856 | live 1
+< P  855 | live 1
+< P  854 | live 1
+< P  853 | live 1
+< P  852 | live 1
+< P  851 | live 1
+< P  850 | live 1
+< P  849 | live 1
+< P  848 | live 1
+< P  847 | live 1
+< P  846 | live 1
+< P  845 | live 1
+< P  460 | live 1
+< P  459 | live 1
+< P  458 | live 1
+< P  457 | live 1
+< P  456 | live 1
+< P  455 | live 1
+< P  454 | live 1
+< P  453 | live 1
+< P  452 | live 1
+< P  451 | live 1
+< P  450 | live 1
+< P  449 | live 1
+< P  448 | live 1
+< P  447 | live 1
+< P  446 | live 1
+< P  445 | live 1
+< P  444 | live 1
+< P  443 | live 1
+< P  442 | live 1
+< P  441 | live 1
+< P  440 | live 1
+< P  439 | live 1
+< P  438 | live 1
+< P  437 | live 1
+< P  436 | live 1
+< P  435 | live 1
+< P  434 | live 1
+< P  433 | live 1
+< P  432 | live 1
+< P  431 | live 1
+< P  430 | live 1
+< P  429 | live 1
+< P  428 | live 1
+< P  427 | live 1
+< P  426 | live 1
+< P  425 | live 1
+< P  424 | live 1
+< P  423 | live 1
+< P  422 | live 1
+< P  421 | live 1
+< P  420 | live 1
+< P  419 | live 1
+< P  418 | live 1
+< P  417 | live 1
+< P  416 | live 1
+< P  415 | live 1
+< P  414 | live 1
+< P  413 | live 1
+< P  412 | live 1
+< P  411 | live 1
+< P  410 | live 1
+< P  409 | live 1
+< P  408 | live 1
+< P  407 | live 1
+< P  406 | live 1
+< P  405 | live 1
+< P  404 | live 1
+< P  403 | live 1
+< P  402 | live 1
+< P  401 | live 1
+< P  400 | live 1
+< P  399 | live 1
+< P  398 | live 1
+< P  397 | live 1
+< P  396 | live 1
+< P  395 | live 1
+< P  394 | live 1
+< P  393 | live 1
+< P  392 | live 1
+< P  391 | live 1
+< P  218 | live 1
+< P  217 | live 1
+< P  216 | live 1
+< P  215 | live 1
+< P  214 | live 1
+< P  213 | live 1
+< P  212 | live 1
+< P  211 | live 1
+< P  210 | live 1
+< P  209 | live 1
+< P  208 | live 1
+< P  207 | live 1
+< P  206 | live 1
+< P  205 | live 1
+< P  204 | live 1
+< P  203 | live 1
+< P  202 | live 1
+< P  201 | live 1
+< P  200 | live 1
+< P  199 | live 1
+< P  198 | live 1
+< P  197 | live 1
+< P  196 | live 1
+< P  195 | live 1
+< P  194 | live 1
+< P  193 | live 1
+< P  192 | live 1
+< P  191 | live 1
+< P  190 | live 1
+< P  189 | live 1
+< P  188 | live 1
+< P  187 | live 1
+< P  186 | live 1
+< P  185 | live 1
+< P  184 | live 1
+< P  183 | live 1
+< P  182 | live 1
+< P  181 | live 1
+< P  180 | live 1
+< P  179 | live 1
+< P  102 | live 1
+< P  101 | live 1
+< P  100 | live 1
+< P   99 | live 1
+< P   98 | live 1
+< P   97 | live 1
+< P   96 | live 1
+< P   95 | live 1
+< P   94 | live 1
+< P   93 | live 1
+< P   92 | live 1
+< P   91 | live 1
+< P   90 | live 1
+< P   89 | live 1
+< P   88 | live 1
+< P   87 | live 1
+< P   86 | live 1
+< P   85 | live 1
+< P   84 | live 1
+< P   83 | live 1
+< P   48 | live 1
+< P   47 | live 1
+< P   46 | live 1
+< P   45 | live 1
+< P   44 | live 1
+< P   43 | live 1
+< P   42 | live 1
+< P   41 | live 1
+< P   24 | live 1
+< P   23 | live 1
+< It is now cycle 9841
+< It is now cycle 9842
+< It is now cycle 9843
+< It is now cycle 9844
+< It is now cycle 9845
+< It is now cycle 9846
+< It is now cycle 9847
+< It is now cycle 9848
+< It is now cycle 9849
+< It is now cycle 9850
+< P  516 | fork -5 (270)
+< P  515 | fork -5 (259)
+< P  514 | fork -5 (270)
+< P  513 | fork -5 (259)
+< P  512 | fork -5 (270)
+< P  511 | fork -5 (259)
+< P  510 | fork -5 (270)
+< P  509 | fork -5 (259)
+< P  508 | fork -5 (270)
+< P  507 | fork -5 (259)
+< P  506 | fork -5 (270)
+< P  505 | fork -5 (259)
+< P  504 | fork -5 (270)
+< P  503 | fork -5 (259)
+< P  502 | zjmp -8 OK
+< P  501 | zjmp -8 OK
+< P  500 | zjmp -8 OK
+< P  499 | zjmp -8 OK
+< P  498 | zjmp -8 OK
+< P  497 | zjmp -8 OK
+< P  496 | zjmp -8 OK
+< P  495 | zjmp -8 OK
+< P  494 | zjmp -8 OK
+< P  493 | zjmp -8 OK
+< P  492 | zjmp -8 OK
+< P  491 | zjmp -8 OK
+< P  490 | zjmp -8 OK
+< P  489 | zjmp -8 OK
+< P  488 | zjmp -8 OK
+< P  487 | zjmp -8 OK
+< P  486 | zjmp -8 OK
+< P  485 | zjmp -8 OK
+< P  484 | zjmp -8 OK
+< P  483 | zjmp -8 OK
+< P  482 | zjmp -8 OK
+< P  481 | zjmp -8 OK
+< P  480 | zjmp -8 OK
+< P  479 | zjmp -8 OK
+< P  478 | zjmp -8 OK
+< P  477 | zjmp -8 OK
+< P  476 | zjmp -8 OK
+< P  475 | zjmp -8 OK
+< P  474 | zjmp -8 OK
+< P  473 | zjmp -8 OK
+< P  472 | zjmp -8 OK
+< P  471 | zjmp -8 OK
+< P  470 | zjmp -8 OK
+< P  469 | zjmp -8 OK
+< P  468 | zjmp -8 OK
+< P  467 | zjmp -8 OK
+< P  466 | zjmp -8 OK
+< P  465 | zjmp -8 OK
+< P  464 | zjmp -8 OK
+< P  463 | zjmp -8 OK
+< P  462 | zjmp -8 OK
+< P  461 | zjmp -8 OK
+< P  260 | fork -5 (270)
+< P  259 | fork -5 (259)
+< P  258 | fork -5 (270)
+< P  257 | fork -5 (259)
+< P  256 | fork -5 (270)
+< P  255 | fork -5 (259)
+< P  254 | fork -5 (270)
+< P  253 | fork -5 (259)
+< P  252 | fork -5 (270)
+< P  251 | fork -5 (259)
+< P  250 | fork -5 (270)
+< P  249 | fork -5 (259)
+< P  248 | zjmp -8 OK
+< P  247 | zjmp -8 OK
+< P  246 | zjmp -8 OK
+< P  245 | zjmp -8 OK
+< P  244 | zjmp -8 OK
+< P  243 | zjmp -8 OK
+< P  242 | zjmp -8 OK
+< P  241 | zjmp -8 OK
+< P  240 | zjmp -8 OK
+< P  239 | zjmp -8 OK
+< P  238 | zjmp -8 OK
+< P  237 | zjmp -8 OK
+< P  236 | zjmp -8 OK
+< P  235 | zjmp -8 OK
+< P  234 | zjmp -8 OK
+< P  233 | zjmp -8 OK
+< P  232 | zjmp -8 OK
+< P  231 | zjmp -8 OK
+< P  230 | zjmp -8 OK
+< P  229 | zjmp -8 OK
+< P  228 | zjmp -8 OK
+< P  227 | zjmp -8 OK
+< P  226 | zjmp -8 OK
+< P  225 | zjmp -8 OK
+< P  224 | zjmp -8 OK
+< P  223 | zjmp -8 OK
+< P  222 | zjmp -8 OK
+< P  221 | zjmp -8 OK
+< P  220 | zjmp -8 OK
+< P  219 | zjmp -8 OK
+< P  132 | fork -5 (270)
+< P  131 | fork -5 (259)
+< P  130 | fork -5 (270)
+< P  129 | fork -5 (259)
+< P  128 | fork -5 (270)
+< P  127 | fork -5 (259)
+< P  126 | fork -5 (270)
+< P  125 | fork -5 (259)
+< P  124 | fork -5 (270)
+< P  123 | fork -5 (259)
+< P  122 | zjmp -8 OK
+< P  121 | zjmp -8 OK
+< P  120 | zjmp -8 OK
+< P  119 | zjmp -8 OK
+< P  118 | zjmp -8 OK
+< P  117 | zjmp -8 OK
+< P  116 | zjmp -8 OK
+< P  115 | zjmp -8 OK
+< P  114 | zjmp -8 OK
+< P  113 | zjmp -8 OK
+< P  112 | zjmp -8 OK
+< P  111 | zjmp -8 OK
+< P  110 | zjmp -8 OK
+< P  109 | zjmp -8 OK
+< P  108 | zjmp -8 OK
+< P  107 | zjmp -8 OK
+< P  106 | zjmp -8 OK
+< P  105 | zjmp -8 OK
+< P  104 | zjmp -8 OK
+< P  103 | zjmp -8 OK
+< P   68 | fork -5 (270)
+< P   67 | fork -5 (259)
+< P   66 | fork -5 (270)
+< P   65 | fork -5 (259)
+< P   64 | fork -5 (270)
+< P   63 | fork -5 (259)
+< P   62 | fork -5 (270)
+< P   61 | fork -5 (259)
+< P   60 | zjmp -8 OK
+< P   59 | zjmp -8 OK
+< P   58 | zjmp -8 OK
+< P   57 | zjmp -8 OK
+< P   56 | zjmp -8 OK
+< P   55 | zjmp -8 OK
+< P   54 | zjmp -8 OK
+< P   53 | zjmp -8 OK
+< P   52 | zjmp -8 OK
+< P   51 | zjmp -8 OK
+< P   50 | zjmp -8 OK
+< P   49 | zjmp -8 OK
+< P   36 | fork -5 (270)
+< P   35 | fork -5 (259)
+< P   34 | fork -5 (270)
+< P   33 | fork -5 (259)
+< P   32 | fork -5 (270)
+< P   31 | fork -5 (259)
+< P   30 | zjmp -8 OK
+< P   29 | zjmp -8 OK
+< P   28 | zjmp -8 OK
+< P   27 | zjmp -8 OK
+< P   26 | zjmp -8 OK
+< P   25 | zjmp -8 OK
+< P   20 | fork -5 (270)
+< P   19 | fork -5 (259)
+< P   18 | fork -5 (270)
+< P   17 | fork -5 (259)
+< P   16 | zjmp -8 OK
+< P   15 | zjmp -8 OK
+< P   12 | fork -5 (270)
+< P   11 | fork -5 (259)
+< It is now cycle 9851
+< It is now cycle 9852
+< It is now cycle 9853
+< It is now cycle 9854
+< It is now cycle 9855
+< It is now cycle 9856
+< It is now cycle 9857
+< It is now cycle 9858
+< It is now cycle 9859
+< It is now cycle 9860
+< P 1012 | live 1
+< P 1011 | live 1
+< P 1010 | live 1
+< P 1009 | live 1
+< P 1008 | live 1
+< P 1007 | live 1
+< P 1006 | live 1
+< P 1005 | live 1
+< P 1004 | live 1
+< P 1003 | live 1
+< P 1002 | live 1
+< P 1001 | live 1
+< P 1000 | live 1
+< P  999 | live 1
+< P  998 | live 1
+< P  997 | live 1
+< P  996 | live 1
+< P  995 | live 1
+< P  994 | live 1
+< P  993 | live 1
+< P  992 | live 1
+< P  991 | live 1
+< P  990 | live 1
+< P  989 | live 1
+< P  988 | live 1
+< P  987 | live 1
+< P  986 | live 1
+< P  985 | live 1
+< P  984 | live 1
+< P  983 | live 1
+< P  982 | live 1
+< P  981 | live 1
+< P  980 | live 1
+< P  979 | live 1
+< P  978 | live 1
+< P  977 | live 1
+< P  976 | live 1
+< P  975 | live 1
+< P  974 | live 1
+< P  973 | live 1
+< P  972 | live 1
+< P  971 | live 1
+< P  970 | live 1
+< P  969 | live 1
+< P  968 | live 1
+< P  967 | live 1
+< P  966 | live 1
+< P  965 | live 1
+< P  964 | live 1
+< P  963 | live 1
+< P  962 | live 1
+< P  961 | live 1
+< P  960 | live 1
+< P  959 | live 1
+< P  958 | live 1
+< P  957 | live 1
+< P  502 | live 1
+< P  501 | live 1
+< P  500 | live 1
+< P  499 | live 1
+< P  498 | live 1
+< P  497 | live 1
+< P  496 | live 1
+< P  495 | live 1
+< P  494 | live 1
+< P  493 | live 1
+< P  492 | live 1
+< P  491 | live 1
+< P  490 | live 1
+< P  489 | live 1
+< P  488 | live 1
+< P  487 | live 1
+< P  486 | live 1
+< P  485 | live 1
+< P  484 | live 1
+< P  483 | live 1
+< P  482 | live 1
+< P  481 | live 1
+< P  480 | live 1
+< P  479 | live 1
+< P  478 | live 1
+< P  477 | live 1
+< P  476 | live 1
+< P  475 | live 1
+< P  474 | live 1
+< P  473 | live 1
+< P  472 | live 1
+< P  471 | live 1
+< P  470 | live 1
+< P  469 | live 1
+< P  468 | live 1
+< P  467 | live 1
+< P  466 | live 1
+< P  465 | live 1
+< P  464 | live 1
+< P  463 | live 1
+< P  462 | live 1
+< P  461 | live 1
+< P  248 | live 1
+< P  247 | live 1
+< P  246 | live 1
+< P  245 | live 1
+< P  244 | live 1
+< P  243 | live 1
+< P  242 | live 1
+< P  241 | live 1
+< P  240 | live 1
+< P  239 | live 1
+< P  238 | live 1
+< P  237 | live 1
+< P  236 | live 1
+< P  235 | live 1
+< P  234 | live 1
+< P  233 | live 1
+< P  232 | live 1
+< P  231 | live 1
+< P  230 | live 1
+< P  229 | live 1
+< P  228 | live 1
+< P  227 | live 1
+< P  226 | live 1
+< P  225 | live 1
+< P  224 | live 1
+< P  223 | live 1
+< P  222 | live 1
+< P  221 | live 1
+< P  220 | live 1
+< P  219 | live 1
+< P  122 | live 1
+< P  121 | live 1
+< P  120 | live 1
+< P  119 | live 1
+< P  118 | live 1
+< P  117 | live 1
+< P  116 | live 1
+< P  115 | live 1
+< P  114 | live 1
+< P  113 | live 1
+< P  112 | live 1
+< P  111 | live 1
+< P  110 | live 1
+< P  109 | live 1
+< P  108 | live 1
+< P  107 | live 1
+< P  106 | live 1
+< P  105 | live 1
+< P  104 | live 1
+< P  103 | live 1
+< P   60 | live 1
+< P   59 | live 1
+< P   58 | live 1
+< P   57 | live 1
+< P   56 | live 1
+< P   55 | live 1
+< P   54 | live 1
+< P   53 | live 1
+< P   52 | live 1
+< P   51 | live 1
+< P   50 | live 1
+< P   49 | live 1
+< P   30 | live 1
+< P   29 | live 1
+< P   28 | live 1
+< P   27 | live 1
+< P   26 | live 1
+< P   25 | live 1
+< P   16 | live 1
+< P   15 | live 1
+< It is now cycle 9861
+< It is now cycle 9862
+< It is now cycle 9863
+< It is now cycle 9864
+< It is now cycle 9865
+< It is now cycle 9866
+< It is now cycle 9867
+< It is now cycle 9868
+< It is now cycle 9869
+< It is now cycle 9870
+< P  518 | fork -5 (259)
+< P  517 | fork -5 (270)
+< P  516 | zjmp -8 OK
+< P  515 | zjmp -8 OK
+< P  514 | zjmp -8 OK
+< P  513 | zjmp -8 OK
+< P  512 | zjmp -8 OK
+< P  511 | zjmp -8 OK
+< P  510 | zjmp -8 OK
+< P  509 | zjmp -8 OK
+< P  508 | zjmp -8 OK
+< P  507 | zjmp -8 OK
+< P  506 | zjmp -8 OK
+< P  505 | zjmp -8 OK
+< P  504 | zjmp -8 OK
+< P  503 | zjmp -8 OK
+< P  262 | fork -5 (259)
+< P  261 | fork -5 (270)
+< P  260 | zjmp -8 OK
+< P  259 | zjmp -8 OK
+< P  258 | zjmp -8 OK
+< P  257 | zjmp -8 OK
+< P  256 | zjmp -8 OK
+< P  255 | zjmp -8 OK
+< P  254 | zjmp -8 OK
+< P  253 | zjmp -8 OK
+< P  252 | zjmp -8 OK
+< P  251 | zjmp -8 OK
+< P  250 | zjmp -8 OK
+< P  249 | zjmp -8 OK
+< P  134 | fork -5 (259)
+< P  133 | fork -5 (270)
+< P  132 | zjmp -8 OK
+< P  131 | zjmp -8 OK
+< P  130 | zjmp -8 OK
+< P  129 | zjmp -8 OK
+< P  128 | zjmp -8 OK
+< P  127 | zjmp -8 OK
+< P  126 | zjmp -8 OK
+< P  125 | zjmp -8 OK
+< P  124 | zjmp -8 OK
+< P  123 | zjmp -8 OK
+< P   70 | fork -5 (259)
+< P   69 | fork -5 (270)
+< P   68 | zjmp -8 OK
+< P   67 | zjmp -8 OK
+< P   66 | zjmp -8 OK
+< P   65 | zjmp -8 OK
+< P   64 | zjmp -8 OK
+< P   63 | zjmp -8 OK
+< P   62 | zjmp -8 OK
+< P   61 | zjmp -8 OK
+< P   38 | fork -5 (259)
+< P   37 | fork -5 (270)
+< P   36 | zjmp -8 OK
+< P   35 | zjmp -8 OK
+< P   34 | zjmp -8 OK
+< P   33 | zjmp -8 OK
+< P   32 | zjmp -8 OK
+< P   31 | zjmp -8 OK
+< P   22 | fork -5 (259)
+< P   21 | fork -5 (270)
+< P   20 | zjmp -8 OK
+< P   19 | zjmp -8 OK
+< P   18 | zjmp -8 OK
+< P   17 | zjmp -8 OK
+< P   14 | fork -5 (259)
+< P   13 | fork -5 (270)
+< P   12 | zjmp -8 OK
+< P   11 | zjmp -8 OK
+< P   10 | fork -5 (259)
+< P    9 | fork -5 (270)
+< It is now cycle 9871
+< It is now cycle 9872
+< It is now cycle 9873
+< It is now cycle 9874
+< It is now cycle 9875
+< It is now cycle 9876
+< It is now cycle 9877
+< It is now cycle 9878
+< It is now cycle 9879
+< It is now cycle 9880
+< P 1028 | live 1
+< P 1027 | live 1
+< P 1026 | live 1
+< P 1025 | live 1
+< P 1024 | live 1
+< P 1023 | live 1
+< P 1022 | live 1
+< P 1021 | live 1
+< P 1020 | live 1
+< P 1019 | live 1
+< P 1018 | live 1
+< P 1017 | live 1
+< P 1016 | live 1
+< P 1015 | live 1
+< P 1014 | live 1
+< P 1013 | live 1
+< P  516 | live 1
+< P  515 | live 1
+< P  514 | live 1
+< P  513 | live 1
+< P  512 | live 1
+< P  511 | live 1
+< P  510 | live 1
+< P  509 | live 1
+< P  508 | live 1
+< P  507 | live 1
+< P  506 | live 1
+< P  505 | live 1
+< P  504 | live 1
+< P  503 | live 1
+< P  260 | live 1
+< P  259 | live 1
+< P  258 | live 1
+< P  257 | live 1
+< P  256 | live 1
+< P  255 | live 1
+< P  254 | live 1
+< P  253 | live 1
+< P  252 | live 1
+< P  251 | live 1
+< P  250 | live 1
+< P  249 | live 1
+< P  132 | live 1
+< P  131 | live 1
+< P  130 | live 1
+< P  129 | live 1
+< P  128 | live 1
+< P  127 | live 1
+< P  126 | live 1
+< P  125 | live 1
+< P  124 | live 1
+< P  123 | live 1
+< P   68 | live 1
+< P   67 | live 1
+< P   66 | live 1
+< P   65 | live 1
+< P   64 | live 1
+< P   63 | live 1
+< P   62 | live 1
+< P   61 | live 1
+< P   36 | live 1
+< P   35 | live 1
+< P   34 | live 1
+< P   33 | live 1
+< P   32 | live 1
+< P   31 | live 1
+< P   20 | live 1
+< P   19 | live 1
+< P   18 | live 1
+< P   17 | live 1
+< P   12 | live 1
+< P   11 | live 1
+< It is now cycle 9881
+< It is now cycle 9882
+< It is now cycle 9883
+< It is now cycle 9884
+< It is now cycle 9885
+< It is now cycle 9886
+< It is now cycle 9887
+< It is now cycle 9888
+< It is now cycle 9889
+< It is now cycle 9890
+< P  518 | zjmp -8 OK
+< P  517 | zjmp -8 OK
+< P  262 | zjmp -8 OK
+< P  261 | zjmp -8 OK
+< P  134 | zjmp -8 OK
+< P  133 | zjmp -8 OK
+< P   70 | zjmp -8 OK
+< P   69 | zjmp -8 OK
+< P   38 | zjmp -8 OK
+< P   37 | zjmp -8 OK
+< P   22 | zjmp -8 OK
+< P   21 | zjmp -8 OK
+< P   14 | zjmp -8 OK
+< P   13 | zjmp -8 OK
+< P   10 | zjmp -8 OK
+< P    9 | zjmp -8 OK
+< P    5 | fork -5 (270)
+< P    3 | fork -5 (259)
+< It is now cycle 9891
+< It is now cycle 9892
+< It is now cycle 9893
+< It is now cycle 9894
+< It is now cycle 9895
+< It is now cycle 9896
+< It is now cycle 9897
+< It is now cycle 9898
+< It is now cycle 9899
+< It is now cycle 9900
+< P 1030 | live 1
+< P 1029 | live 1
+< P  518 | live 1
+< P  517 | live 1
+< P  262 | live 1
+< P  261 | live 1
+< P  134 | live 1
+< P  133 | live 1
+< P   70 | live 1
+< P   69 | live 1
+< P   38 | live 1
+< P   37 | live 1
+< P   22 | live 1
+< P   21 | live 1
+< P   14 | live 1
+< P   13 | live 1
+< P   10 | live 1
+< P    9 | live 1
+< It is now cycle 9901
+< It is now cycle 9902
+< It is now cycle 9903
+< It is now cycle 9904
+< It is now cycle 9905
+< It is now cycle 9906
+< It is now cycle 9907
+< It is now cycle 9908
+< It is now cycle 9909
+< It is now cycle 9910
+< P    5 | zjmp -8 OK
+< P    3 | zjmp -8 OK
+< It is now cycle 9911
+< It is now cycle 9912
+< It is now cycle 9913
+< It is now cycle 9914
+< It is now cycle 9915
+< It is now cycle 9916
+< It is now cycle 9917
+< It is now cycle 9918
+< It is now cycle 9919
+< It is now cycle 9920
+< P    5 | live 1
+< P    3 | live 1
+< It is now cycle 9921
+< It is now cycle 9922
+< It is now cycle 9923
+< It is now cycle 9924
+< It is now cycle 9925
+< It is now cycle 9926
+< It is now cycle 9927
+< It is now cycle 9928
+< It is now cycle 9929
+< It is now cycle 9930
+< It is now cycle 9931
+< It is now cycle 9932
+< It is now cycle 9933
+< It is now cycle 9934
+< It is now cycle 9935
+< It is now cycle 9936
+< It is now cycle 9937
+< It is now cycle 9938
+< It is now cycle 9939
+< It is now cycle 9940
+< It is now cycle 9941
+< It is now cycle 9942
+< It is now cycle 9943
+< It is now cycle 9944
+< It is now cycle 9945
+< It is now cycle 9946
+< It is now cycle 9947
+< It is now cycle 9948
+< It is now cycle 9949
+< It is now cycle 9950
+< It is now cycle 9951
+< It is now cycle 9952
+< It is now cycle 9953
+< It is now cycle 9954
+< It is now cycle 9955
+< It is now cycle 9956
+< It is now cycle 9957
+< It is now cycle 9958
+< It is now cycle 9959
+< It is now cycle 9960
+< It is now cycle 9961
+< It is now cycle 9962
+< It is now cycle 9963
+< It is now cycle 9964
+< It is now cycle 9965
+< It is now cycle 9966
+< It is now cycle 9967
+< It is now cycle 9968
+< It is now cycle 9969
+< It is now cycle 9970
+< It is now cycle 9971
+< It is now cycle 9972
+< It is now cycle 9973
+< It is now cycle 9974
+< It is now cycle 9975
+< It is now cycle 9976
+< It is now cycle 9977
+< It is now cycle 9978
+< It is now cycle 9979
+< It is now cycle 9980
+< It is now cycle 9981
+< It is now cycle 9982
+< It is now cycle 9983
+< It is now cycle 9984
+< It is now cycle 9985
+< It is now cycle 9986
+< It is now cycle 9987
+< It is now cycle 9988
+< It is now cycle 9989
+< It is now cycle 9990
+< It is now cycle 9991
+< It is now cycle 9992
+< It is now cycle 9993
+< It is now cycle 9994
+< It is now cycle 9995
+< It is now cycle 9996
+< It is now cycle 9997
+< It is now cycle 9998
+< It is now cycle 9999
+< It is now cycle 10000
 < 0x0000 : 0c 00 6a 02 90 ff ff fe f0 03 01 00 00 00 00 0c 00 2f 02 90 ff ff fe f0 03 0c 00 14 02 90 00 00 00 0b 54 06 02 03 09 01 8b 04 09 00 8b 02 90 00 00 0b 54 06 02 03 09 ff 31 00 04 09 00 7a 02 90 
 < 0x0040 : ff ff ff 36 03 0c 00 14 02 90 00 00 00 00 02 02 90 00 00 00 00 04 09 00 93 02 90 00 00 00 04 02 02 90 00 00 00 00 04 09 00 0b 54 06 02 03 09 ff 31 01 00 00 00 00 0c 00 28 0c 00 14 02 90 00 00 
 < 0x0080 : 00 0b 54 06 02 03 09 01 8b 04 09 00 45 02 90 00 00 00 04 02 02 90 00 00 00 00 04 09 00 34 0c 00 0d 0b 54 06 02 03 09 ff 31 00 5b 02 90 00 00 00 00 04 09 00 5c 0a 64 02 00 12 06 02 90 00 00 00 
@@ -1195,58 +5334,4 @@
 < 0x0f80 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 
 < 0x0fc0 : 00 0b 54 06 02 03 09 01 8b 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 ff 31 00 00 00 00 00 00 00 00 0b 54 06 02 03 09 fe eb 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
 ---
-> It is now cycle 5001
-> It is now cycle 5002
-> It is now cycle 5003
-> It is now cycle 5004
-> It is now cycle 5005
-> It is now cycle 5006
-> It is now cycle 5007
-> It is now cycle 5008
-> It is now cycle 5009
-> It is now cycle 5010
-> It is now cycle 5011
-> It is now cycle 5012
-> It is now cycle 5013
-> It is now cycle 5014
-> It is now cycle 5015
-> It is now cycle 5016
-> It is now cycle 5017
-> It is now cycle 5018
-> It is now cycle 5019
-> It is now cycle 5020
-> It is now cycle 5021
-> It is now cycle 5022
-> It is now cycle 5023
-> It is now cycle 5024
-> It is now cycle 5025
-> It is now cycle 5026
-> It is now cycle 5027
-> It is now cycle 5028
-> It is now cycle 5029
-> It is now cycle 5030
-> It is now cycle 5031
-> It is now cycle 5032
-> It is now cycle 5033
-> It is now cycle 5034
-> It is now cycle 5035
-> It is now cycle 5036
-> It is now cycle 5037
-> It is now cycle 5038
-> It is now cycle 5039
-> It is now cycle 5040
-> It is now cycle 5041
-> It is now cycle 5042
-> It is now cycle 5043
-> It is now cycle 5044
-> It is now cycle 5045
-> It is now cycle 5046
-> It is now cycle 5047
-> It is now cycle 5048
-> It is now cycle 5049
-> It is now cycle 5050
-> It is now cycle 5051
-> It is now cycle 5052
-> It is now cycle 5053
-> It is now cycle 5054
-> It is now cycle 5055
+> Contestant 1, "Tching tching(Intercepteur), Bouh!Bouh!(bruits d'anti-jeu)", has won !

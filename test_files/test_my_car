@@ -7143,6 +7143,7 @@ It is now cycle 6141
 It is now cycle 6142
 It is now cycle 6143
 It is now cycle 6144
+Cycle to die is now 1486
 It is now cycle 6145
 It is now cycle 6146
 It is now cycle 6147
@@ -7547,9 +7548,9 @@ It is now cycle 6531
 It is now cycle 6532
 It is now cycle 6533
 It is now cycle 6534
-It is now cycle 6535
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 1041)
+It is now cycle 6535
 It is now cycle 6536
 It is now cycle 6537
 It is now cycle 6538
@@ -7577,8 +7578,8 @@ It is now cycle 6551
 It is now cycle 6552
 It is now cycle 6553
 It is now cycle 6554
-It is now cycle 6555
 P   26 | zjmp 395 OK
+It is now cycle 6555
 It is now cycle 6556
 It is now cycle 6557
 It is now cycle 6558
@@ -7625,9 +7626,9 @@ It is now cycle 6596
 It is now cycle 6597
 It is now cycle 6598
 It is now cycle 6599
-It is now cycle 6600
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 1463)
+It is now cycle 6600
 It is now cycle 6601
 It is now cycle 6602
 It is now cycle 6603
@@ -7647,8 +7648,8 @@ It is now cycle 6616
 It is now cycle 6617
 It is now cycle 6618
 It is now cycle 6619
-It is now cycle 6620
 P   26 | zjmp -277 OK
+It is now cycle 6620
 It is now cycle 6621
 It is now cycle 6622
 It is now cycle 6623
@@ -7673,9 +7674,9 @@ It is now cycle 6641
 It is now cycle 6642
 It is now cycle 6643
 It is now cycle 6644
-It is now cycle 6645
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 1191)
+It is now cycle 6645
 It is now cycle 6646
 It is now cycle 6647
 It is now cycle 6648
@@ -7695,8 +7696,8 @@ It is now cycle 6661
 It is now cycle 6662
 It is now cycle 6663
 It is now cycle 6664
-It is now cycle 6665
 P   26 | zjmp -277 OK
+It is now cycle 6665
 It is now cycle 6666
 It is now cycle 6667
 It is now cycle 6668
@@ -7721,9 +7722,9 @@ It is now cycle 6686
 It is now cycle 6687
 It is now cycle 6688
 It is now cycle 6689
-It is now cycle 6690
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 919)
+It is now cycle 6690
 It is now cycle 6691
 It is now cycle 6692
 It is now cycle 6693
@@ -7743,8 +7744,8 @@ It is now cycle 6706
 It is now cycle 6707
 It is now cycle 6708
 It is now cycle 6709
-It is now cycle 6710
 P   26 | zjmp -277 OK
+It is now cycle 6710
 It is now cycle 6711
 It is now cycle 6712
 It is now cycle 6713
@@ -7769,9 +7770,9 @@ It is now cycle 6731
 It is now cycle 6732
 It is now cycle 6733
 It is now cycle 6734
-It is now cycle 6735
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 647)
+It is now cycle 6735
 It is now cycle 6736
 It is now cycle 6737
 It is now cycle 6738
@@ -7791,8 +7792,8 @@ It is now cycle 6751
 It is now cycle 6752
 It is now cycle 6753
 It is now cycle 6754
-It is now cycle 6755
 P   26 | zjmp -277 OK
+It is now cycle 6755
 It is now cycle 6756
 It is now cycle 6757
 It is now cycle 6758
@@ -7817,9 +7818,9 @@ It is now cycle 6776
 It is now cycle 6777
 It is now cycle 6778
 It is now cycle 6779
-It is now cycle 6780
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 4471)
+It is now cycle 6780
 It is now cycle 6781
 It is now cycle 6782
 It is now cycle 6783
@@ -7839,8 +7840,8 @@ It is now cycle 6796
 It is now cycle 6797
 It is now cycle 6798
 It is now cycle 6799
-It is now cycle 6800
 P   26 | zjmp -277 OK
+It is now cycle 6800
 It is now cycle 6801
 It is now cycle 6802
 It is now cycle 6803
@@ -7865,9 +7866,9 @@ It is now cycle 6821
 It is now cycle 6822
 It is now cycle 6823
 It is now cycle 6824
-It is now cycle 6825
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 4199)
+It is now cycle 6825
 It is now cycle 6826
 It is now cycle 6827
 It is now cycle 6828
@@ -7887,8 +7888,8 @@ It is now cycle 6841
 It is now cycle 6842
 It is now cycle 6843
 It is now cycle 6844
-It is now cycle 6845
 P   26 | zjmp -277 OK
+It is now cycle 6845
 It is now cycle 6846
 It is now cycle 6847
 It is now cycle 6848
@@ -7923,9 +7924,9 @@ It is now cycle 6876
 It is now cycle 6877
 It is now cycle 6878
 It is now cycle 6879
-It is now cycle 6880
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 3937)
+It is now cycle 6880
 It is now cycle 6881
 It is now cycle 6882
 It is now cycle 6883
@@ -7945,8 +7946,8 @@ It is now cycle 6896
 It is now cycle 6897
 It is now cycle 6898
 It is now cycle 6899
-It is now cycle 6900
 P   26 | zjmp 395 OK
+It is now cycle 6900
 It is now cycle 6901
 It is now cycle 6902
 It is now cycle 6903
@@ -8031,9 +8032,9 @@ It is now cycle 6981
 It is now cycle 6982
 It is now cycle 6983
 It is now cycle 6984
-It is now cycle 6985
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 4399)
+It is now cycle 6985
 It is now cycle 6986
 It is now cycle 6987
 It is now cycle 6988
@@ -8053,8 +8054,8 @@ It is now cycle 7001
 It is now cycle 7002
 It is now cycle 7003
 It is now cycle 7004
-It is now cycle 7005
 P   26 | zjmp -207 OK
+It is now cycle 7005
 It is now cycle 7006
 It is now cycle 7007
 It is now cycle 7008
@@ -8104,8 +8105,8 @@ It is now cycle 7051
 It is now cycle 7052
 It is now cycle 7053
 It is now cycle 7054
-It is now cycle 7055
 P   26 | zjmp -277 OK
+It is now cycle 7055
 It is now cycle 7056
 It is now cycle 7057
 It is now cycle 7058
@@ -8140,9 +8141,9 @@ It is now cycle 7086
 It is now cycle 7087
 It is now cycle 7088
 It is now cycle 7089
-It is now cycle 7090
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 3937)
+It is now cycle 7090
 It is now cycle 7091
 It is now cycle 7092
 It is now cycle 7093
@@ -8162,8 +8163,8 @@ It is now cycle 7106
 It is now cycle 7107
 It is now cycle 7108
 It is now cycle 7109
-It is now cycle 7110
 P   26 | zjmp 395 OK
+It is now cycle 7110
 It is now cycle 7111
 It is now cycle 7112
 It is now cycle 7113
@@ -8248,9 +8249,9 @@ It is now cycle 7191
 It is now cycle 7192
 It is now cycle 7193
 It is now cycle 7194
-It is now cycle 7195
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 4399)
+It is now cycle 7195
 It is now cycle 7196
 It is now cycle 7197
 It is now cycle 7198
@@ -8270,8 +8271,8 @@ It is now cycle 7211
 It is now cycle 7212
 It is now cycle 7213
 It is now cycle 7214
-It is now cycle 7215
 P   26 | zjmp -207 OK
+It is now cycle 7215
 It is now cycle 7216
 It is now cycle 7217
 It is now cycle 7218
@@ -8321,8 +8322,8 @@ It is now cycle 7261
 It is now cycle 7262
 It is now cycle 7263
 It is now cycle 7264
-It is now cycle 7265
 P   26 | zjmp -277 OK
+It is now cycle 7265
 It is now cycle 7266
 It is now cycle 7267
 It is now cycle 7268
@@ -8357,9 +8358,9 @@ It is now cycle 7296
 It is now cycle 7297
 It is now cycle 7298
 It is now cycle 7299
-It is now cycle 7300
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 3937)
+It is now cycle 7300
 It is now cycle 7301
 It is now cycle 7302
 It is now cycle 7303
@@ -8380,11 +8381,11 @@ It is now cycle 7316
 It is now cycle 7317
 It is now cycle 7318
 It is now cycle 7319
+P   26 | zjmp 395 OK
 It is now cycle 7320
 P   16 | live 1
 P   12 | fork -5 (270)
 P   11 | fork -5 (259)
-P   26 | zjmp 395 OK
 It is now cycle 7321
 It is now cycle 7322
 It is now cycle 7323
@@ -8508,9 +8509,9 @@ It is now cycle 7401
 It is now cycle 7402
 It is now cycle 7403
 It is now cycle 7404
-It is now cycle 7405
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 4399)
+It is now cycle 7405
 It is now cycle 7406
 It is now cycle 7407
 It is now cycle 7408
@@ -8530,8 +8531,8 @@ It is now cycle 7421
 It is now cycle 7422
 It is now cycle 7423
 It is now cycle 7424
-It is now cycle 7425
 P   26 | zjmp -207 OK
+It is now cycle 7425
 It is now cycle 7426
 It is now cycle 7427
 It is now cycle 7428
@@ -8581,8 +8582,8 @@ It is now cycle 7471
 It is now cycle 7472
 It is now cycle 7473
 It is now cycle 7474
-It is now cycle 7475
 P   26 | zjmp -277 OK
+It is now cycle 7475
 It is now cycle 7476
 It is now cycle 7477
 It is now cycle 7478
@@ -8617,9 +8618,9 @@ It is now cycle 7506
 It is now cycle 7507
 It is now cycle 7508
 It is now cycle 7509
-It is now cycle 7510
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 3937)
+It is now cycle 7510
 It is now cycle 7511
 It is now cycle 7512
 It is now cycle 7513
@@ -8639,8 +8640,8 @@ It is now cycle 7526
 It is now cycle 7527
 It is now cycle 7528
 It is now cycle 7529
-It is now cycle 7530
 P   26 | zjmp 395 OK
+It is now cycle 7530
 It is now cycle 7531
 It is now cycle 7532
 It is now cycle 7533
@@ -8725,9 +8726,9 @@ It is now cycle 7611
 It is now cycle 7612
 It is now cycle 7613
 It is now cycle 7614
-It is now cycle 7615
 P   26 | sti r6 0 400
        | -> store to 0 + 400 = 400 (with pc and mod 4399)
+It is now cycle 7615
 It is now cycle 7616
 It is now cycle 7617
 It is now cycle 7618
@@ -8743,12 +8744,12 @@ It is now cycle 7627
 It is now cycle 7628
 It is now cycle 7629
 It is now cycle 7630
+Cycle to die is now 1436
 It is now cycle 7631
 It is now cycle 7632
 It is now cycle 7633
 It is now cycle 7634
 It is now cycle 7635
-P   26 | zjmp -207 OK
 It is now cycle 7636
 It is now cycle 7637
 It is now cycle 7638
@@ -10180,154 +10181,4 @@ It is now cycle 9063
 It is now cycle 9064
 It is now cycle 9065
 It is now cycle 9066
-It is now cycle 9067
-It is now cycle 9068
-It is now cycle 9069
-It is now cycle 9070
-It is now cycle 9071
-It is now cycle 9072
-It is now cycle 9073
-It is now cycle 9074
-It is now cycle 9075
-It is now cycle 9076
-It is now cycle 9077
-It is now cycle 9078
-It is now cycle 9079
-It is now cycle 9080
-It is now cycle 9081
-It is now cycle 9082
-It is now cycle 9083
-It is now cycle 9084
-It is now cycle 9085
-It is now cycle 9086
-It is now cycle 9087
-It is now cycle 9088
-It is now cycle 9089
-It is now cycle 9090
-It is now cycle 9091
-It is now cycle 9092
-It is now cycle 9093
-It is now cycle 9094
-It is now cycle 9095
-It is now cycle 9096
-It is now cycle 9097
-It is now cycle 9098
-It is now cycle 9099
-It is now cycle 9100
-It is now cycle 9101
-It is now cycle 9102
-It is now cycle 9103
-It is now cycle 9104
-It is now cycle 9105
-It is now cycle 9106
-It is now cycle 9107
-It is now cycle 9108
-It is now cycle 9109
-It is now cycle 9110
-It is now cycle 9111
-It is now cycle 9112
-It is now cycle 9113
-It is now cycle 9114
-It is now cycle 9115
-It is now cycle 9116
-It is now cycle 9117
-It is now cycle 9118
-It is now cycle 9119
-It is now cycle 9120
-It is now cycle 9121
-It is now cycle 9122
-It is now cycle 9123
-It is now cycle 9124
-It is now cycle 9125
-It is now cycle 9126
-It is now cycle 9127
-It is now cycle 9128
-It is now cycle 9129
-It is now cycle 9130
-It is now cycle 9131
-It is now cycle 9132
-It is now cycle 9133
-It is now cycle 9134
-It is now cycle 9135
-It is now cycle 9136
-It is now cycle 9137
-It is now cycle 9138
-It is now cycle 9139
-It is now cycle 9140
-It is now cycle 9141
-It is now cycle 9142
-It is now cycle 9143
-It is now cycle 9144
-It is now cycle 9145
-It is now cycle 9146
-It is now cycle 9147
-It is now cycle 9148
-It is now cycle 9149
-It is now cycle 9150
-It is now cycle 9151
-It is now cycle 9152
-It is now cycle 9153
-It is now cycle 9154
-It is now cycle 9155
-It is now cycle 9156
-It is now cycle 9157
-It is now cycle 9158
-It is now cycle 9159
-It is now cycle 9160
-It is now cycle 9161
-It is now cycle 9162
-It is now cycle 9163
-It is now cycle 9164
-It is now cycle 9165
-It is now cycle 9166
-It is now cycle 9167
-It is now cycle 9168
-It is now cycle 9169
-It is now cycle 9170
-It is now cycle 9171
-It is now cycle 9172
-It is now cycle 9173
-It is now cycle 9174
-It is now cycle 9175
-It is now cycle 9176
-It is now cycle 9177
-It is now cycle 9178
-It is now cycle 9179
-It is now cycle 9180
-It is now cycle 9181
-It is now cycle 9182
-It is now cycle 9183
-It is now cycle 9184
-It is now cycle 9185
-It is now cycle 9186
-It is now cycle 9187
-It is now cycle 9188
-It is now cycle 9189
-It is now cycle 9190
-It is now cycle 9191
-It is now cycle 9192
-It is now cycle 9193
-It is now cycle 9194
-It is now cycle 9195
-It is now cycle 9196
-It is now cycle 9197
-It is now cycle 9198
-It is now cycle 9199
-It is now cycle 9200
-It is now cycle 9201
-It is now cycle 9202
-It is now cycle 9203
-It is now cycle 9204
-It is now cycle 9205
-It is now cycle 9206
-It is now cycle 9207
-It is now cycle 9208
-It is now cycle 9209
-It is now cycle 9210
-It is now cycle 9211
-It is now cycle 9212
-It is now cycle 9213
-It is now cycle 9214
-It is now cycle 9215
-It is now cycle 9216
 Contestant 1, "Tching tching(Intercepteur), Bouh!Bouh!(bruits d'anti-jeu)", has won !

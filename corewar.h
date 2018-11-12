@@ -37,6 +37,7 @@ typedef struct s_proc
 	int parent_nbr;
 	unsigned int regs[REG_NUMBER];
 	unsigned int if_live;
+	int lives;
 	int last_live_cycle;
 	unsigned char cmd;
 	int argv[3][2];
@@ -59,6 +60,7 @@ typedef struct s_cycle
 	int indexes[MEM_SIZE][2];
 	int winner_str;
 	int winner_id;
+	int start_bots;
 	t_proc *head_proc;
 }			t_cycle;
 
@@ -74,25 +76,25 @@ typedef struct s_op
 	int					label;
 }			t_op;
 
-typedef void (*t_cmd)(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+typedef int (*t_cmd)(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
 typedef void (*t_aval)(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
 
-void live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void load(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void store(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void addition(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void substraction(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void bit_and(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void bit_or(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void bit_xor(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void zjmp(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void load_ind(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void store_ind(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void ffork(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void lload(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void lload_ind(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void long_fork(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-void aff(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int load(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int store(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int addition(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int substraction(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int bit_and(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int bit_or(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int bit_xor(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int zjmp(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int load_ind(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int store_ind(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int ffork(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int lload(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int lload_ind(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int long_fork(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int aff(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
 
 
 static t_cmd instruct[16] = {&live, &load, &store, &addition, &substraction, &bit_and, &bit_or,
