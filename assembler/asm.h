@@ -127,6 +127,7 @@ void 			ft_print_success(t_binfile *bin);
 
 
 
+
 //********************************* ENCODING FUNCTIONS******************
 
 
@@ -174,6 +175,12 @@ int			error_message_label(char *label, char *arg);
 
 //*************************** FLAG A ***********************************
 void	 	flag_a_output(t_binfile *bin);
+
+void		print_arg_chars(t_t			*instruct);
+
+void			print_dir_ind_bytes(int arg, int lbl_size);
+
+void		print_instr_args(t_t *instruct);
 
 
 #endif
