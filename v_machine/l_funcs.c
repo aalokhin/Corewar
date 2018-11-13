@@ -17,8 +17,10 @@ int live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 	(*tmp).if_live = 1;
 	(*tmp).last_live_cycle = (*main_cycle).cycles;
 	(*tmp).lives++;
+	/*if ((base->flag.v >> 2) & 1)
+		ft_printf("P %4d | live %d\n", proc->num, n);
 	child_proc = tmp;
-	ft_printf("P%5d | live %d\n", (*tmp).id + 1, (*tmp).argv[0][1]);
+	ft_printf("P%5d | live %d\n", (*tmp).id + 1, (*tmp).argv[0][1]);*/
 	if ((*tmp).parent_nbr > -1)
 	{
 		tmp = head_proc;

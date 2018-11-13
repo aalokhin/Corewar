@@ -13,21 +13,6 @@
 #define SIZE_SIZE 10
 #define COMMENT_SIZE 5130
 
-
-typedef struct s_flags
-{
-	int a_aff;
-	int d_dumps_memory;
-	int s_cycles;
-	int v_verbosity;
-	int binary;
-	int b_stealth;
-	int ncurses;
-	int n_stealth;
-	unsigned int bots_quantity;
-	char *players[4];
-} t_flags;
-
 typedef struct s_proc
 {
 	int id;
@@ -63,6 +48,25 @@ typedef struct s_cycle
 	int start_bots;
 	t_proc *head_proc;
 }			t_cycle;
+
+typedef struct s_flags
+{
+	int a_aff;
+	int d_dumps_memory;
+	int s_cycles;
+	int v_verbosity;
+	int binary;
+	int b_stealth;
+	int ncurses;
+	int n_stealth;
+	unsigned int bots_quantity;
+	char *players[4];
+	struct s_cycle main_cycle;
+} t_flags;
+
+
+
+
 
 typedef struct s_op
 {

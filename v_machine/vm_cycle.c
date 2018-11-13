@@ -81,7 +81,7 @@ t_proc *remove_proc(t_proc *head_proc, t_proc *to_del)
 }
 
 
-int check_if_lives(t_proc *head_proc, t_cycle *main_cycle)
+int check_if_lives(t_proc *head_proc, t_cycle *main_cycle, t_flags *params)
 {
 	int res;
 	t_proc *tmp;
@@ -101,17 +101,14 @@ int check_if_lives(t_proc *head_proc, t_cycle *main_cycle)
 				(*main_cycle).winner_id = (*tmp).parent_nbr;
 			(*main_cycle).winner_name = (*tmp).name;
 		}
-		if ((*tmp).last_live_cycle < (*main_cycle).cycles - (*main_cycle).prev_cycle_die)
+		if ((*tmp).lives == 0)
 		{
 			(*tmp).if_live = 0;
 			(*main_cycle).processes--;
-			(*main_cycle).indexes[((*tmp).current_position + MEM_SIZE) % MEM_SIZE][1] = 0;
-			/*if ((*tmp).parent_nbr != -1)
-			{
-				while (tmp2 && (*tmp2).id != (*tmp).parent_nbr)
-					tmp2 = tmp2->next;
-				(*tmp2).child_proc_lives--;
-			}*/
+			(*main_cycle).indexes[(*tmp).current_position][1] = 0;
+			if (((*params).v_verbosity >> 3) & 1)
+				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+					(*tmp).id + 1, (*tmp).lives, (*main_cycle).prev_cycle_die);
 		}
 		else
 		{
@@ -178,7 +175,9 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	WINDOW *win;
 	int cycle_counter;
 	int res;
+	int j;
 
+	j = 0;
 	cycle_counter = 0;
 	win = NULL;
 	i = 0;
@@ -202,15 +201,17 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	while (main_cycle.prev_cycle_die > 0 && main_cycle.processes > 0)
 	{
 		cycle_counter++;
-		ft_printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
+		if (((*params).v_verbosity >> 1) & 1)
+			ft_printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
 		if (main_cycle.cycles != 0 && cycle_counter == main_cycle.prev_cycle_die)
 		{
 			cycle_counter = 0;
-			if (check_if_lives(main_cycle.head_proc, &main_cycle) >= NBR_LIVE || main_cycle.checks_if_die >= MAX_CHECKS)
+			if (check_if_lives(main_cycle.head_proc, &main_cycle, params) >= NBR_LIVE || main_cycle.checks_if_die >= MAX_CHECKS)
 			{
 				main_cycle.cycle_die -= CYCLE_DELTA;
 				main_cycle.checks_if_die = 0;
-				ft_printf("%s%d\n", "Cycle to die is now ", main_cycle.cycle_die);
+				if (((*params).v_verbosity >> 1) & 1)
+					ft_printf("%s%d\n", "Cycle to die is now ", main_cycle.cycle_die);
 			}
 			main_cycle.checks_if_die++;
 			main_cycle.prev_cycle_die = main_cycle.cycle_die;
@@ -221,7 +222,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			map_to_screen(map, &main_cycle, params, main_cycle.head_proc, win);
 
 
-		while (i < main_cycle.prev_processes && processes)
+		while (processes)
 		{
 			if ((*processes).if_live && (*processes).cmd >= 1 && (*processes).cmd <= 16 && (*processes).cycles_wait == 1)
 			{
@@ -233,7 +234,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 				}
 				else
 				{
-					id_counter = ((*processes).current_position + MEM_SIZE) % MEM_SIZE;
+					id_counter = (*processes).current_position;
 					(*processes).argv[0][0] = DIR_CODE;
 					get_arg_vals[(*processes).argv[0][0] - 1](processes, map, 0, &id_counter);
 				}
@@ -242,17 +243,30 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					res = instruct[(*processes).cmd - 1](main_cycle.head_proc, (*processes).id, &main_cycle, map);
 				else if ((*processes).cmd != 16 || ((*processes).cmd == 16 && (*params).a_aff))
 					res = instruct[(*processes).cmd - 1](processes, (*processes).id, &main_cycle, map);
-				if (((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))/* && res == 1*/)
+				else if ((*processes).cmd == 16 && !(*params).a_aff)
+					res = 0;
+				if ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))
 				{
 					main_cycle.indexes[((*processes).current_position + MEM_SIZE) % MEM_SIZE][1] = 0;
+					if ((((*params).v_verbosity >> 4) & 1) && ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0)))
+					{
+						ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", id_counter + 1 - (*processes).current_position, (*processes).current_position, id_counter + 1);
+						j = 0;
+						while (j < id_counter + 1 - (*processes).current_position)
+						{
+							ft_printf("%.2x ", map[((*processes).current_position + j) % MEM_SIZE]);
+							j++;
+						}
+						ft_printf("\n");
+					}
 					(*processes).current_position = id_counter + 1;
 				}
-				else if ((*processes).cmd != 9 && res == 0)
+				/*else if ((*processes).cmd != 9 && res == 0)
 				{
 					main_cycle.indexes[(*processes).current_position][1] = 0;
 					(*processes).current_position += 2;
-				}
-				res = -1;
+				}*/
+				//res = -1;
 				(*processes).current_position = ((*processes).current_position + MEM_SIZE) % MEM_SIZE;
 				(*processes).cmd = map[(*processes).current_position];
 				if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
@@ -287,11 +301,8 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			processes = processes->next;
 			i++;
 		}
-
-
-
 		
-		main_cycle.prev_processes = main_cycle.processes;
+		//main_cycle.prev_processes = main_cycle.processes;
 		/*if (main_cycle.second_limit > 0)
 			usleep((useconds_t)((int)1000000 / main_cycle.second_limit));
 		else
