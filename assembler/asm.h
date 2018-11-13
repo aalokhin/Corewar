@@ -53,6 +53,10 @@ typedef struct			s_t  //minimum
 
 	int 				has_codage;
 	int 				c_len;//byte length of the instruction
+	// for vlaidation 
+
+	int					line_num;
+	char				*line_copy;
 
 	struct s_t			*next;
 
@@ -168,9 +172,18 @@ int			has_codage(char	*c_name);
 
 char		*label_name_is_valid(t_binfile *file, char *str);
 int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i);
-int			error_message(char *arg);
+int			error_message(t_t *token, char *arg);
 int 		error_invalid_arg_type(t_t *command, int arg, int type);
-int			error_message_label(char *label, char *arg);
+int			error_message_label(t_t *token, char *label, char *arg);
+int 		error_command(t_t *token, char *str);
+
+//********************************* LENGTH COUNTER******************
+
+void		token_length(t_t *token, int i, t_lable *label);
+void		label_length(t_binfile *file, t_lable	*label);
+void		file_length(t_binfile *file);
+int			bytes_above_i(t_lable *label);
+void		bytes_above_filler(t_binfile *file, t_lable *label);
 
 
 //*************************** FLAG A ***********************************

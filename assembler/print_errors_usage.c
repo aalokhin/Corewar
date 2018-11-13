@@ -33,33 +33,64 @@ void	ft_print_inv_input()
 	ft_printf("Input error\n");
 }
 
+int 		colomn_definer(t_t *token, char *arg)
+{
+	char	*str;
+	int 	i = 0;
+	int  	l = 0;
 
+	str = token->line_copy;
+	while (str[i])
+	{
+		if (str[i] == arg[l])
+		{
+			l++;
+			if (arg[l + 1] == '\0')
+				return (i - l);
+		}
+		if (str[i] != arg[l - 1])
+			l = 0;
+		i++;
+	}
+	return (i - l);
+}
 
-int			error_message_label(char *label, char *arg)
- {
- 	printf("No such label %s while attempting to dereference token [TOKEN][%d:%d] %s {%s}\n",  label, 0, 0, "DIRECT_LABEL", arg);
- 	return (0);
- }
+int			error_message_label(t_t *token, char *label, char *arg)
+{
+	int 	colomn = colomn_definer(token, arg) + 1;
 
- int			error_message(char *arg)
+	printf("No such label %s while attempting to dereference token [TOKEN][%d:%d] %s {%s}\n",  label, token->line_num, colomn, "DIRECT_LABEL", arg);
+	return (0);
+}
+
+int 		error_command(t_t *token, char *str)
+{
+	int 	colomn = colomn_definer(token, str);
+
+	printf("Invalid instruction at token [TOKEN][%d:%d] INSTRUCTION {%s}\n", token->line_num + 2, colomn, str );
+	return (0);
+}
+
+int			error_message(t_t *token, char *arg)
  {
  	char 	*e;
- 	int 	type;
+ 	int 	colomn = colomn_definer(token, arg) + 1;
 
- 	type = (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%'))) ? 1 : ft_strchr(arg ,'%') ? 2 : ft_strchr(arg , SEPARATOR_CHAR) ? 5 : ft_atoi(arg) != 0 ? 4 : 0;
- 	if (type == 1)
+ 	if (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%')))
  		e = ft_strdup("REGISTER");
- 	else if (type == 2)
+ 	else if (ft_strstr(arg, "%:"))
+ 		e = ft_strdup("DIRECT_LABEL");
+ 	else if (ft_strchr(arg ,'%'))
  		e = ft_strdup("DIRECT");
- 	else if (type == 4)
+ 	else if (ft_atoi(arg) != 0)
  		e = ft_strdup("INDIRECT");
- 	else if (type == 5)
+ 	else if (ft_strchr(arg , SEPARATOR_CHAR))
  		e = ft_strdup("SEPARATOR");
+ 	else if (ft_strchr(arg, ':'))
+ 		e = ft_strdup("LABEL");
  	else
  		e = ft_strdup("INSTRUCTION");
- 	printf("Syntax error at token [TOKEN][%d:%d] %s {%s}\n", 0, 0, e, arg);
- 	//printf("%s\n", w_str);
-
+ 	printf("Syntax error at token [TOKEN][%d:%d] %s {%s}\n",  token->line_num, colomn, e, arg);
  	return (0);
  }
 
@@ -76,4 +107,15 @@ int			error_message_label(char *label, char *arg)
  	ft_printf("Invalid parameter %d type %s for instruction %s\n", arg, type, command->name_c);
  	return (0);
  }
+
+
+//  .name "zork"
+// .comment "I'M ALIIIIVE"
+
+// l2:		sti r, %:live, %1
+// 		and r1, %0, r1
+
+// live:	live %1
+// 		zjmp %:live
+
  

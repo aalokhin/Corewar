@@ -98,8 +98,9 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i) /// Ð¿Ð
 	//printf("%s\n", arg );
  		// if (size == T_REG)
  		// {
- 		// 	if (ft_atoi(arg + 1)  > 16) /// not sure if needed  reg less than 16 :)
- 		// 		return (0);
+ 		// 	printf(" === %s\n", arg);
+ 		// 	if (!arg + 1 || !(ft_isdigit(arg[1])) || ft_atoi(arg + 1)  > 16) /// not sure if needed  reg less than 16 :)
+ 		// 		return (error_message(token, arg));
  		// }
  		if (ft_strstr(arg, "%:"))
  		{
@@ -110,7 +111,7 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i) /// Ð¿Ð
  			if (!(ft_strstr(file->f_contents, label_name)))
  			{
  				label_name[ft_strlen(label_name) - 1] = '\0';
- 				return (error_message_label(label_name, arg));
+ 				return (error_message_label(token, label_name, arg));
  			}
  		}
  		return (1);

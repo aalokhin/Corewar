@@ -30,11 +30,12 @@ int 	file_processing(t_binfile *bin)
 	//ft_space(&file_contents, (int)bin->arg_length);
 
 	fill_magic_start(&(*bin));
-	if (!fill_name_comment(&(*bin)))
-	{
-		printf("%s\n",  "no name or comment");
-		return (0);
-	}
+	//if (!
+	fill_name_comment(&(*bin));
+	// {
+	// 	printf("%s\n",  "no name or comment");
+	// 	return (0);
+	// }
 
 	ft_strdel(&((*bin).f_contents)); //*********************** magic ept
 	(*bin).f_contents = ft_strdup(file_contents); //*********************** magic ept
