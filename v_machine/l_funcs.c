@@ -17,11 +17,12 @@ int live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 	(*tmp).if_live = 1;
 	(*tmp).last_live_cycle = (*main_cycle).cycles;
 	(*tmp).lives++;
-	/*if ((base->flag.v >> 2) & 1)
-		ft_printf("P %4d | live %d\n", proc->num, n);
 	child_proc = tmp;
-	ft_printf("P%5d | live %d\n", (*tmp).id + 1, (*tmp).argv[0][1]);*/
-	if ((*tmp).parent_nbr > -1)
+	//if ((*main_cycle).verbose & 1)
+		//ft_printf("Player %d (%s) is said to be alive\n", (*tmp).id, (*tmp).name);
+	if (((*main_cycle).verbose >> 2) & 1)
+		ft_printf("P%5d | live %d\n", (*tmp).id + 1, (*tmp).argv[0][1]);
+	/*if ((*tmp).parent_nbr > -1)
 	{
 		tmp = head_proc;
 		i = 0;
@@ -33,25 +34,28 @@ int live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 		}
 		if (tmp)
 			(*tmp).child_proc_lives++;
-	}
+	}*/
+	if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] < 0)
+		(*child_proc).argv[0][1] *= -1;
 	if ((*child_proc).argv[0][0] &&
-		(*child_proc).argv[0][1] >= 0 && (*child_proc).argv[0][1] < (*main_cycle).processes)
+		((*child_proc).argv[0][1] >= 0 && (*child_proc).argv[0][1] <= (*head_proc).id))
 	{
 		i = 0;
 		other_proc = (*child_proc).argv[0][1];
+		if ((*child_proc).argv[0][1] < 0)
+			other_proc *= -1;
 		tmp = head_proc;
-		while (i < (*main_cycle).processes && i != other_proc)
-		{
+		while (tmp && (*tmp).id != other_proc)
 			tmp = tmp->next;
-			i++;
-		}
 		if (tmp)
 		{
 			(*tmp).if_live = 1;
 			(*tmp).last_live_cycle = (*main_cycle).cycles;
+			(*tmp).lives++;
+			if (((*main_cycle).verbose & 1) && (*child_proc).argv[0][1] <= (*main_cycle).start_bots )
+				ft_printf("Player %d (%s) is said to be alive\n", (*child_proc).argv[0][1], (*tmp).name);
 		}
-		
-		if (tmp && (*tmp).parent_nbr > -1)
+		/*if (tmp && (*tmp).parent_nbr > -1)
 		{
 			tmp = head_proc;
 			i = 0;
@@ -63,7 +67,7 @@ int live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 			}
 			if (tmp)
 				(*tmp).child_proc_lives++;
-		}
+		}*/
 	}
 	map[0] = map[0];
 	return (1);
@@ -196,11 +200,8 @@ int ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 	i = 0;
 	tmp = processes;
 	head = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
+	while (tmp && (*tmp).id != cur_proc)
 		tmp = tmp->next;
-		i++;
-	}
 	i = (*tmp).current_position + (*tmp).argv[0][1] % IDX_MOD;
 	i = (i + MEM_SIZE) % MEM_SIZE;
 	processes_add(&head, map, main_cycle, i, cur_proc);
@@ -307,11 +308,8 @@ int long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 	i = 0;
 	tmp = processes;
 	head = processes;
-	while (i < (*main_cycle).processes && (*tmp).id != cur_proc)
-	{
+	while (tmp && (*tmp).id != cur_proc)
 		tmp = tmp->next;
-		i++;
-	}
 	i = ((*tmp).argv[0][1] % IDX_MOD) + (*tmp).current_position;
 	i = (i + MEM_SIZE) % MEM_SIZE;
 	processes_add(&head, map, main_cycle, i, cur_proc);

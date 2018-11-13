@@ -47,6 +47,7 @@ void main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).winner_id = 0;
 	(*main_cycle).head_proc = NULL;
 	(*main_cycle).start_bots = (*params).bots_quantity;
+	(*main_cycle).verbose = (*params).v_verbosity;
 }
 
 t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)

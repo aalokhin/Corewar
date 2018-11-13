@@ -245,7 +245,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					res = instruct[(*processes).cmd - 1](processes, (*processes).id, &main_cycle, map);
 				else if ((*processes).cmd == 16 && !(*params).a_aff)
 					res = 0;
-				if ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))
+				if (((*processes).cmd != 9 && res == 1) || ((*processes).cmd == 9 && (*processes).carry == 0) || (*processes).cmd == 11 || (*processes).cmd == 14)
 				{
 					main_cycle.indexes[((*processes).current_position + MEM_SIZE) % MEM_SIZE][1] = 0;
 					if ((((*params).v_verbosity >> 4) & 1) && ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0)))
@@ -261,11 +261,22 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					}
 					(*processes).current_position = id_counter + 1;
 				}
-				/*else if ((*processes).cmd != 9 && res == 0)
+				else if ((*processes).cmd != 9 && res == 0)
 				{
 					main_cycle.indexes[(*processes).current_position][1] = 0;
+					if (((*params).v_verbosity >> 4) & 1)
+					{
+						ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", 2, (*processes).current_position, 2 + (*processes).current_position);
+						j = 0;
+						while (j < 2)
+						{
+							ft_printf("%.2x ", map[((*processes).current_position + j) % MEM_SIZE]);
+							j++;
+						}
+						ft_printf("\n");
+					}
 					(*processes).current_position += 2;
-				}*/
+				}
 				//res = -1;
 				(*processes).current_position = ((*processes).current_position + MEM_SIZE) % MEM_SIZE;
 				(*processes).cmd = map[(*processes).current_position];
@@ -285,6 +296,17 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			else if ((*processes).if_live)
 			{
 				main_cycle.indexes[(*processes).current_position][1] = 0;
+				/*if ((((*params).v_verbosity >> 4) & 1))
+				{
+					ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", 1, (*processes).current_position, (*processes).current_position + 1);
+					j = 0;
+					while (j < 1)
+					{
+						ft_printf("%.2x ", map[((*processes).current_position + j) % MEM_SIZE]);
+						j++;
+					}
+					ft_printf("\n");
+				}*/
 				(*processes).current_position++;
 				(*processes).current_position = ((*processes).current_position + MEM_SIZE) % MEM_SIZE;
 				(*processes).cmd = map[(*processes).current_position];

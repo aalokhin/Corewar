@@ -46,6 +46,7 @@ typedef struct s_cycle
 	int winner_str;
 	int winner_id;
 	int start_bots;
+	int verbose;
 	t_proc *head_proc;
 }			t_cycle;
 
