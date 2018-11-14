@@ -12,6 +12,69 @@
 
 #include "../corewar.h"
 
+int		if_correct_name(unsigned char *str, t_flags *params, int j)
+{
+	int i;
+
+	i = 4;
+	while (str[i] && i < 133)
+		i++;
+	if (i == 133)
+	{
+		ft_printf("Error: File %s has an invalid header\n", (*params).players[j]);
+		return (0);
+	}
+	while (i < 133)
+	{
+		if (str[i] != '\0')
+		{
+			ft_printf("Error: File %s has an invalid header\n", (*params).players[j]);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+int		check_magic(unsigned char *str, t_flags *params, int j,
+	header_t bots[4])
+{
+	unsigned int	magic;
+	unsigned int	buf;
+
+	magic = 0;
+	buf = 0;
+	buf = str[0] << 24;
+	magic |= buf;
+	buf = str[1] << 16;
+	magic |= buf;
+	buf = str[2] << 8;
+	magic |= buf;
+	magic |= str[3];
+	bots[j].magic = magic;
+	if (magic != COREWAR_EXEC_MAGIC)
+	{
+		ft_printf("Error: File %s has an invalid header\n", (*params).players[j]);
+		return (0);
+	}
+	return (1);
+}
+
+int		check_comment(unsigned char *str, t_flags *params, int j)
+{
+	int		i;
+
+	i = 140;
+	while (str[i] && i < 2188)
+		i++;
+	if (i == 2188)
+	{
+		ft_printf("Error: File %s has an invalid header\n", (*params).players[j]);
+		return (0);
+	}
+	return (1);
+}
+
 int		take_bots_params(unsigned char *str, t_flags *params, int j,
 	header_t bots[4])
 {
@@ -42,7 +105,7 @@ int		take_bots_params(unsigned char *str, t_flags *params, int j,
 	return (1);
 }
 
-void	copy_bots_to_map(header_t bots[4], int j, unsigned char *str,
+int	copy_bots_to_map(header_t bots[4], int j, unsigned char *str,
 	t_flags *params)
 {
 	unsigned int i;
@@ -56,6 +119,7 @@ void	copy_bots_to_map(header_t bots[4], int j, unsigned char *str,
 		i++;
 	}
 	ft_strdel((char **)(&str));
+	return (1);
 }
 
 int		read_bots(t_flags *params, int fd, header_t bots[4])
@@ -77,11 +141,20 @@ int		read_bots(t_flags *params, int fd, header_t bots[4])
 		lseek(fd, 0, SEEK_SET);
 		str = (unsigned char *)malloc(sizeof(unsigned char) * len + 1);
 		read(fd, str, len);
+		if (!check_magic(str, params, j, bots) || !if_correct_name(str, params, j) ||
+			!check_comment(str, params, j))
+			return (0);
 		ft_strncpy(bots[j].prog_name, (const char *)(&str[4]),
 			PROG_NAME_LENGTH);
-		if (!take_bots_params(str, params, j, bots))
+		if (!take_bots_params(str, params, j, bots) ||
+			!copy_bots_to_map(bots, j, str, params))
 			return (0);
-		copy_bots_to_map(bots, j, str, params);
+		if (len - 2192 != bots[j].prog_size)
+		{
+			ft_printf("Error: File %s has a code size that differ from what its header says\n",
+				(*params).players[j]);
+			return (0);
+		}
 		j++;
 	}
 	return (1);

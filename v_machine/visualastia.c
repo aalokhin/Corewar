@@ -21,12 +21,12 @@ void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params, t_proc *
 	while (processes)
 	{
 		y += 2;
-		mvwprintw(win, y, x,  "Player: -%d : ", (*processes).real_id + 1);
+		mvwprintw(win, y, x,  "Player: -%d : %s", (*processes).real_id + 1, (*processes).name);
 		x+=2;
 		y++;
 		mvwprintw(win, y, x,  "Last live: %d ", (*processes).last_live_cycle);
 		y++;
-		mvwprintw(win, y, x,  "Lives in current period : %d ", (*processes).child_proc_lives);
+		mvwprintw(win, y, x,  "Lives in current period : %d ", (*processes).live_cycle);
 		processes = processes->next;
 		i++;
 	}

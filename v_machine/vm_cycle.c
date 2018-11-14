@@ -73,10 +73,7 @@ t_proc *remove_proc(t_proc *head_proc, t_proc *to_del)
 		return (head_proc);
 	}
 	while (tmp && tmp->next != to_del)
-	{
-		(*tmp).id -= 1;
 		tmp = tmp->next;
-	}
 	tmp->next = to_del->next;
 	free(to_del);
 	return (tmp->next);
@@ -119,16 +116,14 @@ int check_if_lives(t_proc *head_proc, t_cycle *main_cycle, t_flags *params)
 		}
 		tmp = tmp->next;
 	}
-	/*tmp = head_proc;
+	tmp = head_proc;
 	while (tmp)
 	{
 		if (!(*tmp).if_live)
-		{
 			tmp = remove_proc(head_proc, tmp);
-		}
 		else
 			tmp = tmp->next;
-	}*/
+	}
 	return (res);
 }
 
