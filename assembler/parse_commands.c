@@ -250,11 +250,11 @@ int		parse_commands(t_binfile *file)
 		//printf("%s\n", );
 		//// delete str to avoid leaks
 	}
-	if (n != count_ns(file->f_contents) - 1)
-	{
-		printf ("%s\n", "Syntax error - unexpected end of input (Perhaps you forgot to end with a newline?)");
-		return (0);
-	}
+	// if (n != count_ns(file->f_contents) - 1)  //commented this line because validation should be done earlier
+	// {
+	// 	printf ("%s\n", "Syntax error - unexpected end of input (Perhaps you forgot to end with a newline?)");
+	// 	return (0);
+	// }
 	if (label != NULL)
 	{
 		label_length(file, label);

@@ -147,7 +147,7 @@ void			fill_corfile_contents(t_binfile *bin);
 
 void		skip_name_comment(size_t	*count,  char (*contents)[]);
 
-void		ft_zero_what_left(t_binfile *bin, size_t	*count,  char (*contents)[]);
+void		ft_zero_what_left(t_binfile *bin, size_t *c, char (*file)[]);
 
 void		clean_name_comment(t_binfile *bin, char (*contents)[]);
 
@@ -187,6 +187,7 @@ void		bytes_above_filler(t_binfile *file, t_lable *label);
 
 
 //*************************** FLAG A ***********************************
+
 void	 	flag_a_output(t_binfile *bin);
 
 void		print_arg_chars(t_t			*instruct);

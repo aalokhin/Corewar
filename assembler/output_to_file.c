@@ -1,5 +1,7 @@
 #include "asm.h"
 
+
+
 void	fill_corfile_contents(t_binfile *bin)
 {
 	//******************************* filling magic *************************
@@ -111,13 +113,6 @@ void	fill_corfile_contents(t_binfile *bin)
 					else // == 2
 					{
 						// a[0] = tmp->args[i][1] & 0xFF;
-						// a[1] = (tmp->args[i][1] >> 8) & 0xFF;
-						// z =  0;
-						// while(z < 2)
-						// {
-						// 	write(bin->fd_file_out, &a[z], 1);
-						// 	z++;
-						// }
 
 
 						a[1] = tmp->args[i][1] & 0xFF;

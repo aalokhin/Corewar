@@ -29,8 +29,7 @@ void		print_dir_ind_bytes(int arg, int lbl_size)
 			ft_printf("%-3d ", a[k]);
 			k++;
 		}
-		// ft_printf("%1s", " ");
-		
+	
 	}
 	else if (lbl_size == 2)
 	{
@@ -41,94 +40,9 @@ void		print_dir_ind_bytes(int arg, int lbl_size)
 			ft_printf("%-3d ", a[k]);
 			k++;
 		}
-		// ft_printf("%10s", " ");
-		///ft_printf("%4s", " ");
 	}
-	// if (lbl_size == 4)
-	// 	ft_printf("%4s", " ");
-	// else
-		
-
 
 }
-
-
-
-
-
-
-
-
-// void	ft_reg(char *str)
-// {
-// 	if (str[0] == '0')
-// 	{
-// 		if (str[1] != '\0')
-// 			ft_printf("%-18s", &str[1]);
-// 		else
-// 			ft_printf("%-18s", str);
-// 	}
-// 	else
-// 		ft_printf("%-18s", str);
-// }
-
-// void	ft_pr_di(t_lb *a, int i, char *op)
-// {
-// 	if (i == 0)
-// 	{
-// 		if (a->name[0] != ':' && a->name[1] != ':')
-// 			(a->name[0] == '%') ? ft_cod(ft_atoi(&a->name[1]), op, a->name) :
-// 		ft_cod(ft_atoi(a->name), op, a->name);
-// 		else
-// 			ft_cod(a->len, op, a->name);
-// 	}
-// 	if (i == 1 && !(a->name[0] == '%' || a->name[0] == ':' ||
-// 		a->name[0] == 'r'))
-// 		ft_printf("%-18s", a->name);
-// 	else if (i == 1 && (a->name[0] == '%' && a->name[1] != ':'))
-// 		ft_printf("%-18d", ft_atoi(&a->name[1]));
-// 	else if (i == 1)
-// 		ft_printf("%-18d", a->len);
-// }
-
-// void	ft_pr_nums(char *name, t_lb *arg)
-// {
-// 	int		o;
-// 	int		c;
-// 	t_lb	*a;
-
-// 	a = arg;
-// 	o = ft_op_id(name, NULL, 0);
-// 	c = ft_cotage(name);
-// 	(c == 2) ? ft_printf("\n%20s%-4d%-6d", " ", o, ft_ct(arg, NULL, 0)) :
-// 	ft_printf("\n%20s%-10d", " ", o);
-// 	while (a)
-// 	{
-// 		a->name[0] == 'r' ? ft_reg(&a->name[1]) :
-// 		ft_pr_di(a, 0, name);
-// 		a = a->next;
-// 	}
-// 	(c == 2) ? ft_printf("\n%20s%-4d%-6d", " ", o, ft_ct(arg, NULL, 0)) :
-// 	ft_printf("\n%20s%-10d", " ", o);
-// 	a = arg;
-// 	while (a)
-// 	{
-// 		(a->name[0] == 'r') ? ft_reg(&a->name[1]) :
-// 		ft_pr_di(a, 1, name);
-// 		a = a->next;
-// 	}
-// 	ft_printf("\n\n");
-// }
-
-
-
-// if (a->name[0] != ':' && a->name[1] != ':')
-// 			(a->name[0] == '%') ? ft_cod(ft_atoi(&a->name[1]), op, a->name) :
-// 		ft_cod(ft_atoi(a->name), op, a->name);
-// 		else
-// 			ft_cod(a->len, op, a->name);
-
-
 
 
 void		print_instr_args(t_t *instruct)
