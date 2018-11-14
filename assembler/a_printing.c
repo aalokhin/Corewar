@@ -26,7 +26,7 @@ void		print_dir_ind_bytes(int arg, int lbl_size)
 		a[0] = (arg & 0xFF000000) >> 24;
 		while (k < 4)
 		{
-			ft_printf("%-3d ", a[k]);
+			ft_printf("%-4d", a[k]);
 			k++;
 		}
 	
@@ -37,7 +37,7 @@ void		print_dir_ind_bytes(int arg, int lbl_size)
 		a[0] = (arg >> 8) & 0xFF;
 		while (k < 2)
 		{
-			ft_printf("%-3d ", a[k]);
+			ft_printf("%-4d", a[k]);
 			k++;
 		}
 	}
@@ -63,8 +63,7 @@ void		print_instr_args(t_t *instruct)
 		
 		if (instruct->args[i][0] == 1)
 		{	
-
-			ft_printf("%-19d", instruct->args[i][1]);
+			ft_printf("%-18d", instruct->args[i][1]);
 		}
 		else if (instruct->args[i][0] == 10 || instruct->args[i][0] == 11) //is directory
 		{
@@ -84,7 +83,7 @@ void		print_instr_args(t_t *instruct)
 				//ft_printf(">>>>>%-4d", instruct->args[i][1]);
 			}
 
-			(instruct->lbl_size == 2) ? ft_printf("%10s", " ") : ft_printf("%3s", " ");
+			(instruct->lbl_size == 2) ? ft_printf("%10s", " ") : ft_printf("%2s", " ");
 
 			// if (instruct->has_codage)
 			// 	ft_printf("%-18d", instruct->args[i][1]);
@@ -92,7 +91,7 @@ void		print_instr_args(t_t *instruct)
 		
 		i++;
 	}
-	ft_printf("\n");
+	//=ft_printf("\n");
 
 	i = 0;
 
@@ -108,7 +107,7 @@ void		print_instr_args(t_t *instruct)
 		
 		if (instruct->args[i][0] == 1)
 		{	
-			ft_printf("%-19d", instruct->args[i][1]);
+			ft_printf("%-18d", instruct->args[i][1]);
 		}
 		else if (instruct->args[i][0] == 10 || instruct->args[i][0] == 11) //is directory
 		{
@@ -118,23 +117,9 @@ void		print_instr_args(t_t *instruct)
 				ft_printf("%-18s", instruct->a[i]);
 			else
 				ft_printf("%-18d", instruct->args[i][1]);
-
-
-			(instruct->lbl_size == 2) ? ft_printf("%8s", " ") : ft_printf("%2s", " ");
-
 		}
 		
 		i++;
 	}
 	
 }
-	
-
-
-// if (i == 1 && !(a->name[0] == '%' || a->name[0] == ':' ||
-// 	a->name[0] == 'r'))
-// 	ft_printf("%-18s", a->name);
-// else if (i == 1 && (a->name[0] == '%' && a->name[1] != ':'))
-// 	ft_printf("%-18d", ft_atoi(&a->name[1]));
-// else if (i == 1)
-// 	ft_printf("%-18d", a->len);

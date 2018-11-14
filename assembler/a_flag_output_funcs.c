@@ -24,13 +24,18 @@ void	 		flag_a_output(t_binfile *bin)
 	while (lable)
 	{
 		if (lable->label_name)
-			(lable->instruct) ? ft_printf("%-4d       :    %s\n", lable->bytes_above,  lable->label_name) : ft_printf("%-4d       :    %s\n", byte_nr, lable->label_name);
+		{
+			if (lable->instruct)
+				ft_printf("%-4d%-7s:%-4s%s\n", lable->bytes_above, " ", " ", lable->label_name);
+			else
+				ft_printf("%-4d%-7s:%-4s%s\n", byte_nr, " ", " ", lable->label_name);
+		}
 		instruct = lable->instruct;
 		while(instruct)
 		{
-
-			ft_printf("%-4d (%-3d) :%8s%-10s ", byte_nr, instruct->c_len, " ", instruct->name_c);
-			byte_nr = byte_nr + instruct->c_len;
+			ft_printf("%-4d (%-3d) :", byte_nr, instruct->c_len);
+			ft_printf("%8s%-10s",  " ", instruct->name_c);
+			byte_nr += instruct->c_len;
 			print_arg_chars(instruct);
 			print_instr_args(instruct);
 			printf("\n\n");
