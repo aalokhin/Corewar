@@ -1,9 +1,22 @@
 #include "asm.h"
 
-void		print_arg_chars(t_t			*instruct)
+void			print_arg_chars(t_t			*instruct)
 {
-	int i;
+	size_t		i;
+	uintmax_t	len;
 
+	len = 0;
+	i = 0;
+	while(instruct->a[i]) //костыль для двоеточия
+	{
+		if (instruct->a[i])
+		{
+			len = ft_strlen(instruct->a[i]); 
+			if (len && instruct->a[i][len-1] == ':')
+				instruct->a[i][len-1] = '\0';
+			i++;
+		}
+	}
 	i = 0;
 	while (instruct->a[i])
 	{
@@ -69,7 +82,6 @@ void		print_instr_args(t_t *instruct)
 		{
 			if (instruct->a[i][0] != ':' && instruct->a[i][1] != ':')
 			{
-				// if (instruct->a[i][0] == '%')
 					print_dir_ind_bytes(instruct->args[i][1], instruct->lbl_size);
 
 
@@ -77,10 +89,6 @@ void		print_instr_args(t_t *instruct)
 			else
 			{
 				print_dir_ind_bytes(instruct->args[i][1], instruct->lbl_size);
-
-				 // ft_printf("%-4d%-4d", instruct->args[i][1] >> 24, (instruct->args[i][1] >> 16) & 255);
-				 // ft_printf("%-4d%-4d", (instruct->args[i][1] >> 8) & 255, instruct->args[i][1] & 255);
-				//ft_printf(">>>>>%-4d", instruct->args[i][1]);
 			}
 
 			(instruct->lbl_size == 2) ? ft_printf("%10s", " ") : ft_printf("%2s", " ");

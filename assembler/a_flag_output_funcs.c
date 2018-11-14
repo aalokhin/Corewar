@@ -38,7 +38,7 @@ void	 		flag_a_output(t_binfile *bin)
 			byte_nr += instruct->c_len;
 			print_arg_chars(instruct);
 			print_instr_args(instruct);
-			printf("\n\n");
+			ft_printf("\n\n");
 			instruct = instruct->next;
 		}
 		lable = lable->next;
