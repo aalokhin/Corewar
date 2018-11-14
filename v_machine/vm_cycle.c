@@ -19,17 +19,18 @@ void processes_add(t_proc **head, unsigned char *map, t_cycle *main_cycle, int i
 	if ((**head).id == 0)
 		tmp->id = (*main_cycle).start_bots;
 	else
-		tmp->id = (**head).id + 1;
+		tmp->id = (**head).real_id + 1;
+	tmp->real_id = (**head).real_id + 1;
 	tmp->name = (*parent).name;
 	tmp->current_position = index;
 	tmp->carry = (*parent).carry;
 	if ((*parent).parent_nbr == -1)
-		tmp->parent_nbr = (*parent).id;
+		tmp->parent_nbr = (*parent).real_id;
 	else
 		tmp->parent_nbr = (*parent).parent_nbr;
 	tmp->if_live = 1;
 	tmp->cmd = map[tmp->current_position];
-	(*main_cycle).indexes[index][0] = tmp->parent_nbr + 1;
+	//(*main_cycle).indexes[index][0] = tmp->parent_nbr + 1;
 	(*main_cycle).indexes[index][1] = 1;
 	if (tmp->cmd >= 1 && tmp->cmd <= 16)
 		tmp->cycles_wait = op_tab[tmp->cmd - 1].cycles_wait;
@@ -134,7 +135,7 @@ int check_if_lives(t_proc *head_proc, t_cycle *main_cycle, t_flags *params)
 void fill_start_map_id(t_cycle *main_cycle, header_t bots[4], t_flags *params)
 {
 	unsigned int i;
-	unsigned int j;
+	int j;
 	unsigned int k;
 
 	i = 0;
@@ -166,6 +167,21 @@ void fill_start_map_id(t_cycle *main_cycle, header_t bots[4], t_flags *params)
 	}
 }
 
+void print_dump(unsigned char *map)
+{
+	int		i;
+
+	i = 0;
+	ft_printf("0x0000 : ");
+	while (i < MEM_SIZE)
+	{
+		ft_printf("%.2x ", map[i]);
+		if (++i % 64 == 0 && i < MEM_SIZE)
+			ft_printf("\n%#.4x : ", i);
+	}
+	ft_printf("\n");
+}
+
 void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 {
 	int i;
@@ -192,7 +208,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		visual_init(&win);
 	ft_printf("%s\n", "Introducing contestants...");
 	
-	while ((unsigned int)i < (*params).bots_quantity)
+	while (i < (*params).bots_quantity)
 	{
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1, bots[i].prog_size, bots[i].prog_name, bots[i].comment);
 		i++;
@@ -274,10 +290,10 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
 				else
 					(*processes).cycles_wait = 1;
-				if ((*processes).parent_nbr == -1)
-					main_cycle.indexes[(*processes).current_position][0] = (*processes).id + 1;
+				/*if ((*processes).parent_nbr == -1)
+					main_cycle.indexes[(*processes).current_position][0] = (*processes).real_id + 1;
 				else
-					main_cycle.indexes[(*processes).current_position ][0] = (*processes).parent_nbr + 1;
+					main_cycle.indexes[(*processes).current_position ][0] = (*processes).parent_nbr + 1;*/
 				main_cycle.indexes[(*processes).current_position][1] = 1;
 				clear_argv_arr(processes);
 			}
@@ -293,10 +309,10 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
 				else
 					(*processes).cycles_wait = 1;
-				if ((*processes).parent_nbr == -1)
-					main_cycle.indexes[(*processes).current_position][0] = (*processes).id + 1;
+				/*if ((*processes).parent_nbr == -1)
+					main_cycle.indexes[(*processes).current_position][0] = (*processes).real_id + 1;
 				else
-					main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
+					main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;*/
 				main_cycle.indexes[(*processes).current_position][1] = 1;
 			}			
 			(*processes).live_cycle++;
@@ -314,7 +330,6 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					ft_printf("%s%d\n", "Cycle to die is now ", main_cycle.cycle_die);
 			}
 			main_cycle.checks_if_die--;
-			//main_cycle.prev_cycle_die = main_cycle.cycle_die;
 		}
 		//main_cycle.prev_processes = main_cycle.processes;
 		/*if (main_cycle.second_limit > 0)
@@ -323,7 +338,10 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			main_cycle.second_limit = 1;*/
 		main_cycle.cycles++;
 		if (((*params).d_dumps_memory > 0 && main_cycle.cycles == (*params).d_dumps_memory))
+		{
+			print_dump(map);
 			break ;
+		}
 	}
 	if ((*params).ncurses == 1)
 	{
@@ -332,6 +350,4 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	}
 	else if ((*params).d_dumps_memory <= 0)
 		ft_printf("Contestant %d, \"%s\", has won !\n", main_cycle.winner_id + 1, main_cycle.winner_name);
-	//ft_printf("we exited main cycle\n");
-
 }

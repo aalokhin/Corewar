@@ -34,14 +34,14 @@ void	params_init(t_flags *params)
 	int i;
 
 	i = 0;
-	(*params).a_aff = -1;
-	(*params).d_dumps_memory = -1;
-	(*params).s_cycles = -1;
-	(*params).v_verbosity = -1;
-	(*params).binary = -1;
-	(*params).b_stealth = -1;
-	(*params).ncurses = -1;
-	(*params).n_stealth = -1;
+	(*params).a_aff = 0;
+	(*params).d_dumps_memory = 0;
+	(*params).s_cycles = 0;
+	(*params).v_verbosity = 0;
+	(*params).binary = 0;
+	(*params).b_stealth = 0;
+	(*params).ncurses = 0;
+	(*params).n_stealth = 0;
 	(*params).bots_quantity = 0;
 	while (i < MAX_PLAYERS)
 	{
@@ -77,7 +77,7 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 
 t_proc	*processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 {
-	unsigned int	i;
+	int				i;
 	int				j;
 	t_proc			*processes;
 	t_proc			*tmp;
@@ -93,10 +93,11 @@ t_proc	*processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 			(*processes).id = (*params).pl_nbr[i][1] - 1;
 		else if ((*params).pl_nbr[i][0] && (*params).pl_nbr[i][1] == 0)
 			(*processes).id = 0;
-		else if (!(*params).pl_nbr[i][0])
+		else if (!(*params).pl_nbr[i][0] && tmp)
 			(*processes).id = (*tmp).id + 1;
 		else
 			(*processes).id = i;
+		(*processes).real_id = i;
 		(*processes).name = bots[i].prog_name;
 		(*processes).current_position = bots[i++].start_index;
 		(*processes).carry = 0;

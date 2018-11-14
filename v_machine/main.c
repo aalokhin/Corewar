@@ -3,7 +3,7 @@
 void create_map(header_t bots[4], t_flags *params)
 {
 	unsigned int i;
-	unsigned int j;
+	int j;
 	unsigned int k;
 	static unsigned char map[MEM_SIZE];
 
@@ -131,18 +131,18 @@ int check_flags_core(int argc, char **argv, t_flags *params)
 	{
 		if (ft_strcmp(argv[i], "-a") == 0 && i + 1 < argc)
 			(*params).a_aff = 1;
-		else if (ft_strcmp(argv[i], "-d") == 0)
+		else if (ft_strcmp(argv[i], "-d") == 0 && i + 1 < argc)
 		{
 			(*params).d_dumps_memory = ft_atoi(argv[i + 1]);
 			i += 2;
 			continue ;
 		}
-		else if (ft_strcmp(argv[i], "-s") == 0 && i + 1 < argc)
+		/*else if (ft_strcmp(argv[i], "-s") == 0 && i + 1 < argc)
 		{
 			(*params).s_cycles = ft_atoi(argv[i + 1]);
 			i += 2;
 			continue ;
-		}
+		}*/
 		else if (ft_strcmp(argv[i], "-v") == 0 && i + 1 < argc)
 		{
 			(*params).v_verbosity = ft_atoi(argv[i + 1]);
@@ -156,14 +156,14 @@ int check_flags_core(int argc, char **argv, t_flags *params)
 			i += 2;
 			continue ;
 		}
-		else if (ft_strcmp(argv[i], "-b") == 0)
-			(*params).binary = 1;
-		else if (ft_strcmp(argv[i], "---stealth") == 0 && ft_strcmp(argv[i - 1], "-b"))
-			(*params).b_stealth = 1;
+		//else if (ft_strcmp(argv[i], "-b") == 0)
+			//(*params).binary = 1;
+		//else if (ft_strcmp(argv[i], "---stealth") == 0 && ft_strcmp(argv[i - 1], "-b"))
+			//(*params).b_stealth = 1;
 		else if (ft_strcmp(argv[i], "-nc") == 0)
 			(*params).ncurses = 1;
-		else if (ft_strcmp(argv[i], "---stealth") == 0 && ft_strcmp(argv[i - 1], "-n"))
-			(*params).n_stealth = 1;
+		//else if (ft_strcmp(argv[i], "---stealth") == 0 && ft_strcmp(argv[i - 1], "-n"))
+			//(*params).n_stealth = 1;
 		else if (ft_strchr(argv[i], '.') && ft_strcmp(&(argv[i][ft_strlen(argv[i]) - 4]), ".cor") == 0)
 		{
 			if ((*params).bots_quantity == 4)
@@ -196,18 +196,6 @@ int main(int argc, char **argv)
 	params_init(&params);
 	if (!check_flags_core(argc, argv, &params))
 		exit(0);
-	/*ft_printf("%d\n", params.a_aff);
-	ft_printf("%d\n", params.d_dumps_memory);
-	ft_printf("%d\n", params.s_cycles);
-	ft_printf("%d\n", params.v_verbosity);
-	ft_printf("%d\n", params.binary);
-	ft_printf("%d\n", params.b_stealth);
-	ft_printf("%d\n", params.ncurses);
-	ft_printf("%d\n", params.n_stealth);
-	ft_printf("%s\n", params.players[0]);
-	ft_printf("%s\n", params.players[1]);
-	ft_printf("%s\n", params.players[2]);
-	ft_printf("%s\n", params.players[3]);*/
 	if (!read_bots(&params))
 		exit(0);
 }

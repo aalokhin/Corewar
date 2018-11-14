@@ -1,0 +1,279 @@
+66671a66672
+> Cycle to die is now 36
+66772a66774,66778
+> Process 20 hasn't lived for 38 cycles (CTD 36)
+> Process 6 hasn't lived for 38 cycles (CTD 36)
+> Process 5 hasn't lived for 38 cycles (CTD 36)
+> Process 3 hasn't lived for 38 cycles (CTD 36)
+> Process 1 hasn't lived for 38 cycles (CTD 36)
+66794,66798d66799
+< P   20 | zjmp -200 OK
+< P    6 | zjmp -200 OK
+< P    5 | zjmp -200 OK
+< P    3 | zjmp -200 OK
+< P    1 | zjmp -200 OK
+66812,66814d66812
+< P   20 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x082a -> 0x082f) 01 ff ff ff ff 
+66818,66823d66815
+< P    6 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x082a -> 0x082f) 01 ff ff ff ff 
+< P    5 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x082a -> 0x082f) 01 ff ff ff ff 
+66825,66830d66816
+< P    3 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x082a -> 0x082f) 01 ff ff ff ff 
+< P    1 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x082a -> 0x082f) 01 ff ff ff ff 
+66883a66870
+> Cycle to die is now -14
+66885,67117c66872,66881
+< It is now cycle 25940
+< It is now cycle 25941
+< It is now cycle 25942
+< It is now cycle 25943
+< It is now cycle 25944
+< P   20 | sti r15 0 -182
+<        | -> store to 0 + -182 = -182 (with pc and mod 1913)
+< ADV 6 (0x082f -> 0x0835) 0b 64 0f 00 00 0e 
+< P    6 | sti r15 0 -182
+<        | -> store to 0 + -182 = -182 (with pc and mod 1913)
+< ADV 6 (0x082f -> 0x0835) 0b 64 0f 00 00 0e 
+< P    5 | sti r15 0 -194
+<        | -> store to 0 + -194 = -194 (with pc and mod 1901)
+< ADV 6 (0x082f -> 0x0835) 0b 64 0f 00 00 0e 
+< P    3 | sti r15 0 -190
+<        | -> store to 0 + -190 = -190 (with pc and mod 1905)
+< ADV 6 (0x082f -> 0x0835) 0b 64 0f 00 00 0e 
+< P    1 | sti r15 0 -186
+<        | -> store to 0 + -186 = -186 (with pc and mod 1909)
+< ADV 6 (0x082f -> 0x0835) 0b 64 0f 00 00 0e 
+< It is now cycle 25945
+< It is now cycle 25946
+< It is now cycle 25947
+< It is now cycle 25948
+< It is now cycle 25949
+< P   18 | sti r15 0 -182
+<        | -> store to 0 + -182 = -182 (with pc and mod 1157)
+< ADV 6 (0x053b -> 0x0541) 0b 64 0f 00 00 0e 
+< It is now cycle 25950
+< It is now cycle 25951
+< It is now cycle 25952
+< Cycle to die is now 36
+< It is now cycle 25953
+< P   24 | sti r15 0 0
+<        | -> store to 0 + 0 = 0 (with pc and mod 3463)
+< ADV 6 (0x0d87 -> 0x0d8d) 00 00 00 00 00 0e 
+< It is now cycle 25954
+< P   14 | sti r15 0 -186
+<        | -> store to 0 + -186 = -186 (with pc and mod 1153)
+< ADV 6 (0x053b -> 0x0541) 0b 64 0f 00 00 0e 
+< P   13 | sti r15 0 -186
+<        | -> store to 0 + -186 = -186 (with pc and mod 1153)
+< ADV 6 (0x053b -> 0x0541) 0b 64 0f 00 00 0e 
+< P   11 | sti r15 0 -186
+<        | -> store to 0 + -186 = -186 (with pc and mod 1153)
+< ADV 6 (0x053b -> 0x0541) 0b 64 0f 00 00 0e 
+< P    4 | sti r15 0 -186
+<        | -> store to 0 + -186 = -186 (with pc and mod 1153)
+< ADV 6 (0x053b -> 0x0541) 0b 64 0f 00 00 0e 
+< It is now cycle 25955
+< It is now cycle 25956
+< It is now cycle 25957
+< It is now cycle 25958
+< It is now cycle 25959
+< It is now cycle 25960
+< P   10 | sti r15 0 -182
+<        | -> store to 0 + -182 = -182 (with pc and mod 1157)
+< ADV 6 (0x053b -> 0x0541) 0b 64 0f 00 00 0e 
+< P    9 | sti r15 0 -194
+<        | -> store to 0 + -194 = -194 (with pc and mod 1145)
+< ADV 6 (0x053b -> 0x0541) 0b 64 0f 00 00 0e 
+< P    7 | sti r15 0 -190
+<        | -> store to 0 + -190 = -190 (with pc and mod 1149)
+< ADV 6 (0x053b -> 0x0541) 0b 64 0f 00 00 0e 
+< P    2 | sti r15 0 -186
+<        | -> store to 0 + -186 = -186 (with pc and mod 1153)
+< ADV 6 (0x053b -> 0x0541) 0b 64 0f 00 00 0e 
+< It is now cycle 25961
+< It is now cycle 25962
+< It is now cycle 25963
+< It is now cycle 25964
+< P   20 | zjmp -200 OK
+< P    6 | zjmp -200 OK
+< P    5 | zjmp -200 OK
+< P    3 | zjmp -200 OK
+< P    1 | zjmp -200 OK
+< It is now cycle 25965
+< It is now cycle 25966
+< It is now cycle 25967
+< It is now cycle 25968
+< It is now cycle 25969
+< P   18 | zjmp -200 OK
+< It is now cycle 25970
+< It is now cycle 25971
+< It is now cycle 25972
+< It is now cycle 25973
+< P   24 | zjmp -200 FAILED
+< ADV 3 (0x0d8d -> 0x0d90) 09 ff 38 
+< It is now cycle 25974
+< P   20 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x076d -> 0x0772) 01 ff ff ff ff 
+< P   14 | zjmp -200 OK
+< P   13 | zjmp -200 OK
+< P   11 | zjmp -200 OK
+< P    6 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x076d -> 0x0772) 01 ff ff ff ff 
+< P    5 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x076d -> 0x0772) 01 ff ff ff ff 
+< P    4 | zjmp -200 OK
+< P    3 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x076d -> 0x0772) 01 ff ff ff ff 
+< P    1 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x076d -> 0x0772) 01 ff ff ff ff 
+< It is now cycle 25975
+< It is now cycle 25976
+< It is now cycle 25977
+< It is now cycle 25978
+< It is now cycle 25979
+< P   18 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x0479 -> 0x047e) 01 ff ff ff ff 
+< It is now cycle 25980
+< P   10 | zjmp -200 OK
+< P    9 | zjmp -200 OK
+< P    7 | zjmp -200 OK
+< P    2 | zjmp -200 OK
+< It is now cycle 25981
+< It is now cycle 25982
+< It is now cycle 25983
+< P   24 | live -65025
+< ADV 5 (0x0d90 -> 0x0d95) 01 ff ff 01 ff 
+< It is now cycle 25984
+< P   14 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x0479 -> 0x047e) 01 ff ff ff ff 
+< P   13 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x0479 -> 0x047e) 01 ff ff ff ff 
+< P   11 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x0479 -> 0x047e) 01 ff ff ff ff 
+< P    4 | live -1
+< Player 1 (Celebration Funebre v0.99pl42) is said to be alive
+< ADV 5 (0x0479 -> 0x047e) 01 ff ff ff ff 
+< It is now cycle 25985
+< It is now cycle 25986
+< It is now cycle 25987
+< It is now cycle 25988
+< Process 10 hasn't lived for 53 cycles (CTD 36)
+< Process 9 hasn't lived for 53 cycles (CTD 36)
+< Process 7 hasn't lived for 53 cycles (CTD 36)
+< Process 2 hasn't lived for 53 cycles (CTD 36)
+< It is now cycle 25989
+< It is now cycle 25990
+< It is now cycle 25991
+< It is now cycle 25992
+< It is now cycle 25993
+< It is now cycle 25994
+< It is now cycle 25995
+< It is now cycle 25996
+< It is now cycle 25997
+< It is now cycle 25998
+< It is now cycle 25999
+< P   20 | sti r15 0 -182
+<        | -> store to 0 + -182 = -182 (with pc and mod 1724)
+< ADV 6 (0x0772 -> 0x0778) 0b 64 0f 00 00 0e 
+< P    6 | sti r15 0 -182
+<        | -> store to 0 + -182 = -182 (with pc and mod 1724)
+< ADV 6 (0x0772 -> 0x0778) 0b 64 0f 00 00 0e 
+< P    5 | sti r15 0 -194
+<        | -> store to 0 + -194 = -194 (with pc and mod 1712)
+< ADV 6 (0x0772 -> 0x0778) 0b 64 0f 00 00 0e 
+< P    3 | sti r15 0 -190
+<        | -> store to 0 + -190 = -190 (with pc and mod 1716)
+< ADV 6 (0x0772 -> 0x0778) 0b 64 0f 00 00 0e 
+< P    1 | sti r15 0 -186
+<        | -> store to 0 + -186 = -186 (with pc and mod 1720)
+< ADV 6 (0x0772 -> 0x0778) 0b 64 0f 00 00 0e 
+< It is now cycle 26000
+< It is now cycle 26001
+< It is now cycle 26002
+< It is now cycle 26003
+< It is now cycle 26004
+< P   18 | sti r15 0 -182
+<        | -> store to 0 + -182 = -182 (with pc and mod 968)
+< ADV 6 (0x047e -> 0x0484) 0b 64 0f 00 00 0e 
+< It is now cycle 26005
+< It is now cycle 26006
+< It is now cycle 26007
+< It is now cycle 26008
+< It is now cycle 26009
+< P   14 | sti r15 0 -186
+<        | -> store to 0 + -186 = -186 (with pc and mod 964)
+< ADV 6 (0x047e -> 0x0484) 0b 64 0f 00 00 0e 
+< P   13 | sti r15 0 -186
+<        | -> store to 0 + -186 = -186 (with pc and mod 964)
+< ADV 6 (0x047e -> 0x0484) 0b 64 0f 00 00 0e 
+< P   11 | sti r15 0 -186
+<        | -> store to 0 + -186 = -186 (with pc and mod 964)
+< ADV 6 (0x047e -> 0x0484) 0b 64 0f 00 00 0e 
+< P    4 | sti r15 0 -186
+<        | -> store to 0 + -186 = -186 (with pc and mod 964)
+< ADV 6 (0x047e -> 0x0484) 0b 64 0f 00 00 0e 
+< It is now cycle 26010
+< It is now cycle 26011
+< P   24 | sti r15 0 0
+<        | -> store to 0 + 0 = 0 (with pc and mod 3480)
+< ADV 6 (0x0d98 -> 0x0d9e) 00 00 00 00 00 0e 
+< It is now cycle 26012
+< It is now cycle 26013
+< It is now cycle 26014
+< It is now cycle 26015
+< It is now cycle 26016
+< It is now cycle 26017
+< It is now cycle 26018
+< It is now cycle 26019
+< P   20 | zjmp -200 OK
+< P    6 | zjmp -200 OK
+< P    5 | zjmp -200 OK
+< P    3 | zjmp -200 OK
+< P    1 | zjmp -200 OK
+< It is now cycle 26020
+< It is now cycle 26021
+< It is now cycle 26022
+< It is now cycle 26023
+< It is now cycle 26024
+< P   18 | zjmp -200 OK
+< Process 24 hasn't lived for 41 cycles (CTD 36)
+< Process 20 hasn't lived for 50 cycles (CTD 36)
+< Process 18 hasn't lived for 45 cycles (CTD 36)
+< Process 14 hasn't lived for 40 cycles (CTD 36)
+< Process 13 hasn't lived for 40 cycles (CTD 36)
+< Process 11 hasn't lived for 40 cycles (CTD 36)
+< Process 6 hasn't lived for 50 cycles (CTD 36)
+< Process 5 hasn't lived for 50 cycles (CTD 36)
+< Process 4 hasn't lived for 40 cycles (CTD 36)
+< Process 3 hasn't lived for 50 cycles (CTD 36)
+< Process 1 hasn't lived for 50 cycles (CTD 36)
+---
+> Process 24 hasn't lived for 11 cycles (CTD -14)
+> Process 18 hasn't lived for 15 cycles (CTD -14)
+> Process 14 hasn't lived for 10 cycles (CTD -14)
+> Process 13 hasn't lived for 10 cycles (CTD -14)
+> Process 11 hasn't lived for 10 cycles (CTD -14)
+> Process 10 hasn't lived for 4 cycles (CTD -14)
+> Process 9 hasn't lived for 4 cycles (CTD -14)
+> Process 7 hasn't lived for 4 cycles (CTD -14)
+> Process 4 hasn't lived for 10 cycles (CTD -14)
+> Process 2 hasn't lived for 4 cycles (CTD -14)

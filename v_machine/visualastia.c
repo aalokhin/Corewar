@@ -16,10 +16,12 @@ void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params, t_proc *
 	mvwprintw(win, y, x,  "Cycles: %d", (*main_cycle).cycles);
 	y += 2;
 	mvwprintw(win, y, x,  "Processes: %d", (*main_cycle).processes);
-	while (i < (*params).bots_quantity)
+	while ((*processes).real_id != (*params).bots_quantity - 1)
+		processes = processes->next;
+	while (processes)
 	{
 		y += 2;
-		mvwprintw(win, y, x,  "Player: -%d : ", (*processes).id + 1);
+		mvwprintw(win, y, x,  "Player: -%d : ", (*processes).real_id + 1);
 		x+=2;
 		y++;
 		mvwprintw(win, y, x,  "Last live: %d ", (*processes).last_live_cycle);

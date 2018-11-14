@@ -16,6 +16,7 @@
 typedef struct s_proc
 {
 	int id;
+	int real_id;
 	char *name;
 	int current_position;
 	int carry;
@@ -62,7 +63,7 @@ typedef struct s_flags
 	int ncurses;
 	int n_stealth;
 	int pl_nbr[4][2];
-	unsigned int bots_quantity;
+	int bots_quantity;
 	char *players[4];
 	struct s_cycle main_cycle;
 } t_flags;

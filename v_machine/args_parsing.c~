@@ -6,7 +6,7 @@
 /*   By: vlikhotk <vlikhotk@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 14:50:43 by vlikhotk          #+#    #+#             */
-/*   Updated: 2018/11/14 14:56:48 by vlikhotk         ###   ########.fr       */
+/*   Updated: 2018/11/14 14:56:14 by vlikhotk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,20 @@ void	take_args(unsigned char codage, t_proc *processes)
 {
 	if ((codage & 192) == 64)
 		(*processes).argv[0][0] = REG_CODE;
-	else if ((codage & 192) == 192)
+    else if ((codage & 192) == 192)
 		(*processes).argv[0][0] = IND_CODE;
-	else if ((codage & 192) == 128)
+    else if ((codage & 192) == 128 )
 		(*processes).argv[0][0] = DIR_CODE;
-	if ((codage & 48) == 32)
+    if ((codage & 48 ) == 32)
 		(*processes).argv[1][0] = DIR_CODE;
-	else if ((codage & 48) == 48)
+    else if ((codage & 48 ) == 48 )
 		(*processes).argv[1][0] = IND_CODE;
-	else if ((codage & 48) == 16)
+    else if ((codage & 48 ) == 16)
 		(*processes).argv[1][0] = REG_CODE;
-	if ((codage & 12) == 8)
+    if ((codage & 12) == 8 )
 		(*processes).argv[2][0] = DIR_CODE;
-	else if ((codage & 12) == 12)
+    else if ((codage & 12) == 12)
 		(*processes).argv[2][0] = IND_CODE;
-	else if ((codage & 12) == 4)
+    else if ((codage & 12) == 4)
 		(*processes).argv[2][0] = REG_CODE;
 }
