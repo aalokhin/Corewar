@@ -60,35 +60,15 @@ int find_arg_index(t_proc *processes, int target)
 	return (i);
 }
 
-t_proc *remove_proc(t_proc *head_proc, t_proc *to_del)
-{
-	t_proc *tmp;
-
-	tmp = head_proc;
-	if (head_proc == to_del)
-	{
-		tmp = head_proc->next;
-		free(head_proc);
-		head_proc = tmp;
-		return (head_proc);
-	}
-	while (tmp && tmp->next != to_del)
-		tmp = tmp->next;
-	tmp->next = to_del->next;
-	free(to_del);
-	return (tmp->next);
-}
-
-
-int check_if_lives(t_proc *head_proc, t_cycle *main_cycle, t_flags *params)
+int check_if_lives(t_cycle *main_cycle, t_flags *params)
 {
 	int res;
 	t_proc *tmp;
 	t_proc *tmp2;
 
 	res = 0;
-	tmp = head_proc;
-	tmp2 = head_proc;
+	tmp = (*main_cycle).head_proc;
+	tmp2 = (*main_cycle).head_proc;
 	while (tmp)
 	{
 		if ((*tmp).last_live_cycle > (*main_cycle).current_winner)
@@ -104,6 +84,7 @@ int check_if_lives(t_proc *head_proc, t_cycle *main_cycle, t_flags *params)
 		{
 			(*tmp).if_live = 0;
 			(*main_cycle).processes--;
+			(*tmp).lives = 0;
 			(*main_cycle).indexes[(*tmp).current_position][1] = 0;
 			if (((*params).v_verbosity >> 3) & 1)
 				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
@@ -115,14 +96,6 @@ int check_if_lives(t_proc *head_proc, t_cycle *main_cycle, t_flags *params)
 			(*tmp).lives = 0;
 		}
 		tmp = tmp->next;
-	}
-	tmp = head_proc;
-	while (tmp)
-	{
-		if (!(*tmp).if_live)
-			tmp = remove_proc(head_proc, tmp);
-		else
-			tmp = tmp->next;
 	}
 	return (res);
 }
@@ -211,7 +184,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	i = 0;
 	while (main_cycle.processes > 0)
 	{
-		cycle_counter++;
+		//cycle_counter++;
 		if (((*params).v_verbosity >> 1) & 1)
 			ft_printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
 		
@@ -314,10 +287,10 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			processes = processes->next;
 			i++;
 		}
-		if (cycle_counter == main_cycle.cycle_die || main_cycle.cycle_die < 0)
+		if (++cycle_counter == main_cycle.cycle_die || main_cycle.cycle_die < 0)
 		{
 			cycle_counter = 0;
-			if (check_if_lives(main_cycle.head_proc, &main_cycle, params) >= NBR_LIVE || main_cycle.checks_if_die == 0)
+			if (check_if_lives(&main_cycle, params) >= NBR_LIVE || main_cycle.checks_if_die == 0)
 			{
 				main_cycle.cycle_die -= CYCLE_DELTA;
 				main_cycle.checks_if_die = MAX_CHECKS;

@@ -13,7 +13,7 @@ int load(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 	else if ((*tmp).argv[1][0] == REG_CODE && ((*tmp).argv[1][1] < 1 || (*tmp).argv[1][1] > 16))
 		return (1);
 	(*tmp).carry = 0;
-	if ((*tmp).argv[0][0] == DIR_CODE) //t_reg -> index of n array
+	if ((*tmp).argv[0][0] == DIR_CODE)
 	{
 		if ((*tmp).argv[0][1] == 0)
 			(*tmp).carry = 1;
@@ -296,10 +296,6 @@ int zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 		(*main_cycle).indexes[(*tmp).current_position % MEM_SIZE][1] = 0;
 		(*tmp).current_position += ((*tmp).argv[0][1] % IDX_MOD);
 		(*tmp).current_position = ((*tmp).current_position + MEM_SIZE) % MEM_SIZE;
-		/*if ((*tmp).parent_nbr == -1)
-			(*main_cycle).indexes[(*tmp).current_position % MEM_SIZE][0] = (*tmp).real_id + 1;
-		else
-			(*main_cycle).indexes[(*tmp).current_position % MEM_SIZE][0] = (*tmp).parent_nbr + 1;*/
 		(*main_cycle).indexes[(*tmp).current_position % MEM_SIZE][1] = 1;
 		res = "OK";
 	}

@@ -23,8 +23,6 @@ int live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 		ft_printf("P%5d | live %d\n", (*tmp).id + 1, (*tmp).argv[0][1]);
 	if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] < 0)
 		(*child_proc).argv[0][1] *= -1;
-	/*if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] == 0)
-		(*child_proc).argv[0][1] = 1;*/
 	if ((*child_proc).argv[0][0] &&
 		((*child_proc).argv[0][1] > 0 && (*child_proc).argv[0][1] <= (*head_proc).id))
 	{
@@ -150,8 +148,6 @@ int store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
  		ft_printf("%8c -> store to %d + %d = %d (with pc and mod %d)\n", '|', two, three, two + three, i);
 	}
 	i = (i + MEM_SIZE) % MEM_SIZE;
-	//ft_printf("%d %d %d %d %d %d %d %d\n", i, (*tmp).current_position, (*main_cycle).cycles, (*tmp).argv[1][1], (*tmp).argv[2][1], (*tmp).regs[(*tmp).argv[0][1] - 1], two, three);
-	
 	map[(i + MEM_SIZE + 3) % MEM_SIZE] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x000000FF); 
 	map[(i + MEM_SIZE + 2) % MEM_SIZE] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x0000FF00) >> 8; 
 	map[(i + MEM_SIZE + 1) % MEM_SIZE] = ((*tmp).regs[(*tmp).argv[0][1] - 1] & 0x00FF0000) >> 16; 
@@ -202,7 +198,7 @@ int lload(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *m
 	if((*tmp).argv[1][0] != REG_CODE || (*tmp).argv[1][1] < 1 || (*tmp).argv[1][1] > 16 || (*tmp).argv[2][0])
 		return (0);
 	(*tmp).carry = 0;
-	if ((*tmp).argv[0][0] == DIR_CODE) //t_reg -> index of n array
+	if ((*tmp).argv[0][0] == DIR_CODE)
 	{
 		if ((*tmp).argv[0][1] == 0)
 			(*tmp).carry = 1;
@@ -308,7 +304,6 @@ int long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 
 int aff(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map)
 {
-	// надо узнать куда печатать символ и правильно прописать функцию
 	int i;
 	t_proc *tmp;
 
@@ -317,9 +312,9 @@ int aff(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned char *map
 	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[0][1] < 1 || (*tmp).argv[0][1] > 16 ||
 		(*tmp).argv[1][0] || (*tmp).argv[2][0])
 		return (0);
-	ft_printf("%d %s\n", cur_proc + 1, "Aff: ");
+	ft_printf("%s", "Aff: ");
 	ft_printf("%c\n", ((*tmp).regs[(*tmp).argv[0][1] - 1] % 256));
 	(*main_cycle).cycles = (*main_cycle).cycles;
-	map[0] = map[0];
+	cur_proc = map[0];
 	return (1);
 }
