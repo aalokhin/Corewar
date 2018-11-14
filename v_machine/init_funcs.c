@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_funcs.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlikhotk <vlikhotk@student.unit.ua>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/13 19:05:41 by vlikhotk          #+#    #+#             */
+/*   Updated: 2018/11/13 19:06:43 by vlikhotk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../corewar.h"
 
-void		init_bots(header_t bots[4])
+void	init_bots(header_t bots[4])
 {
-	int 	i = 0;
-	while(i < 4)
+	int i;
+
+	i = 0;
+	while (i < 4)
 	{
 		bots[i].magic = 0;
 		bots[i].prog_size = 0;
@@ -15,7 +29,7 @@ void		init_bots(header_t bots[4])
 	}
 }
 
-void params_init(t_flags *params)
+void	params_init(t_flags *params)
 {
 	(*params).a_aff = -1;
 	(*params).d_dumps_memory = -1;
@@ -32,7 +46,7 @@ void params_init(t_flags *params)
 	(*params).players[3] = NULL;
 }
 
-void main_cycle_init(t_cycle *main_cycle, t_flags *params)
+void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 {
 	(*main_cycle).cycles = 0;
 	(*main_cycle).processes = (*params).bots_quantity;
@@ -40,7 +54,7 @@ void main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).second_limit = 100;
 	(*main_cycle).cycle_die = CYCLE_TO_DIE;
 	(*main_cycle).current_winner = -1;
-	(*main_cycle).checks_if_die = 0;
+	(*main_cycle).checks_if_die = MAX_CHECKS;
 	(*main_cycle).prev_cycle_die = (*main_cycle).cycle_die;
 	(*main_cycle).winner_str = 0;
 	(*main_cycle).winner_name = NULL;
@@ -50,12 +64,12 @@ void main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).verbose = (*params).v_verbosity;
 }
 
-t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
+t_proc	*processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 {
-	unsigned int i;
-	int j;
-	t_proc *processes;
-	t_proc *tmp;
+	unsigned int	i;
+	int				j;
+	t_proc			*processes;
+	t_proc			*tmp;
 
 	j = 0;
 	i = 0;
@@ -66,7 +80,7 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 		processes = (t_proc *)malloc(sizeof(t_proc));
 		(*processes).id = i;
 		(*processes).name = bots[i].prog_name;
-		(*processes).current_position = bots[i].start_index;
+		(*processes).current_position = bots[i++].start_index;
 		(*processes).carry = 0;
 		(*processes).parent_nbr = -1;
 		(*processes).if_live = 1;
@@ -77,22 +91,18 @@ t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 		else
 			(*processes).cycles_wait = 1;
 		(*processes).last_live_cycle = 0;
-		(*processes).child_proc_lives = 0;
+		(*processes).live_cycle = 0;
 		(*processes).next = tmp;
 		clear_argv_arr(processes);
 		while (j < REG_NUMBER)
-		{
-			(*processes).regs[j] = 0;
-			j++;
-		}
+			(*processes).regs[j++] = 0;
 		(*processes).regs[0] = (unsigned int)(((*processes).id + 1) * -1);
 		tmp = processes;
-		i++;
 	}
 	return (processes);
 }
 
-void clear_argv_arr(t_proc *processes)
+void	clear_argv_arr(t_proc *processes)
 {
 	(*processes).argv[0][0] = 0;
 	(*processes).argv[0][1] = 0;

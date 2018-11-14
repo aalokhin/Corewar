@@ -37,6 +37,7 @@ void processes_add(t_proc **head, unsigned char *map, t_cycle *main_cycle, int i
 		tmp->cycles_wait = 1;
 	tmp->last_live_cycle = 0;
 	tmp->child_proc_lives = 0;
+	tmp->live_cycle = (*parent).live_cycle + 1;
 	clear_argv_arr(tmp);
 	while (j < REG_NUMBER)
 	{
@@ -101,20 +102,19 @@ int check_if_lives(t_proc *head_proc, t_cycle *main_cycle, t_flags *params)
 				(*main_cycle).winner_id = (*tmp).parent_nbr;
 			(*main_cycle).winner_name = (*tmp).name;
 		}
-		if ((*tmp).lives == 0)
+		if ((*tmp).lives == 0 && (*tmp).if_live)
 		{
 			(*tmp).if_live = 0;
 			(*main_cycle).processes--;
 			(*main_cycle).indexes[(*tmp).current_position][1] = 0;
 			if (((*params).v_verbosity >> 3) & 1)
 				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
-					(*tmp).id + 1, (*tmp).lives, (*main_cycle).prev_cycle_die);
+					(*tmp).id + 1, (*tmp).live_cycle - 1, (*main_cycle).cycle_die);
 		}
 		else
 		{
 			res += (*tmp).lives;
 			(*tmp).lives = 0;
-			(*tmp).child_proc_lives = 0;
 		}
 		tmp = tmp->next;
 	}
@@ -198,24 +198,12 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		i++;
 	}
 	i = 0;
-	while (main_cycle.prev_cycle_die > 0 && main_cycle.processes > 0)
+	while (main_cycle.processes > 0)
 	{
 		cycle_counter++;
 		if (((*params).v_verbosity >> 1) & 1)
 			ft_printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
-		if (main_cycle.cycles != 0 && cycle_counter == main_cycle.prev_cycle_die)
-		{
-			cycle_counter = 0;
-			if (check_if_lives(main_cycle.head_proc, &main_cycle, params) >= NBR_LIVE || main_cycle.checks_if_die >= MAX_CHECKS)
-			{
-				main_cycle.cycle_die -= CYCLE_DELTA;
-				main_cycle.checks_if_die = 0;
-				if (((*params).v_verbosity >> 1) & 1)
-					ft_printf("%s%d\n", "Cycle to die is now ", main_cycle.cycle_die);
-			}
-			main_cycle.checks_if_die++;
-			main_cycle.prev_cycle_die = main_cycle.cycle_die;
-		}
+		
 		i = 0;
 		processes = main_cycle.head_proc;
 		if ((*params).ncurses == 1)
@@ -245,7 +233,9 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					res = instruct[(*processes).cmd - 1](processes, (*processes).id, &main_cycle, map);
 				else if ((*processes).cmd == 16 && !(*params).a_aff)
 					res = 0;
-				if (((*processes).cmd != 9 && res == 1) || ((*processes).cmd == 9 && (*processes).carry == 0) || (*processes).cmd == 11 || (*processes).cmd == 14)
+				if (((*processes).cmd != 9 && res == 1) || ((*processes).cmd == 9 && (*processes).carry == 0) ||
+					(*processes).cmd == 11 || (*processes).cmd == 14 || (*processes).cmd == 6 || (*processes).cmd == 7
+					 || (*processes).cmd == 4 || (*processes).cmd == 10)
 				{
 					main_cycle.indexes[((*processes).current_position + MEM_SIZE) % MEM_SIZE][1] = 0;
 					if ((((*params).v_verbosity >> 4) & 1) && ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0)))
@@ -296,17 +286,6 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			else if ((*processes).if_live)
 			{
 				main_cycle.indexes[(*processes).current_position][1] = 0;
-				/*if ((((*params).v_verbosity >> 4) & 1))
-				{
-					ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", 1, (*processes).current_position, (*processes).current_position + 1);
-					j = 0;
-					while (j < 1)
-					{
-						ft_printf("%.2x ", map[((*processes).current_position + j) % MEM_SIZE]);
-						j++;
-					}
-					ft_printf("\n");
-				}*/
 				(*processes).current_position++;
 				(*processes).current_position = ((*processes).current_position + MEM_SIZE) % MEM_SIZE;
 				(*processes).cmd = map[(*processes).current_position];
@@ -320,17 +299,30 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;
 				main_cycle.indexes[(*processes).current_position][1] = 1;
 			}			
+			(*processes).live_cycle++;
 			processes = processes->next;
 			i++;
 		}
-		
+		if (cycle_counter == main_cycle.cycle_die || main_cycle.cycle_die < 0)
+		{
+			cycle_counter = 0;
+			if (check_if_lives(main_cycle.head_proc, &main_cycle, params) >= NBR_LIVE || main_cycle.checks_if_die == 0)
+			{
+				main_cycle.cycle_die -= CYCLE_DELTA;
+				main_cycle.checks_if_die = MAX_CHECKS;
+				if (((*params).v_verbosity >> 1) & 1)
+					ft_printf("%s%d\n", "Cycle to die is now ", main_cycle.cycle_die);
+			}
+			main_cycle.checks_if_die--;
+			//main_cycle.prev_cycle_die = main_cycle.cycle_die;
+		}
 		//main_cycle.prev_processes = main_cycle.processes;
 		/*if (main_cycle.second_limit > 0)
 			usleep((useconds_t)((int)1000000 / main_cycle.second_limit));
 		else
 			main_cycle.second_limit = 1;*/
 		main_cycle.cycles++;
-		if ((*params).d_dumps_memory > 0 && main_cycle.cycles == (*params).d_dumps_memory)
+		if (((*params).d_dumps_memory > 0 && main_cycle.cycles == (*params).d_dumps_memory))
 			break ;
 	}
 	if ((*params).ncurses == 1)

@@ -17,28 +17,16 @@ int live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 	(*tmp).if_live = 1;
 	(*tmp).last_live_cycle = (*main_cycle).cycles;
 	(*tmp).lives++;
+	(*tmp).live_cycle = 0;
 	child_proc = tmp;
-	//if ((*main_cycle).verbose & 1)
-		//ft_printf("Player %d (%s) is said to be alive\n", (*tmp).id, (*tmp).name);
 	if (((*main_cycle).verbose >> 2) & 1)
 		ft_printf("P%5d | live %d\n", (*tmp).id + 1, (*tmp).argv[0][1]);
-	/*if ((*tmp).parent_nbr > -1)
-	{
-		tmp = head_proc;
-		i = 0;
-		other_proc = (*tmp).parent_nbr;
-		while (i < (*main_cycle).processes && i != other_proc)
-		{
-			tmp = tmp->next;
-			i++;
-		}
-		if (tmp)
-			(*tmp).child_proc_lives++;
-	}*/
 	if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] < 0)
 		(*child_proc).argv[0][1] *= -1;
+	/*if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] == 0)
+		(*child_proc).argv[0][1] = 1;*/
 	if ((*child_proc).argv[0][0] &&
-		((*child_proc).argv[0][1] >= 0 && (*child_proc).argv[0][1] <= (*head_proc).id))
+		((*child_proc).argv[0][1] > 0 && (*child_proc).argv[0][1] <= (*head_proc).id))
 	{
 		i = 0;
 		other_proc = (*child_proc).argv[0][1];
@@ -55,19 +43,6 @@ int live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 			if (((*main_cycle).verbose & 1) && (*child_proc).argv[0][1] <= (*main_cycle).start_bots )
 				ft_printf("Player %d (%s) is said to be alive\n", (*child_proc).argv[0][1], (*tmp).name);
 		}
-		/*if (tmp && (*tmp).parent_nbr > -1)
-		{
-			tmp = head_proc;
-			i = 0;
-			other_proc = (*tmp).parent_nbr;
-			while (i < (*main_cycle).processes && i != other_proc)
-			{
-				tmp = tmp->next;
-				i++;
-			}
-			if (tmp)
-				(*tmp).child_proc_lives++;
-		}*/
 	}
 	map[0] = map[0];
 	return (1);
@@ -310,10 +285,11 @@ int long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle, unsigned cha
 	head = processes;
 	while (tmp && (*tmp).id != cur_proc)
 		tmp = tmp->next;
-	i = ((*tmp).argv[0][1] % IDX_MOD) + (*tmp).current_position;
+	i = (*tmp).argv[0][1] + (*tmp).current_position;
+	ft_printf("P%5d | lfork %d (%d)\n", (*tmp).id + 1, (*tmp).argv[0][1], i);
 	i = (i + MEM_SIZE) % MEM_SIZE;
 	processes_add(&head, map, main_cycle, i, cur_proc);
-	ft_printf("P%5d | lfork %d (%d)\n", (*tmp).id + 1, (*tmp).argv[0][1], i);
+	
 	return (1);
 }
 

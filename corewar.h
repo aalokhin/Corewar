@@ -28,6 +28,7 @@ typedef struct s_proc
 	int argv[3][2];
 	unsigned int cycles_wait;
 	int child_proc_lives;
+	int live_cycle;
 	struct s_proc *next;
 }			t_proc;
 

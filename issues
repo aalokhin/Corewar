@@ -231,3 +231,44 @@ CAR играет очень долго даже один, забил всю па
  если аргементу некоректные то нужно делать только +1 на кодаж, а не на количество аргументов
  4585 отличие в каретке в новой версии
  4550 различие в переходе от сти при некоректном кодаже фф
+убрать печать цикла ту дай меньше 0
+сделать согласование/приоритет флагов визуализации и остальных
+убрать лишние флаги из юседжа, если они рне по сабджекту
+
+ ./corewar vm_champs/champs/Gagnant.cor -v 31 > test_files/all_v_my
+e2r1p6% diff test_files/all_v_or test_files/all_v_my > test_files/diff_v_gagnant
+e2r1p6% ./corewar vm_champs/champs/ex.cor -v 31 > test_files/all_v_my_ex
+e2r1p6% ./vm_champs/corewar vm_champs/champs/ex.cor -v 31 > test_files/all_v_or_ex
+e2r1p6% ./vm_champs/corewar vm_champs/champs/Car.cor -v 31 > test_files/all_v_or_car
+^Z
+zsh: suspended  ./vm_champs/corewar vm_champs/champs/Car.cor -v 31 > test_files/all_v_or_car
+e2r1p6% ./vm_champs/corewar vm_champs/champs/Car.cor -v 31 -d 30000 > test_files/all_v_or_car
+^Z
+zsh: suspended  ./vm_champs/corewar vm_champs/champs/Car.cor -v 31 -d 30000 >
+e2r1p6% ./vm_champs/corewar vm_champs/champs/jumper.cor -v 31 > test_files/all_v_or_jumper
+e2r1p6% ./vm_champs/corewar vm_champs/champs/maxidef.cor -v 31 > test_files/all_v_or_maxidef
+e2r1p6% ./vm_champs/corewar vm_champs/champs/mortel.cor -v 31 > test_files/all_v_or_mortel
+e2r1p6% ./vm_champs/corewar vm_champs/champs/Octobre_Rouge_V4.2.v -v 31 > test_files/all_v_or_octobre
+e2r1p6% ./vm_champs/corewar vm_champs/champs/Octobre_Rouge_V4.2.cor -v 31 > test_files/all_v_or_octobre
+e2r1p6% ./vm_champs/corewar vm_champs/champs/slider2.cor -v 31 > test_files/all_v_or_slider
+e2r1p6% ./vm_champs/corewar vm_champs/champs/toto.cor -v 31 > test_files/all_v_or_toto
+e2r1p6% ./corewar vm_champs/champs/toto.cor -v 31 > test_files/all_v_my_toto
+e2r1p6% ./corewar vm_champs/champs/jumper.cor -v 31 > test_files/all_v_my_jumper
+e2r1p6% ./corewar vm_champs/champs/slider2.cor -v 31 > test_files/all_v_my_slider
+e2r1p6% ./corewar vm_champs/champs/Octobre_Rouge_V4.2.cor -v 31 > test_files/all_v_my_octobre
+e2r1p6% ./corewar vm_champs/champs/car.cor -v 31 > test_files/all_v_my_car
+^Z
+zsh: suspended  ./corewar vm_champs/champs/car.cor -v 31 > test_files/all_v_my_car
+e2r1p6% ./corewar vm_champs/champs/Car.cor -v 31 > test_files/all_v_my_car
+^Z
+zsh: suspended  ./corewar vm_champs/champs/Car.cor -v 31 > test_files/all_v_my_car
+e2r1p6% ./corewar vm_champs/champs/maxidef.cor -v 31 > test_files/all_v_my_maxidef
+e2r1p6% ./corewar vm_champs/champs/mortel.cor -v 31 > test_files/all_v_my_mortel
+e2r1p6% diff test_files/all_v_or_ex test_files/all_v_my_ex > test_files/diff_v_ex
+e2r1p6% diff test_files/all_v_or_car test_files/all_v_my_car > test_files/diff_v_car
+e2r1p6% diff test_files/all_v_or_jumper test_files/all_v_my_jumper > test_files/diff_v_jumper
+e2r1p6% diff test_files/all_v_or_maxidef test_files/all_v_my_maxidef > test_files/diff_v_maxidef
+e2r1p6% diff test_files/all_v_or_mortel test_files/all_v_my_mortel > test_files/diff_v_mortel
+e2r1p6% diff test_files/all_v_or_octobre test_files/all_v_my_octobre > test_files/diff_v_octobre
+e2r1p6% diff test_files/all_v_or_toto test_files/all_v_my_toto > test_files/diff_v_toto
+e2r1p6% diff test_files/all_v_or_slider test_files/all_v_my_slider > test_files/diff_v_slider
