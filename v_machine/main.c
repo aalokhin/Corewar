@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlikhotk <vlikhotk@student.unit.ua>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/14 14:59:01 by vlikhotk          #+#    #+#             */
+/*   Updated: 2018/11/14 15:00:35 by vlikhotk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../corewar.h"
 
-void create_map(header_t bots[4], t_flags *params)
+void	create_map(header_t bots[4], t_flags *params)
 {
-	unsigned int i;
-	int j;
-	unsigned int k;
-	static unsigned char map[MEM_SIZE];
+	unsigned int			i;
+	int						j;
+	unsigned int			k;
+	static unsigned char	map[MEM_SIZE];
 
 	i = 0;
 	j = 0;
@@ -29,69 +41,7 @@ void create_map(header_t bots[4], t_flags *params)
 	vm_cycle(map, params, bots);
 }
 
-int read_bots(t_flags *params)
-{
-	unsigned int 		i;
-	int j;
-	int 		fd;
-	static header_t bots[4];
-	unsigned int len;
-	unsigned int	size;
-	unsigned int	buf;
-	unsigned char *str;
-
-	i = 0;
-	j = 0;
-	fd = 0;
-	init_bots(bots);
-	while ((*params).players[j] != NULL)
-	{
-		i = 0;
-		fd = open((*params).players[j], O_RDONLY);
-		if (fd < 0)
-		{
-			ft_printf("%s %s\n", "Can't read source file", (*params).players[j]);
-			return (0);
-		}
-		len = (int)lseek(fd, 0, SEEK_END);
-		lseek(fd, 0, SEEK_SET);
-		str = (unsigned char *)malloc(sizeof(unsigned char) * len + 1);
-		read(fd, str, len);
-		ft_strncpy(bots[j].prog_name, (const char *)(&str[4]), PROG_NAME_LENGTH);
-		size = 0;
-		buf = 0;
-		buf = str[136] << 24;
-		size |= buf;
-		buf = str[137] << 16;
-		size |= buf;
-		buf = str[138] << 8;
-		size |= buf;
-		size |= str[139];
-		bots[j].prog_size = size;
-		if (size > 682)
-		{
-			ft_printf("Error: %s has too large a code (%d bytes > 682 bytes)\n", (*params).players[j], size);
-			ft_strdel((char **)(&str));
-			return (0);
-		}
-		ft_strncpy(bots[j].comment, (const char *)(&str[140]), COMMENT_LENGTH);
-		bots[j].exec_part = (unsigned char *)malloc(sizeof(unsigned char) * (bots[j].prog_size + 1));
-		ft_bzero(bots[j].exec_part, bots[j].prog_size + 1);
-		bots[j].start_index = (MEM_SIZE / (*params).bots_quantity) * j;
-		i = 0;
-		while (i < bots[j].prog_size)
-		{
-			bots[j].exec_part[i] = str[2192 + i];
-			i++;
-		}
-		ft_strdel((char **)(&str));
-		j++;
-	}
-	create_map(bots, params);
-	return (1);
-}
-
-void print_usage(void)
+void	print_usage(void)
 {
 	char *octos;
 
@@ -120,7 +70,7 @@ void print_usage(void)
 	ft_printf("%s%.22s\n", octos, octos);
 }
 
-int check_flags_core(int argc, char **argv, t_flags *params)
+int		check_flags_core(int argc, char **argv, t_flags *params)
 {
 	int i;
 	int j;
@@ -185,9 +135,13 @@ int check_flags_core(int argc, char **argv, t_flags *params)
 	return (1);
 }
 
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
+	int fd;
 	t_flags params;
+	static header_t	bots[4];
+
+	fd = 0;
 	if (argc == 1)
 	{
 		print_usage();
@@ -196,6 +150,8 @@ int main(int argc, char **argv)
 	params_init(&params);
 	if (!check_flags_core(argc, argv, &params))
 		exit(0);
-	if (!read_bots(&params))
+	init_bots(bots);
+	if (!read_bots(&params, fd, bots))
 		exit(0);
+	create_map(bots, &params);
 }

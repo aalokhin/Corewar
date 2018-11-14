@@ -154,6 +154,7 @@ void take_args(unsigned char codage, t_proc *processes);
 void map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes, WINDOW *win);
 void visual_init(WINDOW **win);
 void print_winner(WINDOW * win, t_cycle main_cycle);
+int		read_bots(t_flags *params, int fd, header_t	bots[4]);
 
 #endif
 

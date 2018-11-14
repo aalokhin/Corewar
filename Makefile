@@ -15,15 +15,21 @@ ASM := asm
 
 LIB_DIR = ./libft/
 
-SFILES = ./v_machine/main.c ./v_machine/vm_cycle.c ./v_machine/l_funcs.c ./v_machine/funcs_2_9.c ./v_machine/init_funcs.c ./v_machine/args_parsing.c ./v_machine/visualastia.c
+SFILES = ./v_machine/main.c ./v_machine/vm_cycle.c ./v_machine/l_funcs.c ./v_machine/funcs_2_9.c ./v_machine/init_funcs.c \
+./v_machine/args_parsing.c ./v_machine/visualastia.c ./v_machine/read_bots.c
 
-OFILES = ./v_machine/main.o ./v_machine/vm_cycle.o ./v_machine/l_funcs.o ./v_machine/funcs_2_9.o ./v_machine/init_funcs.o ./v_machine/args_parsing.o ./v_machine/visualastia.o
+OFILES = ./v_machine/main.o ./v_machine/vm_cycle.o ./v_machine/l_funcs.o ./v_machine/funcs_2_9.o ./v_machine/init_funcs.o \
+./v_machine/args_parsing.o ./v_machine/visualastia.o ./v_machine/read_bots.o
 
-ASM_SFILES := ./assembler/file_length_counter.c  ./assembler/a_printing.c ./assembler/a_flag_output_funcs.c ./assembler/validation_funcs.c ./assembler/labels_nastia.c ./assembler/main_assembler.c \
-./assembler/print_errors_usage.c ./assembler/encoding_funcs.c ./assembler/output_to_file.c ./assembler/parse_file_funcs.c  ./assembler/parse_commands.c ./assembler/commands_help_funcs.c
+ASM_SFILES := ./assembler/file_length_counter.c  ./assembler/a_printing.c ./assembler/a_flag_output_funcs.c \
+./assembler/validation_funcs.c ./assembler/labels_nastia.c ./assembler/main_assembler.c ./assembler/print_errors_usage.c \
+./assembler/encoding_funcs.c ./assembler/output_to_file.c ./assembler/parse_file_funcs.c  ./assembler/parse_commands.c \
+./assembler/commands_help_funcs.c
 
-ASM_OFILES :=  ./assembler/file_length_counter.o ./assembler/a_printing.o ./assembler/a_flag_output_funcs.o ./assembler/validation_funcs.o ./assembler/labels_nastia.o ./assembler/main_assembler.o \
-./assembler/print_errors_usage.o  ./assembler/encoding_funcs.o ./assembler/output_to_file.o ./assembler/parse_file_funcs.o  ./assembler/parse_commands.o ./assembler/commands_help_funcs.o
+ASM_OFILES :=  ./assembler/file_length_counter.o ./assembler/a_printing.o ./assembler/a_flag_output_funcs.o \
+./assembler/validation_funcs.o ./assembler/labels_nastia.o ./assembler/main_assembler.o \
+./assembler/print_errors_usage.o  ./assembler/encoding_funcs.o ./assembler/output_to_file.o ./assembler/parse_file_funcs.o \
+./assembler/parse_commands.o ./assembler/commands_help_funcs.o
 
 LIBFT = $(LIBFT_DIR)libftprintf.a
 LIBFT_DIR = $(LIB_DIR)
