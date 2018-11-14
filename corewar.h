@@ -61,14 +61,11 @@ typedef struct s_flags
 	int b_stealth;
 	int ncurses;
 	int n_stealth;
+	int pl_nbr[4][2];
 	unsigned int bots_quantity;
 	char *players[4];
 	struct s_cycle main_cycle;
 } t_flags;
-
-
-
-
 
 typedef struct s_op
 {

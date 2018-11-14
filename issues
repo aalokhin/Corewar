@@ -19,6 +19,7 @@ Usage: ./vm_champs/corewar [-d N -s N -v N | -b --stealth | -n --stealth] [-a] <
 ################################################################################
 
 сделать проверку чтоб числовые значения были числовыми
+поправить юседж по фактически работающим флагам
 
 272 / 2 имя бота
 после 8 байт 16 символов размер бота
@@ -30,7 +31,7 @@ if (base->go && base->flag.nc)
         usleep((useconds_t)((int)1000000 / base->speed));
 сделать выполнение инструкции если ожидание 0, если больше - уменьшать, при этом не должно быть перехода с каррент позишн
 
-добавить прверки и эррор менеджмент
+добавить прверки и эррор менеджмент.ю проверка на меджик
 нужно проверять живость процессов раз в текущий цикл ту дай
 
 в 21 должны учитываться только живие дочерние процессы или все? вроде только живие, нужно проверять
@@ -191,84 +192,20 @@ live функция обратить внимание, на боте кар бы
 комит с фиксом багов цикла нарушает работу цикла почему то, откат изменений, все еще не применено ожтдание команд в цикле
 
 на нашей визуалке похоже дочерний бот без имени перезаписывает предыдущий Гагнант после форка
-Гагнант 2775 цикл должен делать джамп на 01, но не делает этого ни вовремя ни позже
-1980 цикл Гагнант неправильный индекс записи по команле сти
 записывать в карту нужно в обратном порядке байти
 если задержка в программе больше 1 цикла, нужно ли прорисовывать карту чаще? или только ра в период ожидания?
-2787 цикл Гагнант, почему подсветилась белым команда 01? 2811 - после этого часть когда начиная от 01 16 байт скопированы вниз карты!
-пишет на 363 позицию каррент 46
-в оригинале цикл на 1 больше проходит
-реверс процессов нарушил вывод
-также замена отправки индекса на ид процесса привела к поломкам
-
-
-надо ускорить корвар, убрать лишние циклы, стал медленно работать
+надо ускорить корвар, убрать лишние циклы, стал медленно работать на визуализации
 добавить увеличнение и уменьш скорости
-сегфолт EXC_BAD_INSTRUCTION в гагнанте в цикле > 193          (*processes).cmd = map[(*processes).current_position]; цикл 4655
-наверное надо удялать узел процеса
-срочно ускорять корвар!
-
+наверное надо удялать узел процеса убитого процесса
 сегфолт на таком кейсе ./corewar vm_champs/champs/Gagnant.cor -v 6> test_origin_gagnant
-CAR играет очень долго даже один, забил всю память на диске
-возможно вечный цикл
-не выпадает ошибка если не коректый файл типа Gagnant.ex.cor
-на гагнанте сегфол на 6000 цикле
-на джампере например объявляет победителя раньше, чем оригинал
-
 проверить все функции чтоб печатались только если в ифах
-неверно работает лоад, не то записывает в джампере
-в гагнанте снгфолт и проблемы с лди
 сегфолт в максидеф
-
 оригинал если -в без цифры вконце пишет что невозможно открыть, если в середине игнорит
- надо выводить при уменьшении < Cycle to die is now 1486
- некоректный файл принимает, не выводит эрор
- 1
- поправить вывод ботов в визуаизации, листать до стартовых ботов с ид от 0
- кажется при удалении процессов не исчезает каретка, исправить
-
- 5363 гагнант начинается различие, исчезает каретка 0с, хотя в оригинале стоит
- если аргементу некоректные то нужно делать только +1 на кодаж, а не на количество аргументов
- 4585 отличие в каретке в новой версии
- 4550 различие в переходе от сти при некоректном кодаже фф
+некоректный файл принимает, не выводит эрор Gagnant.ex.cor
 убрать печать цикла ту дай меньше 0
+поправить вывод ботов в визуаизации, листать до стартовых ботов с ид от 0
 сделать согласование/приоритет флагов визуализации и остальных
-убрать лишние флаги из юседжа, если они рне по сабджекту
-
- ./corewar vm_champs/champs/Gagnant.cor -v 31 > test_files/all_v_my
-e2r1p6% diff test_files/all_v_or test_files/all_v_my > test_files/diff_v_gagnant
-e2r1p6% ./corewar vm_champs/champs/ex.cor -v 31 > test_files/all_v_my_ex
-e2r1p6% ./vm_champs/corewar vm_champs/champs/ex.cor -v 31 > test_files/all_v_or_ex
-e2r1p6% ./vm_champs/corewar vm_champs/champs/Car.cor -v 31 > test_files/all_v_or_car
-^Z
-zsh: suspended  ./vm_champs/corewar vm_champs/champs/Car.cor -v 31 > test_files/all_v_or_car
-e2r1p6% ./vm_champs/corewar vm_champs/champs/Car.cor -v 31 -d 30000 > test_files/all_v_or_car
-^Z
-zsh: suspended  ./vm_champs/corewar vm_champs/champs/Car.cor -v 31 -d 30000 >
-e2r1p6% ./vm_champs/corewar vm_champs/champs/jumper.cor -v 31 > test_files/all_v_or_jumper
-e2r1p6% ./vm_champs/corewar vm_champs/champs/maxidef.cor -v 31 > test_files/all_v_or_maxidef
-e2r1p6% ./vm_champs/corewar vm_champs/champs/mortel.cor -v 31 > test_files/all_v_or_mortel
-e2r1p6% ./vm_champs/corewar vm_champs/champs/Octobre_Rouge_V4.2.v -v 31 > test_files/all_v_or_octobre
-e2r1p6% ./vm_champs/corewar vm_champs/champs/Octobre_Rouge_V4.2.cor -v 31 > test_files/all_v_or_octobre
-e2r1p6% ./vm_champs/corewar vm_champs/champs/slider2.cor -v 31 > test_files/all_v_or_slider
-e2r1p6% ./vm_champs/corewar vm_champs/champs/toto.cor -v 31 > test_files/all_v_or_toto
-e2r1p6% ./corewar vm_champs/champs/toto.cor -v 31 > test_files/all_v_my_toto
-e2r1p6% ./corewar vm_champs/champs/jumper.cor -v 31 > test_files/all_v_my_jumper
-e2r1p6% ./corewar vm_champs/champs/slider2.cor -v 31 > test_files/all_v_my_slider
-e2r1p6% ./corewar vm_champs/champs/Octobre_Rouge_V4.2.cor -v 31 > test_files/all_v_my_octobre
-e2r1p6% ./corewar vm_champs/champs/car.cor -v 31 > test_files/all_v_my_car
-^Z
-zsh: suspended  ./corewar vm_champs/champs/car.cor -v 31 > test_files/all_v_my_car
-e2r1p6% ./corewar vm_champs/champs/Car.cor -v 31 > test_files/all_v_my_car
-^Z
-zsh: suspended  ./corewar vm_champs/champs/Car.cor -v 31 > test_files/all_v_my_car
-e2r1p6% ./corewar vm_champs/champs/maxidef.cor -v 31 > test_files/all_v_my_maxidef
-e2r1p6% ./corewar vm_champs/champs/mortel.cor -v 31 > test_files/all_v_my_mortel
-e2r1p6% diff test_files/all_v_or_ex test_files/all_v_my_ex > test_files/diff_v_ex
-e2r1p6% diff test_files/all_v_or_car test_files/all_v_my_car > test_files/diff_v_car
-e2r1p6% diff test_files/all_v_or_jumper test_files/all_v_my_jumper > test_files/diff_v_jumper
-e2r1p6% diff test_files/all_v_or_maxidef test_files/all_v_my_maxidef > test_files/diff_v_maxidef
-e2r1p6% diff test_files/all_v_or_mortel test_files/all_v_my_mortel > test_files/diff_v_mortel
-e2r1p6% diff test_files/all_v_or_octobre test_files/all_v_my_octobre > test_files/diff_v_octobre
-e2r1p6% diff test_files/all_v_or_toto test_files/all_v_my_toto > test_files/diff_v_toto
-e2r1p6% diff test_files/all_v_or_slider test_files/all_v_my_slider > test_files/diff_v_slider
+убрать лишние флаги из юседжа, если они не по сабджекту
+убрать минимальный размеры окна визуализации
+убирать ли если вконце флаг без цифры это невозможно прочитать файл? и даже если это флаг визуалиации
+на вищуализации боты печатаются не в том порядке, надо задом наперед

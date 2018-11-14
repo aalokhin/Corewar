@@ -31,6 +31,9 @@ void	init_bots(header_t bots[4])
 
 void	params_init(t_flags *params)
 {
+	int i;
+
+	i = 0;
 	(*params).a_aff = -1;
 	(*params).d_dumps_memory = -1;
 	(*params).s_cycles = -1;
@@ -40,10 +43,18 @@ void	params_init(t_flags *params)
 	(*params).ncurses = -1;
 	(*params).n_stealth = -1;
 	(*params).bots_quantity = 0;
-	(*params).players[0] = NULL;
-	(*params).players[1] = NULL;
-	(*params).players[2] = NULL;
-	(*params).players[3] = NULL;
+	while (i < MAX_PLAYERS)
+	{
+		(*params).players[i] = NULL;
+		i++;
+	}
+	i = 0;
+	while (i < MAX_PLAYERS)
+	{
+		(*params).pl_nbr[i][0] = 0;
+		(*params).pl_nbr[i][1] = 0;
+		i++;
+	}
 }
 
 void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
@@ -78,7 +89,14 @@ t_proc	*processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 	{
 		j = 0;
 		processes = (t_proc *)malloc(sizeof(t_proc));
-		(*processes).id = i;
+		if ((*params).pl_nbr[i][0] && (*params).pl_nbr[i][1] != 0)
+			(*processes).id = (*params).pl_nbr[i][1] - 1;
+		else if ((*params).pl_nbr[i][0] && (*params).pl_nbr[i][1] == 0)
+			(*processes).id = 0;
+		else if (!(*params).pl_nbr[i][0])
+			(*processes).id = (*tmp).id + 1;
+		else
+			(*processes).id = i;
 		(*processes).name = bots[i].prog_name;
 		(*processes).current_position = bots[i++].start_index;
 		(*processes).carry = 0;

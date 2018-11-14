@@ -26,14 +26,6 @@ void create_map(header_t bots[4], t_flags *params)
 		}
 		i++;
 	}
-	/*i = 0;
-	while (i < MEM_SIZE)
-	{
-		if (i % 128 == 0)
-			ft_printf("\n");
-		ft_printf("%.2x ", map[i]);
-		i++;
-	}*/
 	vm_cycle(map, params, bots);
 }
 
@@ -65,14 +57,6 @@ int read_bots(t_flags *params)
 		lseek(fd, 0, SEEK_SET);
 		str = (unsigned char *)malloc(sizeof(unsigned char) * len + 1);
 		read(fd, str, len);
-		//str[i] = '\0';
-		/*while (i < len)
-		{
-			if (i % 64 == 0)
-				ft_printf("\n");
-			ft_printf("%.2x ", str[i]);
-			i++;
-		}*/
 		ft_strncpy(bots[j].prog_name, (const char *)(&str[4]), PROG_NAME_LENGTH);
 		size = 0;
 		buf = 0;
@@ -93,22 +77,14 @@ int read_bots(t_flags *params)
 		ft_strncpy(bots[j].comment, (const char *)(&str[140]), COMMENT_LENGTH);
 		bots[j].exec_part = (unsigned char *)malloc(sizeof(unsigned char) * (bots[j].prog_size + 1));
 		ft_bzero(bots[j].exec_part, bots[j].prog_size + 1);
-		//ft_strncpy((char *)(bots[j].exec_part), (const char *)(&str[2192]), bots[j].prog_size); ?why in cycle and not in strncpy
-		//ft_printf("\n%s\n", bots[j].prog_name);
-		//ft_printf("%d\n", bots[j].prog_size);
-		//ft_printf("%s\n", bots[j].comment);
 		bots[j].start_index = (MEM_SIZE / (*params).bots_quantity) * j;
 		i = 0;
 		while (i < bots[j].prog_size)
 		{
 			bots[j].exec_part[i] = str[2192 + i];
-			/*if (i % 64 == 0)
-				ft_printf("\n");
-			ft_printf("%.2x ", bots[j].exec_part[i]);*/
 			i++;
 		}
 		ft_strdel((char **)(&str));
-		//ft_printf("\n");
 		j++;
 	}
 	create_map(bots, params);
@@ -147,11 +123,13 @@ void print_usage(void)
 int check_flags_core(int argc, char **argv, t_flags *params)
 {
 	int i;
+	int j;
 
 	i = 1;
+	j = 0;
 	while (i < argc)
 	{
-		if (ft_strcmp(argv[i], "-a") == 0)
+		if (ft_strcmp(argv[i], "-a") == 0 && i + 1 < argc)
 			(*params).a_aff = 1;
 		else if (ft_strcmp(argv[i], "-d") == 0)
 		{
@@ -159,15 +137,22 @@ int check_flags_core(int argc, char **argv, t_flags *params)
 			i += 2;
 			continue ;
 		}
-		else if (ft_strcmp(argv[i], "-s") == 0)
+		else if (ft_strcmp(argv[i], "-s") == 0 && i + 1 < argc)
 		{
 			(*params).s_cycles = ft_atoi(argv[i + 1]);
 			i += 2;
 			continue ;
 		}
-		else if (ft_strcmp(argv[i], "-v") == 0)
+		else if (ft_strcmp(argv[i], "-v") == 0 && i + 1 < argc)
 		{
 			(*params).v_verbosity = ft_atoi(argv[i + 1]);
+			i += 2;
+			continue ;
+		}
+		else if (ft_strcmp(argv[i], "-n") == 0 && j < 4 && i + 1 < argc)
+		{
+			(*params).pl_nbr[j][0] = 1;
+			(*params).pl_nbr[j][1] = ft_atoi(argv[i + 1]);
 			i += 2;
 			continue ;
 		}
@@ -186,6 +171,7 @@ int check_flags_core(int argc, char **argv, t_flags *params)
 				ft_printf("%s\n", "Too many champions");
 				return (0);
 			}
+			j++;
 			(*params).players[(*params).bots_quantity] = argv[i];
 			(*params).bots_quantity++;
 		}
