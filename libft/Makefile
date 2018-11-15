@@ -37,10 +37,15 @@ check_params.o length_analize.o unicode.o octal.o atoi_and_itoa.o chars_handle.o
 strings_handle.o additional_funcs.o get_next_line.o ft_sqrt.o hash.o multi_arr_mem.o to_multi_arr.o \
 two_dim_arr_mem.o
 
+
+GREEN 		=  	\033[0;32m
+
 all: $(NAME)
 
 $(NAME): $(OFILES)
+	@echo "$(GREEN)compiling libft..."
 	@ar rc $(NAME) $(OFILES)
+	@echo "$(GREEN)libft ready"
 
 $(OFILES): %.o:%.c
 	@gcc -c -Wall -Wextra -Werror $(SFILES)

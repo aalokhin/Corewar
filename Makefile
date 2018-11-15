@@ -55,18 +55,15 @@ CC = @gcc
 all: $(NAME) $(ASM)
 
 $(NAME): $(LIBFT) $(OFILES)
-	@echo "$(GREEN)compiling libft... ready"
 	@echo "$(BLUE)compiling virtual machine..."
-	$(CC) $(CC_FLAGS) $(OFILES) -lncurses $(LIBFT) -o $(NAME) 
-	
-	@echo "$(CYAN)Ready!"
+	$(CC) $(CC_FLAGS) $(OFILES) -lncurses $(LIBFT) -o $(NAME)
+	@echo "$(BLUE)Ready!"
 	@echo "$(PURPLE)comiling assembler ..."
 
 $(ASM): $(ASM_OFILES)
 	@echo "$(PURPLE)comiling assembler ..."
 	$(CC) $(CC_FLAGS) $(ASM_OFILES) $(LIBFT) -o $(ASM)
-	@echo "$(CYAN)Assembler Ready!"
-	@echo "$(COLOR_OFF)"
+	@echo "$(PURPLE)Assembler Ready!$(COLOR_OFF)"
 
 
 $(OFILES): %.o:%.c
@@ -79,9 +76,12 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
 clean:
+	@echo "$(CYAN)Cleaning garbage..."
 	@rm -rf $(OFILES)
 	@rm -rf $(ASM_OFILES)
 	@make clean -C $(LIBFT_DIR)
+	@echo "$(CYAN)All clean"
+
 
 fclean: clean
 	@rm -rf $(NAME)
