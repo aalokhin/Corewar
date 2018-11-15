@@ -4889,7 +4889,6 @@ It is now cycle 3858
 It is now cycle 3859
 It is now cycle 3860
 P    6 | live 0
-Player 1 (Jumper !) is said to be alive
 ADV 5 (0x013f -> 0x0144) 01 00 00 00 00 
 It is now cycle 3861
 P    2 | zjmp -25 OK
@@ -7672,7 +7671,6 @@ It is now cycle 5478
 It is now cycle 5479
 It is now cycle 5480
 P    9 | live 0
-Player 1 (Jumper !) is said to be alive
 ADV 5 (0x013f -> 0x0144) 01 00 00 00 00 
 It is now cycle 5481
 P    3 | ld 0 r7
@@ -10936,7 +10934,6 @@ It is now cycle 7098
 It is now cycle 7099
 It is now cycle 7100
 P   12 | live 0
-Player 1 (Jumper !) is said to be alive
 ADV 5 (0x013f -> 0x0144) 01 00 00 00 00 
 P    1 | add r3 r4 r3
 ADV 5 (0x0ee6 -> 0x0eeb) 04 54 03 04 03 
@@ -14684,7 +14681,6 @@ P    3 | add r3 r4 r3
 ADV 5 (0x0da2 -> 0x0da7) 04 54 03 04 03 
 It is now cycle 8720
 P   15 | live 0
-Player 1 (Jumper !) is said to be alive
 ADV 5 (0x013f -> 0x0144) 01 00 00 00 00 
 P    4 | add r3 r4 r3
 ADV 5 (0x0ee6 -> 0x0eeb) 04 54 03 04 03 
@@ -18908,7 +18904,6 @@ P    5 | add r3 r4 r3
 ADV 5 (0x0da2 -> 0x0da7) 04 54 03 04 03 
 It is now cycle 10340
 P   18 | live 0
-Player 1 (Jumper !) is said to be alive
 ADV 5 (0x013f -> 0x0144) 01 00 00 00 00 
 P    7 | add r3 r4 r3
 ADV 5 (0x0ee6 -> 0x0eeb) 04 54 03 04 03 
@@ -23613,7 +23608,6 @@ P    8 | add r3 r4 r3
 ADV 5 (0x0da2 -> 0x0da7) 04 54 03 04 03 
 It is now cycle 11960
 P   21 | live 0
-Player 1 (Jumper !) is said to be alive
 ADV 5 (0x013f -> 0x0144) 01 00 00 00 00 
 P   10 | add r3 r4 r3
 ADV 5 (0x0ee6 -> 0x0eeb) 04 54 03 04 03 
@@ -28801,7 +28795,6 @@ P   11 | add r3 r4 r3
 ADV 5 (0x0da2 -> 0x0da7) 04 54 03 04 03 
 It is now cycle 13580
 P   24 | live 0
-Player 1 (Jumper !) is said to be alive
 ADV 5 (0x013f -> 0x0144) 01 00 00 00 00 
 P   13 | add r3 r4 r3
 ADV 5 (0x0ee6 -> 0x0eeb) 04 54 03 04 03 
@@ -34461,7 +34454,6 @@ P   14 | add r3 r4 r3
 ADV 5 (0x0da2 -> 0x0da7) 04 54 03 04 03 
 It is now cycle 15200
 P   27 | live 0
-Player 1 (Jumper !) is said to be alive
 ADV 5 (0x013f -> 0x0144) 01 00 00 00 00 
 P   16 | add r3 r4 r3
 ADV 5 (0x0ee6 -> 0x0eeb) 04 54 03 04 03 
@@ -40599,7 +40591,6 @@ P   17 | add r3 r4 r3
 ADV 5 (0x0da2 -> 0x0da7) 04 54 03 04 03 
 It is now cycle 16820
 P   30 | live 0
-Player 1 (Jumper !) is said to be alive
 ADV 5 (0x013f -> 0x0144) 01 00 00 00 00 
 P   19 | add r3 r4 r3
 ADV 5 (0x0ee6 -> 0x0eeb) 04 54 03 04 03 
@@ -47223,7 +47214,6 @@ P   20 | add r3 r4 r3
 ADV 5 (0x0da2 -> 0x0da7) 04 54 03 04 03 
 It is now cycle 18440
 P   33 | live 0
-Player 1 (Jumper !) is said to be alive
 ADV 5 (0x013f -> 0x0144) 01 00 00 00 00 
 P   22 | add r3 r4 r3
 ADV 5 (0x0ee6 -> 0x0eeb) 04 54 03 04 03 
@@ -54325,7 +54315,6 @@ P   23 | add r3 r4 r3
 ADV 5 (0x0da2 -> 0x0da7) 04 54 03 04 03 
 It is now cycle 20060
 P   36 | live 0
-Player 1 (Jumper !) is said to be alive
 ADV 5 (0x013f -> 0x0144) 01 00 00 00 00 
 P   25 | add r3 r4 r3
 ADV 5 (0x0ee6 -> 0x0eeb) 04 54 03 04 03 
@@ -74134,6 +74123,7 @@ Process 1 hasn't lived for 96 cycles (CTD 86)
 Cycle to die is now 36
 It is now cycle 24331
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00ae -> 0x00b3) 01 ff ff ff ff 
 It is now cycle 24332
 P   17 | xor 48 36 r6
@@ -74176,6 +74166,7 @@ ADV 7 (0x09e3 -> 0x09ea) 02 90 00 00 00 00 07
 P    8 | ld 0 r7
 ADV 7 (0x07fd -> 0x0804) 02 90 00 00 00 00 07 
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00b3 -> 0x00b8) 01 ff ff ff ff 
 It is now cycle 24342
 It is now cycle 24343
@@ -74217,6 +74208,7 @@ P    5 | ldi -5 8 r1
 ADV 6 (0x0742 -> 0x0748) 0a 94 ff fb 03 01 
 It is now cycle 24351
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00b8 -> 0x00bd) 01 ff ff ff ff 
 It is now cycle 24352
 P   17 | zjmp 13 FAILED
@@ -74307,6 +74299,7 @@ It is now cycle 24379
 It is now cycle 24380
 It is now cycle 24381
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00a4 -> 0x00a9) 01 ff ff ff ff 
 It is now cycle 24382
 It is now cycle 24383
@@ -74319,6 +74312,7 @@ It is now cycle 24389
 It is now cycle 24390
 It is now cycle 24391
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00a9 -> 0x00ae) 01 ff ff ff ff 
 It is now cycle 24392
 It is now cycle 24393
@@ -74331,6 +74325,7 @@ It is now cycle 24399
 It is now cycle 24400
 It is now cycle 24401
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00ae -> 0x00b3) 01 ff ff ff ff 
 It is now cycle 24402
 It is now cycle 24403
@@ -74343,6 +74338,7 @@ It is now cycle 24409
 It is now cycle 24410
 It is now cycle 24411
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00b3 -> 0x00b8) 01 ff ff ff ff 
 It is now cycle 24412
 It is now cycle 24413
@@ -74355,6 +74351,7 @@ It is now cycle 24419
 It is now cycle 24420
 It is now cycle 24421
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00b8 -> 0x00bd) 01 ff ff ff ff 
 It is now cycle 24422
 It is now cycle 24423
@@ -74388,6 +74385,7 @@ It is now cycle 24449
 It is now cycle 24450
 It is now cycle 24451
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00a4 -> 0x00a9) 01 ff ff ff ff 
 It is now cycle 24452
 It is now cycle 24453
@@ -74400,6 +74398,7 @@ It is now cycle 24459
 It is now cycle 24460
 It is now cycle 24461
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00a9 -> 0x00ae) 01 ff ff ff ff 
 It is now cycle 24462
 It is now cycle 24463
@@ -74412,6 +74411,7 @@ It is now cycle 24469
 It is now cycle 24470
 It is now cycle 24471
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00ae -> 0x00b3) 01 ff ff ff ff 
 It is now cycle 24472
 It is now cycle 24473
@@ -74424,6 +74424,7 @@ It is now cycle 24479
 It is now cycle 24480
 It is now cycle 24481
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00b3 -> 0x00b8) 01 ff ff ff ff 
 It is now cycle 24482
 It is now cycle 24483
@@ -74436,6 +74437,7 @@ It is now cycle 24489
 It is now cycle 24490
 It is now cycle 24491
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00b8 -> 0x00bd) 01 ff ff ff ff 
 It is now cycle 24492
 It is now cycle 24493
@@ -74469,6 +74471,7 @@ It is now cycle 24519
 It is now cycle 24520
 It is now cycle 24521
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00a4 -> 0x00a9) 01 ff ff ff ff 
 It is now cycle 24522
 It is now cycle 24523
@@ -74481,6 +74484,7 @@ It is now cycle 24529
 It is now cycle 24530
 It is now cycle 24531
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00a9 -> 0x00ae) 01 ff ff ff ff 
 It is now cycle 24532
 It is now cycle 24533
@@ -74493,6 +74497,7 @@ It is now cycle 24539
 It is now cycle 24540
 It is now cycle 24541
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00ae -> 0x00b3) 01 ff ff ff ff 
 It is now cycle 24542
 It is now cycle 24543
@@ -74505,6 +74510,7 @@ It is now cycle 24549
 It is now cycle 24550
 It is now cycle 24551
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00b3 -> 0x00b8) 01 ff ff ff ff 
 It is now cycle 24552
 It is now cycle 24553
@@ -74517,6 +74523,7 @@ It is now cycle 24559
 It is now cycle 24560
 It is now cycle 24561
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00b8 -> 0x00bd) 01 ff ff ff ff 
 It is now cycle 24562
 It is now cycle 24563
@@ -74550,6 +74557,7 @@ It is now cycle 24589
 It is now cycle 24590
 It is now cycle 24591
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00a4 -> 0x00a9) 01 ff ff ff ff 
 It is now cycle 24592
 It is now cycle 24593
@@ -74562,6 +74570,7 @@ It is now cycle 24599
 It is now cycle 24600
 It is now cycle 24601
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00a9 -> 0x00ae) 01 ff ff ff ff 
 It is now cycle 24602
 It is now cycle 24603
@@ -74574,6 +74583,7 @@ It is now cycle 24609
 It is now cycle 24610
 It is now cycle 24611
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00ae -> 0x00b3) 01 ff ff ff ff 
 It is now cycle 24612
 It is now cycle 24613
@@ -74586,6 +74596,7 @@ It is now cycle 24619
 It is now cycle 24620
 It is now cycle 24621
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00b3 -> 0x00b8) 01 ff ff ff ff 
 It is now cycle 24622
 It is now cycle 24623
@@ -74598,6 +74609,7 @@ It is now cycle 24629
 It is now cycle 24630
 It is now cycle 24631
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00b8 -> 0x00bd) 01 ff ff ff ff 
 It is now cycle 24632
 It is now cycle 24633
@@ -74631,6 +74643,7 @@ It is now cycle 24659
 It is now cycle 24660
 It is now cycle 24661
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00a4 -> 0x00a9) 01 ff ff ff ff 
 It is now cycle 24662
 It is now cycle 24663
@@ -74643,6 +74656,7 @@ It is now cycle 24669
 It is now cycle 24670
 It is now cycle 24671
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00a9 -> 0x00ae) 01 ff ff ff ff 
 It is now cycle 24672
 It is now cycle 24673
@@ -74655,6 +74669,7 @@ It is now cycle 24679
 It is now cycle 24680
 It is now cycle 24681
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00ae -> 0x00b3) 01 ff ff ff ff 
 It is now cycle 24682
 It is now cycle 24683
@@ -74668,6 +74683,7 @@ It is now cycle 24690
 Cycle to die is now -14
 It is now cycle 24691
 P    2 | live -1
+Player 1 (Jumper !) is said to be alive
 ADV 5 (0x00b3 -> 0x00b8) 01 ff ff ff ff 
 It is now cycle 24692
 Process 2 hasn't lived for 1 cycles (CTD -14)
