@@ -21,26 +21,35 @@ int live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 	child_proc = tmp;
 	if (((*main_cycle).verbose >> 2) & 1)
 		ft_printf("P%5d | live %d\n", (*tmp).id + 1, (*tmp).argv[0][1]);
-	if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] < 0)
-		(*child_proc).argv[0][1] = ((*child_proc).argv[0][1] * -1) - 1;
-	else if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] > 0)
-		(*child_proc).argv[0][1] -= 1;
-	if ((*child_proc).argv[0][0] &&
-		((*child_proc).argv[0][1] >= 0 && (*child_proc).argv[0][1] <= (*head_proc).id))
+	if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] <= 0)
 	{
-		i = 0;
-		other_proc = (*child_proc).argv[0][1];
-		tmp = head_proc;
-		while (tmp && (*tmp).id != other_proc)
-			tmp = tmp->next;
-		if (tmp && (*tmp).if_live && (*tmp).last_live_cycle > 0)
+		if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] < 0)
+		(*child_proc).argv[0][1] = ((*child_proc).argv[0][1] * -1) - 1;
+		else if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] > 0)
+			(*child_proc).argv[0][1] -= 1;
+		if ((*child_proc).argv[0][0] &&
+			((*child_proc).argv[0][1] >= 0 && (*child_proc).argv[0][1] <= (*head_proc).id))
 		{
-			(*tmp).if_live = 1;
-			(*tmp).last_live_cycle = (*main_cycle).cycles;
-			//(*tmp).lives++;
-			if (((*main_cycle).verbose & 1))
-				//ft_printf("A process shows that player %s (champion_name) is alive.\n", (*tmp).name);
-				ft_printf("Player %d (%s) is said to be alive\n", (*child_proc).argv[0][1] + 1, (*tmp).name);
+			i = 0;
+			other_proc = (*child_proc).argv[0][1];
+			tmp = head_proc;
+			while (tmp && (*tmp).id != other_proc)
+				tmp = tmp->next;
+			if (tmp && (*tmp).if_live && (*tmp).last_live_cycle > 0)
+			{
+				(*tmp).if_live = 1;
+				(*tmp).last_live_cycle = (*main_cycle).cycles;
+				//(*tmp).lives++;
+				if (((*main_cycle).verbose & 1))
+					//ft_printf("A process shows that player %s (champion_name) is alive.\n", (*tmp).name);
+				{
+					//if ((*tmp).parent_nbr == -1)
+						ft_printf("Player %d (%s) is said to be alive\n", (*child_proc).argv[0][1] + 1, (*tmp).name);
+					//else
+						//ft_printf("Player %d (%s) is said to be alive\n", (*tmp).parent_nbr + 1, (*tmp).name);
+				}
+					
+			}
 		}
 	}
 	map[0] = map[0];

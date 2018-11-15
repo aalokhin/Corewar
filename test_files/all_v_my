@@ -2021,7 +2021,6 @@ It is now cycle 1955
 P    4 | live 42
 ADV 5 (0x009d -> 0x00a2) 01 00 00 00 2a 
 P    2 | live 3
-Player 3 (Celebration Funebre v0.99pl42) is said to be alive
 ADV 5 (0x00b9 -> 0x00be) 01 00 00 00 03 
 It is now cycle 1956
 It is now cycle 1957
@@ -2891,7 +2890,6 @@ It is now cycle 2765
 P    7 | live 42
 ADV 5 (0x00e6 -> 0x00eb) 01 00 00 00 2a 
 P    2 | live 4
-Player 4 (Celebration Funebre v0.99pl42) is said to be alive
 ADV 5 (0x00c1 -> 0x00c6) 01 00 00 00 04 
 It is now cycle 2766
 It is now cycle 2767
@@ -2993,7 +2991,6 @@ ADV 5 (0x009d -> 0x00a2) 01 00 00 00 2a
 P    6 | zjmp -200 OK
 P    5 | zjmp -200 OK
 P    4 | live 3
-Player 3 (Celebration Funebre v0.99pl42) is said to be alive
 ADV 5 (0x00b9 -> 0x00be) 01 00 00 00 03 
 P    3 | zjmp -200 OK
 P    1 | zjmp -200 OK
@@ -4282,7 +4279,6 @@ It is now cycle 3640
 P   11 | live 42
 ADV 5 (0x00e6 -> 0x00eb) 01 00 00 00 2a 
 P    4 | live 4
-Player 4 (Celebration Funebre v0.99pl42) is said to be alive
 ADV 5 (0x00c1 -> 0x00c6) 01 00 00 00 04 
 It is now cycle 3641
 It is now cycle 3642
@@ -4412,7 +4408,6 @@ ADV 5 (0x009d -> 0x00a2) 01 00 00 00 2a
 P   10 | zjmp -200 OK
 P    9 | zjmp -200 OK
 P    8 | live 3
-Player 3 (Celebration Funebre v0.99pl42) is said to be alive
 ADV 5 (0x00b9 -> 0x00be) 01 00 00 00 03 
 P    7 | zjmp -200 OK
 P    2 | zjmp -200 OK
@@ -6108,7 +6103,6 @@ It is now cycle 4515
 P   15 | live 42
 ADV 5 (0x00e6 -> 0x00eb) 01 00 00 00 2a 
 P    8 | live 4
-Player 4 (Celebration Funebre v0.99pl42) is said to be alive
 ADV 5 (0x00c1 -> 0x00c6) 01 00 00 00 04 
 P    6 | sti r15 0 -182
        | -> store to 0 + -182 = -182 (with pc and mod 2197)
@@ -6269,7 +6263,6 @@ It is now cycle 4580
 P   16 | live 42
 ADV 5 (0x009d -> 0x00a2) 01 00 00 00 2a 
 P   12 | live 3
-Player 3 (Celebration Funebre v0.99pl42) is said to be alive
 ADV 5 (0x00b9 -> 0x00be) 01 00 00 00 03 
 It is now cycle 4581
 It is now cycle 4582
@@ -6542,7 +6535,6 @@ It is now cycle 4681
 It is now cycle 4682
 It is now cycle 4683
 P   16 | live 4
-Player 4 (Celebration Funebre v0.99pl42) is said to be alive
 ADV 5 (0x00c1 -> 0x00c6) 01 00 00 00 04 
 It is now cycle 4684
 It is now cycle 4685

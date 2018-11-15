@@ -20,89 +20,62 @@
 > Player 1 (Jumper !) is said to be alive
 54317a54328
 > Player 1 (Jumper !) is said to be alive
-74122d74132
-< Process 1 hasn't lived for 96 cycles (CTD 86)
-74185a74196
-> P    1 | zjmp -37 OK
-74228a74240,74242
-> P    1 | live -1
-> Player 1 (Jumper !) is said to be alive
-> ADV 5 (0x073d -> 0x0742) 01 ff ff ff ff 
-74299a74314,74316
-> P    1 | ldi -5 8 r1
->        | -> load from -5 + 8 = 3 (with pc and mod 1861)
-> ADV 6 (0x0742 -> 0x0748) 0a 94 ff fb 03 01 
-74333a74351,74353
-> P    1 | sti r1 -173 8
->        | -> store to -173 + 8 = -165 (with pc and mod 1699)
-> ADV 6 (0x0748 -> 0x074e) 0b 64 01 ff 53 03 
-74346a74367,74368
-> P    1 | add r3 r4 r3
-> ADV 5 (0x074e -> 0x0753) 04 54 03 04 03 
-74355a74378,74379
-> P    1 | xor 48 12 r6
-> ADV 5 (0x0753 -> 0x0758) 08 54 05 03 06 
-74376a74401,74402
-> P    1 | zjmp 13 FAILED
-> ADV 3 (0x0758 -> 0x075b) 09 00 0d 
-74381a74408,74409
-> P    1 | ld 0 r7
-> ADV 7 (0x075b -> 0x0762) 02 90 00 00 00 00 07 
-74407a74436
-> P    1 | zjmp -37 OK
-74420a74450,74452
-> P    1 | live -1
-> Player 1 (Jumper !) is said to be alive
-> ADV 5 (0x073d -> 0x0742) 01 ff ff ff ff 
-74451a74484,74486
-> P    1 | ldi -5 12 r1
->        | -> load from -5 + 12 = 7 (with pc and mod 1865)
-> ADV 6 (0x0742 -> 0x0748) 0a 94 ff fb 03 01 
-74480a74516,74518
-> P    1 | sti r1 -173 12
->        | -> store to -173 + 12 = -161 (with pc and mod 1703)
-> ADV 6 (0x0748 -> 0x074e) 0b 64 01 ff 53 03 
-74493a74532,74533
-> P    1 | add r3 r4 r3
-> ADV 5 (0x074e -> 0x0753) 04 54 03 04 03 
-74502a74543,74544
-> P    1 | xor 48 16 r6
-> ADV 5 (0x0753 -> 0x0758) 08 54 05 03 06 
-74528a74571,74572
-> P    1 | zjmp 13 FAILED
-> ADV 3 (0x0758 -> 0x075b) 09 00 0d 
-74533a74578,74579
-> P    1 | ld 0 r7
-> ADV 7 (0x075b -> 0x0762) 02 90 00 00 00 00 07 
-74554a74601
-> P    1 | zjmp -37 OK
-74567a74615,74617
-> P    1 | live -1
-> Player 1 (Jumper !) is said to be alive
-> ADV 5 (0x073d -> 0x0742) 01 ff ff ff ff 
-74601a74652,74654
-> P    1 | ldi -5 16 r1
->        | -> load from -5 + 16 = 11 (with pc and mod 1869)
-> ADV 6 (0x0742 -> 0x0748) 0a 94 ff fb 03 01 
-74629a74683,74685
-> P    1 | sti r1 -173 16
->        | -> store to -173 + 16 = -157 (with pc and mod 1707)
-> ADV 6 (0x0748 -> 0x074e) 0b 64 01 ff 53 03 
-74640a74697,74698
-> P    1 | add r3 r4 r3
-> ADV 5 (0x074e -> 0x0753) 04 54 03 04 03 
-74649a74708,74709
-> P    1 | xor 48 20 r6
-> ADV 5 (0x0753 -> 0x0758) 08 54 05 03 06 
-74675a74736,74737
-> P    1 | zjmp 13 FAILED
-> ADV 3 (0x0758 -> 0x075b) 09 00 0d 
-74680a74743,74744
-> P    1 | ld 0 r7
-> ADV 7 (0x075b -> 0x0762) 02 90 00 00 00 00 07 
-74688c74752,74754
+74126d74136
+< Player 1 (Jumper !) is said to be alive
+74169d74178
+< Player 1 (Jumper !) is said to be alive
+74211d74219
+< Player 1 (Jumper !) is said to be alive
+74302d74309
+< Player 1 (Jumper !) is said to be alive
+74315d74321
+< Player 1 (Jumper !) is said to be alive
+74328d74333
+< Player 1 (Jumper !) is said to be alive
+74341d74345
+< Player 1 (Jumper !) is said to be alive
+74354d74357
+< Player 1 (Jumper !) is said to be alive
+74388d74390
+< Player 1 (Jumper !) is said to be alive
+74401d74402
+< Player 1 (Jumper !) is said to be alive
+74414d74414
+< Player 1 (Jumper !) is said to be alive
+74427d74426
+< Player 1 (Jumper !) is said to be alive
+74440d74438
+< Player 1 (Jumper !) is said to be alive
+74474d74471
+< Player 1 (Jumper !) is said to be alive
+74487d74483
+< Player 1 (Jumper !) is said to be alive
+74500d74495
+< Player 1 (Jumper !) is said to be alive
+74513d74507
+< Player 1 (Jumper !) is said to be alive
+74526d74519
+< Player 1 (Jumper !) is said to be alive
+74560d74552
+< Player 1 (Jumper !) is said to be alive
+74573d74564
+< Player 1 (Jumper !) is said to be alive
+74586d74576
+< Player 1 (Jumper !) is said to be alive
+74599d74588
+< Player 1 (Jumper !) is said to be alive
+74612d74600
+< Player 1 (Jumper !) is said to be alive
+74646d74633
+< Player 1 (Jumper !) is said to be alive
+74659d74645
+< Player 1 (Jumper !) is said to be alive
+74672d74657
+< Player 1 (Jumper !) is said to be alive
+74686d74670
+< Player 1 (Jumper !) is said to be alive
+74688c74672,74673
 < Process 2 hasn't lived for 0 cycles (CTD -14)
 ---
 > It is now cycle 24692
 > Process 2 hasn't lived for 1 cycles (CTD -14)
-> Process 1 hasn't lived for 95 cycles (CTD -14)
