@@ -33,6 +33,16 @@ typedef struct s_proc
 	struct s_proc *next;
 }			t_proc;
 
+typedef struct s_instr
+{
+	int i;
+	unsigned int one;
+	unsigned int two;
+	int new_ind;
+	t_proc *tmp;
+	
+}			t_instr;
+
 typedef struct s_cycle
 {
 	int cycles;
@@ -139,7 +149,6 @@ static t_op    op_tab[17] =
 
 
 void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4]);
-int find_arg_index(t_proc *processes, int target);
 void processes_add(t_proc **processes, unsigned char *map, t_cycle *main_cycle, int index, int cur_proc);
 void init_bots(header_t bots[4]);
 void params_init(t_flags *params);
@@ -155,6 +164,9 @@ void map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_p
 void visual_init(WINDOW **win);
 void print_winner(WINDOW * win, t_cycle main_cycle);
 int		read_bots(t_flags *params, int fd, header_t	bots[4]);
+void inst_vars_init(t_instr *inst_vars, t_proc *processes);
+int check_ldi_params(t_instr inst_vars);
+void	take_bits_params(t_instr *inst_vars, unsigned char *map);
 
 #endif
 

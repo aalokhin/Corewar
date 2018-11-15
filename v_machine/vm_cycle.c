@@ -30,7 +30,6 @@ void processes_add(t_proc **head, unsigned char *map, t_cycle *main_cycle, int i
 		tmp->parent_nbr = (*parent).parent_nbr;
 	tmp->if_live = 1;
 	tmp->cmd = map[tmp->current_position];
-	//(*main_cycle).indexes[index][0] = tmp->parent_nbr + 1;
 	(*main_cycle).indexes[index][1] = 1;
 	if (tmp->cmd >= 1 && tmp->cmd <= 16)
 		tmp->cycles_wait = op_tab[tmp->cmd - 1].cycles_wait;
@@ -48,16 +47,6 @@ void processes_add(t_proc **head, unsigned char *map, t_cycle *main_cycle, int i
 	tmp->next = *head;
 	*head = tmp;
 	(*main_cycle).head_proc = *head;
-}
-
-int find_arg_index(t_proc *processes, int target)
-{
-	int i;
-
-	i = 0;
-	while(i < 3 && (*processes).argv[i][0] != target)
-		i++;
-	return (i);
 }
 
 int check_if_lives(t_cycle *main_cycle, t_flags *params)
@@ -111,7 +100,6 @@ void fill_start_map_id(t_cycle *main_cycle, header_t bots[4], t_flags *params)
 	k = 0;
 	while (i < MEM_SIZE)
 	{
-
 		(*main_cycle).indexes[i][0] = 0;
 		(*main_cycle).indexes[i][1] = 0;
 		i++;
@@ -181,19 +169,14 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1, bots[i].prog_size, bots[i].prog_name, bots[i].comment);
 		i++;
 	}
-	i = 0;
 	while (main_cycle.processes > 0)
 	{
-		//cycle_counter++;
 		if (((*params).v_verbosity >> 1) & 1)
 			ft_printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
-		
-		i = 0;
+
 		processes = main_cycle.head_proc;
 		if ((*params).ncurses == 1)
 			map_to_screen(map, &main_cycle, params, main_cycle.head_proc, win);
-
-
 		while (processes)
 		{
 			if ((*processes).if_live && (*processes).cmd >= 1 && (*processes).cmd <= 16 && (*processes).cycles_wait == 1)
@@ -251,17 +234,12 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					}
 					(*processes).current_position += 2;
 				}
-				//res = -1;
 				(*processes).current_position = ((*processes).current_position + MEM_SIZE) % MEM_SIZE;
 				(*processes).cmd = map[(*processes).current_position];
 				if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
 					(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
 				else
 					(*processes).cycles_wait = 1;
-				/*if ((*processes).parent_nbr == -1)
-					main_cycle.indexes[(*processes).current_position][0] = (*processes).real_id + 1;
-				else
-					main_cycle.indexes[(*processes).current_position ][0] = (*processes).parent_nbr + 1;*/
 				main_cycle.indexes[(*processes).current_position][1] = 1;
 				clear_argv_arr(processes);
 			}
@@ -277,10 +255,6 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 					(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
 				else
 					(*processes).cycles_wait = 1;
-				/*if ((*processes).parent_nbr == -1)
-					main_cycle.indexes[(*processes).current_position][0] = (*processes).real_id + 1;
-				else
-					main_cycle.indexes[(*processes).current_position][0] = (*processes).parent_nbr + 1;*/
 				main_cycle.indexes[(*processes).current_position][1] = 1;
 			}			
 			(*processes).live_cycle++;
@@ -299,7 +273,6 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			}
 			main_cycle.checks_if_die--;
 		}
-		//main_cycle.prev_processes = main_cycle.processes;
 		/*if (main_cycle.second_limit > 0)
 			usleep((useconds_t)((int)1000000 / main_cycle.second_limit));
 		else
@@ -316,6 +289,6 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 		print_winner(win, main_cycle);
 		endwin();
 	}
-	else if ((*params).d_dumps_memory <= 0)
+	else
 		ft_printf("Contestant %d, \"%s\", has won !\n", main_cycle.winner_id + 1, main_cycle.winner_name);
 }
