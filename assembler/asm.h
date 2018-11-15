@@ -19,15 +19,16 @@
 #define CUR_DIR(c) (c == '.')
 
 
-// struct dirent
+
+// typedef struct 				s_sound
 // {
-//                ino_t          d_ino;       /* Inode number */
-//                off_t          d_off;       /* Not an offset; see below */
-//                unsigned short d_reclen;    /* Length of this record */
-//                unsigned char  d_type;      /* Type of file; not supported
-//                                               by all filesystem types */
-//                char           d_name[256]; /* Null-terminated filename */
-//       };
+// 	unsigned char 		 	
+// 	char 					*start;
+// 	char 					*die;
+
+// 	char 					*success;
+// 	char 					*abort;
+// }							t_sound;
 
 
 typedef struct			s_t  //minimum
@@ -188,13 +189,12 @@ void		bytes_above_filler(t_binfile *file, t_lable *label);
 
 //*************************** FLAG A ***********************************
 
-void	 	flag_a_output(t_binfile *bin);
-
-void		print_arg_chars(t_t			*instruct);
-
+void	 		flag_a_output(t_binfile *bin);
+void			print_arg_chars(t_t	*instruct);
 void			print_dir_ind_bytes(int arg, int lbl_size);
+void			print_instr_args(t_t *instruct);
+void			print_instr_args2(t_t *instruct);
 
-void		print_instr_args(t_t *instruct);
 
 
 #endif
