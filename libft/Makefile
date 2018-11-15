@@ -40,15 +40,15 @@ two_dim_arr_mem.o
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	ar rc $(NAME) $(OFILES)
+	@ar rc $(NAME) $(OFILES)
 
 $(OFILES): %.o:%.c
-	gcc -c -Wall -Wextra -Werror $(SFILES)
+	@gcc -c -Wall -Wextra -Werror $(SFILES)
 
 clean:
-	rm -f $(OFILES) *.gch
+	@rm -f $(OFILES) *.gch
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all

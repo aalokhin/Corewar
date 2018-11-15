@@ -50,16 +50,14 @@ HEADER_FLAGS = -I $(LIBFT_INC)
 
 ASSEMBLER_FLAGS = -I .$(LIBFT_INC)
 
-CC = gcc
+CC = @gcc 
 
 all: $(NAME) $(ASM)
-
-
 
 $(NAME): $(LIBFT) $(OFILES)
 	@echo "$(GREEN)compiling libft... ready"
 	@echo "$(BLUE)compiling virtual machine..."
-	$(CC) $(CC_FLAGS) $(OFILES) -lncurses $(LIBFT) -o $(NAME)
+	$(CC) $(CC_FLAGS) $(OFILES) -lncurses $(LIBFT) -o $(NAME) 
 	
 	@echo "$(CYAN)Ready!"
 	@echo "$(PURPLE)comiling assembler ..."
@@ -78,17 +76,17 @@ $(ASM_OFILES): %.o:%.c
 	$(CC) -c $< -o $@ $(CC_FLAGS) $(ASSEMBLER_FLAGS)
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 clean:
-	rm -rf $(OFILES)
-	rm -rf $(ASM_OFILES)
-	make clean -C $(LIBFT_DIR)
+	@rm -rf $(OFILES)
+	@rm -rf $(ASM_OFILES)
+	@make clean -C $(LIBFT_DIR)
 
 fclean: clean
-	rm -rf $(NAME)
-	rm -rf $(ASM)
-	make fclean -C $(LIBFT_DIR)
+	@rm -rf $(NAME)
+	@rm -rf $(ASM)
+	@make fclean -C $(LIBFT_DIR)
 
 re: fclean all
 
