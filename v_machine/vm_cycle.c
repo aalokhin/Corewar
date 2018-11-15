@@ -80,7 +80,7 @@ int check_if_lives(t_cycle *main_cycle, t_flags *params)
 				(*main_cycle).winner_id = (*tmp).parent_nbr;
 			(*main_cycle).winner_name = (*tmp).name;
 		}
-		if ((*tmp).lives == 0 && (*tmp).if_live)
+		if ((*tmp).lives == 0 && (*tmp).if_live && (*tmp).live_cycle > (*main_cycle).cycle_die)
 		{
 			(*tmp).if_live = 0;
 			(*main_cycle).processes--;

@@ -35,7 +35,7 @@ int live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *ma
 			{
 				//(*tmp).if_live = 1;
 				(*tmp).last_live_cycle = (*main_cycle).cycles;
-				(*tmp).lives++;
+				//(*tmp).lives++;
 				if (((*main_cycle).verbose & 1))
 					//ft_printf("A process shows that player %s (champion_name) is alive.\n", (*tmp).name);
 				{
