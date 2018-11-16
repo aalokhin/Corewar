@@ -71,7 +71,7 @@ void 	bytes_above_filler(t_binfile *file, t_lable *label)
 	}
 }
 
-void	token_length(t_t *token, int i, t_lable *label) //int 	token_arg_length(t_t *token, int i) by nastia 
+void	token_length(t_t *token, int i, t_lable *label)
 {
 	token->bytes_above_i = bytes_above_i(label);
 	token->c_len = 1;

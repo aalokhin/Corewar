@@ -62,25 +62,30 @@ int			label_name_is_duplicate(t_binfile *file, char *label_name)
 	return (0);
 }
 
-char		*label_name_is_valid(t_binfile *file, char *str) /// only label chars copier :)
+int 	label_name_is_valid(t_binfile *file, t_lable *label, char *str)
 {
 	int		i;
 	char	*label_name;
 
 	i = 0;
 	if (!(label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(str) + 1)))
-		return (NULL);
+		return (0);
 	while (str[i] && str[i] != LABEL_CHAR)
 	{
 		if (!(ft_strchr(LABEL_CHARS, str[i])))
-			return (NULL);
+			return (0);
 		label_name[i] = str[i];
 		i++;
 	}
 	label_name[i] = ':';
 	label_name[i + 1] = '\0';
-	file->fd = file->fd;
-	return (label_name_is_duplicate(file, label_name) ? NULL : label_name);
+	if (label_name_is_duplicate(file, label_name))
+	{
+		printf("Lexical error at [%d:%d]\n", 2, 0);
+		return (0);
+	}
+	label->label_name = label_name;
+	return (1);
 }
 
 int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i) /// перевіряємо чи існує такий лейбл і чи аргументи співпадають з табличкою  

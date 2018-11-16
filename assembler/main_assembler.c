@@ -23,7 +23,7 @@ int				file_processing(t_binfile *bin)
 	fill_name_comment(&(*bin));
 	ft_strdel(&((*bin).f_contents)); //*********************** magic ept
 	(*bin).f_contents = ft_strdup(file_contents); //*********************** magic ept
-	if (!(parse_commands(&(*bin))))//collecting commands labels and staff <==================== Molly
+	if (!(parse_commands(&(*bin), 0, NULL, NULL)))
 		return (0);
 	label_distance(&(*bin));
 	if ((*bin).flag_a == 1)

@@ -40,21 +40,27 @@ static t_op	g_op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-int  command_name(char *name)
+int  command_name(char *name, t_t *token)
 {
-	 int     i;
+	token->c_name = 0;
 
-	 i = 0;
-	 while (g_op_tab[i].name)
+	 while (g_op_tab[token->c_name].name)
 	 {
-		if ((ft_strcmp(g_op_tab[i].name, name) == 0))
-			return (i);
-		i++;
+		if ((ft_strcmp(g_op_tab[token->c_name].name, name) == 0))
+		{
+			token->name_c = ft_strdup(name);
+			token->arguments =  g_op_tab[token->c_name].nb_params; //ft_cmd_arguments(token->name_c);
+			token->lbl_size = ft_cmd_lbls(token->name_c);
+			token->has_codage = g_op_tab[token->c_name].has_pcode;//has_codage(token->name_c);
+			token->opcode = g_op_tab[token->c_name].opcode;
+			return (token->c_name);
+		}
+		token->c_name++;
 	 }
 	 return (-1);
 }
 
-void			labels_linker(t_binfile *file, t_lable 	*label)
+t_lable		*labels_linker(t_binfile *file, t_lable *label)
 {
 	t_lable		*tmp;
 
@@ -71,6 +77,8 @@ void			labels_linker(t_binfile *file, t_lable 	*label)
 		tmp->next = label;
 		label->prev = tmp;
 	}
+	label_length(file, label);
+	return (NULL);
 }
 
 void			command_linker(t_lable 	*label, t_t 	*token)
@@ -109,18 +117,6 @@ int 	token_codage(t_t *token, int i)
 	return (dec);
 }
 
-// void	tabs_remover(char *str)
-// {
-// 	int i = 0;
-
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '\t')
-// 			str[i] = ' ';
-// 		i++;
-// 	}
-// }
-
 int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string, int *i)
 {
 	char	**str = NULL;
@@ -158,110 +154,42 @@ int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string,
 	}
 	return (1);
 }
-int 	line_definer(char *copy)
+
+int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 {
-	int l = 0;
-
-	if (ft_strchr(copy, '.'))
-		return (1);
-	while (copy[l])
-	{
-		if (!(WHITESPACE(copy[l])))
-			return (0);
-		l++;
-	}
-	return (1);
-}
-
-int 	count_ns(char *str)
-{
-	int  i = 0;
-	int k = 0;
-
-
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			k++;
-		i++;
-	}
-	return (k);
-}
-
-int		parse_commands(t_binfile *file)
-{
-	char	**str = NULL;
-	char	**str_n = NULL;
 	t_t 	*token = NULL;
-	char	**copy_n = NULL;
-
-	copy_n = (ft_strsplit(file->copy, '\n'));
 	t_lable	*label = NULL;
-	int i = 0;
-	int n = 0;
-	int k = 0;
 	file->labels_list = NULL;
-	//tabs_remover(file->f_contents);
+
 	str_n = (ft_strsplit(file->f_contents, '\n'));
-	while (str_n[n])
+	while (*str_n)
 	{
-		while (copy_n[k] && line_definer(copy_n[k]))
-			k++;
 		i = 0;
-		str = ft_strsplit(str_n[n], ' ');
+		str = ft_strsplit(*str_n, ' ');
 		if (!(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':')))
 		{
 			if (label)
-			{
-				label_length(file, label);
-				labels_linker(file, label);
-				label = NULL;
-			}
+				label = labels_linker(file, label);;
 			label = (t_lable *)ft_memalloc(sizeof(t_lable));
-			label->label_name = label_name_is_valid(file, str[i++]);
-			if (label->label_name == NULL)
-			{
-				printf("Lexical error at [%d:%d]\n", k + 2, 0);
+			if (!(label_name_is_valid(file, label, str[i++])))
 				return (0);
-			}
 		}
 		if (str[i])
 		{
 			if (!label)
 				label = (t_lable *)ft_memalloc(sizeof(t_lable));
 			token = (t_t *)ft_memalloc(sizeof(t_t));
-			token->c_name = command_name(str[i]);
-			token->line_num = k;
-			token->line_copy = ft_strdup(copy_n[k++]);
-			if (command_name(str[i]) == -1)
+			if (command_name(str[i], token) == -1)
 				return (error_command(token, str[i]));
-			token->name_c = ft_strdup(str[i++]);
-			token->arguments =  g_op_tab[token->c_name].nb_params; //ft_cmd_arguments(token->name_c);
-			token->lbl_size = ft_cmd_lbls(token->name_c);
-			token->has_codage = g_op_tab[token->c_name].has_pcode;//has_codage(token->name_c);
-			token->opcode = g_op_tab[token->c_name].opcode;
-			if (!arguments_filler(file, label, token, str_n[n], &i))
+			if (++i && (!arguments_filler(file, label, token, *str_n, &i)))
 				return (0);
 		}
 		if (!file->name || !file->comment)
 			return (error_message(token, str[0]));
-		//printf("%s\n", str_n[n]);
-		n++;
-		//printf("%s\n", );
-		//// delete str to avoid leaks
+		str_n++;
 	}
-	// if (n != count_ns(file->f_contents) - 1)  //commented this line because validation should be done earlier
-	// {
-	// 	printf ("%s\n", "Syntax error - unexpected end of input (Perhaps you forgot to end with a newline?)");
-	// 	return (0);
-	// }
-	if (label != NULL)
-	{
-		label_length(file, label);
+	if (label)
 		labels_linker(file, label);
-	}
 	file_length(file);
 	return (1);
-
-
 }  

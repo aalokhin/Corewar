@@ -72,7 +72,8 @@ typedef struct 				s_lable
 	struct s_lable			*prev;
 	int 					lbl_len; //length of lable
 	int 					bytes_above;
-	//int 					bytes_below; 
+	int						line_num;
+	char					*line_copy;
 }							t_lable;
 
 
@@ -163,7 +164,7 @@ void			ft_clean_parse(char **parse);//strdel char * array
 
 
 
-int			parse_commands(t_binfile *file);
+int			parse_commands(t_binfile *file, int i, char **str, char **str_n);
 int			ft_cmd_arguments(char	*c_name);
 
 int			ft_cmd_lbls(char	*c_name);
@@ -171,7 +172,7 @@ int			has_codage(char	*c_name);
 
 //********************************* VALIDATION FUNCTIONS******************
 
-char		*label_name_is_valid(t_binfile *file, char *str);
+int			label_name_is_valid(t_binfile *file, t_lable *label, char *str);
 int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i);
 int			error_message(t_t *token, char *arg);
 int 		error_invalid_arg_type(t_t *command, int arg, int type);
