@@ -101,5 +101,7 @@ int		read_bots(t_flags *params, int fd, header_t bots[4])
 		close(fd);
 		(*params).j++;
 	}
+	(*params).i = 0;
+	(*params).j = 0;
 	return (1);
 }

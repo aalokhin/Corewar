@@ -60,6 +60,7 @@ typedef struct s_cycle
 	int start_bots;
 	int verbose;
 	int max_id;
+	int shift;
 	t_proc *head_proc;
 }			t_cycle;
 
