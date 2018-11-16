@@ -52,33 +52,6 @@ void processes_add(t_proc **head, unsigned char *map, t_cycle *main_cycle, int i
 	(*main_cycle).head_proc = *head;
 }
 
-void   delete_unneeded(t_proc **head, t_cycle *main_cycle)
-{
- t_proc *prev;
- t_proc *tmp;
-
- tmp = *head;
- prev = tmp;
- while (tmp != NULL && (tmp->if_live == 0 || (*main_cycle).cycles <= 0))
- {
-  *head = tmp->next;
-  free(tmp);
-  tmp = *head;
- }
- while (tmp != NULL)
- {
-  while (tmp != NULL && (tmp->if_live != 0 || (*main_cycle).cycles > 0))
-  {
-   prev = tmp;
-   tmp = tmp->next;
-  }
-  if (tmp == NULL)
-   return ;
-  prev->next = tmp->next;
-  tmp = prev->next;
- }
-}
-
 int check_if_lives(t_cycle *main_cycle, t_flags *params)
 {
 	int res;
@@ -120,40 +93,6 @@ int check_if_lives(t_cycle *main_cycle, t_flags *params)
 	}
 	delete_unneeded(&main_cycle->head_proc, main_cycle);
 	return (res);
-}
-
-void fill_start_map_id(t_cycle *main_cycle, header_t bots[4], t_flags *params)
-{
-	unsigned int i;
-	int j;
-	unsigned int k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (i < MEM_SIZE)
-	{
-		(*main_cycle).indexes[i][0] = 0;
-		(*main_cycle).indexes[i][1] = 0;
-		i++;
-	}
-	i = 0;
-	while (i < MEM_SIZE && j < (*params).bots_quantity)
-	{
-		if (i == bots[j].start_index)
-		{
-			(*main_cycle).indexes[i][1] = 1;
-			k = 0;
-			while (k < bots[j].prog_size)
-			{
-				(*main_cycle).indexes[i][0] = j + 1;
-				i++;
-				k++;
-			}
-			j++;
-		}
-		i++;
-	}
 }
 
 void print_dump(unsigned char *map)

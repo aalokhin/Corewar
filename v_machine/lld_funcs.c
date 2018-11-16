@@ -51,7 +51,6 @@ int		load(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		ft_printf("P%5d | ld %d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
 		(*tmp).argv[1][1]);
 	return (1);
-	(*main_cycle).cycles = (*main_cycle).cycles;
 }
 
 int		lload(t_proc *processes, int cur_proc, t_cycle *main_cycle,
@@ -78,6 +77,5 @@ int		lload(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if (((*main_cycle).verbose >> 2) & 1)
 		ft_printf("P%5d | lld %d r%d\n", cur_proc + 1,
 		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1]);
-	(*main_cycle).cycles = (*main_cycle).cycles;
 	return (1);
 }

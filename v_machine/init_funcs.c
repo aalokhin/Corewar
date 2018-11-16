@@ -74,58 +74,53 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).max_id = 0;
 }
 
+void	processes_init2(t_flags *params, header_t bots[4], unsigned char *map,
+	t_proc *processes)
+{
+	(*processes).real_id = (*params).i;
+	(*processes).name = bots[(*params).i].prog_name;
+	(*processes).current_position = bots[(*params).i++].start_index;
+	(*processes).carry = 0;
+	(*processes).parent_nbr = -1;
+	(*processes).if_live = 1;
+	(*processes).lives = 0;
+	(*processes).cmd = map[(*processes).current_position];
+	if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
+		(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
+	else
+		(*processes).cycles_wait = 1;
+	(*processes).last_live_cycle = 0;
+	(*processes).live_cycle = 0;
+	(*params).j = 0;
+	while ((*params).j < REG_NUMBER)
+		(*processes).regs[(*params).j++] = 0;
+}
+
 t_proc	*processes_init(t_flags *params, header_t bots[4], unsigned char *map)
 {
-	int				i;
-	int				j;
 	t_proc			*processes;
 	t_proc			*tmp;
 
-	j = 0;
-	i = 0;
+	(*params).i = 0;
 	tmp = NULL;
-	while (i < (*params).bots_quantity)
+	while ((*params).i < (*params).bots_quantity)
 	{
-		j = 0;
 		processes = (t_proc *)malloc(sizeof(t_proc));
-		if ((*params).pl_nbr[i][0] && (*params).pl_nbr[i][1] != 0)
-			(*processes).id = (*params).pl_nbr[i][1] - 1;
-		else if ((*params).pl_nbr[i][0] && (*params).pl_nbr[i][1] == 0)
+		if ((*params).pl_nbr[(*params).i][0] &&
+		(*params).pl_nbr[(*params).i][1] != 0)
+			(*processes).id = (*params).pl_nbr[(*params).i][1] - 1;
+		else if ((*params).pl_nbr[(*params).i][0] &&
+			(*params).pl_nbr[(*params).i][1] == 0)
 			(*processes).id = 0;
-		else if (!(*params).pl_nbr[i][0] && tmp)
+		else if (!(*params).pl_nbr[(*params).i][0] && tmp)
 			(*processes).id = (*tmp).id + 1;
 		else
-			(*processes).id = i;
-		(*processes).real_id = i;
-		(*processes).name = bots[i].prog_name;
-		(*processes).current_position = bots[i++].start_index;
-		(*processes).carry = 0;
-		(*processes).parent_nbr = -1;
-		(*processes).if_live = 1;
-		(*processes).lives = 0;
-		(*processes).cmd = map[(*processes).current_position];
-		if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
-			(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
-		else
-			(*processes).cycles_wait = 1;
-		(*processes).last_live_cycle = 0;
-		(*processes).live_cycle = 0;
+			(*processes).id = (*params).i;
+		processes_init2(params, bots, map, processes);
 		(*processes).next = tmp;
 		clear_argv_arr(processes);
-		while (j < REG_NUMBER)
-			(*processes).regs[j++] = 0;
 		(*processes).regs[0] = (unsigned int)(((*processes).id + 1) * -1);
 		tmp = processes;
 	}
 	return (processes);
-}
-
-void	clear_argv_arr(t_proc *processes)
-{
-	(*processes).argv[0][0] = 0;
-	(*processes).argv[0][1] = 0;
-	(*processes).argv[1][0] = 0;
-	(*processes).argv[1][1] = 0;
-	(*processes).argv[2][0] = 0;
-	(*processes).argv[2][1] = 0;
 }

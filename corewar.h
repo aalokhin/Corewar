@@ -170,5 +170,8 @@ int		if_correct_name(unsigned char *str, t_flags *params, int j);
 int		check_magic(unsigned char *str, t_flags *params, int j,
 	header_t bots[4]);
 int		check_comment(unsigned char *str, t_flags *params, int j);
+void   delete_unneeded(t_proc **head, t_cycle *main_cycle);
+void fill_start_map_id(t_cycle *main_cycle, header_t bots[4], t_flags *params);
+
 #endif
 
