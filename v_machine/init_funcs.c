@@ -34,14 +34,12 @@ void	params_init(t_flags *params)
 	int i;
 
 	i = 0;
+	(*params).i = 1;
+	(*params).j = 0;
 	(*params).a_aff = 0;
 	(*params).d_dumps_memory = 0;
-	(*params).s_cycles = 0;
 	(*params).v_verbosity = 0;
-	(*params).binary = 0;
-	(*params).b_stealth = 0;
 	(*params).ncurses = 0;
-	(*params).n_stealth = 0;
 	(*params).bots_quantity = 0;
 	while (i < MAX_PLAYERS)
 	{
@@ -73,6 +71,7 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).head_proc = NULL;
 	(*main_cycle).start_bots = (*params).bots_quantity;
 	(*main_cycle).verbose = (*params).v_verbosity;
+	(*main_cycle).max_id = 0;
 }
 
 t_proc	*processes_init(t_flags *params, header_t bots[4], unsigned char *map)

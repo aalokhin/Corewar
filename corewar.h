@@ -59,19 +59,18 @@ typedef struct s_cycle
 	int winner_id;
 	int start_bots;
 	int verbose;
+	int max_id;
 	t_proc *head_proc;
 }			t_cycle;
 
 typedef struct s_flags
 {
+	int i;
+	int j;
 	int a_aff;
 	int d_dumps_memory;
-	int s_cycles;
 	int v_verbosity;
-	int binary;
-	int b_stealth;
 	int ncurses;
-	int n_stealth;
 	int pl_nbr[4][2];
 	int bots_quantity;
 	char *players[4];

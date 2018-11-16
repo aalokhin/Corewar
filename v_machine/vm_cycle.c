@@ -18,8 +18,10 @@ void processes_add(t_proc **head, unsigned char *map, t_cycle *main_cycle, int i
 	tmp = (t_proc *)malloc(sizeof(t_proc));
 	if ((**head).id == 0)
 		tmp->id = (*main_cycle).start_bots;
-	else
+	else if ((*main_cycle).max_id <= (**head).real_id)
 		tmp->id = (**head).real_id + 1;
+	else
+		tmp->id = (*main_cycle).max_id + 1;
 	tmp->real_id = (**head).real_id + 1;
 	tmp->name = (*parent).name;
 	tmp->current_position = index;
@@ -44,9 +46,37 @@ void processes_add(t_proc **head, unsigned char *map, t_cycle *main_cycle, int i
 		tmp->regs[j] = (*parent).regs[j];
 		j++;
 	}
+	(*main_cycle).max_id = tmp->id;
 	tmp->next = *head;
 	*head = tmp;
 	(*main_cycle).head_proc = *head;
+}
+
+void   delete_unneeded(t_proc **head, t_cycle *main_cycle)
+{
+ t_proc *prev;
+ t_proc *tmp;
+
+ tmp = *head;
+ prev = tmp;
+ while (tmp != NULL && (tmp->if_live == 0 || (*main_cycle).cycles <= 0))
+ {
+  *head = tmp->next;
+  free(tmp);
+  tmp = *head;
+ }
+ while (tmp != NULL)
+ {
+  while (tmp != NULL && (tmp->if_live != 0 || (*main_cycle).cycles > 0))
+  {
+   prev = tmp;
+   tmp = tmp->next;
+  }
+  if (tmp == NULL)
+   return ;
+  prev->next = tmp->next;
+  tmp = prev->next;
+ }
 }
 
 int check_if_lives(t_cycle *main_cycle, t_flags *params)
@@ -74,6 +104,8 @@ int check_if_lives(t_cycle *main_cycle, t_flags *params)
 			(*tmp).if_live = 0;
 			(*main_cycle).processes--;
 			(*tmp).lives = 0;
+			if ((*tmp).id > (*main_cycle).max_id)
+				(*main_cycle).max_id = (*tmp).id;
 			(*main_cycle).indexes[(*tmp).current_position][1] = 0;
 			if (((*params).v_verbosity >> 3) & 1)
 				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
@@ -86,6 +118,7 @@ int check_if_lives(t_cycle *main_cycle, t_flags *params)
 		}
 		tmp = tmp->next;
 	}
+	delete_unneeded(&main_cycle->head_proc, main_cycle);
 	return (res);
 }
 
@@ -273,9 +306,9 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			}
 			main_cycle.checks_if_die--;
 		}
-		/*if (main_cycle.second_limit > 0)
+		/*if ((*params).ncurses == 1 && main_cycle.second_limit > 0)
 			usleep((useconds_t)((int)1000000 / main_cycle.second_limit));
-		else
+		else if ((*params).ncurses == 1 && main_cycle.second_limit <= 0)
 			main_cycle.second_limit = 1;*/
 		main_cycle.cycles++;
 		if (((*params).d_dumps_memory > 0 && main_cycle.cycles == (*params).d_dumps_memory))
@@ -283,6 +316,13 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 			print_dump(map);
 			break ;
 		}
+	}
+	i = 0;
+	while (i < (*params).bots_quantity)
+	{
+		free(bots[i].exec_part);
+		bots[i].exec_part = NULL;
+		i++;
 	}
 	if ((*params).ncurses == 1)
 	{
