@@ -52,12 +52,10 @@ int			label_name_is_duplicate(t_binfile *file, char *label_name)
 			if (tmp->label_name)
 			{
 				if (!(ft_strcmp(tmp->label_name, label_name)))
-				{
-					printf("%s\n", "duplicate labels name");
 					return (1);
-				}
 			}
-			tmp = tmp->next;		}
+			tmp = tmp->next;
+		}
 	}
 	return (0);
 }
@@ -81,14 +79,32 @@ int 	label_name_is_valid(t_binfile *file, t_lable *label, char *str)
 	label_name[i + 1] = '\0';
 	if (label_name_is_duplicate(file, label_name))
 	{
-		printf("Lexical error at [%d:%d]\n", 2, 0);
+		//printf("Lexical error at [%d:%d]\n", label->line_num, define_line_colomn(file, str, label->line_num));
+		printf("%s\n", "duplicate label");
 		return (0);
 	}
 	label->label_name = label_name;
 	return (1);
 }
 
-int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i) /// перевіряємо чи існує такий лейбл і чи аргументи співпадають з табличкою  
+int 		all_digits(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		if (!(ft_isdigit(str[i])) && str[i] != '-')
+		{
+			printf("%c\n",str[i] );
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+
+int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
 {
 	int		size = 0;
 	char	*label_name;
@@ -96,17 +112,12 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i) /// п�
 
  	to_count = g_op_tab[token->c_name].param_types[i];
 	size = (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%'))) ? 1 : ft_strchr(arg ,'%') ? 2 : 4;
-	file->fd = file->fd;
  	if (size == to_count || to_count == 7 || (size < to_count && to_count - size != size  && (to_count - size == T_REG
  		|| to_count  - size == T_DIR ||  to_count - size == T_IND)))
- 	{
-	//printf("%s\n", arg );
- 		// if (size == T_REG)
- 		// {
- 		// 	printf(" === %s\n", arg);
- 		// 	if (!arg + 1 || !(ft_isdigit(arg[1])) || ft_atoi(arg + 1)  > 16) /// not sure if needed  reg less than 16 :)
- 		// 		return (error_message(token, arg));
- 		// }
+	{
+ 		if (size == T_REG)
+ 			if (!(arg + 1) || !(ft_isdigit(arg[1])) || !all_digits(arg + 1))
+ 				return (error_message(file, arg, token->line_num));
  		if (ft_strstr(arg, "%:"))
  		{
  			label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(arg));
@@ -116,11 +127,21 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i) /// п�
  			if (!(ft_strstr(file->f_contents, label_name)))
  			{
  				label_name[ft_strlen(label_name) - 1] = '\0';
- 				return (error_message_label(token, label_name, arg));
+ 				return (error_message_label(file, token, label_name, arg));
  			}
+ 			return (1);
  		}
- 		return (1);
- 	}
- 		return (error_invalid_arg_type(token, i, size));
- 	}
+ 		// if (size == T_DIR)
+ 		// 	 if (!(arg + 1) || !(ft_isdigit(arg[1])) || !all_digits(arg + 1))
+ 		// 		return (error_message(file, arg, token->line_num));
+ 		// if (size == T_IND)
+ 		// {
+ 		// 	 if (!all_digits(arg))
+ 		// 		return (error_message(file, arg, token->line_num));
+ 		// }
+ 		else
+ 			return (1);
+	 }
+ 	return (error_invalid_arg_type(token, i, size));
+}
 //label_exist

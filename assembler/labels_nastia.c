@@ -1,9 +1,9 @@
 #include "asm.h"
 
-int					find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
+int			find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 {
-	char			*search;
-	t_lable			*tmp_lbl;
+	char	*search;
+	t_lable	*tmp_lbl;
 
 	tmp_lbl = bin->labels_list;
 	if (ft_strstr(str, "%:"))
@@ -26,17 +26,13 @@ int					find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 	}
 	if (ft_strstr(str, "r"))
 		return (ft_atoi(ft_strstr(str, "r") + 1));
+	else if (ft_strstr(str, "%"))
+		return (ft_atoi(ft_strstr(str, "%") + 1));
 	else
-	{
-		if (ft_strstr(str, "%"))
-			return (ft_atoi(ft_strstr(str, "%") + 1));
-		else
-			return (ft_atoi(str));
-	}
-	// return (ft_strstr(str, "r") ? ft_atoi(ft_strstr(str, "r") + 1) : ft_strstr(str, "%")  ? ft_atoi(ft_strstr(str, "%") + 1) : ft_atoi(str));
+		return (ft_atoi(str));
 }
 
-void					label_distance(t_binfile *bin)
+int					label_distance(t_binfile *bin)
 {
 	int					k;
 	t_lable				*tmp;
@@ -59,4 +55,6 @@ void					label_distance(t_binfile *bin)
 		}
 		tmp = tmp->next;
 	}
+	return (1);
 }
+

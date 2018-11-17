@@ -22,20 +22,28 @@ int				fill_name_comment(t_binfile *bin)
 	size_t		i;
 	char		*str;
 	size_t		tmp;
+	char 		a;
 
+	a = 22;
 	i = 0;
 	tmp = 0;
 	if (ft_strstr(bin->f_contents, ".name") &&\
 	ft_strstr(bin->f_contents, ".comment"))
 	{
 		str = ft_strstr(bin->f_contents, ".name");
-		fill_str_help(str, &i, &tmp);
+		// if (ft_strchr(str, a) && ft_strchr(ft_strchr(str, a), a))
+			fill_str_help(str, &i, &tmp);
+		// else
+		// 	return (error_message(bin, NULL, 1));
 		bin->name = ft_strnew(PROG_NAME_LENGTH);
 		ft_strncpy(bin->name, &str[tmp], i - tmp);
 		str = ft_strstr(bin->f_contents, ".comment");
 		i = 0;
 		tmp = 0;
-		fill_str_help(str, &i, &tmp);
+		// if (ft_strchr(str, a) && ft_strchr(ft_strchr(str, a), a))
+			fill_str_help(str, &i, &tmp);
+		// else
+		// 	return (error_message(bin, NULL, 2));
 		bin->comment = ft_strnew(COMMENT_LENGTH);
 		ft_strncpy(bin->comment, &str[tmp], i - tmp);
 		return (1);

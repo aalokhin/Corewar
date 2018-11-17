@@ -20,12 +20,14 @@ int				file_processing(t_binfile *bin)
 	(*bin).copy = ft_strdup(file_contents);
 	parse_file(&(*bin), &file_contents);
 	fill_magic_start(&(*bin));
-	fill_name_comment(&(*bin));
+	if (!(fill_name_comment(&(*bin))))
+		return (0);
 	ft_strdel(&((*bin).f_contents)); //*********************** magic ept
 	(*bin).f_contents = ft_strdup(file_contents); //*********************** magic ept
 	if (!(parse_commands(&(*bin), 0, NULL, NULL)))
 		return (0);
-	label_distance(&(*bin));
+	if (!(label_distance(&(*bin))))
+		return (0);
 	if ((*bin).flag_a == 1)
 	{
 	 	ft_print_flag_a(&(*bin));

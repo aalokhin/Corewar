@@ -125,89 +125,107 @@ void	ft_print_inv_input()
 	ft_printf("Input error\n");
 }
 
-int 		colomn_definer(t_t *token, char *arg)
+int 		define_line_colomn(t_binfile *file, char *arg, int line_num)
 {
-	char	*str;
-	int 	i = 0;
-	int  	l = 0;
+	char 	*copy;
+	int		i = 0;
+	int 	a = 0;
+	int 	l = 0;
+	int		n = 0;
+	 int comma = 0;
 
-	str = token->line_copy;
-	while (str[i])
+	copy = file->copy;
+	while (copy[i])
 	{
-		if (str[i] == arg[l])
+		if (copy[i] == '\n' && n++)
 		{
-			l++;
-			if (arg[l + 1] == '\0')
-				return (i - l);
+			i += copy[i + 1] != '\n' ? 1 : 0;
+			if (n == line_num)
+			{
+				l = i;
+				while (copy[i] != '\n' && arg[a])
+				{
+					comma += copy[i] == ',' ? 1 : 0;
+					if (copy[i] == arg[a] && i++ && a++)
+					{
+						if (arg[a] == '\0')
+						{
+							while (WHITESPACE(copy[i]))
+								i++;
+							comma += copy[i] == ',' ? 1 : 0;
+							return (i - l - a);
+						}
+					}
+					if (copy[i] != arg[a])
+					{
+						i++;
+						a = 0;
+					}
+				}
+			}
 		}
-		if (str[i] != arg[l - 1])
-			l = 0;
 		i++;
 	}
-	return (i - l);
+	return (-1);
 }
 
-int			error_message_label(t_t *token, char *label, char *arg)
+int			error_message_label(t_binfile *file, t_t *token, char *label, char *arg)
 {
-	int 	colomn = colomn_definer(token, arg) + 1;
+	int 	colomn = define_line_colomn(file, arg, token->line_num);
 
-	printf("No such label %s while attempting to dereference token [TOKEN][%d:%d] %s {%s}\n",  label, token->line_num, colomn, "DIRECT_LABEL", arg);
+	printf("No such label %s while attempting to dereference token [TOKEN][%d:%d] %s {%s}\n", label, token->line_num + 1, colomn + 1, "DIRECT_LABEL", arg);
 	return (0);
 }
 
-int 		error_command(t_t *token, char *str)
+int 		error_command(t_binfile *file, char *str, int line_num)
 {
-	int 	colomn = colomn_definer(token, str);
+	int 	colomn = define_line_colomn(file, str, line_num);
 
-	printf("Invalid instruction at token [TOKEN][%d:%d] INSTRUCTION {%s}\n", token->line_num + 2, colomn, str );
+	printf("Invalid instruction at token [TOKEN][%d:%d] INSTRUCTION {%s}\n", line_num + 1, colomn, str);
 	return (0);
 }
 
-int			error_message(t_t *token, char *arg)
- {
- 	char 	*e;
- 	int 	colomn = colomn_definer(token, arg) + 1;
 
- 	if (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%')))
- 		e = ft_strdup("REGISTER");
- 	else if (ft_strstr(arg, "%:"))
- 		e = ft_strdup("DIRECT_LABEL");
- 	else if (ft_strchr(arg ,'%'))
- 		e = ft_strdup("DIRECT");
- 	else if (ft_atoi(arg) != 0)
- 		e = ft_strdup("INDIRECT");
- 	else if (ft_strchr(arg , SEPARATOR_CHAR))
- 		e = ft_strdup("SEPARATOR");
- 	else if (ft_strchr(arg, ':'))
- 		e = ft_strdup("LABEL");
- 	else
- 		e = ft_strdup("INSTRUCTION");
- 	printf("Syntax error at token [TOKEN][%d:%d] %s {%s}\n",  token->line_num, colomn, e, arg);
- 	return (0);
- }
+int			error_message(t_binfile *file, char *arg, int line_num)
+{
+	char 	*e;
+	int 	colomn;
 
- int 		error_invalid_arg_type(t_t *command, int arg, int size)
- {
- 	char 	*type;
+	if (line_num == 1 || line_num == 2)
+	{
+		printf("Syntax error at token [TOKEN][%d:%d] ENDLINE\n", line_num, 0);
+		return (0);
+	}
+	colomn = define_line_colomn(file, arg, line_num);
+	if (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%')))
+		e = ft_strdup("REGISTER");
+	else if (ft_strstr(arg, "%:"))
+		e = ft_strdup("DIRECT_LABEL");
+	else if (ft_strchr(arg ,'%'))
+		e = ft_strdup("DIRECT");
+	else if (ft_atoi(arg) != 0)
+		e = ft_strdup("INDIRECT");
+	else if (ft_strchr(arg , SEPARATOR_CHAR))
+		e = ft_strdup("SEPARATOR");
+	else if (ft_strchr(arg, ':'))
+		e = ft_strdup("LABEL");
+	else
+		e = ft_strdup("INSTRUCTION");
+	printf("Syntax error at token [TOKEN][%d:%d] %s {%s}\n", line_num + 1, colomn, e, arg);
+	return (0);
+}
 
- 	if (size == 1)
- 		type = ft_strdup("register");
- 	else if (size == 2)
- 		type = ft_strdup("direct");
- 	else
- 		type = ft_strdup("indirect");
- 	ft_printf("Invalid parameter %d type %s for instruction %s\n", arg, type, command->name_c);
- 	return (0);
- }
+int 		error_invalid_arg_type(t_t *command, int arg, int size)
+{
+	char 	*type;
 
-
-//  .name "zork"
-// .comment "I'M ALIIIIVE"
-
-// l2:		sti r, %:live, %1
-// 		and r1, %0, r1
-
-// live:	live %1
-// 		zjmp %:live
-
+	if (size == 1)
+		type = ft_strdup("register");
+	else if (size == 2)
+		type = ft_strdup("direct");
+	else
+		type = ft_strdup("indirect");
+	ft_printf("Invalid parameter %d type %s for instruction %s\n", arg, type, command->name_c);
+	return (0);
+}
  

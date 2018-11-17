@@ -121,7 +121,7 @@ typedef struct	s_binfile
 
 
 
-void	label_distance(t_binfile 	*bin);
+int				label_distance(t_binfile 	*bin);
 
 //********************************* PRINTING FUNCTIONS******************
 
@@ -165,19 +165,20 @@ void			ft_clean_parse(char **parse);//strdel char * array
 
 
 int			parse_commands(t_binfile *file, int i, char **str, char **str_n);
-int			ft_cmd_arguments(char	*c_name);
+//int			ft_cmd_arguments(char	*c_name);
 
 int			ft_cmd_lbls(char	*c_name);
-int			has_codage(char	*c_name);
+//int			has_codage(char	*c_name);
 
 //********************************* VALIDATION FUNCTIONS******************
 
 int			label_name_is_valid(t_binfile *file, t_lable *label, char *str);
 int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i);
-int			error_message(t_t *token, char *arg);
+int			error_message(t_binfile *file, char *arg, int line_num);
 int 		error_invalid_arg_type(t_t *command, int arg, int type);
-int			error_message_label(t_t *token, char *label, char *arg);
-int 		error_command(t_t *token, char *str);
+int			error_message_label(t_binfile *file, t_t *token, char *label, char *arg);
+int			error_command(t_binfile *file, char *str, int line_num);
+int 		define_line_colomn(t_binfile *file, char *arg, int line_num);
 
 //********************************* LENGTH COUNTER******************
 

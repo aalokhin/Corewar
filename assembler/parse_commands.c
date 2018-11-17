@@ -135,7 +135,7 @@ int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string,
 		// if (arg1 + 1 != g_op_tab[token->c_name].nb_params)
 		// 	str[*i][ft_strlen(str[*i]) - 1] = '\0';
 		if (str[*i] == '\0')
-			return (error_message(token, str[*i]));
+			return (error_message(file, str[*i], token->line_num));
 		if (!(arguments_validator(file, token, str[*i], arg1)))
  			return (0);
 		token->args[arg1][0] = (ft_strchr(str[*i] ,'r') && !(ft_strchr(str[*i] ,'%'))) ? 1 : ft_strchr(str[*i] ,'%') ? 10 : 11;
@@ -147,12 +147,44 @@ int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string,
 				token->codage = token_codage(token, 0);
 			token_length(token, 0, label);
 			if (str[*i + 1])
-				return (error_message(token, str[*i + 1]));
+				return (error_message(file, str[*i + 1], token->line_num));
 			break ;
 		}
 		(*i)++;
 	}
 	return (1);
+}
+
+int		define_line_num(char *copy, char *str_n, int f, int l)
+{
+	int 	k = 0;
+
+	while (copy[f])
+	{
+		if (copy[f] == '\n' && k++)
+		{
+			if (copy[f + 1] != '\n')
+				f++;
+			l = 0;
+			while (copy[f] && copy[f] != '\n' && copy[f] != '.' && l != -1)
+			{
+				while (WHITESPACE(copy[f]) || copy[f] == ',')
+					f++;
+				while (WHITESPACE(str_n[l]) || str_n[l] == ',')
+					l++;
+				if (copy[f] != str_n[l])
+					l = -1;
+				if (copy[f] == str_n[l])
+				{
+					f++;
+					if (str_n[++l] == '\0')
+						return (k);
+				}
+			}
+		}
+		f++;
+	}
+	return (0);
 }
 
 int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
@@ -171,21 +203,28 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 			if (label)
 				label = labels_linker(file, label);;
 			label = (t_lable *)ft_memalloc(sizeof(t_lable));
+			label->line_num = define_line_num(file->copy, *str_n, 0, 0);
+			if (!file->name || !file->comment)
+				return (error_message(file, str[0], label->line_num));
 			if (!(label_name_is_valid(file, label, str[i++])))
 				return (0);
 		}
 		if (str[i])
 		{
 			if (!label)
+			{
 				label = (t_lable *)ft_memalloc(sizeof(t_lable));
+				label->line_num = define_line_num(file->copy, *str_n, 0, 0);
+			}
 			token = (t_t *)ft_memalloc(sizeof(t_t));
+			token->line_num = define_line_num(file->copy, *str_n, 0, 0);
+			if (!file->name || !file->comment)
+				return (error_message(file, str[0], label->line_num));
 			if (command_name(str[i], token) == -1)
-				return (error_command(token, str[i]));
+				return (error_command(file, str[i], token->line_num));
 			if (++i && (!arguments_filler(file, label, token, *str_n, &i)))
 				return (0);
 		}
-		if (!file->name || !file->comment)
-			return (error_message(token, str[0]));
 		str_n++;
 	}
 	if (label)
