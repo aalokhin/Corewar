@@ -78,7 +78,9 @@ void	token_length(t_t *token, int i, t_lable *label)
 	token->c_len += token->has_codage;
 	while (i < g_op_tab[token->c_name].nb_params)
 	{
-		token->c_len += token->args[i][0] == 0 ? 0 : token->args[i][0] == 1 ? 1 : token->args[i][0] == 11 ? 2 : token->lbl_size;
+		token->c_len += token->args[i][0] == 0
+	? 0 : token->args[i][0] == 1 ? 1 : token->args[i][0] == 11 ?
+	2 : token->lbl_size;
 		i++;
 	}
 }

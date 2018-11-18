@@ -125,63 +125,19 @@ void	ft_print_inv_input()
 	ft_printf("Input error\n");
 }
 
-int 		define_line_colomn(t_binfile *file, char *arg, int line_num)
-{
-	char 	*copy;
-	int		i = 0;
-	int 	a = 0;
-	int 	l = 0;
-	int		n = 0;
-	 int comma = 0;
-
-	copy = file->copy;
-	while (copy[i])
-	{
-		if (copy[i] == '\n' && n++)
-		{
-			i += copy[i + 1] != '\n' ? 1 : 0;
-			if (n == line_num)
-			{
-				l = i;
-				while (copy[i] != '\n' && arg[a])
-				{
-					comma += copy[i] == ',' ? 1 : 0;
-					if (copy[i] == arg[a] && i++ && a++)
-					{
-						if (arg[a] == '\0')
-						{
-							while (WHITESPACE(copy[i]))
-								i++;
-							comma += copy[i] == ',' ? 1 : 0;
-							return (i - l - a);
-						}
-					}
-					if (copy[i] != arg[a])
-					{
-						i++;
-						a = 0;
-					}
-				}
-			}
-		}
-		i++;
-	}
-	return (-1);
-}
-
 int			error_message_label(t_binfile *file, t_t *token, char *label, char *arg)
 {
-	int 	colomn = define_line_colomn(file, arg, token->line_num);
+	int 	colomn = define_line_colomn(file->copy, arg, token->line_num);
 
-	printf("No such label %s while attempting to dereference token [TOKEN][%d:%d] %s {%s}\n", label, token->line_num + 1, colomn + 1, "DIRECT_LABEL", arg);
+	ft_printf("No such label %s while attempting to dereference token [TOKEN][%d:%d] %s \"%s\"\n", label, token->line_num + 1, colomn + 1, "DIRECT_LABEL", arg);
 	return (0);
 }
 
 int 		error_command(t_binfile *file, char *str, int line_num)
 {
-	int 	colomn = define_line_colomn(file, str, line_num);
+	int 	colomn = define_line_colomn(file->copy, str, line_num);
 
-	printf("Invalid instruction at token [TOKEN][%d:%d] INSTRUCTION {%s}\n", line_num + 1, colomn, str);
+	ft_printf("Invalid instruction at token [TOKEN][%d:%d] INSTRUCTION \"%s\"\n", line_num + 1, colomn, str);
 	return (0);
 }
 
@@ -191,12 +147,13 @@ int			error_message(t_binfile *file, char *arg, int line_num)
 	char 	*e;
 	int 	colomn;
 
-	if (line_num == 1 || line_num == 2)
+	colomn = define_line_colomn(file->copy, arg, line_num);
+	//printf("%s %d\n", arg, colomn);
+	if (ft_strstr(arg, ".name") || ft_strstr(arg, ".comment"))
 	{
-		printf("Syntax error at token [TOKEN][%d:%d] ENDLINE\n", line_num, 0);
+		ft_printf("Syntax error at token [TOKEN][%d:%d] ENDLINE\n", line_num + 1, colomn);
 		return (0);
 	}
-	colomn = define_line_colomn(file, arg, line_num);
 	if (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%')))
 		e = ft_strdup("REGISTER");
 	else if (ft_strstr(arg, "%:"))
@@ -211,7 +168,7 @@ int			error_message(t_binfile *file, char *arg, int line_num)
 		e = ft_strdup("LABEL");
 	else
 		e = ft_strdup("INSTRUCTION");
-	printf("Syntax error at token [TOKEN][%d:%d] %s {%s}\n", line_num + 1, colomn, e, arg);
+	ft_printf("Syntax error at token [TOKEN][%d:%d] %s \"%s\"\n", line_num + 1, colomn, e, arg);
 	return (0);
 }
 

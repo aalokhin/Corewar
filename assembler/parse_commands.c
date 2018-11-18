@@ -49,9 +49,9 @@ int  command_name(char *name, t_t *token)
 		if ((ft_strcmp(g_op_tab[token->c_name].name, name) == 0))
 		{
 			token->name_c = ft_strdup(name);
-			token->arguments =  g_op_tab[token->c_name].nb_params; //ft_cmd_arguments(token->name_c);
+			token->arguments =  g_op_tab[token->c_name].nb_params;
 			token->lbl_size = ft_cmd_lbls(token->name_c);
-			token->has_codage = g_op_tab[token->c_name].has_pcode;//has_codage(token->name_c);
+			token->has_codage = g_op_tab[token->c_name].has_pcode;
 			token->opcode = g_op_tab[token->c_name].opcode;
 			return (token->c_name);
 		}
@@ -117,23 +117,14 @@ int 	token_codage(t_t *token, int i)
 	return (dec);
 }
 
-int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string, int *i)
+int		arguments_filler(t_binfile *file, t_lable *label, t_t *token, char *string, int *i)
 {
 	char	**str = NULL;
-	file->fd = file->fd;
 	int		arg1 = 0;
 
 	str = ft_strsplit(string, ' ');
 	while (arg1 < g_op_tab[token->c_name].nb_params)
 	{
-		//printf("%s\n", str[*i]);
-		// if (arg1 + 1 != g_op_tab[token->c_name].nb_params && !(ft_strchr(str[*i], ',')))
-		// {
-		// 	printf("%s\n", "faulty --- fuck:)");
-		// 	return (0);
-		// }
-		// if (arg1 + 1 != g_op_tab[token->c_name].nb_params)
-		// 	str[*i][ft_strlen(str[*i]) - 1] = '\0';
 		if (str[*i] == '\0')
 			return (error_message(file, str[*i], token->line_num));
 		if (!(arguments_validator(file, token, str[*i], arg1)))
@@ -153,38 +144,6 @@ int		arguments_filler(t_binfile *file, t_lable	*label, t_t *token, char *string,
 		(*i)++;
 	}
 	return (1);
-}
-
-int		define_line_num(char *copy, char *str_n, int f, int l)
-{
-	int 	k = 0;
-
-	while (copy[f])
-	{
-		if (copy[f] == '\n' && k++)
-		{
-			if (copy[f + 1] != '\n')
-				f++;
-			l = 0;
-			while (copy[f] && copy[f] != '\n' && copy[f] != '.' && l != -1)
-			{
-				while (WHITESPACE(copy[f]) || copy[f] == ',')
-					f++;
-				while (WHITESPACE(str_n[l]) || str_n[l] == ',')
-					l++;
-				if (copy[f] != str_n[l])
-					l = -1;
-				if (copy[f] == str_n[l])
-				{
-					f++;
-					if (str_n[++l] == '\0')
-						return (k);
-				}
-			}
-		}
-		f++;
-	}
-	return (0);
 }
 
 int		parse_commands(t_binfile *file, int i, char **str, char **str_n)

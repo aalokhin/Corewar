@@ -178,7 +178,9 @@ int			error_message(t_binfile *file, char *arg, int line_num);
 int 		error_invalid_arg_type(t_t *command, int arg, int type);
 int			error_message_label(t_binfile *file, t_t *token, char *label, char *arg);
 int			error_command(t_binfile *file, char *str, int line_num);
-int 		define_line_colomn(t_binfile *file, char *arg, int line_num);
+int			define_line_num(char *copy, char *str_n, int f, int l);
+int 		define_line_colomn(char *copy, char *arg, int line_num);
+int			initial_validation(t_binfile *file);
 
 //********************************* LENGTH COUNTER******************
 

@@ -24,6 +24,8 @@ int				file_processing(t_binfile *bin)
 		return (0);
 	ft_strdel(&((*bin).f_contents)); //*********************** magic ept
 	(*bin).f_contents = ft_strdup(file_contents); //*********************** magic ept
+	if (!(initial_validation(&(*bin))))
+		return (0);
 	if (!(parse_commands(&(*bin), 0, NULL, NULL)))
 		return (0);
 	if (!(label_distance(&(*bin))))
