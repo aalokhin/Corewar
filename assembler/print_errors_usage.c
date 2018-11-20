@@ -96,7 +96,7 @@ void 			ft_print_success(t_binfile *bin)
 	
 	len = ft_strlen(bin->arg_name);
 	printf("Writing output program to %s\n", bin->res_arg_name);
-	system("afplay /Users/aalokhin/Downloads/Sound_15025.mp3");
+	//system("afplay /Users/aalokhin/Downloads/Sound_15025.mp3");
 
 
 

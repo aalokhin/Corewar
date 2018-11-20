@@ -48,8 +48,8 @@ int				file_processing(t_binfile *bin)
 	}
 	create_cor_file(&(*bin)); //creates the file iteslf and fills out the contents
 	close((*bin).fd);
+	system("leaks asm");
 	ft_clean_all(bin);
-
 	return (1);
 }
 

@@ -1,5 +1,25 @@
 #include "asm.h"
 
+void 		print_check(t_binfile	*bin)
+{
+	t_lable 	*tmp;
+	t_t 		*tmp2;
+
+	tmp = bin->labels_list;
+	while(tmp)
+	{
+		printf("lable name is [%s]\n", tmp->label_name);
+		tmp2 = tmp->instruct;
+		while(tmp2)
+		{
+			printf("	instruct name [%s]\n", tmp2->name_c);
+			tmp2 = tmp2->next;  
+		}
+		tmp = tmp->next;
+	}
+	printf("all printed\n");
+}
+
 void		clean_instructs(t_lable *element)
 {
 	t_t		*instruct;
@@ -16,8 +36,6 @@ void		clean_instructs(t_lable *element)
 		free(tmp);
 	}
 	free(element);
-
-
 }
 
 void			clean_labels(t_lable **head)
@@ -39,6 +57,7 @@ void			clean_labels(t_lable **head)
 
 void		ft_clean_all(t_binfile	*bin)
 {
+	//print_check(bin);
 	// if (bin->labels_list)
 	// 	printf("1it exists\n");
 	ft_strdel(&((*bin).f_contents));
@@ -52,5 +71,6 @@ void		ft_clean_all(t_binfile	*bin)
 	// 	printf("2it exists\n");
 	// else
 	// 	printf("it is freed\n");
+	//print_check(bin);
 
 }
