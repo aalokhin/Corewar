@@ -43,6 +43,7 @@ int				file_processing(t_binfile *bin)
 		ft_clean_all(bin);
 		return (0);
 	}
+	 system("leaks asm");
 	ft_strdel(&((*bin).f_contents)); //*********************** magic ept
 	(*bin).f_contents = ft_strdup(file_contents); //*********************** magic ept
 	if (init_check(bin) == 0)
@@ -52,7 +53,7 @@ int				file_processing(t_binfile *bin)
 	}
 	create_cor_file(&(*bin)); //creates the file iteslf and fills out the contents
 	close((*bin).fd);
-	system("leaks asm");
+	// system("leaks asm");
 	ft_clean_all(bin);
 	return (1);
 }

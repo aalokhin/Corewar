@@ -30,8 +30,12 @@ void		clean_instructs(t_lable *element)
 	{
 		tmp = instruct;
 		ft_strdel(&(tmp->name_c));
-		ft_strdel(&(tmp->line_copy));
-
+		///tmo->a to del
+		// ft_strdel(&(tmp->a[0]));
+		// // if (tmp->a[1])
+		// // 	ft_strdel(&(tmp->a[1]));
+		// // if (tmp->a[2])
+		// // 	ft_strdel(&(tmp->a[2]));
 		instruct = instruct->next;
 		free(tmp);
 	}
@@ -49,7 +53,6 @@ void			clean_labels(t_lable **head)
 	{
 		next = (*head)->next;
 		ft_strdel(&(*head)->label_name);
-		ft_strdel(&(*head)->line_copy);
 		clean_instructs(*head);
 		(*head) = next;
 	}

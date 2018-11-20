@@ -128,6 +128,7 @@ int		arguments_filler(t_binfile *file, t_lable *label, t_t *token, char *string,
 				return (error_message(file, str[*i + 1], token->line_num));
 			break ;
 		}
+		ft_strdel(&(str[*i]));
 		(*i)++;
 	}
 	return (1);
@@ -170,11 +171,14 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 				return (error_command(file, str[i], token->line_num));
 			if (++i && (!arguments_filler(file, label, token, *str_n, &i)))
 				return (0);
+			ft_clean_parse (str); /// cleaning
 		}
+		ft_strdel(&(*str_n)); /// cleaning 
 		str_n++;
 	}
 	if (label)
 		labels_linker(file, label);
 	file_length(file);
+	system("leaks asm");
 	return (1);
 }  

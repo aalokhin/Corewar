@@ -70,7 +70,6 @@ typedef struct			s_t  //minimum
 	// for vlaidation 
 
 	int					line_num;
-	char				*line_copy;
 
 	struct s_t			*next;
 
@@ -86,7 +85,6 @@ typedef struct 				s_lable
 	int 					lbl_len; //length of lable
 	int 					bytes_above;
 	int						line_num;
-	char					*line_copy;
 }							t_lable;
 
 
