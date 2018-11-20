@@ -73,6 +73,10 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).verbose = (*params).v_verbosity;
 	(*main_cycle).max_id = 0;
 	(*main_cycle).shift = 0;
+	(*main_cycle).id_counter = 0;
+	(*main_cycle).instr_res = 0;
+	(*main_cycle).cycle_counter = 0;
+	(*main_cycle).fork_ind = 0;
 }
 
 void	processes_init2(t_flags *params, header_t bots[4], unsigned char *map,

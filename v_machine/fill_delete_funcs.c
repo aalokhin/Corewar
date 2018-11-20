@@ -6,11 +6,67 @@
 /*   By: vlikhotk <vlikhotk@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 16:41:43 by vlikhotk          #+#    #+#             */
-/*   Updated: 2018/11/16 16:44:34 by vlikhotk         ###   ########.fr       */
+/*   Updated: 2018/11/20 13:53:20 by vlikhotk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../corewar.h"
+
+void	processes_add2(t_proc **head, t_cycle *main_cycle,
+	t_proc *tmp, t_proc *parent)
+{
+	if ((**head).id == 0)
+		tmp->id = (*main_cycle).start_bots;
+	else if ((*main_cycle).max_id <= (**head).real_id)
+		tmp->id = (**head).real_id + 1;
+	else
+		tmp->id = (*main_cycle).max_id + 1;
+	tmp->real_id = (**head).real_id + 1;
+	tmp->name = (*parent).name;
+	tmp->carry = (*parent).carry;
+	if ((*parent).parent_nbr == -1)
+		tmp->parent_nbr = (*parent).real_id;
+	else
+		tmp->parent_nbr = (*parent).parent_nbr;
+	tmp->if_live = 1;
+	tmp->last_live_cycle = 0;
+	tmp->child_proc_lives = 0;
+	tmp->live_cycle = (*parent).live_cycle + 1;
+	clear_argv_arr(tmp);
+	(*main_cycle).max_id = tmp->id;
+	tmp->next = *head;
+	*head = tmp;
+	(*main_cycle).head_proc = *head;
+}
+
+void	processes_add(t_proc **head, unsigned char *map,
+	t_cycle *main_cycle, int cur_proc)
+{
+	t_proc	*tmp;
+	t_proc	*parent;
+	int		j;
+
+	j = 0;
+	tmp = NULL;
+	parent = *head;
+	(*main_cycle).processes++;
+	while (parent && (*parent).id != cur_proc)
+		parent = parent->next;
+	tmp = (t_proc *)malloc(sizeof(t_proc));
+	processes_add2(head, main_cycle, tmp, parent);
+	tmp->current_position = (*main_cycle).fork_ind;
+	tmp->cmd = map[tmp->current_position];
+	(*main_cycle).indexes[(*main_cycle).fork_ind][1] = 1;
+	if (tmp->cmd >= 1 && tmp->cmd <= 16)
+		tmp->cycles_wait = op_tab[tmp->cmd - 1].cycles_wait;
+	else
+		tmp->cycles_wait = 1;
+	while (j < REG_NUMBER)
+	{
+		tmp->regs[j] = (*parent).regs[j];
+		j++;
+	}
+}
 
 void	clear_argv_arr(t_proc *processes)
 {
