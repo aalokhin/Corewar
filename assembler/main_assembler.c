@@ -13,6 +13,7 @@ void				init_bin(t_binfile	*bin)
 
 int 			init_check(t_binfile *bin)
 {
+
 	if (!(initial_validation(&(*bin))))
 		return (0);
 	if (!(parse_commands(&(*bin), 0, NULL, NULL)))
@@ -38,7 +39,10 @@ int				file_processing(t_binfile *bin)
 	parse_file(&(*bin), &file_contents);
 	fill_magic_start(&(*bin));
 	if (!(fill_name_comment(&(*bin))))
+	{
+		ft_clean_all(bin);
 		return (0);
+	}
 	ft_strdel(&((*bin).f_contents)); //*********************** magic ept
 	(*bin).f_contents = ft_strdup(file_contents); //*********************** magic ept
 	if (init_check(bin) == 0)
@@ -70,6 +74,7 @@ int				ft_opening_file(char *s_file, int flag_a)
 	if (bin.fd < 0)
 	{
 		ft_print_inv_f(s_file);
+		ft_clean_all(&bin);
 		return (0);
 	}
 	bin.arg_length = (unsigned int)lseek(bin.fd, 0, SEEK_END);

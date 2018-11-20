@@ -57,9 +57,7 @@ void			clean_labels(t_lable **head)
 
 void		ft_clean_all(t_binfile	*bin)
 {
-	//print_check(bin);
-	// if (bin->labels_list)
-	// 	printf("1it exists\n");
+
 	ft_strdel(&((*bin).f_contents));
 	ft_strdel(&((*bin).copy)); 
 	ft_strdel(&((*bin).arg_name)); 
@@ -67,10 +65,5 @@ void		ft_clean_all(t_binfile	*bin)
 	ft_strdel(&((*bin).name)); 
 	ft_strdel(&((*bin).comment));
 	clean_labels(&((*bin).labels_list));
-	// if (bin->labels_list)
-	// 	printf("2it exists\n");
-	// else
-	// 	printf("it is freed\n");
-	//print_check(bin);
 
 }
