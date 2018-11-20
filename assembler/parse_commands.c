@@ -104,12 +104,10 @@ int 	token_codage(t_t *token, int i)
 	return (dec);
 }
 
-int		arguments_filler(t_binfile *file, t_lable *label, t_t *token, char *string, int *i)
+int		arguments_filler(t_binfile *file, t_lable *label, t_t *token, char **str, int *i)
 {
-	char	**str = NULL;
 	int		arg1 = 0;
 
-	str = ft_strsplit(string, ' ');
 	while (arg1 < g_op_tab[token->c_name].nb_params)
 	{
 		if (str[*i] == '\0')
@@ -128,7 +126,6 @@ int		arguments_filler(t_binfile *file, t_lable *label, t_t *token, char *string,
 				return (error_message(file, str[*i + 1], token->line_num));
 			break ;
 		}
-		ft_strdel(&(str[*i]));
 		(*i)++;
 	}
 	return (1);
@@ -169,7 +166,7 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 				return (error_message(file, str[0], label->line_num));
 			if (command_name(str[i], token) == -1)
 				return (error_command(file, str[i], token->line_num));
-			if (++i && (!arguments_filler(file, label, token, *str_n, &i)))
+			if (++i && (!arguments_filler(file, label, token, str, &i)))
 				return (0);
 			ft_clean_parse (str); /// cleaning
 		}

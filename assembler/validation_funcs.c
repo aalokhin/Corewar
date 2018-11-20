@@ -90,7 +90,6 @@ int 		all_digits(char *str)
 int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
 {
 	int		size = 0;
-	char	*label_name;
 	int		to_count;
 
  	to_count = g_op_tab[token->c_name].param_types[i];
@@ -103,14 +102,11 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
  		// 		return (error_message(file, arg, token->line_num));
  		if (ft_strstr(arg, "%:"))
  		{
- 			label_name = (char *)ft_memalloc(sizeof(char) * ft_strlen(arg));
- 			label_name = arg + 2;
- 			label_name[ft_strlen(arg) - 2] = ':';
- 			label_name[ft_strlen(arg) - 1] = '\0';
- 			if (!(ft_strstr(file->f_contents, label_name)))
+ 			if (!(ft_strstr(file->f_contents, arg + 2)))
  			{
- 				label_name[ft_strlen(label_name) - 1] = '\0';
- 				return (error_message_label(file, token, label_name, arg));
+ 				printf("%s\n", "we are herer" );
+ 				//label_name[ft_strlen(label_name) - 1] = '\0';
+ 				return (0);//error_message_label(file, token, arg + 2, arg));
  			}
  			return (1);
  		}

@@ -9,6 +9,7 @@ int			find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 	if (ft_strstr(str, "%:"))
 	{
 		search = ft_strstr(str, "%:") + 2;
+		search[ft_strlen(search)] = ':';
 		while (tmp_lbl)
 		{
 			if (tmp_lbl->label_name)
