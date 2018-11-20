@@ -35,7 +35,8 @@ int		ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		tmp = tmp->next;
 	i = (*tmp).current_position + (*tmp).argv[0][1] % IDX_MOD;
 	i = (i + MEM_SIZE) % MEM_SIZE;
-	processes_add(&head, map, main_cycle, i, cur_proc);
+	(*main_cycle).fork_ind = i;
+	processes_add(&head, map, main_cycle, cur_proc);
 	if (((*main_cycle).verbose >> 2) & 1)
 		ft_printf("P%5d | fork %d (%d)\n", (*tmp).id + 1, (*tmp).argv[0][1], i);
 	return (1);
@@ -58,7 +59,8 @@ int		long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		ft_printf("P%5d | lfork %d (%d)\n", (*tmp).id + 1,
 		(*tmp).argv[0][1], i);
 	i = (i + MEM_SIZE) % MEM_SIZE;
-	processes_add(&head, map, main_cycle, i, cur_proc);
+	(*main_cycle).fork_ind = i;
+	processes_add(&head, map, main_cycle, cur_proc);
 	return (1);
 }
 

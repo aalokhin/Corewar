@@ -61,6 +61,10 @@ typedef struct s_cycle
 	int verbose;
 	int max_id;
 	int shift;
+	int id_counter;
+	int instr_res;
+	int cycle_counter;
+	int fork_ind;
 	t_proc *head_proc;
 }			t_cycle;
 
@@ -149,7 +153,7 @@ static t_op    op_tab[17] =
 
 
 void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4]);
-void processes_add(t_proc **processes, unsigned char *map, t_cycle *main_cycle, int index, int cur_proc);
+void processes_add(t_proc **processes, unsigned char *map, t_cycle *main_cycle, int cur_proc);
 void init_bots(header_t bots[4]);
 void params_init(t_flags *params);
 void main_cycle_init(t_cycle *main_cycle, t_flags *params);
@@ -173,6 +177,16 @@ int		check_magic(unsigned char *str, t_flags *params, int j,
 int		check_comment(unsigned char *str, t_flags *params, int j);
 void   delete_unneeded(t_proc **head, t_cycle *main_cycle);
 void fill_start_map_id(t_cycle *main_cycle, header_t bots[4], t_flags *params);
+void intro_print(t_flags *params, header_t bots[4], WINDOW *win);
+void after_cycle(t_flags *params, header_t bots[4],
+	t_cycle main_cycle, WINDOW *win);
+void print_adv(t_cycle *main_cycle, t_proc *processes, t_flags *params,
+	unsigned char *map);
+int external_cycle_pass(t_cycle *main_cycle, unsigned char *map,
+	t_flags *params);
+void print_dump(unsigned char *map);
+void cycle_period_check(int *cycle_counter, t_cycle *main_cycle,
+	t_flags *params);
 
 #endif
 
