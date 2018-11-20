@@ -15,7 +15,7 @@
 void	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 	unsigned char *map, t_flags *params)
 {
-	if (op_tab[(*processes).cmd - 1].codage)
+	if (g_op_tab[(*processes).cmd - 1].codage)
 	{
 		(*main_cycle).id_counter = ((*processes).current_position +
 		1 + MEM_SIZE) % MEM_SIZE;
@@ -26,16 +26,16 @@ void	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 	{
 		(*main_cycle).id_counter = (*processes).current_position;
 		(*processes).argv[0][0] = DIR_CODE;
-		get_arg_vals[(*processes).argv[0][0] - 1](processes, map,
+		g_get_arg_vals[(*processes).argv[0][0] - 1](processes, map,
 			0, &main_cycle->id_counter);
 	}
 	if ((*processes).cmd == 1 || (*processes).cmd == 12 ||
 		(*processes).cmd == 15)
-		(*main_cycle).instr_res = instruct[(*processes).cmd -
+		(*main_cycle).instr_res = g_instruct[(*processes).cmd -
 		1]((*main_cycle).head_proc, (*processes).id, main_cycle, map);
 	else if ((*processes).cmd != 16 || ((*processes).cmd == 16
 		&& (*params).a_aff))
-		(*main_cycle).instr_res = instruct[(*processes).cmd -
+		(*main_cycle).instr_res = g_instruct[(*processes).cmd -
 		1](processes, (*processes).id, main_cycle, map);
 	else if ((*processes).cmd == 16 && !(*params).a_aff)
 		(*main_cycle).instr_res = 0;
@@ -60,7 +60,7 @@ void	change_cur_pos_and_print_it(t_proc *processes, t_cycle *main_cycle,
 		MEM_SIZE) % MEM_SIZE;
 	(*processes).cmd = map[(*processes).current_position];
 	if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
-		(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
+		(*processes).cycles_wait = g_op_tab[(*processes).cmd - 1].cycles_wait;
 	else
 		(*processes).cycles_wait = 1;
 	(*main_cycle).indexes[(*processes).current_position][1] = 1;
@@ -76,7 +76,7 @@ void	skip_if_not_cmd(t_cycle *main_cycle, t_proc *processes,
 	+ MEM_SIZE) % MEM_SIZE;
 	(*processes).cmd = map[(*processes).current_position];
 	if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
-		(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
+		(*processes).cycles_wait = g_op_tab[(*processes).cmd - 1].cycles_wait;
 	else
 		(*processes).cycles_wait = 1;
 	(*main_cycle).indexes[(*processes).current_position][1] = 1;
@@ -105,7 +105,7 @@ void	internal_cycle_core(t_cycle *main_cycle, t_proc *processes,
 	}
 }
 
-void	vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
+void	vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
 {
 	t_cycle	main_cycle;
 	t_proc	*processes;

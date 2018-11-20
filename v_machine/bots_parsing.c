@@ -39,7 +39,7 @@ int		if_correct_name(unsigned char *str, t_flags *params, int j)
 }
 
 int		check_magic(unsigned char *str, t_flags *params, int j,
-	header_t bots[4])
+	t_header bots[4])
 {
 	unsigned int	magic;
 	unsigned int	buf;

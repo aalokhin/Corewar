@@ -12,7 +12,7 @@
 
 #include "../corewar.h"
 
-void	intro_print(t_flags *params, header_t bots[4], WINDOW *win)
+void	intro_print(t_flags *params, t_header bots[4], WINDOW *win)
 {
 	int i;
 
@@ -28,7 +28,7 @@ void	intro_print(t_flags *params, header_t bots[4], WINDOW *win)
 	}
 }
 
-void	after_cycle(t_flags *params, header_t bots[4],
+void	after_cycle(t_flags *params, t_header bots[4],
 	t_cycle main_cycle, WINDOW *win)
 {
 	int i;

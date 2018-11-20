@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   corewar.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlikhotk <vlikhotk@student.unit.ua>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/20 17:56:08 by vlikhotk          #+#    #+#             */
+/*   Updated: 2018/11/20 18:28:17 by vlikhotk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef COREWAR_H
 # define COREWAR_H
 
@@ -8,123 +20,144 @@
 # include "op.h"
 # include <ncurses.h>
 
-#define MAGIC_SIZE 1
-#define NAME_SIZE 330
-#define SIZE_SIZE 10
-#define COMMENT_SIZE 5130
+# define MAGIC_SIZE 1
+# define NAME_SIZE 330
+# define SIZE_SIZE 10
+# define COMMENT_SIZE 5130
 
-typedef struct s_proc
+typedef struct		s_proc
 {
-	int id;
-	int real_id;
-	char *name;
-	int current_position;
-	int carry;
-	int parent_nbr;
-	unsigned int regs[REG_NUMBER];
-	unsigned int if_live;
-	int lives;
-	int last_live_cycle;
-	unsigned char cmd;
-	int argv[3][2];
-	unsigned int cycles_wait;
-	int child_proc_lives;
-	int live_cycle;
-	struct s_proc *next;
-}			t_proc;
+	int				id;
+	int				real_id;
+	char			*name;
+	int				current_position;
+	int				carry;
+	int				parent_nbr;
+	unsigned int	regs[REG_NUMBER];
+	unsigned int	if_live;
+	int				lives;
+	int				last_live_cycle;
+	unsigned char	cmd;
+	int				argv[3][2];
+	unsigned int	cycles_wait;
+	int				child_proc_lives;
+	int				live_cycle;
+	struct s_proc	*next;
+}					t_proc;
 
-typedef struct s_instr
+typedef struct		s_instr
 {
-	int i;
-	unsigned int one;
-	unsigned int two;
-	int new_ind;
-	t_proc *tmp;
-	
-}			t_instr;
+	int				i;
+	unsigned int	one;
+	unsigned int	two;
+	int				new_ind;
+	t_proc			*tmp;
+}					t_instr;
 
-typedef struct s_cycle
+typedef struct		s_cycle
 {
-	int cycles;
-	int processes;
-	int prev_processes;
-	int second_limit;
-	int cycle_die;
-	int current_winner;
-	char *winner_name;
-	int checks_if_die;
-	int prev_cycle_die;
-	int indexes[MEM_SIZE][2];
-	int winner_str;
-	int winner_id;
-	int start_bots;
-	int verbose;
-	int max_id;
-	int shift;
-	int id_counter;
-	int instr_res;
-	int cycle_counter;
-	int fork_ind;
-	t_proc *head_proc;
-}			t_cycle;
+	int				cycles;
+	int				processes;
+	int				prev_processes;
+	int				second_limit;
+	int				cycle_die;
+	int				current_winner;
+	char			*winner_name;
+	int				checks_if_die;
+	int				prev_cycle_die;
+	int				indexes[MEM_SIZE][2];
+	int				winner_str;
+	int				winner_id;
+	int				start_bots;
+	int				verbose;
+	int				max_id;
+	int				shift;
+	int				id_counter;
+	int				instr_res;
+	int				cycle_counter;
+	int				fork_ind;
+	t_proc			*head_proc;
+}					t_cycle;
 
-typedef struct s_flags
+typedef struct		s_flags
 {
-	int i;
-	int j;
-	int a_aff;
-	int d_dumps_memory;
-	int v_verbosity;
-	int ncurses;
-	int pl_nbr[4][2];
-	int bots_quantity;
-	char *players[4];
-	struct s_cycle main_cycle;
-} t_flags;
+	int				i;
+	int				j;
+	int				a_aff;
+	int				d_dumps_memory;
+	int				v_verbosity;
+	int				ncurses;
+	int				pl_nbr[4][2];
+	int				bots_quantity;
+	char			*players[4];
+	struct s_cycle	main_cycle;
+}					t_flags;
 
-typedef struct s_op
+typedef struct		s_op
 {
-	char				*name;
-	int					argc;
-	t_arg_type			argv[3];
-	int					nbr;
-	int					cycles_wait;
-	char				*desc;
-	int					codage;
-	int					label;
-}			t_op;
+	char			*name;
+	int				argc;
+	t_arg_type		argv[3];
+	int				nbr;
+	int				cycles_wait;
+	char			*desc;
+	int				codage;
+	int				label;
+}					t_op;
 
-typedef int (*t_cmd)(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-typedef void (*t_aval)(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
+typedef int			(*t_cmd)(t_proc *head_proc, int cur_proc,
+					t_cycle *main_cycle, unsigned char *map);
+typedef void		(*t_aval)(t_proc *processes, unsigned char *map,
+					int arg_ind, int *id_counter);
 
-int live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int load(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int store(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int addition(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int substraction(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int bit_and(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int bit_or(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int bit_xor(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int zjmp(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int load_ind(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int store_ind(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int ffork(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int lload(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int lload_ind(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int long_fork(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
-int aff(t_proc *head_proc, int cur_proc, t_cycle *main_cycle, unsigned char *map);
+int					live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+						unsigned char *map);
+int					load(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+						unsigned char *map);
+int					store(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+						unsigned char *map);
+int					addition(t_proc *head_proc, int cur_proc,
+						t_cycle *main_cycle, unsigned char *map);
+int					substraction(t_proc *head_proc, int cur_proc,
+						t_cycle *main_cycle, unsigned char *map);
+int					bit_and(t_proc *head_proc, int cur_proc,
+						t_cycle *main_cycle, unsigned char *map);
+int					bit_or(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+						unsigned char *map);
+int					bit_xor(t_proc *head_proc, int cur_proc,
+						t_cycle *main_cycle, unsigned char *map);
+int					zjmp(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+						unsigned char *map);
+int					load_ind(t_proc *head_proc, int cur_proc,
+						t_cycle *main_cycle, unsigned char *map);
+int					store_ind(t_proc *head_proc, int cur_proc,
+						t_cycle *main_cycle, unsigned char *map);
+int					ffork(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+						unsigned char *map);
+int					lload(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+						unsigned char *map);
+int					lload_ind(t_proc *head_proc, int cur_proc,
+						t_cycle *main_cycle, unsigned char *map);
+int					long_fork(t_proc *head_proc, int cur_proc,
+						t_cycle *main_cycle, unsigned char *map);
+int					aff(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+					unsigned char *map);
 
+static t_cmd		g_instruct[16] = {&live, &load, &store, &addition,
+	&substraction, &bit_and, &bit_or, &bit_xor, &zjmp, &load_ind,
+	&store_ind, &ffork, &lload, &lload_ind, &long_fork, &aff};
 
-static t_cmd instruct[16] = {&live, &load, &store, &addition, &substraction, &bit_and, &bit_or,
-	&bit_xor, &zjmp, &load_ind, &store_ind, &ffork, &lload, &lload_ind,&long_fork, &aff};
+void				get_t_dir_value(t_proc *processes, unsigned char *map,
+						int arg_ind, int *id_counter);
+void				get_t_ind_value(t_proc *processes, unsigned char *map,
+						int arg_ind, int *id_counter);
+void				get_t_reg_value(t_proc *processes, unsigned char *map,
+						int arg_ind, int *id_counter);
 
-void get_t_dir_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
-void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
-void get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
+static t_aval		g_get_arg_vals[3] = {&get_t_reg_value, &get_t_dir_value,
+	&get_t_ind_value};
 
-static t_aval get_arg_vals[3] = {&get_t_reg_value, &get_t_dir_value, &get_t_ind_value};
-
-static t_op    op_tab[17] =
+static t_op g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
@@ -151,42 +184,49 @@ static t_op    op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-
-void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4]);
-void processes_add(t_proc **processes, unsigned char *map, t_cycle *main_cycle, int cur_proc);
-void init_bots(header_t bots[4]);
-void params_init(t_flags *params);
-void main_cycle_init(t_cycle *main_cycle, t_flags *params);
-t_proc * processes_init(t_flags *params, header_t bots[4], unsigned char *map);
-void clear_argv_arr(t_proc *processes);
-void get_t_dir_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
-void get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
-void get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind, int *id_counter);
-void get_args_values(t_proc *processes, unsigned char *map, int *id_counter);
-void take_args(unsigned char codage, t_proc *processes);
-void map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes, WINDOW *win);
-void visual_init(WINDOW **win);
-void print_winner(WINDOW * win, t_cycle main_cycle);
-int		read_bots(t_flags *params, int fd, header_t	bots[4]);
-void inst_vars_init(t_instr *inst_vars, t_proc *processes);
-int check_ldi_params(t_instr inst_vars);
-void	take_bits_params(t_instr *inst_vars, unsigned char *map);
-int		if_correct_name(unsigned char *str, t_flags *params, int j);
-int		check_magic(unsigned char *str, t_flags *params, int j,
-	header_t bots[4]);
-int		check_comment(unsigned char *str, t_flags *params, int j);
-void   delete_unneeded(t_proc **head, t_cycle *main_cycle);
-void fill_start_map_id(t_cycle *main_cycle, header_t bots[4], t_flags *params);
-void intro_print(t_flags *params, header_t bots[4], WINDOW *win);
-void after_cycle(t_flags *params, header_t bots[4],
-	t_cycle main_cycle, WINDOW *win);
-void print_adv(t_cycle *main_cycle, t_proc *processes, t_flags *params,
-	unsigned char *map);
-int external_cycle_pass(t_cycle *main_cycle, unsigned char *map,
-	t_flags *params);
-void print_dump(unsigned char *map);
-void cycle_period_check(int *cycle_counter, t_cycle *main_cycle,
-	t_flags *params);
+void				vm_cycle(unsigned char *map, t_flags *params,
+						t_header bots[4]);
+void				processes_add(t_proc **processes, unsigned char *map,
+						t_cycle *main_cycle, int cur_proc);
+void				init_bots(t_header bots[4]);
+void				params_init(t_flags *params);
+void				main_cycle_init(t_cycle *main_cycle, t_flags *params);
+t_proc				*processes_init(t_flags *params, t_header bots[4],
+						unsigned char *map);
+void				clear_argv_arr(t_proc *processes);
+void				get_t_dir_value(t_proc *processes, unsigned char *map,
+						int arg_ind, int *id_counter);
+void				get_t_ind_value(t_proc *processes, unsigned char *map,
+						int arg_ind, int *id_counter);
+void				get_t_reg_value(t_proc *processes, unsigned char *map,
+						int arg_ind, int *id_counter);
+void				get_args_values(t_proc *processes, unsigned char *map,
+						int *id_counter);
+void				take_args(unsigned char codage, t_proc *processes);
+void				map_to_screen(unsigned char *map, t_cycle *main_cycle,
+						t_flags *params, t_proc *processes, WINDOW *win);
+void				visual_init(WINDOW **win);
+void				print_winner(WINDOW *win, t_cycle main_cycle);
+int					read_bots(t_flags *params, int fd, t_header	bots[4]);
+void				inst_vars_init(t_instr *inst_vars, t_proc *processes);
+int					check_ldi_params(t_instr inst_vars);
+void				take_bits_params(t_instr *inst_vars, unsigned char *map);
+int					if_correct_name(unsigned char *str, t_flags *params, int j);
+int					check_magic(unsigned char *str, t_flags *params, int j,
+						t_header bots[4]);
+int					check_comment(unsigned char *str, t_flags *params, int j);
+void				delete_unneeded(t_proc **head, t_cycle *main_cycle);
+void				fill_start_map_id(t_cycle *main_cycle, t_header bots[4],
+						t_flags *params);
+void				intro_print(t_flags *params, t_header bots[4], WINDOW *win);
+void				after_cycle(t_flags *params, t_header bots[4],
+						t_cycle main_cycle, WINDOW *win);
+void				print_adv(t_cycle *main_cycle, t_proc *processes,
+						t_flags *params, unsigned char *map);
+int					external_cycle_pass(t_cycle *main_cycle, unsigned char *map,
+						t_flags *params);
+void				print_dump(unsigned char *map);
+void				cycle_period_check(int *cycle_counter, t_cycle *main_cycle,
+						t_flags *params);
 
 #endif
-

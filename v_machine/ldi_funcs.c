@@ -22,7 +22,7 @@ void	take_ldi_params(t_instr *inst_vars, unsigned char *map)
 	{
 		(*inst_vars).i = ((inst_vars->tmp->argv[0][1] % IDX_MOD +
 			inst_vars->tmp->current_position) + MEM_SIZE) % MEM_SIZE;
-		(*inst_vars).one = (map[(*inst_vars).i] << 24) + (map[((*inst_vars).i
+		(*inst_vars).one = (map[((*inst_vars).i + MEM_SIZE) % MEM_SIZE] << 24) + (map[((*inst_vars).i
 		+ MEM_SIZE + 1) % MEM_SIZE] << 16) + (map[((*inst_vars).i + MEM_SIZE +
 		2) % MEM_SIZE] << 8) + map[((*inst_vars).i + MEM_SIZE + 3) % MEM_SIZE];
 	}
@@ -35,7 +35,7 @@ void	take_ldi_params(t_instr *inst_vars, unsigned char *map)
 		(*inst_vars).i = inst_vars->tmp->argv[1][1] % IDX_MOD +
 		inst_vars->tmp->current_position;
 		(*inst_vars).i = ((*inst_vars).i + MEM_SIZE) % MEM_SIZE;
-		(*inst_vars).two = (map[(*inst_vars).i] << 24) + (map[((*inst_vars).i +
+		(*inst_vars).two = (map[((*inst_vars).i + MEM_SIZE) % MEM_SIZE] << 24) + (map[((*inst_vars).i +
 		MEM_SIZE + 1) % MEM_SIZE] << 16) + (map[((*inst_vars).i + MEM_SIZE + 2)
 		% MEM_SIZE] << 8) + map[((*inst_vars).i + MEM_SIZE + 3) % MEM_SIZE];
 	}
@@ -61,7 +61,7 @@ int		load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		inst_vars.i);
 	}
 	inst_vars.i = (inst_vars.i + MEM_SIZE) % MEM_SIZE;
-	inst_vars.tmp->regs[inst_vars.tmp->argv[2][1] - 1] = (map[inst_vars.i]
+	inst_vars.tmp->regs[inst_vars.tmp->argv[2][1] - 1] = (map[(inst_vars.i + MEM_SIZE) % MEM_SIZE]
 	<< 24) + (map[(inst_vars.i + MEM_SIZE + 1) % MEM_SIZE] << 16) +
 	(map[(inst_vars.i + MEM_SIZE + 2) % MEM_SIZE] << 8) + map[(inst_vars.i +
 	MEM_SIZE + 3) % MEM_SIZE];
@@ -102,7 +102,7 @@ int		lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		inst_vars.one, inst_vars.two, inst_vars.one + inst_vars.two,
 		(inst_vars.one + inst_vars.two) + inst_vars.tmp->current_position);
 	}
-	inst_vars.new_ind = (map[inst_vars.i] << 24) + (map[(inst_vars.i +
+	inst_vars.new_ind = (map[(inst_vars.i + MEM_SIZE) % MEM_SIZE] << 24) + (map[(inst_vars.i +
 	MEM_SIZE + 1) % MEM_SIZE] << 16) + (map[(inst_vars.i + MEM_SIZE + 2)
 	% MEM_SIZE] << 8) + map[(inst_vars.i + MEM_SIZE + 3) % MEM_SIZE];
 	if (inst_vars.new_ind == 0)

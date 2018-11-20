@@ -22,7 +22,7 @@ void	get_t_dir_value(t_proc *processes, unsigned char *map,
 	size = 0;
 	tmp_2 = 0;
 	tmp_4 = 0;
-	if (!op_tab[(int)(*processes).cmd - 1].label)
+	if (!g_op_tab[(int)(*processes).cmd - 1].label)
 	{
 		size = 4;
 		tmp_4 = (unsigned int)(((map[((*id_counter) + 1) % MEM_SIZE] << 24) +
@@ -65,13 +65,13 @@ void	get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind,
 void	get_args_values(t_proc *processes, unsigned char *map, int *id_counter)
 {
 	if ((*processes).argv[0][0])
-		get_arg_vals[(*processes).argv[0][0] - 1](processes, map, 0,
+		g_get_arg_vals[(*processes).argv[0][0] - 1](processes, map, 0,
 			id_counter);
 	if ((*processes).argv[1][0])
-		get_arg_vals[(*processes).argv[1][0] - 1](processes, map, 1,
+		g_get_arg_vals[(*processes).argv[1][0] - 1](processes, map, 1,
 			id_counter);
 	if ((*processes).argv[2][0])
-		get_arg_vals[(*processes).argv[2][0] - 1](processes, map, 2,
+		g_get_arg_vals[(*processes).argv[2][0] - 1](processes, map, 2,
 			id_counter);
 }
 

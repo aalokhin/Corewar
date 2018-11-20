@@ -66,7 +66,7 @@ do
 	done
 	echo -n > $DIFF; echo -n > $ORIG_LOG; echo -n > $OURS_LOG
 	./corewar -d 14000 $VMAV > $ORIG_LOG &
-	../corewar -dump 14000 $VMAV > $OURS_LOG 2>> $ERR_F &
+	../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F &
 	if [[ $(cat $ERR_F) ]]; then
 		printf $RED; cat $ERR_F; printf $RESET
 		rm -f $ERR_F; exit 1

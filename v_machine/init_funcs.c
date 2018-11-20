@@ -12,7 +12,7 @@
 
 #include "../corewar.h"
 
-void	init_bots(header_t bots[4])
+void	init_bots(t_header bots[4])
 {
 	int i;
 
@@ -79,7 +79,7 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).fork_ind = 0;
 }
 
-void	processes_init2(t_flags *params, header_t bots[4], unsigned char *map,
+void	processes_init2(t_flags *params, t_header bots[4], unsigned char *map,
 	t_proc *processes)
 {
 	(*processes).real_id = (*params).i;
@@ -91,7 +91,7 @@ void	processes_init2(t_flags *params, header_t bots[4], unsigned char *map,
 	(*processes).lives = 0;
 	(*processes).cmd = map[(*processes).current_position];
 	if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
-		(*processes).cycles_wait = op_tab[(*processes).cmd - 1].cycles_wait;
+		(*processes).cycles_wait = g_op_tab[(*processes).cmd - 1].cycles_wait;
 	else
 		(*processes).cycles_wait = 1;
 	(*processes).last_live_cycle = 0;
@@ -101,7 +101,7 @@ void	processes_init2(t_flags *params, header_t bots[4], unsigned char *map,
 		(*processes).regs[(*params).j++] = 0;
 }
 
-t_proc	*processes_init(t_flags *params, header_t bots[4], unsigned char *map)
+t_proc	*processes_init(t_flags *params, t_header bots[4], unsigned char *map)
 {
 	t_proc			*processes;
 	t_proc			*tmp;

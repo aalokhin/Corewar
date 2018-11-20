@@ -12,7 +12,7 @@
 
 #include "../corewar.h"
 
-void	create_map(header_t bots[4], t_flags *params)
+void	create_map(t_header bots[4], t_flags *params)
 {
 	unsigned int			i;
 	int						j;
@@ -117,7 +117,7 @@ int		main(int argc, char **argv)
 {
 	int				fd;
 	t_flags			params;
-	static header_t	bots[4];
+	static t_header	bots[4];
 	int				res;
 
 	res = 0;

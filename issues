@@ -26,7 +26,7 @@ Usage: ./vm_champs/corewar [-d N -s N -v N | -b --stealth | -n --stealth] [-a] <
 4104 /2 коммент бота
 дальше сам бот = размер 
 
-протеститьь проверку имени и коммента
+
 
 в 21 должны учитываться только живие дочерние процессы или все? вроде только живие, нужно проверять
 
@@ -38,10 +38,8 @@ For each valid execution of the live instruction, the machine must display: “A
 
 чекать флаги на повторность?
 если после флага вместо числа чтото левое, то оригинал работает, что делать?
-
-зафришить:
-процессы вконце игры
-bots[j].exec_part
+протеститьь проверку имени и коммента
+Error: File vm_champs/champs/ex.cor is too small to be a champion если меньше бот чем имя и коммент - протестить этот кейс
 
 на нашей визуалке похоже дочерний бот без имени перезаписывает предыдущий Гагнант после форка
 если задержка в программе больше 1 цикла, нужно ли прорисовывать карту чаще? или только ра в период ожидания?
@@ -56,7 +54,8 @@ bots[j].exec_part
 
 убрать минимальный размеры окна визуализации
 убирать ли если вконце флаг без цифры это невозможно прочитать файл? и даже если это флаг визуалиации
-на вищуализации боты печатаются не в том порядке, надо задом наперед
+на вищуализации боты печатаются не в том порядке, надо задом наперед, а как без визуализации?
+
 при -н флаге сбивается визуализация
 сделать защиту от повторного номера при флаге н
 проверить чтоб текст эроров совпадал с сабджектом или примером
@@ -69,4 +68,74 @@ bots[j].exec_part
 проверить если в боте одни нули или исполнительная чусть нулевая или бот короче чем сумма имени и комента
 разобраться с ограничением размера 
 hell bot на команде 03 неправильно работает хотя кодаж 70 должно быть норм
-bee, big_zork, flut,  passed
+bee, big_zork, flut, bguy passed
+2014 bjacob Error: File vm_champs/champs/championships/2014/bjacob is too small to be a champion ./vm_champs/corewar vm_champs/champs/championships/2014/bjacob?
+если нулевой бот 0 сайз то на 1 отлтчается сколько циклов он не жил, например экс
+
+Start testing 48 combinations of this bots: ./champs/championships/2014/ekocevar/mandragore.cor ./champs/championships/2017/agregoir/Kittystrophic.cor ./champs/championships/2017/gnebie/ultima.cor ./champs/Car.cor
+make: Nothing to be done for `all'.
+./mass_checker.zsh: line 43: 42653 Bus error: 10           ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42667 Bus error: 10           ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42680 Bus error: 10           ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42695 Segmentation fault: 11  ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42702 Bus error: 10           ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42708 Bus error: 10           ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42715 Bus error: 10           ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42740 Segmentation fault: 11  ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42749 Segmentation fault: 11  ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42755 Bus error: 10           ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42770 Bus error: 10           ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42784 Bus error: 10           ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42843 Bus error: 10           ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42849 Segmentation fault: 11  ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42856 Bus error: 10           ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+BAD RANDOM 2376
+./mass_checker.zsh: line 43: 42906 Bus error: 10           ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42912 Segmentation fault: 11  ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42932 Segmentation fault: 11  ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+./mass_checker.zsh: line 43: 42994 Segmentation fault: 11  ../corewar -d 14000 $VMAV > $OURS_LOG 2>> $ERR_F
+
+может сегфолт
+Introducing contestants...
+* Player 1, weighing 400 bytes, "mandragore" ("you can see me, you can't anymore, you can, you can't !") !
+* Player 2, weighing 514 bytes, "Kittystrophic" ("Jan-ken-pon (じゃんけんぽん)
+* Player 3, weighing 614 bytes, "Ultima" ("
+* Player 4, weighing 281 bytes, "Tching tching(Intercepteur), Bouh!Bouh!(bruits d'anti-jeu)" ("") !
+
+./corewar vm_champs/champs/championships/2014/ekocevar/mandragore.cor vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor vm_champs/champs/championships/2017/gnebie/ultima.cor vm_champs/champs/Car.cor
+бас эррор
+
+* Player 1, weighing 614 bytes, "Ultima" ("
+* Player 2, weighing 281 bytes, "Tching tching(Intercepteur), Bouh!Bouh!(bruits d'anti-jeu)" ("") !
+* Player 3, weighing 400 bytes, "mandragore" ("you can see me, you can't anymore, you can, you can't !") !
+* Player 4, weighing 514 bytes, "Kittystrophic" ("Jan-ken-pon (じゃんけんぽん)
+
+* Player 1, weighing 614 bytes, "Ultima" ("
+* Player 2, weighing 281 bytes, "Tching tching(Intercepteur), Bouh!Bouh!(bruits d'anti-jeu)" ("") !
+* Player 3, weighing 400 bytes, "mandragore" ("you can see me, you can't anymore, you can, you can't !") !
+* Player 4, weighing 514 bytes, "Kittystrophic" ("Jan-ken-pon (じゃんけんぽん)
+
+* Player 1, weighing 614 bytes, "Ultima" ("
+* Player 2, weighing 281 bytes, "Tching tching(Intercepteur), Bouh!Bouh!(bruits d'anti-jeu)" ("") !
+* Player 3, weighing 400 bytes, "mandragore" ("you can see me, you can't anymore, you can, you can't !") !
+* Player 4, weighing 514 bytes, "Kittystrophic" ("Jan-ken-pon (じゃんけんぽん)
+
+сегфолт ./corewar vm_champs/champs/championships/2017/gnebie/ultima.cor  vm_champs/champs/Car.cor vm_champs/champs/championships/2014/ekocevar/mandragore.cor vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor
+
+Introducing contestants...
+* Player 1, weighing 400 bytes, "mandragore" ("you can see me, you can't anymore, you can, you can't !") !
+* Player 2, weighing 514 bytes, "Kittystrophic" ("Jan-ken-pon (じゃんけんぽん)
+* Player 3, weighing 614 bytes, "Ultima" ("
+* Player 4, weighing 281 bytes, "Tching tching(Intercepteur), Bouh!Bouh!(bruits d'anti-jeu)" ("") !
+
+* Player 1, weighing 614 bytes, "Ultima" ("
+* Player 2, weighing 281 bytes, "Tching tching(Intercepteur), Bouh!Bouh!(bruits d'anti-jeu)" ("") !
+* Player 3, weighing 400 bytes, "mandragore" ("you can see me, you can't anymore, you can, you can't !") !
+* Player 4, weighing 514 bytes, "Kittystrophic" ("Jan-ken-pon (じゃんけんぽん)
+
+* Player 1, weighing 394 bytes, "turtle" ("TURTLE FFS U LAMA") !
+* Player 2, weighing 400 bytes, "mandragore" ("you can see me, you can't anymore, you can, you can't !") !
+* Player 3, weighing 430 bytes, "bigzork" ("I know i cant win") !
+* Player 4, weighing 671 bytes, "skynet" ("j'aime les chats") !
+
+везде где доступы к карте сделать округление индекса

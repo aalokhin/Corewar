@@ -58,7 +58,7 @@ void	processes_add(t_proc **head, unsigned char *map,
 	tmp->cmd = map[tmp->current_position];
 	(*main_cycle).indexes[(*main_cycle).fork_ind][1] = 1;
 	if (tmp->cmd >= 1 && tmp->cmd <= 16)
-		tmp->cycles_wait = op_tab[tmp->cmd - 1].cycles_wait;
+		tmp->cycles_wait = g_op_tab[tmp->cmd - 1].cycles_wait;
 	else
 		tmp->cycles_wait = 1;
 	while (j < REG_NUMBER)
@@ -105,7 +105,7 @@ void	delete_unneeded(t_proc **head, t_cycle *main_cycle)
 	}
 }
 
-void	fill_start_map_id(t_cycle *main_cycle, header_t bots[4],
+void	fill_start_map_id(t_cycle *main_cycle, t_header bots[4],
 	t_flags *params)
 {
 	unsigned int	k;

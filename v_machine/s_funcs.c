@@ -23,7 +23,7 @@ void	take_sti_params(t_instr *inst_vars, unsigned char *map)
 		(*inst_vars).i = inst_vars->tmp->current_position +
 		inst_vars->tmp->argv[1][1] % IDX_MOD;
 		(*inst_vars).i = ((*inst_vars).i + MEM_SIZE) % MEM_SIZE;
-		(*inst_vars).one = (map[(*inst_vars).i] << 24) + (map[((*inst_vars).i +
+		(*inst_vars).one = (map[((*inst_vars).i + MEM_SIZE) % MEM_SIZE] << 24) + (map[((*inst_vars).i +
 		MEM_SIZE + 1) % MEM_SIZE] << 16) + (map[((*inst_vars).i + MEM_SIZE + 2)
 		% MEM_SIZE] << 8) + map[((*inst_vars).i + MEM_SIZE + 3) % MEM_SIZE];
 	}
@@ -44,12 +44,12 @@ void	insert_vals_to_map(unsigned char *map, t_instr inst_vars,
 	map[(inst_vars.i + MEM_SIZE + 1) % MEM_SIZE] =
 	(inst_vars.tmp->regs[inst_vars.tmp->argv[0][1] - 1] & 0x00FF0000)
 	>> 16;
-	map[inst_vars.i] = (inst_vars.tmp->regs[inst_vars.tmp->argv[0][1] - 1]
+	map[(inst_vars.i + MEM_SIZE) % MEM_SIZE] = (inst_vars.tmp->regs[inst_vars.tmp->argv[0][1] - 1]
 		& 0xFF000000) >> 24;
 	inst_vars.new_ind = inst_vars.tmp->parent_nbr + 1;
 	if (inst_vars.tmp->parent_nbr == -1)
 		inst_vars.new_ind = inst_vars.tmp->real_id + 1;
-	(*main_cycle).indexes[inst_vars.i][0] = inst_vars.new_ind;
+	(*main_cycle).indexes[(inst_vars.i + MEM_SIZE) % MEM_SIZE][0] = inst_vars.new_ind;
 	(*main_cycle).indexes[(inst_vars.i + MEM_SIZE + 1) % MEM_SIZE][0] =
 	inst_vars.new_ind;
 	(*main_cycle).indexes[(inst_vars.i + MEM_SIZE + 2) % MEM_SIZE][0] =

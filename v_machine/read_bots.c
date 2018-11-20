@@ -13,7 +13,7 @@
 #include "../corewar.h"
 
 int		take_bots_params(unsigned char *str, t_flags *params, int j,
-	header_t bots[4])
+	t_header bots[4])
 {
 	unsigned int	size;
 	unsigned int	buf;
@@ -42,7 +42,7 @@ int		take_bots_params(unsigned char *str, t_flags *params, int j,
 	return (1);
 }
 
-int		copy_bots_to_map(header_t bots[4], unsigned char *str,
+int		copy_bots_to_map(t_header bots[4], unsigned char *str,
 	t_flags *params, int len)
 {
 	(*params).i = 0;
@@ -58,7 +58,7 @@ int		copy_bots_to_map(header_t bots[4], unsigned char *str,
 	if ((unsigned int)(len - 2192) != bots[(*params).j].prog_size)
 	{
 		ft_printf("%s %s %s\n", "Error: File", (*params).players[(*params).j],
-		"has a code size that differfrom what its header says");
+		"has a code size that differ from what its header says");
 		return (0);
 	}
 	return (1);
@@ -73,11 +73,17 @@ int		bot_open(int *fd, t_flags *params, unsigned int *len)
 		return (0);
 	}
 	*len = (int)lseek(*fd, 0, SEEK_END);
+	if (*len < 4 * 4 + PROG_NAME_LENGTH + COMMENT_LENGTH)
+	{
+		ft_printf("Error: File %s is too small to be a champion\n",
+			(*params).players[(*params).j]);
+		return (0);
+	}
 	lseek(*fd, 0, SEEK_SET);
 	return (1);
 }
 
-int		read_bots(t_flags *params, int fd, header_t bots[4])
+int		read_bots(t_flags *params, int fd, t_header bots[4])
 {
 	unsigned int			len;
 	static unsigned char	*str;
