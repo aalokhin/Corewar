@@ -1,4 +1,4 @@
-.name "bot"
+.name "Allmighty bot"
 .comment "winner is my second name"
 
 fork %0
