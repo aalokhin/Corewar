@@ -200,5 +200,9 @@ void			print_instr_args(t_t *instruct);
 void			print_instr_args2(t_t *instruct);
 
 
+//******************************* clean *********************************
+void		ft_clean_all(t_binfile	*bin);
+
+
 
 #endif

@@ -23,12 +23,12 @@ OFILES = ./v_machine/main.o ./v_machine/vm_cycle.o ./v_machine/ldi_funcs.o ./v_m
 ./v_machine/init_funcs.o ./v_machine/args_parsing.o ./v_machine/visualastia.o ./v_machine/read_bots.o ./v_machine/forks_aff.o \
 ./v_machine/bits_instr.o ./v_machine/bots_parsing.o ./v_machine/lld_funcs.o ./v_machine/fill_delete_funcs.o
 
-ASM_SFILES := ./assembler/file_length_counter.c  ./assembler/a_printing.c ./assembler/a_flag_output_funcs.c \
+ASM_SFILES :=  ./assembler/clean_all.c ./assembler/file_length_counter.c  ./assembler/a_printing.c ./assembler/a_flag_output_funcs.c \
 ./assembler/validation_funcs.c ./assembler/labels_nastia.c ./assembler/main_assembler.c ./assembler/print_errors_usage.c \
 ./assembler/encoding_funcs.c ./assembler/output_to_file.c ./assembler/parse_file_funcs.c  ./assembler/parse_commands.c \
 ./assembler/commands_help_funcs.c ./assembler/errors_manager.c 
 
-ASM_OFILES :=  ./assembler/file_length_counter.o ./assembler/a_printing.o ./assembler/a_flag_output_funcs.o \
+ASM_OFILES :=  ./assembler/clean_all.o ./assembler/file_length_counter.o ./assembler/a_printing.o ./assembler/a_flag_output_funcs.o \
 ./assembler/validation_funcs.o ./assembler/labels_nastia.o ./assembler/main_assembler.o \
 ./assembler/print_errors_usage.o  ./assembler/encoding_funcs.o ./assembler/output_to_file.o ./assembler/parse_file_funcs.o \
 ./assembler/parse_commands.o ./assembler/commands_help_funcs.o ./assembler/errors_manager.o
