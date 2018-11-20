@@ -31,6 +31,19 @@
 // }							t_sound;
 
 
+
+typedef struct			s_op
+{
+	char				*name;
+	int					nb_params;
+	int					param_types[4];
+	int					opcode;
+	int					nb_cycles;
+	char				*description;
+	int					has_pcode;
+	int					has_idx;
+}						t_op;
+
 typedef struct			s_t  //minimum
 {
 	int					c_name; // order number of "live"

@@ -1,19 +1,6 @@
 #include "asm.h"
 
 
-typedef struct			s_op
-{
-	char				*name;
-	int					nb_params;
-	int					param_types[4];
-	int					opcode;
-	int					nb_cycles;
-	char				*description;
-	int					has_pcode;
-	int					has_idx;
-}						t_op;
-
-
 static t_op	g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
