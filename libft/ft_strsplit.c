@@ -12,98 +12,65 @@
 
 #include "includes/libft.h"
 
-static char	**oneword(char const *s, char **dest, char c, int i)
+static	int		ft_count_words(const char *str, char c)
 {
-	int k;
-	int j;
-	int start;
+	int	word;
+	int	i;
 
-	j = 0;
+	i = 0;
+	word = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == c && str[i + 1] != c)
+			word++;
+		i++;
+	}
+	if (str[0] != '\0')
+		word++;
+	return (word);
+}
+
+static	char	*ft_word(const char *str, char c, int *i)
+{
+	char	*s;
+	int		k;
+
+	if (!(s = (char *)malloc(sizeof(s) * (ft_strlen(str)))))
+		return (NULL);
 	k = 0;
-	while (s[i] == c)
-		i++;
-	start = i;
-	while (s[i] != c && s[i] != 0)
-		i++;
-	if (!(dest[j] = (char *)malloc(sizeof(char) * (i - start + 1))))
-		return (NULL);
-	while (k < i - start)
+	while (str[*i] != c && str[*i])
 	{
-		dest[j][k] = s[start + k];
+		s[k] = str[*i];
 		k++;
+		*i += 1;
 	}
-	dest[j++][k] = 0;
-	return (dest);
+	s[k] = '\0';
+	while (str[*i] == c && str[*i])
+		*i += 1;
+	return (s);
 }
 
-static char	**free_mem(char **dest, int i, int j, int start)
-{
-	if (!(dest[j] = (char *)malloc(sizeof(char) * (i - start + 1))))
-	{
-		j = j - 1;
-		while (j >= 0)
-		{
-			free(dest[j]);
-			dest[j] = NULL;
-			j--;
-		}
-		return (NULL);
-	}
-	return (dest);
-}
-
-static char	**mainsplit(char const *s, char **dest, char c, int i)
-{
-	int k;
-	int j;
-	int start;
-
-	j = 0;
-	while (s[i] != 0)
-	{
-		if ((i == 0 || s[i - 1] == c) && s[i] != c)
-		{
-			start = i;
-			while (s[i] != c && s[i] != 0)
-				i++;
-			if (!(free_mem(dest, i, j, start)))
-				return (NULL);
-			k = 0;
-			while (k < i - start)
-			{
-				dest[j][k] = s[start + k];
-				k++;
-			}
-			dest[j++][k] = 0;
-		}
-		i++;
-	}
-	return (dest);
-}
-
-char		**ft_strsplit(char const *s, char c)
+char			**ft_strsplit(const char *str, char c)
 {
 	int		i;
-	int		words;
-	char	**dest;
+	int		j;
+	int		wrd;
+	char	**s;
 
 	i = 0;
-	words = 0;
-	if (s == NULL)
+	j = 0;
+	wrd = ft_count_words(str, c);
+	if (!(s = (char **)malloc(sizeof(s) * (ft_count_words(str, c) + 2))))
 		return (NULL);
-	while (s[i] != 0)
-	{
-		if ((i == 0 || s[i - 1] == c) && s[i] != c)
-			words++;
+	while (str[i] == c && str[i])
 		i++;
+	while (j < wrd && str[i])
+	{
+		s[j] = ft_word(str, c, &i);
+		j++;
 	}
-	if (!(dest = (char **)malloc(sizeof(char *) * (words + 1))))
-		return (NULL);
-	i = 0;
-	if (words == 1)
-		dest = oneword(s, dest, c, i);
-	else
-		dest = mainsplit(s, dest, c, i);
-	dest[words] = NULL;
-	return (dest);
+	s[j] = NULL;
+	return (s);
 }

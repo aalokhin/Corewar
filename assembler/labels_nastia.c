@@ -8,14 +8,16 @@ int			find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 	tmp_lbl = bin->labels_list;
 	if (ft_strstr(str, "%:"))
 	{
+		search = (char *)ft_memalloc(sizeof(char) * ft_strlen(str));
 		search = ft_strstr(str, "%:") + 2;
-		search[ft_strlen(search)] = ':';
+		search = ft_strjoin(search, ":");
 		while (tmp_lbl)
 		{
 			if (tmp_lbl->label_name)
 			{
 				if (strcmp(search, tmp_lbl->label_name) == 0)
 				{
+					ft_strdel(&search);
 					if (label->bytes_above < tmp_lbl->bytes_above)
 						return (tmp_lbl->bytes_above - label->bytes_above - instruct->bytes_above_i);
 					else
@@ -24,6 +26,7 @@ int			find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 			}
 			tmp_lbl = tmp_lbl->next;
 		}
+		ft_strdel(&search);
 	}
 	if (ft_strstr(str, "r"))
 		return (ft_atoi(ft_strstr(str, "r") + 1));

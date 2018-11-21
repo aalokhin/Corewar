@@ -1,5 +1,16 @@
 #include "asm.h"
 
+void				ft_clean_parse(char **parse)
+{
+	int i;
+
+	i = 0;
+	while (parse[i])
+		ft_strdel(&parse[i++]);
+	free(parse);
+}
+
+
 void 		print_check(t_binfile	*bin)
 {
 	t_lable 	*tmp;
@@ -29,13 +40,8 @@ void		clean_instructs(t_lable *element)
 	while(instruct)
 	{
 		tmp = instruct;
-		ft_strdel(&(tmp->name_c));
-		///tmo->a to del
-		// ft_strdel(&(tmp->a[0]));
-		// // if (tmp->a[1])
-		// // 	ft_strdel(&(tmp->a[1]));
-		// // if (tmp->a[2])
-		// // 	ft_strdel(&(tmp->a[2]));
+		if (tmp->name_c)
+			ft_strdel(&(tmp->name_c));
 		instruct = instruct->next;
 		free(tmp);
 	}
@@ -52,7 +58,8 @@ void			clean_labels(t_lable **head)
 	while(*head != NULL)
 	{
 		next = (*head)->next;
-		ft_strdel(&(*head)->label_name);
+		if ((*head)->label_name)
+			ft_strdel(&(*head)->label_name);
 		clean_instructs(*head);
 		(*head) = next;
 	}
@@ -67,6 +74,7 @@ void		ft_clean_all(t_binfile	*bin)
 	ft_strdel(&((*bin).res_arg_name)); 
 	ft_strdel(&((*bin).name)); 
 	ft_strdel(&((*bin).comment));
-	clean_labels(&((*bin).labels_list));
+	if ((*bin).labels_list)
+		clean_labels(&((*bin).labels_list));
 
 }

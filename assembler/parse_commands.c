@@ -135,7 +135,6 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 {
 	t_t 	*token = NULL;
 	t_lable	*label = NULL;
-	file->labels_list = NULL;
 
 	str_n = (ft_strsplit(file->f_contents, '\n'));
 	while (*str_n)
@@ -164,13 +163,14 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 			token->line_num = define_line_num(file->copy, *str_n, 0, 0);
 			if (!file->name || !file->comment)
 				return (error_message(file, str[0], label->line_num));
+			printf("%s\n", str[i]);
 			if (command_name(str[i], token) == -1)
 				return (error_command(file, str[i], token->line_num));
 			if (++i && (!arguments_filler(file, label, token, str, &i)))
 				return (0);
 			ft_clean_parse (str); /// cleaning
 		}
-		ft_strdel(&(*str_n)); /// cleaning 
+	ft_strdel(&(*str_n)); /// cleaning 
 		str_n++;
 	}
 	if (label)

@@ -9,6 +9,7 @@ void				init_bin(t_binfile	*bin)
 	(*bin).fd_file_out = 0;
 	(*bin).arg_name = NULL;
 	(*bin).f_contents = NULL;
+	(*bin).labels_list = NULL;
 }
 
 int 			init_check(t_binfile *bin)
@@ -43,7 +44,7 @@ int				file_processing(t_binfile *bin)
 		ft_clean_all(bin);
 		return (0);
 	}
-	 system("leaks asm");
+	// system("leaks asm");
 	ft_strdel(&((*bin).f_contents)); //*********************** magic ept
 	(*bin).f_contents = ft_strdup(file_contents); //*********************** magic ept
 	if (init_check(bin) == 0)
