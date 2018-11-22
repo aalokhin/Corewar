@@ -18,14 +18,14 @@ int		define_line_num(char *copy, char *str_n, int f, int l)
 
 	while (copy[f])
 	{
-		if (copy[f] == '\n' && k++)
+		if (copy[f] == '\n')
+			k++;
+		else
 		{
-			if (copy[f + 1] != '\n')
-				f++;
 			l = 0;
-			while (copy[f] && copy[f] != '\n' && copy[f] != '.' && l != -1)
+			while (copy[f] && copy[f] != '\n' && l != -1)
 			{
-				while (WHITESPACE(copy[f]) || copy[f] == ',')
+				while ((WHITESPACE(copy[f]) && (copy[f] != '\n'))|| copy[f] == ',')
 					f++;
 				while (WHITESPACE(str_n[l]) || str_n[l] == ',')
 					l++;
@@ -34,10 +34,15 @@ int		define_line_num(char *copy, char *str_n, int f, int l)
 				if (copy[f] == str_n[l])
 				{
 					f++;
-					if (str_n[++l] == '\0')
+					l++;
+					while (WHITESPACE(str_n[l]))
+						l++;
+					if (str_n[l] == '\0')
 						return (k);
 				}
 			}
+			if (copy[f] == '\n')
+				k++;
 		}
 		f++;
 	}

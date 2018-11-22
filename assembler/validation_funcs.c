@@ -149,6 +149,8 @@ int 	initial_validation(t_binfile *file)
 	char 	cpy[2];
 	int 	line = 0;
 	int 	colomn = 0;
+	//char *copy;
+
 
 	int i = 0;
 	int start = 0;

@@ -15,9 +15,9 @@ int			fill_str_help(char *str, size_t *i, size_t *tmp)
 	*tmp = ++(*i);
 	while (str[(*i)] != '"')
 	{
-		if (str[(*i)] == '\n')
-			return (0);
 		(*i)++;
+		// if (!(str[(*i)]))
+		// 	return (0);
 	}
 	return (1);
 }
