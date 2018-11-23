@@ -19,10 +19,10 @@ void	intro_print(t_flags *params, t_header bots[4], WINDOW *win)
 	i = 0;
 	if ((*params).ncurses == 1)
 		visual_init(&win);
-	ft_printf("%s\n", "Introducing contestants...");
+	printf("%s\n", "Introducing contestants...");
 	while (i < (*params).bots_quantity)
 	{
-		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1,
+		printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1,
 			bots[i].prog_size, bots[i].prog_name, bots[i].comment);
 		i++;
 	}
@@ -46,7 +46,7 @@ void	after_cycle(t_flags *params, t_header bots[4],
 		endwin();
 	}
 	else
-		ft_printf("Contestant %d, \"%s\", has won !\n",
+		printf("Contestant %d, \"%s\", has won !\n",
 			main_cycle.winner_id + 1, main_cycle.winner_name);
 }
 
@@ -59,16 +59,16 @@ void	print_adv(t_cycle *main_cycle, t_proc *processes, t_flags *params,
 	(*main_cycle).indexes[(*processes).current_position][1] = 0;
 	if (((*params).v_verbosity >> 4) & 1)
 	{
-		ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", (*main_cycle).shift,
+		printf("ADV %d (0x%.4x -> 0x%.4x) ", (*main_cycle).shift,
 			(*processes).current_position, (*main_cycle).shift +
 			(*processes).current_position);
 		while (j < (*main_cycle).shift)
 		{
-			ft_printf("%.2x ", map[((*processes).current_position
+			printf("%.2x ", map[((*processes).current_position
 			+ j) % MEM_SIZE]);
 			j++;
 		}
-		ft_printf("\n");
+		printf("\n");
 	}
 	(*processes).current_position += (*main_cycle).shift;
 }
@@ -95,12 +95,12 @@ void	print_dump(unsigned char *map)
 	int i;
 
 	i = 0;
-	ft_printf("0x0000 : ");
+	printf("0x0000 : ");
 	while (i < MEM_SIZE)
 	{
-		ft_printf("%.2x ", map[i]);
+		printf("%.2x ", map[i]);
 		if (++i % 64 == 0 && i < MEM_SIZE)
-			ft_printf("\n%#.4x : ", i);
+			printf("\n%#.4x : ", i);
 	}
-	ft_printf("\n");
+	printf("\n");
 }

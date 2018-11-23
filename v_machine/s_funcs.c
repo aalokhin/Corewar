@@ -22,7 +22,7 @@ void	take_sti_params(t_instr *inst_vars, unsigned char *map)
 	{
 		(*inst_vars).i = inst_vars->tmp->current_position +
 		inst_vars->tmp->argv[1][1] % IDX_MOD;
-		(*inst_vars).i = ((*inst_vars).i + MEM_SIZE) % MEM_SIZE;
+		(*inst_vars).i = (((*inst_vars).i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
 		(*inst_vars).one = (map[((*inst_vars).i + MEM_SIZE) % MEM_SIZE] << 24) + (map[((*inst_vars).i +
 		MEM_SIZE + 1) % MEM_SIZE] << 16) + (map[((*inst_vars).i + MEM_SIZE + 2)
 		% MEM_SIZE] << 8) + map[((*inst_vars).i + MEM_SIZE + 3) % MEM_SIZE];
@@ -76,13 +76,17 @@ int		store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	(inst_vars.one + inst_vars.two);
 	if (((*main_cycle).verbose >> 2) & 1)
 	{
-		ft_printf("P%5d | sti r%d %d %d\n", cur_proc + 1,
+		if (cur_proc + 1 <= 9999)
+		printf("P%5d | sti r%d %d %d\n", cur_proc + 1,
 		inst_vars.tmp->argv[0][1], inst_vars.one, inst_vars.two);
-		ft_printf("%8c -> store to %d + %d = %d (with pc and mod %d)\n", '|',
+		else
+		printf("P%6d | sti r%d %d %d\n", cur_proc + 1,
+		inst_vars.tmp->argv[0][1], inst_vars.one, inst_vars.two);
+		printf("%8c -> store to %d + %d = %d (with pc and mod %d)\n", '|',
 		inst_vars.one, inst_vars.two, inst_vars.one +
 		inst_vars.two, inst_vars.i);
 	}
-	inst_vars.i = (inst_vars.i + MEM_SIZE) % MEM_SIZE;
+	inst_vars.i = ((inst_vars.i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
 	insert_vals_to_map(map, inst_vars, main_cycle);
 	return (1);
 }
@@ -110,7 +114,13 @@ int		store(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		inst_vars.tmp->regs[inst_vars.tmp->argv[0][1] - 1];
 	}
 	if (((*main_cycle).verbose >> 2) & 1)
-		ft_printf("P%5d | st r%d %d\n", cur_proc + 1,
+	{
+		if (cur_proc + 1 <= 9999)
+		printf("P%5d | st r%d %d\n", cur_proc + 1,
 		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1]);
+		else
+		printf("P%6d | st r%d %d\n", cur_proc + 1,
+		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1]);
+	}
 	return (1);
 }

@@ -22,6 +22,8 @@ void	get_t_dir_value(t_proc *processes, unsigned char *map,
 	size = 0;
 	tmp_2 = 0;
 	tmp_4 = 0;
+	if ((*processes).arg_counter < g_op_tab[(*processes).cmd - 1].arg_nbr)
+	{
 	if (!g_op_tab[(int)(*processes).cmd - 1].label)
 	{
 		size = 4;
@@ -38,6 +40,8 @@ void	get_t_dir_value(t_proc *processes, unsigned char *map,
 		(*processes).argv[arg_ind][1] = tmp_2;
 	}
 	(*id_counter) += size;
+	(*processes).arg_counter++;
+}
 }
 
 void	get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind,
@@ -46,20 +50,27 @@ void	get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind,
 	short tmp;
 
 	tmp = 0;
+	if ((*processes).arg_counter < g_op_tab[(*processes).cmd - 1].arg_nbr)
+	{
 	tmp = (short)((map[((*id_counter) + 1) % MEM_SIZE] << 8) +
 		map[((*id_counter) + 2) % MEM_SIZE]);
 	(*processes).argv[arg_ind][1] = tmp;
 	(*id_counter) += 2;
+	(*processes).arg_counter++;
+	}
 }
 
 void	get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind,
 	int *id_counter)
 {
 	unsigned char tmp;
-
+	if ((*processes).arg_counter < g_op_tab[(*processes).cmd - 1].arg_nbr)
+	{
 	tmp = (unsigned char)(map[((*id_counter) + 1) % MEM_SIZE]);
 	(*processes).argv[arg_ind][1] = tmp;
 	(*id_counter)++;
+	(*processes).arg_counter++;
+}
 }
 
 void	get_args_values(t_proc *processes, unsigned char *map, int *id_counter)

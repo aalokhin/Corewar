@@ -23,9 +23,9 @@ void	live_or_die(t_proc *tmp, t_cycle *main_cycle, t_flags *params,
 		(*tmp).lives = 0;
 		if ((*tmp).id > (*main_cycle).max_id)
 			(*main_cycle).max_id = (*tmp).id;
-		(*main_cycle).indexes[(*tmp).current_position][1] = 0;
+		(*main_cycle).indexes[((*tmp).current_position + MEM_SIZE) % MEM_SIZE][1] = 0;
 		if (((*params).v_verbosity >> 3) & 1)
-			ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+			printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 				(*tmp).id + 1, (*tmp).live_cycle - 1,
 				(*main_cycle).cycle_die);
 	}
@@ -76,7 +76,7 @@ void	cycle_period_check(int *cycle_counter, t_cycle *main_cycle,
 			(*main_cycle).cycle_die -= CYCLE_DELTA;
 			(*main_cycle).checks_if_die = MAX_CHECKS;
 			if (((*params).v_verbosity >> 1) & 1)
-				ft_printf("%s%d\n", "Cycle to die is now ",
+				printf("%s%d\n", "Cycle to die is now ",
 					(*main_cycle).cycle_die);
 		}
 		(*main_cycle).checks_if_die--;

@@ -21,6 +21,7 @@ void	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 		1 + MEM_SIZE) % MEM_SIZE;
 		take_args(map[(*main_cycle).id_counter], processes);
 		get_args_values(processes, map, &main_cycle->id_counter);
+		(*processes).arg_counter = 0;
 	}
 	else
 	{
@@ -28,6 +29,7 @@ void	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 		(*processes).argv[0][0] = DIR_CODE;
 		g_get_arg_vals[(*processes).argv[0][0] - 1](processes, map,
 			0, &main_cycle->id_counter);
+		(*processes).arg_counter = 0;
 	}
 	if ((*processes).cmd == 1 || (*processes).cmd == 12 ||
 		(*processes).cmd == 15)
@@ -37,25 +39,36 @@ void	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 		&& (*params).a_aff))
 		(*main_cycle).instr_res = g_instruct[(*processes).cmd -
 		1](processes, (*processes).id, main_cycle, map);
-	else if ((*processes).cmd == 16 && !(*params).a_aff)
-		(*main_cycle).instr_res = 0;
+		//printf("RES%d\n", (*main_cycle).instr_res = 0);
 }
 
 void	change_cur_pos_and_print_it(t_proc *processes, t_cycle *main_cycle,
 	t_flags *params, unsigned char *map)
 {
-	if (((*processes).cmd != 9 && (*main_cycle).instr_res == 1) ||
+	/*if (((*processes).cmd != 9 && (*main_cycle).instr_res == 1) ||
 		((*processes).cmd == 9 && (*processes).carry == 0) ||
 		(*processes).cmd == 11 || (*processes).cmd == 14 ||
 		(*processes).cmd == 6 || (*processes).cmd == 7
 		|| (*processes).cmd == 4 || (*processes).cmd == 10)
+	{*/
+	if ((*processes).cmd == 1 || (*processes).cmd == 12 ||
+		(*processes).cmd == 15 || ((*processes).cmd == 9 &&
+	(*processes).carry == 0))
+		{
+			if(!g_op_tab[(*processes).cmd - 1].label)
+				(*main_cycle).shift = 5;
+			else
+			(*main_cycle).shift = 3;
+			print_adv(main_cycle, processes, params, map);
+		}
+	else if ((*processes).cmd != 9
+&& (*main_cycle).id_counter + 1 - (*processes).current_position != 0)
 	{
 		(*main_cycle).shift = (*main_cycle).id_counter + 1 -
 		(*processes).current_position;
 		print_adv(main_cycle, processes, params, map);
 	}
-	else if ((*processes).cmd != 9 && (*main_cycle).instr_res == 0)
-		print_adv(main_cycle, processes, params, map);
+
 	(*processes).current_position = ((*processes).current_position +
 		MEM_SIZE) % MEM_SIZE;
 	(*processes).cmd = map[(*processes).current_position];
@@ -121,7 +134,7 @@ void	vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
 	while (main_cycle.processes > 0)
 	{
 		if (((*params).v_verbosity >> 1) & 1)
-			ft_printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
+			printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
 		processes = main_cycle.head_proc;
 		if ((*params).ncurses == 1)
 			map_to_screen(map, &main_cycle, params, main_cycle.head_proc, win);

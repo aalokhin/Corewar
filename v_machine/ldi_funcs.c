@@ -20,8 +20,8 @@ void	take_ldi_params(t_instr *inst_vars, unsigned char *map)
 		(*inst_vars).one = inst_vars->tmp->argv[0][1];
 	else if (inst_vars->tmp->argv[0][0] == IND_CODE)
 	{
-		(*inst_vars).i = ((inst_vars->tmp->argv[0][1] % IDX_MOD +
-			inst_vars->tmp->current_position) + MEM_SIZE) % MEM_SIZE;
+		(*inst_vars).i = (((inst_vars->tmp->argv[0][1] % IDX_MOD +
+			inst_vars->tmp->current_position) % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
 		(*inst_vars).one = (map[((*inst_vars).i + MEM_SIZE) % MEM_SIZE] << 24) + (map[((*inst_vars).i
 		+ MEM_SIZE + 1) % MEM_SIZE] << 16) + (map[((*inst_vars).i + MEM_SIZE +
 		2) % MEM_SIZE] << 8) + map[((*inst_vars).i + MEM_SIZE + 3) % MEM_SIZE];
@@ -34,7 +34,7 @@ void	take_ldi_params(t_instr *inst_vars, unsigned char *map)
 	{
 		(*inst_vars).i = inst_vars->tmp->argv[1][1] % IDX_MOD +
 		inst_vars->tmp->current_position;
-		(*inst_vars).i = ((*inst_vars).i + MEM_SIZE) % MEM_SIZE;
+		(*inst_vars).i = (((*inst_vars).i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
 		(*inst_vars).two = (map[((*inst_vars).i + MEM_SIZE) % MEM_SIZE] << 24) + (map[((*inst_vars).i +
 		MEM_SIZE + 1) % MEM_SIZE] << 16) + (map[((*inst_vars).i + MEM_SIZE + 2)
 		% MEM_SIZE] << 8) + map[((*inst_vars).i + MEM_SIZE + 3) % MEM_SIZE];
@@ -54,13 +54,17 @@ int		load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	inst_vars.tmp->current_position;
 	if (((*main_cycle).verbose >> 2) & 1)
 	{
-		ft_printf("P%5d | ldi %d %d r%d\n", cur_proc + 1, inst_vars.one,
+		if (cur_proc + 1 <= 9999)
+		printf("P%5d | ldi %d %d r%d\n", cur_proc + 1, inst_vars.one,
 		inst_vars.two, inst_vars.tmp->argv[2][1]);
-		ft_printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|',
+		else
+		printf("P%6d | ldi %d %d r%d\n", cur_proc + 1, inst_vars.one,
+		inst_vars.two, inst_vars.tmp->argv[2][1]);
+		printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|',
 		inst_vars.one, inst_vars.two, inst_vars.one + inst_vars.two,
 		inst_vars.i);
 	}
-	inst_vars.i = (inst_vars.i + MEM_SIZE) % MEM_SIZE;
+	inst_vars.i = ((inst_vars.i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
 	inst_vars.tmp->regs[inst_vars.tmp->argv[2][1] - 1] = (map[(inst_vars.i + MEM_SIZE) % MEM_SIZE]
 	<< 24) + (map[(inst_vars.i + MEM_SIZE + 1) % MEM_SIZE] << 16) +
 	(map[(inst_vars.i + MEM_SIZE + 2) % MEM_SIZE] << 8) + map[(inst_vars.i +
@@ -91,14 +95,19 @@ int		lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		return (0);
 	inst_vars.tmp->carry = 0;
 	take_ldi_params(&inst_vars, map);
-	inst_vars.i = (((inst_vars.one + inst_vars.two) +
-	inst_vars.tmp->current_position) + MEM_SIZE) % MEM_SIZE;
+	inst_vars.i = ((((inst_vars.one + inst_vars.two) +
+	inst_vars.tmp->current_position) % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
 	if (((*main_cycle).verbose >> 2) & 1)
 	{
-		ft_printf("P%5d | lldi %d %d r%d\n", cur_proc + 1,
+		if (cur_proc + 1 <= 9999)
+		printf("P%5d | lldi %d %d r%d\n", cur_proc + 1,
 		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1],
 		inst_vars.tmp->argv[2][1]);
-		ft_printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|',
+		else
+		printf("P%6d | lldi %d %d r%d\n", cur_proc + 1,
+		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1],
+		inst_vars.tmp->argv[2][1]);
+		printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|',
 		inst_vars.one, inst_vars.two, inst_vars.one + inst_vars.two,
 		(inst_vars.one + inst_vars.two) + inst_vars.tmp->current_position);
 	}
