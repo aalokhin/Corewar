@@ -1,5 +1,12 @@
 #!/bin/bash
+
+#this script shall be placed in vm_champs older where and will use vm_champs/asm and ../asm 
+#to complie champs from vm_champs/champs directory
+#the resut will be displayed in diference.txt file
+
+
 # $BOT_DIR="."
+
 $(mkdir  ./my ./or);
 $(touch difference.txt)
 $(chmod +x ./my);
@@ -19,32 +26,51 @@ or_bots=$(find or -name '*.s')
 i=0;
 for i in $or_bots
 do
-$(vm_champs/asm $i)
+vm_champs/asm $i
 
 done
 
 i=0;
 for i in $my_bots
 do
-$(../asm $i)
-# echo "$i"
+../asm $i
+
 done
 
 
-comp_m=$(find my -name '*.cor')
-comp_o=$(find or -name '*.cor')
 
 
-arrayname=( $(find or -name '*.cor') )
-arrayname2=( $(find my -name '*.cor') )
 
-for element in $(seq 0 $((${#arrayname[@]} - 1)))
-do
-     echo =========\> "${arrayname2[$element]}"  "${arrayname[$element]}"   \<=========
-    diff "${arrayname2[$element]}"  "${arrayname[$element]}" >> difference.txt
+# comp_m=( $(find or -name '*.cor') )
+# comp_o=( $(find my -name '*.cor') )
+
+# for element in $(seq 0 $((${#comp_m[@]} - 1)))
+# do
+# 	if 
+# 	echo =========\> "${comp_o[$element]}"  "${comp_m[$element]}"   \<=========
+#     diff "${comp_o[$element]}"  "${comp_m[$element]}" >> difference.txt
+# done
+
+
+
+DIR1=$(ls or)
+DIR2=$(ls my)
+
+for i in $DIR1; do
+    for j in $DIR2; do
+        if [[ $i == $j ]]; then
+            # echo "=====> $i" 
+            # echo $DIR2/$j
+            # echo "====> $i"
+            # echo "====> $j"
+            diff "my/$i" "or/$j" >> difference.txt
+        fi
+    done
 done
 
-
+cat difference.txt
+rm -rf difference.txt
+rm -rf my or
 
 
 # for i in $comp_m
@@ -93,3 +119,13 @@ done
 # for i in ${!AR[*]}; do
 #   echo $i  ${AR[i]}
 # done
+
+
+
+
+
+# name1=${file1##*/}
+# name2=${file2##*/}
+# if [[ $name1 == $name2 ]]; then
+#     echo "$name1 exists in both directories"
+# fi
