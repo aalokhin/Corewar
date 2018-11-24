@@ -86,6 +86,44 @@ rm -rf difference.txt
 rm -rf my or
 
 
+
+
+
+$(mkdir  ./my ./or);
+$(chmod +x ./my);
+$(chmod +x ./or);
+# ="/my"  #my
+# OR="/or" #original
+bots=$(find vm_champs/champs -name "*.s") #list bots
+cp $bots ./my
+cp $bots ./or
+
+# ./vm_champs/asm 
+
+# echo $bots; 
+my_bots=$(find my -name "*.s")
+or_bots=$(find or -name "*.s")
+
+i=0;
+for i in $or_bots
+do
+vm_champs/asm -a $i > "$i.txt"
+rm -rf $i
+done
+
+i=0;
+for i in $my_bots
+do
+../asm -a $i > "$i.txt"
+rm -rf $i
+done
+
+
+diff --brief -r my/ or/ >> result.txt
+
+cat result.txt
+rm -rf my or result.txt
+
 # for i in $comp_m
 # do
 # echo ============\> "$i" comp_m \<====================
