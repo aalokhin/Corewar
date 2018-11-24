@@ -83,7 +83,7 @@ done
 
 cat difference.txt
 rm -rf difference.txt
-# rm -rf my or
+rm -rf my or
 
 
 # for i in $comp_m
