@@ -7,21 +7,30 @@
 
 # $BOT_DIR="."
 
+# BLUE        =   \033[0;94m
+# YELLOW      =   \033[0;33m
+# LIGHT       =   \033[0;5m
+# COLOR_OFF   =   \033[0m
+# GREEN       =   \033[0;32m
+# PURPLE      =   \033[0;35m
+# CYAN        =   \033[0;36m
+
+
 $(mkdir  ./my ./or);
 $(touch difference.txt)
 $(chmod +x ./my);
 $(chmod +x ./or);
 # ="/my"  #my
 # OR="/or" #original
-bots=$(find vm_champs/champs -name '*.s') #list bots
+bots=$(find vm_champs/champs -name "*.s") #list bots
 cp $bots ./my
 cp $bots ./or
 
 # ./vm_champs/asm 
 
 # echo $bots; 
-my_bots=$(find my -name '*.s')
-or_bots=$(find or -name '*.s')
+my_bots=$(find my -name "*.s")
+or_bots=$(find or -name "*.s")
 
 i=0;
 for i in $or_bots
@@ -48,9 +57,13 @@ done
 # do
 # 	if 
 # 	echo =========\> "${comp_o[$element]}"  "${comp_m[$element]}"   \<=========
-#     diff "${comp_o[$element]}"  "${comp_m[$element]}" >> difference.txt
+#   	diff "${comp_o[$element]}"  "${comp_m[$element]}" >> difference.txt
 # done
+echo "********* Folders differ: *********" 
 
+diff --brief -r my/ or/ >> difference.txt
+
+echo "=================>Files that differ: <===================" >> difference.txt
 
 
 DIR1=$(ls or)
@@ -70,7 +83,7 @@ done
 
 cat difference.txt
 rm -rf difference.txt
-rm -rf my or
+# rm -rf my or
 
 
 # for i in $comp_m

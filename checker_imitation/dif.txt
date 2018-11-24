@@ -1,0 +1,27 @@
+11d10
+< Explosive_Kitty.cor
+17d15
+< Kittystrophic.cor
+23d20
+< Misaka_Mikoto.cor
+59d55
+< dubo.cor
+71d66
+< jinx.cor
+99d93
+< run_Kitty_RUN.cor
+119d112
+< ultima.cor
+Files my/Douceur_power.cor and or/Douceur_power.cor differ
+Only in or/: Explosive_Kitty.cor
+Only in or/: Kittystrophic.cor
+Only in or/: Misaka_Mikoto.cor
+Files my/champ.cor and or/champ.cor differ
+Only in or/: dubo.cor
+Files my/gateau.cor and or/gateau.cor differ
+Only in or/: jinx.cor
+Files my/jumper.cor and or/jumper.cor differ
+Files my/maxidef.cor and or/maxidef.cor differ
+Only in or/: run_Kitty_RUN.cor
+Files my/skynet.cor and or/skynet.cor differ
+Only in or/: ultima.cor
