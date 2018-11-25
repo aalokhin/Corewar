@@ -175,6 +175,6 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 	if (label)
 		labels_linker(file, label);
 	file_length(file);
-	system("leaks asm");
+	// system("leaks asm");
 	return (1);
 }  
