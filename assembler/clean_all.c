@@ -35,13 +35,22 @@ void		clean_instructs(t_lable *element)
 {
 	t_t		*instruct;
 	t_t 	*tmp;
+	int 	k;
 
+	k = 0;
 	instruct = element->instruct;
 	while(instruct)
 	{
 		tmp = instruct;
 		if (tmp->name_c)
 			ft_strdel(&(tmp->name_c));
+		k = 0;
+		while(tmp->a[k])
+		{
+			ft_strdel(&(tmp->a[k]));
+			k++;
+		}
+	
 		instruct = instruct->next;
 		free(tmp);
 	}
