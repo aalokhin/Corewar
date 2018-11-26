@@ -89,7 +89,7 @@ int		check_flags_with_nbr(char **argv, int argc, t_flags *params)
 	return (0);
 }
 
-int		check_flags_core(int argc, char **argv, t_flags *params)
+/*int		check_flags_core(int argc, char **argv, t_flags *params)
 {
 	while ((*params).i < argc)
 	{
@@ -111,6 +111,61 @@ int		check_flags_core(int argc, char **argv, t_flags *params)
 			return (-1);
 	}
 	return (1);
+}*/
+
+int check_flags_core(int argc, char **argv, t_flags *params)
+{
+	int i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (ft_strcmp(argv[i], "-a") == 0)
+			(*params).a_aff = 1;
+		else if (ft_strcmp(argv[i], "-d") == 0)
+		{
+			(*params).d_dumps_memory = ft_atoi(argv[i + 1]);
+			i += 2;
+			continue ;
+		}
+		/*else if (ft_strcmp(argv[i], "-s") == 0)
+		{
+			(*params).s_cycles = ft_atoi(argv[i + 1]);
+			i += 2;
+			continue ;
+		}*/
+		else if (ft_strcmp(argv[i], "-v") == 0)
+		{
+			(*params).v_verbosity = ft_atoi(argv[i + 1]);
+			i += 2;
+			continue ;
+		}
+		/*else if (ft_strcmp(argv[i], "-b") == 0)
+			(*params).binary = 1;
+		else if (ft_strcmp(argv[i], "---stealth") == 0 && ft_strcmp(argv[i - 1], "-b"))
+			(*params).b_stealth = 1;*/
+		else if (ft_strcmp(argv[i], "-nc") == 0)
+			(*params).ncurses = 1;
+		/*else if (ft_strcmp(argv[i], "---stealth") == 0 && ft_strcmp(argv[i - 1], "-n"))
+			(*params).n_stealth = 1;*/
+		else if (ft_strchr(argv[i], '.') && ft_strcmp(&(argv[i][ft_strlen(argv[i]) - 4]), ".cor") == 0)
+		{
+			if ((*params).bots_quantity == 4)
+			{
+				ft_printf("%s\n", "Too many champions");
+				return (0);
+			}
+			(*params).players[(*params).bots_quantity] = argv[i];
+			(*params).bots_quantity++;
+		}
+		else
+		{
+			ft_printf("%s %s\n", "Can't read source file", argv[i]);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
 }
 
 int		main(int argc, char **argv)
@@ -128,13 +183,16 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	params_init(&params);
+	printf("%s%d\n", "test", 5);
 	res = check_flags_core(argc, argv, &params);
+	printf("%s%d\n", "test", 5);
 	if (res <= 0)
 	{
 		res == 0 ? ft_printf("%s\n", "Too many champions") :
 		ft_printf("%s %s\n", "Can't read source file", argv[params.i]);
 		exit(0);
 	}
+	printf("%s%d\n", "test", 5);
 	init_bots(bots);
 	if (!read_bots(&params, fd, bots))
 		exit(0);

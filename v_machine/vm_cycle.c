@@ -130,7 +130,20 @@ void	vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
 	fill_start_map_id(&main_cycle, bots, params);
 	processes = processes_init(params, bots, map);
 	main_cycle.head_proc = processes;
-	intro_print(params, bots, win);
+	//intro_print(params, bots, win);
+	int i;
+
+	i = 0;
+	printf("%s%d\n", "test", (*params).ncurses);
+	if ((*params).ncurses == 1)
+		visual_init(&win);
+	printf("%s\n", "Introducing contestants...");
+	while (i < (*params).bots_quantity)
+	{
+		printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1,
+			bots[i].prog_size, bots[i].prog_name, bots[i].comment);
+		i++;
+	}
 	while (main_cycle.processes > 0)
 	{
 		if (((*params).v_verbosity >> 1) & 1)

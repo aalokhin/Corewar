@@ -79,7 +79,7 @@ void visual_init(WINDOW **win)
 	int  yMax, xMax;
 	getmaxyx(stdscr, yMax, xMax);
 
-	*win = newwin(0, 0, 0, 0); //*newwin(int nlines, int ncols, int begin_y, int begin_x);
+	*win = newwin(68, 0, 0, 5); //*newwin(int nlines, int ncols, int begin_y, int begin_x);
 	// box(win, 0, 0);
 
 	// int wborder(WINDOW *win, chtype ls, chtype rs, chtype ts, chtype bs, chtype tl, chtype tr, chtype bl, chtype br);
