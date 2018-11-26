@@ -60,6 +60,11 @@ void				print_instr_args(t_t *instruct)
 		ft_printf("\n%20s%-10d", " ", instruct->opcode);
 	while (instruct->args[i][0])
 	{
+			if (!instruct->a[i])
+			{
+				//ft_printf("null in args is args[i][0]=%d args[i][1]= [%d] i %d", instruct->args[i][0],instruct->args[i][1], i);
+				break ;
+			}
 		if (instruct->args[i][0] == 1)
 			ft_printf("%-18d", instruct->args[i][1]);
 		else if (instruct->args[i][0] == 10 || instruct->args[i][0] == 11)
@@ -89,6 +94,11 @@ void				print_instr_args2(t_t *instruct)
 		ft_printf("\n%20s%-10d", " ", instruct->opcode);
 	while (instruct->args[i][0])
 	{
+			if (!instruct->a[i])
+			{
+				//ft_printf("null in args is args[i][0]=%d args[i][1]= [%d] i %d\n", instruct->args[i][0],instruct->args[i][1], i);
+				break ;
+			}
 		if (instruct->args[i][0] == 1)
 		{
 			ft_printf("%-18d", instruct->args[i][1]);

@@ -53,7 +53,7 @@ int					label_distance(t_binfile *bin)
 			while (tmpi->a[k])
 			{
 				tmpi->args[k][1] = find_arg_value(bin, tmpi->a[k], tmpi, tmp);
-				//ft_strdel(&(tmpi->a[k])); // we need this in flag i 
+				//ft_strdel(&(tmpi->a[k])); // we need this in flag a
 				k++;
 			}
 			tmpi = tmpi->next;

@@ -160,6 +160,13 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 				label->line_num = define_line_num(file->copy, *str_n, 0, 0);
 			}
 			token = (t_t *)ft_memalloc(sizeof(t_t));
+			// token->args[0][0] = 0;
+			// token->args[1][0] = 0;
+			// token->args[2][0] = 0;
+			// token->args[0][1] = 0;
+			// token->args[1][1] = 0;
+			// token->args[2][1] = 0;
+
 			token->line_num = define_line_num(file->copy, *str_n, 0, 0);
 			if (!file->name || !file->comment)
 				return (error_message(file, str[0], label->line_num));

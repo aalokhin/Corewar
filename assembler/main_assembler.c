@@ -15,6 +15,11 @@ void				init_bin(t_binfile	*bin)
 int 			init_check(t_binfile *bin)
 {
 
+	t_t *instruct;
+	t_lable *l;
+	int k;
+	k = 0;
+
 	if (!(initial_validation(&(*bin))))
 		return (0);
 	if (!(parse_commands(&(*bin), 0, NULL, NULL)))
@@ -23,6 +28,28 @@ int 			init_check(t_binfile *bin)
 		return (0);
 	if ((*bin).flag_a == 1)
 	{
+		
+
+		l = bin->labels_list;
+		while(l)
+		{
+			//printf("label %s\n", l->label_name);
+			instruct = l->instruct;
+			while(instruct)
+			{
+				//printf("instruct:");
+				k = 0;
+				while(instruct->a[k])
+				{
+					//printf(" [%s] ", instruct->a[k]);
+					k++;
+				}
+				//printf("\n");
+				instruct = instruct->next;
+			}
+
+			l = l->next;
+		}
 	 	ft_print_flag_a(&(*bin));
 	 	flag_a_output(&(*bin));
 	 	return (0);
@@ -168,7 +195,7 @@ int					main(int argc, char **argv)
 		}
 		i++;
 	}
-	//system("leaks asm");
+	system("leaks asm");
 
 	return 0;
 }
