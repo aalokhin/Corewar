@@ -114,15 +114,70 @@ done
 i=0;
 for i in $my_bots
 do
+ # echo ">>>$i<<<"
 ../asm -a $i > "$i.txt"
 rm -rf $i
 done
 
+echo "=================>Flag A differs: <===================" >> result.txt
 
 diff --brief -r my/ or/ >> result.txt
 
 cat result.txt
-rm -rf my or result.txt
+rm -rf my or 
+rm -rf result.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # for i in $comp_m
 # do

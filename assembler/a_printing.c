@@ -25,13 +25,13 @@ void				print_arg_chars(t_t *instruct) //костыль для двоеточи�
 	}
 }
 
-void				print_dir_ind_bytes(int arg, int lbl_size)
+void				print_dir_ind_bytes(int arg0, int arg, int lbl_size) //arg0 = args[i][0]
 {
 	unsigned char	a[4];
 	int				k;
 
 	k = -1;
-	if (lbl_size == 4)
+	if (lbl_size == 4 && arg0 != 11)
 	{
 		a[3] = arg & 0x000000FF;
 		a[2] = (arg & 0x0000FF00) >> 8;
@@ -40,7 +40,7 @@ void				print_dir_ind_bytes(int arg, int lbl_size)
 		while (++k < 4)
 			ft_printf("%-4d", a[k]);
 	}
-	else if (lbl_size == 2)
+	else if (lbl_size == 2 || arg0 == 11)
 	{
 		a[1] = arg & 0xFF;
 		a[0] = (arg >> 8) & 0xFF;
@@ -70,10 +70,10 @@ void				print_instr_args(t_t *instruct)
 		else if (instruct->args[i][0] == 10 || instruct->args[i][0] == 11)
 		{
 			if (instruct->a[i][0] != ':' && instruct->a[i][1] != ':')
-				print_dir_ind_bytes(instruct->args[i][1], instruct->lbl_size);
+				print_dir_ind_bytes(instruct->args[i][0], instruct->args[i][1], instruct->lbl_size);
 			else
-				print_dir_ind_bytes(instruct->args[i][1], instruct->lbl_size);
-			if (instruct->lbl_size == 2)
+				print_dir_ind_bytes(instruct->args[i][0], instruct->args[i][1], instruct->lbl_size);
+			if (instruct->lbl_size == 2 || instruct->args[i][0] == 11)
 				ft_printf("%10s", " ");
 			else
 				ft_printf("%2s", " ");

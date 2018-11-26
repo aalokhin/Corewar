@@ -1,0 +1,14 @@
+Usage: ./corewar [-d N -v N| -n N] [-a] <champion1.cor> <...>
+    -a        : Prints output from "aff" (Default is to hide it)
+#### TEXT OUTPUT MODE ##########################################################
+    -d N      : Dumps memory after N cycles then exits
+    -v N      : Verbosity levels, can be added together to enable several
+                - 0 : Show only essentials
+                - 1 : Show lives
+                - 2 : Show cycles
+                - 4 : Show operations (Params are NOT litteral ...)
+                - 8 : Show deaths
+                - 16 : Show PC movements (Except for jumps)
+#### NCURSES OUTPUT MODE ##########################################################
+    -nc        : Ncurses output mode
+################################################################################

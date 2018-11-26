@@ -195,7 +195,7 @@ int					main(int argc, char **argv)
 		}
 		i++;
 	}
-	system("leaks asm");
+	//system("leaks asm");
 
 	return 0;
 }

@@ -1,0 +1,17 @@
+19816,19818d19815
+< Process 112 hasn't lived for 1755 cycles (CTD 1436)
+< Process 111 hasn't lived for 1760 cycles (CTD 1436)
+< Process 110 hasn't lived for 1765 cycles (CTD 1436)
+34397a34395,34397
+> Process 112 hasn't lived for 3141 cycles (CTD 1386)
+> Process 111 hasn't lived for 3146 cycles (CTD 1386)
+> Process 110 hasn't lived for 3151 cycles (CTD 1386)
+153009a153010
+> ADV 8 (0x0264 -> 0x026c) 06 ff ff 01 42 ff ff ff 
+153342,153343d153342
+< P  510 | live 1124073471
+< ADV 5 (0x0267 -> 0x026c) 01 42 ff ff ff 
+189021a189021
+> Process 510 hasn't lived for 1740 cycles (CTD 1186)
+191370a191371
+> Contestant 1, "Octobre Rouge V4.2", has won !

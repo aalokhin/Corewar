@@ -1,0 +1,245 @@
+Writing output program to or/42.cor
+Writing output program to or/_.cor
+Writing output program to or/_honeybadger.cor
+Writing output program to or/Asombra.cor
+Lexical error at [3:1]
+Writing output program to or/barriere.cor
+Writing output program to or/bee_gees.cor
+Writing output program to or/big_feet.cor
+Writing output program to or/bigzork.cor
+Writing output program to or/Car.cor
+Writing output program to or/casimir.cor
+Writing output program to or/champ.cor
+Writing output program to or/corelol.cor
+Writing output program to or/darksasuke.cor
+Lexical error at [3:1]
+Writing output program to or/doge.cor
+Writing output program to or/Douceur_power.cor
+Writing output program to or/dubo.cor
+Writing output program to or/ex.cor
+Writing output program to or/Explosive_Kitty.cor
+Writing output program to or/fluttershy.cor
+Writing output program to or/Gagnant.cor
+Writing output program to or/gateau.cor
+Writing output program to or/gedeon.cor
+Writing output program to or/helltrain.cor
+Writing output program to or/jinx.cor
+Writing output program to or/jumper.cor
+Writing output program to or/justin_bee.cor
+Writing output program to or/Kappa.cor
+Writing output program to or/Kittystrophic.cor
+Syntax error at token [TOKEN][002:002] INSTRUCTION "ld"
+Lexical error at [31:23]
+Writing output program to or/littlepuppy.cor
+Writing output program to or/live.cor
+Writing output program to or/loose.cor
+Writing output program to or/Machine-gun.cor
+Writing output program to or/mandragore.cor
+Writing output program to or/MarineKing.cor
+Lexical error at [182:1]
+Writing output program to or/maxidef.cor
+Writing output program to or/meowluigi.cor
+Writing output program to or/Misaka_Mikoto.cor
+Writing output program to or/mise_a_jour_windows95.cor
+Writing output program to or/mortel.cor
+Lexical error at [3:1]
+Writing output program to or/Octobre_Rouge_V4.2.cor
+Writing output program to or/overwatch.cor
+Writing output program to or/Rainbow_dash.cor
+Writing output program to or/run_Kitty_RUN.cor
+Writing output program to or/salamahenagalabadoun.cor
+Writing output program to or/sam_2.0.cor
+Lexical error at [3:1]
+Writing output program to or/skynet.cor
+Writing output program to or/slider2.cor
+Lexical error at [7:1]
+Lexical error at [3:1]
+Lexical error at [3:1]
+Lexical error at [3:1]
+Writing output program to or/terminator.cor
+Writing output program to or/THUNDER.cor
+Lexical error at [3:1]
+Writing output program to or/toto.cor
+Writing output program to or/turtle.cor
+Writing output program to or/ultima.cor
+Writing output program to or/ultimate-surrender.cor
+Writing output program to or/Varimathras.cor
+Writing output program to or/Wall.cor
+Writing output program to or/youforkmytralala.cor
+Writing output program to or/zork.cor
+Writing output program to my/42.cor
+Writing output program to my/_.cor
+Writing output program to my/_honeybadger.cor
+Writing output program to my/Asombra.cor
+Lexical error at [3:1]
+Writing output program to my/barriere.cor
+Writing output program to my/bee_gees.cor
+Writing output program to my/big_feet.cor
+Writing output program to my/bigzork.cor
+Writing output program to my/Car.cor
+Writing output program to my/casimir.cor
+Writing output program to my/champ.cor
+Writing output program to my/corelol.cor
+Writing output program to my/darksasuke.cor
+Lexical error at [3:1]
+Writing output program to my/doge.cor
+Writing output program to my/Douceur_power.cor
+Writing output program to my/ex.cor
+Lexical error at [3:1]
+Writing output program to my/fluttershy.cor
+Writing output program to my/Gagnant.cor
+Writing output program to my/gateau.cor
+Writing output program to my/gedeon.cor
+Writing output program to my/helltrain.cor
+Invalid parameter 0 type register for instruction ld
+Writing output program to my/jumper.cor
+Writing output program to my/justin_bee.cor
+Writing output program to my/Kappa.cor
+Lexical error at [3:1]
+Syntax error at token [TOKEN][2:-1] INSTRUCTION "ld"
+Lexical error at [31:23]
+Writing output program to my/littlepuppy.cor
+Writing output program to my/live.cor
+Writing output program to my/loose.cor
+Writing output program to my/Machine-gun.cor
+Writing output program to my/mandragore.cor
+Writing output program to my/MarineKing.cor
+Lexical error at [182:1]
+Writing output program to my/maxidef.cor
+Writing output program to my/meowluigi.cor
+Lexical error at [4:2]
+Writing output program to my/mise_a_jour_windows95.cor
+Writing output program to my/mortel.cor
+Lexical error at [3:1]
+Writing output program to my/Octobre_Rouge_V4.2.cor
+Writing output program to my/overwatch.cor
+Writing output program to my/Rainbow_dash.cor
+Lexical error at [3:1]
+Writing output program to my/salamahenagalabadoun.cor
+Writing output program to my/sam_2.0.cor
+Lexical error at [3:1]
+Writing output program to my/skynet.cor
+Writing output program to my/slider2.cor
+Lexical error at [7:1]
+Lexical error at [3:1]
+Lexical error at [3:1]
+Lexical error at [3:1]
+Writing output program to my/terminator.cor
+Writing output program to my/THUNDER.cor
+Lexical error at [3:1]
+Writing output program to my/toto.cor
+Writing output program to my/turtle.cor
+Lexical error at [4:1]
+Writing output program to my/ultimate-surrender.cor
+Writing output program to my/Varimathras.cor
+Writing output program to my/Wall.cor
+Writing output program to my/youforkmytralala.cor
+Writing output program to my/zork.cor
+********* Folders differ: *********
+Files my/Douceur_power.cor and or/Douceur_power.cor differ
+Only in or/: Explosive_Kitty.cor
+Only in or/: Kittystrophic.cor
+Only in or/: Misaka_Mikoto.cor
+Files my/champ.cor and or/champ.cor differ
+Only in or/: dubo.cor
+Files my/gateau.cor and or/gateau.cor differ
+Only in or/: jinx.cor
+Files my/jumper.cor and or/jumper.cor differ
+Files my/maxidef.cor and or/maxidef.cor differ
+Only in or/: run_Kitty_RUN.cor
+Files my/skynet.cor and or/skynet.cor differ
+Only in or/: ultima.cor
+=================>Files that differ: <===================
+Binary files my/Douceur_power.cor and or/Douceur_power.cor differ
+Binary files my/champ.cor and or/champ.cor differ
+Binary files my/gateau.cor and or/gateau.cor differ
+Binary files my/jumper.cor and or/jumper.cor differ
+Binary files my/maxidef.cor and or/maxidef.cor differ
+Binary files my/skynet.cor and or/skynet.cor differ
+Files my/Asombra.s.txt and or/Asombra.s.txt differ
+Files my/Douceur_power.s.txt and or/Douceur_power.s.txt differ
+Files my/Explosive_Kitty.s.txt and or/Explosive_Kitty.s.txt differ
+Files my/Kappa.s.txt and or/Kappa.s.txt differ
+Files my/Kittystrophic.s.txt and or/Kittystrophic.s.txt differ
+Files my/Machine-gun.s.txt and or/Machine-gun.s.txt differ
+Files my/MarineKing.s.txt and or/MarineKing.s.txt differ
+Files my/Misaka_Mikoto.s.txt and or/Misaka_Mikoto.s.txt differ
+Files my/Octobre_Rouge_V4.2.s.txt and or/Octobre_Rouge_V4.2.s.txt differ
+Files my/Rainbow_dash.s.txt and or/Rainbow_dash.s.txt differ
+Files my/THUNDER.s.txt and or/THUNDER.s.txt differ
+Files my/Wall.s.txt and or/Wall.s.txt differ
+Files my/_.s.txt and or/_.s.txt differ
+Files my/_honeybadger.s.txt and or/_honeybadger.s.txt differ
+Files my/bigzork.s.txt and or/bigzork.s.txt differ
+Files my/casimir.s.txt and or/casimir.s.txt differ
+Files my/champ.s.txt and or/champ.s.txt differ
+Files my/darksasuke.s.txt and or/darksasuke.s.txt differ
+Files my/doge.s.txt and or/doge.s.txt differ
+Files my/dubo.s.txt and or/dubo.s.txt differ
+Files my/fluttershy.s.txt and or/fluttershy.s.txt differ
+Files my/gateau.s.txt and or/gateau.s.txt differ
+Files my/gedeon.s.txt and or/gedeon.s.txt differ
+Files my/helltrain.s.txt and or/helltrain.s.txt differ
+Files my/jinx.s.txt and or/jinx.s.txt differ
+Files my/jumper.s.txt and or/jumper.s.txt differ
+Files my/justin_bee.s.txt and or/justin_bee.s.txt differ
+Files my/lde.s.txt and or/lde.s.txt differ
+Files my/live.s.txt and or/live.s.txt differ
+Files my/loose.s.txt and or/loose.s.txt differ
+Files my/mandragore.s.txt and or/mandragore.s.txt differ
+Files my/maxidef.s.txt and or/maxidef.s.txt differ
+Files my/meowluigi.s.txt and or/meowluigi.s.txt differ
+Files my/mise_a_jour_windows95.s.txt and or/mise_a_jour_windows95.s.txt differ
+Files my/overwatch.s.txt and or/overwatch.s.txt differ
+Files my/run_Kitty_RUN.s.txt and or/run_Kitty_RUN.s.txt differ
+Files my/salamahenagalabadoun.s.txt and or/salamahenagalabadoun.s.txt differ
+Files my/sam_2.0.s.txt and or/sam_2.0.s.txt differ
+Files my/skynet.s.txt and or/skynet.s.txt differ
+Files my/terminator.s.txt and or/terminator.s.txt differ
+Files my/turtle.s.txt and or/turtle.s.txt differ
+Files my/ultima.s.txt and or/ultima.s.txt differ
+Files my/ultimate-surrender.s.txt and or/ultimate-surrender.s.txt differ
+Files my/youforkmytralala.s.txt and or/youforkmytralala.s.txt differ
+Files my/Asombra.s.txt and or/Asombra.s.txt differ
+Files my/Douceur_power.s.txt and or/Douceur_power.s.txt differ
+Files my/Explosive_Kitty.s.txt and or/Explosive_Kitty.s.txt differ
+Files my/Kappa.s.txt and or/Kappa.s.txt differ
+Files my/Kittystrophic.s.txt and or/Kittystrophic.s.txt differ
+Files my/Machine-gun.s.txt and or/Machine-gun.s.txt differ
+Files my/MarineKing.s.txt and or/MarineKing.s.txt differ
+Files my/Misaka_Mikoto.s.txt and or/Misaka_Mikoto.s.txt differ
+Files my/Octobre_Rouge_V4.2.s.txt and or/Octobre_Rouge_V4.2.s.txt differ
+Files my/Rainbow_dash.s.txt and or/Rainbow_dash.s.txt differ
+Files my/THUNDER.s.txt and or/THUNDER.s.txt differ
+Files my/Wall.s.txt and or/Wall.s.txt differ
+Files my/_.s.txt and or/_.s.txt differ
+Files my/_honeybadger.s.txt and or/_honeybadger.s.txt differ
+Files my/bigzork.s.txt and or/bigzork.s.txt differ
+Files my/casimir.s.txt and or/casimir.s.txt differ
+Files my/champ.s.txt and or/champ.s.txt differ
+Files my/darksasuke.s.txt and or/darksasuke.s.txt differ
+Files my/doge.s.txt and or/doge.s.txt differ
+Files my/fluttershy.s.txt and or/fluttershy.s.txt differ
+Files my/gateau.s.txt and or/gateau.s.txt differ
+Files my/gedeon.s.txt and or/gedeon.s.txt differ
+Files my/helltrain.s.txt and or/helltrain.s.txt differ
+Files my/jinx.s.txt and or/jinx.s.txt differ
+Files my/jumper.s.txt and or/jumper.s.txt differ
+Files my/justin_bee.s.txt and or/justin_bee.s.txt differ
+Files my/lde.s.txt and or/lde.s.txt differ
+Files my/live.s.txt and or/live.s.txt differ
+Files my/loose.s.txt and or/loose.s.txt differ
+Files my/mandragore.s.txt and or/mandragore.s.txt differ
+Files my/maxidef.s.txt and or/maxidef.s.txt differ
+Files my/meowluigi.s.txt and or/meowluigi.s.txt differ
+Files my/mise_a_jour_windows95.s.txt and or/mise_a_jour_windows95.s.txt differ
+Files my/overwatch.s.txt and or/overwatch.s.txt differ
+Files my/run_Kitty_RUN.s.txt and or/run_Kitty_RUN.s.txt differ
+Files my/salamahenagalabadoun.s.txt and or/salamahenagalabadoun.s.txt differ
+Files my/sam_2.0.s.txt and or/sam_2.0.s.txt differ
+Files my/skynet.s.txt and or/skynet.s.txt differ
+Files my/terminator.s.txt and or/terminator.s.txt differ
+Files my/turtle.s.txt and or/turtle.s.txt differ
+Files my/ultima.s.txt and or/ultima.s.txt differ
+Files my/ultimate-surrender.s.txt and or/ultimate-surrender.s.txt differ
+Files my/youforkmytralala.s.txt and or/youforkmytralala.s.txt differ

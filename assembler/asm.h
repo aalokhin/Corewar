@@ -206,7 +206,7 @@ void		bytes_above_filler(t_binfile *file, t_lable *label);
 
 void	 		flag_a_output(t_binfile *bin);
 void			print_arg_chars(t_t	*instruct);
-void			print_dir_ind_bytes(int arg, int lbl_size);
+void			print_dir_ind_bytes(int arg0, int arg, int lbl_size);
 void			print_instr_args(t_t *instruct);
 void			print_instr_args2(t_t *instruct);
 
