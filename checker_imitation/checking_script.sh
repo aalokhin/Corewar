@@ -59,73 +59,73 @@ done
 # 	echo =========\> "${comp_o[$element]}"  "${comp_m[$element]}"   \<=========
 #   	diff "${comp_o[$element]}"  "${comp_m[$element]}" >> difference.txt
 # done
-echo "********* Folders differ: *********" 
+echo "********* Folders differ: *********"  >> difference.txt
 
 diff --brief -r my/ or/ >> difference.txt
 
-echo "=================>Files that differ: <===================" >> difference.txt
+# echo "=================>Files that differ: <===================" >> difference.txt
 
 
-DIR1=$(ls or)
-DIR2=$(ls my)
+# DIR1=$(ls or)
+# DIR2=$(ls my)
 
-for i in $DIR1; do
-    for j in $DIR2; do
-        if [[ $i == $j ]]; then
-            # echo "=====> $i" 
-            # echo $DIR2/$j
-            # echo "====> $i"
-            # echo "====> $j"
-            diff "my/$i" "or/$j" >> difference.txt
-        fi
-    done
-done
+# for i in $DIR1; do
+#     for j in $DIR2; do
+#         if [[ $i == $j ]]; then
+#             # echo "=====> $i" 
+#             # echo $DIR2/$j
+#             # echo "====> $i"
+#             # echo "====> $j"
+#             diff "my/$i" "or/$j" >> difference.txt
+#         fi
+#     done
+# done
 
 cat difference.txt
 rm -rf difference.txt
-rm -rf my or
+# rm -rf my or
 
 
 
 
 
-$(mkdir  ./my ./or);
-$(chmod +x ./my);
-$(chmod +x ./or);
-# ="/my"  #my
-# OR="/or" #original
-bots=$(find vm_champs/champs -name "*.s") #list bots
-cp $bots ./my
-cp $bots ./or
+# $(mkdir  ./my ./or);
+# $(chmod +x ./my);
+# $(chmod +x ./or);
+# # ="/my"  #my
+# # OR="/or" #original
+# bots=$(find vm_champs/champs -name "*.s") #list bots
+# cp $bots ./my
+# cp $bots ./or
 
-# ./vm_champs/asm 
+# # ./vm_champs/asm 
 
-# echo $bots; 
-my_bots=$(find my -name "*.s")
-or_bots=$(find or -name "*.s")
+# # echo $bots; 
+# my_bots=$(find my -name "*.s")
+# or_bots=$(find or -name "*.s")
 
-i=0;
-for i in $or_bots
-do
-vm_champs/asm -a $i > "$i.txt"
-rm -rf $i
-done
+# i=0;
+# for i in $or_bots
+# do
+# vm_champs/asm -a $i > "$i.txt"
+# rm -rf $i
+# done
 
-i=0;
-for i in $my_bots
-do
- # echo ">>>$i<<<"
-../asm -a $i > "$i.txt"
-rm -rf $i
-done
+# i=0;
+# for i in $my_bots
+# do
+#  # echo ">>>$i<<<"
+# ../asm -a $i > "$i.txt"
+# rm -rf $i
+# done
 
-echo "=================>Flag A differs: <===================" >> result.txt
+# echo "=================>Flag A differs: <===================" >> result.txt
 
-diff --brief -r my/ or/ >> result.txt
+# diff --brief -r my/ or/ >> result.txt
 
-cat result.txt
-rm -rf my or 
-rm -rf result.txt
+# cat result.txt
+# rm -rf my or 
+# rm -rf result.txt
 
 
 

@@ -15,7 +15,7 @@
 int		define_line_num(char *copy, char *str_n, int f, int l)
 {
 	int 	k = 0;
-
+	
 	while (copy[f])
 	{
 		if (copy[f] == '\n')
@@ -31,14 +31,26 @@ int		define_line_num(char *copy, char *str_n, int f, int l)
 					l++;
 				if (copy[f] != str_n[l])
 					l = -1;
-				if (copy[f] == str_n[l])
+				else
 				{
-					f++;
-					l++;
-					while (WHITESPACE(str_n[l]))
+
+					// printf("checkmark [f=%d], [l=%d]\n", f, l);
+					// if (!copy || !str_n)
+					// {
+					// 	printf("this is something weird\n");
+					// 	return(0);
+					// }
+					if (copy[f] == str_n[l]) // for some reason it enters here sometimes
+					{
+
+
+						f++;
 						l++;
-					if (str_n[l] == '\0')
-						return (k);
+						while (WHITESPACE(str_n[l]))
+							l++;
+						if (str_n[l] == '\0')
+							return (k);
+					}
 				}
 			}
 			if (copy[f] == '\n')
@@ -46,6 +58,8 @@ int		define_line_num(char *copy, char *str_n, int f, int l)
 		}
 		f++;
 	}
+	printf("end\n");
+
 	return (0);
 }
 
