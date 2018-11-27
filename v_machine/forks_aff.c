@@ -85,7 +85,7 @@ int		long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 			printf("P%6d | lfork %d (%d)\n", (*tmp).id + 1,
 			(*tmp).argv[0][1], i);
 	}
-	i = ((i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
+	i = (i + MEM_SIZE) % MEM_SIZE;
 	(*main_cycle).fork_ind = i;
 	processes_add(&head, map, main_cycle, cur_proc);
 	return (1);

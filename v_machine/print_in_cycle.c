@@ -45,7 +45,7 @@ void	after_cycle(t_flags *params, t_header bots[4],
 		print_winner(win, main_cycle);
 		endwin();
 	}
-	else
+	else if (!(*params).ncurses && !main_cycle.processes)
 		printf("Contestant %d, \"%s\", has won !\n",
 			main_cycle.winner_id + 1, main_cycle.winner_name);
 }
@@ -57,7 +57,7 @@ void	print_adv(t_cycle *main_cycle, t_proc *processes, t_flags *params,
 
 	j = 0;
 	(*main_cycle).indexes[(*processes).current_position][1] = 0;
-	if (((*params).v_verbosity >> 4) & 1)
+	if (((*params).v_verbosity >> 4) & 1 && (*main_cycle).shift > 0)
 	{
 		printf("ADV %d (0x%.4x -> 0x%.4x) ", (*main_cycle).shift,
 			(*processes).current_position, (*main_cycle).shift +

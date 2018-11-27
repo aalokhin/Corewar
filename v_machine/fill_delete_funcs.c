@@ -56,7 +56,7 @@ void	processes_add(t_proc **head, unsigned char *map,
 	processes_add2(head, main_cycle, tmp, parent);
 	tmp->current_position = (*main_cycle).fork_ind;
 	tmp->arg_counter = 0;
-	tmp->cmd = map[(tmp->current_position + MEM_SIZE) % MEM_SIZE];
+	tmp->cmd = map[tmp->current_position];
 	(*main_cycle).indexes[(*main_cycle).fork_ind][1] = 1;
 	if (tmp->cmd >= 1 && tmp->cmd <= 16)
 		tmp->cycles_wait = g_op_tab[tmp->cmd - 1].cycles_wait;

@@ -22,7 +22,7 @@ void	take_sti_params(t_instr *inst_vars, unsigned char *map)
 	{
 		(*inst_vars).i = inst_vars->tmp->current_position +
 		inst_vars->tmp->argv[1][1] % IDX_MOD;
-		(*inst_vars).i = (((*inst_vars).i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
+		(*inst_vars).i = ((*inst_vars).i + MEM_SIZE) % MEM_SIZE;
 		(*inst_vars).one = (map[((*inst_vars).i + MEM_SIZE) % MEM_SIZE] << 24) + (map[((*inst_vars).i +
 		MEM_SIZE + 1) % MEM_SIZE] << 16) + (map[((*inst_vars).i + MEM_SIZE + 2)
 		% MEM_SIZE] << 8) + map[((*inst_vars).i + MEM_SIZE + 3) % MEM_SIZE];
@@ -86,7 +86,7 @@ int		store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		inst_vars.one, inst_vars.two, inst_vars.one +
 		inst_vars.two, inst_vars.i);
 	}
-	inst_vars.i = ((inst_vars.i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
+	inst_vars.i = (inst_vars.i + MEM_SIZE) % MEM_SIZE;
 	insert_vals_to_map(map, inst_vars, main_cycle);
 	return (1);
 }

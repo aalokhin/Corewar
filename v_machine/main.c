@@ -183,16 +183,13 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	params_init(&params);
-	printf("%s%d\n", "test", 5);
 	res = check_flags_core(argc, argv, &params);
-	printf("%s%d\n", "test", 5);
 	if (res <= 0)
 	{
 		res == 0 ? ft_printf("%s\n", "Too many champions") :
 		ft_printf("%s %s\n", "Can't read source file", argv[params.i]);
 		exit(0);
 	}
-	printf("%s%d\n", "test", 5);
 	init_bots(bots);
 	if (!read_bots(&params, fd, bots))
 		exit(0);

@@ -40,8 +40,8 @@ void	get_t_dir_value(t_proc *processes, unsigned char *map,
 		(*processes).argv[arg_ind][1] = tmp_2;
 	}
 	(*id_counter) += size;
-	(*processes).arg_counter++;
 }
+(*processes).arg_counter++;
 }
 
 void	get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind,
@@ -56,8 +56,8 @@ void	get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind,
 		map[((*id_counter) + 2) % MEM_SIZE]);
 	(*processes).argv[arg_ind][1] = tmp;
 	(*id_counter) += 2;
-	(*processes).arg_counter++;
 	}
+	(*processes).arg_counter++;
 }
 
 void	get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind,
@@ -69,8 +69,9 @@ void	get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind,
 	tmp = (unsigned char)(map[((*id_counter) + 1) % MEM_SIZE]);
 	(*processes).argv[arg_ind][1] = tmp;
 	(*id_counter)++;
-	(*processes).arg_counter++;
+	
 }
+(*processes).arg_counter++;
 }
 
 void	get_args_values(t_proc *processes, unsigned char *map, int *id_counter)
@@ -106,4 +107,6 @@ void	take_args(unsigned char codage, t_proc *processes)
 		(*processes).argv[2][0] = IND_CODE;
 	else if ((codage & 12) == 4)
 		(*processes).argv[2][0] = REG_CODE;
+	if ((codage & 1) == 1 || (codage & 2) == 2 || (codage & 3) == 3)
+		(*processes).fourth_arg = 1;
 }

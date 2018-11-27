@@ -20,8 +20,13 @@ void	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 		(*main_cycle).id_counter = ((*processes).current_position +
 		1 + MEM_SIZE) % MEM_SIZE;
 		take_args(map[(*main_cycle).id_counter], processes);
+		//(*main_cycle).shift = 2;
 		get_args_values(processes, map, &main_cycle->id_counter);
-		(*processes).arg_counter = 0;
+		if ((*processes).fourth_arg)
+			(*processes).arg_counter++;
+		(*processes).fourth_arg = 0;
+		//(*main_cycle).shift = (*main_cycle).id_counter + 1 -
+		//(*processes).current_position;
 	}
 	else
 	{
@@ -29,8 +34,10 @@ void	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 		(*processes).argv[0][0] = DIR_CODE;
 		g_get_arg_vals[(*processes).argv[0][0] - 1](processes, map,
 			0, &main_cycle->id_counter);
-		(*processes).arg_counter = 0;
+		
+		//(*main_cycle).shift = 2;
 	}
+	
 	if ((*processes).cmd == 1 || (*processes).cmd == 12 ||
 		(*processes).cmd == 15)
 		(*main_cycle).instr_res = g_instruct[(*processes).cmd -
@@ -51,24 +58,75 @@ void	change_cur_pos_and_print_it(t_proc *processes, t_cycle *main_cycle,
 		(*processes).cmd == 6 || (*processes).cmd == 7
 		|| (*processes).cmd == 4 || (*processes).cmd == 10)
 	{*/
-	if ((*processes).cmd == 1 || (*processes).cmd == 12 ||
+	/*if ((*processes).cmd == 1 || (*processes).cmd == 12 ||
 		(*processes).cmd == 15 || ((*processes).cmd == 9 &&
 	(*processes).carry == 0))
 		{
-			if(!g_op_tab[(*processes).cmd - 1].label)
-				(*main_cycle).shift = 5;
-			else
-			(*main_cycle).shift = 3;
+			(*main_cycle).shift = (*main_cycle).id_counter + 1 -
+		(*processes).current_position;
 			print_adv(main_cycle, processes, params, map);
-		}
-	else if ((*processes).cmd != 9
-&& (*main_cycle).id_counter + 1 - (*processes).current_position != 0)
+		}*/
+	if (((*processes).cmd == 3 || (*processes).cmd == 2 ) && (*main_cycle).instr_res == 0
+	/* && (*processes).arg_counter < g_op_tab[(*processes).cmd - 1].arg_nbr*/)
+	{
+		(*main_cycle).shift = 2;
+		print_adv(main_cycle, processes, params, map);
+	}
+	else if ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))/* || (*processes).cmd == 1
+		|| (*processes).cmd == 12 || (*processes).cmd == 15)*/
 	{
 		(*main_cycle).shift = (*main_cycle).id_counter + 1 -
 		(*processes).current_position;
 		print_adv(main_cycle, processes, params, map);
 	}
+	/*else if ((*processes).cmd != 9 )
+		{
+		(*main_cycle).shift = (*main_cycle).id_counter + 1 -
+		(*processes).current_position;
+		print_adv(main_cycle, processes, params, map);
+	}*/
+	/*if ((*main_cycle).instr_res == 0 && (*processes).arg_counter)
+	{
+		(*main_cycle).shift = 2;
+		print_adv(main_cycle, processes, params, map);
+	}
+	else if ((*processes).cmd != 9 )
+	{
+		(*main_cycle).shift = (*main_cycle).id_counter + 1 -
+		(*processes).current_position;
+		print_adv(main_cycle, processes, params, map);
+	}*/
+	(*processes).arg_counter = 0;
+	/*if (((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))
+		&& (*main_cycle).shift)
+	print_adv(main_cycle, processes, params, map);*/
+	/*if (((*processes).cmd != 9 && (*main_cycle).instr_res == 1) || ((*processes).cmd == 9 && (*processes).carry == 0) ||
+	(*processes).cmd == 11 || (*processes).cmd == 14 || (*processes).cmd == 6 || (*processes).cmd == 7
+	 || (*processes).cmd == 4 || (*processes).cmd == 10)
+	{
+		(*main_cycle).shift = (*main_cycle).id_counter + 1 -
+		(*processes).current_position;
+	}
+	else if ((*processes).cmd != 9 && (*main_cycle).instr_res == 0)
+		(*main_cycle).shift = 2;*/
 
+
+
+	/*if (((*processes).cmd != 9 && (*main_cycle).instr_res == 1) ||
+		((*processes).cmd == 9 && (*processes).carry == 0) ||
+		(*processes).cmd == 11 || (*processes).cmd == 14 ||
+		(*processes).cmd == 6 || (*processes).cmd == 7
+		|| (*processes).cmd == 4 || (*processes).cmd == 10)
+	{
+		(*main_cycle).shift = (*main_cycle).id_counter + 1 -
+		(*processes).current_position;
+		print_adv(main_cycle, processes, params, map);
+	}
+	else if ((*processes).cmd != 9 && (*main_cycle).instr_res == 0)
+		print_adv(main_cycle, processes, params, map);*/
+	/*if (((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))
+		&& (*main_cycle).shift && (*processes).cmd >= 1 && (*processes).cmd <= 16)
+	print_adv(main_cycle, processes, params, map);*/
 	(*processes).current_position = ((*processes).current_position +
 		MEM_SIZE) % MEM_SIZE;
 	(*processes).cmd = map[(*processes).current_position];
@@ -104,7 +162,7 @@ void	internal_cycle_core(t_cycle *main_cycle, t_proc *processes,
 		(*processes).cmd <= 16 && (*processes).cycles_wait == 1)
 		{
 			take_args_and_do_instr(processes, main_cycle, map, params);
-			(*main_cycle).shift = 2;
+			//(*main_cycle).shift = 2;
 			change_cur_pos_and_print_it(processes, main_cycle, params, map);
 		}
 		else if ((*processes).if_live && (*processes).cmd >= 1
@@ -130,20 +188,7 @@ void	vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
 	fill_start_map_id(&main_cycle, bots, params);
 	processes = processes_init(params, bots, map);
 	main_cycle.head_proc = processes;
-	//intro_print(params, bots, win);
-	int i;
-
-	i = 0;
-	printf("%s%d\n", "test", (*params).ncurses);
-	if ((*params).ncurses == 1)
-		visual_init(&win);
-	printf("%s\n", "Introducing contestants...");
-	while (i < (*params).bots_quantity)
-	{
-		printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1,
-			bots[i].prog_size, bots[i].prog_name, bots[i].comment);
-		i++;
-	}
+	intro_print(params, bots, win);
 	while (main_cycle.processes > 0)
 	{
 		if (((*params).v_verbosity >> 1) & 1)

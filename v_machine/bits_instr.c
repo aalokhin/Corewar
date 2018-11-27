@@ -22,8 +22,8 @@ void	take_bits_params(t_instr *inst_vars, unsigned char *map)
 	{
 		(*inst_vars).i = inst_vars->tmp->current_position +
 		inst_vars->tmp->argv[0][1] % IDX_MOD;
-		(*inst_vars).i = (((*inst_vars).i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
-		(*inst_vars).one = ((map[(*inst_vars).i + MEM_SIZE] << 24) + (map[((*inst_vars).i
+		(*inst_vars).i = ((*inst_vars).i + MEM_SIZE) % MEM_SIZE;
+		(*inst_vars).one = ((map[(*inst_vars).i] << 24) + (map[((*inst_vars).i
 		+ MEM_SIZE + 1) % MEM_SIZE] << 16) + (map[((*inst_vars).i + MEM_SIZE +
 		2) % MEM_SIZE] << 8) + map[((*inst_vars).i + MEM_SIZE + 3) % MEM_SIZE]);
 	}
@@ -35,7 +35,7 @@ void	take_bits_params(t_instr *inst_vars, unsigned char *map)
 	{
 		(*inst_vars).i = ((inst_vars->tmp->current_position +
 		inst_vars->tmp->argv[1][1] % IDX_MOD) + MEM_SIZE) % MEM_SIZE;
-		(*inst_vars).two = ((map[(*inst_vars).i + MEM_SIZE] << 24) + (map[((*inst_vars).i +
+		(*inst_vars).two = ((map[(*inst_vars).i] << 24) + (map[((*inst_vars).i +
 		MEM_SIZE + 1) % MEM_SIZE] << 16) + (map[((*inst_vars).i + MEM_SIZE + 2)
 		% MEM_SIZE] << 8) + map[((*inst_vars).i + MEM_SIZE + 3) % MEM_SIZE]);
 	}

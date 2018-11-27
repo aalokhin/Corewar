@@ -15,7 +15,7 @@
 void	lload_ind_parse(t_proc *tmp, unsigned char *map, int i)
 {
 	i = (*tmp).current_position + (*tmp).argv[0][1] % IDX_MOD;
-	i = ((i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
+	i = (i + MEM_SIZE) % MEM_SIZE;
 	(*tmp).argv[0][1] = ((map[(i + MEM_SIZE) % MEM_SIZE] << 24) + (map[(i + MEM_SIZE + 1) %
 	MEM_SIZE] << 16) + (map[(i + MEM_SIZE + 2) % MEM_SIZE] << 8) +
 	map[(i + MEM_SIZE + 3) % MEM_SIZE]);
