@@ -57,7 +57,7 @@ int		live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 		(*child_proc).argv[0][1]);
 	}
 
-	if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] <= 0 && (*child_proc).argv[0][1] >= -255)
+	if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] <= 0/* && (*child_proc).argv[0][1] >= -255*/)
 		live_dir_proc(child_proc, head_proc, main_cycle);
 	map[0] = map[0];
 	return (1);

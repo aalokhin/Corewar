@@ -45,13 +45,8 @@ void	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 void	change_cur_pos_and_print_it(t_proc *processes, t_cycle *main_cycle,
 	t_flags *params, unsigned char *map)
 {
-	/*if (((*processes).cmd != 9 && (*main_cycle).instr_res == 1) ||
-		((*processes).cmd == 9 && (*processes).carry == 0) ||
-		(*processes).cmd == 11 || (*processes).cmd == 14 ||
-		(*processes).cmd == 6 || (*processes).cmd == 7
-		|| (*processes).cmd == 4 || (*processes).cmd == 10)
-	{*/
-	if ((*processes).cmd == 1 || (*processes).cmd == 12 ||
+
+	/*if ((*processes).cmd == 1 || (*processes).cmd == 12 ||
 		(*processes).cmd == 15 || ((*processes).cmd == 9 &&
 	(*processes).carry == 0))
 		{
@@ -67,8 +62,20 @@ void	change_cur_pos_and_print_it(t_proc *processes, t_cycle *main_cycle,
 		(*main_cycle).shift = (*main_cycle).id_counter + 1 -
 		(*processes).current_position;
 		print_adv(main_cycle, processes, params, map);
+	}*/
+	if (((*processes).cmd == 3 || (*processes).cmd == 2 ) && (*main_cycle).instr_res == 0
+	/* && (*processes).arg_counter < g_op_tab[(*processes).cmd - 1].arg_nbr*/)
+	{
+		(*main_cycle).shift = 2;
+		print_adv(main_cycle, processes, params, map);
 	}
-
+	else if ((*processes).cmd != 9 || ((*processes).cmd == 9 && (*processes).carry == 0))/* || (*processes).cmd == 1
+		|| (*processes).cmd == 12 || (*processes).cmd == 15)*/
+	{
+		(*main_cycle).shift = (*main_cycle).id_counter + 1 -
+		(*processes).current_position;
+		print_adv(main_cycle, processes, params, map);
+	}
 	(*processes).current_position = ((*processes).current_position +
 		MEM_SIZE) % MEM_SIZE;
 	(*processes).cmd = map[(*processes).current_position];
