@@ -12,13 +12,13 @@
 
 #include "../corewar.h"
 
-void	intro_print(t_flags *params, t_header bots[4], WINDOW *win)
+void	intro_print(t_flags *params, t_header bots[4], WINDOW **win)
 {
 	int i;
 
 	i = 0;
 	if ((*params).ncurses == 1)
-		visual_init(&win);
+		visual_init(win);
 	printf("%s\n", "Introducing contestants...");
 	while (i < (*params).bots_quantity)
 	{

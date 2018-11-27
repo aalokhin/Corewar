@@ -221,7 +221,7 @@ int					check_comment(unsigned char *str, t_flags *params, int j);
 void				delete_unneeded(t_proc **head, t_cycle *main_cycle);
 void				fill_start_map_id(t_cycle *main_cycle, t_header bots[4],
 						t_flags *params);
-void				intro_print(t_flags *params, t_header bots[4], WINDOW *win);
+void				intro_print(t_flags *params, t_header bots[4], WINDOW **win);
 void				after_cycle(t_flags *params, t_header bots[4],
 						t_cycle main_cycle, WINDOW *win);
 void				print_adv(t_cycle *main_cycle, t_proc *processes,
