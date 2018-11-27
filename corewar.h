@@ -43,6 +43,7 @@ typedef struct		s_proc
 	int				child_proc_lives;
 	int				live_cycle;
 	int				arg_counter;
+	int				fourth_arg;
 	struct s_proc	*next;
 }					t_proc;
 
