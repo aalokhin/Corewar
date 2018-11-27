@@ -148,7 +148,8 @@ int check_flags_core(int argc, char **argv, t_flags *params)
 			(*params).ncurses = 1;
 		/*else if (ft_strcmp(argv[i], "---stealth") == 0 && ft_strcmp(argv[i - 1], "-n"))
 			(*params).n_stealth = 1;*/
-		else if (ft_strchr(argv[i], '.') && ft_strcmp(&(argv[i][ft_strlen(argv[i]) - 4]), ".cor") == 0)
+		else if (ft_strchr(argv[i], '.') && ft_strcmp(&
+		(argv[i][ft_strlen(argv[i]) - 4]), ".cor") == 0)
 		{
 			if ((*params).bots_quantity == 4)
 			{
