@@ -242,7 +242,7 @@ ADV 8 (0x0264 -> 0x026c) 06 ff ff 01 42 ff ff ff
 > Contestant 1, "Octobre Rouge V4.2", has won !
 
 
-slider2
+slider2 15689
 ADV 6 (0x087b -> 0x0881) ff ff ff ff 01 9f
 ---
 > ADV 2 (0x087b -> 0x087d) ff ff
@@ -270,3 +270,5 @@ train
 < ADV 5 (0x0f7f -> 0x0f84) 03 70 00 00 00
 
 fix car , evlsova mbacoux lseguin
+
+проверить все индексы чтоб не было выхода за пределы

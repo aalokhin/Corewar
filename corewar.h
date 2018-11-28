@@ -77,6 +77,7 @@ typedef struct		s_cycle
 	int				instr_res;
 	int				cycle_counter;
 	int				fork_ind;
+	int				run;
 	t_proc			*head_proc;
 }					t_cycle;
 

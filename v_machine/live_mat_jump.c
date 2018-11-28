@@ -70,10 +70,12 @@ int		addition(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 
 	tmp = processes;
 	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[1][0] != REG_CODE
-	|| (*tmp).argv[2][0] != REG_CODE || (*tmp).argv[0][1] < 0 ||
+	|| (*tmp).argv[2][0] != REG_CODE)
+		return (0);
+	if ((*tmp).argv[0][1] < 0 ||
 	(*tmp).argv[0][1] > 16 || (*tmp).argv[1][1] < 0 || (*tmp).argv[1][1]
 	> 16 || (*tmp).argv[2][1] < 0 || (*tmp).argv[2][1] > 16)
-		return (0);
+		return (-1);
 	(*tmp).carry = 0;
 	if (((*tmp).regs[(*tmp).argv[0][1] - 1] +
 		(*tmp).regs[(*tmp).argv[1][1] - 1]) == 0)
@@ -100,10 +102,12 @@ int		substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 
 	tmp = processes;
 	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[1][0] != REG_CODE
-	|| (*tmp).argv[2][0] != REG_CODE || (*tmp).argv[0][1] < 0 ||
+	|| (*tmp).argv[2][0] != REG_CODE)
+		return (0);
+	if ((*tmp).argv[0][1] < 0 ||
 	(*tmp).argv[0][1] > 16 || (*tmp).argv[1][1] < 0 || (*tmp).argv[1][1]
 	> 16 || (*tmp).argv[2][1] < 0 || (*tmp).argv[2][1] > 16)
-		return (0);
+		return (-1);
 	(*tmp).carry = 0;
 	if (((*tmp).regs[(*tmp).argv[0][1] - 1] -
 		(*tmp).regs[(*tmp).argv[1][1] - 1]) == 0)

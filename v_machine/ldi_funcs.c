@@ -73,14 +73,15 @@ int		load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 
 int		check_ldi_params(t_instr *inst_vars, unsigned char *map)
 {
-	if (inst_vars->tmp->argv[2][0] != REG_CODE || inst_vars->tmp->argv[2][1] < 1
+	if (inst_vars->tmp->argv[2][0] != REG_CODE || (inst_vars->tmp->argv[1][0]
+	!= REG_CODE && inst_vars->tmp->argv[1][0] != DIR_CODE))
+		return (0);
+	if (inst_vars->tmp->argv[2][1] < 1
 	|| inst_vars->tmp->argv[2][1] > 16 || (inst_vars->tmp->argv[0][0] ==
 	REG_CODE && (inst_vars->tmp->argv[0][1] < 1 || inst_vars->tmp->argv[0][1] >
 	16)) || (inst_vars->tmp->argv[1][0] == REG_CODE &&
-	(inst_vars->tmp->argv[1][1] < 1 || inst_vars->tmp->argv[1][1] > 16))
-	|| (inst_vars->tmp->argv[1][0]
-	!= REG_CODE && inst_vars->tmp->argv[1][0] != DIR_CODE))
-		return (0);
+	(inst_vars->tmp->argv[1][1] < 1 || inst_vars->tmp->argv[1][1] > 16)))
+		return (-1);
 	take_ldi_params(inst_vars, map, 0, &inst_vars->one);
 	take_ldi_params(inst_vars, map, 1, &inst_vars->two);
 	return (1);
@@ -90,10 +91,12 @@ int		lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	t_instr inst_vars;
+	int res;
 
 	inst_vars_init(&inst_vars, processes);
-	if (!check_ldi_params(&inst_vars, map))
-		return (0);
+	res = check_ldi_params(&inst_vars, map);
+	if (res <= 0)
+		return (res);
 	inst_vars.tmp->carry = 0;
 	inst_vars.i = (((inst_vars.one + inst_vars.two) +
 	inst_vars.tmp->current_position) + MEM_SIZE) % MEM_SIZE;

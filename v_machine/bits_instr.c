@@ -47,12 +47,14 @@ int		bit_and(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	t_instr inst_vars;
 
 	inst_vars_init(&inst_vars, processes);
-	if (inst_vars.tmp->argv[2][0] != REG_CODE || inst_vars.tmp->argv[2][1] < 1
+	if (inst_vars.tmp->argv[2][0] != REG_CODE)
+		return (0);
+	if (inst_vars.tmp->argv[2][1] < 1
 	|| inst_vars.tmp->argv[2][1] > 16 || (inst_vars.tmp->argv[0][0] == REG_CODE
 	&& (inst_vars.tmp->argv[0][1] < 1 || inst_vars.tmp->argv[0][1] > 16))
 	|| (inst_vars.tmp->argv[1][0] == REG_CODE && (inst_vars.tmp->argv[1][1] < 1
 	|| inst_vars.tmp->argv[1][1] > 16)))
-		return (0);
+		return (-1);
 	take_bits_params(&inst_vars, map);
 	inst_vars.tmp->carry = 0;
 	if ((inst_vars.one & inst_vars.two) == 0)
@@ -77,12 +79,14 @@ int		bit_or(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	t_instr inst_vars;
 
 	inst_vars_init(&inst_vars, processes);
-	if (inst_vars.tmp->argv[2][0] != REG_CODE || inst_vars.tmp->argv[2][1] < 1
+	if (inst_vars.tmp->argv[2][0] != REG_CODE)
+		return (0);
+	if (inst_vars.tmp->argv[2][1] < 1
 	|| inst_vars.tmp->argv[2][1] > 16 || (inst_vars.tmp->argv[0][0] == REG_CODE
 	&& (inst_vars.tmp->argv[0][1] < 1 || inst_vars.tmp->argv[0][1] > 16))
 	|| (inst_vars.tmp->argv[1][0] == REG_CODE && (inst_vars.tmp->argv[1][1] < 1
 	|| inst_vars.tmp->argv[1][1] > 16)))
-		return (0);
+		return (-1);
 	take_bits_params(&inst_vars, map);
 	inst_vars.tmp->carry = 0;
 	if ((inst_vars.one | inst_vars.two) == 0)
@@ -107,12 +111,14 @@ int		bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	t_instr inst_vars;
 
 	inst_vars_init(&inst_vars, processes);
-	if (inst_vars.tmp->argv[2][0] != REG_CODE || inst_vars.tmp->argv[2][1] < 1
+	if (inst_vars.tmp->argv[2][0] != REG_CODE)
+		return (0);
+	if (inst_vars.tmp->argv[2][1] < 1
 	|| inst_vars.tmp->argv[2][1] > 16 || (inst_vars.tmp->argv[0][0] == REG_CODE
 	&& (inst_vars.tmp->argv[0][1] < 1 || inst_vars.tmp->argv[0][1] > 16))
 	|| (inst_vars.tmp->argv[1][0] == REG_CODE && (inst_vars.tmp->argv[1][1] < 1
 	|| inst_vars.tmp->argv[1][1] > 16)))
-		return (0);
+		return (-1);
 	take_bits_params(&inst_vars, map);
 	inst_vars.tmp->carry = 0;
 	if ((inst_vars.one ^ inst_vars.two) == 0)

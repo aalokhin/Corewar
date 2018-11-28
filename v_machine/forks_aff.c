@@ -85,9 +85,10 @@ int		aff(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 
 	i = 0;
 	tmp = processes;
-	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[0][1] < 1 ||
-	(*tmp).argv[0][1] > 16 || (*tmp).argv[1][0] || (*tmp).argv[2][0])
+	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[1][0] || (*tmp).argv[2][0])
 		return (0);
+	if ((*tmp).argv[0][1] < 1 || (*tmp).argv[0][1] > 16)
+		return (-1);
 	printf("%s", "Aff: ");
 	printf("%c\n", ((*tmp).regs[(*tmp).argv[0][1] - 1] % 256));
 	(*main_cycle).cycles = (*main_cycle).cycles;
