@@ -74,8 +74,8 @@ int		store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	take_sti_params(&inst_vars, map);
 	inst_vars.i = inst_vars.tmp->current_position +
 	(inst_vars.one + inst_vars.two);
-	//if (inst_vars.i > 65535)
-		//inst_vars.i %= IDX_MOD;
+	if (inst_vars.i > 65535)
+		inst_vars.i %= IDX_MOD;
 	if (((*main_cycle).verbose >> 2) & 1)
 	{
 		if (cur_proc + 1 <= 9999)

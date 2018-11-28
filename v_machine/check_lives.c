@@ -15,8 +15,8 @@
 void	live_or_die(t_proc *tmp, t_cycle *main_cycle, t_flags *params,
 	int *res)
 {
-	if ((*tmp).lives == 0 && (*tmp).if_live && (*tmp).live_cycle >
-		(*main_cycle).cycle_die)
+	if ((*tmp).lives == 0 && (*tmp).if_live && (*tmp).live_cycle >=
+		(*main_cycle).cycle_die && (*tmp).if_live)
 	{
 		(*tmp).if_live = 0;
 		(*main_cycle).processes--;
@@ -25,9 +25,19 @@ void	live_or_die(t_proc *tmp, t_cycle *main_cycle, t_flags *params,
 			(*main_cycle).max_id = (*tmp).id;
 		(*main_cycle).indexes[(*tmp).current_position][1] = 0;
 		if (((*params).v_verbosity >> 3) & 1)
+		{
+			if ((*main_cycle).cycle_die < 0)
+				printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+				(*tmp).id + 1, 0, (*main_cycle).cycle_die);
+			else if ((*tmp).live_cycle == (*main_cycle).cycle_die)
+				printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+				(*tmp).id + 1, (*tmp).live_cycle,
+				(*main_cycle).cycle_die);
+			else
 			printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 				(*tmp).id + 1, (*tmp).live_cycle - 1,
 				(*main_cycle).cycle_die);
+		}
 	}
 	else
 	{
