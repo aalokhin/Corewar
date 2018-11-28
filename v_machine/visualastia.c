@@ -9,9 +9,16 @@ void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params, t_proc *
 	i = 0;
 	x = 199;
 	y = 2;
-	mvwprintw(win, y, x,  "** PAUSED **");
+
+
+	// if ((*main_cycle).run == 0)
+		// mvwprintw(win, y, x,  "** PAUSED **");
+	// else
+	// 	mvwprintw(win, y, x,  "** RUNNING **");
 	y += 2;
+	wrefresh(win);
 	mvwprintw(win, y, x,  "Cycles/second limit : %d", (*main_cycle).second_limit);
+	wrefresh(win);
 	y += 3;
 	mvwprintw(win, y, x,  "Cycles: %d", (*main_cycle).cycles);
 	y += 2;
@@ -53,6 +60,7 @@ void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params, t_proc *
 	y += 2;
 	mvwprintw(win, y, x,  "MAX_CHECKS : %d", MAX_CHECKS);
 	(*main_cycle).winner_str = y + 2;
+	wrefresh(win);
 }
 
 void print_winner(WINDOW * win, t_cycle main_cycle)
@@ -122,6 +130,7 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
 	x = 3;
 	
 	refresh();  
+
 	while (i < MEM_SIZE)
 	{
 		x = 3;
@@ -208,8 +217,9 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
     		i++;
     	}
     	print_map_info(win, main_cycle, params, processes);
+    	wrefresh(win);
     	y++;
 	}
 	wrefresh(win);
-	getch();
+
 }

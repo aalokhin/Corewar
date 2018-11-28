@@ -19,12 +19,15 @@ void	intro_print(t_flags *params, t_header bots[4], WINDOW **win)
 	i = 0;
 	if ((*params).ncurses == 1)
 		visual_init(win);
-	printf("%s\n", "Introducing contestants...");
-	while (i < (*params).bots_quantity)
+	else
 	{
-		printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1,
-			bots[i].prog_size, bots[i].prog_name, bots[i].comment);
-		i++;
+		printf("%s\n", "Introducing contestants...");
+		while (i < (*params).bots_quantity)
+		{
+			printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1,
+				bots[i].prog_size, bots[i].prog_name, bots[i].comment);
+			i++;
+		}
 	}
 }
 
@@ -76,10 +79,8 @@ void	print_adv(t_cycle *main_cycle, t_proc *processes, t_flags *params,
 int		external_cycle_pass(t_cycle *main_cycle, unsigned char *map,
 	t_flags *params)
 {
-	/*if ((*params).ncurses == 1 && main_cycle.second_limit > 0)
-		usleep((useconds_t)((int)1000000 / main_cycle.second_limit));
-	else if ((*params).ncurses == 1 && main_cycle.second_limit <= 0)
-		main_cycle.second_limit = 1;*/
+	if ((*params).ncurses == 1 && (*main_cycle).second_limit > 0)
+		usleep((useconds_t)((int)1000000 / (*main_cycle).second_limit));
 	(*main_cycle).cycles++;
 	if (((*params).d_dumps_memory > 0 && (*main_cycle).cycles ==
 		(*params).d_dumps_memory))
