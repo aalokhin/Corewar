@@ -141,7 +141,7 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 	{
 		i = 0;
 		str = ft_strsplit(*str_n, ' ');
-		if (!(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':')))
+		if (!(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':'))) /// && :+1 !=whitespaces
 		{
 			if (label)
 				label = labels_linker(file, label);;

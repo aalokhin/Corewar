@@ -75,14 +75,18 @@ int 	label_name_is_valid(t_binfile *file, t_lable *label, char *str)
 
 int 		all_digits(char *str)
 {
-	int i = 0;
+	int i;
 
+	i = 0;
 	while (str[i])
 	{
 		if (!(ft_isdigit(str[i])) && str[i] != '-')
 			return (0);
 		i++;
 	}
+	// if (ft_strcmp(ft_itoa(ft_atoi(str)), str) != 0)
+	// 	return (0);
+	// if ()
 	return (1);
 }
 
@@ -97,29 +101,25 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
  	if (size == to_count || to_count == 7 || (size < to_count && to_count - size != size  && (to_count - size == T_REG
  		|| to_count  - size == T_DIR ||  to_count - size == T_IND)))
 	{
- 		// if (size == T_REG)
- 		// 	if (!(arg + 1) || !(ft_isdigit(arg[1])) || !all_digits(arg + 1) || arg[1] != '-')
- 		// 		return (error_message(file, arg, token->line_num));
  		if (ft_strstr(arg, "%:"))
  		{
  			if (!(ft_strstr(file->f_contents, arg + 2)))
  			{
- 				printf("%s\n", "we are herer" );
- 				//label_name[ft_strlen(label_name) - 1] = '\0';
  				return (0);//error_message_label(file, token, arg + 2, arg));
  			}
  			return (1);
  		}
- 		// if (size == T_DIR)
- 		// 	 if (!(arg + 1) || !(ft_isdigit(arg[1])) || !all_digits(arg + 1) || arg[1] != '-' )
- 		// 		return (error_message(file, arg, token->line_num));
- 		// if (size == T_IND)
- 		// {
- 		// 	 if (!all_digits(arg) || arg[0] != '-')
- 		// 		return (error_message(file, arg, token->line_num));
- 		// }
- 		// else
- 			return (1);
+ 		if (size == T_REG || size == T_DIR)
+ 		{
+ 			if (!(arg + 1) || (!(ft_isdigit(arg[1])) && arg[1] != '-')|| !all_digits(arg + 1))// && arg[1] != '-'))
+ 				return (error_message(file, arg, token->line_num));
+ 		}
+ 		if (size == T_IND)
+ 		{
+ 			 if (!all_digits(arg))
+ 				return (error_message(file, arg, token->line_num));
+ 		}
+ 		return (1);
 	 }
  	return (error_invalid_arg_type(token, i, size));
 }
