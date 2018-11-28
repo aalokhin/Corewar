@@ -33,11 +33,24 @@ void				clean_name_comment(t_binfile *bin, char (*contents)[])
 	i = 0;
 	k = 0;
 	len = 0;
+	int d = 0;
 	while (i < bin->arg_length)
 	{
 		if (ft_strncmp(&(*contents)[i], ".name", 5) == 0 ||\
 			ft_strncmp(&(*contents)[i], ".comment", 8) == 0)
 		{
+			while ((*contents)[i])
+			{
+				if ((*contents)[i] == '"')
+					d++;
+				if (d == 2)
+				{
+					d = 0;
+					break ;
+				}
+				i++;
+			}
+			//printf("[%zu]\n", i);
 			len = 0;
 			while ((*contents)[i] && (*contents)[i] != '\n')
 			{
@@ -49,6 +62,7 @@ void				clean_name_comment(t_binfile *bin, char (*contents)[])
 		k++;
 		i++;
 	}
+	//printf(">%s<\n", (*contents));
 	ft_zero_what_left(bin, &k, contents);
 }
 
@@ -152,4 +166,5 @@ void				parse_file(t_binfile *bin, char (*contents)[])
 	clean_name_comment(bin, contents);
 	clean_spaces(bin, contents);
 	clean_new_lines(bin, contents);
+	//printf("{%s}\n", (*contents));
 }
