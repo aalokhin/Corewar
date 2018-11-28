@@ -91,7 +91,6 @@ void	processes_init2(t_flags *params, t_header bots[4], unsigned char *map,
 	(*processes).lives = 0;
 	(*processes).arg_counter = 0;
 	(*processes).cmd = map[(*processes).current_position];
-	(*processes).fourth_arg = 0;
 	if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
 		(*processes).cycles_wait = g_op_tab[(*processes).cmd - 1].cycles_wait;
 	else

@@ -64,13 +64,15 @@ int		store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	t_instr inst_vars;
 
 	inst_vars_init(&inst_vars, processes);
-	if (inst_vars.tmp->argv[0][0] != REG_CODE || inst_vars.tmp->argv[0][1] < 1
-	|| inst_vars.tmp->argv[0][1] > 16 || (inst_vars.tmp->argv[2][0] != REG_CODE
-	&& inst_vars.tmp->argv[2][0] != DIR_CODE) || (inst_vars.tmp->argv[1][0] ==
+	if (inst_vars.tmp->argv[0][0] != REG_CODE || (inst_vars.tmp->argv[2][0] != REG_CODE
+	&& inst_vars.tmp->argv[2][0] != DIR_CODE))
+		return (0);
+	if (inst_vars.tmp->argv[0][1] < 1 || inst_vars.tmp->argv[0][1] > 16 ||
+	(inst_vars.tmp->argv[1][0] ==
 	REG_CODE && (inst_vars.tmp->argv[1][1] < 1 || inst_vars.tmp->argv[1][1] >
 	16)) || (inst_vars.tmp->argv[2][0] == REG_CODE && (inst_vars.tmp->argv[2][1]
 	< 1 || inst_vars.tmp->argv[2][1] > 16)))
-		return (0);
+		return (1);
 	take_sti_params(&inst_vars, map);
 	inst_vars.i = inst_vars.tmp->current_position +
 	(inst_vars.one + inst_vars.two);

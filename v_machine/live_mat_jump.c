@@ -53,11 +53,11 @@ int		live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 			printf("P%5d | live %d\n", (*child_proc).id + 1,
 		(*child_proc).argv[0][1]);
 		else
-		printf("P%6d | live %d\n", (*child_proc).id + 1,
-		(*child_proc).argv[0][1]);
+			printf("P%6d | live %d\n", (*child_proc).id + 1,
+			(*child_proc).argv[0][1]);
 	}
-
-	if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] <= 0/* && (*child_proc).argv[0][1] >= -255*/)
+	if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] <= 0
+		&& (*child_proc).argv[0][1] >= -255)
 		live_dir_proc(child_proc, head_proc, main_cycle);
 	map[0] = map[0];
 	return (1);
@@ -66,17 +66,13 @@ int		live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 int		addition(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
-	int		i;
 	t_proc	*tmp;
 
-	i = 0;
 	tmp = processes;
 	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[1][0] != REG_CODE
-		|| (*tmp).argv[2][0] != REG_CODE)
-		return (0);
-	if ((*tmp).argv[0][1] < 0 || (*tmp).argv[0][1] > 16 ||
-		(*tmp).argv[1][1] < 0 || (*tmp).argv[1][1] > 16 ||
-		(*tmp).argv[2][1] < 0 || (*tmp).argv[2][1] > 16)
+	|| (*tmp).argv[2][0] != REG_CODE || (*tmp).argv[0][1] < 0 ||
+	(*tmp).argv[0][1] > 16 || (*tmp).argv[1][1] < 0 || (*tmp).argv[1][1]
+	> 16 || (*tmp).argv[2][1] < 0 || (*tmp).argv[2][1] > 16)
 		return (0);
 	(*tmp).carry = 0;
 	if (((*tmp).regs[(*tmp).argv[0][1] - 1] +
@@ -87,10 +83,10 @@ int		addition(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if (((*main_cycle).verbose >> 2) & 1)
 	{
 		if (cur_proc + 1 <= 9999)
-		printf("P%5d | add r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
+			printf("P%5d | add r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
 		(*tmp).argv[1][1], (*tmp).argv[2][1]);
 		else
-		printf("P%6d | add r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
+			printf("P%6d | add r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
 		(*tmp).argv[1][1], (*tmp).argv[2][1]);
 	}
 	map[0] = map[0];
@@ -100,17 +96,13 @@ int		addition(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 int		substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
-	int		i;
 	t_proc	*tmp;
 
-	i = 0;
 	tmp = processes;
-	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[1][0] != REG_CODE ||
-		(*tmp).argv[2][0] != REG_CODE)
-		return (0);
-	if ((*tmp).argv[0][1] < 0 || (*tmp).argv[0][1] > 16 || (*tmp).argv[1][1]
-	< 0 || (*tmp).argv[1][1] > 16 || (*tmp).argv[2][1] < 0 ||
-	(*tmp).argv[2][1] > 16)
+	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[1][0] != REG_CODE
+	|| (*tmp).argv[2][0] != REG_CODE || (*tmp).argv[0][1] < 0 ||
+	(*tmp).argv[0][1] > 16 || (*tmp).argv[1][1] < 0 || (*tmp).argv[1][1]
+	> 16 || (*tmp).argv[2][1] < 0 || (*tmp).argv[2][1] > 16)
 		return (0);
 	(*tmp).carry = 0;
 	if (((*tmp).regs[(*tmp).argv[0][1] - 1] -
@@ -121,12 +113,11 @@ int		substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if (((*main_cycle).verbose >> 2) & 1)
 	{
 		if (cur_proc + 1 <= 9999)
-		printf("P%5d | sub r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
+			printf("P%5d | sub r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
 			(*tmp).argv[1][1], (*tmp).argv[2][1]);
-			else
+		else
 			printf("P%6d | sub r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
 			(*tmp).argv[1][1], (*tmp).argv[2][1]);
-
 	}
 	map[0] = map[0];
 	return (1);
@@ -135,28 +126,28 @@ int		substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 int		zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
-	int		i;
 	t_proc	*tmp;
 	char	*res;
 
-	i = 0;
 	res = "FAILED";
 	tmp = processes;
 	if ((*tmp).carry == 1)
 	{
-		(*main_cycle).indexes[((*tmp).current_position + MEM_SIZE) % MEM_SIZE][1] = 0;
+		(*main_cycle).indexes[((*tmp).current_position +
+			MEM_SIZE) % MEM_SIZE][1] = 0;
 		(*tmp).current_position += ((*tmp).argv[0][1] % IDX_MOD);
 		(*tmp).current_position = ((*tmp).current_position + MEM_SIZE)
 		% MEM_SIZE;
-		(*main_cycle).indexes[((*tmp).current_position + MEM_SIZE) % MEM_SIZE][1] = 1;
+		(*main_cycle).indexes[((*tmp).current_position +
+			MEM_SIZE) % MEM_SIZE][1] = 1;
 		res = "OK";
 	}
 	if (((*main_cycle).verbose >> 2) & 1)
 	{
 		if (cur_proc + 1 <= 9999)
-		printf("P%5d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);
+			printf("P%5d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);
 		else
-		printf("P%6d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);
+			printf("P%6d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);
 	}
 	map[0] = map[0];
 	return (1);

@@ -12,22 +12,6 @@
 
 #include "../corewar.h"
 
-int process_length(int pc_nbr)
-{
-	int len;
-	int res;
-	char *tmp;
-
-	len = 0;
-	res = 0;
-	tmp = ft_itoa(pc_nbr);
-	len = ft_strlen(tmp);
-	if (len < 5)
-		return (5);
-	else
-		return (len + 1);
-}
-
 void	inst_vars_init(t_instr *inst_vars, t_proc *processes)
 {
 	(*inst_vars).i = 0;
@@ -53,9 +37,11 @@ int		ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if (((*main_cycle).verbose >> 2) & 1)
 	{
 		if ((*tmp).id + 1 <= 9999)
-			printf("P%5d | fork %d (%d)\n", (*tmp).id + 1, (*tmp).argv[0][1], i);
+			printf("P%5d | fork %d (%d)\n",
+				(*tmp).id + 1, (*tmp).argv[0][1], i);
 		else
-			printf("P%6d | fork %d (%d)\n", (*tmp).id + 1, (*tmp).argv[0][1], i);
+			printf("P%6d | fork %d (%d)\n",
+				(*tmp).id + 1, (*tmp).argv[0][1], i);
 	}
 	i = (i + MEM_SIZE) % MEM_SIZE;
 	(*main_cycle).fork_ind = i;

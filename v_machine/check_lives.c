@@ -12,6 +12,21 @@
 
 #include "../corewar.h"
 
+void	print_proc_die(t_proc *tmp, t_cycle *main_cycle)
+{
+	if ((*main_cycle).cycle_die < 0)
+		printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+		(*tmp).id + 1, 0, (*main_cycle).cycle_die);
+	else if ((*tmp).live_cycle == (*main_cycle).cycle_die)
+		printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+		(*tmp).id + 1, (*tmp).live_cycle,
+		(*main_cycle).cycle_die);
+	else
+		printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+			(*tmp).id + 1, (*tmp).live_cycle - 1,
+			(*main_cycle).cycle_die);
+}
+
 void	live_or_die(t_proc *tmp, t_cycle *main_cycle, t_flags *params,
 	int *res)
 {
@@ -25,19 +40,7 @@ void	live_or_die(t_proc *tmp, t_cycle *main_cycle, t_flags *params,
 			(*main_cycle).max_id = (*tmp).id;
 		(*main_cycle).indexes[(*tmp).current_position][1] = 0;
 		if (((*params).v_verbosity >> 3) & 1)
-		{
-			if ((*main_cycle).cycle_die < 0)
-				printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
-				(*tmp).id + 1, 0, (*main_cycle).cycle_die);
-			else if ((*tmp).live_cycle == (*main_cycle).cycle_die)
-				printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
-				(*tmp).id + 1, (*tmp).live_cycle,
-				(*main_cycle).cycle_die);
-			else
-			printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
-				(*tmp).id + 1, (*tmp).live_cycle - 1,
-				(*main_cycle).cycle_die);
-		}
+			print_proc_die(tmp, main_cycle);
 	}
 	else
 	{
