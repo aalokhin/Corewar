@@ -113,8 +113,11 @@ int		arguments_filler(t_binfile *file, t_lable *label, t_t *token, char **str, i
 		if (str[*i] == '\0')
 			return (error_message(file, str[*i], token->line_num));
 		if (!(arguments_validator(file, token, str[*i], arg1)))
+		{
+			printf("%s\n", "mistake here" );
  			return (0);
-		token->args[arg1][0] = (ft_strchr(str[*i] ,'r') && !(ft_strchr(str[*i] ,'%'))) ? 1 : ft_strchr(str[*i] ,'%') ? 10 : 11;
+		}
+		token->args[arg1][0] = (ft_strchr(str[*i] ,'r') && !(ft_strchr(str[*i] ,'%'))) && !(ft_strchr(str[*i] ,':')) ? 1 : ft_strchr(str[*i] ,'%') ? 10 : 11;
 		token->a[arg1++] = ft_strdup(str[*i]);
 		if (arg1 == g_op_tab[token->c_name].nb_params)
 		{
@@ -141,14 +144,14 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 	{
 		i = 0;
 		str = ft_strsplit(*str_n, ' ');
-		if (!(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':'))) /// && :+1 !=whitespaces
+		if (i == 0 && !(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':'))) /// && :+1 !=whitespaces
 		{
 			if (label)
 				label = labels_linker(file, label);;
 			label = (t_lable *)ft_memalloc(sizeof(t_lable));
-			label->line_num = define_line_num(file->copy, *str_n, 0, 0);
-			if (!file->name || !file->comment)
-				return (error_message(file, str[0], label->line_num));
+			// label->line_num = define_line_num(file->copy, *str_n, 0, 0);
+			// if (!file->name || !file->comment)
+			// 	return (error_message(file, str[0], label->line_num));
 			if (!(label_name_is_valid(file, label, str[i++])))
 				return (0);
 		}
@@ -157,19 +160,12 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 			if (!label)
 			{
 				label = (t_lable *)ft_memalloc(sizeof(t_lable));
-				label->line_num = define_line_num(file->copy, *str_n, 0, 0);
+				//label->line_num = define_line_num(file->copy, *str_n, 0, 0);
 			}
 			token = (t_t *)ft_memalloc(sizeof(t_t));
-			// token->args[0][0] = 0;
-			// token->args[1][0] = 0;
-			// token->args[2][0] = 0;
-			// token->args[0][1] = 0;
-			// token->args[1][1] = 0;
-			// token->args[2][1] = 0;
-
-			token->line_num = define_line_num(file->copy, *str_n, 0, 0);
-			if (!file->name || !file->comment)
-				return (error_message(file, str[0], label->line_num));
+			//token->line_num = define_line_num(file->copy, *str_n, 0, 0);
+			// if (!file->name || !file->comment)
+			// 	return (error_message(file, str[0], label->line_num));
 			if (command_name(str[i], token) == -1)
 				return (error_command(file, str[i], token->line_num));
 			if (++i && (!arguments_filler(file, label, token, str, &i)))

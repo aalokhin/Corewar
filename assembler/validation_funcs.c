@@ -97,7 +97,7 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
 	int		to_count;
 
  	to_count = g_op_tab[token->c_name].param_types[i];
-	size = (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%'))) ? 1 : ft_strchr(arg ,'%') ? 2 : 4;
+	size = (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%'))) && !(ft_strchr(arg ,':')) ? 1 : ft_strchr(arg ,'%') ? 2 : 4;
  	if (size == to_count || to_count == 7 || (size < to_count && to_count - size != size  && (to_count - size == T_REG
  		|| to_count  - size == T_DIR ||  to_count - size == T_IND)))
 	{
@@ -114,11 +114,16 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
  			if (!(arg + 1) || (!(ft_isdigit(arg[1])) && arg[1] != '-')|| !all_digits(arg + 1))// && arg[1] != '-'))
  				return (error_message(file, arg, token->line_num));
  		}
- 		if (size == T_IND)
- 		{
- 			 if (!all_digits(arg))
- 				return (error_message(file, arg, token->line_num));
- 		}
+ 		// if (size == T_IND)
+ 		// {
+ 		// 	printf("%s\n", "not label" );
+ 		// 	// if (!(ft_strstr(file->f_contents, arg + 1)))
+ 		// 	// {
+ 		// 	// 	return (0);//error_message_label(file, token, arg + 2, arg));
+ 		// 	// }
+ 		// 	 if (!all_digits(arg))
+ 		// 		return (error_message(file, arg, token->line_num));
+ 		// }
  		return (1);
 	 }
  	return (error_invalid_arg_type(token, i, size));

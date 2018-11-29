@@ -154,7 +154,7 @@ int			error_message(t_binfile *file, char *arg, int line_num)
 		ft_printf("Syntax error at token [TOKEN][%d:%d] ENDLINE\n", line_num + 1, colomn);
 		return (0);
 	}
-	if (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%')))
+	if (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%')) && !(ft_strchr(arg ,':')))
 		e = ft_strdup("REGISTER");
 	else if (ft_strstr(arg, "%:"))
 		e = ft_strdup("DIRECT_LABEL");
