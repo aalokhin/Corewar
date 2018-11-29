@@ -154,12 +154,15 @@ int 	initial_validation(t_binfile *file)
 	char 	cpy[2];
 	int 	line = 0;
 	int 	colomn = 0;
-	//char *copy;
-
-
 	int i = 0;
 	int start = 0;
+
 	str = file->f_contents;
+	if (!file->f_contents[i])
+	{
+		ft_printf("Syntax error at token [TOKEN][%d:001] END \"(null)\"\n",12 );
+		return (0);
+	}
 	while (str[i])
 	{
 		if (str[i] == '\n')
@@ -175,7 +178,7 @@ int 	initial_validation(t_binfile *file)
 		}
 		i++;
 	}
-		if (str[i - 1] && str[i - 1] != '\n')
+	if (str[i - 1] && str[i - 1] != '\n')
 	{
 		ft_printf("Syntax error - unexpected end of input (Perhaps you forgot to end with a newline ?)\n");
 		return (0);

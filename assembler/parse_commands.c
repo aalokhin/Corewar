@@ -161,6 +161,8 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 	{
 		i = 0;
 		str = ft_strsplit(*str_n, ' ');
+		if (!file->name || !file->comment)
+			return (error_message(file, str[i], define_line_num(file->copy, str[i], 0, 0)));
 		if (i == 0 && !(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':')))
 		{
 			if (label)

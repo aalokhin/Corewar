@@ -148,12 +148,6 @@ int			error_message(t_binfile *file, char *arg, int line_num)
 	int 	colomn;
 
 	colomn = define_line_colomn(file->copy, arg, line_num);
-	//printf("%s %d\n", arg, colomn);
-	if (ft_strstr(arg, ".name") || ft_strstr(arg, ".comment"))
-	{
-		ft_printf("Syntax error at token [TOKEN][%d:%d] ENDLINE\n", line_num + 1, colomn);
-		return (0);
-	}
 	if (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%')) && !(ft_strchr(arg ,':')))
 		e = ft_strdup("REGISTER");
 	else if (ft_strstr(arg, "%:"))

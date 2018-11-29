@@ -72,7 +72,7 @@ int 		define_line_colomn(char *copy, char *arg, int line_num)
 
 	while (copy[i])
 	{
-		if (copy[i] == '\n' && n++)
+		if (copy[i] == '\n' && ++n)
 		{
 			i += copy[i + 1] != '\n' ? 1 : 0;
 			if (n == line_num)

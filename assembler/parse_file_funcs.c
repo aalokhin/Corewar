@@ -50,7 +50,6 @@ void				clean_name_comment(t_binfile *bin, char (*contents)[])
 				}
 				i++;
 			}
-			//printf("[%zu]\n", i);
 			len = 0;
 			while ((*contents)[i] && (*contents)[i] != '\n')
 			{
@@ -58,7 +57,7 @@ void				clean_name_comment(t_binfile *bin, char (*contents)[])
 				i++;
 			}
 		}
-		ft_memmove(&(*contents)[k], &(*contents)[i], len);
+		ft_memmove(&(*contents)[k], &(*contents)[i], len + 1); /// please confirm that it does not break anything 
 		k++;
 		i++;
 	}
