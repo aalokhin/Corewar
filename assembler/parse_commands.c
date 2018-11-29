@@ -31,8 +31,8 @@ int  command_name(char *name, t_t *token)
 {
 	token->c_name = 0;
 
-	 while (g_op_tab[token->c_name].name)
-	 {
+	while (g_op_tab[token->c_name].name)
+	{
 		if ((ft_strcmp(g_op_tab[token->c_name].name, name) == 0))
 		{
 			token->name_c = ft_strdup(name);
@@ -43,7 +43,7 @@ int  command_name(char *name, t_t *token)
 			return (token->c_name);
 		}
 		token->c_name++;
-	 }
+	}
 	 return (-1);
 }
 
@@ -133,6 +133,23 @@ int		arguments_filler(t_binfile *file, t_lable *label, t_t *token, char **str, i
 	}
 	return (1);
 }
+char	*space_adder(char **str)
+{
+	char	*cmd;
+	char 	*cpy;
+	int		i = 0;
+
+	cpy = *str;
+	while (cpy[i])
+	{
+		if (cpy[i] == '%' || cpy[i] == ':')
+			break ;
+		i++;
+	}
+	cmd = ft_strsub(cpy, 0, i);
+	*str = ft_strsub(cpy, i, ft_strlen(cpy));
+	return (cmd);
+}
 
 int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 {
@@ -144,35 +161,32 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 	{
 		i = 0;
 		str = ft_strsplit(*str_n, ' ');
-		if (i == 0 && !(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':'))) /// && :+1 !=whitespaces
+		if (i == 0 && !(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':')))
 		{
 			if (label)
 				label = labels_linker(file, label);;
 			label = (t_lable *)ft_memalloc(sizeof(t_lable));
-			// label->line_num = define_line_num(file->copy, *str_n, 0, 0);
-			// if (!file->name || !file->comment)
-			// 	return (error_message(file, str[0], label->line_num));
 			if (!(label_name_is_valid(file, label, str[i++])))
 				return (0);
 		}
 		if (str[i])
 		{
 			if (!label)
-			{
 				label = (t_lable *)ft_memalloc(sizeof(t_lable));
-				//label->line_num = define_line_num(file->copy, *str_n, 0, 0);
-			}
 			token = (t_t *)ft_memalloc(sizeof(t_t));
-			//token->line_num = define_line_num(file->copy, *str_n, 0, 0);
-			// if (!file->name || !file->comment)
-			// 	return (error_message(file, str[0], label->line_num));
-			if (command_name(str[i], token) == -1)
+			if (ft_strchr(str[i], '%') || ft_strchr(str[i], ':'))
+			{
+				if (command_name(space_adder(&(str[i])), token) == -1)
+					return (error_command(file, str[i], token->line_num));
+				i -= 1; 
+			}
+			else if (command_name(str[i], token) == -1)
 				return (error_command(file, str[i], token->line_num));
-			if (++i && (!arguments_filler(file, label, token, str, &i)))
+			if (++i >= 0 && (!arguments_filler(file, label, token, str, &i)))
 				return (0);
 		}
-		ft_clean_parse (str); /// cleaning
-		ft_strdel(&(*str_n)); /// cleaning 
+		ft_clean_parse (str);
+		ft_strdel(&(*str_n));
 		str_n++;
 	}
 	if (label)
