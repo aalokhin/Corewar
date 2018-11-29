@@ -177,6 +177,11 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 	}
 	if (label)
 		labels_linker(file, label);
+	if (!token)
+	{
+		printf("%s\n", "empty file");
+		return (0);//(error_message(file, NULL, define_line_num(file->copy, NULL, 0, 0) + 1));
+	}
 	file_length(file);
 	// system("leaks asm");
 	return (1);

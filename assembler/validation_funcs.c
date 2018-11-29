@@ -175,6 +175,11 @@ int 	initial_validation(t_binfile *file)
 		}
 		i++;
 	}
+		if (str[i - 1] && str[i - 1] != '\n')
+	{
+		ft_printf("Syntax error - unexpected end of input (Perhaps you forgot to end with a newline ?)\n");
+		return (0);
+	}
 	return (1);
 }
 //label_exist
