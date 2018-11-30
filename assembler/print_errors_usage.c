@@ -137,7 +137,10 @@ int			error_message_label(t_binfile *file, t_t *token, char *label, char *arg)
 {
 	int 	colomn = define_line_colomn(file->copy, arg, token->line_num);
 
-	ft_printf("No such label %s while attempting to dereference token [TOKEN][%d:%d] %s \"%s\"\n", label, token->line_num + 1, colomn + 1, "DIRECT_LABEL", arg);
+	if (ft_strstr(arg, "%:"))
+		ft_printf("No such label %s while attempting to dereference token [TOKEN][%0.3d:%0.3d] %s \"%s\"\n", label, token->line_num + 1, colomn + 1, "DIRECT_LABEL", arg);
+	else if (ft_strstr(arg, ":"))
+		ft_printf("No such label %s while attempting to dereference token [TOKEN][%0.3d:%0.3d] %s \"%s\"\n", label, token->line_num + 1, colomn + 1, "INDIRECT_LABEL", arg);
 	return (0);
 }
 
@@ -145,7 +148,7 @@ int 		error_command(t_binfile *file, char *str, int line_num)
 {
 	int 	colomn = define_line_colomn(file->copy, str, line_num);
 
-	ft_printf("Invalid instruction at token [TOKEN][%d:%d] INSTRUCTION \"%s\"\n", line_num + 1, colomn, str);
+	ft_printf("Invalid instruction at token [TOKEN][%0.3d:%0.3d] INSTRUCTION \"%s\"\n", line_num + 1, colomn, str);
 	return (0);
 }
 
@@ -160,6 +163,8 @@ int			error_message(t_binfile *file, char *arg, int line_num)
 		e = ft_strdup("REGISTER");
 	else if (ft_strstr(arg, "%:"))
 		e = ft_strdup("DIRECT_LABEL");
+	else if (ft_strstr(arg, ":"))
+		e = ft_strdup("INDIRECT_LABEL");
 	else if (ft_strchr(arg ,'%'))
 		e = ft_strdup("DIRECT");
 	else if (ft_atoi(arg) != 0)
@@ -170,7 +175,7 @@ int			error_message(t_binfile *file, char *arg, int line_num)
 		e = ft_strdup("LABEL");
 	else
 		e = ft_strdup("INSTRUCTION");
-	ft_printf("Syntax error at token [TOKEN][%d:%d] %s \"%s\"\n", line_num + 1, colomn, e, arg);
+	ft_printf("Syntax error at token [TOKEN][%0.3d:%0.3d] %s \"%s\"\n", line_num + 1, colomn, e, arg);
 	return (0);
 }
 

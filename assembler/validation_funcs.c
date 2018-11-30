@@ -65,8 +65,7 @@ int 	label_name_is_valid(t_binfile *file, t_lable *label, char *str)
 	label_name[i + 1] = '\0';
 	if (label_name_is_duplicate(file, label_name))
 	{
-		//printf("Lexical error at [%d:%d]\n", label->line_num, define_line_colomn(file, str, label->line_num));
-		printf("%s\n", "duplicate label");
+		ft_printf("%s\n", "Duplicate label!");
 		return (0);
 	}
 	label->label_name = label_name;
@@ -95,6 +94,7 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
 {
 	int		size = 0;
 	int		to_count;
+	char 	*str = NULL;
 
  	to_count = g_op_tab[token->c_name].param_types[i];
 	size = (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%'))) && !(ft_strchr(arg ,':')) ? 1 : ft_strchr(arg ,'%') ? 2 : 4;
@@ -103,27 +103,33 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
 	{
  		if (ft_strstr(arg, "%:"))
  		{
- 			if (!(ft_strstr(file->f_contents, arg + 2)))
- 			{
- 				return (0);//error_message_label(file, token, arg + 2, arg));
- 			}
- 			return (1);
+ 			str = ft_strjoin(arg + 2, ":");
+ 			if (!(ft_strstr(file->f_contents, str)))
+ 				return (error_message_label(file, token, arg + 2, arg));
+ 			ft_strdel(&str);
  		}
- 		if (size == T_REG || size == T_DIR)
+		else if (ft_strstr(arg, ":"))
+		{
+			str = ft_strjoin(arg + 1, ":");
+ 			if (!(ft_strstr(file->f_contents, str)))
+ 				return (error_message_label(file, token, arg + 1, arg));
+ 			ft_strdel(&str);
+		}
+ 		else if (size == T_DIR)
  		{
- 			if (!(arg + 1) || (!(ft_isdigit(arg[1])) && arg[1] != '-')|| !all_digits(arg + 1))// && arg[1] != '-'))
+ 			if (!(arg + 1) || (!(ft_isdigit(arg[1])) &&  arg[1] != '-') || !all_digits(arg + 1))// && arg[1] != '-'))
  				return (error_message(file, arg, token->line_num));
  		}
- 		// if (size == T_IND)
- 		// {
- 		// 	printf("%s\n", "not label" );
- 		// 	// if (!(ft_strstr(file->f_contents, arg + 1)))
- 		// 	// {
- 		// 	// 	return (0);//error_message_label(file, token, arg + 2, arg));
- 		// 	// }
- 		// 	 if (!all_digits(arg))
- 		// 		return (error_message(file, arg, token->line_num));
- 		// }
+ 		else if (size == T_REG)
+ 		{
+ 			if (!(arg + 1) || !(ft_isdigit(arg[1])) || !all_digits(arg + 1) || ft_atoi(arg + 1) > 100)// && arg[1] != '-'))
+ 				return (error_message(file, arg, token->line_num));
+ 		}
+ 		else if (size == T_IND)
+ 		{
+ 			 if (!all_digits(arg))
+ 				return (error_message(file, arg, token->line_num));
+ 		}
  		return (1);
 	 }
  	return (error_invalid_arg_type(token, i, size));

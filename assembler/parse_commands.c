@@ -113,10 +113,7 @@ int		arguments_filler(t_binfile *file, t_lable *label, t_t *token, char **str, i
 		if (str[*i] == '\0')
 			return (error_message(file, str[*i], token->line_num));
 		if (!(arguments_validator(file, token, str[*i], arg1)))
-		{
-			printf("%s\n", "mistake here" );
  			return (0);
-		}
 		token->args[arg1][0] = (ft_strchr(str[*i] ,'r') && !(ft_strchr(str[*i] ,'%'))) && !(ft_strchr(str[*i] ,':')) ? 1 : ft_strchr(str[*i] ,'%') ? 10 : 11;
 		token->a[arg1++] = ft_strdup(str[*i]);
 		if (arg1 == g_op_tab[token->c_name].nb_params)
@@ -131,6 +128,7 @@ int		arguments_filler(t_binfile *file, t_lable *label, t_t *token, char **str, i
 		}
 		(*i)++;
 	}
+// system("leaks asm");
 	return (1);
 }
 char	*space_adder(char **str)
@@ -159,6 +157,7 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 	str_n = (ft_strsplit(file->f_contents, '\n'));
 	while (*str_n)
 	{
+		//system("leaks asm");
 		i = 0;
 		str = ft_strsplit(*str_n, ' ');
 		if (!file->name || !file->comment)
@@ -176,9 +175,10 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 			if (!label)
 				label = (t_lable *)ft_memalloc(sizeof(t_lable));
 			token = (t_t *)ft_memalloc(sizeof(t_t));
+			token->line_num = define_line_num(file->copy, *str_n, 0, 0); //= does not work
 			if (ft_strchr(str[i], '%') || ft_strchr(str[i], ':'))
 			{
-				if (command_name(space_adder(&(str[i])), token) == -1)
+				if (command_name(space_adder(&(str[i])), token) == -1) // need to add 
 					return (error_command(file, str[i], token->line_num));
 				i -= 1; 
 			}
@@ -193,11 +193,6 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 	}
 	if (label)
 		labels_linker(file, label);
-	if (!token)
-	{
-		printf("%s\n", "empty file");
-		return (0);//(error_message(file, NULL, define_line_num(file->copy, NULL, 0, 0) + 1));
-	}
 	file_length(file);
 	// system("leaks asm");
 	return (1);
