@@ -95,8 +95,16 @@ void 			ft_print_success(t_binfile *bin)
 
 	
 	len = ft_strlen(bin->arg_name);
+        	//system("afplay /Users/aalokhin/Corewar2/media/La_Valse_OST_Ameli.mp3");
+
 	printf("Writing output program to %s\n", bin->res_arg_name);
-	//system("afplay /Users/aalokhin/Downloads/Sound_15025.mp3");
+	system("say \"Your champion has been born\"");
+	        	//system("afplay /Users/aalokhin/Corewar2/media/La_Valse_OST_Ameli.mp3");
+
+	  //system("afplay /Users/aalokhin/Corewar2/media/La_Valse_OST_Ameli.mp3");
+
+	// system("afplay /Users/aalokhin/Downloads/Sound_15025.mp3");
+	
 
 
 
