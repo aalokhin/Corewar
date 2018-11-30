@@ -125,6 +125,38 @@ void	internal_cycle_core(t_cycle *main_cycle, t_proc *processes,
 	}
 }
 
+void speed_listener(char spc, t_cycle *main_cycle, WINDOW **win)
+{
+	if (spc == 'q')
+	{
+			(*main_cycle).second_limit -= 10;
+			if ((*main_cycle).second_limit <= 0)
+					(*main_cycle).second_limit = 1;
+			mvwprintw(*win, 4, 199,  "Cycles/second limit : %d\n", (*main_cycle).second_limit);
+			wrefresh(*win);
+	}
+	if (spc == 'w')
+	{
+			(*main_cycle).second_limit -= 1;
+			if ((*main_cycle).second_limit <= 0)
+					(*main_cycle).second_limit = 1;
+			mvwprintw(*win, 4, 199,  "Cycles/second limit : %d\n", (*main_cycle).second_limit);
+			wrefresh(*win);
+	}
+	if (spc == 'e')
+	{
+			(*main_cycle).second_limit += 1;
+			mvwprintw(*win, 4, 199,  "Cycles/second limit : %d\n", (*main_cycle).second_limit);
+			wrefresh(*win);
+	}
+	if (spc == 'r')
+	{
+			(*main_cycle).second_limit += 10;
+			mvwprintw(*win, 4, 199,  "Cycles/second limit : %d\n", (*main_cycle).second_limit);
+			wrefresh(*win);
+	}
+}
+
 void    vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
 {
     t_cycle    main_cycle;
@@ -139,32 +171,11 @@ void    vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
     fill_start_map_id(&main_cycle, bots, params);
     processes = processes_init(params, bots, map);
     main_cycle.head_proc = processes;
-
     intro_print(params, bots, &win);
-   
-    curs_set(0);
     mvwprintw(win, 2, 199,  "** PAUSED **");
     curs_set(0);
-
-    //mvwprintw(win, 4, 199,  "Cycles/second limit : %d", main_cycle.second_limit);
-
-    /*int i;
-
-    i = 0;
-    printf("%s%d\n", "test", (*params).ncurses);
-    if ((*params).ncurses == 1)
-        visual_init(&win);
-    printf("%s\n", "Introducing contestants...");
-    while (i < (*params).bots_quantity)
-    {
-        printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1,
-            bots[i].prog_size, bots[i].prog_name, bots[i].comment);
-        i++;
-    }*/
-    nodelay(stdscr, FALSE);
     while (main_cycle.processes > 0)
     {
-        
         if (((*params).v_verbosity >> 1) & 1)
             printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
         processes = main_cycle.head_proc;
@@ -180,56 +191,7 @@ void    vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
                 wrefresh(win);
                 nodelay(stdscr, FALSE);
             }
-            if (spc == 'q')
-            {
-                main_cycle.second_limit -= 10;
-                if (main_cycle.second_limit <= 0)
-                    main_cycle.second_limit = 1;
-                mvwprintw(win, 4, 199,  "Cycles/second limit : %d\n", main_cycle.second_limit);
-                wrefresh(win);
-                /*wattron(win, COLOR_PAIR(33));
-                mvwprintw(win, 2, 199,  "** THIS IS PINK **");
-                wattroff(win, COLOR_PAIR(33));
-                wrefresh(win);*/
-
-            }
-            if (spc == 'w')
-            {
-                main_cycle.second_limit -= 1;
-                if (main_cycle.second_limit <= 0)
-                    main_cycle.second_limit = 1;
-                mvwprintw(win, 4, 199,  "Cycles/second limit : %d\n", main_cycle.second_limit);
-                wrefresh(win);
-                /*wattron(win, COLOR_PAIR(55));
-                mvwprintw(win, 2, 199,  "** THIS IS RED **");
-                wattroff(win, COLOR_PAIR(55));
-                wrefresh(win);*/
-
-            }
-            if (spc == 'e')
-            {
-                main_cycle.second_limit += 1;
-                mvwprintw(win, 4, 199,  "Cycles/second limit : %d\n", main_cycle.second_limit);
-                wrefresh(win);
-                /*wattron(win, COLOR_PAIR(44));
-                mvwprintw(win, 2, 199,  "** THIS IS PINK **");
-                wattroff(win, COLOR_PAIR(44));
-                wrefresh(win);*/
-
-            }
-            
-            if (spc == 'r')
-            {
-                main_cycle.second_limit += 10;
-                mvwprintw(win, 4, 199,  "Cycles/second limit : %d\n", main_cycle.second_limit);
-                wrefresh(win);
-                /*wattron(win, COLOR_PAIR(22));
-                mvwprintw(win, 2, 199,  "** THIS IS BALCK **");
-                wattroff(win, COLOR_PAIR(22));
-                wrefresh(win);*/
-
-            }
-
+            speed_listener(spc, &main_cycle, &win);
         }
         else
         {
@@ -241,14 +203,13 @@ void    vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
                 wrefresh(win);
                 nodelay(stdscr, TRUE);
             }
-
+						speed_listener(spc, &main_cycle, &win);
         }
         internal_cycle_core(&main_cycle, processes, params, map);
         cycle_period_check(&main_cycle.cycle_counter, &main_cycle, params);
 
         if (!external_cycle_pass(&main_cycle, map, params))
             break ;
-        
     }
     after_cycle(params, bots, main_cycle, win);
 }

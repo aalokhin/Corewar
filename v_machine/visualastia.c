@@ -74,7 +74,7 @@ void print_winner(WINDOW * win, t_cycle main_cycle)
 	mvwprintw(win, y, x,  "The winner is : %s", main_cycle.winner_name);
 	wattroff(win, COLOR_PAIR(main_cycle.winner_id + 1));
 	wrefresh(win);
-	getch();
+	//getch();
 }
 
 void visual_init(WINDOW **win)
@@ -116,7 +116,7 @@ void visual_init(WINDOW **win)
 	wborder(*win, ls, rs, ts, bs, tl, tr, bl, br);
 	mvwvline(*win, 1, 196, 42, 70);
 	wattroff(*win, COLOR_PAIR(12));
-	
+
 }
 
 void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes, WINDOW *win)
@@ -124,12 +124,12 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
 	int i;
 	int y;
 	int x;
-	
+
 	i = 0;
 	y = 2;
 	x = 3;
-	
-	refresh();  
+
+	refresh();
 
 	while (i < MEM_SIZE)
 	{
@@ -210,7 +210,7 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
 					mvwprintw(win, y, x,  "%.2x", map[i]);
 					wattroff(win, COLOR_PAIR(5));
     			}
-				
+
 			}
 
     		x += 3;
