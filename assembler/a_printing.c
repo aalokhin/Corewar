@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   a_printing.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aalokhin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/30 16:18:16 by aalokhin          #+#    #+#             */
+/*   Updated: 2018/11/30 16:18:25 by aalokhin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-void				print_arg_chars(t_t *instruct) //костыль для двоеточия
+void				print_arg_chars(t_t *instruct)
 {
 	size_t			i;
 	uintmax_t		len;
@@ -25,7 +37,7 @@ void				print_arg_chars(t_t *instruct) //костыль для двоеточи�
 	}
 }
 
-void				print_dir_ind_bytes(int arg0, int arg, int lbl_size) //arg0 = args[i][0]
+void				ind_dir_print(int arg0, int arg, int lbl_size)
 {
 	unsigned char	a[4];
 	int				k;
@@ -49,38 +61,40 @@ void				print_dir_ind_bytes(int arg0, int arg, int lbl_size) //arg0 = args[i][0]
 	}
 }
 
-void				print_instr_args(t_t *instruct)
+void				print_opcode(t_t *instruct)
 {
-	size_t			i;
-
-	i = 0;
 	if (instruct->has_codage)
 		ft_printf("\n%20s%-4d%-6d", " ", instruct->opcode, instruct->codage);
 	else
 		ft_printf("\n%20s%-10d", " ", instruct->opcode);
-	while (instruct->args[i][0])
+}
+
+void				print_instr_args(t_t *ins)
+{
+	size_t			i;
+
+	i = 0;
+	print_opcode(ins);
+	while (ins->args[i][0])
 	{
-			if (!instruct->a[i])
-			{
-				//ft_printf("null in args is args[i][0]=%d args[i][1]= [%d] i %d", instruct->args[i][0],instruct->args[i][1], i);
-				break ;
-			}
-		if (instruct->args[i][0] == 1)
-			ft_printf("%-18d", instruct->args[i][1]);
-		else if (instruct->args[i][0] == 10 || instruct->args[i][0] == 11)
+		if (!ins->a[i])
+			break ;
+		if (ins->args[i][0] == 1)
+			ft_printf("%-18d", ins->args[i][1]);
+		else if (ins->args[i][0] == 10 || ins->args[i][0] == 11)
 		{
-			if (instruct->a[i][0] != ':' && instruct->a[i][1] != ':')
-				print_dir_ind_bytes(instruct->args[i][0], instruct->args[i][1], instruct->lbl_size);
+			if (ins->a[i][0] != ':' && ins->a[i][1] != ':')
+				ind_dir_print(ins->args[i][0], ins->args[i][1], ins->lbl_size);
 			else
-				print_dir_ind_bytes(instruct->args[i][0], instruct->args[i][1], instruct->lbl_size);
-			if (instruct->lbl_size == 2 || instruct->args[i][0] == 11)
+				ind_dir_print(ins->args[i][0], ins->args[i][1], ins->lbl_size);
+			if (ins->lbl_size == 2 || ins->args[i][0] == 11)
 				ft_printf("%10s", " ");
 			else
 				ft_printf("%2s", " ");
 		}
 		i++;
 	}
-	print_instr_args2(instruct);
+	print_instr_args2(ins);
 }
 
 void				print_instr_args2(t_t *instruct)
@@ -88,17 +102,11 @@ void				print_instr_args2(t_t *instruct)
 	size_t			i;
 
 	i = 0;
-	if (instruct->has_codage)
-		ft_printf("\n%20s%-4d%-6d", " ", instruct->opcode, instruct->codage);
-	else
-		ft_printf("\n%20s%-10d", " ", instruct->opcode);
+	print_opcode(instruct);
 	while (instruct->args[i][0])
 	{
-			if (!instruct->a[i])
-			{
-				//ft_printf("null in args is args[i][0]=%d args[i][1]= [%d] i %d\n", instruct->args[i][0],instruct->args[i][1], i);
-				break ;
-			}
+		if (!instruct->a[i])
+			break ;
 		if (instruct->args[i][0] == 1)
 		{
 			ft_printf("%-18d", instruct->args[i][1]);

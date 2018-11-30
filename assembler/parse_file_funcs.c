@@ -1,19 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_file_funcs.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aalokhin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/30 16:45:59 by aalokhin          #+#    #+#             */
+/*   Updated: 2018/11/30 16:46:01 by aalokhin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
-
-void				skip_name_comment(size_t *count, char (*contents)[])
-{
-	size_t			k;
-
-	k = 0;
-	while (k != 4)
-	{
-		if ((*contents)[(*count)] == '"')
-			k++;
-		(*count)++;
-	}
-	while ((*contents)[(*count)] && (*contents)[(*count)] != '\n')
-		(*count)++;
-}
 
 void				ft_zero_what_left(t_binfile *bin, size_t *c, char (*file)[])
 {
@@ -24,112 +21,22 @@ void				ft_zero_what_left(t_binfile *bin, size_t *c, char (*file)[])
 	}
 }
 
-void				clean_name_comment(t_binfile *bin, char (*contents)[])
+void				move_name_comment(char (*contents)[], size_t *i)
 {
-	size_t			i;
-	size_t			len;
-	size_t			k;
+	size_t d;
 
-	i = 0;
-	k = 0;
-	len = 0;
-	int d = 0;
-	while (i < bin->arg_length)
+	d = 0;
+	while ((*contents)[*i])
 	{
-		if (ft_strncmp(&(*contents)[i], ".name", 5) == 0 ||\
-			ft_strncmp(&(*contents)[i], ".comment", 8) == 0)
+		if ((*contents)[*i] == '"')
+			d++;
+		if (d == 2)
 		{
-			while ((*contents)[i])
-			{
-				if ((*contents)[i] == '"')
-					d++;
-				if (d == 2)
-				{
-					d = 0;
-					break ;
-				}
-				i++;
-			}
-			len = 0;
-			while ((*contents)[i] && (*contents)[i] != '\n')
-			{
-				len++;
-				i++;
-			}
+			d = 0;
+			break ;
 		}
-		ft_memmove(&(*contents)[k], &(*contents)[i], len + 1); /// please confirm that it does not break anything 
-		k++;
-		i++;
+		(*i)++;
 	}
-	//printf(">%s<\n", (*contents));
-	ft_zero_what_left(bin, &k, contents);
-}
-
-void				ft_clean_commas(char (*contents)[])
-{
-	size_t			i;
-
-	i = 0;
-	while ((*contents)[i])
-	{
-		if ((*contents)[i] == ',')
-			(*contents)[i] = ' ';
-		i++;
-	}
-}
-
-void				clean_spaces(t_binfile *bin, char (*contents)[])
-{
-	size_t			i;
-	size_t			j;
-
-	i = 0;
-	j = 0;
-	while ((*contents)[i])
-	{
-		while ((*contents)[i] != '\n' && WHITESPACE((*contents)[i]))
-			++i;
-		if (j > 0 && (*contents)[j - 1] != '\n' && i > 0\
-		&& WHITESPACE((*contents)[i - 1]))
-		{
-			(*contents)[j] = ' ';
-			j++;
-		}
-		if ((*contents)[i] && ((*contents)[i] == '\n' ||\
-		!WHITESPACE((*contents)[i])))
-		{
-			ft_memmove(&(*contents)[j], &(*contents)[i], 1);
-			j++;
-		}
-		i++;
-	}
-	ft_zero_what_left(bin, &j, contents);
-	ft_clean_commas(contents);
-}
-
-void				clean_new_lines(t_binfile *bin, char (*contents)[])
-{
-	size_t			j;
-	size_t			i;
-	size_t			len;
-
-	j = 0;
-	i = 0;
-	len = 0;
-	while ((*contents)[i])
-	{
-		if ((*contents)[i] == '\n')
-		{
-			while ((*contents)[i + 1] == '\n')
-				++i;
-			if ((*contents)[0] == '\n')
-				i++;
-		}
-		ft_memmove(&(*contents)[j], &(*contents)[i], 1);
-		j++;
-		i++;
-	}
-	ft_zero_what_left(bin, &j, contents);
 }
 
 void				remove_comments(t_binfile *bin, char (*contents)[])
@@ -165,5 +72,4 @@ void				parse_file(t_binfile *bin, char (*contents)[])
 	clean_name_comment(bin, contents);
 	clean_spaces(bin, contents);
 	clean_new_lines(bin, contents);
-	//printf("{%s}\n", (*contents));
 }
