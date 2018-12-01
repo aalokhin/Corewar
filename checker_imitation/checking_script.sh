@@ -152,7 +152,7 @@ do
 vm_champs/asm  $i > "$i.txt"
 ../asm  $i > "$i2.txt"
 if [[ $(diff "$i2.txt" "$i.txt") ]]; then
-    echo "$i.txt ===>" >> result.txt && diff "$i2.txt" "$i.txt" >> result.txt
+    echo "$i ===>" >> result.txt && diff "$i2.txt" "$i.txt" >> result.txt
 fi
 rm -rf $i
 done
