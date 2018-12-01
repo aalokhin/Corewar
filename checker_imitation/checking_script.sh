@@ -130,7 +130,47 @@ rm -rf result.txt
 
 
 
+$(mkdir  ./my ./or);
+$(chmod +x ./my);
+$(chmod +x ./or);
+# ="/my"  #my
+# OR="/or" #original
+bots=$(find vm_champs/champs -name "*.s") #list bots
+cp $bots ./my
+cp $bots ./or
 
+# ./vm_champs/asm 
+echo "=================>StdScr difference: <===================" >> result.txt
+
+# echo $bots; 
+my_bots=$(find my -name "*.s")
+or_bots=$(find or -name "*.s")
+
+i=0;
+for i in $or_bots
+do
+vm_champs/asm  $i > "$i.txt"
+../asm  $i > "$i2.txt"
+if [[ $(diff "$i2.txt" "$i.txt") ]]; then
+    echo "$i.txt ===>" >> result.txt && diff "$i2.txt" "$i.txt" >> result.txt
+fi
+rm -rf $i
+done
+
+# i=0;
+# for i in $my_bots
+# do
+#  # echo ">>>$i<<<"
+# ../asm  $i > "$i.txt"
+# rm -rf $i
+# done
+
+
+# diff --brief -r my/ or/ >> result.txt
+echo " \033[1;32m"
+cat -e result.txt
+rm -rf my or 
+rm -rf result.txt
 
 
 
