@@ -23,9 +23,14 @@ int 			init_check(t_binfile *bin)
 	if (!(initial_validation(&(*bin))))
 		return (0);
 	if (!(parse_commands(&(*bin), 0, NULL, NULL)))
+	{
+		//system("leaks asm");
 		return (0);
+	}
+	//system("leaks asm");
 	if (!(label_distance(&(*bin))))
 		return (0);
+	//system("leaks asm");
 	if ((*bin).flag_a == 1)
 	{
 		
@@ -33,18 +38,12 @@ int 			init_check(t_binfile *bin)
 		l = bin->labels_list;
 		while(l)
 		{
-			//printf("label %s\n", l->label_name);
 			instruct = l->instruct;
 			while(instruct)
 			{
-				//printf("instruct:");
 				k = 0;
 				while(instruct->a[k])
-				{
-					//printf(" [%s] ", instruct->a[k]);
 					k++;
-				}
-				//printf("\n");
 				instruct = instruct->next;
 			}
 
@@ -54,6 +53,7 @@ int 			init_check(t_binfile *bin)
 	 	flag_a_output(&(*bin));
 	 	return (0);
 	}
+	//system("leaks asm");
 	return(1);
 }
 
@@ -77,6 +77,7 @@ int				file_processing(t_binfile *bin)
 	if (init_check(bin) == 0)
 	{
 		ft_clean_all(bin);
+		//system("leaks asm");
 		return (0);
 	}
 	create_cor_file(&(*bin)); //creates the file iteslf and fills out the contents

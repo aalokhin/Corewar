@@ -176,6 +176,7 @@ int			error_message(t_binfile *file, char *arg, int line_num)
 	else
 		e = ft_strdup("INSTRUCTION");
 	ft_printf("Syntax error at token [TOKEN][%0.3d:%0.3d] %s \"%s\"\n", line_num + 1, colomn, e, arg);
+	ft_strdel(&e);
 	return (0);
 }
 

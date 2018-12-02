@@ -44,7 +44,7 @@ int  command_name(char *name, t_t *token)
 		}
 		token->c_name++;
 	}
-	 return (-1);
+	return (-1);
 }
 
 t_lable		*labels_linker(t_binfile *file, t_lable *label)
@@ -128,7 +128,6 @@ int		arguments_filler(t_binfile *file, t_lable *label, t_t *token, char **str, i
 		}
 		(*i)++;
 	}
-// system("leaks asm");
 	return (1);
 }
 char	*space_adder(char **str)
@@ -146,6 +145,7 @@ char	*space_adder(char **str)
 	}
 	cmd = ft_strsub(cpy, 0, i);
 	*str = ft_strsub(cpy, i, ft_strlen(cpy));
+	ft_strdel(&cpy);
 	return (cmd);
 }
 
@@ -153,11 +153,11 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 {
 	t_t 	*token = NULL;
 	t_lable	*label = NULL;
+	char *copy =  NULL;
 
 	str_n = (ft_strsplit(file->f_contents, '\n'));
 	while (*str_n)
 	{
-		//system("leaks asm");
 		i = 0;
 		str = ft_strsplit(*str_n, ' ');
 		if (!file->name || !file->comment)
@@ -165,27 +165,62 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 		if (i == 0 && !(ft_strchr(str[i] ,'%')) && (ft_strchr(str[i], ':')))
 		{
 			if (label)
-				label = labels_linker(file, label);;
+				label = labels_linker(file, label);
 			label = (t_lable *)ft_memalloc(sizeof(t_lable));
 			if (!(label_name_is_valid(file, label, str[i++])))
-				return (0);
+				return (0); ///////////////////////////////////////to del here
 		}
 		if (str[i])
 		{
 			if (!label)
 				label = (t_lable *)ft_memalloc(sizeof(t_lable));
 			token = (t_t *)ft_memalloc(sizeof(t_t));
-			token->line_num = define_line_num(file->copy, *str_n, 0, 0); //= does not work
+			token->line_num = define_line_num(file->copy, *str_n, 0, 0);
 			if (ft_strchr(str[i], '%') || ft_strchr(str[i], ':'))
 			{
-				if (command_name(space_adder(&(str[i])), token) == -1) // need to add 
-					return (error_command(file, str[i], token->line_num));
+				copy = space_adder(&(str[i]));
+				if (command_name(copy, token) == -1)
+				{
+					error_command(file, copy, token->line_num);
+					ft_strdel(&copy);
+					ft_clean_parse (str);
+					while (*str_n)
+					{
+						ft_strdel(&(*str_n));
+						str_n++;
+					}
+					command_linker(label, token);
+					labels_linker(file, label);
+					return (0);
+				}
+				ft_strdel(&copy);
 				i -= 1; 
 			}
 			else if (command_name(str[i], token) == -1)
-				return (error_command(file, str[i], token->line_num));
-			if (++i >= 0 && (!arguments_filler(file, label, token, str, &i)))
+			{
+				error_command(file, str[i], token->line_num);
+				ft_clean_parse (str);
+				while (*str_n)
+				{
+					ft_strdel(&(*str_n));
+					str_n++;
+				}
+				command_linker(label, token);
+				labels_linker(file, label);
 				return (0);
+			}
+			if (++i >= 0 && (!arguments_filler(file, label, token, str, &i)))
+			{
+				ft_clean_parse (str);
+				while (*str_n)
+				{
+					ft_strdel(&(*str_n));
+					str_n++;
+				}
+				command_linker(label, token);
+				labels_linker(file, label);
+				return (0);
+			}
 		}
 		ft_clean_parse (str);
 		ft_strdel(&(*str_n));
@@ -194,6 +229,6 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 	if (label)
 		labels_linker(file, label);
 	file_length(file);
-	// system("leaks asm");
+	//system("leaks asm");
 	return (1);
 }  

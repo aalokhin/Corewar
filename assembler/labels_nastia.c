@@ -3,14 +3,15 @@
 int			find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 {
 	char	*search;
+	char 	*saved;
 	t_lable	*tmp_lbl;
 
 	tmp_lbl = bin->labels_list;
 	if (ft_strstr(str, "%:"))
 	{
-		search = (char *)ft_memalloc(sizeof(char) * ft_strlen(str));
-		search = ft_strstr(str, "%:") + 2;
-		search = ft_strjoin(search, ":");
+		//search = (char *)ft_memalloc(sizeof(char) * ft_strlen(str));
+		saved = ft_strstr(str, "%:") + 2;
+		search = ft_strjoin(saved, ":");
 		while (tmp_lbl)
 		{
 			if (tmp_lbl->label_name)
@@ -30,9 +31,9 @@ int			find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 	}
 	if (ft_strstr(str, ":"))
 	{
-		search = (char *)ft_memalloc(sizeof(char) * ft_strlen(str));
-		search = ft_strstr(str, ":") + 1;
-		search = ft_strjoin(search, ":");
+		//search = (char *)ft_memalloc(sizeof(char) * ft_strlen(str));
+		saved = ft_strstr(str, ":") + 1;
+		search = ft_strjoin(saved, ":");
 		while (tmp_lbl)
 		{
 			if (tmp_lbl->label_name)
@@ -75,7 +76,6 @@ int					label_distance(t_binfile *bin)
 			while (tmpi->a[k])
 			{
 				tmpi->args[k][1] = find_arg_value(bin, tmpi->a[k], tmpi, tmp);
-				//ft_strdel(&(tmpi->a[k])); // we need this in flag a
 				k++;
 			}
 			tmpi = tmpi->next;
