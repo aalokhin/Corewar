@@ -83,14 +83,14 @@ void	change_cur_pos_and_print_it(t_proc *processes, t_cycle *main_cycle,
 		(*processes).cycles_wait = g_op_tab[(*processes).cmd - 1].cycles_wait;
 	else
 		(*processes).cycles_wait = 1;
-	(*main_cycle).indexes[(*processes).current_position][1] = 1;
+	(*main_cycle).indexes[(*processes).current_position][1] = CARETKA;
 	clear_argv_arr(processes);
 }
 
 void	skip_if_not_cmd(t_cycle *main_cycle, t_proc *processes,
 	unsigned char *map)
 {
-	(*main_cycle).indexes[(*processes).current_position][1] = 0;
+	(*main_cycle).indexes[(*processes).current_position][1] = NO_CARETKA;
 	(*processes).current_position++;
 	(*processes).current_position = ((*processes).current_position
 	+ MEM_SIZE) % MEM_SIZE;
@@ -99,7 +99,7 @@ void	skip_if_not_cmd(t_cycle *main_cycle, t_proc *processes,
 		(*processes).cycles_wait = g_op_tab[(*processes).cmd - 1].cycles_wait;
 	else
 		(*processes).cycles_wait = 1;
-	(*main_cycle).indexes[(*processes).current_position][1] = 1;
+	(*main_cycle).indexes[(*processes).current_position][1] = CARETKA;
 }
 
 void	internal_cycle_core(t_cycle *main_cycle, t_proc *processes,

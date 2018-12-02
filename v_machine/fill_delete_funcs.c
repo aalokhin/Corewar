@@ -57,8 +57,8 @@ void	processes_add(t_proc **head, unsigned char *map,
 	tmp->current_position = (*main_cycle).fork_ind;
 	tmp->arg_counter = 0;
 	tmp->cmd = map[tmp->current_position];
-	(*main_cycle).indexes[(*main_cycle).fork_ind][1] = 1;
-	if (tmp->cmd >= 1 && tmp->cmd <= 16)
+	(*main_cycle).indexes[(*main_cycle).fork_ind][1] = CARETKA;
+	if (tmp->cmd >= 1 && tmp->cmd <= CMD_NBR)
 		tmp->cycles_wait = g_op_tab[tmp->cmd - 1].cycles_wait;
 	else
 		tmp->cycles_wait = 1;
@@ -71,12 +71,15 @@ void	processes_add(t_proc **head, unsigned char *map,
 
 void	clear_argv_arr(t_proc *processes)
 {
-	(*processes).argv[0][0] = 0;
-	(*processes).argv[0][1] = 0;
-	(*processes).argv[1][0] = 0;
-	(*processes).argv[1][1] = 0;
-	(*processes).argv[2][0] = 0;
-	(*processes).argv[2][1] = 0;
+	int i;
+
+	i = 0;
+	while (i < MAX_ARGS_NUMBER - 1)
+	{
+		(*processes).argv[i][0] = 0;
+		(*processes).argv[i][1] = 0;
+		i++;
+	}
 }
 
 void	delete_unneeded(t_proc **head, t_cycle *main_cycle)
@@ -86,7 +89,7 @@ void	delete_unneeded(t_proc **head, t_cycle *main_cycle)
 
 	tmp = *head;
 	prev = tmp;
-	while (tmp != NULL && (tmp->if_live == 0 || (*main_cycle).cycles <= 0))
+	while (tmp != NULL && (!tmp->if_live || (*main_cycle).cycles <= 0))
 	{
 		*head = tmp->next;
 		free(tmp);
@@ -94,7 +97,7 @@ void	delete_unneeded(t_proc **head, t_cycle *main_cycle)
 	}
 	while (tmp != NULL)
 	{
-		while (tmp != NULL && (tmp->if_live != 0 || (*main_cycle).cycles > 0))
+		while (tmp != NULL && (tmp->if_live || (*main_cycle).cycles > 0))
 		{
 			prev = tmp;
 			tmp = tmp->next;
@@ -117,14 +120,14 @@ void	fill_start_map_id(t_cycle *main_cycle, t_header bots[4],
 	while ((*params).i < MEM_SIZE)
 	{
 		(*main_cycle).indexes[(*params).i][0] = 0;
-		(*main_cycle).indexes[(*params).i++][1] = 0;
+		(*main_cycle).indexes[(*params).i++][1] = NO_CARETKA;
 	}
 	(*params).i = 0;
 	while ((*params).i < MEM_SIZE && (*params).j < (*params).bots_quantity)
 	{
 		if ((unsigned int)(*params).i == bots[(*params).j].start_index)
 		{
-			(*main_cycle).indexes[(*params).i][1] = 1;
+			(*main_cycle).indexes[(*params).i][1] = CARETKA;
 			k = 0;
 			while (k++ < bots[(*params).j].prog_size)
 				(*main_cycle).indexes[(*params).i++][0] = (*params).j + 1;

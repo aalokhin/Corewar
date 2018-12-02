@@ -59,7 +59,7 @@ void	print_adv(t_cycle *main_cycle, t_proc *processes, t_flags *params,
 	int j;
 
 	j = 0;
-	(*main_cycle).indexes[(*processes).current_position][1] = 0;
+	(*main_cycle).indexes[(*processes).current_position][1] = NO_CARETKA;
 	if (((*params).v_verbosity >> 4) & 1 && (*main_cycle).shift > 0)
 	{
 		printf("ADV %d (0x%.4x -> 0x%.4x) ", (*main_cycle).shift,

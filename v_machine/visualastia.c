@@ -117,7 +117,7 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
     	{
     		if ((*main_cycle).indexes[i][0] == 1)
     		{
-    			if((*main_cycle).indexes[i][1] == 1)
+    			if((*main_cycle).indexes[i][1] == CARETKA)
     			{
 	    			wattron(win, COLOR_PAIR(11));
 		    		mvwprintw(win, y, x,  "%.2x", map[i]);
@@ -132,7 +132,7 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
     		}
     		else if ((*main_cycle).indexes[i][0] == 2)
     		{
-    			if((*main_cycle).indexes[i][1] == 1)
+    			if((*main_cycle).indexes[i][1] == CARETKA)
     			{
 	    			wattron(win, COLOR_PAIR(22));
 		    		mvwprintw(win, y, x,  "%.2x", map[i]);
@@ -147,7 +147,7 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
     		}
     		else if ((*main_cycle).indexes[i][0] == 3)
     		{
-    			if((*main_cycle).indexes[i][1] == 1)
+    			if((*main_cycle).indexes[i][1] == CARETKA)
     			{
 	    			wattron(win, COLOR_PAIR(33));
 		    		mvwprintw(win, y, x,  "%.2x", map[i]);
@@ -162,7 +162,7 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
     		}
     		else if ((*main_cycle).indexes[i][0] == 4)
     		{
-    			if((*main_cycle).indexes[i][1] == 1)
+    			if((*main_cycle).indexes[i][1] == CARETKA)
     			{
 	    			wattron(win, COLOR_PAIR(44));
 		    		mvwprintw(win, y, x,  "%.2x", map[i]);
@@ -177,7 +177,7 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
     		}
     		else
 			{
-				if((*main_cycle).indexes[i][1] == 1)
+				if((*main_cycle).indexes[i][1] == CARETKA)
     			{
 	    			wattron(win, COLOR_PAIR(55));
 		    		mvwprintw(win, y, x,  "%.2x", map[i]);

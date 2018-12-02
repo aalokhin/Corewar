@@ -22,9 +22,12 @@
 
 # define MAGIC_SIZE 4
 # define NULL_SIZE 4
-# define SIZE_SIZE 10
 # define EXEC_SIZE 4
+# define PRE_EXEC_SIZE (COMMENT_LENGTH + PROG_NAME_LENGTH + MAGIC_SIZE + (NULL_SIZE * 2) + EXEC_SIZE)
 # define SEC_LIMIT 50
+# define CMD_NBR 16
+# define CARETKA 1
+# define NO_CARETKA 0
 
 typedef struct		s_proc
 {
@@ -39,7 +42,7 @@ typedef struct		s_proc
 	int				lives;
 	int				last_live_cycle;
 	unsigned char	cmd;
-	int				argv[3][2];
+	int				argv[MAX_ARGS_NUMBER - 1][2];
 	unsigned int	cycles_wait;
 	int				child_proc_lives;
 	int				live_cycle;
@@ -90,9 +93,9 @@ typedef struct		s_flags
 	int				d_dumps_memory;
 	int				v_verbosity;
 	int				ncurses;
-	int				pl_nbr[4][2];
+	int				pl_nbr[MAX_PLAYERS][2];
 	int				bots_quantity;
-	char			*players[4];
+	char			*players[MAX_PLAYERS];
 	struct s_cycle	main_cycle;
 }					t_flags;
 
@@ -100,7 +103,7 @@ typedef struct		s_op
 {
 	char			*name;
 	int				argc;
-	t_arg_type		argv[3];
+	t_arg_type		argv[MAX_ARGS_NUMBER - 1];
 	int				nbr;
 	int				cycles_wait;
 	char			*desc;
@@ -147,7 +150,7 @@ int					long_fork(t_proc *head_proc, int cur_proc,
 int					aff(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 					unsigned char *map);
 
-static t_cmd		g_instruct[16] = {&live, &load, &store, &addition,
+static t_cmd		g_instruct[REG_NUMBER] = {&live, &load, &store, &addition,
 	&substraction, &bit_and, &bit_or, &bit_xor, &zjmp, &load_ind,
 	&store_ind, &ffork, &lload, &lload_ind, &long_fork, &aff};
 
@@ -158,10 +161,10 @@ void				get_t_ind_value(t_proc *processes, unsigned char *map,
 void				get_t_reg_value(t_proc *processes, unsigned char *map,
 						int arg_ind, int *id_counter);
 
-static t_aval		g_get_arg_vals[3] = {&get_t_reg_value, &get_t_dir_value,
+static t_aval		g_get_arg_vals[MAX_ARGS_NUMBER - 1] = {&get_t_reg_value, &get_t_dir_value,
 	&get_t_ind_value};
 
-static t_op g_op_tab[17] =
+static t_op g_op_tab[CMD_NBR] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0, 1},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0, 2},
@@ -184,18 +187,17 @@ static t_op g_op_tab[17] =
 	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,
 		"long load index", 1, 1, 3},
 	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1, 1},
-	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0, 1},
-	{0, 0, {0}, 0, 0, 0, 0, 0, 0}
+	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0, 1}
 };
 
 void				vm_cycle(unsigned char *map, t_flags *params,
-						t_header bots[4]);
+						t_header bots[MAX_PLAYERS]);
 void				processes_add(t_proc **processes, unsigned char *map,
 						t_cycle *main_cycle, int cur_proc);
-void				init_bots(t_header bots[4]);
+void				init_bots(t_header bots[MAX_PLAYERS]);
 void				params_init(t_flags *params);
 void				main_cycle_init(t_cycle *main_cycle, t_flags *params);
-t_proc				*processes_init(t_flags *params, t_header bots[4],
+t_proc				*processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
 						unsigned char *map);
 void				clear_argv_arr(t_proc *processes);
 void				get_t_dir_value(t_proc *processes, unsigned char *map,
@@ -211,7 +213,7 @@ void				map_to_screen(unsigned char *map, t_cycle *main_cycle,
 						t_flags *params, t_proc *processes, WINDOW *win);
 void				visual_init(WINDOW **win);
 void				print_winner(WINDOW *win, t_cycle main_cycle);
-int					read_bots(t_flags *params, int fd, t_header	bots[4]);
+int					read_bots(t_flags *params, int fd, t_header	bots[MAX_PLAYERS]);
 void				inst_vars_init(t_instr *inst_vars, t_proc *processes);
 int					check_ldi_params(t_instr *inst_vars, unsigned char *map);
 void				take_bits_params(t_instr *inst_vars, unsigned char *map);
@@ -220,10 +222,10 @@ int					check_magic(unsigned char *str, t_flags *params, int j,
 						t_header bots[4]);
 int					check_comment(unsigned char *str, t_flags *params, int j);
 void				delete_unneeded(t_proc **head, t_cycle *main_cycle);
-void				fill_start_map_id(t_cycle *main_cycle, t_header bots[4],
+void				fill_start_map_id(t_cycle *main_cycle, t_header bots[MAX_PLAYERS],
 						t_flags *params);
-void				intro_print(t_flags *params, t_header bots[4], WINDOW **win);
-void				after_cycle(t_flags *params, t_header bots[4],
+void				intro_print(t_flags *params, t_header bots[MAX_PLAYERS], WINDOW **win);
+void				after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
 						t_cycle main_cycle, WINDOW *win);
 void				print_adv(t_cycle *main_cycle, t_proc *processes,
 						t_flags *params, unsigned char *map);

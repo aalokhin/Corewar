@@ -17,25 +17,43 @@ void	get_t_dir_value(t_proc *processes, unsigned char *map,
 {
 	short			tmp_2;
 	unsigned int	tmp_4;
+	int j;
+	int k;
 
 	tmp_2 = 0;
 	tmp_4 = 0;
+	j = 1;
 	if ((*processes).arg_counter < g_op_tab[(*processes).cmd - 1].arg_nbr)
 	{
 		if (!g_op_tab[(int)(*processes).cmd - 1].label)
 		{
-			tmp_4 = (unsigned int)(((map[((*id_counter) + 1) % MEM_SIZE] << 24)
-			+ (map[((*id_counter) + 2) % MEM_SIZE] << 16) + (map[((*id_counter)
-			+ 3) % MEM_SIZE] << 8) + map[((*id_counter) + 4) % MEM_SIZE]));
-			(*processes).argv[arg_ind][1] = tmp_4;
-			(*id_counter) += 4;
+			k = DIR_SIZE;
+			while (j <= DIR_SIZE)
+			{
+				if (((k - 1) * 8) > 0)
+					tmp_4 += (unsigned int)(map[((*id_counter) + j) % MEM_SIZE] << (k - 1) * 8);
+				else
+					tmp_4 += (unsigned int)map[((*id_counter) + j) % MEM_SIZE];
+				k--;
+				j++;
+			}
+			(*processes).argv[arg_ind][1] = (unsigned int)tmp_4;
+			(*id_counter) += DIR_SIZE;
 		}
 		else
 		{
-			tmp_2 = (short)((map[((*id_counter) + 1) % MEM_SIZE] << 8) +
-			map[((*id_counter) + 2) % MEM_SIZE]);
-			(*processes).argv[arg_ind][1] = tmp_2;
-			(*id_counter) += 2;
+			k = DIR_SIZE / 2;
+			while (j <= DIR_SIZE / 2)
+			{
+				if (((k - 1) * 8) > 0)
+					tmp_2 += (short)(map[((*id_counter) + j) % MEM_SIZE] << (k - 1) * 8);
+				else
+					tmp_2 += (short)map[((*id_counter) + j) % MEM_SIZE];
+				k--;
+				j++;
+			}
+			(*processes).argv[arg_ind][1] = (short)tmp_2;
+			(*id_counter) = (*id_counter) + DIR_SIZE / 2;
 		}
 	}
 	(*processes).arg_counter++;
@@ -45,14 +63,26 @@ void	get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind,
 	int *id_counter)
 {
 	short tmp;
+	int j;
+	int k;
 
 	tmp = 0;
+	j = 1;
+	k = IND_SIZE;
 	if ((*processes).arg_counter < g_op_tab[(*processes).cmd - 1].arg_nbr)
 	{
-		tmp = (short)((map[((*id_counter) + 1) % MEM_SIZE] << 8) +
-			map[((*id_counter) + 2) % MEM_SIZE]);
+		while (j <= IND_SIZE)
+		{
+			if (((k - 1) * 8) > 0)
+				tmp += (short)(map[((*id_counter) + j) % MEM_SIZE] << (k - 1) * 8);
+			else
+				tmp += (short)map[((*id_counter) + j) % MEM_SIZE];
+			k--;
+			j++;
+		}
+		tmp = (short)tmp;
 		(*processes).argv[arg_ind][1] = tmp;
-		(*id_counter) += 2;
+		(*id_counter) += IND_SIZE;
 	}
 	(*processes).arg_counter++;
 }
@@ -61,12 +91,25 @@ void	get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind,
 	int *id_counter)
 {
 	unsigned char tmp;
+	int j;
+	int k;
 
+	tmp = 0;
+	j = 1;
+	k = T_REG;
 	if ((*processes).arg_counter < g_op_tab[(*processes).cmd - 1].arg_nbr)
 	{
-		tmp = (unsigned char)(map[((*id_counter) + 1) % MEM_SIZE]);
-		(*processes).argv[arg_ind][1] = tmp;
-		(*id_counter)++;
+		while (j <= T_REG)
+		{
+			if (((k - 1) * 8) > 0)
+				tmp += (unsigned char)(map[((*id_counter) + j) % MEM_SIZE] << (k - 1) * 8);
+			else
+				tmp += (unsigned char)map[((*id_counter) + j) % MEM_SIZE];
+			k--;
+			j++;
+		}
+		(*processes).argv[arg_ind][1] = (unsigned char)tmp;
+		(*id_counter) += T_REG;
 	}
 	(*processes).arg_counter++;
 }
