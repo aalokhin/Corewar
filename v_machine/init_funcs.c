@@ -12,12 +12,12 @@
 
 #include "../corewar.h"
 
-void	init_bots(t_header bots[4])
+void	init_bots(t_header bots[MAX_PLAYERS])
 {
 	int i;
 
 	i = 0;
-	while (i < 4)
+	while (i < MAX_PLAYERS)
 	{
 		bots[i].magic = 0;
 		bots[i].prog_size = 0;
@@ -60,7 +60,7 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).cycles = 0;
 	(*main_cycle).processes = (*params).bots_quantity;
 	(*main_cycle).prev_processes = (*main_cycle).processes;
-	(*main_cycle).second_limit = 50;
+	(*main_cycle).second_limit = SEC_LIMIT;
 	(*main_cycle).cycle_die = CYCLE_TO_DIE;
 	(*main_cycle).current_winner = -1;
 	(*main_cycle).checks_if_die = MAX_CHECKS;
@@ -80,7 +80,7 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).run = 0;
 }
 
-void	processes_init2(t_flags *params, t_header bots[4], unsigned char *map,
+void	processes_init2(t_flags *params, t_header bots[MAX_PLAYERS], unsigned char *map,
 	t_proc *processes)
 {
 	(*processes).real_id = (*params).i;
@@ -103,7 +103,7 @@ void	processes_init2(t_flags *params, t_header bots[4], unsigned char *map,
 		(*processes).regs[(*params).j++] = 0;
 }
 
-t_proc	*processes_init(t_flags *params, t_header bots[4], unsigned char *map)
+t_proc	*processes_init(t_flags *params, t_header bots[MAX_PLAYERS], unsigned char *map)
 {
 	t_proc			*processes;
 	t_proc			*tmp;

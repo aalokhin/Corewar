@@ -13,7 +13,7 @@
 #include "../corewar.h"
 
 int		take_bots_params(unsigned char *str, t_flags *params, int j,
-	t_header bots[4])
+	t_header bots[MAX_PLAYERS])
 {
 	unsigned int	size;
 	unsigned int	buf;
@@ -28,10 +28,10 @@ int		take_bots_params(unsigned char *str, t_flags *params, int j,
 	size |= buf;
 	size |= str[139];
 	bots[j].prog_size = size;
-	if (size > 682)
+	if (size > CHAMP_MAX_SIZE)
 	{
-		ft_printf("Error: %s has too large a code (%d bytes > 682 bytes)\n",
-			(*params).players[j], size);
+		ft_printf("Error: %s has too large a code (%d bytes > %d bytes)\n",
+			(*params).players[j], size, MAX_PLAYERS);
 		ft_strdel((char **)(&str));
 		return (0);
 	}
@@ -42,7 +42,7 @@ int		take_bots_params(unsigned char *str, t_flags *params, int j,
 	return (1);
 }
 
-int		copy_bots_to_map(t_header bots[4], unsigned char *str,
+int		copy_bots_to_map(t_header bots[MAX_PLAYERS], unsigned char *str,
 	t_flags *params, int len)
 {
 	(*params).i = 0;

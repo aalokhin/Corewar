@@ -77,10 +77,10 @@ int		check_ldi_params(t_instr *inst_vars, unsigned char *map)
 	!= REG_CODE && inst_vars->tmp->argv[1][0] != DIR_CODE))
 		return (0);
 	if (inst_vars->tmp->argv[2][1] < 1
-	|| inst_vars->tmp->argv[2][1] > 16 || (inst_vars->tmp->argv[0][0] ==
+	|| inst_vars->tmp->argv[2][1] > REG_NUMBER || (inst_vars->tmp->argv[0][0] ==
 	REG_CODE && (inst_vars->tmp->argv[0][1] < 1 || inst_vars->tmp->argv[0][1] >
-	16)) || (inst_vars->tmp->argv[1][0] == REG_CODE &&
-	(inst_vars->tmp->argv[1][1] < 1 || inst_vars->tmp->argv[1][1] > 16)))
+	REG_NUMBER)) || (inst_vars->tmp->argv[1][0] == REG_CODE &&
+	(inst_vars->tmp->argv[1][1] < 1 || inst_vars->tmp->argv[1][1] > REG_NUMBER)))
 		return (-1);
 	take_ldi_params(inst_vars, map, 0, &inst_vars->one);
 	take_ldi_params(inst_vars, map, 1, &inst_vars->two);

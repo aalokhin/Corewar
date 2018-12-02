@@ -35,7 +35,7 @@ int		load(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((*tmp).argv[1][0] != REG_CODE || (*tmp).argv[2][0] ||
 		((*tmp).argv[0][0] != DIR_CODE && (*tmp).argv[0][0] != IND_CODE))
 		return (0);
-	if ((*tmp).argv[1][1] < 1 || (*tmp).argv[1][1] > 16)
+	if ((*tmp).argv[1][1] < 1 || (*tmp).argv[1][1] > REG_NUMBER)
 		return (-1);
 	(*tmp).carry = 0;
 	if ((*tmp).argv[0][0] == DIR_CODE)
@@ -68,7 +68,7 @@ int		lload(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		(inst_vars.tmp->argv[0][0] != DIR_CODE && inst_vars.tmp->argv[0][0]
 		!= IND_CODE))
 		return (0);
-	if (inst_vars.tmp->argv[1][1] < 1 || inst_vars.tmp->argv[1][1] > 16)
+	if (inst_vars.tmp->argv[1][1] < 1 || inst_vars.tmp->argv[1][1] > REG_NUMBER)
 		return (-1);
 	inst_vars.tmp->carry = 0;
 	if (inst_vars.tmp->argv[0][0] == DIR_CODE)

@@ -2,20 +2,11 @@
 
 void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params, t_proc *processes)
 {
-	unsigned int i;
 	int x;
 	int y;
 
-	i = 0;
 	x = 199;
-	y = 2;
-
-
-	// if ((*main_cycle).run == 0)
-		// mvwprintw(win, y, x,  "** PAUSED **");
-	// else
-	// 	mvwprintw(win, y, x,  "** RUNNING **");
-	y += 2;
+	y = 4;
 	wrefresh(win);
 	mvwprintw(win, y, x,  "Cycles/second limit : %d", (*main_cycle).second_limit);
 	wrefresh(win);
@@ -28,14 +19,13 @@ void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params, t_proc *
 	while (processes)
 	{
 		y += 2;
-		mvwprintw(win, y, x,  "Player: -%d : %s", (*processes).real_id + 1, (*processes).name);
+		mvwprintw(win, y, x,  "Player: -%d : %s", (*processes).id + 1, (*processes).name);
 		x+=2;
 		y++;
 		mvwprintw(win, y, x,  "Last live: %d ", (*processes).last_live_cycle);
 		y++;
 		mvwprintw(win, y, x,  "Lives in current period : %d ", (*processes).live_cycle);
 		processes = processes->next;
-		i++;
 	}
 	y += 2;
 	x-=2;
@@ -74,27 +64,22 @@ void print_winner(WINDOW * win, t_cycle main_cycle)
 	mvwprintw(win, y, x,  "The winner is : %s", main_cycle.winner_name);
 	wattroff(win, COLOR_PAIR(main_cycle.winner_id + 1));
 	wrefresh(win);
-	//getch();
 }
 
 void visual_init(WINDOW **win)
 {
+	int  yMax;
+	int  xMax;
+
 	initscr();
 	cbreak();
 	noecho();
 	start_color();
-
-	int  yMax, xMax;
 	getmaxyx(stdscr, yMax, xMax);
-
-	*win = newwin(68, 0, 0, 5); //*newwin(int nlines, int ncols, int begin_y, int begin_x);
-	// box(win, 0, 0);
-
-	// int wborder(WINDOW *win, chtype ls, chtype rs, chtype ts, chtype bs, chtype tl, chtype tr, chtype bl, chtype br);
+	*win = newwin(68, 0, 0, 5);
 	int ls, rs, ts, bs, tl, tr, bl, br;
 	ls = rs = ts = bs = tl = tr = bl = br = 42;
 	init_pair(12, COLOR_CYAN, COLOR_CYAN);
-
 	init_pair(1 , COLOR_GREEN, COLOR_BLACK);
 	init_pair(2, COLOR_BLUE, COLOR_BLACK);
 	init_pair(3, COLOR_RED, COLOR_BLACK);
@@ -102,21 +87,15 @@ void visual_init(WINDOW **win)
 	init_pair(5 , COLOR_WHITE, COLOR_BLACK);
 	init_pair(6 , COLOR_RED, COLOR_RED);
 	init_pair(7 , COLOR_CYAN, COLOR_BLACK);
-
-
-
 	init_pair(11, COLOR_BLACK, COLOR_GREEN);
 	init_pair(22, COLOR_BLACK, COLOR_BLUE);
 	init_pair(33, COLOR_BLACK, COLOR_RED);
 	init_pair(44, COLOR_BLACK, COLOR_CYAN);
 	init_pair(55, COLOR_BLACK, COLOR_WHITE);
-
-
 	wattron(*win, COLOR_PAIR(12));
 	wborder(*win, ls, rs, ts, bs, tl, tr, bl, br);
 	mvwvline(*win, 1, 196, 42, 70);
 	wattroff(*win, COLOR_PAIR(12));
-
 }
 
 void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes, WINDOW *win)

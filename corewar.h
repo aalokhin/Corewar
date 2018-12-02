@@ -20,10 +20,11 @@
 # include "op.h"
 # include <ncurses.h>
 
-# define MAGIC_SIZE 1
-# define NAME_SIZE 330
+# define MAGIC_SIZE 4
+# define NULL_SIZE 4
 # define SIZE_SIZE 10
-# define COMMENT_SIZE 5130
+# define EXEC_SIZE 4
+# define SEC_LIMIT 50
 
 typedef struct		s_proc
 {
