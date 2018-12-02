@@ -27,8 +27,6 @@ void	live_dir_proc(t_proc *child_proc, t_proc *head_proc,
 		{
 			(*tmp).last_live_cycle = (*main_cycle).cycles;
 			if (((*main_cycle).verbose & 1))
-				//ft_printf("A process shows that player %s
-				//(champion_name) is alive.\n", (*tmp).name);
 				printf("Player %d (%s) is said to be alive\n",
 				(*child_proc).argv[0][1] + 1, (*tmp).name);
 		}

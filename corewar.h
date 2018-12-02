@@ -96,6 +96,7 @@ typedef struct		s_flags
 	int				pl_nbr[MAX_PLAYERS][2];
 	int				bots_quantity;
 	char			*players[MAX_PLAYERS];
+	int				sum_bots;
 	struct s_cycle	main_cycle;
 }					t_flags;
 
@@ -224,7 +225,8 @@ int					check_comment(unsigned char *str, t_flags *params, int j);
 void				delete_unneeded(t_proc **head, t_cycle *main_cycle);
 void				fill_start_map_id(t_cycle *main_cycle, t_header bots[MAX_PLAYERS],
 						t_flags *params);
-void				intro_print(t_flags *params, t_header bots[MAX_PLAYERS], WINDOW **win);
+void				intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
+						WINDOW **win, t_proc *processes);
 void				after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
 						t_cycle main_cycle, WINDOW *win);
 void				print_adv(t_cycle *main_cycle, t_proc *processes,

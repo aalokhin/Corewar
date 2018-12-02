@@ -41,6 +41,7 @@ void	params_init(t_flags *params)
 	(*params).v_verbosity = 0;
 	(*params).ncurses = 0;
 	(*params).bots_quantity = 0;
+	(*params).sum_bots = 0;
 	while (i < MAX_PLAYERS)
 	{
 		(*params).players[i] = NULL;
@@ -92,7 +93,7 @@ void	processes_init2(t_flags *params, t_header bots[MAX_PLAYERS], unsigned char 
 	(*processes).lives = 0;
 	(*processes).arg_counter = 0;
 	(*processes).cmd = map[(*processes).current_position];
-	if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
+	if ((*processes).cmd >= 1 && (*processes).cmd <= CMD_NBR)
 		(*processes).cycles_wait = g_op_tab[(*processes).cmd - 1].cycles_wait;
 	else
 		(*processes).cycles_wait = 1;

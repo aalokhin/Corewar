@@ -28,6 +28,7 @@ int		take_bots_params(unsigned char *str, t_flags *params, int len,
 	size |= buf;
 	size |= str[139];
 	bots[(*params).j].prog_size = size;
+	(*params).sum_bots += size;
 	if ((unsigned int)(len - PRE_EXEC_SIZE) != bots[(*params).j].prog_size)
 	{
 		ft_printf("%s %s %s\n", "Error: File", (*params).players[(*params).j],
@@ -38,8 +39,14 @@ int		take_bots_params(unsigned char *str, t_flags *params, int len,
 	if (size > CHAMP_MAX_SIZE)
 	{
 		ft_printf("Error: %s has too large a code (%d bytes > %d bytes)\n",
-			(*params).players[(*params).j], size, MAX_PLAYERS);
+			(*params).players[(*params).j], size, CHAMP_MAX_SIZE);
 		ft_strdel((char **)(&str));
+		return (0);
+	}
+	if ((*params).sum_bots > MEM_SIZE)
+	{
+		ft_printf("Error: %s %d MEM_SIZE for this game\n", "Too small map size, you need at least ",
+			(*params).sum_bots);
 		return (0);
 	}
 	ft_strncpy(bots[(*params).j].comment, (const char *)(&str[140]),
@@ -84,7 +91,7 @@ int		bot_open(int *fd, t_flags *params, unsigned int *len)
 	return (1);
 }
 
-int		read_bots(t_flags *params, int fd, t_header bots[4])
+int		read_bots(t_flags *params, int fd, t_header bots[MAX_PLAYERS])
 {
 	unsigned int			len;
 	static unsigned char	*str;

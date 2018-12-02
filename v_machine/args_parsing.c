@@ -12,47 +12,42 @@
 
 #include "../corewar.h"
 
-void	get_t_dir_value(t_proc *processes, unsigned char *map,
-	int arg_ind, int *id_counter)
+void get_args_value(int arg_size, unsigned int *dest, unsigned char *map, int *id_counter)
 {
-	short			tmp_2;
-	unsigned int	tmp_4;
 	int j;
 	int k;
 
-	tmp_2 = 0;
-	tmp_4 = 0;
 	j = 1;
+	k = arg_size;
+	while (j <= arg_size)
+	{
+		if (((k - 1) * 8) > 0)
+			*dest += (map[((*id_counter) + j) % MEM_SIZE] << (k - 1) * 8);
+		else
+			*dest += map[((*id_counter) + j) % MEM_SIZE];
+		k--;
+		j++;
+	}
+}
+
+void	get_t_dir_value(t_proc *processes, unsigned char *map,
+	int arg_ind, int *id_counter)
+{
+	unsigned int	tmp_4;
+
+	tmp_4 = 0;
 	if ((*processes).arg_counter < g_op_tab[(*processes).cmd - 1].arg_nbr)
 	{
 		if (!g_op_tab[(int)(*processes).cmd - 1].label)
 		{
-			k = DIR_SIZE;
-			while (j <= DIR_SIZE)
-			{
-				if (((k - 1) * 8) > 0)
-					tmp_4 += (unsigned int)(map[((*id_counter) + j) % MEM_SIZE] << (k - 1) * 8);
-				else
-					tmp_4 += (unsigned int)map[((*id_counter) + j) % MEM_SIZE];
-				k--;
-				j++;
-			}
+			get_args_value(DIR_SIZE, &tmp_4, map, id_counter);
 			(*processes).argv[arg_ind][1] = (unsigned int)tmp_4;
 			(*id_counter) += DIR_SIZE;
 		}
 		else
 		{
-			k = DIR_SIZE / 2;
-			while (j <= DIR_SIZE / 2)
-			{
-				if (((k - 1) * 8) > 0)
-					tmp_2 += (short)(map[((*id_counter) + j) % MEM_SIZE] << (k - 1) * 8);
-				else
-					tmp_2 += (short)map[((*id_counter) + j) % MEM_SIZE];
-				k--;
-				j++;
-			}
-			(*processes).argv[arg_ind][1] = (short)tmp_2;
+			get_args_value(DIR_SIZE / 2, &tmp_4, map, id_counter);
+			(*processes).argv[arg_ind][1] = (short)tmp_4;
 			(*id_counter) = (*id_counter) + DIR_SIZE / 2;
 		}
 	}

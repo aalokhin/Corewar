@@ -79,7 +79,7 @@ void	change_cur_pos_and_print_it(t_proc *processes, t_cycle *main_cycle,
 	(*processes).current_position = ((*processes).current_position +
 		MEM_SIZE) % MEM_SIZE;
 	(*processes).cmd = map[(*processes).current_position];
-	if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
+	if ((*processes).cmd >= 1 && (*processes).cmd <= CMD_NBR)
 		(*processes).cycles_wait = g_op_tab[(*processes).cmd - 1].cycles_wait;
 	else
 		(*processes).cycles_wait = 1;
@@ -95,7 +95,7 @@ void	skip_if_not_cmd(t_cycle *main_cycle, t_proc *processes,
 	(*processes).current_position = ((*processes).current_position
 	+ MEM_SIZE) % MEM_SIZE;
 	(*processes).cmd = map[(*processes).current_position];
-	if ((*processes).cmd >= 1 && (*processes).cmd <= 16)
+	if ((*processes).cmd >= 1 && (*processes).cmd <= CMD_NBR)
 		(*processes).cycles_wait = g_op_tab[(*processes).cmd - 1].cycles_wait;
 	else
 		(*processes).cycles_wait = 1;
@@ -108,14 +108,14 @@ void	internal_cycle_core(t_cycle *main_cycle, t_proc *processes,
 	while (processes)
 	{
 		if ((*processes).if_live && (*processes).cmd >= 1 &&
-		(*processes).cmd <= 16 && (*processes).cycles_wait == 1)
+		(*processes).cmd <= CMD_NBR && (*processes).cycles_wait == 1)
 		{
 			take_args_and_do_instr(processes, main_cycle, map, params);
 			(*main_cycle).shift = 2;
 			change_cur_pos_and_print_it(processes, main_cycle, params, map);
 		}
 		else if ((*processes).if_live && (*processes).cmd >= 1
-		&& (*processes).cmd <= 16 && (*processes).cycles_wait > 1)
+		&& (*processes).cmd <= CMD_NBR && (*processes).cycles_wait > 1)
 			(*processes).cycles_wait--;
 		else if ((*processes).if_live)
 			skip_if_not_cmd(main_cycle, processes, map);
@@ -171,7 +171,7 @@ void    vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
     fill_start_map_id(&main_cycle, bots, params);
     processes = processes_init(params, bots, map);
     main_cycle.head_proc = processes;
-    intro_print(params, bots, &win);
+    intro_print(params, bots, &win, processes);
     mvwprintw(win, 2, 199,  "** PAUSED **");
     curs_set(0);
     while (main_cycle.processes > 0)
