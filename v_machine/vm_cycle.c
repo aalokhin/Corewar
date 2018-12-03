@@ -37,11 +37,11 @@ int	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 		return (0);*/
 	if ((*processes).cmd == 1 || (*processes).cmd == 12 ||
 		(*processes).cmd == 15)
-		(*main_cycle).instr_res = g_instruct[(*processes).cmd -
+			g_instruct[(*processes).cmd -
 		1]((*main_cycle).head_proc, (*processes).id, main_cycle, map);
 	else if ((*processes).cmd != 16 || ((*processes).cmd == 16
 		&& (*params).a_aff))
-		(*main_cycle).instr_res = g_instruct[(*processes).cmd -
+		g_instruct[(*processes).cmd -
 		1](processes, (*processes).id, main_cycle, map);
 	return (1);
 }
@@ -54,8 +54,8 @@ void	change_cur_pos_and_print_it(t_proc *processes, t_cycle *main_cycle,
 		(*main_cycle).shift = (*main_cycle).id_counter + 1 -
 		(*processes).current_position;
 		print_adv(main_cycle, processes, params, map);
-		(*processes).current_position = (*processes).current_position % MEM_SIZE;
 	}
+	(*processes).current_position = (*processes).current_position % MEM_SIZE;
 	(*processes).cmd = map[(*processes).current_position];
 	if ((*processes).cmd >= 1 && (*processes).cmd <= CMD_NBR)
 		(*processes).cycles_wait = g_op_tab[(*processes).cmd - 1].cycles_wait;
@@ -70,8 +70,7 @@ void	skip_if_not_cmd(t_cycle *main_cycle, t_proc *processes,
 {
 	(*main_cycle).indexes[(*processes).current_position][1] = NO_CARETKA;
 	(*processes).current_position++;
-	(*processes).current_position = ((*processes).current_position
-	+ MEM_SIZE) % MEM_SIZE;
+	(*processes).current_position = (*processes).current_position % MEM_SIZE;
 	(*processes).cmd = map[(*processes).current_position];
 	if ((*processes).cmd >= 1 && (*processes).cmd <= CMD_NBR)
 		(*processes).cycles_wait = g_op_tab[(*processes).cmd - 1].cycles_wait;
@@ -102,7 +101,7 @@ void	internal_cycle_core(t_cycle *main_cycle, t_proc *processes,
 		else if ((*processes).if_live && (*processes).cmd >= 1
 		&& (*processes).cmd <= CMD_NBR && (*processes).cycles_wait > 1)
 			(*processes).cycles_wait--;
-		else if ((*processes).if_live)
+		else if ((*processes).if_live && ((*processes).cmd > CMD_NBR || (*processes).cmd < 1))
 			skip_if_not_cmd(main_cycle, processes, map);
 		(*processes).live_cycle++;
 		processes = processes->next;
@@ -136,10 +135,12 @@ void    vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
             printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
         processes = main_cycle.head_proc;
         if ((*params).ncurses == 1)
+        {
             map_to_screen(map, &main_cycle, params, main_cycle.head_proc, win);
-        char_listener(spc, &main_cycle, &win);
-        if (main_cycle.run == 0 && (*params).ncurses == 1)
-            continue ;
+            char_listener(spc, &main_cycle, &win);
+	        if (main_cycle.run == 0 && (*params).ncurses == 1)
+	            continue ;
+        }
         internal_cycle_core(&main_cycle, processes, params, map);
         cycle_period_check(&main_cycle.cycle_counter, &main_cycle, params);
 
