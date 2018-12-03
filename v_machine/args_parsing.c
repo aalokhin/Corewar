@@ -114,10 +114,10 @@ void	get_args_values(t_proc *processes, unsigned char *map, int *id_counter)
 	if ((*processes).argv[0][0])
 		g_get_arg_vals[(*processes).argv[0][0] - 1](processes, map, 0,
 			id_counter);
-	if ((*processes).argv[1][0])
+	if ((*processes).argv[1][0] && g_op_tab[(*processes).cmd - 1].arg_nbr >= 2)
 		g_get_arg_vals[(*processes).argv[1][0] - 1](processes, map, 1,
 			id_counter);
-	if ((*processes).argv[2][0])
+	if ((*processes).argv[2][0] && g_op_tab[(*processes).cmd - 1].arg_nbr >= 3)
 		g_get_arg_vals[(*processes).argv[2][0] - 1](processes, map, 2,
 			id_counter);
 }

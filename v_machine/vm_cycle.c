@@ -18,19 +18,19 @@ int	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 	if (g_op_tab[(*processes).cmd - 1].codage/* && map[((*processes).current_position +
 		1) % MEM_SIZE] != 0*/)
 	{
+		(*processes).arg_counter = 0;
 		(*main_cycle).id_counter = ((*processes).current_position +
 		1) % MEM_SIZE;
 		take_args(map[(*main_cycle).id_counter], processes);
 		get_args_values(processes, map, &main_cycle->id_counter);
-		(*processes).arg_counter = 0;
 	}
 	else if (!g_op_tab[(*processes).cmd - 1].codage)
 	{
+		(*processes).arg_counter = 0;
 		(*main_cycle).id_counter = (*processes).current_position;
 		(*processes).argv[0][0] = DIR_CODE;
 		g_get_arg_vals[(*processes).argv[0][0] - 1](processes, map,
 			0, &main_cycle->id_counter);
-		(*processes).arg_counter = 0;
 	}
 	/*else 
 		return (0);*/
