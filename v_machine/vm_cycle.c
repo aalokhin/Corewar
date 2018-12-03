@@ -32,7 +32,8 @@ int	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 		g_get_arg_vals[(*processes).argv[0][0] - 1](processes, map,
 			0, &main_cycle->id_counter);
 	}
-	/*else 
+	/*else if (g_op_tab[(*processes).cmd - 1].codage && map[((*processes).current_position +
+		1) % MEM_SIZE] == 0)
 		return (0);*/
 	if ((*processes).cmd == 1 || (*processes).cmd == 12 ||
 		(*processes).cmd == 15)
@@ -91,8 +92,8 @@ void	internal_cycle_core(t_cycle *main_cycle, t_proc *processes,
 			{
 				(*main_cycle).shift = 2;
 				print_adv(main_cycle, processes, params, map);
-				(*main_cycle).indexes[(*processes).current_position][1] = CARETKA;
-				clear_argv_arr(processes);
+				//(*main_cycle).indexes[(*processes).current_position][1] = CARETKA;
+				//clear_argv_arr(processes);
 			}
 			else*/
 				take_args_and_do_instr(processes, main_cycle, map, params);
@@ -106,38 +107,6 @@ void	internal_cycle_core(t_cycle *main_cycle, t_proc *processes,
 		(*processes).live_cycle++;
 		processes = processes->next;
 		(*params).i++;
-	}
-}
-
-void speed_listener(char spc, t_cycle *main_cycle, WINDOW **win)
-{
-	if (spc == 'q')
-	{
-			(*main_cycle).second_limit -= 10;
-			if ((*main_cycle).second_limit <= 0)
-					(*main_cycle).second_limit = 1;
-			mvwprintw(*win, 4, 199,  "Cycles/second limit : %d\n", (*main_cycle).second_limit);
-			wrefresh(*win);
-	}
-	if (spc == 'w')
-	{
-			(*main_cycle).second_limit -= 1;
-			if ((*main_cycle).second_limit <= 0)
-					(*main_cycle).second_limit = 1;
-			mvwprintw(*win, 4, 199,  "Cycles/second limit : %d\n", (*main_cycle).second_limit);
-			wrefresh(*win);
-	}
-	if (spc == 'e')
-	{
-			(*main_cycle).second_limit += 1;
-			mvwprintw(*win, 4, 199,  "Cycles/second limit : %d\n", (*main_cycle).second_limit);
-			wrefresh(*win);
-	}
-	if (spc == 'r')
-	{
-			(*main_cycle).second_limit += 10;
-			mvwprintw(*win, 4, 199,  "Cycles/second limit : %d\n", (*main_cycle).second_limit);
-			wrefresh(*win);
 	}
 }
 
@@ -156,7 +125,10 @@ void    vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
     processes = processes_init(params, bots, map);
     main_cycle.head_proc = processes;
     intro_print(params, bots, &win, processes);
+    main_cycle.m = 0;
+    main_cycle.run = 0;
     mvwprintw(win, 2, 199,  "** PAUSED **");
+    mvwprintw(win, 45, 199,  "=============> MUSIC OFF <============== %d, ", main_cycle.m);
     curs_set(0);
     while (main_cycle.processes > 0)
     {
@@ -165,30 +137,9 @@ void    vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
         processes = main_cycle.head_proc;
         if ((*params).ncurses == 1)
             map_to_screen(map, &main_cycle, params, main_cycle.head_proc, win);
-        if (main_cycle.run == 1)
-        {
-            spc = (char)getch();
-            if (spc == ' ')
-            {
-                main_cycle.run = 0;
-                mvwprintw(win, 2, 199,  "** PAUSED **\n");
-                wrefresh(win);
-                nodelay(stdscr, FALSE);
-            }
-            speed_listener(spc, &main_cycle, &win);
-        }
-        else
-        {
-            spc = (char)getch();
-            if (spc == ' ')
-            {
-                main_cycle.run = 1;
-                mvwprintw(win, 2, 199,  "** RUNNING **");
-                wrefresh(win);
-                nodelay(stdscr, TRUE);
-            }
-						speed_listener(spc, &main_cycle, &win);
-        }
+        char_listener(spc, &main_cycle, &win);
+        if (main_cycle.run == 0 && (*params).ncurses == 1)
+            continue ;
         internal_cycle_core(&main_cycle, processes, params, map);
         cycle_period_check(&main_cycle.cycle_counter, &main_cycle, params);
 

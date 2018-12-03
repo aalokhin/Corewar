@@ -82,6 +82,7 @@ typedef struct		s_cycle
 	int				cycle_counter;
 	int				fork_ind;
 	int				run;
+	int				m;
 	t_proc			*head_proc;
 }					t_cycle;
 
@@ -236,5 +237,8 @@ int					external_cycle_pass(t_cycle *main_cycle, unsigned char *map,
 void				print_dump(unsigned char *map);
 void				cycle_period_check(int *cycle_counter, t_cycle *main_cycle,
 						t_flags *params);
+void    music_listener(char spc, t_cycle *main_cycle, WINDOW **win);
+void speed_listener(char spc, t_cycle *main_cycle, WINDOW **win);
+void        char_listener(char spc, t_cycle *main_cycle, WINDOW **win);
 
 #endif
