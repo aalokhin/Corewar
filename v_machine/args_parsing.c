@@ -6,29 +6,11 @@
 /*   By: vlikhotk <vlikhotk@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 14:50:43 by vlikhotk          #+#    #+#             */
-/*   Updated: 2018/11/14 14:56:48 by vlikhotk         ###   ########.fr       */
+/*   Updated: 2018/12/03 18:10:56 by vlikhotk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../corewar.h"
-
-void get_args_value(int arg_size, unsigned int *dest, unsigned char *map, int *id_counter)
-{
-	int j;
-	int k;
-
-	j = 1;
-	k = arg_size;
-	while (j <= arg_size)
-	{
-		if (((k - 1) * 8) > 0)
-			*dest += (map[((*id_counter) + j) % MEM_SIZE] << (k - 1) * 8);
-		else
-			*dest += map[((*id_counter) + j) % MEM_SIZE];
-		k--;
-		j++;
-	}
-}
 
 void	get_t_dir_value(t_proc *processes, unsigned char *map,
 	int arg_ind, int *id_counter)
@@ -53,9 +35,9 @@ void	get_t_dir_value(t_proc *processes, unsigned char *map,
 void	get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind,
 	int *id_counter)
 {
-	short tmp;
-	int j;
-	int k;
+	short	tmp;
+	int		j;
+	int		k;
 
 	tmp = 0;
 	j = 1;
@@ -77,9 +59,9 @@ void	get_t_ind_value(t_proc *processes, unsigned char *map, int arg_ind,
 void	get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind,
 	int *id_counter)
 {
-	unsigned char tmp;
-	int j;
-	int k;
+	unsigned char	tmp;
+	int				j;
+	int				k;
 
 	tmp = 0;
 	j = 1;
@@ -87,7 +69,8 @@ void	get_t_reg_value(t_proc *processes, unsigned char *map, int arg_ind,
 	while (j <= T_REG)
 	{
 		if (((k - 1) * 8) > 0)
-			tmp += (unsigned char)(map[((*id_counter) + j) % MEM_SIZE] << (k - 1) * 8);
+			tmp += (unsigned char)(map[((*id_counter) + j) % MEM_SIZE]
+				<< (k - 1) * 8);
 		else
 			tmp += (unsigned char)map[((*id_counter) + j) % MEM_SIZE];
 		k--;

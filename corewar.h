@@ -114,42 +114,42 @@ typedef struct		s_op
 	int				arg_nbr;
 }					t_op;
 
-typedef int			(*t_cmd)(t_proc *head_proc, int cur_proc,
+typedef void		(*t_cmd)(t_proc *head_proc, int cur_proc,
 					t_cycle *main_cycle, unsigned char *map);
 typedef void		(*t_aval)(t_proc *processes, unsigned char *map,
 					int arg_ind, int *id_counter);
 
-int					live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+void				live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 						unsigned char *map);
-int					load(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+void				load(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 						unsigned char *map);
-int					store(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+void				store(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 						unsigned char *map);
-int					addition(t_proc *head_proc, int cur_proc,
+void				addition(t_proc *head_proc, int cur_proc,
 						t_cycle *main_cycle, unsigned char *map);
-int					substraction(t_proc *head_proc, int cur_proc,
+void				substraction(t_proc *head_proc, int cur_proc,
 						t_cycle *main_cycle, unsigned char *map);
-int					bit_and(t_proc *head_proc, int cur_proc,
+void				bit_and(t_proc *head_proc, int cur_proc,
 						t_cycle *main_cycle, unsigned char *map);
-int					bit_or(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+void				bit_or(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 						unsigned char *map);
-int					bit_xor(t_proc *head_proc, int cur_proc,
+void				bit_xor(t_proc *head_proc, int cur_proc,
 						t_cycle *main_cycle, unsigned char *map);
-int					zjmp(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+void				zjmp(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 						unsigned char *map);
-int					load_ind(t_proc *head_proc, int cur_proc,
+void				load_ind(t_proc *head_proc, int cur_proc,
 						t_cycle *main_cycle, unsigned char *map);
-int					store_ind(t_proc *head_proc, int cur_proc,
+void				store_ind(t_proc *head_proc, int cur_proc,
 						t_cycle *main_cycle, unsigned char *map);
-int					ffork(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+void				ffork(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 						unsigned char *map);
-int					lload(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+void				lload(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 						unsigned char *map);
-int					lload_ind(t_proc *head_proc, int cur_proc,
+void				lload_ind(t_proc *head_proc, int cur_proc,
 						t_cycle *main_cycle, unsigned char *map);
-int					long_fork(t_proc *head_proc, int cur_proc,
+void				long_fork(t_proc *head_proc, int cur_proc,
 						t_cycle *main_cycle, unsigned char *map);
-int					aff(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+void				aff(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 					unsigned char *map);
 
 static t_cmd		g_instruct[REG_NUMBER] = {&live, &load, &store, &addition,
@@ -237,8 +237,10 @@ int					external_cycle_pass(t_cycle *main_cycle, unsigned char *map,
 void				print_dump(unsigned char *map);
 void				cycle_period_check(int *cycle_counter, t_cycle *main_cycle,
 						t_flags *params);
-void    music_listener(char spc, t_cycle *main_cycle, WINDOW **win);
-void speed_listener(char spc, t_cycle *main_cycle, WINDOW **win);
-void        char_listener(char spc, t_cycle *main_cycle, WINDOW **win);
-
+void				music_listener(char spc, t_cycle *main_cycle, WINDOW **win);
+void				speed_listener(char spc, t_cycle *main_cycle, WINDOW **win);
+void				char_listener(char spc, t_cycle *main_cycle, WINDOW **win);
+void				get_args_value(int arg_size, unsigned int *dest, unsigned char *map,
+						int *id_counter);
+void				create_map(t_header bots[MAX_PLAYERS], t_flags *params);
 #endif

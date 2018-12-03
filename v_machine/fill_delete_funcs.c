@@ -12,6 +12,25 @@
 
 #include "../corewar.h"
 
+void	get_args_value(int arg_size, unsigned int *dest, unsigned char *map,
+	int *id_counter)
+{
+	int j;
+	int k;
+
+	j = 1;
+	k = arg_size;
+	while (j <= arg_size)
+	{
+		if (((k - 1) * 8) > 0)
+			*dest += (map[((*id_counter) + j) % MEM_SIZE] << (k - 1) * 8);
+		else
+			*dest += map[((*id_counter) + j) % MEM_SIZE];
+		k--;
+		j++;
+	}
+}
+
 void	processes_add2(t_proc **head, t_cycle *main_cycle,
 	t_proc *tmp, t_proc *parent)
 {

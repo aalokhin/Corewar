@@ -117,5 +117,6 @@ int		read_bots(t_flags *params, int fd, t_header bots[MAX_PLAYERS])
 	}
 	(*params).i = 0;
 	(*params).j = 0;
+	create_map(bots, params);
 	return (1);
 }

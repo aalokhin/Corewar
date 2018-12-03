@@ -38,38 +38,6 @@ int		if_correct_name(unsigned char *str, t_flags *params, int j)
 	return (1);
 }
 
-/*
-int		check_magic(unsigned char *str, t_flags *params, int j,
-	t_header bots[MAX_PLAYERS])
-{
-	unsigned int	magic;
-	unsigned int	buf;
-	int i;
-
-	i = 0;
-	magic = 0;
-	buf = 0;
-	while (i < MAGIC_SIZE)
-	{
-		if (((MAGIC_SIZE - 1) * 8) > 0)
-		{
-			buf = str[i] << (MAGIC_SIZE - 1) * 8;
-			magic |= buf;
-		}
-		else
-			magic |= str[i];
-		i++;
-	}
-	bots[j].magic = magic;
-	if (magic != COREWAR_EXEC_MAGIC)
-	{
-		ft_printf("Error: File %s has an invalid header\n",
-		(*params).players[j]);
-		return (0);
-	}
-	return (1);
-}*/
-
 int		check_magic(unsigned char *str, t_flags *params, int j,
 	t_header bots[MAX_PLAYERS])
 {
@@ -102,7 +70,7 @@ int		check_comment(unsigned char *str, t_flags *params, int j)
 	i = 140;
 	while (str[i] && i < PRE_EXEC_SIZE - NULL_SIZE)
 		i++;
-	if (i ==  PRE_EXEC_SIZE - NULL_SIZE)
+	if (i == PRE_EXEC_SIZE - NULL_SIZE)
 	{
 		ft_printf("Error: File %s has an invalid header\n",
 		(*params).players[j]);

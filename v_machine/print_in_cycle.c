@@ -12,7 +12,8 @@
 
 #include "../corewar.h"
 
-void	intro_print(t_flags *params, t_header bots[MAX_PLAYERS], WINDOW **win, t_proc *processes)
+void	intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
+	WINDOW **win, t_proc *processes)
 {
 	int i;
 
@@ -24,8 +25,9 @@ void	intro_print(t_flags *params, t_header bots[MAX_PLAYERS], WINDOW **win, t_pr
 		printf("%s\n", "Introducing contestants...");
 		while (processes && i < (*params).bots_quantity)
 		{
-			printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", (*processes).id + 1,
-				bots[i].prog_size, bots[i].prog_name, bots[i].comment);
+			printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+			(*processes).id + 1, bots[i].prog_size,
+			bots[i].prog_name, bots[i].comment);
 			i++;
 			processes = processes->next;
 		}
@@ -61,7 +63,8 @@ void	print_adv(t_cycle *main_cycle, t_proc *processes, t_flags *params,
 
 	j = 0;
 	(*main_cycle).indexes[(*processes).current_position][1] = NO_CARETKA;
-	if (((*params).v_verbosity >> 4) & 1 && (*main_cycle).shift > 0)
+	if (((*params).v_verbosity >> 4) & 1 && (*main_cycle).shift > 0/* &&
+		map[(*processes).current_position] >= 1 && map[(*processes).current_position] <= 16*/)
 	{
 		printf("ADV %d (0x%.4x -> 0x%.4x) ", (*main_cycle).shift,
 			(*processes).current_position, (*main_cycle).shift +

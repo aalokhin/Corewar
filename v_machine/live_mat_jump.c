@@ -33,7 +33,7 @@ void	live_dir_proc(t_proc *child_proc, t_proc *head_proc,
 	}
 }
 
-int		live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
+void	live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	t_proc *child_proc;
@@ -58,10 +58,9 @@ int		live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 		&& (*child_proc).argv[0][1] >= -255)
 		live_dir_proc(child_proc, head_proc, main_cycle);
 	map[0] = map[0];
-	return (1);
 }
 
-int		addition(t_proc *processes, int cur_proc, t_cycle *main_cycle,
+void	addition(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	t_proc	*tmp;
@@ -71,7 +70,7 @@ int		addition(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	|| (*tmp).argv[2][0] != REG_CODE || (*tmp).argv[0][1] < 0 ||
 	(*tmp).argv[0][1] > REG_NUMBER || (*tmp).argv[1][1] < 0 || (*tmp).argv[1][1]
 	> REG_NUMBER || (*tmp).argv[2][1] < 0 || (*tmp).argv[2][1] > REG_NUMBER)
-		return (0);
+		return ;
 	(*tmp).carry = 0;
 	if (((*tmp).regs[(*tmp).argv[0][1] - 1] +
 		(*tmp).regs[(*tmp).argv[1][1] - 1]) == 0)
@@ -88,10 +87,9 @@ int		addition(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		(*tmp).argv[1][1], (*tmp).argv[2][1]);
 	}
 	map[0] = map[0];
-	return (1);
 }
 
-int		substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle,
+void	substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	t_proc	*tmp;
@@ -101,7 +99,7 @@ int		substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	|| (*tmp).argv[2][0] != REG_CODE || (*tmp).argv[0][1] < 0 ||
 	(*tmp).argv[0][1] > REG_NUMBER || (*tmp).argv[1][1] < 0 || (*tmp).argv[1][1]
 	> REG_NUMBER || (*tmp).argv[2][1] < 0 || (*tmp).argv[2][1] > REG_NUMBER)
-		return (0);
+		return ;
 	(*tmp).carry = 0;
 	if (((*tmp).regs[(*tmp).argv[0][1] - 1] -
 		(*tmp).regs[(*tmp).argv[1][1] - 1]) == 0)
@@ -118,10 +116,9 @@ int		substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 			(*tmp).argv[1][1], (*tmp).argv[2][1]);
 	}
 	map[0] = map[0];
-	return (1);
 }
 
-int		zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle,
+void	zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	t_proc	*tmp;
@@ -148,5 +145,4 @@ int		zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 			printf("P%6d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);
 	}
 	map[0] = map[0];
-	return (1);
 }

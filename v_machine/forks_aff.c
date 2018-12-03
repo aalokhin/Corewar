@@ -21,7 +21,7 @@ void	inst_vars_init(t_instr *inst_vars, t_proc *processes)
 	(*inst_vars).new_ind = 0;
 }
 
-int		ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
+void	ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	int		i;
@@ -46,10 +46,9 @@ int		ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	i = (i + MEM_SIZE) % MEM_SIZE;
 	(*main_cycle).fork_ind = i;
 	processes_add(&head, map, main_cycle, cur_proc);
-	return (1);
 }
 
-int		long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
+void	long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	int		i;
@@ -74,10 +73,9 @@ int		long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	i = (i + MEM_SIZE) % MEM_SIZE;
 	(*main_cycle).fork_ind = i;
 	processes_add(&head, map, main_cycle, cur_proc);
-	return (1);
 }
 
-int		aff(t_proc *processes, int cur_proc, t_cycle *main_cycle,
+void	aff(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	int		i;
@@ -85,11 +83,11 @@ int		aff(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 
 	i = 0;
 	tmp = processes;
-	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[0][1] < 1 || (*tmp).argv[0][1] > REG_NUMBER)
-		return (0);
+	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[0][1] < 1
+		|| (*tmp).argv[0][1] > REG_NUMBER)
+		return ;
 	printf("%s", "Aff: ");
 	printf("%c\n", ((*tmp).regs[(*tmp).argv[0][1] - 1] % 256));
 	(*main_cycle).cycles = (*main_cycle).cycles;
 	cur_proc = map[0];
-	return (1);
 }

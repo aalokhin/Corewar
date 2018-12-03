@@ -79,11 +79,11 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).cycle_counter = 0;
 	(*main_cycle).fork_ind = 0;
 	(*main_cycle).run = 0;
-	(*main_cycle).m = 0;		
+	(*main_cycle).m = 0;
 }
 
-void	processes_init2(t_flags *params, t_header bots[MAX_PLAYERS], unsigned char *map,
-	t_proc *processes)
+void	processes_init2(t_flags *params, t_header bots[MAX_PLAYERS],
+	unsigned char *map, t_proc *processes)
 {
 	(*processes).real_id = (*params).i;
 	(*processes).name = bots[(*params).i].prog_name;
@@ -105,7 +105,8 @@ void	processes_init2(t_flags *params, t_header bots[MAX_PLAYERS], unsigned char 
 		(*processes).regs[(*params).j++] = 0;
 }
 
-t_proc	*processes_init(t_flags *params, t_header bots[MAX_PLAYERS], unsigned char *map)
+t_proc	*processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
+	unsigned char *map)
 {
 	t_proc			*processes;
 	t_proc			*tmp;

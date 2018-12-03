@@ -58,7 +58,7 @@ void	insert_vals_to_map(unsigned char *map, t_instr inst_vars,
 	inst_vars.new_ind;
 }
 
-int		store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
+void	store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	t_instr inst_vars;
@@ -70,7 +70,7 @@ int		store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	REG_CODE && (inst_vars.tmp->argv[1][1] < 1 || inst_vars.tmp->argv[1][1] >
 	REG_NUMBER)) || (inst_vars.tmp->argv[2][0] == REG_CODE && (inst_vars.tmp->argv[2][1]
 	< 1 || inst_vars.tmp->argv[2][1] > REG_NUMBER)))
-		return (0);
+		return ;
 	take_sti_params(&inst_vars, map);
 	inst_vars.i = inst_vars.tmp->current_position +
 	(inst_vars.one + inst_vars.two);
@@ -94,10 +94,9 @@ int		store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	}
 	
 	insert_vals_to_map(map, inst_vars, main_cycle);
-	return (1);
 }
 
-int		store(t_proc *processes, int cur_proc, t_cycle *main_cycle,
+void	store(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	t_instr inst_vars;
@@ -106,7 +105,7 @@ int		store(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if (inst_vars.tmp->argv[0][0] != REG_CODE || (inst_vars.tmp->argv[1][0]
 		!= REG_CODE && inst_vars.tmp->argv[1][0] != IND_CODE)
 		|| inst_vars.tmp->argv[0][1] < 1 || inst_vars.tmp->argv[0][1] > REG_NUMBER)
-		return (0);
+		return ;
 	if (inst_vars.tmp->argv[1][0] == IND_CODE)
 	{
 		inst_vars.i = ((inst_vars.tmp->current_position +
@@ -127,5 +126,4 @@ int		store(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		printf("P%6d | st r%d %d\n", cur_proc + 1,
 		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1]);
 	}
-	return (1);
 }

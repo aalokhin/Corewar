@@ -46,14 +46,14 @@ void	take_ldi_params(t_instr *inst_vars, unsigned char *map, int i,
 	}
 }
 
-int		load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
+void	load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	t_instr inst_vars;
 
 	inst_vars_init(&inst_vars, processes);
 	if (!check_ldi_params(&inst_vars, map))
-		return (0);
+		return ;
 	inst_vars.i = (inst_vars.one + inst_vars.two) +
 	inst_vars.tmp->current_position;
 	if (((*main_cycle).verbose >> 2) & 1)
@@ -68,31 +68,31 @@ int		load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	MEM_SIZE) % MEM_SIZE] << 24) + (map[(inst_vars.i + MEM_SIZE + 1) %
 	MEM_SIZE] << 16) + (map[(inst_vars.i + MEM_SIZE + 2) % MEM_SIZE] << 8) +
 	map[(inst_vars.i + MEM_SIZE + 3) % MEM_SIZE];
-	return (1);
 }
 
 int		check_ldi_params(t_instr *inst_vars, unsigned char *map)
 {
 	if (inst_vars->tmp->argv[2][0] != REG_CODE || (inst_vars->tmp->argv[1][0]
-	!= REG_CODE && inst_vars->tmp->argv[1][0] != DIR_CODE) || inst_vars->tmp->argv[2][1] < 1
-	|| inst_vars->tmp->argv[2][1] > REG_NUMBER || (inst_vars->tmp->argv[0][0] ==
-	REG_CODE && (inst_vars->tmp->argv[0][1] < 1 || inst_vars->tmp->argv[0][1] >
-	REG_NUMBER)) || (inst_vars->tmp->argv[1][0] == REG_CODE &&
-	(inst_vars->tmp->argv[1][1] < 1 || inst_vars->tmp->argv[1][1] > REG_NUMBER)))
+	!= REG_CODE && inst_vars->tmp->argv[1][0] != DIR_CODE) ||
+	inst_vars->tmp->argv[2][1] < 1 || inst_vars->tmp->argv[2][1] > REG_NUMBER
+	|| (inst_vars->tmp->argv[0][0] == REG_CODE && (inst_vars->tmp->argv[0][1]
+	< 1 || inst_vars->tmp->argv[0][1] > REG_NUMBER)) ||
+	(inst_vars->tmp->argv[1][0] == REG_CODE && (inst_vars->tmp->argv[1][1] < 1
+	|| inst_vars->tmp->argv[1][1] > REG_NUMBER)))
 		return (0);
 	take_ldi_params(inst_vars, map, 0, &inst_vars->one);
 	take_ldi_params(inst_vars, map, 1, &inst_vars->two);
 	return (1);
 }
 
-int		lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
+void	lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	t_instr inst_vars;
 
 	inst_vars_init(&inst_vars, processes);
 	if (!check_ldi_params(&inst_vars, map))
-		return (0);
+		return ;
 	inst_vars.tmp->carry = 0;
 	inst_vars.i = (((inst_vars.one + inst_vars.two) +
 	inst_vars.tmp->current_position) + MEM_SIZE) % MEM_SIZE;
@@ -110,5 +110,4 @@ int		lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if (inst_vars.new_ind == 0)
 		inst_vars.tmp->carry = 1;
 	inst_vars.tmp->regs[inst_vars.tmp->argv[2][1] - 1] = inst_vars.new_ind;
-	return (1);
 }

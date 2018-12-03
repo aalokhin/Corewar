@@ -12,8 +12,11 @@
 
 #include "../corewar.h"
 
-void	lload_ind_parse(t_proc *tmp, unsigned char *map, int i)
+void	lload_ind_parse(t_proc *tmp, unsigned char *map)
 {
+	int i;
+
+	i = 0;
 	i = (*tmp).current_position + (*tmp).argv[0][1] % IDX_MOD;
 	i = (i + MEM_SIZE) % MEM_SIZE;
 	(*tmp).argv[0][1] = ((map[(i + MEM_SIZE) % MEM_SIZE] << 24) +
@@ -24,18 +27,16 @@ void	lload_ind_parse(t_proc *tmp, unsigned char *map, int i)
 	(*tmp).regs[(*tmp).argv[1][1] - 1] = (*tmp).argv[0][1];
 }
 
-int		load(t_proc *processes, int cur_proc, t_cycle *main_cycle,
+void	load(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
-	int		i;
 	t_proc	*tmp;
 
-	i = 0;
 	tmp = processes;
 	if ((*tmp).argv[1][0] != REG_CODE || (*tmp).argv[1][1] < 1 ||
 		(*tmp).argv[1][1] > REG_NUMBER ||
 		((*tmp).argv[0][0] != DIR_CODE && (*tmp).argv[0][0] != IND_CODE))
-		return (0);
+		return ;
 	(*tmp).carry = 0;
 	if ((*tmp).argv[0][0] == DIR_CODE)
 	{
@@ -44,7 +45,7 @@ int		load(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		(*tmp).regs[(*tmp).argv[1][1] - 1] = (*tmp).argv[0][1];
 	}
 	else if ((*tmp).argv[0][0] == IND_CODE)
-		lload_ind_parse(tmp, map, i);
+		lload_ind_parse(tmp, map);
 	if (((*main_cycle).verbose >> 2) & 1)
 	{
 		if (cur_proc + 1 <= 9999)
@@ -54,19 +55,18 @@ int		load(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 			printf("P%6d | ld %d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
 		(*tmp).argv[1][1]);
 	}
-	return (1);
 }
 
-int		lload(t_proc *processes, int cur_proc, t_cycle *main_cycle,
+void	lload(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
 	t_instr inst_vars;
 
 	inst_vars_init(&inst_vars, processes);
-	if (inst_vars.tmp->argv[1][0] != REG_CODE || 
-		(inst_vars.tmp->argv[0][0] != DIR_CODE && inst_vars.tmp->argv[0][0]
-		!= IND_CODE) || inst_vars.tmp->argv[1][1] < 1 || inst_vars.tmp->argv[1][1] > REG_NUMBER)
-		return (0);
+	if (inst_vars.tmp->argv[1][0] != REG_CODE || (inst_vars.tmp->argv[0][0]
+	!= DIR_CODE && inst_vars.tmp->argv[0][0] != IND_CODE) ||
+	inst_vars.tmp->argv[1][1] < 1 || inst_vars.tmp->argv[1][1] > REG_NUMBER)
+		return ;
 	inst_vars.tmp->carry = 0;
 	if (inst_vars.tmp->argv[0][0] == DIR_CODE)
 	{
@@ -76,7 +76,7 @@ int		lload(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		inst_vars.tmp->argv[0][1];
 	}
 	else if (inst_vars.tmp->argv[0][0] == IND_CODE)
-		lload_ind_parse(inst_vars.tmp, map, inst_vars.i);
+		lload_ind_parse(inst_vars.tmp, map);
 	if (((*main_cycle).verbose >> 2) & 1)
 	{
 		if (cur_proc + 1 <= 9999)
@@ -86,5 +86,4 @@ int		lload(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 			printf("P%6d | lld %d r%d\n", cur_proc + 1,
 		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1]);
 	}
-	return (1);
 }

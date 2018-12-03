@@ -78,8 +78,8 @@ int		check_flags_with_nbr(char **argv, int argc, t_flags *params)
 		(*params).i += 2;
 		return (1);
 	}
-	else if (ft_strcmp(argv[(*params).i], "-n") == 0 && (*params).j < MAX_PLAYERS
-		&& (*params).i + 1 < argc)
+	else if (ft_strcmp(argv[(*params).i], "-n") == 0 && (*params).j
+		< MAX_PLAYERS && (*params).i + 1 < argc)
 	{
 		(*params).pl_nbr[(*params).j][0] = 1;
 		(*params).pl_nbr[(*params).j][1] = ft_atoi(argv[(*params).i + 1]);
@@ -141,5 +141,4 @@ int		main(int argc, char **argv)
 	init_bots(bots);
 	if (!read_bots(&params, fd, bots))
 		exit(0);
-	create_map(bots, &params);
 }
