@@ -111,6 +111,7 @@ int		check_flags_core(int argc, char **argv, t_flags *params)
 			return (-1);
 		(*params).i++;
 	}
+	(*params).j = 0;
 	return (1);
 }
 
