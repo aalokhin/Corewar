@@ -32,11 +32,10 @@ int		load(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 
 	i = 0;
 	tmp = processes;
-	if ((*tmp).argv[1][0] != REG_CODE || (*tmp).argv[2][0] ||
+	if ((*tmp).argv[1][0] != REG_CODE || (*tmp).argv[1][1] < 1 ||
+		(*tmp).argv[1][1] > REG_NUMBER ||
 		((*tmp).argv[0][0] != DIR_CODE && (*tmp).argv[0][0] != IND_CODE))
 		return (0);
-	if ((*tmp).argv[1][1] < 1 || (*tmp).argv[1][1] > REG_NUMBER)
-		return (-1);
 	(*tmp).carry = 0;
 	if ((*tmp).argv[0][0] == DIR_CODE)
 	{
@@ -64,12 +63,10 @@ int		lload(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	t_instr inst_vars;
 
 	inst_vars_init(&inst_vars, processes);
-	if (inst_vars.tmp->argv[1][0] != REG_CODE || inst_vars.tmp->argv[2][0] ||
+	if (inst_vars.tmp->argv[1][0] != REG_CODE || 
 		(inst_vars.tmp->argv[0][0] != DIR_CODE && inst_vars.tmp->argv[0][0]
-		!= IND_CODE))
+		!= IND_CODE) || inst_vars.tmp->argv[1][1] < 1 || inst_vars.tmp->argv[1][1] > REG_NUMBER)
 		return (0);
-	if (inst_vars.tmp->argv[1][1] < 1 || inst_vars.tmp->argv[1][1] > REG_NUMBER)
-		return (-1);
 	inst_vars.tmp->carry = 0;
 	if (inst_vars.tmp->argv[0][0] == DIR_CODE)
 	{

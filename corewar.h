@@ -53,8 +53,8 @@ typedef struct		s_proc
 typedef struct		s_instr
 {
 	int				i;
-	unsigned int	one;
-	unsigned int	two;
+	int	one;
+	int	two;
 	int				new_ind;
 	t_proc			*tmp;
 }					t_instr;

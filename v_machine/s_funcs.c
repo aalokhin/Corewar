@@ -65,19 +65,21 @@ int		store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 
 	inst_vars_init(&inst_vars, processes);
 	if (inst_vars.tmp->argv[0][0] != REG_CODE || (inst_vars.tmp->argv[2][0] != REG_CODE
-	&& inst_vars.tmp->argv[2][0] != DIR_CODE))
-		return (0);
-	if (inst_vars.tmp->argv[0][1] < 1 || inst_vars.tmp->argv[0][1] > REG_NUMBER ||
+	&& inst_vars.tmp->argv[2][0] != DIR_CODE) || inst_vars.tmp->argv[0][1] < 1 || inst_vars.tmp->argv[0][1] > REG_NUMBER ||
 	(inst_vars.tmp->argv[1][0] ==
 	REG_CODE && (inst_vars.tmp->argv[1][1] < 1 || inst_vars.tmp->argv[1][1] >
 	REG_NUMBER)) || (inst_vars.tmp->argv[2][0] == REG_CODE && (inst_vars.tmp->argv[2][1]
 	< 1 || inst_vars.tmp->argv[2][1] > REG_NUMBER)))
-		return (-1);
+		return (0);
 	take_sti_params(&inst_vars, map);
 	inst_vars.i = inst_vars.tmp->current_position +
 	(inst_vars.one + inst_vars.two);
 	if (inst_vars.i > 65535)
 		inst_vars.i %= IDX_MOD;
+	/*if (inst_vars.i < 0)
+		inst_vars.i = (inst_vars.i + MEM_SIZE) % MEM_SIZE;
+	else
+		inst_vars.i = inst_vars.i % MEM_SIZE;*/
 	if (((*main_cycle).verbose >> 2) & 1)
 	{
 		if (cur_proc + 1 <= 9999)
@@ -90,7 +92,7 @@ int		store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		inst_vars.one, inst_vars.two, inst_vars.one +
 		inst_vars.two, inst_vars.i);
 	}
-	inst_vars.i = (inst_vars.i + MEM_SIZE) % MEM_SIZE;
+	
 	insert_vals_to_map(map, inst_vars, main_cycle);
 	return (1);
 }
@@ -101,19 +103,17 @@ int		store(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	t_instr inst_vars;
 
 	inst_vars_init(&inst_vars, processes);
-	if (inst_vars.tmp->argv[0][0] != REG_CODE || inst_vars.tmp->argv[2][0] ||
-	(inst_vars.tmp->argv[1][0] != REG_CODE && inst_vars.tmp->argv[1][0] != IND_CODE))
+	if (inst_vars.tmp->argv[0][0] != REG_CODE || (inst_vars.tmp->argv[1][0]
+		!= REG_CODE && inst_vars.tmp->argv[1][0] != IND_CODE)
+		|| inst_vars.tmp->argv[0][1] < 1 || inst_vars.tmp->argv[0][1] > REG_NUMBER)
 		return (0);
-	if (inst_vars.tmp->argv[0][1] < 1 || inst_vars.tmp->argv[0][1] > REG_NUMBER)
-		return (-1);
 	if (inst_vars.tmp->argv[1][0] == IND_CODE)
 	{
 		inst_vars.i = ((inst_vars.tmp->current_position +
 		inst_vars.tmp->argv[1][1] % IDX_MOD) + MEM_SIZE) % MEM_SIZE;
 		insert_vals_to_map(map, inst_vars, main_cycle);
 	}
-	else if (inst_vars.tmp->argv[1][0] == REG_CODE && inst_vars.tmp->argv[1][1]
-		>= 1 && inst_vars.tmp->argv[1][1] <= REG_NUMBER)
+	else if (inst_vars.tmp->argv[1][0] == REG_CODE)
 	{
 		inst_vars.tmp->regs[inst_vars.tmp->argv[1][1] - 1] =
 		inst_vars.tmp->regs[inst_vars.tmp->argv[0][1] - 1];
