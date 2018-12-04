@@ -32,7 +32,7 @@ int			find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 	if (ft_strstr(str, ":"))
 	{
 		//search = (char *)ft_memalloc(sizeof(char) * ft_strlen(str));
-		saved = ft_strstr(str, ":") + 1;
+		saved = ft_strchr(str, LABEL_CHAR) + 1;
 		search = ft_strjoin(saved, ":");
 		while (tmp_lbl)
 		{
@@ -53,8 +53,8 @@ int			find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 	}
 	if (ft_strstr(str, "r"))
 		return (ft_atoi(ft_strstr(str, "r") + 1));
-	else if (ft_strstr(str, "%"))
-		return (ft_atoi(ft_strstr(str, "%") + 1));
+	else if (ft_strchr(str, DIRECT_CHAR))
+		return (ft_atoi(ft_strchr(str, DIRECT_CHAR) + 1));
 	else
 		return (ft_atoi(str));
 }
