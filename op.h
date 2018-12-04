@@ -50,19 +50,19 @@ typedef char	t_arg_type;
 # define T_IND					4
 # define T_LAB					8
 
-# define PROG_NAME_LENGTH		(128)
-# define COMMENT_LENGTH			(2048)
+# define PROG_NAME_L		(128)
+# define COMMENT_L			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
 typedef struct	s_header
 {
 	unsigned int		magic;
-	char				prog_name[PROG_NAME_LENGTH + 1];
+	char				prog_name[PROG_NAME_L + 1];
 	unsigned int		prog_size;
-	char				comment[COMMENT_LENGTH + 1];
+	char				comment[COMMENT_L + 1];
 	unsigned char		*exec_part;
 	unsigned int		start_index;
-	int id;
+	int					id;
 }				t_header;
 
 #endif

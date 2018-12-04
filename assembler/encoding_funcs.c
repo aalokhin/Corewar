@@ -36,14 +36,14 @@ int				fill_name_comment(t_binfile *bin)
 		str = ft_strstr(bin->f_contents, NAME_CMD_STRING);
 		if (!(fill_str_help(str, &i, &tmp)))
 			return (error_message(bin, NAME_CMD_STRING, define_line_num(bin->copy, NAME_CMD_STRING, 0, 0)));
-		bin->name = ft_strnew(PROG_NAME_LENGTH);
+		bin->name = ft_strnew(PROG_NAME_L);
 		ft_strncpy(bin->name, &str[tmp], i - tmp);
 		str = ft_strstr(bin->f_contents, COMMENT_CMD_STRING);
 		i = 0;
 		tmp = 0;
 		if (!(fill_str_help(str, &i, &tmp)))
 			return (error_message(bin, COMMENT_CMD_STRING, define_line_num(bin->copy, COMMENT_CMD_STRING, 0, 0)));
-		bin->comment = ft_strnew(COMMENT_LENGTH);
+		bin->comment = ft_strnew(COMMENT_L);
 		ft_strncpy(bin->comment, &str[tmp], i - tmp);
 		return (1);
 	}

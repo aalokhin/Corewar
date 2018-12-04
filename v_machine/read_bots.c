@@ -15,7 +15,7 @@
 int		check_bot_size(int len, unsigned char *str, t_header bots[MAX_PLAYERS],
 	t_flags *params)
 {
-	if ((unsigned int)(len - PRE_EXEC_SIZE) != bots[(*params).j].prog_size)
+	if ((unsigned int)(len - PRE_EXEC_S) != bots[(*params).j].prog_size)
 	{
 		ft_printf("%s %s %s\n", "Error: File", (*params).players[(*params).j],
 		"has a code size that differ from what its header says");
@@ -60,7 +60,7 @@ int		take_bots_params(unsigned char *str, t_flags *params, int len,
 	if (!check_bot_size(len, str, bots, params))
 		return (0);
 	ft_strncpy(bots[(*params).j].comment, (const char *)(&str[140]),
-		COMMENT_LENGTH);
+		COMMENT_L);
 	bots[(*params).j].exec_part = (unsigned char *)malloc(sizeof(unsigned char)
 	* (bots[(*params).j].prog_size + 1));
 	return (1);
@@ -76,7 +76,7 @@ int		copy_bots_to_map(t_header bots[MAX_PLAYERS], unsigned char *str,
 	while ((unsigned int)(*params).i < bots[(*params).j].prog_size)
 	{
 		bots[(*params).j].exec_part[(*params).i] =
-		str[PRE_EXEC_SIZE + (*params).i];
+		str[PRE_EXEC_S + (*params).i];
 		(*params).i++;
 	}
 	ft_strdel((char **)(&str));
@@ -92,7 +92,7 @@ int		bot_open(int *fd, t_flags *params, unsigned int *len)
 		return (0);
 	}
 	*len = (int)lseek(*fd, 0, SEEK_END);
-	if (*len < PRE_EXEC_SIZE)
+	if (*len < PRE_EXEC_S)
 	{
 		ft_printf("Error: File %s is too small to be a champion\n",
 			(*params).players[(*params).j]);
@@ -118,7 +118,7 @@ int		read_bots(t_flags *params, int fd, t_header bots[MAX_PLAYERS])
 		!check_comment(str, params, (*params).j))
 			return (0);
 		ft_strncpy(bots[(*params).j].prog_name,
-		(const char *)(&str[MAGIC_SIZE]), PROG_NAME_LENGTH);
+		(const char *)(&str[MAGIC_S]), PROG_NAME_L);
 		if (!take_bots_params(str, params, len, bots) ||
 			!copy_bots_to_map(bots, str, params))
 			return (0);

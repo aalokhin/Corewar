@@ -6,7 +6,7 @@
 /*   By: vlikhotk <vlikhotk@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 17:56:08 by vlikhotk          #+#    #+#             */
-/*   Updated: 2018/11/20 18:28:17 by vlikhotk         ###   ########.fr       */
+/*   Updated: 2018/12/04 19:35:31 by vlikhotk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include "op.h"
 # include <ncurses.h>
 
-# define MAGIC_SIZE 4
-# define NULL_SIZE 4
-# define EXEC_SIZE 4
-# define PRE_EXEC_SIZE (COMMENT_LENGTH + PROG_NAME_LENGTH + MAGIC_SIZE + (NULL_SIZE * 2) + EXEC_SIZE)
+# define MAGIC_S 4
+# define NULL_S 4
+# define EXEC_S 4
+# define PRE_EXEC_S (COMMENT_L + PROG_NAME_L + MAGIC_S + (NULL_S * 2) + EXEC_S)
 # define SEC_LIMIT 50
 # define CMD_NBR 16
 # define CARETKA 1
@@ -53,8 +53,8 @@ typedef struct		s_proc
 typedef struct		s_instr
 {
 	int				i;
-	int	one;
-	int	two;
+	int				one;
+	int				two;
 	int				new_ind;
 	t_proc			*tmp;
 }					t_instr;
@@ -164,7 +164,8 @@ void				get_t_ind_value(t_proc *processes, unsigned char *map,
 void				get_t_reg_value(t_proc *processes, unsigned char *map,
 						int arg_ind, int *id_counter);
 
-static t_aval		g_get_arg_vals[MAX_ARGS_NUMBER - 1] = {&get_t_reg_value, &get_t_dir_value,
+static t_aval		g_get_arg_vals[MAX_ARGS_NUMBER - 1] =
+{&get_t_reg_value, &get_t_dir_value,
 	&get_t_ind_value};
 
 static t_op g_op_tab[CMD_NBR] =
@@ -214,20 +215,23 @@ void				get_args_values(t_proc *processes, unsigned char *map,
 void				take_args(unsigned char codage, t_proc *processes);
 void				map_to_screen(unsigned char *map, t_cycle *main_cycle,
 						t_flags *params, WINDOW *win);
-void				visual_init(WINDOW **win, t_flags *params, t_header bots[MAX_PLAYERS],
-						t_cycle *main_cycle);
+void				visual_init(WINDOW **win, t_flags *params,
+						t_header bots[MAX_PLAYERS], t_cycle *main_cycle);
 void				print_winner(WINDOW **win, t_cycle *main_cycle);
-int					read_bots(t_flags *params, int fd, t_header	bots[MAX_PLAYERS]);
+int					read_bots(t_flags *params, int fd,
+						t_header bots[MAX_PLAYERS]);
 void				inst_vars_init(t_instr *inst_vars, t_proc *processes);
-int					check_ldi_params(t_instr *inst_vars, unsigned char *map, int what_instr);
-void				take_bits_params(t_instr *inst_vars, unsigned char *map, int i, int *dest);
+int					check_ldi_params(t_instr *inst_vars, unsigned char *map,
+						int what_instr);
+void				take_bits_params(t_instr *inst_vars, unsigned char *map,
+						int i, int *dest);
 int					if_correct_name(unsigned char *str, t_flags *params, int j);
 int					check_magic(unsigned char *str, t_flags *params, int j,
 						t_header bots[4]);
 int					check_comment(unsigned char *str, t_flags *params, int j);
 void				delete_unneeded(t_proc **head, t_cycle *main_cycle);
-void				fill_start_map_id(t_cycle *main_cycle, t_header bots[MAX_PLAYERS],
-						t_flags *params);
+void				fill_start_map_id(t_cycle *main_cycle,
+						t_header bots[MAX_PLAYERS], t_flags *params);
 void				intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
 						WINDOW **win, t_cycle *main_cycle);
 void				after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
@@ -242,17 +246,21 @@ void				cycle_period_check(int *cycle_counter, t_cycle *main_cycle,
 void				music_listener(char spc, t_cycle *main_cycle, WINDOW **win);
 void				speed_listener(char spc, t_cycle *main_cycle, WINDOW **win);
 void				char_listener(t_cycle *main_cycle, WINDOW **win);
-void				get_args_value(int arg_size, unsigned int *dest, unsigned char *map,
+void				get_args_value(int arg_size, unsigned int *dest,
+						unsigned char *map,
 						int *id_counter);
 void				create_map(t_header bots[MAX_PLAYERS], t_flags *params);
-void				print_ldi_instr(int what_func, int cur_proc, t_instr inst_vars);
+void				print_ldi_instr(int what_func, int cur_proc,
+						t_instr inst_vars);
 int					check_flags_core(int argc, char **argv, t_flags *params);
 void				print_usage(void);
-void				lload_ind_parse(t_proc *tmp, unsigned char *map, int what_instr);
+void				lload_ind_parse(t_proc *tmp, unsigned char *map,
+						int what_instr);
 void				insert_vals_to_map(unsigned char *map, t_instr inst_vars,
 						t_cycle *main_cycle);
 void				start_cycle(unsigned char *map, t_flags *params,
 						WINDOW **win, t_cycle *main_cycle);
-void				print_map_info(WINDOW *win, t_cycle *main_cycle, t_flags *params);
+void				print_map_info(WINDOW *win, t_cycle *main_cycle,
+						t_flags *params);
 
 #endif

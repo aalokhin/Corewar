@@ -112,8 +112,8 @@ typedef struct	s_binfile
 
 
 	char			magic_start[4];
-	char 			champ_name[PROG_NAME_LENGTH + 1];
-	char 			champ_comment[COMMENT_LENGTH + 1];
+	char 			champ_name[PROG_NAME_L + 1];
+	char 			champ_comment[COMMENT_L + 1];
 	char 			champ_size[4];
 
 

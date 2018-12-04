@@ -37,7 +37,7 @@ void					output_basics(t_binfile *bin)
 		i++;
 	}
 	i = 0;
-	while (i < PROG_NAME_LENGTH)
+	while (i < PROG_NAME_L)
 	{
 		write(bin->fd_file_out, &bin->name[i], 1);
 		i++;
@@ -54,7 +54,7 @@ void					fill_corfile_contents(t_binfile *bin)
 	output_basics(bin);
 	print_four_bytes(bin->file_length, bin->fd_file_out);
 	i = 0;
-	while (i < COMMENT_LENGTH)
+	while (i < COMMENT_L)
 	{
 		write(bin->fd_file_out, &bin->comment[i], 1);
 		i++;
