@@ -34,7 +34,7 @@ void	intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
 }
 
 void	after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
-	t_cycle main_cycle)
+	t_cycle main_cycle, WINDOW **win)
 {
 	int i;
 
@@ -44,6 +44,10 @@ void	after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
 		free(bots[i].exec_part);
 		bots[i].exec_part = NULL;
 		i++;
+	}
+	if ((*params).ncurses == 1)
+	{
+		print_winner(win, &main_cycle);
 	}
 	if (!(*params).ncurses && !main_cycle.processes)
 		printf("Contestant %d, \"%s\", has won !\n",

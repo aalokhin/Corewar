@@ -235,7 +235,7 @@ void vm_cycle(unsigned char *map, t_flags *params, header_t bots[4])
 	}
 	if ((*params).ncurses == 1)
 	{
-		print_winner(win, main_cycle);
+		print_winner(win, &main_cycle);
 		endwin();
 	}
 	else if ((*params).d_dumps_memory <= 0)

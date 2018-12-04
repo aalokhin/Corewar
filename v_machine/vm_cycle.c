@@ -129,8 +129,13 @@ void	vm_cycle(unsigned char *map, t_flags *params, t_header bots[MAX_PLAYERS])
 		{
 			map_to_screen(map, &main_cycle, params, main_cycle.head_proc, win);
 			char_listener(spc, &main_cycle, &win);
-			if  (main_cycle.processes <= 0)
-				print_winner(win, main_cycle);
+			// if  (main_cycle.processes <= 0)
+			// {
+			// 	nodelay(stdscr, FALSE);
+
+			// 	print_winner(win, main_cycle);
+			// 	getch();
+			// }
 			if (main_cycle.run == 0 && (*params).ncurses == 1)
 				continue ;
 		}
@@ -139,5 +144,5 @@ void	vm_cycle(unsigned char *map, t_flags *params, t_header bots[MAX_PLAYERS])
 		if (!external_cycle_pass(&main_cycle, map, params))
 			break ;
 	}
-	after_cycle(params, bots, main_cycle);
+	after_cycle(params, bots, main_cycle, &win);
 }

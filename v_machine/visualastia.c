@@ -45,20 +45,31 @@ void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params, t_proc *
 	wrefresh(win);
 }
 
-void print_winner(WINDOW * win, t_cycle main_cycle)
+void print_winner(WINDOW **win, t_cycle *main_cycle)
 {
 	int x;
 	int y;
+	char c;
 
 	x = 199;
-	y = main_cycle.winner_str;
-	wattron(win, COLOR_PAIR(main_cycle.winner_id + 1));
-	mvwprintw(win, y, x,  "The winner is : %s", main_cycle.winner_name);
-	wattroff(win, COLOR_PAIR(main_cycle.winner_id + 1));
+	y = (*main_cycle).winner_str;
+	//
+	//system("say winner &");
+	wattron(*win, COLOR_PAIR((*main_cycle).winner_id + 1));
+	mvwprintw(*win,  2, 199,  "The winner is : %s", (*main_cycle).winner_name);
+	wattroff(*win, COLOR_PAIR((*main_cycle).winner_id + 1));
 	y += 2;
-	mvwprintw(win, y, x,  "Press any key for exit");
-	if ((int)getch() == ' ')
-		endwin();
+	mvwprintw(*win, y, x,  "Press any key for exit");
+	//system("say failure &");
+	wrefresh(*win);
+	nodelay(stdscr, FALSE);
+	c = (char)getch();
+	wclear(*win);
+	endwin();
+	// else
+	// 	c = (char)getch();
+	/*if ((char)getch() == 'o')
+		endwin();*/
 	//wrefresh(win);
 }
 
