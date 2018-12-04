@@ -113,7 +113,7 @@ void	vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
 	fill_start_map_id(&main_cycle, bots, params);
 	processes = processes_init(params, bots, map);
 	main_cycle.head_proc = processes;
-	intro_print(params, bots, &win, processes);
+	intro_print(params, bots, &win);
 	main_cycle.m = 0;
 	main_cycle.run = 0;
 	mvwprintw(win, 2, 199, "** PAUSED **");

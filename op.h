@@ -62,6 +62,7 @@ typedef struct	s_header
 	char				comment[COMMENT_LENGTH + 1];
 	unsigned char		*exec_part;
 	unsigned int		start_index;
+	int id;
 }				t_header;
 
 #endif

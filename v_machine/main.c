@@ -68,22 +68,37 @@ int		check_flags_with_nbr(char **argv, int argc, t_flags *params)
 {
 	if (ft_strcmp(argv[(*params).i], "-d") == 0 && (*params).i + 1 < argc)
 	{
-		(*params).d_dumps_memory = ft_atoi(argv[(*params).i + 1]);
-		(*params).i += 2;
+		if (ft_atoi(argv[(*params).i + 1]) > 0)
+		{
+			(*params).d_dumps_memory = ft_atoi(argv[(*params).i + 1]);
+			(*params).i += 2;
+		}
+		else
+			(*params).i++;
 		return (1);
 	}
 	else if (ft_strcmp(argv[(*params).i], "-v") == 0 && (*params).i + 1 < argc)
 	{
-		(*params).v_verbosity = ft_atoi(argv[(*params).i + 1]);
-		(*params).i += 2;
+		if (ft_atoi(argv[(*params).i + 1]) > 0)
+		{
+			(*params).v_verbosity = ft_atoi(argv[(*params).i + 1]);
+			(*params).i += 2;
+		}
+		else
+			(*params).i++;
 		return (1);
 	}
 	else if (ft_strcmp(argv[(*params).i], "-n") == 0 && (*params).j
 		< MAX_PLAYERS && (*params).i + 1 < argc)
 	{
-		(*params).pl_nbr[(*params).j][0] = 1;
-		(*params).pl_nbr[(*params).j][1] = ft_atoi(argv[(*params).i + 1]);
-		(*params).i += 2;
+		if (ft_atoi(argv[(*params).i + 1]) > 0)
+		{
+			(*params).pl_nbr[(*params).j][0] = 1;
+			(*params).pl_nbr[(*params).j][1] = ft_atoi(argv[(*params).i + 1]);
+			(*params).i += 2;
+		}
+		else
+			(*params).i++;
 		return (1);
 	}
 	return (0);
@@ -95,6 +110,12 @@ int		check_flags_core(int argc, char **argv, t_flags *params)
 	{
 		if (ft_strcmp(argv[(*params).i], "-a") == 0)
 			(*params).a_aff = 1;
+		else if ((ft_strcmp(argv[(*params).i], "-d") == 0 || ft_strcmp(argv[(*params).i], "-v") == 0
+		|| ft_strcmp(argv[(*params).i], "-n") == 0) && (*params).i + 1 >= argc)
+		{
+			print_usage();
+			return (-2);
+		}
 		else if (check_flags_with_nbr(argv, argc, params))
 			continue ;
 		else if (ft_strcmp(argv[(*params).i], "-nc") == 0)
@@ -110,6 +131,11 @@ int		check_flags_core(int argc, char **argv, t_flags *params)
 		else
 			return (-1);
 		(*params).i++;
+	}
+	if ((*params).j == 0)
+	{
+		print_usage();
+		return (-2);
 	}
 	(*params).j = 0;
 	return (1);
@@ -135,7 +161,7 @@ int		main(int argc, char **argv)
 	{
 		if (res == 0)
 			ft_printf("%s\n", "Too many champions");
-		if (res < 0)
+		if (res == -1)
 			ft_printf("%s %s\n", "Can't read source file", argv[params.i]);
 		exit(0);
 	}

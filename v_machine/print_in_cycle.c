@@ -13,7 +13,7 @@
 #include "../corewar.h"
 
 void	intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
-	WINDOW **win, t_proc *processes)
+	WINDOW **win)
 {
 	int i;
 
@@ -23,13 +23,12 @@ void	intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
 	else
 	{
 		printf("%s\n", "Introducing contestants...");
-		while (processes && i < (*params).bots_quantity)
+		while (i < (*params).bots_quantity)
 		{
 			printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
-			(*processes).id + 1, bots[i].prog_size,
+			bots[i].id + 1, bots[i].prog_size,
 			bots[i].prog_name, bots[i].comment);
 			i++;
-			processes = processes->next;
 		}
 	}
 }

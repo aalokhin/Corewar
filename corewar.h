@@ -227,7 +227,7 @@ void				delete_unneeded(t_proc **head, t_cycle *main_cycle);
 void				fill_start_map_id(t_cycle *main_cycle, t_header bots[MAX_PLAYERS],
 						t_flags *params);
 void				intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
-						WINDOW **win, t_proc *processes);
+						WINDOW **win);
 void				after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
 						t_cycle main_cycle, WINDOW *win);
 void				print_adv(t_cycle *main_cycle, t_proc *processes,
