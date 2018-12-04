@@ -218,7 +218,7 @@ void				visual_init(WINDOW **win, t_flags *params, t_header bots[MAX_PLAYERS]);
 void				print_winner(WINDOW **win, t_cycle *main_cycle);
 int					read_bots(t_flags *params, int fd, t_header	bots[MAX_PLAYERS]);
 void				inst_vars_init(t_instr *inst_vars, t_proc *processes);
-int					check_ldi_params(t_instr *inst_vars, unsigned char *map);
+int					check_ldi_params(t_instr *inst_vars, unsigned char *map, int what_instr);
 void				take_bits_params(t_instr *inst_vars, unsigned char *map);
 int					if_correct_name(unsigned char *str, t_flags *params, int j);
 int					check_magic(unsigned char *str, t_flags *params, int j,

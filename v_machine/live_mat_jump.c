@@ -128,13 +128,11 @@ void	zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	tmp = processes;
 	if ((*tmp).carry == 1)
 	{
-		(*main_cycle).indexes[((*tmp).current_position +
-			MEM_SIZE) % MEM_SIZE][1] = NO_CARETKA;
+		(*main_cycle).indexes[(*tmp).current_position % MEM_SIZE][1] = NO_CARETKA;
 		(*tmp).current_position += ((*tmp).argv[0][1] % IDX_MOD);
-		(*tmp).current_position = ((*tmp).current_position + MEM_SIZE)
+		(*tmp).current_position = (((*tmp).current_position % MEM_SIZE) + MEM_SIZE)
 		% MEM_SIZE;
-		(*main_cycle).indexes[((*tmp).current_position +
-			MEM_SIZE) % MEM_SIZE][1] = 1;
+		(*main_cycle).indexes[(*tmp).current_position % MEM_SIZE][1] = 1;
 		res = "OK";
 	}
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
