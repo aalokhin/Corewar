@@ -18,25 +18,32 @@ void	music_listener(char spc, t_cycle *main_cycle, WINDOW **win)
 	{
 		if ((*main_cycle).m == 0)
 		{
-			// system("say \"Corewar is playing\" &");
+           system("afplay  media/Game_of_Thrones.mp3 &> /dev/null &");
 			(*main_cycle).m = 1;
 			mvwprintw(*win, 45, 199,  "=============> MUSIC  start <==============");
 			wrefresh(*win);
 		}
 		else if ((*main_cycle).m == 1)
 		{
-			system("pkill -STOP afplay &");
+			system("pkill -STOP afplay  &> /dev/null &");
 			(*main_cycle).m = 2;
 			mvwprintw(*win, 45, 199,  "=============> MUSIC  ON pause <==============");
 			wrefresh(*win);
 		}
 		else
 		{
-			system("pkill -CONT afplay &");
+			system("pkill -CONT afplay  &> /dev/null &");
 			(*main_cycle).m = 1;
 			mvwprintw(*win, 45, 199,  "=============> MUSIC  ON play <==============");
 			wrefresh(*win);
 		}
+	}
+	else if (spc == 'n')
+	{
+	    system("pkill afplay &> /dev/null &");
+	    (*main_cycle).m = 0;
+	     mvwprintw(*win, 45, 199,  "=============> MUSIC  OFF <==============");
+	     wrefresh(*win);
 	}
 } 
 
