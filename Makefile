@@ -18,12 +18,12 @@ LIB_DIR = ./libft/
 SFILES = ./v_machine/main.c ./v_machine/vm_cycle.c ./v_machine/ld_funcs.c ./v_machine/live_mat_jump.c ./v_machine/s_funcs.c \
 ./v_machine/init_funcs.c ./v_machine/args_parsing.c ./v_machine/visualastia.c ./v_machine/read_bots.c ./v_machine/forks_aff.c \
 ./v_machine/bits_instr.c ./v_machine/bots_parsing.c ./v_machine/ld_params.c ./v_machine/fill_delete_funcs.c \
-./v_machine/print_in_cycle.c ./v_machine/check_lives.c ./v_machine/buttons.c ./v_machine/check_flags.c
+./v_machine/print_in_cycle.c ./v_machine/check_lives.c ./v_machine/buttons.c ./v_machine/check_flags.c ./v_machine/map_info.c
 
 OFILES = ./v_machine/main.o ./v_machine/vm_cycle.o ./v_machine/ld_funcs.o ./v_machine/live_mat_jump.o ./v_machine/s_funcs.o \
 ./v_machine/init_funcs.o ./v_machine/args_parsing.o ./v_machine/visualastia.o ./v_machine/read_bots.o ./v_machine/forks_aff.o \
 ./v_machine/bits_instr.o ./v_machine/bots_parsing.o ./v_machine/ld_params.o ./v_machine/fill_delete_funcs.o \
-./v_machine/print_in_cycle.o ./v_machine/check_lives.o ./v_machine/buttons.o ./v_machine/check_flags.o
+./v_machine/print_in_cycle.o ./v_machine/check_lives.o ./v_machine/buttons.o ./v_machine/check_flags.o ./v_machine/map_info.o
 
 ASM_SFILES :=  ./assembler/clean_all.c ./assembler/file_length_counter.c  ./assembler/a_printing.c ./assembler/a_flag_output_funcs.c \
 ./assembler/validation_funcs.c ./assembler/labels_nastia.c ./assembler/main_assembler.c ./assembler/print_errors_usage.c \

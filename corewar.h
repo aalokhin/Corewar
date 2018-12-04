@@ -253,5 +253,6 @@ void				insert_vals_to_map(unsigned char *map, t_instr inst_vars,
 						t_cycle *main_cycle);
 void				start_cycle(unsigned char *map, t_flags *params,
 						WINDOW **win, t_cycle *main_cycle);
+void				print_map_info(WINDOW *win, t_cycle *main_cycle, t_flags *params);
 
 #endif

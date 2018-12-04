@@ -12,62 +12,6 @@
 
 #include "../corewar.h"
 
-void	print_map_info2(WINDOW *win, t_cycle *main_cycle, int x, int y)
-{
-	int x_0;
-	int y_0;
-
-	x_0 = 199;
-	y_0 = 4;
-	mvwprintw(win, y_0, x_0, "Cycles/second limit : %d",
-		(*main_cycle).second_limit);
-	y_0 += 3;
-	mvwprintw(win, y_0, x_0, "Cycles: %d", (*main_cycle).cycles);
-	y_0 += 2;
-	mvwprintw(win, y_0, x_0, "Processes: %d", (*main_cycle).processes);
-	mvwprintw(win, y, x, "CYCLE_TO_DIE : %d", (*main_cycle).cycle_die);
-	y += 2;
-	mvwprintw(win, y, x, "CYCLE_DELTA : %d", CYCLE_DELTA);
-	y += 2;
-	mvwprintw(win, y, x, "NBR_LIVE : %d", NBR_LIVE);
-	y += 2;
-	mvwprintw(win, y, x, "MAX_CHECKS : %d", MAX_CHECKS);
-	y += 2;
-	if ((*main_cycle).winner_name)
-		mvwprintw(win, y, x, "Current winner is : %s",
-		(*main_cycle).winner_name);
-	(*main_cycle).winner_str = y + 2;
-	wrefresh(win);
-}
-
-void	print_map_info(WINDOW *win, t_cycle *main_cycle, t_flags *params)
-{
-	int		x;
-	int		y;
-	int		tmp;
-	t_proc	*processes;
-
-	x = 199;
-	y = 9;
-	processes = (*main_cycle).head_proc;
-	wrefresh(win);
-	while ((*processes).real_id != (*params).bots_quantity - 1)
-		processes = processes->next;
-	y = y + (4 * (*params).bots_quantity);
-	tmp = y;
-	x += 2;
-	while (processes)
-	{
-		mvwprintw(win, y, x, "Lives in current period : %d ",
-			(*processes).lives);
-		y -= 1;
-		mvwprintw(win, y, x, "Last live: %d ", (*processes).last_live_cycle);
-		y -= 3;
-		processes = processes->next;
-	}
-	print_map_info2(win, main_cycle, x - 2, tmp + 3);
-}
-
 void	print_winner(WINDOW **win, t_cycle *main_cycle)
 {
 	int		x;
@@ -139,6 +83,15 @@ void	visual_init(WINDOW **win, t_flags *params,
 	}
 }
 
+int		id_count(t_cycle *main_cycle, t_flags *params, int i)
+{
+	if ((*main_cycle).indexes[i][0] >= 1 &&
+		(*main_cycle).indexes[i][0] <= (*params).bots_quantity)
+		return ((*main_cycle).indexes[i][0]);
+	else
+		return (5);
+}
+
 void	map_to_screen(unsigned char *map, t_cycle *main_cycle,
 	t_flags *params, WINDOW *win)
 {
@@ -149,7 +102,6 @@ void	map_to_screen(unsigned char *map, t_cycle *main_cycle,
 
 	i = 0;
 	y = 2;
-	x = 3;
 	res = 0;
 	refresh();
 	while (i < MEM_SIZE)
@@ -157,25 +109,13 @@ void	map_to_screen(unsigned char *map, t_cycle *main_cycle,
 		x = 3;
 		while (x < 194)
 		{
-			if ((*main_cycle).indexes[i][0] >= 1 &&
-				(*main_cycle).indexes[i][0] <= (*params).bots_quantity)
-				res = (*main_cycle).indexes[i][0];
-			else
-				res = 5;
+			res = id_count(main_cycle, params, i);
 			if ((*main_cycle).indexes[i][1] == CARETKA)
-			{
-				wattron(win, COLOR_PAIR(res * 11));
-				mvwprintw(win, y, x, "%.2x", map[i]);
-				wattroff(win, COLOR_PAIR(res * 11));
-			}
-			else
-			{
-				wattron(win, COLOR_PAIR(res));
-				mvwprintw(win, y, x, "%.2x", map[i]);
-				wattroff(win, COLOR_PAIR(res));
-			}
+				res = id_count(main_cycle, params, i) * 11;
+			wattron(win, COLOR_PAIR(res));
+			mvwprintw(win, y, x, "%.2x", map[i++]);
+			wattroff(win, COLOR_PAIR(res));
 			x += 3;
-			i++;
 		}
 		print_map_info(win, main_cycle, params);
 		y++;
