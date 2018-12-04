@@ -153,8 +153,24 @@ int				fill_name_comment(t_binfile *bin);
 
 
 //**********************************FILE FUNCTIONS****************
+int				ft_opening_file(char *s_file, int flag_a);
+void				init_bin(t_binfile	*bin);
+
+int				file_processing(t_binfile *bin);
+
+
 void			create_cor_file(t_binfile *bin); 
 void			fill_corfile_contents(t_binfile *bin);
+void					print_four_bytes(unsigned int src, int fd_out);
+
+void					print_reg_to_file(int i, t_t *tmp, int fd_out);
+
+void					print_ind_to_file(int i, t_t *tmp, int fd_out);
+
+void					print_dir_to_file(int i, t_t *tmp, int fd_out);
+
+void					print_inst_file(t_t *tmp, size_t i, t_binfile *bin);
+
 
 
 
@@ -206,13 +222,15 @@ int			bytes_above_i(t_lable *label);
 void		bytes_above_filler(t_binfile *file, t_lable *label);
 
 
-//*************************** FLAG A ***********************************
+//*************************** FLAG A  D***********************************
 
 void	 		flag_a_output(t_binfile *bin);
 void			print_arg_chars(t_t	*instruct);
 void			ind_dir_print(int arg0, int arg, int lbl_size);
 void			print_instr_args(t_t *instruct);
 void			print_instr_args2(t_t *instruct);
+char			*join_name_path(char *curdir, char *file);
+int 			ft_opening_directory(char *input, int flag_d, int flag_a);
 
 
 //******************************* clean *********************************

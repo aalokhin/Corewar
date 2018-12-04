@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_assembler.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aalokhin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/04 16:49:25 by aalokhin          #+#    #+#             */
+/*   Updated: 2018/12/04 16:49:27 by aalokhin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 void				init_bin(t_binfile	*bin)
@@ -14,49 +26,22 @@ void				init_bin(t_binfile	*bin)
 
 int 			init_check(t_binfile *bin)
 {
-
-	t_t *instruct;
-	t_lable *l;
-	int k;
-	k = 0;
-
 	if (!(initial_validation(&(*bin))))
 	{
-		// system("leaks asm");
 		return (0);
 	}
 	if (!(parse_commands(&(*bin), 0, NULL, NULL)))
 	{
-		//system("leaks asm");
 		return (0);
 	}
-	//system("leaks asm");
 	if (!(label_distance(&(*bin))))
 		return (0);
-	//system("leaks asm");
 	if ((*bin).flag_a == 1)
 	{
-		
-
-		l = bin->labels_list;
-		while(l)
-		{
-			instruct = l->instruct;
-			while(instruct)
-			{
-				k = 0;
-				while(instruct->a[k])
-					k++;
-				instruct = instruct->next;
-			}
-
-			l = l->next;
-		}
 	 	ft_print_flag_a(&(*bin));
 	 	flag_a_output(&(*bin));
 	 	return (0);
 	}
-	//system("leaks asm");
 	return(1);
 }
 
@@ -75,95 +60,22 @@ int				file_processing(t_binfile *bin)
 		return (0);
 	}
 	// system("leaks asm");
-	ft_strdel(&((*bin).f_contents)); //*********************** magic ept
-	(*bin).f_contents = ft_strdup(file_contents); //*********************** magic ept
+	ft_strdel(&((*bin).f_contents));
+	(*bin).f_contents = ft_strdup(file_contents);
 	if (init_check(bin) == 0)
 	{
 		ft_clean_all(bin);
 		//system("leaks asm");
 		return (0);
 	}
-	create_cor_file(&(*bin)); //creates the file iteslf and fills out the contents
+	create_cor_file(&(*bin));
 	close((*bin).fd);
 	// system("leaks asm");
 	ft_clean_all(bin);
 	return (1);
 }
 
-int				ft_opening_file(char *s_file, int flag_a)
-{
-	t_binfile	bin;
 
-	init_bin(&bin);
-	if (flag_a == 1)
-		bin.flag_a = 1;
-	if (ft_strcmp(&s_file[ft_strlen(s_file) - 2], ".s") != 0)
-	{
-		ft_print_inv_f(s_file);
-		return (0);
-	}
-	bin.arg_name = ft_strdup(s_file);
-	bin.fd = open(s_file,  O_RDONLY);
-	if (bin.fd < 0)
-	{
-		ft_print_inv_f(s_file);
-		ft_clean_all(&bin);
-		return (0);
-	}
-	bin.arg_length = (unsigned int)lseek(bin.fd, 0, SEEK_END);
-	lseek(bin.fd, 0, SEEK_SET);
-	return (file_processing(&bin));
-}
-
-char				*join_name_path(char *curdir, char *file)
-{
-	int 			len;
-	char 			*path;
-	char 			*new;
-
-	len = ft_strlen(curdir);
-	path = NULL;
-	new = NULL;
-	if (curdir[len - 1] == '/')
-	{
-		path = ft_strjoin(curdir, file);
-		//ft_strdel(&curdir);
-	}
-	else
-	{
-		new = ft_strnew(len + 1);
-		new = ft_strncpy(new, curdir, len);
-		new[len] = '/';
-		//ft_strdel(&curdir);
-		path = ft_strjoin(new, file); 
-		ft_strdel(&new);
-	}
-	return (path);
-}
-
-int 				ft_opening_directory(char *input, int flag_d, int flag_a)
-{
-	DIR				*dfd;
-	struct dirent	*dp;
-	char			*filename;
-
-	filename = NULL;
-	if ((dfd = opendir(input)) == NULL)
-		return (0);
-	while ((dp = readdir(dfd)) != NULL)
-	{
-		filename = join_name_path(input, dp->d_name);
-		if (!CUR_DIR(dp->d_name[0]))
-		{
-			ft_opening_file(filename, flag_a);
-			if (flag_d == 2)
-				ft_opening_directory(filename, flag_d, flag_a);
-		}
-		ft_strdel(&filename); /// added  
-	}
-	closedir(dfd);
-	return (1);
-}
 
 int					main(int argc, char **argv)
 {
@@ -204,8 +116,6 @@ int					main(int argc, char **argv)
 		}
 		i++;
 	}
-//system("leaks asm");
-
+	// system("leaks asm");
 	return 0;
 }
-
