@@ -12,6 +12,23 @@
 
 #include "../corewar.h"
 
+void	vm_cycle(unsigned char *map, t_flags *params,
+	t_header bots[MAX_PLAYERS])
+{
+	t_cycle		main_cycle;
+	t_proc		*processes;
+
+	WINDOW * win;
+	win = NULL;
+	main_cycle_init(&main_cycle, params);
+	fill_start_map_id(&main_cycle, bots, params);
+	processes = processes_init(params, bots, map);
+	main_cycle.head_proc = processes;
+	intro_print(params, bots, &win, &main_cycle);
+	start_cycle(map, params, &win, &main_cycle);
+	after_cycle(params, bots, main_cycle, &win);
+}
+
 void	fill_start_map_id(t_cycle *main_cycle, t_header bots[4],
 	t_flags *params)
 {

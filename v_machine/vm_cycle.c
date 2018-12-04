@@ -99,35 +99,27 @@ void	internal_cycle_core(t_cycle *main_cycle, t_proc *processes,
 	}
 }
 
-void	vm_cycle(unsigned char *map, t_flags *params,
-	t_header bots[MAX_PLAYERS])
+void	start_cycle(unsigned char *map, t_flags *params,
+	WINDOW **win, t_cycle *main_cycle)
 {
-	t_cycle		main_cycle;
 	t_proc		*processes;
 
-	WINDOW * win;
-	win = NULL;
-	main_cycle_init(&main_cycle, params);
-	fill_start_map_id(&main_cycle, bots, params);
-	processes = processes_init(params, bots, map);
-	main_cycle.head_proc = processes;
-	intro_print(params, bots, &win, &main_cycle);
-	while (main_cycle.processes > 0)
+	processes = (*main_cycle).head_proc;
+	while ((*main_cycle).processes > 0)
 	{
 		if ((((*params).v_verbosity >> 1) & 1) && !(*params).ncurses)
-			printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
-		processes = main_cycle.head_proc;
+			printf("%s%d\n", "It is now cycle ", (*main_cycle).cycles + 1);
+		processes = (*main_cycle).head_proc;
 		if ((*params).ncurses == 1)
 		{
-			map_to_screen(map, &main_cycle, params, win);
-			char_listener(&main_cycle, &win);
-			if (main_cycle.run == 0 && (*params).ncurses == 1)
+			map_to_screen(map, main_cycle, params, *win);
+			char_listener(main_cycle, win);
+			if ((*main_cycle).run == 0 && (*params).ncurses == 1)
 				continue ;
 		}
-		internal_cycle_core(&main_cycle, processes, params, map);
-		cycle_period_check(&main_cycle.cycle_counter, &main_cycle, params);
-		if (!external_cycle_pass(&main_cycle, map, params))
+		internal_cycle_core(main_cycle, processes, params, map);
+		cycle_period_check(&main_cycle->cycle_counter, main_cycle, params);
+		if (!external_cycle_pass(main_cycle, map, params))
 			break ;
 	}
-	after_cycle(params, bots, main_cycle, &win);
 }
