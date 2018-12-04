@@ -61,10 +61,11 @@ int 	label_name_is_valid(t_binfile *file, t_lable *label, char *str)
 		label_name[i] = str[i];
 		i++;
 	}
-	label_name[i] = ':';
+	label_name[i] = LABEL_CHAR;
 	label_name[i + 1] = '\0';
 	if (label_name_is_duplicate(file, label_name))
 	{
+		ft_strdel(&label_name);
 		ft_printf("%s\n", "Duplicate label!");
 		return (0);
 	}
@@ -97,7 +98,7 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
 	char 	*str = NULL;
 
  	to_count = g_op_tab[token->c_name].param_types[i];
-	size = (ft_strchr(arg ,'r') && !(ft_strchr(arg ,'%'))) && !(ft_strchr(arg ,':')) ? 1 : ft_strchr(arg ,'%') ? 2 : 4;
+	size = (ft_strchr(arg ,'r') && !(ft_strchr(arg, DIRECT_CHAR))) && !(ft_strchr(arg, LABEL_CHAR)) ? 1 : ft_strchr(arg, DIRECT_CHAR) ? 2 : 4;
  	if (size == to_count || to_count == 7 || (size < to_count && to_count - size != size  && (to_count - size == T_REG
  		|| to_count  - size == T_DIR ||  to_count - size == T_IND)))
 	{
@@ -105,14 +106,20 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
  		{
  			str = ft_strjoin(arg + 2, ":");
  			if (!(ft_strstr(file->f_contents, str)))
+ 			{
+ 				ft_strdel(&str);
  				return (error_message_label(file, token, arg + 2, arg));
+ 			}
  			ft_strdel(&str);
  		}
 		else if (ft_strstr(arg, ":"))
 		{
 			str = ft_strjoin(arg + 1, ":");
  			if (!(ft_strstr(file->f_contents, str)))
+ 			{
+ 				ft_strdel(&str);
  				return (error_message_label(file, token, arg + 1, arg));
+ 			}
  			ft_strdel(&str);
 		}
  		else if (size == T_DIR)
@@ -162,24 +169,29 @@ int 	initial_validation(t_binfile *file)
 	int 	colomn = 0;
 	int i = 0;
 	int start = 0;
+	char *string;
 
 	str = file->f_contents;
 	if (!file->f_contents[i])
 	{
 		ft_printf("Syntax error at token [TOKEN][%d:001] END \"(null)\"\n",12 );
+	//system("leaks asm");
 		return (0);
 	}
 	while (str[i])
 	{
 		if (str[i] == '\n')
 			start = i;
-		if (!(WHITESPACE(str[i])) && str[i] != '-' && !ft_isdigit(str[i]) && str[i] != '_' && (str[i] < 97 ||  str[i] > 123) && str[i] != ':' && str[i] != '%' && str[i] != ',')
+		if (!(WHITESPACE(str[i])) && str[i] != '-' && !ft_isdigit(str[i]) && str[i] != '_' && (str[i] < 97 ||  str[i] > 123) && str[i] != LABEL_CHAR && str[i] != DIRECT_CHAR && str[i] != SEPARATOR_CHAR)
 		{
 			cpy[0] = str[i];
 			cpy[1] = '\0';
-			line = define_line_num(file->copy, string_definer(str, start + 1), 0, 0);
+			string = string_definer(str, start + 1);
+			line = define_line_num(file->copy, string, 0, 0);
 			colomn = define_line_colomn(file->copy, cpy, line);
 			printf ("Lexical error at [%d:%d]\n", line + 1, colomn);
+			ft_strdel(&string);
+			//system("leaks asm");
 			return (0);
 		}
 		i++;
@@ -187,6 +199,7 @@ int 	initial_validation(t_binfile *file)
 	if (str[i - 1] && str[i - 1] != '\n')
 	{
 		ft_printf("Syntax error - unexpected end of input (Perhaps you forgot to end with a newline ?)\n");
+		//system("leaks asm");
 		return (0);
 	}
 	return (1);

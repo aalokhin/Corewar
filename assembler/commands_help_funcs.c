@@ -73,7 +73,7 @@ void				ft_clean_commas(char (*contents)[])
 	i = 0;
 	while ((*contents)[i])
 	{
-		if ((*contents)[i] == ',')
+		if ((*contents)[i] == SEPARATOR_CHAR)
 			(*contents)[i] = ' ';
 		i++;
 	}

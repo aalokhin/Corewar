@@ -188,9 +188,15 @@ int 		error_invalid_arg_type(t_t *command, int arg, int size)
 		type = ft_strdup("register");
 	else if (size == 2)
 		type = ft_strdup("direct");
+	else if (size == 3)
+	{
+		ft_printf("Invalid parameter count for instruction %s\n", command->name_c);
+		return (0);
+	}
 	else
 		type = ft_strdup("indirect");
 	ft_printf("Invalid parameter %d type %s for instruction %s\n", arg, type, command->name_c);
+	ft_strdel(&type);
 	return (0);
 }
  

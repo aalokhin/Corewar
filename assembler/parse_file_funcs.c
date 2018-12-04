@@ -50,7 +50,7 @@ void				remove_comments(t_binfile *bin, char (*contents)[])
 	k = 0;
 	while (i < bin->arg_length)
 	{
-		if ((*contents)[i] == '#' || (*contents)[i] == ';')
+		if ((*contents)[i] == COMMENT_CHAR || (*contents)[i] == ';')
 		{
 			len = 0;
 			while ((*contents)[i] && (*contents)[i] != '\n')

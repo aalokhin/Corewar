@@ -21,7 +21,10 @@ int 			init_check(t_binfile *bin)
 	k = 0;
 
 	if (!(initial_validation(&(*bin))))
+	{
+		// system("leaks asm");
 		return (0);
+	}
 	if (!(parse_commands(&(*bin), 0, NULL, NULL)))
 	{
 		//system("leaks asm");
@@ -122,12 +125,16 @@ char				*join_name_path(char *curdir, char *file)
 	path = NULL;
 	new = NULL;
 	if (curdir[len - 1] == '/')
+	{
 		path = ft_strjoin(curdir, file);
+		//ft_strdel(&curdir);
+	}
 	else
 	{
 		new = ft_strnew(len + 1);
 		new = ft_strncpy(new, curdir, len);
 		new[len] = '/';
+		//ft_strdel(&curdir);
 		path = ft_strjoin(new, file); 
 		ft_strdel(&new);
 	}
@@ -152,6 +159,7 @@ int 				ft_opening_directory(char *input, int flag_d, int flag_a)
 			if (flag_d == 2)
 				ft_opening_directory(filename, flag_d, flag_a);
 		}
+		ft_strdel(&filename); /// added  
 	}
 	closedir(dfd);
 	return (1);
@@ -196,7 +204,7 @@ int					main(int argc, char **argv)
 		}
 		i++;
 	}
-	//system("leaks asm");
+//system("leaks asm");
 
 	return 0;
 }

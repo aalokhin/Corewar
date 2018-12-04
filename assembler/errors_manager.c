@@ -86,7 +86,7 @@ int 		define_line_colomn(char *copy, char *arg, int line_num)
 						a++;
 						if (arg[a] == '\0')
 						{
-							if (ft_strchr(arg, 'r') || ft_strchr(arg, '%') || ft_strchr(arg, ':'))
+							if (ft_strchr(arg, 'r') || ft_strchr(arg, '%') || ((ft_strchr(arg, ':')) && arg[ft_strlen(arg) - 1] != ':'))
 								return (i - l - a);
 							return (i - l - a + 1);
 						}
