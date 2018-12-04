@@ -107,7 +107,7 @@ int		read_bots(t_flags *params, int fd, t_header bots[MAX_PLAYERS])
 	unsigned int			len;
 	static unsigned char	*str;
 
-	while ((*params).players[(*params).j] != NULL)
+	while ((*params).j < (*params).bots_quantity)
 	{
 		if (!bot_open(&fd, params, &len))
 			return (0);
