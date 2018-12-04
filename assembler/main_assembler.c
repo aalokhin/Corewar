@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-void				init_bin(t_binfile	*bin)
+void				init_bin(t_binfile *bin)
 {
 	(*bin).fd = 0;
 	(*bin).flag_a = 0;
@@ -24,7 +24,7 @@ void				init_bin(t_binfile	*bin)
 	(*bin).labels_list = NULL;
 }
 
-int 			init_check(t_binfile *bin)
+int					init_check(t_binfile *bin)
 {
 	if (!(initial_validation(&(*bin))))
 	{
@@ -38,16 +38,17 @@ int 			init_check(t_binfile *bin)
 		return (0);
 	if ((*bin).flag_a == 1)
 	{
-	 	ft_print_flag_a(&(*bin));
-	 	flag_a_output(&(*bin));
-	 	return (0);
+		ft_print_flag_a(&(*bin));
+		flag_a_output(&(*bin));
+		return (0);
 	}
-	return(1);
+	return (1);
 }
 
-int				file_processing(t_binfile *bin)
+int					file_processing(t_binfile *bin)
 {
-	char file_contents[(*bin).arg_length + 1];	
+	char file_contents[(*bin).arg_length + 1];
+
 	read((*bin).fd, file_contents, (*bin).arg_length);
 	file_contents[(*bin).arg_length] = '\0';
 	(*bin).f_contents = ft_strdup(file_contents);
@@ -75,7 +76,28 @@ int				file_processing(t_binfile *bin)
 	return (1);
 }
 
+int					parse_stdargs(int flag_a, int flag_d, char **argv, int argc)
+{
+	int				i;
 
+	i = (flag_d || flag_a) ? 2 : 1;
+	while (i < argc)
+	{
+		if (flag_d != 1 && flag_d != 2)
+		{
+			if (!ft_opening_file(argv[i], flag_a))
+				return (0);
+		}
+		else
+		{
+			if (!ft_opening_directory(argv[i], flag_d, flag_a))
+				if (!ft_opening_file(argv[i], flag_a))
+					return (0);
+		}
+		i++;
+	}
+	return (0);
+}
 
 int					main(int argc, char **argv)
 {
@@ -97,25 +119,8 @@ int					main(int argc, char **argv)
 	while (argv[i + 1])
 	{
 		if (!(ft_strcmp(argv[i], "-a")))
-			flag_a = 1;		
+			flag_a = 1;
 		i++;
 	}
-	i = (flag_d || flag_a) ?  2 : 1;
-	while (i < argc)
-	{
-		if (flag_d != 1 && flag_d != 2)
-		{
-			if (!ft_opening_file(argv[i], flag_a))
-				return (0);
-		}
-		else
-		{
-			if (!ft_opening_directory(argv[i], flag_d, flag_a))
-				if (!ft_opening_file(argv[i], flag_a))
-					return (0);
-		}
-		i++;
-	}
-	// system("leaks asm");
-	return 0;
+	return (parse_stdargs(flag_a, flag_d, argv, argc));
 }
