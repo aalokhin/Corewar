@@ -30,19 +30,19 @@ int				fill_name_comment(t_binfile *bin)
 
 	i = 0;
 	tmp = 0;
-	if (ft_strstr(bin->f_contents, ".name") &&\
-	ft_strstr(bin->f_contents, ".comment"))
+	if (ft_strstr(bin->f_contents, NAME_CMD_STRING) &&\
+	ft_strstr(bin->f_contents, COMMENT_CMD_STRING))
 	{
-		str = ft_strstr(bin->f_contents, ".name");
+		str = ft_strstr(bin->f_contents, NAME_CMD_STRING);
 		if (!(fill_str_help(str, &i, &tmp)))
-			return (error_message(bin, ".name", define_line_num(bin->copy, ".name", 0, 0)));
+			return (error_message(bin, NAME_CMD_STRING, define_line_num(bin->copy, NAME_CMD_STRING, 0, 0)));
 		bin->name = ft_strnew(PROG_NAME_LENGTH);
 		ft_strncpy(bin->name, &str[tmp], i - tmp);
-		str = ft_strstr(bin->f_contents, ".comment");
+		str = ft_strstr(bin->f_contents, COMMENT_CMD_STRING);
 		i = 0;
 		tmp = 0;
 		if (!(fill_str_help(str, &i, &tmp)))
-			return (error_message(bin, ".comment", define_line_num(bin->copy, ".comment", 0, 0)));
+			return (error_message(bin, COMMENT_CMD_STRING, define_line_num(bin->copy, COMMENT_CMD_STRING, 0, 0)));
 		bin->comment = ft_strnew(COMMENT_LENGTH);
 		ft_strncpy(bin->comment, &str[tmp], i - tmp);
 		return (1);

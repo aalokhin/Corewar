@@ -24,7 +24,7 @@ void				print_arg_chars(t_t *instruct)
 		if (instruct->a[i])
 		{
 			len = ft_strlen(instruct->a[i]);
-			if (len && instruct->a[i][len - 1] == ':')
+			if (len && instruct->a[i][len - 1] == LABEL_CHAR)
 				instruct->a[i][len - 1] = '\0';
 			i++;
 		}
@@ -83,7 +83,7 @@ void				print_instr_args(t_t *ins)
 			ft_printf("%-18d", ins->args[i][1]);
 		else if (ins->args[i][0] == 10 || ins->args[i][0] == 11)
 		{
-			if (ins->a[i][0] != ':' && ins->a[i][1] != ':')
+			if (ins->a[i][0] != LABEL_CHAR && ins->a[i][1] != LABEL_CHAR)
 				ind_dir_print(ins->args[i][0], ins->args[i][1], ins->lbl_size);
 			else
 				ind_dir_print(ins->args[i][0], ins->args[i][1], ins->lbl_size);
@@ -113,7 +113,7 @@ void				print_instr_args2(t_t *instruct)
 		}
 		else if (instruct->args[i][0] == 10 || instruct->args[i][0] == 11)
 		{
-			if (instruct->a[i][0] != '%' && instruct->a[i][0] != ':'\
+			if (instruct->a[i][0] != DIRECT_CHAR && instruct->a[i][0] != LABEL_CHAR\
 			&& instruct->a[i][0] != 'r')
 				ft_printf("%-18s", instruct->a[i]);
 			else

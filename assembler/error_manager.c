@@ -25,9 +25,9 @@ int		define_line_num(char *copy, char *str_n, int f, int l)
 			l = 0;
 			while (copy[f] && copy[f] != '\n' && copy[f] != '.' && l != -1)
 			{
-				while (WHITESPACE(copy[f]) || copy[f] == ',')
+				while (WHITESPACE(copy[f]) || copy[f] == SEPARATOR_CHAR)
 					f++;
-				while (WHITESPACE(str_n[l]) || str_n[l] == ',')
+				while (WHITESPACE(str_n[l]) || str_n[l] == SEPARATOR_CHAR)
 					l++;
 				if (copy[f] != str_n[l])
 					l = -1;
@@ -67,7 +67,7 @@ int 		define_line_colomn(char *copy, char *arg, int line_num)
 						a++;
 						if (arg[a] == '\0')
 						{
-							if (ft_strchr(arg, 'r') || ft_strchr(arg, '%'))
+							if (ft_strchr(arg, 'r') || ft_strchr(arg, DIRECT_CHAR))
 								return (i - l - a);
 							return (i - l - a + 1);
 						}

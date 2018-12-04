@@ -48,8 +48,8 @@ void				clean_name_comment(t_binfile *bin, char (*contents)[])
 	len = 0;
 	while (i < bin->arg_length)
 	{
-		if (ft_strncmp(&(*contents)[i], ".name", 5) == 0 ||\
-			ft_strncmp(&(*contents)[i], ".comment", 8) == 0)
+		if (ft_strncmp(&(*contents)[i], NAME_CMD_STRING, 5) == 0 ||\
+			ft_strncmp(&(*contents)[i], COMMENT_CMD_STRING, 8) == 0)
 		{
 			move_name_comment(&(*contents), &i);
 			len = 0;

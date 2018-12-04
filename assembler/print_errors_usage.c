@@ -48,7 +48,7 @@ int				error_message(t_binfile *file, char *arg, int line_num)
 	int			colomn;
 
 	colomn = define_line_colomn(file->copy, arg, line_num);
-	if (ft_strchr(arg, 'r') && !(ft_strchr(arg, '%')) && !(ft_strchr(arg, ':')))
+	if (ft_strchr(arg, 'r') && !(ft_strchr(arg, DIRECT_CHAR)) && !(ft_strchr(arg, LABEL_CHAR)))
 		e = ft_strdup("REGISTER");
 	else if (ft_strstr(arg, "%:"))
 		e = ft_strdup("DIRECT_LABEL");
