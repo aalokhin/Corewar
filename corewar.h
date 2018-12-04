@@ -219,7 +219,7 @@ void				print_winner(WINDOW **win, t_cycle *main_cycle);
 int					read_bots(t_flags *params, int fd, t_header	bots[MAX_PLAYERS]);
 void				inst_vars_init(t_instr *inst_vars, t_proc *processes);
 int					check_ldi_params(t_instr *inst_vars, unsigned char *map, int what_instr);
-void				take_bits_params(t_instr *inst_vars, unsigned char *map);
+void				take_bits_params(t_instr *inst_vars, unsigned char *map, int i, int *dest);
 int					if_correct_name(unsigned char *str, t_flags *params, int j);
 int					check_magic(unsigned char *str, t_flags *params, int j,
 						t_header bots[4]);
@@ -244,4 +244,8 @@ void				char_listener(char spc, t_cycle *main_cycle, WINDOW **win);
 void				get_args_value(int arg_size, unsigned int *dest, unsigned char *map,
 						int *id_counter);
 void				create_map(t_header bots[MAX_PLAYERS], t_flags *params);
+void				print_ldi_instr(int what_func, int cur_proc, t_instr inst_vars);
+int					check_flags_core(int argc, char **argv, t_flags *params);
+void				print_usage(void);
+
 #endif

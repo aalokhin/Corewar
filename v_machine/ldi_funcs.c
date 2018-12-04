@@ -38,7 +38,7 @@ void	take_ldi_params(t_instr *inst_vars, unsigned char *map, int i,
 	else if (inst_vars->tmp->argv[i][0] == IND_CODE)
 	{
 		(*inst_vars).i = (((inst_vars->tmp->argv[i][1] % IDX_MOD +
-			inst_vars->tmp->current_position) % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
+		inst_vars->tmp->current_position) % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
 		*dest = (map[(*inst_vars).i % MEM_SIZE] << 24)
 		+ (map[((*inst_vars).i + 1) % MEM_SIZE] << 16) +
 		(map[((*inst_vars).i + 2) % MEM_SIZE] << 8) +
@@ -56,36 +56,12 @@ void	take_lldi_params(t_instr *inst_vars, unsigned char *map, int i,
 	else if (inst_vars->tmp->argv[i][0] == IND_CODE)
 	{
 		(*inst_vars).i = (((inst_vars->tmp->argv[i][1] +
-			inst_vars->tmp->current_position) % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
+		inst_vars->tmp->current_position) % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
 		*dest = (map[(*inst_vars).i % MEM_SIZE] << 24)
 		+ (map[((*inst_vars).i + 1) % MEM_SIZE] << 16) +
 		(map[((*inst_vars).i + 2) % MEM_SIZE] << 8) +
 		map[((*inst_vars).i + 3) % MEM_SIZE];
 	}
-}
-
-void	load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
-	unsigned char *map)
-{
-	t_instr inst_vars;
-
-	inst_vars_init(&inst_vars, processes);
-	if (!check_ldi_params(&inst_vars, map, 0))
-		return ;
-	inst_vars.i = (inst_vars.one + inst_vars.two) +
-	inst_vars.tmp->current_position;
-	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
-	{
-		print_ldi_instr(0, cur_proc, inst_vars);
-		printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|',
-		inst_vars.one, inst_vars.two, inst_vars.one + inst_vars.two,
-		inst_vars.i);
-	}
-	inst_vars.i = ((inst_vars.i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
-	inst_vars.tmp->regs[inst_vars.tmp->argv[2][1] - 1] = (map[inst_vars.i % MEM_SIZE]
-	<< 24) + (map[(inst_vars.i + 1) %
-	MEM_SIZE] << 16) + (map[(inst_vars.i + 2) % MEM_SIZE] << 8) +
-	map[(inst_vars.i + 3) % MEM_SIZE];
 }
 
 int		check_ldi_params(t_instr *inst_vars, unsigned char *map, int what_instr)
@@ -109,31 +85,4 @@ int		check_ldi_params(t_instr *inst_vars, unsigned char *map, int what_instr)
 		take_lldi_params(inst_vars, map, 1, &inst_vars->two);
 	}
 	return (1);
-}
-
-void	lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
-	unsigned char *map)
-{
-	t_instr inst_vars;
-
-	inst_vars_init(&inst_vars, processes);
-	if (!check_ldi_params(&inst_vars, map, 1))
-		return ;
-	inst_vars.tmp->carry = 0;
-	inst_vars.i = ((((inst_vars.one + inst_vars.two) +
-		inst_vars.tmp->current_position) % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
-	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
-	{
-		print_ldi_instr(1, cur_proc, inst_vars);
-		printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|',
-		inst_vars.one, inst_vars.two, inst_vars.one + inst_vars.two,
-		(inst_vars.one + inst_vars.two) + inst_vars.tmp->current_position);
-	}
-	inst_vars.new_ind = (map[inst_vars.i % MEM_SIZE] << 24) +
-	(map[(inst_vars.i + 1) % MEM_SIZE] << 16) +
-	(map[(inst_vars.i + 2) % MEM_SIZE] << 8) +
-	map[(inst_vars.i + 3) % MEM_SIZE];
-	if (inst_vars.new_ind == 0)
-		inst_vars.tmp->carry = 1;
-	inst_vars.tmp->regs[inst_vars.tmp->argv[2][1] - 1] = inst_vars.new_ind;
 }

@@ -86,6 +86,7 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 void	processes_init2(t_flags *params, t_header bots[MAX_PLAYERS],
 	unsigned char *map, t_proc *processes)
 {
+	bots[(*params).i].id = (*processes).id;
 	(*processes).real_id = (*params).i;
 	(*processes).name = bots[(*params).i].prog_name;
 	(*processes).current_position = bots[(*params).i++].start_index;
@@ -127,7 +128,6 @@ t_proc	*processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
 			(*processes).id = (*tmp).id + 1;
 		else
 			(*processes).id = (*params).i;
-		bots[(*params).i].id = (*processes).id;
 		processes_init2(params, bots, map, processes);
 		(*processes).next = tmp;
 		clear_argv_arr(processes);
