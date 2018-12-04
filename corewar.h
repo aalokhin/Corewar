@@ -213,8 +213,9 @@ void				get_args_values(t_proc *processes, unsigned char *map,
 						int *id_counter);
 void				take_args(unsigned char codage, t_proc *processes);
 void				map_to_screen(unsigned char *map, t_cycle *main_cycle,
-						t_flags *params, t_proc *processes, WINDOW *win);
-void				visual_init(WINDOW **win, t_flags *params, t_header bots[MAX_PLAYERS]);
+						t_flags *params, WINDOW *win);
+void				visual_init(WINDOW **win, t_flags *params, t_header bots[MAX_PLAYERS],
+						t_cycle *main_cycle);
 void				print_winner(WINDOW **win, t_cycle *main_cycle);
 int					read_bots(t_flags *params, int fd, t_header	bots[MAX_PLAYERS]);
 void				inst_vars_init(t_instr *inst_vars, t_proc *processes);
@@ -228,7 +229,7 @@ void				delete_unneeded(t_proc **head, t_cycle *main_cycle);
 void				fill_start_map_id(t_cycle *main_cycle, t_header bots[MAX_PLAYERS],
 						t_flags *params);
 void				intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
-						WINDOW **win);
+						WINDOW **win, t_cycle *main_cycle);
 void				after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
 						t_cycle main_cycle, WINDOW **win);
 void				print_adv(t_cycle *main_cycle, t_proc *processes,
@@ -240,12 +241,14 @@ void				cycle_period_check(int *cycle_counter, t_cycle *main_cycle,
 						t_flags *params);
 void				music_listener(char spc, t_cycle *main_cycle, WINDOW **win);
 void				speed_listener(char spc, t_cycle *main_cycle, WINDOW **win);
-void				char_listener(char spc, t_cycle *main_cycle, WINDOW **win);
+void				char_listener(t_cycle *main_cycle, WINDOW **win);
 void				get_args_value(int arg_size, unsigned int *dest, unsigned char *map,
 						int *id_counter);
 void				create_map(t_header bots[MAX_PLAYERS], t_flags *params);
 void				print_ldi_instr(int what_func, int cur_proc, t_instr inst_vars);
 int					check_flags_core(int argc, char **argv, t_flags *params);
 void				print_usage(void);
-
+void				lload_ind_parse(t_proc *tmp, unsigned char *map, int what_instr);
+void				insert_vals_to_map(unsigned char *map, t_instr inst_vars,
+						t_cycle *main_cycle);
 #endif

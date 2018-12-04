@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lld_funcs.c                                        :+:      :+:    :+:   */
+/*   ld_funcs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlikhotk <vlikhotk@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 15:32:45 by vlikhotk          #+#    #+#             */
-/*   Updated: 2018/11/16 15:54:25 by vlikhotk         ###   ########.fr       */
+/*   Created: 2018/12/04 17:21:01 by vlikhotk          #+#    #+#             */
+/*   Updated: 2018/12/04 17:21:04 by vlikhotk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../corewar.h"
-
-void	lload_ind_parse(t_proc *tmp, unsigned char *map, int what_instr)
-{
-	int i;
-
-	i = 0;
-	if (!what_instr)
-		i = (*tmp).current_position + (*tmp).argv[0][1] % IDX_MOD;
-	else
-		i = (*tmp).current_position + (*tmp).argv[0][1];
-	i = ((i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
-	(*tmp).argv[0][1] = ((map[i % MEM_SIZE] << 24) +
-	(map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8)
-	+ map[(i + 3) % MEM_SIZE]);
-	if ((*tmp).argv[0][1] == 0)
-		(*tmp).carry = 1;
-	(*tmp).regs[(*tmp).argv[1][1] - 1] = (*tmp).argv[0][1];
-}
 
 void	load(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
@@ -60,6 +42,19 @@ void	load(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	}
 }
 
+void	print_lld(t_cycle *main_cycle, int cur_proc, t_instr inst_vars)
+{
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
+	{
+		if (cur_proc + 1 <= 9999)
+			printf("P%5d | lld %d r%d\n", cur_proc + 1,
+		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1]);
+		else
+			printf("P%6d | lld %d r%d\n", cur_proc + 1,
+		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1]);
+	}
+}
+
 void	lload(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	unsigned char *map)
 {
@@ -80,15 +75,7 @@ void	lload(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	}
 	else if (inst_vars.tmp->argv[0][0] == IND_CODE)
 		lload_ind_parse(inst_vars.tmp, map, 1);
-	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
-	{
-		if (cur_proc + 1 <= 9999)
-			printf("P%5d | lld %d r%d\n", cur_proc + 1,
-		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1]);
-		else
-			printf("P%6d | lld %d r%d\n", cur_proc + 1,
-		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1]);
-	}
+	print_lld(main_cycle, cur_proc, inst_vars);
 }
 
 void	load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,

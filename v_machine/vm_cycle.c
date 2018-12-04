@@ -12,7 +12,7 @@
 
 #include "../corewar.h"
 
-int	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
+int		take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 	unsigned char *map, t_flags *params)
 {
 	if (g_op_tab[(*processes).cmd - 1].codage)
@@ -99,43 +99,28 @@ void	internal_cycle_core(t_cycle *main_cycle, t_proc *processes,
 	}
 }
 
-void	vm_cycle(unsigned char *map, t_flags *params, t_header bots[MAX_PLAYERS])
+void	vm_cycle(unsigned char *map, t_flags *params,
+	t_header bots[MAX_PLAYERS])
 {
 	t_cycle		main_cycle;
 	t_proc		*processes;
-	char		spc;
 
 	WINDOW * win;
-	spc = '\0';
 	win = NULL;
-	processes = NULL;
 	main_cycle_init(&main_cycle, params);
 	fill_start_map_id(&main_cycle, bots, params);
 	processes = processes_init(params, bots, map);
 	main_cycle.head_proc = processes;
-	intro_print(params, bots, &win);
-	main_cycle.m = 0;
-	main_cycle.run = 0;
-	mvwprintw(win, 2, 199, "** PAUSED **");
-	mvwprintw(win, 45, 199, "=============> MUSIC OFF <============== %d, ",
-	main_cycle.m);
-	curs_set(0);
+	intro_print(params, bots, &win, &main_cycle);
 	while (main_cycle.processes > 0)
 	{
 		if ((((*params).v_verbosity >> 1) & 1) && !(*params).ncurses)
 			printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
-		processes = main_cycle.head_proc;		
+		processes = main_cycle.head_proc;
 		if ((*params).ncurses == 1)
 		{
-			map_to_screen(map, &main_cycle, params, main_cycle.head_proc, win);
-			char_listener(spc, &main_cycle, &win);
-			// if  (main_cycle.processes <= 0)
-			// {
-			// 	nodelay(stdscr, FALSE);
-
-			// 	print_winner(win, main_cycle);
-			// 	getch();
-			// }
+			map_to_screen(map, &main_cycle, params, win);
+			char_listener(&main_cycle, &win);
 			if (main_cycle.run == 0 && (*params).ncurses == 1)
 				continue ;
 		}

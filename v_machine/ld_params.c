@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ldi_funcs.c                                        :+:      :+:    :+:   */
+/*   ld_params.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlikhotk <vlikhotk@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 15:32:38 by vlikhotk          #+#    #+#             */
-/*   Updated: 2018/11/16 15:32:41 by vlikhotk         ###   ########.fr       */
+/*   Created: 2018/12/04 17:21:09 by vlikhotk          #+#    #+#             */
+/*   Updated: 2018/12/04 17:21:10 by vlikhotk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../corewar.h"
+
+void	lload_ind_parse(t_proc *tmp, unsigned char *map, int what_instr)
+{
+	int i;
+
+	i = 0;
+	if (!what_instr)
+		i = (*tmp).current_position + (*tmp).argv[0][1] % IDX_MOD;
+	else
+		i = (*tmp).current_position + (*tmp).argv[0][1];
+	i = ((i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
+	(*tmp).argv[0][1] = ((map[i % MEM_SIZE] << 24) +
+	(map[(i + 1) % MEM_SIZE] << 16) + (map[(i + 2) % MEM_SIZE] << 8)
+	+ map[(i + 3) % MEM_SIZE]);
+	if ((*tmp).argv[0][1] == 0)
+		(*tmp).carry = 1;
+	(*tmp).regs[(*tmp).argv[1][1] - 1] = (*tmp).argv[0][1];
+}
 
 void	print_ldi_instr(int what_func, int cur_proc, t_instr inst_vars)
 {

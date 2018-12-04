@@ -1,13 +1,15 @@
 #include "../corewar.h"
 
-void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params, t_proc *processes)
+void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params)
 {
 	int x;
 	int y;
 	int tmp;
+	t_proc *processes;
 
 	x = 199;
 	y = 4;
+	processes = (*main_cycle).head_proc;
 	wrefresh(win);
 	mvwprintw(win, y, x,  "Cycles/second limit : %d", (*main_cycle).second_limit);
 	wrefresh(win);
@@ -65,7 +67,7 @@ void print_winner(WINDOW **win, t_cycle *main_cycle)
 	endwin();
 }
 
-void visual_init(WINDOW **win, t_flags *params, t_header bots[MAX_PLAYERS])
+void visual_init(WINDOW **win, t_flags *params, t_header bots[MAX_PLAYERS], t_cycle *main_cycle)
 {
 	int  yMax;
 	int  xMax;
@@ -80,6 +82,7 @@ void visual_init(WINDOW **win, t_flags *params, t_header bots[MAX_PLAYERS])
 	cbreak();
 	noecho();
 	start_color();
+	curs_set(0);
 	getmaxyx(stdscr, yMax, xMax);
 	*win = newwin(68, 0, 0, 5);
 	int ls, rs, ts, bs, tl, tr, bl, br;
@@ -101,6 +104,9 @@ void visual_init(WINDOW **win, t_flags *params, t_header bots[MAX_PLAYERS])
 	wborder(*win, ls, rs, ts, bs, tl, tr, bl, br);
 	mvwvline(*win, 1, 196, 42, 70);
 	wattroff(*win, COLOR_PAIR(12));
+	mvwprintw(*win, 2, 199, "** PAUSED **");
+	mvwprintw(*win, 45, 199, "=============> MUSIC OFF <============== %d, ",
+	(*main_cycle).m);
 	while (i < (*params).bots_quantity)
 	{
 		y += 2;
@@ -110,7 +116,7 @@ void visual_init(WINDOW **win, t_flags *params, t_header bots[MAX_PLAYERS])
 	}
 }
 
-void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes, WINDOW *win)
+void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, WINDOW *win)
 {
 	int i;
 	int y;
@@ -207,7 +213,7 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
     		x += 3;
     		i++;
     	}
-    	print_map_info(win, main_cycle, params, processes);
+    	print_map_info(win, main_cycle, params);
     	//wrefresh(win);
     	y++;
 	}

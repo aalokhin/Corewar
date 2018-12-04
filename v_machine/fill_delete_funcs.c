@@ -127,31 +127,3 @@ void	delete_unneeded(t_proc **head, t_cycle *main_cycle)
 		tmp = prev->next;
 	}
 }
-
-void	fill_start_map_id(t_cycle *main_cycle, t_header bots[4],
-	t_flags *params)
-{
-	unsigned int	k;
-
-	(*params).i = 0;
-	(*params).j = 0;
-	k = 0;
-	while ((*params).i < MEM_SIZE)
-	{
-		(*main_cycle).indexes[(*params).i][0] = 0;
-		(*main_cycle).indexes[(*params).i++][1] = NO_CARETKA;
-	}
-	(*params).i = 0;
-	while ((*params).i < MEM_SIZE && (*params).j < (*params).bots_quantity)
-	{
-		if ((unsigned int)(*params).i == bots[(*params).j].start_index)
-		{
-			(*main_cycle).indexes[(*params).i][1] = CARETKA;
-			k = 0;
-			while (k++ < bots[(*params).j].prog_size)
-				(*main_cycle).indexes[(*params).i++][0] = (*params).j + 1;
-			(*params).j++;
-		}
-		(*params).i++;
-	}
-}

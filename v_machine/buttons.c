@@ -83,8 +83,11 @@ void	speed_listener(char spc, t_cycle *main_cycle, WINDOW **win)
 
 }
 
-void        char_listener(char spc, t_cycle *main_cycle, WINDOW **win)
+void        char_listener(t_cycle *main_cycle, WINDOW **win)
 {
+	char		spc;
+
+	spc = '\0';
     if ((*main_cycle).run == 1)
     {
         spc = (char)getch();
