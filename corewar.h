@@ -83,6 +83,7 @@ typedef struct		s_cycle
 	int				fork_ind;
 	int				run;
 	int				m;
+	int				ncurses;
 	t_proc			*head_proc;
 }					t_cycle;
 
@@ -213,7 +214,7 @@ void				get_args_values(t_proc *processes, unsigned char *map,
 void				take_args(unsigned char codage, t_proc *processes);
 void				map_to_screen(unsigned char *map, t_cycle *main_cycle,
 						t_flags *params, t_proc *processes, WINDOW *win);
-void				visual_init(WINDOW **win);
+void				visual_init(WINDOW **win, t_flags *params, t_header bots[MAX_PLAYERS]);
 void				print_winner(WINDOW *win, t_cycle main_cycle);
 int					read_bots(t_flags *params, int fd, t_header	bots[MAX_PLAYERS]);
 void				inst_vars_init(t_instr *inst_vars, t_proc *processes);
@@ -229,7 +230,7 @@ void				fill_start_map_id(t_cycle *main_cycle, t_header bots[MAX_PLAYERS],
 void				intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
 						WINDOW **win);
 void				after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
-						t_cycle main_cycle, WINDOW *win);
+						t_cycle main_cycle);
 void				print_adv(t_cycle *main_cycle, t_proc *processes,
 						t_flags *params, unsigned char *map);
 int					external_cycle_pass(t_cycle *main_cycle, unsigned char *map,

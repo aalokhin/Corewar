@@ -4,6 +4,7 @@ void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params, t_proc *
 {
 	int x;
 	int y;
+	int tmp;
 
 	x = 199;
 	y = 4;
@@ -16,32 +17,20 @@ void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params, t_proc *
 	mvwprintw(win, y, x,  "Processes: %d", (*main_cycle).processes);
 	while ((*processes).real_id != (*params).bots_quantity - 1)
 		processes = processes->next;
+	
+	y = y + (4 * (*params).bots_quantity);
+	tmp = y;
+	x+=2;
 	while (processes)
-	{
-		y += 2;
-		mvwprintw(win, y, x,  "Player: -%d : %s", (*processes).id + 1, (*processes).name);
-		x+=2;
-		y++;
+	{	
+		mvwprintw(win, y, x,  "Lives in current period : %d ", (*processes).lives);
+		y -= 1;
 		mvwprintw(win, y, x,  "Last live: %d ", (*processes).last_live_cycle);
-		y++;
-		mvwprintw(win, y, x,  "Lives in current period : %d ", (*processes).live_cycle);
+		y -= 3;
 		processes = processes->next;
 	}
-	y += 2;
+	y = tmp + 3;
 	x-=2;
-	mvwprintw(win, y, x,  "Live breakdown for current period :");
-	y += 2;
-	wattron(win, COLOR_PAIR(7));
-	mvwprintw(win, y, x,  "[--------------------------------------------------]");
-	wattroff(win, COLOR_PAIR(7));
-	y += 2;
-	mvwprintw(win, y, x,  "Live breakdown for last period :");
-	y += 2;
-	mvwprintw(win, y, x,  "Live breakdown for last period :");
-	wattron(win, COLOR_PAIR(7));
-	mvwprintw(win, y, x,  "[--------------------------------------------------]");
-	wattroff(win, COLOR_PAIR(7));
-	y += 2;
 	mvwprintw(win, y, x,  "CYCLE_TO_DIE : %d", (*main_cycle).cycle_die);
 	y += 2;
 	mvwprintw(win, y, x,  "CYCLE_DELTA : %d", CYCLE_DELTA);
@@ -49,6 +38,9 @@ void print_map_info(WINDOW * win, t_cycle *main_cycle, t_flags *params, t_proc *
 	mvwprintw(win, y, x,  "NBR_LIVE : %d", NBR_LIVE);
 	y += 2;
 	mvwprintw(win, y, x,  "MAX_CHECKS : %d", MAX_CHECKS);
+	y += 2;
+	if ((*main_cycle).winner_name )
+		mvwprintw(win, y, x,  "Current winner is : %s", (*main_cycle).winner_name);
 	(*main_cycle).winner_str = y + 2;
 	wrefresh(win);
 }
@@ -63,14 +55,24 @@ void print_winner(WINDOW * win, t_cycle main_cycle)
 	wattron(win, COLOR_PAIR(main_cycle.winner_id + 1));
 	mvwprintw(win, y, x,  "The winner is : %s", main_cycle.winner_name);
 	wattroff(win, COLOR_PAIR(main_cycle.winner_id + 1));
-	wrefresh(win);
+	y += 2;
+	mvwprintw(win, y, x,  "Press any key for exit");
+	if ((int)getch() == ' ')
+		endwin();
+	//wrefresh(win);
 }
 
-void visual_init(WINDOW **win)
+void visual_init(WINDOW **win, t_flags *params, t_header bots[MAX_PLAYERS])
 {
 	int  yMax;
 	int  xMax;
+	int i;
+	int x;
+	int y;
 
+	x = 199;
+	y = 9;
+	i = 0;
 	initscr();
 	cbreak();
 	noecho();
@@ -96,6 +98,13 @@ void visual_init(WINDOW **win)
 	wborder(*win, ls, rs, ts, bs, tl, tr, bl, br);
 	mvwvline(*win, 1, 196, 42, 70);
 	wattroff(*win, COLOR_PAIR(12));
+	while (i < (*params).bots_quantity)
+	{
+		y += 2;
+		mvwprintw(*win, y, x,  "Player: -%d : %s", bots[i].id + 1, bots[i].prog_name);
+		i++;
+		y += 2;
+	}
 }
 
 void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_proc *processes, WINDOW *win)
@@ -196,9 +205,9 @@ void 	map_to_screen(unsigned char *map, t_cycle *main_cycle, t_flags *params, t_
     		i++;
     	}
     	print_map_info(win, main_cycle, params, processes);
-    	wrefresh(win);
+    	//wrefresh(win);
     	y++;
 	}
-	wrefresh(win);
+	//wrefresh(win);
 
 }

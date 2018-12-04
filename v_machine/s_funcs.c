@@ -80,7 +80,7 @@ void	store_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	(inst_vars.one + inst_vars.two);
 	if (inst_vars.i > 65535)
 		inst_vars.i %= IDX_MOD;
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
 			printf("P%5d | sti r%d %d %d\n", cur_proc + 1,
@@ -116,7 +116,7 @@ void	store(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		inst_vars.tmp->regs[inst_vars.tmp->argv[1][1] - 1] =
 		inst_vars.tmp->regs[inst_vars.tmp->argv[0][1] - 1];
 	}
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
 			printf("P%5d | st r%d %d\n", cur_proc + 1,

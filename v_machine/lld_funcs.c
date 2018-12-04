@@ -46,7 +46,7 @@ void	load(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	}
 	else if ((*tmp).argv[0][0] == IND_CODE)
 		lload_ind_parse(tmp, map);
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
 			printf("P%5d | ld %d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
@@ -77,7 +77,7 @@ void	lload(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	}
 	else if (inst_vars.tmp->argv[0][0] == IND_CODE)
 		lload_ind_parse(inst_vars.tmp, map);
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
 			printf("P%5d | lld %d r%d\n", cur_proc + 1,

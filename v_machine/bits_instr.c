@@ -59,7 +59,7 @@ void	bit_and(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		inst_vars.tmp->carry = 1;
 	inst_vars.tmp->regs[inst_vars.tmp->argv[2][1] - 1] =
 	inst_vars.one & inst_vars.two;
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
 			printf("P%5d | and %d %d r%d\n", cur_proc + 1, inst_vars.one,
@@ -88,7 +88,7 @@ void	bit_or(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		inst_vars.tmp->carry = 1;
 	inst_vars.tmp->regs[inst_vars.tmp->argv[2][1] - 1] =
 	inst_vars.one | inst_vars.two;
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
 			printf("P%5d | or %d %d r%d\n", cur_proc + 1, inst_vars.one,
@@ -117,7 +117,7 @@ void	bit_xor(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		inst_vars.tmp->carry = 1;
 	inst_vars.tmp->regs[inst_vars.tmp->argv[2][1] - 1] =
 	inst_vars.one ^ inst_vars.two;
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
 			printf("P%5d | xor %d %d r%d\n", cur_proc + 1,

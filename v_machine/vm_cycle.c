@@ -36,7 +36,7 @@ int	take_args_and_do_instr(t_proc *processes, t_cycle *main_cycle,
 		g_instruct[(*processes).cmd -
 		1]((*main_cycle).head_proc, (*processes).id, main_cycle, map);
 	else if ((*processes).cmd != 16 || ((*processes).cmd == 16
-		&& (*params).a_aff))
+		&& (*params).a_aff && !(*params).ncurses))
 		g_instruct[(*processes).cmd -
 		1](processes, (*processes).id, main_cycle, map);
 	return (1);
@@ -99,7 +99,7 @@ void	internal_cycle_core(t_cycle *main_cycle, t_proc *processes,
 	}
 }
 
-void	vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
+void	vm_cycle(unsigned char *map, t_flags *params, t_header bots[MAX_PLAYERS])
 {
 	t_cycle		main_cycle;
 	t_proc		*processes;
@@ -122,13 +122,15 @@ void	vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
 	curs_set(0);
 	while (main_cycle.processes > 0)
 	{
-		if (((*params).v_verbosity >> 1) & 1)
+		if ((((*params).v_verbosity >> 1) & 1) && !(*params).ncurses)
 			printf("%s%d\n", "It is now cycle ", main_cycle.cycles + 1);
-		processes = main_cycle.head_proc;
+		processes = main_cycle.head_proc;		
 		if ((*params).ncurses == 1)
 		{
 			map_to_screen(map, &main_cycle, params, main_cycle.head_proc, win);
 			char_listener(spc, &main_cycle, &win);
+			if  (main_cycle.processes <= 0)
+				print_winner(win, main_cycle);
 			if (main_cycle.run == 0 && (*params).ncurses == 1)
 				continue ;
 		}
@@ -137,5 +139,5 @@ void	vm_cycle(unsigned char *map, t_flags *params, t_header bots[4])
 		if (!external_cycle_pass(&main_cycle, map, params))
 			break ;
 	}
-	after_cycle(params, bots, main_cycle, win);
+	after_cycle(params, bots, main_cycle);
 }

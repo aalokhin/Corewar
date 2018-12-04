@@ -19,7 +19,7 @@ void	intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
 
 	i = 0;
 	if ((*params).ncurses == 1)
-		visual_init(win);
+		visual_init(win, params, bots);
 	else
 	{
 		printf("%s\n", "Introducing contestants...");
@@ -34,7 +34,7 @@ void	intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
 }
 
 void	after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
-	t_cycle main_cycle, WINDOW *win)
+	t_cycle main_cycle)
 {
 	int i;
 
@@ -45,12 +45,7 @@ void	after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
 		bots[i].exec_part = NULL;
 		i++;
 	}
-	if ((*params).ncurses == 1)
-	{
-		print_winner(win, main_cycle);
-		endwin();
-	}
-	else if (!(*params).ncurses && !main_cycle.processes)
+	if (!(*params).ncurses && !main_cycle.processes)
 		printf("Contestant %d, \"%s\", has won !\n",
 			main_cycle.winner_id + 1, main_cycle.winner_name);
 }
@@ -62,7 +57,9 @@ void	print_adv(t_cycle *main_cycle, t_proc *processes, t_flags *params,
 
 	j = 0;
 	(*main_cycle).indexes[(*processes).current_position][1] = NO_CARETKA;
-	if (((*params).v_verbosity >> 4) & 1 && (*main_cycle).shift > 0/* &&
+	if (((*params).v_verbosity >> 4) & 1 && (*main_cycle).shift > 0
+		&& !(*params).ncurses
+	/* &&
 		map[(*processes).current_position] >= 1 && map[(*processes).current_position] <= 16*/)
 	{
 		printf("ADV %d (0x%.4x -> 0x%.4x) ", (*main_cycle).shift,
@@ -86,7 +83,7 @@ int		external_cycle_pass(t_cycle *main_cycle, unsigned char *map,
 		usleep((useconds_t)((int)1000000 / (*main_cycle).second_limit));
 	(*main_cycle).cycles++;
 	if (((*params).d_dumps_memory > 0 && (*main_cycle).cycles ==
-		(*params).d_dumps_memory))
+		(*params).d_dumps_memory) && !(*params).ncurses)
 	{
 		print_dump(map);
 		return (0);

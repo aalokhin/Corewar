@@ -34,7 +34,7 @@ void	ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	while (tmp && (*tmp).id != cur_proc)
 		tmp = tmp->next;
 	i = (*tmp).current_position + (*tmp).argv[0][1] % IDX_MOD;
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if ((*tmp).id + 1 <= 9999)
 			printf("P%5d | fork %d (%d)\n",
@@ -61,7 +61,7 @@ void	long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	while (tmp && (*tmp).id != cur_proc)
 		tmp = tmp->next;
 	i = (*tmp).argv[0][1] + (*tmp).current_position;
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if ((*tmp).id + 1 <= 9999)
 			printf("P%5d | lfork %d (%d)\n", (*tmp).id + 1,

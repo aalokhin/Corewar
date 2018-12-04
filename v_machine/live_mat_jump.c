@@ -26,7 +26,7 @@ void	live_dir_proc(t_proc *child_proc, t_proc *head_proc,
 		if (tmp)
 		{
 			(*tmp).last_live_cycle = (*main_cycle).cycles;
-			if (((*main_cycle).verbose & 1))
+			if (((*main_cycle).verbose & 1) && !(*main_cycle).ncurses)
 				printf("Player %d (%s) is said to be alive\n",
 				(*child_proc).argv[0][1] + 1, (*tmp).name);
 		}
@@ -45,7 +45,7 @@ void	live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 	(*child_proc).last_live_cycle = (*main_cycle).cycles;
 	(*child_proc).lives++;
 	(*child_proc).live_cycle = 0;
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if ((*child_proc).id + 1 <= 9999)
 			printf("P%5d | live %d\n", (*child_proc).id + 1,
@@ -77,7 +77,7 @@ void	addition(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		(*tmp).carry = 1;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = (*tmp).regs[(*tmp).argv[0][1] - 1] +
 	(*tmp).regs[(*tmp).argv[1][1] - 1];
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
 			printf("P%5d | add r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
@@ -106,7 +106,7 @@ void	substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		(*tmp).carry = 1;
 	(*tmp).regs[(*tmp).argv[2][1] - 1] = (*tmp).regs[(*tmp).argv[0][1] - 1] -
 	(*tmp).regs[(*tmp).argv[1][1] - 1];
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
 			printf("P%5d | sub r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
@@ -137,7 +137,7 @@ void	zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 			MEM_SIZE) % MEM_SIZE][1] = 1;
 		res = "OK";
 	}
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
 			printf("P%5d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);

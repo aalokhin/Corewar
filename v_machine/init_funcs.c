@@ -72,6 +72,7 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).head_proc = NULL;
 	(*main_cycle).start_bots = (*params).bots_quantity;
 	(*main_cycle).verbose = (*params).v_verbosity;
+	(*main_cycle).ncurses = (*params).ncurses;
 	(*main_cycle).max_id = 0;
 	(*main_cycle).shift = 0;
 	(*main_cycle).id_counter = 0;

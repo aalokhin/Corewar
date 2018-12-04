@@ -56,7 +56,7 @@ void	load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 		return ;
 	inst_vars.i = (inst_vars.one + inst_vars.two) +
 	inst_vars.tmp->current_position;
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		print_ldi_instr(0, cur_proc, inst_vars);
 		printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|',
@@ -96,7 +96,7 @@ void	lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	inst_vars.tmp->carry = 0;
 	inst_vars.i = (((inst_vars.one + inst_vars.two) +
 	inst_vars.tmp->current_position) + MEM_SIZE) % MEM_SIZE;
-	if (((*main_cycle).verbose >> 2) & 1)
+	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		print_ldi_instr(1, cur_proc, inst_vars);
 		printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|',
