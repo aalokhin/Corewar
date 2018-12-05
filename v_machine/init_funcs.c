@@ -66,7 +66,7 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).checks_if_die = MAX_CHECKS;
 	(*main_cycle).winner_str = 0;
 	(*main_cycle).winner_name = NULL;
-	(*main_cycle).winner_id = 0;
+	(*main_cycle).winner_id = -1;
 	(*main_cycle).head_proc = NULL;
 	(*main_cycle).start_bots = (*params).bots_quantity;
 	(*main_cycle).verbose = (*params).v_verbosity;

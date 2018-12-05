@@ -29,7 +29,7 @@ void	vm_cycle(unsigned char *map, t_flags *params,
 	after_cycle(params, bots, main_cycle, &win);
 }
 
-void	fill_start_map_id(t_cycle *main_cycle, t_header bots[4],
+void	fill_start_map_id(t_cycle *main_cycle, t_header bots[MAX_PLAYERS],
 	t_flags *params)
 {
 	unsigned int	k;

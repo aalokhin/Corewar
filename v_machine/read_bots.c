@@ -113,14 +113,14 @@ int		read_bots(t_flags *params, int fd, t_header bots[MAX_PLAYERS])
 			return (0);
 		str = (unsigned char *)malloc(sizeof(unsigned char) * len + 1);
 		read(fd, str, len);
-		if (!check_magic(str, params, (*params).j, bots) ||
+		if (!take_bots_params(str, params, len, bots) ||
+		!check_magic(str, params, (*params).j, bots) ||
 		!if_correct_name(str, params, (*params).j) ||
 		!check_comment(str, params, (*params).j))
 			return (0);
 		ft_strncpy(bots[(*params).j].prog_name,
 		(const char *)(&str[MAGIC_S]), PROG_NAME_L);
-		if (!take_bots_params(str, params, len, bots) ||
-			!copy_bots_to_map(bots, str, params))
+		if (!copy_bots_to_map(bots, str, params))
 			return (0);
 		close(fd);
 		(*params).j++;

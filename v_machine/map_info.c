@@ -38,6 +38,7 @@ void	print_map_info2(WINDOW *win, t_cycle *main_cycle, int x, int y)
 		wattron(win, COLOR_PAIR((*main_cycle).live_id + 1));
 		mvwprintw(win, y, x, "A process shows that player %d (%s) is alive",
 		(*main_cycle).live_id + 1, (*main_cycle).live_name);
+		wrefresh(win);
 		wattroff(win, COLOR_PAIR((*main_cycle).live_id + 1));
 	}
 	y += 2;
@@ -47,6 +48,7 @@ void	print_map_info2(WINDOW *win, t_cycle *main_cycle, int x, int y)
 		mvwprintw(win, y, x, "Current winner is : %s",
 		(*main_cycle).winner_name);
 		wattroff(win, COLOR_PAIR((*main_cycle).winner_id + 1));
+		wrefresh(win);
 	}
 	(*main_cycle).winner_str = y + 2;
 	wrefresh(win);
@@ -72,8 +74,10 @@ void	print_map_info(WINDOW *win, t_cycle *main_cycle, t_flags *params)
 	{
 		mvwprintw(win, y, x, "Lives in current period : %d ",
 			(*processes).lives);
+		wrefresh(win);
 		y -= 1;
 		mvwprintw(win, y, x, "Last live: %d ", (*processes).last_live_cycle);
+		wrefresh(win);
 		y -= 3;
 		if ((*processes).last_live_cycle ==
 			(*main_cycle).cycles - 1 && (*main_cycle).cycles != 1)

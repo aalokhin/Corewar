@@ -20,9 +20,14 @@ void	print_winner(WINDOW **win, t_cycle *main_cycle)
 
 	x = 199;
 	y = (*main_cycle).winner_str;
-	wattron(*win, COLOR_PAIR((*main_cycle).winner_id + 1));
-	mvwprintw(*win, y, x, "Player %d (%s) won", (*main_cycle).winner_id + 1, (*main_cycle).winner_name);
-	wattroff(*win, COLOR_PAIR((*main_cycle).winner_id + 1));
+	if ((*main_cycle).winner_id >= 0)
+	{
+		wattron(*win, COLOR_PAIR((*main_cycle).winner_id + 1));
+		mvwprintw(*win, y, x, "Player %d (%s) won", (*main_cycle).winner_id + 1, (*main_cycle).winner_name);
+		wattroff(*win, COLOR_PAIR((*main_cycle).winner_id + 1));
+	}
+	else
+		mvwprintw(*win, y, x, "There is no winner in this game. Friendship won:)");
 	y += 2;
 	mvwprintw(*win, y, x, "Press any key for exit");
 	wrefresh(*win);

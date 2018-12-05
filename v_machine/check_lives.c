@@ -60,7 +60,8 @@ int		check_if_lives(t_cycle *main_cycle, t_flags *params)
 	tmp2 = (*main_cycle).head_proc;
 	while (tmp)
 	{
-		if ((*tmp).last_live_cycle > (*main_cycle).current_winner)
+		if ((*tmp).last_live_cycle > (*main_cycle).current_winner
+			&& (*tmp).last_live_cycle > 0)
 		{
 			(*main_cycle).current_winner = (*tmp).last_live_cycle;
 			if ((*tmp).parent_nbr == -1)
