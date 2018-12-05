@@ -43,7 +43,7 @@ int		check_flag_v(char **argv, int argc, t_flags *params)
 
 int		check_flags_with_nbr(char **argv, int argc, t_flags *params)
 {
-	if (ft_strcmp(argv[(*params).i], "-d") == 0 && (*params).i + 1 < argc)
+	if (ft_strcmp(argv[(*params).i], "-dump") == 0 && (*params).i + 1 < argc)
 	{
 		if (ft_atoi(argv[(*params).i + 1]) > 0)
 		{
@@ -85,7 +85,7 @@ int		check_flags_core(int argc, char **argv, t_flags *params)
 	{
 		if (ft_strcmp(argv[(*params).i], "-a") == 0)
 			(*params).a_aff = 1;
-		else if ((ft_strcmp(argv[(*params).i], "-d") == 0 ||
+		else if ((ft_strcmp(argv[(*params).i], "-dump") == 0 ||
 		ft_strcmp(argv[(*params).i], "-v") == 0
 		|| ft_strcmp(argv[(*params).i], "-n") == 0) && (*params).i + 1 >= argc)
 		{
