@@ -90,11 +90,11 @@ void	print_usage(void)
 
 	octos = "##########################################################";
 	ft_printf("%s", "Usage: ./corewar [-dump N -v N");
-	ft_printf("%s\n", "| -n N] [-a] <champion1.cor> <...>");
+	ft_printf("%s\n", " -n N | -nc] [-a] <champion1.cor> <...>");
 	ft_printf("%6s", "-a");
 	ft_printf("%58s\n", ": Prints output from \"aff\" (Default is to hide it)");
 	ft_printf("%s%s\n", "#### TEXT OUTPUT MODE ", octos);
-	ft_printf("%8s%46s\n",
+	ft_printf("%11s%43s\n",
 		"-dump N", ": Dumps memory after N cycles then exits");
 	ft_printf("%26s", "-v N      : Verbosity ");
 	ft_printf("%s\n", "levels, can be added together to enable several");

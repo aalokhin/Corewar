@@ -20,10 +20,6 @@ Usage: ./vm_champs/corewar [-d N -s N -v N | -b --stealth | -n --stealth] [-a] <
 ################################################################################
 
 
-272 / 2 имя бота
-после 8 байт 16 символов размер бота
-4104 /2 коммент бота
-дальше сам бот = размер
 
 
 Один нюанс, если T_REG не последний аргумент в функции, то нужно использовать значения из регистра каретки, т.е. argument1 = karetka->[T_REG].???
@@ -32,24 +28,10 @@ Usage: ./vm_champs/corewar [-d N -s N -v N | -b --stealth | -n --stealth] [-a] <
 If during one of those checkup we notice that there has been at least one NBR_LIVE execution of live since the latest check up, we will decrease CYCLE_TO_DIE of CYCLE_DELTA units.
 For each valid execution of the live instruction, the machine must display: “A process shows that player X (champion_name) is alive”.??? не забыть заменить на текст из сабджекта
 
-если после флага вместо числа чтото левое, то оригинал работает, что делать?
-протеститьь проверку имени и коммента
-Error: File vm_champs/champs/ex.cor is too small to be a champion если меньше бот чем имя и коммент - протестить этот кейс
-
-если задержка в программе больше 1 цикла, нужно ли прорисовывать карту чаще? или только ра в период ожидания?
 
 проверить чтоб текст эроров совпадал с сабджектом или примером
 
-без флагов возможно повисает цикл, проверить
-
-разобраться с ограничением размера
-
 проверить вывод всех инструкций чтоб совпадал
-проверить если в боте одни нули или исполнительная чусть нулевая или бот короче чем сумма имени и комента
-разобраться с ограничением размера
-
-2014 bjacob Error: File vm_champs/champs/championships/2014/bjacob is too small to be a champion ./vm_champs/corewar vm_champs/champs/championships/2014/bjacob?
-если нулевой бот 0 сайз то на 1 отлтчается сколько циклов он не жил, например экс
 
 Start testing 48 combinations of this bots: ./champs/championships/2014/ekocevar/mandragore.cor ./champs/championships/2017/agregoir/Kittystrophic.cor ./champs/championships/2017/gnebie/ultima.cor ./champs/Car.cor
 make: Nothing to be done for `all'.
@@ -124,7 +106,6 @@ Introducing contestants...
 только если победитель объявлен в пределах указанного количества циклов?
 
 train бот - почему один процесс может выполнять подряд 2 инструкции?
-
 
 djestin цикл 55
 | -> store to 0 + 50595074 = 50595074 (with pc and mod 283)
@@ -219,18 +200,11 @@ adenis не совпадает потому что у меня бере стар
 почему в аденисе при флаге д у меня не печатается правилько низ карты, хотя он совпадает, во всяком случае там не 0
 проверить чтоб не было лишних файлов
 
-добавить в визуализацию победителя текущего и проверить ка кработает
-у нас после выигрыша выходит сразу, нужно остановить показат победителя и выйти по кнопке надо пофиксить
-
-долбавить текст как в сабдекте
-
 решить с музыкой
-
-не обновляется, а накладывается текст A process shows that player
 
 проверить чтоб в дочерних ботах правильно печатался номер и имя и цвет и каретка
 заититься от нуля в боте или в константах
-ничего не пменяется если перед исполнительной частью нет налла, в оригинале тоже
+ничего не п0меняется если перед исполнительной частью нет налла, в оригинале тоже
 все константы должны быть дефолтными
 не должно быть макс размер бота больше размеру карты
 размер 325 ка ки у гагнанта, печатаются лишние символы
@@ -256,94 +230,9 @@ tbillard
 
 нет защиты если автоматом поставлен номер игрока, а потом такой же задан флагом, что делать?
 
-
-#include "../corewar.h"
-
-void    print_map_info3(WINDOW *win, t_cycle *main_cycle, int x, int y)
-{
-    if ((*main_cycle).live_name)
-    {
-        wattron(win, COLOR_PAIR((*main_cycle).live_id + 1));
-        mvwprintw(win, y, x, "A process shows that player %d (%s) is alive",
-        (*main_cycle).live_id + 1, (*main_cycle).live_name);
-        wrefresh(win);
-        wattroff(win, COLOR_PAIR((*main_cycle).live_id + 1));
-    }
-    y += 2;
-    if ((*main_cycle).winner_name)
-    {
-        wattron(win, COLOR_PAIR((*main_cycle).winner_id + 1));
-        mvwprintw(win, y, x, "Current winner is : %s",
-        (*main_cycle).winner_name);
-        wattroff(win, COLOR_PAIR((*main_cycle).winner_id + 1));
-        wrefresh(win);
-    }
-    wrefresh(win);
-}
-
-void    print_map_info2(WINDOW *win, t_cycle *main_cycle, int x, int y)
-{
-    int x_0;
-    int y_0;
-
-    x_0 = 199;
-    y_0 = 4;
-    mvwprintw(win, y_0, x_0, "Cycles/second limit : %d",
-        (*main_cycle).second_limit);
-    y_0 += 3;
-    mvwprintw(win, y_0, x_0, "Cycles: %d", (*main_cycle).cycles);
-    y_0 += 2;
-    mvwprintw(win, y_0, x_0, "Processes: %d", (*main_cycle).processes);
-    mvwprintw(win, y, x, "CYCLE_TO_DIE : %d", (*main_cycle).cycle_die);
-    y += 2;
-    mvwprintw(win, y, x, "CYCLE_DELTA : %d", CYCLE_DELTA);
-    y += 2;
-    mvwprintw(win, y, x, "NBR_LIVE : %d", NBR_LIVE);
-    y += 2;
-    mvwprintw(win, y, x, "MAX_CHECKS : %d", (*main_cycle).checks_if_die);
-    y += 2;
-    print_map_info3(win, main_cycle, x, y);
-    (*main_cycle).winner_str = y + 2;
-    wrefresh(win);
-}
-
-void    print_map_info(WINDOW *win, t_cycle *main_cycle, t_flags *params)
-{
-    int     x;
-    int     y;
-    int     tmp;
-    t_proc  *processes;
-
-    x = 201;
-    y = 9 + (4 * (*params).bots_quantity);
-    processes = (*main_cycle).head_proc;
-    wrefresh(win);
-    while ((*processes).real_id != (*params).bots_quantity - 1)
-        processes = processes->next;
-    tmp = y;
-    while (processes)
-    {
-        mvwprintw(win, y--, x, "Lives in current period : %d ",
-            (*processes).lives);
-        wrefresh(win);
-        mvwprintw(win, y, x, "Last live: %d ", (*processes).last_live_cycle);
-        wrefresh(win);
-        y -= 3;
-        if ((*processes).last_live_cycle ==
-            (*main_cycle).cycles - 1 && (*main_cycle).cycles != 1)
-        {
-            (*main_cycle).live_id = (*processes).id;
-            (*main_cycle).live_name = (*processes).name;
-        }
-        processes = processes->next;
-    }
-    print_map_info2(win, main_cycle, x - 2, tmp + 3);
-}
-
-
-
 проверить айди плеера справа, возможно там не тот
 
 может все таки добавить +1 в строки и заналить вконце
 если последний живой цико одинаковй, печатает бота которфый в листе раньше
 что если вконце игры 2 одинаковых бота?
+проверить а флаг

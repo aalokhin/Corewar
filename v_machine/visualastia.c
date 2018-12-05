@@ -81,10 +81,10 @@ void	visual_init(WINDOW **win, t_flags *params,
 	while (i < (*params).bots_quantity)
 	{
 		y += 2;
-		wattron(*win, COLOR_PAIR(bots[i].id + 1));
+		wattron(*win, COLOR_PAIR(i + 1));
 		mvwprintw(*win, y, x, "Player: -%d : %s",
 			bots[i].id + 1, bots[i].prog_name);
-		wattroff(*win, COLOR_PAIR(bots[i].id + 1));
+		wattroff(*win, COLOR_PAIR(i + 1));
 		i++;
 		y += 4;
 	}
