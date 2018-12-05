@@ -114,7 +114,7 @@ void	map_to_screen(unsigned char *map, t_cycle *main_cycle,
 	while (i < MEM_SIZE)
 	{
 		x = 3;
-		while (x < 194)
+		while (x < 194 && i < MEM_SIZE)
 		{
 			res = id_count(main_cycle, params, i);
 			if ((*main_cycle).indexes[i][1] == CARETKA)

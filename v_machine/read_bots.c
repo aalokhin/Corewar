@@ -33,7 +33,7 @@ int		check_bot_size(int len, unsigned char *str, t_header bots[MAX_PLAYERS],
 	if ((*params).sum_bots > MEM_SIZE)
 	{
 		ft_printf("Error: %s %d MEM_SIZE for this game\n",
-		"Too small map size, you need at least ",
+		"Too small map size, you need at least",
 		(*params).sum_bots);
 		return (0);
 	}
@@ -62,7 +62,7 @@ int		take_bots_params(unsigned char *str, t_flags *params, int len,
 	ft_strncpy(bots[(*params).j].comment, (const char *)(&str[140]),
 		COMMENT_L);
 	bots[(*params).j].exec_part = (unsigned char *)malloc(sizeof(unsigned char)
-	* (bots[(*params).j].prog_size + 1));
+	* (bots[(*params).j].prog_size));
 	return (1);
 }
 
@@ -70,7 +70,7 @@ int		copy_bots_to_map(t_header bots[MAX_PLAYERS], unsigned char *str,
 	t_flags *params)
 {
 	(*params).i = 0;
-	ft_bzero(bots[(*params).j].exec_part, bots[(*params).j].prog_size + 1);
+	ft_bzero(bots[(*params).j].exec_part, bots[(*params).j].prog_size);
 	bots[(*params).j].start_index = (MEM_SIZE /
 	(*params).bots_quantity) * (*params).j;
 	while ((unsigned int)(*params).i < bots[(*params).j].prog_size)
@@ -111,7 +111,7 @@ int		read_bots(t_flags *params, int fd, t_header bots[MAX_PLAYERS])
 	{
 		if (!bot_open(&fd, params, &len))
 			return (0);
-		str = (unsigned char *)malloc(sizeof(unsigned char) * len + 1);
+		str = (unsigned char *)malloc(sizeof(unsigned char) * len);
 		read(fd, str, len);
 		if (!take_bots_params(str, params, len, bots) ||
 		!check_magic(str, params, (*params).j, bots) ||

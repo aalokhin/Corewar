@@ -81,7 +81,7 @@ Introducing contestants...
 * Player 3, weighing 614 bytes, "Ultima" ("
 * Player 4, weighing 281 bytes, "Tching tching(Intercepteur), Bouh!Bouh!(bruits d'anti-jeu)" ("") !
 
-./corewar vm_champs/champs/championships/2014/ekocevar/mandragore.cor vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor vm_champs/champs/championships/2017/gnebie/ultima.cor vm_champs/champs/Car.cor
+./corewar -nc vm_champs/champs/championships/2014/ekocevar/mandragore.cor vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor vm_champs/champs/championships/2017/gnebie/ultima.cor vm_champs/champs/Car.cor
 бас эррор
 
 * Player 1, weighing 614 bytes, "Ultima" ("
@@ -224,7 +224,6 @@ adenis не совпадает потому что у меня бере стар
 
 долбавить текст как в сабдекте
 
-появился сегфолт при запуске 4 ботов!
 решить с музыкой
 
 не обновляется, а накладывается текст A process shows that player
@@ -232,3 +231,6 @@ adenis не совпадает потому что у меня бере стар
 проверить чтоб в дочерних ботах правильно печатался номер и имя и цвет и каретка
 заититься от нуля в боте или в константах
 ничего не пменяется если перед исполнительной частью нет налла, в оригинале тоже
+все константы должны быть дефолтными
+не должно быть макс размер бота больше размеру карты
+размер 325 ка ки у гагнанта, печатаются лишние символы

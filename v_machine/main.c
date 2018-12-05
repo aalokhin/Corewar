@@ -53,7 +53,8 @@ void	fill_start_map_id(t_cycle *main_cycle, t_header bots[MAX_PLAYERS],
 				(*main_cycle).indexes[(*params).i++][0] = (*params).j + 1;
 			(*params).j++;
 		}
-		(*params).i++;
+		else
+			(*params).i++;
 	}
 }
 
@@ -81,7 +82,8 @@ void	create_map(t_header bots[MAX_PLAYERS], t_flags *params)
 			}
 			j++;
 		}
-		i++;
+		else
+			i++;
 	}
 	vm_cycle(map, params, bots);
 }
@@ -121,6 +123,11 @@ int		main(int argc, char **argv)
 	if (argc == 1)
 	{
 		print_usage();
+		return (0);
+	}
+	if (CHAMP_MAX_SIZE > MEM_SIZE)
+	{
+		ft_printf("%s\n", "Incorrect const values");
 		return (0);
 	}
 	params_init(&params);
