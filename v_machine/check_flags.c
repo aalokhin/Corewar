@@ -70,13 +70,20 @@ int		check_flags_nc_and_bots(char **argv, t_flags *params)
 	(argv[(*params).i][ft_strlen(argv[(*params).i]) - 4]), ".cor") == 0)
 	{
 		if ((*params).bots_quantity == MAX_PLAYERS)
+		{
+			ft_printf("%s\n", "Error: Too many champions");
 			return (0);
+		}
 		(*params).j++;
 		(*params).players[(*params).bots_quantity++] = argv[(*params).i];
 		return (1);
 	}
 	else
+	{
+		ft_printf("%s %s\n", "Error: Can't read source file",
+			argv[(*params).i]);
 		return (-1);
+	}
 }
 
 int		check_flags_core(int argc, char **argv, t_flags *params)

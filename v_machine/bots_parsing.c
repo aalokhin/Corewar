@@ -14,32 +14,29 @@
 
 int		if_correct_name(unsigned char *str, t_flags *params, int j)
 {
-	int i;
-
-	i = MAGIC_S;
-	while (i < PROG_NAME_L + MAGIC_S)
-		i++;
-	while (i < PROG_NAME_L + MAGIC_S + NULL_S)
+	(*params).i = MAGIC_S;
+	while ((*params).i < PROG_NAME_L + MAGIC_S)
+		(*params).i++;
+	while ((*params).i < PROG_NAME_L + MAGIC_S + NULL_S)
 	{
-		if (str[i] != 0)
+		if (str[(*params).i++] != 0)
 		{
 			ft_printf("Error: File %s has an invalid header\n",
 				(*params).players[j]);
 			return (0);
 		}
-		i++;
 	}
-	while (i < PROG_NAME_L + MAGIC_S + NULL_S + EXEC_S + COMMENT_L)
-		i++;
-	while (i < PROG_NAME_L + MAGIC_S + NULL_S * 2 + EXEC_S + COMMENT_L)
+	while ((*params).i < PROG_NAME_L + MAGIC_S + NULL_S + EXEC_S + COMMENT_L)
+		(*params).i++;
+	while ((*params).i < PROG_NAME_L + MAGIC_S + NULL_S * 2
+		+ EXEC_S + COMMENT_L)
 	{
-		if (str[i] != 0)
+		if (str[(*params).i++] != 0)
 		{
 			ft_printf("Error: File %s has an invalid header\n",
 				(*params).players[j]);
 			return (0);
 		}
-		i++;
 	}
 	return (1);
 }

@@ -24,7 +24,7 @@ void	vm_cycle(unsigned char *map, t_flags *params,
 	fill_start_map_id(&main_cycle, bots, params);
 	processes = processes_init(params, bots, map);
 	main_cycle.head_proc = processes;
-	intro_print(params, bots, &win, &main_cycle);
+	intro_print(params, bots, &win);
 	start_cycle(map, params, &win, &main_cycle);
 	after_cycle(params, bots, main_cycle, &win);
 }
@@ -75,11 +75,7 @@ void	create_map(t_header bots[MAX_PLAYERS], t_flags *params)
 		{
 			k = 0;
 			while (k < bots[j].prog_size)
-			{
-				map[i] = bots[j].exec_part[k];
-				i++;
-				k++;
-			}
+				map[i++] = bots[j].exec_part[k++];
 			j++;
 		}
 		else
@@ -98,7 +94,8 @@ void	print_usage(void)
 	ft_printf("%6s", "-a");
 	ft_printf("%58s\n", ": Prints output from \"aff\" (Default is to hide it)");
 	ft_printf("%s%s\n", "#### TEXT OUTPUT MODE ", octos);
-	ft_printf("%8s%46s\n", "-dump N", ": Dumps memory after N cycles then exits");
+	ft_printf("%8s%46s\n",
+		"-dump N", ": Dumps memory after N cycles then exits");
 	ft_printf("%26s", "-v N      : Verbosity ");
 	ft_printf("%s\n", "levels, can be added together to enable several");
 	ft_printf("%43s%32s\n", "- 0 : Show only essentials\n", "- 1 : Show lives");
@@ -116,9 +113,7 @@ int		main(int argc, char **argv)
 	int				fd;
 	t_flags			params;
 	static t_header	bots[MAX_PLAYERS];
-	int				res;
 
-	res = 0;
 	fd = 0;
 	if (argc == 1)
 	{
@@ -127,19 +122,12 @@ int		main(int argc, char **argv)
 	}
 	if (CHAMP_MAX_SIZE > MEM_SIZE)
 	{
-		ft_printf("%s\n", "Incorrect const values");
+		ft_printf("%s\n", "Error: Incorrect const values");
 		return (0);
 	}
 	params_init(&params);
-	res = check_flags_core(argc, argv, &params);
-	if (res <= 0)
-	{
-		if (res == 0)
-			ft_printf("%s\n", "Too many champions");
-		if (res == -1)
-			ft_printf("%s %s\n", "Can't read source file", argv[params.i]);
+	if (check_flags_core(argc, argv, &params) <= 0)
 		exit(0);
-	}
 	init_bots(bots);
 	if (!read_bots(&params, fd, bots))
 		exit(0);

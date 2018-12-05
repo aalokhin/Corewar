@@ -20,7 +20,7 @@ void	music_listener(char spc, t_cycle *main_cycle, WINDOW **win)
 		{
 			system("afplay  media/Game_of_Thrones.mp3 &> /dev/null &");
 			(*main_cycle).m = 1;
-			mvwprintw(*win, 45, 199,
+			mvwprintw(*win, (*main_cycle).winner_str + 10, 199,
 				"=============> MUSIC  start <==============");
 			wrefresh(*win);
 		}
@@ -28,7 +28,7 @@ void	music_listener(char spc, t_cycle *main_cycle, WINDOW **win)
 		{
 			system("pkill -STOP afplay  &> /dev/null &");
 			(*main_cycle).m = 2;
-			mvwprintw(*win, 45, 199,
+			mvwprintw(*win, (*main_cycle).winner_str + 10, 199,
 				"=============> MUSIC  ON pause <==============");
 			wrefresh(*win);
 		}
@@ -36,7 +36,7 @@ void	music_listener(char spc, t_cycle *main_cycle, WINDOW **win)
 		{
 			system("pkill -CONT afplay  &> /dev/null &");
 			(*main_cycle).m = 1;
-			mvwprintw(*win, 45, 199,
+			mvwprintw(*win, (*main_cycle).winner_str + 10, 199,
 				"=============> MUSIC  ON play <==============");
 			wrefresh(*win);
 		}
@@ -45,7 +45,7 @@ void	music_listener(char spc, t_cycle *main_cycle, WINDOW **win)
 	{
 		system("pkill afplay &> /dev/null &");
 		(*main_cycle).m = 0;
-		mvwprintw(*win, 45, 199,
+		mvwprintw(*win, (*main_cycle).winner_str + 10, 199,
 			"=============> MUSIC  OFF <==============");
 		wrefresh(*win);
 	}

@@ -8,15 +8,15 @@
 ./vm_champs/corewar vm_champs/champs/championships/2017/pzarmehr/overwatch.cor -v 31 -d 20000 > /tmp/test_files/all_v_or_pzarmehr
 ./vm_champs/corewar vm_champs/champs/championships/2017/tbillard/Douceur_power.cor -v 31 -d 20000 > /tmp/test_files/all_v_or_tbillard
 
-./corewar vm_champs/champs/championships/2017/adenis/Explosive_Kitty.cor -v 31 -d 20000 > /tmp/test_files/all_v_my_adenis
-./corewar vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor -v 31 -d 20000 > /tmp/test_files/all_v_my_agregoir
-./corewar vm_champs/champs/championships/2017/gnebie/ultima.cor -v 31 -d 20000 > /tmp/test_files/all_v_my_gnebie
-./corewar vm_champs/champs/championships/2017/iburel/ultimate-surrender.cor -v 31 -d 20000 > /tmp/test_files/all_v_my_iburel
-./corewar vm_champs/champs/championships/2017/gateau/gateau.cor -v 31 -d 20000 > /tmp/test_files/all_v_my_gateau
-./corewar vm_champs/champs/championships/2017/jaustry/mise_a_jour_windows95.cor -v 31 -d 20000 > /tmp/test_files/all_v_my_jaustry
-./corewar vm_champs/champs/championships/2017/nolivier/run_Kitty_RUN.cor -v 31 -d 20000 > /tmp/test_files/all_v_my_nolivier
-./corewar vm_champs/champs/championships/2017/pzarmehr/overwatch.cor -v 31 -d 20000 > /tmp/test_files/all_v_my_pzarmehr
-./corewar vm_champs/champs/championships/2017/tbillard/Douceur_power.cor -v 31 -d 20000 > /tmp/test_files/all_v_my_tbillard
+./corewar vm_champs/champs/championships/2017/adenis/Explosive_Kitty.cor -v 31 -dump 20000 > /tmp/test_files/all_v_my_adenis
+./corewar vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor -v 31 -dump 20000 > /tmp/test_files/all_v_my_agregoir
+./corewar vm_champs/champs/championships/2017/gnebie/ultima.cor -v 31 -dump 20000 > /tmp/test_files/all_v_my_gnebie
+./corewar vm_champs/champs/championships/2017/iburel/ultimate-surrender.cor -v 31 -dump 20000 > /tmp/test_files/all_v_my_iburel
+./corewar vm_champs/champs/championships/2017/gateau/gateau.cor -v 31 -dump 20000 > /tmp/test_files/all_v_my_gateau
+./corewar vm_champs/champs/championships/2017/jaustry/mise_a_jour_windows95.cor -v 31 -dump 20000 > /tmp/test_files/all_v_my_jaustry
+./corewar vm_champs/champs/championships/2017/nolivier/run_Kitty_RUN.cor -v 31 -dump 20000 > /tmp/test_files/all_v_my_nolivier
+./corewar vm_champs/champs/championships/2017/pzarmehr/overwatch.cor -v 31 -dump 20000 > /tmp/test_files/all_v_my_pzarmehr
+./corewar vm_champs/champs/championships/2017/tbillard/Douceur_power.cor -v 31 -dump 20000 > /tmp/test_files/all_v_my_tbillard
 
 diff /tmp/test_files/all_v_or_adenis /tmp/test_files/all_v_my_adenis > /tmp/test_files/diff_v_adenis
 diff /tmp/test_files/all_v_or_agregoir /tmp/test_files/all_v_my_agregoir > /tmp/test_files/diff_v_agregoir

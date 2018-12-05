@@ -87,7 +87,7 @@ int		bot_open(int *fd, t_flags *params, unsigned int *len)
 {
 	if ((*fd = open((*params).players[(*params).j], O_RDONLY)) < 0)
 	{
-		ft_printf("%s %s\n", "Can't read source file",
+		ft_printf("%s %s\n", "Error: Incorrect arg or can't read source file",
 			(*params).players[(*params).j]);
 		return (0);
 	}
@@ -111,7 +111,8 @@ int		read_bots(t_flags *params, int fd, t_header bots[MAX_PLAYERS])
 	{
 		if (!bot_open(&fd, params, &len))
 			return (0);
-		str = (unsigned char *)malloc(sizeof(unsigned char) * len);
+		str = (unsigned char *)malloc(sizeof(unsigned char) * len + 1);
+		str[len] = 0;
 		read(fd, str, len);
 		if (!take_bots_params(str, params, len, bots) ||
 		!check_magic(str, params, (*params).j, bots) ||

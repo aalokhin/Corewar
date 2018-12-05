@@ -99,7 +99,7 @@ Introducing contestants...
 * Player 3, weighing 400 bytes, "mandragore" ("you can see me, you can't anymore, you can, you can't !") !
 * Player 4, weighing 514 bytes, "Kittystrophic" ("Jan-ken-pon (じゃんけんぽん)
 
-сегфолт ./corewar vm_champs/champs/championships/2017/gnebie/ultima.cor  vm_champs/champs/Car.cor vm_champs/champs/championships/2014/ekocevar/mandragore.cor vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor
+сегфолт ./corewar -nc vm_champs/champs/championships/2017/gnebie/ultima.cor  vm_champs/champs/Car.cor vm_champs/champs/championships/2014/ekocevar/mandragore.cor vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor
 
 Introducing contestants...
 * Player 1, weighing 400 bytes, "mandragore" ("you can see me, you can't anymore, you can, you can't !") !
@@ -234,3 +234,116 @@ adenis не совпадает потому что у меня бере стар
 все константы должны быть дефолтными
 не должно быть макс размер бота больше размеру карты
 размер 325 ка ки у гагнанта, печатаются лишние символы
+
+ldesgoui 1561c1561
+< Contestant 1, "HoneyBadger", has won !
+---
+> Contestant 0, "(null)", has won !
+
+
+tbillard
+> P    9 | zjmp 0 OK
+302345d302345
+< ADV 2 (0x0005 -> 0x0007) 02 0f 
+304446a304447
+> ADV 2 (0x0005 -> 0x0007) 02 0f 
+505684,505686d505684
+< ADV 2 (0x0e8d -> 0x0e8f) 03 01 
+< ADV 2 (0x0e8d -> 0x0e8f) 03 01 
+< ADV 2 (0x0e8d -> 0x0e8f) 03 01 
+
+56 ботов, 15 не совпадает
+
+нет защиты если автоматом поставлен номер игрока, а потом такой же задан флагом, что делать?
+
+
+#include "../corewar.h"
+
+void    print_map_info3(WINDOW *win, t_cycle *main_cycle, int x, int y)
+{
+    if ((*main_cycle).live_name)
+    {
+        wattron(win, COLOR_PAIR((*main_cycle).live_id + 1));
+        mvwprintw(win, y, x, "A process shows that player %d (%s) is alive",
+        (*main_cycle).live_id + 1, (*main_cycle).live_name);
+        wrefresh(win);
+        wattroff(win, COLOR_PAIR((*main_cycle).live_id + 1));
+    }
+    y += 2;
+    if ((*main_cycle).winner_name)
+    {
+        wattron(win, COLOR_PAIR((*main_cycle).winner_id + 1));
+        mvwprintw(win, y, x, "Current winner is : %s",
+        (*main_cycle).winner_name);
+        wattroff(win, COLOR_PAIR((*main_cycle).winner_id + 1));
+        wrefresh(win);
+    }
+    wrefresh(win);
+}
+
+void    print_map_info2(WINDOW *win, t_cycle *main_cycle, int x, int y)
+{
+    int x_0;
+    int y_0;
+
+    x_0 = 199;
+    y_0 = 4;
+    mvwprintw(win, y_0, x_0, "Cycles/second limit : %d",
+        (*main_cycle).second_limit);
+    y_0 += 3;
+    mvwprintw(win, y_0, x_0, "Cycles: %d", (*main_cycle).cycles);
+    y_0 += 2;
+    mvwprintw(win, y_0, x_0, "Processes: %d", (*main_cycle).processes);
+    mvwprintw(win, y, x, "CYCLE_TO_DIE : %d", (*main_cycle).cycle_die);
+    y += 2;
+    mvwprintw(win, y, x, "CYCLE_DELTA : %d", CYCLE_DELTA);
+    y += 2;
+    mvwprintw(win, y, x, "NBR_LIVE : %d", NBR_LIVE);
+    y += 2;
+    mvwprintw(win, y, x, "MAX_CHECKS : %d", (*main_cycle).checks_if_die);
+    y += 2;
+    print_map_info3(win, main_cycle, x, y);
+    (*main_cycle).winner_str = y + 2;
+    wrefresh(win);
+}
+
+void    print_map_info(WINDOW *win, t_cycle *main_cycle, t_flags *params)
+{
+    int     x;
+    int     y;
+    int     tmp;
+    t_proc  *processes;
+
+    x = 201;
+    y = 9 + (4 * (*params).bots_quantity);
+    processes = (*main_cycle).head_proc;
+    wrefresh(win);
+    while ((*processes).real_id != (*params).bots_quantity - 1)
+        processes = processes->next;
+    tmp = y;
+    while (processes)
+    {
+        mvwprintw(win, y--, x, "Lives in current period : %d ",
+            (*processes).lives);
+        wrefresh(win);
+        mvwprintw(win, y, x, "Last live: %d ", (*processes).last_live_cycle);
+        wrefresh(win);
+        y -= 3;
+        if ((*processes).last_live_cycle ==
+            (*main_cycle).cycles - 1 && (*main_cycle).cycles != 1)
+        {
+            (*main_cycle).live_id = (*processes).id;
+            (*main_cycle).live_name = (*processes).name;
+        }
+        processes = processes->next;
+    }
+    print_map_info2(win, main_cycle, x - 2, tmp + 3);
+}
+
+
+
+проверить айди плеера справа, возможно там не тот
+
+может все таки добавить +1 в строки и заналить вконце
+если последний живой цико одинаковй, печатает бота которфый в листе раньше
+что если вконце игры 2 одинаковых бота?

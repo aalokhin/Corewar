@@ -23,11 +23,13 @@ void	print_winner(WINDOW **win, t_cycle *main_cycle)
 	if ((*main_cycle).winner_id >= 0)
 	{
 		wattron(*win, COLOR_PAIR((*main_cycle).winner_id + 1));
-		mvwprintw(*win, y, x, "Player %d (%s) won", (*main_cycle).winner_id + 1, (*main_cycle).winner_name);
+		mvwprintw(*win, y, x, "Player %d (%s) won",
+			(*main_cycle).winner_id + 1, (*main_cycle).winner_name);
 		wattroff(*win, COLOR_PAIR((*main_cycle).winner_id + 1));
 	}
 	else
-		mvwprintw(*win, y, x, "There is no winner in this game. Friendship won:)");
+		mvwprintw(*win, y, x,
+			"There is no winner in this game. Friendship won:)");
 	y += 2;
 	mvwprintw(*win, y, x, "Press any key for exit");
 	wrefresh(*win);
@@ -56,10 +58,11 @@ void	init_colors(WINDOW **win)
 	wborder(*win, 42, 42, 42, 42, 42, 42, 42, 42);
 	mvwvline(*win, 1, 196, 42, 70);
 	wattroff(*win, COLOR_PAIR(12));
+	mvwprintw(*win, 2, 199, "** PAUSED **");
 }
 
 void	visual_init(WINDOW **win, t_flags *params,
-	t_header bots[MAX_PLAYERS], t_cycle *main_cycle)
+	t_header bots[MAX_PLAYERS])
 {
 	int i;
 	int x;
@@ -75,9 +78,6 @@ void	visual_init(WINDOW **win, t_flags *params,
 	curs_set(0);
 	*win = newwin(68, 0, 0, 5);
 	init_colors(win);
-	mvwprintw(*win, 2, 199, "** PAUSED **");
-	mvwprintw(*win, 45, 199, "=============> MUSIC OFF <============== %d, ",
-	(*main_cycle).m);
 	while (i < (*params).bots_quantity)
 	{
 		y += 2;
@@ -86,7 +86,7 @@ void	visual_init(WINDOW **win, t_flags *params,
 			bots[i].id + 1, bots[i].prog_name);
 		wattroff(*win, COLOR_PAIR(bots[i].id + 1));
 		i++;
-		y += 2;
+		y += 4;
 	}
 }
 

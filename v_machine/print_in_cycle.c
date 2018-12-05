@@ -13,13 +13,13 @@
 #include "../corewar.h"
 
 void	intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
-	WINDOW **win, t_cycle *main_cycle)
+	WINDOW **win)
 {
 	int i;
 
 	i = 0;
 	if ((*params).ncurses == 1)
-		visual_init(win, params, bots, main_cycle);
+		visual_init(win, params, bots);
 	else
 	{
 		printf("%s\n", "Introducing contestants...");
@@ -50,8 +50,13 @@ void	after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
 		print_winner(win, &main_cycle);
 	}
 	if (!(*params).ncurses && !main_cycle.processes)
-		printf("Contestant %d, \"%s\", has won !\n",
+	{
+		if (main_cycle.winner_id >= 0)
+			printf("Contestant %d, \"%s\", has won !\n",
 			main_cycle.winner_id + 1, main_cycle.winner_name);
+		else
+			printf("%s\n", "There is no winner in this game. Friendship won:)");
+	}
 		//printf("Player %d (%s) won\n",
 			//main_cycle.winner_id + 1, main_cycle.winner_name);
 }

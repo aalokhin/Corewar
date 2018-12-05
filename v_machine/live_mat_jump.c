@@ -25,7 +25,8 @@ void	live_dir_proc(t_proc *child_proc, t_proc *head_proc,
 			tmp = tmp->next;
 		if (tmp)
 		{
-			(*tmp).last_live_cycle = (*main_cycle).cycles;
+			if ((*tmp).if_live)
+				(*tmp).last_live_cycle = (*main_cycle).cycles;
 			if (((*main_cycle).verbose & 1) && !(*main_cycle).ncurses)
 				printf("Player %d (%s) is said to be alive\n",
 				(*child_proc).argv[0][1] + 1, (*tmp).name);
