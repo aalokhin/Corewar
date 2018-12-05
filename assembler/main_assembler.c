@@ -55,7 +55,7 @@ int					file_processing(t_binfile *bin)
 	(*bin).copy = ft_strdup(file_contents);
 	parse_file(&(*bin), &file_contents);
 	fill_magic_start(&(*bin));
-	if (!(fill_name_comment(&(*bin))))
+	if (!(fill_name_comment(&(*bin), 0, 0)))
 	{
 		ft_clean_all(bin);
 		return (0);

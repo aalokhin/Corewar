@@ -12,9 +12,9 @@
 
 #include "asm.h"
 
-int						ft_opening_file(char *s_file, int flag_a)
+int					ft_opening_file(char *s_file, int flag_a)
 {
-	t_binfile				bin;
+	t_binfile		bin;
 
 	init_bin(&bin);
 	if (flag_a == 1)
@@ -37,11 +37,11 @@ int						ft_opening_file(char *s_file, int flag_a)
 	return (file_processing(&bin));
 }
 
-char					*join_name_path(char *curdir, char *file)
+char				*join_name_path(char *curdir, char *file)
 {
-	int					len;
-	char				*path;
-	char				*new;
+	int				len;
+	char			*path;
+	char			*new;
 
 	len = ft_strlen(curdir);
 	path = NULL;
@@ -63,11 +63,11 @@ char					*join_name_path(char *curdir, char *file)
 	return (path);
 }
 
-int						ft_opening_directory(char *input, int flag_d, int flag_a)
+int					ft_opening_directory(char *input, int flag_d, int flag_a)
 {
-	DIR					*dfd;
-	struct dirent		*dp;
-	char				*filename;
+	DIR				*dfd;
+	struct dirent	*dp;
+	char			*filename;
 
 	filename = NULL;
 	if ((dfd = opendir(input)) == NULL)

@@ -93,7 +93,7 @@ void						ft_print_flag_a(t_binfile *bin);
 void						ft_print_inv_input();
 void						ft_print_success(t_binfile *bin);
 void						fill_magic_start(t_binfile *bin);
-int							fill_name_comment(t_binfile *bin);
+int							fill_name_comment(t_binfile *bin, size_t i, size_t tmp);
 int							ft_opening_file(char *s_file, int flag_a);
 void						init_bin(t_binfile	*bin);
 int							file_processing(t_binfile *bin);
@@ -148,5 +148,11 @@ char						*join_name_path(char *curdir, char *file);
 int							ft_opening_directory(char *input,\
 							int flag_d, int flag_a);
 void						ft_clean_all(t_binfile	*bin);
+int							token_codage(t_t *token, int i);
+int							command_name(char *name, t_t *token);
+t_lable						*labels_linker(t_binfile *file, t_lable *label);
+void						command_linker(t_lable *label, t_t *token);
+char						*string_definer(char *str, int i);
+int							initial_validation(t_binfile *file);
 
 #endif

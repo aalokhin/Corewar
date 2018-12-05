@@ -1,5 +1,16 @@
-#include "asm.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_length_counter.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdynia <mdynia@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/05 21:46:13 by mdynia            #+#    #+#             */
+/*   Updated: 2018/12/05 21:46:15 by mdynia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "asm.h"
 
 static t_op	g_op_tab[17] =
 {
@@ -28,12 +39,10 @@ static t_op	g_op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-
-int 	bytes_above_i(t_lable *label)
+int			bytes_above_i(t_lable *label)
 {
-	t_t *tmp;
-	int count;
-
+	t_t		*tmp;
+	int		count;
 
 	count = 0;
 	tmp = label->instruct;
@@ -45,9 +54,9 @@ int 	bytes_above_i(t_lable *label)
 	return (count);
 }
 
-void 	bytes_above_filler(t_binfile *file, t_lable *label)
+void		bytes_above_filler(t_binfile *file, t_lable *label)
 {
-	t_lable *tmp;
+	t_lable	*tmp;
 
 	label->bytes_above = 0;
 	tmp = file->labels_list;
@@ -58,22 +67,26 @@ void 	bytes_above_filler(t_binfile *file, t_lable *label)
 	}
 }
 
-void	token_length(t_t *token, int i, t_lable *label)
+void		token_length(t_t *token, int i, t_lable *label)
 {
 	token->bytes_above_i = bytes_above_i(label);
 	token->c_len = 1;
 	token->c_len += token->has_codage;
 	while (i < g_op_tab[token->c_name].nb_params)
 	{
-		token->c_len += token->args[i][0] == 0
-	? 0 : token->args[i][0] == 1 ? 1 : token->args[i][0] == 11 ?
-	2 : token->lbl_size;
+		if (token->args[i][0] == 0)
+			token->c_len += 0;
+		else if (token->args[i][0] == 1)
+			token->c_len += 1;
+		else if (token->args[i][0] == 11)
+			token->c_len += 2;
+		else
+			token->c_len += token->lbl_size;
 		i++;
 	}
 }
 
-
-void label_length(t_binfile *file, t_lable	*label)
+void		label_length(t_binfile *file, t_lable *label)
 {
 	t_t		*tmp;
 
@@ -87,7 +100,7 @@ void label_length(t_binfile *file, t_lable	*label)
 	}
 }
 
-void	file_length(t_binfile *file)
+void		file_length(t_binfile *file)
 {
 	t_lable	*tmp;
 

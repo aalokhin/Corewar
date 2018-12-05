@@ -94,5 +94,4 @@ void			ft_clean_all(t_binfile *bin)
 	ft_strdel(&((*bin).comment));
 	if ((*bin).labels_list)
 		clean_labels(&((*bin).labels_list));
-	//free(bin);
 }

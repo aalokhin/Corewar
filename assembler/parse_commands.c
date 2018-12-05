@@ -27,86 +27,8 @@ static t_op	g_op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-int  command_name(char *name, t_t *token)
-{
-	token->c_name = 0;
 
-	while (g_op_tab[token->c_name].name)
-	{
-		if ((ft_strcmp(g_op_tab[token->c_name].name, name) == 0))
-		{
-			token->name_c = ft_strdup(name);
-			token->arguments =  g_op_tab[token->c_name].nb_params;
-			token->lbl_size = ft_cmd_lbls(token->name_c);
-			token->has_codage = g_op_tab[token->c_name].has_pcode;
-			token->opcode = g_op_tab[token->c_name].opcode;
-			return (token->c_name);
-		}
-		token->c_name++;
-	}
-	return (-1);
-}
-
-t_lable		*labels_linker(t_binfile *file, t_lable *label)
-{
-	t_lable		*tmp;
-
-	if (!file->labels_list)
-	{
-		file->labels_list = label;
-		file->labels_list->prev = NULL;
-	}
-	else
-	{
-		tmp = file->labels_list;
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = label;
-		label->prev = tmp;
-	}
-	label_length(file, label);
-	return (NULL);
-}
-
-void			command_linker(t_lable 	*label, t_t 	*token)
-{
-	t_t		*tmp;
-
-	if (!label->instruct)
-	{
-		label->instruct = token;
-		label->instruct->next = NULL;
-	}
-	else
-	{
-		tmp = label->instruct;
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = token;
-	}
-}
-
-int 	token_codage(t_t *token, int i)
-{
-	int	dec;
-	int k;
-
-	dec = 0;
-	k = 128;
-	while (i < 4)
-	{
-		if (token->args[i][0] == 11 || token->args[i][0] == 10)
-			dec += k;
-		k /= 2;
-		if (token->args[i][0] == 11 || token->args[i][0] == 1)
-			dec += k;
-		k /= 2;
-		i++;
-	}
-	return (dec);
-}
-
-int		arguments_filler(t_binfile *file, t_lable *label, t_t *token, char **str, int *i) /// 5 змінних
+int		arguments_filler(t_binfile *file, t_t *token, char **str, int *i)
 {
 	int		arg1;
 
@@ -115,16 +37,15 @@ int		arguments_filler(t_binfile *file, t_lable *label, t_t *token, char **str, i
 	{
 		if (!(arguments_validator(file, token, str[*i], arg1)))
  			return (0);
-		token->args[arg1][0] = (ft_strchr(str[*i] ,'r') && !(ft_strchr(str[*i] ,DIRECT_CHAR))) && !(ft_strchr(str[*i] ,LABEL_CHAR)) ? 1 : ft_strchr(str[*i] ,DIRECT_CHAR) ? 10 : 11;
+		token->args[arg1][0] = (ft_strchr(str[*i] ,'r') && !(ft_strchr(str[*i] ,DIRECT_CHAR)))
+	&& !(ft_strchr(str[*i] ,LABEL_CHAR)) ? 1 : ft_strchr(str[*i] ,DIRECT_CHAR) ? 10 : 11;
 		token->a[arg1++] = ft_strdup(str[*i]);
 		if (arg1 == g_op_tab[token->c_name].nb_params)
 		{
 			if (str[*i + 1])
-				return (error_invalid_arg_type(token, *i, (ft_strchr(str[*i + 1] ,'r') && !(ft_strchr(str[*i + 1] ,DIRECT_CHAR))) && !(ft_strchr(str[*i + 1] ,LABEL_CHAR)) ? 1 : ft_strchr(str[*i + 1] ,DIRECT_CHAR) ? 2 : 3));
-			command_linker(label, token);
-			if (token->has_codage)
-				token->codage = token_codage(token, 0);
-			token_length(token, 0, label);
+				return (error_invalid_arg_type(token, *i, (ft_strchr(str[*i + 1] ,'r')
+					&& !(ft_strchr(str[*i + 1] ,DIRECT_CHAR))) && !(ft_strchr(str[*i + 1] ,LABEL_CHAR))
+					? 1 : ft_strchr(str[*i + 1] ,DIRECT_CHAR) ? 2 : 3));
 			break ;
 		}
 		(*i)++;
@@ -137,8 +58,9 @@ char	*space_adder(char **str)
 {
 	char	*cmd;
 	char 	*cpy;
-	int		i = 0;
+	int		i;
 
+	i = 0;
 	cpy = *str;
 	while (cpy[i])
 	{
@@ -152,12 +74,42 @@ char	*space_adder(char **str)
 	return (cmd);
 }
 
-int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
+int 	clean(char **str, char **str_n)
+{
+	ft_clean_parse(str);
+	ft_clean_parse(str_n);
+	return (0);
+}
+
+int 	fill_command_name(t_binfile *file, t_t *token, char **str, int *i)
+{
+	char *copy =  NULL;
+
+	if (ft_strchr(*str, DIRECT_CHAR) || ft_strchr(*str, LABEL_CHAR))
+	{
+		copy = space_adder(str);
+		if (command_name(copy, token) == -1)
+		{
+			error_command(file, copy, token->line_num);
+			ft_strdel(&copy);
+			return (0);
+		}
+		ft_strdel(&copy);
+		*i -= 1; 
+	}
+	else if (command_name(*str, token) == -1)
+	{
+		error_command(file, *str, token->line_num);
+		return (0);
+	}
+	return (1);
+}
+
+int		parse_commands(t_binfile *file, int k, char **str, char **str_n)
 {
 	t_t 	*token = NULL;
 	t_lable	*label = NULL;
-	char *copy =  NULL;
-	int k = 0;
+	int i = 0;
 
 	str_n = (ft_strsplit(file->f_contents, '\n'));
 	while (str_n[k])
@@ -167,10 +119,7 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 		if (!file->name || !file->comment)
 		{
 			error_message(file, str[i], define_line_num(file->copy, str[i], 0, 0));
-			ft_clean_parse(str);
-			ft_clean_parse(str_n);
-			//system("leaks asm");
-			return (0);
+			return (clean(str, str_n));
 		}
 		if (i == 0 && !(ft_strchr(str[i], DIRECT_CHAR)) && (ft_strchr(str[i], LABEL_CHAR)))
 		{
@@ -179,11 +128,8 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 			label = (t_lable *)ft_memalloc(sizeof(t_lable));
 			if (!(label_name_is_valid(file, label, str[i++])))
 			{
-				ft_clean_parse (str);
-				ft_clean_parse(str_n);
 				labels_linker(file, label);
-				//system("leaks asm");
-				return (0);
+				return (clean(str, str_n));
 			}
 		}
 		if (str[i])
@@ -192,50 +138,23 @@ int		parse_commands(t_binfile *file, int i, char **str, char **str_n)
 				label = (t_lable *)ft_memalloc(sizeof(t_lable));
 			token = (t_t *)ft_memalloc(sizeof(t_t));
 			token->line_num = define_line_num(file->copy, str_n[k], 0, 0);
-			if (ft_strchr(str[i], DIRECT_CHAR) || ft_strchr(str[i], LABEL_CHAR))
+			if ((!fill_command_name(file, token, &(str[i]), &i)) || (++i >= 0 && (!arguments_filler(file, token, str, &i))))
 			{
-				copy = space_adder(&(str[i]));
-				if (command_name(copy, token) == -1)
-				{
-					error_command(file, copy, token->line_num);
-					ft_strdel(&copy);
-					ft_clean_parse (str);
-					ft_clean_parse(str_n);
-					command_linker(label, token);
-					labels_linker(file, label);
-					//system("leaks asm");
-					return (0);
-				}
-				ft_strdel(&copy);
-				i -= 1; 
-			}
-			else if (command_name(str[i], token) == -1)
-			{
-				error_command(file, str[i], token->line_num);
-				ft_clean_parse (str);
-				ft_clean_parse(str_n);
 				command_linker(label, token);
 				labels_linker(file, label);
-			//	system("leaks asm");
-				return (0);
+				return (clean(str, str_n));
 			}
-			if (++i >= 0 && (!arguments_filler(file, label, token, str, &i)))
-			{
-				ft_clean_parse (str);
-				ft_clean_parse(str_n);
-				command_linker(label, token);
-				labels_linker(file, label);
-				//system("leaks asm");
-				return (0);
-			}
+			if (token->has_codage)
+				token->codage = token_codage(token, 0);
+			command_linker(label, token);
+			token_length(token, 0, label);
 		}
-		ft_clean_parse (str);
+		ft_clean_parse(str);
 		k++;
 	}
 	if (label)
 		labels_linker(file, label);
 	ft_clean_parse(str_n);
 	file_length(file);
-	//system("leaks asm");
 	return (1);
 }  

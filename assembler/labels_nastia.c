@@ -1,55 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   labels_nastia.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdynia <mdynia@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/05 22:23:18 by mdynia            #+#    #+#             */
+/*   Updated: 2018/12/05 22:23:19 by mdynia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-int			find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
+int			find_arg_value_help(t_lable *tmp, char *search, int inst, int label)
+{
+	while (tmp)
+	{
+		if (tmp->label_name)
+		{
+			if (strcmp(search, tmp->label_name) == 0)
+			{
+				ft_strdel(&search);
+				if (label < tmp->bytes_above)
+					return (tmp->bytes_above - label - inst);
+				else
+					return (tmp->bytes_above - (label + inst));
+			}
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int			find_arg_value(t_binfile *bin, char *str, t_t *c, t_lable *l)
 {
 	char	*search;
-	char 	*saved;
+	char	*saved;
 	t_lable	*tmp_lbl;
 
 	tmp_lbl = bin->labels_list;
-	if (ft_strstr(str, "%:"))
+	if (ft_strstr(str, "%:") || ft_strchr(str, LABEL_CHAR))
 	{
-		//search = (char *)ft_memalloc(sizeof(char) * ft_strlen(str));
-		saved = ft_strstr(str, "%:") + 2;
+		saved = ft_strstr(str, "%:") ? ft_strstr(str, "%:") + 2 :\
+	ft_strchr(str, LABEL_CHAR) + 1;
 		search = ft_strjoin(saved, ":");
-		while (tmp_lbl)
-		{
-			if (tmp_lbl->label_name)
-			{
-				if (strcmp(search, tmp_lbl->label_name) == 0)
-				{
-					ft_strdel(&search);
-					if (label->bytes_above < tmp_lbl->bytes_above)
-						return (tmp_lbl->bytes_above - label->bytes_above - instruct->bytes_above_i);
-					else
-						return (tmp_lbl->bytes_above - (label->bytes_above + instruct->bytes_above_i));
-				}
-			}
-			tmp_lbl = tmp_lbl->next;
-		}
-		ft_strdel(&search);
-	}
-	if (ft_strstr(str, ":"))
-	{
-		//search = (char *)ft_memalloc(sizeof(char) * ft_strlen(str));
-		saved = ft_strchr(str, LABEL_CHAR) + 1;
-		search = ft_strjoin(saved, ":");
-		while (tmp_lbl)
-		{
-			if (tmp_lbl->label_name)
-			{
-				if (strcmp(search, tmp_lbl->label_name) == 0)
-				{
-					ft_strdel(&search);
-					if (label->bytes_above < tmp_lbl->bytes_above)
-						return (tmp_lbl->bytes_above - label->bytes_above - instruct->bytes_above_i);
-					else
-						return (tmp_lbl->bytes_above - (label->bytes_above + instruct->bytes_above_i));
-				}
-			}
-			tmp_lbl = tmp_lbl->next;
-		}
-		ft_strdel(&search);
+		return (find_arg_value_help(tmp_lbl, search, c->bytes_above_i,\
+			l->bytes_above));
 	}
 	if (ft_strstr(str, "r"))
 		return (ft_atoi(ft_strstr(str, "r") + 1));
@@ -59,29 +55,28 @@ int			find_arg_value(t_binfile *bin, char *str, t_t *instruct, t_lable *label)
 		return (ft_atoi(str));
 }
 
-int					label_distance(t_binfile *bin)
+int			label_distance(t_binfile *bin)
 {
-	int					k;
-	t_lable				*tmp;
-	t_t					*tmpi;
+	int		k;
+	t_lable	*tmp;
+	t_t		*ti;
 
 	tmp = bin->labels_list;
 	while (tmp)
 	{
-		tmpi = tmp->instruct;
+		ti = tmp->instruct;
 		k = 0;
-		while (tmpi)
+		while (ti)
 		{
 			k = 0;
-			while (tmpi->a[k])
+			while (ti->a[k])
 			{
-				tmpi->args[k][1] = find_arg_value(bin, tmpi->a[k], tmpi, tmp);
+				ti->args[k][1] = find_arg_value(bin, ti->a[k], ti, tmp);
 				k++;
 			}
-			tmpi = tmpi->next;
+			ti = ti->next;
 		}
 		tmp = tmp->next;
 	}
 	return (1);
 }
-

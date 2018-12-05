@@ -90,118 +90,51 @@ int 		all_digits(char *str)
 	return (1);
 }
 
-
-int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
+int 		arguments_add_validator(int size,  char *arg)
 {
-	int		size = 0;
-	int		to_count;
-	char 	*str = NULL;
-
- 	to_count = g_op_tab[token->c_name].param_types[i];
-	size = (ft_strchr(arg ,'r') && !(ft_strchr(arg, DIRECT_CHAR))) && !(ft_strchr(arg, LABEL_CHAR)) ? 1 : ft_strchr(arg, DIRECT_CHAR) ? 2 : 4;
- 	if (size == to_count || to_count == 7 || (size < to_count && to_count - size != size  && (to_count - size == T_REG
- 		|| to_count  - size == T_DIR ||  to_count - size == T_IND)))
+	if (size == T_DIR)
 	{
- 		if (ft_strstr(arg, "%:"))
- 		{
- 			str = ft_strjoin(arg + 2, ":");
- 			if (!(ft_strstr(file->f_contents, str)))
- 			{
- 				ft_strdel(&str);
- 				return (error_message_label(file, token, arg + 2, arg));
- 			}
- 			ft_strdel(&str);
- 		}
-		else if (ft_strstr(arg, ":"))
-		{
-			str = ft_strjoin(arg + 1, ":");
- 			if (!(ft_strstr(file->f_contents, str)))
- 			{
- 				ft_strdel(&str);
- 				return (error_message_label(file, token, arg + 1, arg));
- 			}
- 			ft_strdel(&str);
-		}
- 		else if (size == T_DIR)
- 		{
- 			if (!(arg + 1) || (!(ft_isdigit(arg[1])) &&  arg[1] != '-') || !all_digits(arg + 1))// && arg[1] != '-'))
- 				return (error_message(file, arg, token->line_num));
- 		}
- 		else if (size == T_REG)
- 		{
- 			if (!(arg + 1) || !(ft_isdigit(arg[1])) || !all_digits(arg + 1) || ft_atoi(arg + 1) > 100)// && arg[1] != '-'))
- 				return (error_message(file, arg, token->line_num));
- 		}
- 		else if (size == T_IND)
- 		{
- 			 if (!all_digits(arg))
- 				return (error_message(file, arg, token->line_num));
- 		}
- 		return (1);
-	 }
- 	return (error_invalid_arg_type(token, i, size));
-}
-
-char *string_definer(char *str, int i)
-{
-	int k = i;
-	int l = 0;
-	char *string;
-
-	while (str[i] && str[i] != '\n')
-		i++;
-	string  = (char *)ft_memalloc(sizeof(char) * (i - k + 1));
-	while (str[k] && str[k] != '\n')
-	{
-		string[l] = str[k];
-		l++;
-		k++;
-	}
-	string[l] = '\0';
-	return (string);
-}
-
-int 	initial_validation(t_binfile *file)
-{
-	char	*str;
-	char 	cpy[2];
-	int 	line = 0;
-	int 	colomn = 0;
-	int i = 0;
-	int start = 0;
-	char *string;
-
-	str = file->f_contents;
-	if (!file->f_contents[i])
-	{
-		ft_printf("Syntax error at token [TOKEN][%d:001] END \"(null)\"\n",12 );
-	//system("leaks asm");
-		return (0);
-	}
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			start = i;
-		if (!(WHITESPACE(str[i])) && str[i] != '-' && !ft_isdigit(str[i]) && str[i] != '_' && (str[i] < 97 ||  str[i] > 123) && str[i] != LABEL_CHAR && str[i] != DIRECT_CHAR && str[i] != SEPARATOR_CHAR)
-		{
-			cpy[0] = str[i];
-			cpy[1] = '\0';
-			string = string_definer(str, start + 1);
-			line = define_line_num(file->copy, string, 0, 0);
-			colomn = define_line_colomn(file->copy, cpy, line);
-			ft_printf ("Lexical error at [%d:%d]\n", line + 1, colomn);
-			ft_strdel(&string);
-			//system("leaks asm");
+		if (!(arg + 1) || (!(ft_isdigit(arg[1])) &&  arg[1] != '-') || !all_digits(arg + 1))// && arg[1] != '-'))
 			return (0);
-		}
-		i++;
 	}
-	if (str[i - 1] && str[i - 1] != '\n')
+	else if (size == T_REG)
 	{
-		ft_printf("Syntax error - unexpected end of input (Perhaps you forgot to end with a newline ?)\n");
-		//system("leaks asm");
-		return (0);
+		if (!(arg + 1) || !(ft_isdigit(arg[1])) || !all_digits(arg + 1) || ft_atoi(arg + 1) > 100)// && arg[1] != '-'))
+			return (0);
+	}
+	else if (size == T_IND)
+	{
+		 if (!all_digits(arg))
+			return (0);
 	}
 	return (1);
 }
-//label_exist
+
+int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
+{
+	int		size;
+	int		t;
+	char 	*str;
+
+ 	t = g_op_tab[token->c_name].param_types[i];
+	size = (ft_strchr(arg ,'r') && !(ft_strchr(arg, DIRECT_CHAR)))\
+	&& !(ft_strchr(arg, LABEL_CHAR)) ? 1 : ft_strchr(arg, DIRECT_CHAR) ? 2 : 4;
+	if (size == t || t == 7 || (size < t && t - size != size &&
+		(t - size == T_REG || t - size == T_DIR ||  t - size == T_IND)))
+	{
+		if (ft_strstr(arg, "%:") || ft_strchr(arg, LABEL_CHAR))
+		{
+			str = ft_strstr(arg, "%:") ? ft_strjoin(arg + 2, ":") : ft_strjoin(arg + 1, ":");
+			if (!(ft_strstr(file->f_contents, str)))
+			{
+				ft_strdel(&str);
+				return (ft_strstr(arg, "%:") ? error_message_label(file, token, arg + 2, arg) : error_message_label(file, token, arg + 1, arg)); // error_message_label(file, token, arg + 1, arg));
+			}
+			ft_strdel(&str);
+		}
+		else if ((size == T_DIR || size == T_REG || size == T_IND) && (!(arguments_add_validator(size, arg))))
+			return (error_message(file, arg, token->line_num));
+		return (1);
+	}
+	return (error_invalid_arg_type(token, i, size));
+}
