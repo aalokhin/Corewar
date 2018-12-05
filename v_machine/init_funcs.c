@@ -52,7 +52,7 @@ void	params_init(t_flags *params)
 	while (i < MAX_PLAYERS)
 	{
 		(*params).pl_nbr[i][0] = 0;
-		(*params).pl_nbr[i][1] = 0;
+		(*params).pl_nbr[i][1] = -1;
 		i++;
 	}
 }
@@ -116,7 +116,7 @@ int check_if_norepeat_id(t_flags *params, int id_to_check)
 	i = 0;
 	while (i < MAX_PLAYERS)
 	{
-		if ((*params).pl_nbr[i][0] && id_to_check == (*params).pl_nbr[i][1])
+		if ((*params).pl_nbr[i][0] && id_to_check == (*params).pl_nbr[i][1] - 1)
 			return (1);
 		i++;
 	}
@@ -142,13 +142,26 @@ t_proc	*processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
 {
 	t_proc			*processes;
 	t_proc			*tmp;
+	int cur_id;
 
 	(*params).i = 0;
 	tmp = NULL;
+	cur_id = 0;
 	while ((*params).i < (*params).bots_quantity)
 	{
 		processes = (t_proc *)malloc(sizeof(t_proc));
-		if ((*params).pl_nbr[(*params).i][0] &&
+		if ((*params).pl_nbr[(*params).i][0])
+			(*processes).id = (*params).pl_nbr[(*params).i][1] - 1;
+		else
+		{
+			while (check_if_norepeat_id(params, cur_id))
+			{
+				cur_id++;
+			}
+			(*processes).id = cur_id;
+			cur_id++;
+		}
+		/*if ((*params).pl_nbr[(*params).i][0] &&
 		(*params).pl_nbr[(*params).i][1] > 0)
 			(*processes).id = (*params).pl_nbr[(*params).i][1] - 1;
 		else if ((*params).pl_nbr[(*params).i][0] &&
@@ -157,7 +170,7 @@ t_proc	*processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
 		else if (!(*params).pl_nbr[(*params).i][0] && tmp)
 			(*processes).id = (*tmp).id + 1;
 		else
-			(*processes).id = (*params).i;
+			(*processes).id = (*params).i;*/
 		processes_init2(params, bots, map, processes);
 		(*processes).next = tmp;
 		clear_argv_arr(processes);

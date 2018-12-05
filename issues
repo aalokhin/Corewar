@@ -218,13 +218,13 @@ ldesgoui 1561c1561
 tbillard
 > P    9 | zjmp 0 OK
 302345d302345
-< ADV 2 (0x0005 -> 0x0007) 02 0f 
+< ADV 2 (0x0005 -> 0x0007) 02 0f
 304446a304447
-> ADV 2 (0x0005 -> 0x0007) 02 0f 
+> ADV 2 (0x0005 -> 0x0007) 02 0f
 505684,505686d505684
-< ADV 2 (0x0e8d -> 0x0e8f) 03 01 
-< ADV 2 (0x0e8d -> 0x0e8f) 03 01 
-< ADV 2 (0x0e8d -> 0x0e8f) 03 01 
+< ADV 2 (0x0e8d -> 0x0e8f) 03 01
+< ADV 2 (0x0e8d -> 0x0e8f) 03 01
+< ADV 2 (0x0e8d -> 0x0e8f) 03 01
 
 56 ботов, 15 не совпадает
 
@@ -240,7 +240,7 @@ tbillard
 новый баг - при повторном айди через флаг чтото сбивается, данные печатаются не у первого а у того, с кем совпадает ид
 
 
-дважды печатает 
+дважды печатает
 ./corewar -nc vm_champs/champs/championships/2017/gnebie/ultima.cor  vm_champs/champs/Car.cor vm_champs/champs/championships/2014/ekocevar/mandragore.cor -n -1 vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor
 Error: Can't read source file -1
 Error: Can't read source file -1
@@ -310,3 +310,4 @@ t_proc  *processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
     return (processes);
 }
 
+выводить эррор при попытке задать одинаковые н номера
