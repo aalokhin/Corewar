@@ -63,13 +63,11 @@ typedef struct		s_cycle
 {
 	int				cycles;
 	int				processes;
-	int				prev_processes;
 	int				second_limit;
 	int				cycle_die;
 	int				current_winner;
 	char			*winner_name;
 	int				checks_if_die;
-	int				prev_cycle_die;
 	int				indexes[MEM_SIZE][2];
 	int				winner_str;
 	int				winner_id;
@@ -78,12 +76,13 @@ typedef struct		s_cycle
 	int				max_id;
 	int				shift;
 	int				id_counter;
-	int				instr_res;
 	int				cycle_counter;
 	int				fork_ind;
 	int				run;
 	int				m;
 	int				ncurses;
+	int				live_id;
+	char			*live_name;
 	t_proc			*head_proc;
 }					t_cycle;
 

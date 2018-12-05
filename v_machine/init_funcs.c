@@ -60,12 +60,10 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 {
 	(*main_cycle).cycles = 0;
 	(*main_cycle).processes = (*params).bots_quantity;
-	(*main_cycle).prev_processes = (*main_cycle).processes;
 	(*main_cycle).second_limit = SEC_LIMIT;
 	(*main_cycle).cycle_die = CYCLE_TO_DIE;
 	(*main_cycle).current_winner = -1;
 	(*main_cycle).checks_if_die = MAX_CHECKS;
-	(*main_cycle).prev_cycle_die = (*main_cycle).cycle_die;
 	(*main_cycle).winner_str = 0;
 	(*main_cycle).winner_name = NULL;
 	(*main_cycle).winner_id = 0;
@@ -76,11 +74,12 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).max_id = 0;
 	(*main_cycle).shift = 0;
 	(*main_cycle).id_counter = 0;
-	(*main_cycle).instr_res = 0;
 	(*main_cycle).cycle_counter = 0;
 	(*main_cycle).fork_ind = 0;
 	(*main_cycle).run = 0;
 	(*main_cycle).m = 0;
+	(*main_cycle).live_id = 0;
+	(*main_cycle).live_name = NULL;
 }
 
 void	processes_init2(t_flags *params, t_header bots[MAX_PLAYERS],

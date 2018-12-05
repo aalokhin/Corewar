@@ -21,7 +21,7 @@ void	print_winner(WINDOW **win, t_cycle *main_cycle)
 	x = 199;
 	y = (*main_cycle).winner_str;
 	wattron(*win, COLOR_PAIR((*main_cycle).winner_id + 1));
-	mvwprintw(*win, y, x, "The winner is : %s", (*main_cycle).winner_name);
+	mvwprintw(*win, y, x, "Player %d (%s) won", (*main_cycle).winner_id + 1, (*main_cycle).winner_name);
 	wattroff(*win, COLOR_PAIR((*main_cycle).winner_id + 1));
 	y += 2;
 	mvwprintw(*win, y, x, "Press any key for exit");
@@ -76,8 +76,10 @@ void	visual_init(WINDOW **win, t_flags *params,
 	while (i < (*params).bots_quantity)
 	{
 		y += 2;
+		wattron(*win, COLOR_PAIR(bots[i].id + 1));
 		mvwprintw(*win, y, x, "Player: -%d : %s",
 			bots[i].id + 1, bots[i].prog_name);
+		wattroff(*win, COLOR_PAIR(bots[i].id + 1));
 		i++;
 		y += 2;
 	}

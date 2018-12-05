@@ -31,11 +31,23 @@ void	print_map_info2(WINDOW *win, t_cycle *main_cycle, int x, int y)
 	y += 2;
 	mvwprintw(win, y, x, "NBR_LIVE : %d", NBR_LIVE);
 	y += 2;
-	mvwprintw(win, y, x, "MAX_CHECKS : %d", MAX_CHECKS);
+	mvwprintw(win, y, x, "MAX_CHECKS : %d", (*main_cycle).checks_if_die);
+	y += 2;
+	if ((*main_cycle).live_name)
+	{	
+		wattron(win, COLOR_PAIR((*main_cycle).live_id + 1));
+		mvwprintw(win, y, x, "A process shows that player %d (%s) is alive",
+		(*main_cycle).live_id + 1, (*main_cycle).live_name);
+		wattroff(win, COLOR_PAIR((*main_cycle).live_id + 1));
+	}
 	y += 2;
 	if ((*main_cycle).winner_name)
+	{
+		wattron(win, COLOR_PAIR((*main_cycle).winner_id + 1));
 		mvwprintw(win, y, x, "Current winner is : %s",
 		(*main_cycle).winner_name);
+		wattroff(win, COLOR_PAIR((*main_cycle).winner_id + 1));
+	}
 	(*main_cycle).winner_str = y + 2;
 	wrefresh(win);
 }
@@ -63,6 +75,12 @@ void	print_map_info(WINDOW *win, t_cycle *main_cycle, t_flags *params)
 		y -= 1;
 		mvwprintw(win, y, x, "Last live: %d ", (*processes).last_live_cycle);
 		y -= 3;
+		if ((*processes).last_live_cycle ==
+			(*main_cycle).cycles - 1 && (*main_cycle).cycles != 1)
+		{
+			(*main_cycle).live_id = (*processes).id;
+			(*main_cycle).live_name = (*processes).name;
+		}
 		processes = processes->next;
 	}
 	print_map_info2(win, main_cycle, x - 2, tmp + 3);
