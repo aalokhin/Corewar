@@ -50,48 +50,51 @@ void	print_map_info2(WINDOW *win, t_cycle *main_cycle, int x, int y)
 	wrefresh(win);
 }
 
+void	print_map_info4(WINDOW *win, t_proc *processes, int x, int *y)
+{
+	if (!(*processes).if_live)
+	{
+		{
+			wattron(win, COLOR_PAIR((*processes).id + 1));
+			mvwprintw(win, *y, x, "PROCESS DIED");
+			wattroff(win, COLOR_PAIR((*processes).id + 1));
+		}
+	}
+	(*y) -= 2;
+	mvwprintw(win, (*y), x, "Lives in current period : %d ",
+		(*processes).lives);
+	(*y)--;
+	wrefresh(win);
+	mvwprintw(win, (*y), x, "Last live: %d ", (*processes).last_live_cycle);
+	wrefresh(win);
+	(*y) += 2;
+}
+
 void	print_map_info(WINDOW *win, t_cycle *main_cycle, t_flags *params)
 {
 	int		x;
 	int		y;
-	int		tmp;
 	t_proc	*processes;
 
 	x = 201;
 	y = 9 + (6 * (*params).bots_quantity);
 	processes = (*main_cycle).head_proc;
-	wrefresh(win);
 	while ((*processes).real_id != (*params).bots_quantity - 1)
 		processes = processes->next;
-	tmp = y;
 	while (processes)
 	{
-		if (!(*processes).if_live)
-		{
-			{
-				wattron(win, COLOR_PAIR((*processes).id + 1));
-				mvwprintw(win, y, x, "PROCESS DIED");
-				wattroff(win, COLOR_PAIR((*processes).id + 1));
-			}
-		}
-		y--;
+		print_map_info4(win, processes, x, &y);
 		if ((*processes).last_live_cycle ==
 			(*main_cycle).cycles - 1 && (*main_cycle).cycles != 1)
 		{
 			wattron(win, COLOR_PAIR((*processes).id + 1));
-			mvwprintw(win, y, x, "A process shows that player %d (%s) is alive in cycle %d",
+			mvwprintw(win, y, x,
+				"A process shows that player %d (%s) is alive in cycle %d",
 			(*processes).id + 1, (*processes).name, (*main_cycle).cycles - 1);
 			wattroff(win, COLOR_PAIR((*processes).id + 1));
 		}
-		y--;
-		mvwprintw(win, y, x, "Lives in current period : %d ",
-			(*processes).lives);
-		y--;
-		wrefresh(win);
-		mvwprintw(win, y, x, "Last live: %d ", (*processes).last_live_cycle);
-		wrefresh(win);
-		y -= 3;
+		y -= 5;
 		processes = processes->next;
 	}
-	print_map_info2(win, main_cycle, x - 2, tmp + 2);
+	print_map_info2(win, main_cycle, x - 2, 11 + (6 * (*params).bots_quantity));
 }

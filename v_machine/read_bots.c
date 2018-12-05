@@ -80,6 +80,7 @@ int		copy_bots_to_map(t_header bots[MAX_PLAYERS], unsigned char *str,
 		(*params).i++;
 	}
 	ft_strdel((char **)(&str));
+	(*params).j++;
 	return (1);
 }
 
@@ -112,7 +113,7 @@ int		read_bots(t_flags *params, int fd, t_header bots[MAX_PLAYERS])
 		if (!bot_open(&fd, params, &len))
 			return (0);
 		str = (unsigned char *)malloc(sizeof(unsigned char) * len + 1);
-		str[len] = 0;
+		str[len] = '\0';
 		read(fd, str, len);
 		if (!take_bots_params(str, params, len, bots) ||
 		!check_magic(str, params, (*params).j, bots) ||
@@ -124,7 +125,6 @@ int		read_bots(t_flags *params, int fd, t_header bots[MAX_PLAYERS])
 		if (!copy_bots_to_map(bots, str, params))
 			return (0);
 		close(fd);
-		(*params).j++;
 	}
 	(*params).i = 0;
 	(*params).j = 0;

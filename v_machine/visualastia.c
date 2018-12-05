@@ -111,6 +111,10 @@ void	map_to_screen(unsigned char *map, t_cycle *main_cycle,
 	y = 2;
 	res = 0;
 	refresh();
+	wattron(win, COLOR_PAIR(12));
+	wborder(win, 42, 42, 42, 42, 42, 42, 42, 42);
+	mvwvline(win, 1, 196, 42, 70);
+	wattroff(win, COLOR_PAIR(12));
 	while (i < MEM_SIZE)
 	{
 		x = 3;
