@@ -30,16 +30,16 @@ void			print_check(t_binfile *bin)
 	tmp = bin->labels_list;
 	while (tmp)
 	{
-		printf("lable name is [%s]\n", tmp->label_name);
+		ft_printf("lable name is [%s]\n", tmp->label_name);
 		tmp2 = tmp->instruct;
 		while (tmp2)
 		{
-			printf("	instruct name [%s]\n", tmp2->name_c);
+			ft_printf("	instruct name [%s]\n", tmp2->name_c);
 			tmp2 = tmp2->next;
 		}
 		tmp = tmp->next;
 	}
-	printf("all printed\n");
+	ft_printf("all printed\n");
 }
 
 void			clean_instructs(t_lable *element)

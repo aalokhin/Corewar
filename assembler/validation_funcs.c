@@ -189,7 +189,7 @@ int 	initial_validation(t_binfile *file)
 			string = string_definer(str, start + 1);
 			line = define_line_num(file->copy, string, 0, 0);
 			colomn = define_line_colomn(file->copy, cpy, line);
-			printf ("Lexical error at [%d:%d]\n", line + 1, colomn);
+			ft_printf ("Lexical error at [%d:%d]\n", line + 1, colomn);
 			ft_strdel(&string);
 			//system("leaks asm");
 			return (0);

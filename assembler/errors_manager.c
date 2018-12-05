@@ -58,8 +58,6 @@ int		define_line_num(char *copy, char *str_n, int f, int l)
 		}
 		f++;
 	}
-	printf("end\n");
-
 	return (0);
 }
 

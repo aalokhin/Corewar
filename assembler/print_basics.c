@@ -17,7 +17,7 @@ void			ft_print_success(t_binfile *bin)
 	int			len;
 
 	len = ft_strlen(bin->arg_name);
-	printf("Writing output program to %s\n", bin->res_arg_name);
+	ft_printf("Writing output program to %s\n", bin->res_arg_name);
 }
 
 void			ft_print_usage(void)
