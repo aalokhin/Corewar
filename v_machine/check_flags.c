@@ -88,6 +88,8 @@ int		check_flags_nc_and_bots(char **argv, t_flags *params)
 
 int		check_flags_core(int argc, char **argv, t_flags *params)
 {
+	int res;
+
 	while ((*params).i < argc)
 	{
 		if (ft_strcmp(argv[(*params).i], "-a") == 0)
@@ -101,8 +103,8 @@ int		check_flags_core(int argc, char **argv, t_flags *params)
 		}
 		else if (check_flags_with_nbr(argv, argc, params))
 			continue ;
-		else if (check_flags_nc_and_bots(argv, params) <= 0)
-			return (check_flags_nc_and_bots(argv, params));
+		else if ((res = check_flags_nc_and_bots(argv, params)) <= 0)
+			return (res);
 		(*params).i++;
 	}
 	if ((*params).j == 0)

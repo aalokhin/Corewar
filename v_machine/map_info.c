@@ -55,9 +55,9 @@ void	print_map_info4(WINDOW *win, t_proc *processes, int x, int *y)
 	if (!(*processes).if_live)
 	{
 		{
-			wattron(win, COLOR_PAIR((*processes).id + 1));
+			wattron(win, COLOR_PAIR((*processes).real_id + 1));
 			mvwprintw(win, *y, x, "PROCESS DIED");
-			wattroff(win, COLOR_PAIR((*processes).id + 1));
+			wattroff(win, COLOR_PAIR((*processes).real_id + 1));
 		}
 	}
 	(*y) -= 2;
@@ -87,11 +87,11 @@ void	print_map_info(WINDOW *win, t_cycle *main_cycle, t_flags *params)
 		if ((*processes).last_live_cycle ==
 			(*main_cycle).cycles - 1 && (*main_cycle).cycles != 1)
 		{
-			wattron(win, COLOR_PAIR((*processes).id + 1));
+			wattron(win, COLOR_PAIR((*processes).real_id + 1));
 			mvwprintw(win, y, x,
 				"A process shows that player %d (%s) is alive in cycle %d",
 			(*processes).id + 1, (*processes).name, (*main_cycle).cycles - 1);
-			wattroff(win, COLOR_PAIR((*processes).id + 1));
+			wattroff(win, COLOR_PAIR((*processes).real_id + 1));
 		}
 		y -= 5;
 		processes = processes->next;

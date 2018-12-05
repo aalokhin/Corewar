@@ -23,6 +23,7 @@ void	init_bots(t_header bots[MAX_PLAYERS])
 		bots[i].prog_size = 0;
 		bots[i].exec_part = NULL;
 		bots[i].start_index = 0;
+		bots[i].real_id = 0;
 		ft_bzero(bots[i].prog_name, ft_strlen(bots[i].prog_name));
 		ft_bzero(bots[i].comment, ft_strlen(bots[i].comment));
 		i++;
@@ -88,6 +89,7 @@ void	processes_init2(t_flags *params, t_header bots[MAX_PLAYERS],
 {
 	bots[(*params).i].id = (*processes).id;
 	(*processes).real_id = (*params).i;
+	bots[(*params).i].real_id = (*processes).real_id;
 	(*processes).name = bots[(*params).i].prog_name;
 	(*processes).current_position = bots[(*params).i++].start_index;
 	(*processes).carry = 0;
@@ -107,6 +109,34 @@ void	processes_init2(t_flags *params, t_header bots[MAX_PLAYERS],
 		(*processes).regs[(*params).j++] = 0;
 }
 
+int check_if_norepeat_id(t_flags *params, int id_to_check)
+{
+	int i;
+
+	i = 0;
+	while (i < MAX_PLAYERS)
+	{
+		if ((*params).pl_nbr[i][0] && id_to_check == (*params).pl_nbr[i][1])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int check_if_norepeat_id_in_list(t_proc *processes, int id_to_check)
+{
+	t_proc *tmp;
+
+	tmp = processes;
+	while (tmp)
+	{
+		if ((*tmp).id - 1 == id_to_check)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 t_proc	*processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
 	unsigned char *map)
 {
@@ -119,7 +149,7 @@ t_proc	*processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
 	{
 		processes = (t_proc *)malloc(sizeof(t_proc));
 		if ((*params).pl_nbr[(*params).i][0] &&
-		(*params).pl_nbr[(*params).i][1] != 0)
+		(*params).pl_nbr[(*params).i][1] > 0)
 			(*processes).id = (*params).pl_nbr[(*params).i][1] - 1;
 		else if ((*params).pl_nbr[(*params).i][0] &&
 			(*params).pl_nbr[(*params).i][1] == 0)

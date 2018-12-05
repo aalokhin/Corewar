@@ -63,6 +63,7 @@ typedef struct	s_header
 	unsigned char		*exec_part;
 	unsigned int		start_index;
 	int					id;
+	int					real_id;
 }				t_header;
 
 #endif

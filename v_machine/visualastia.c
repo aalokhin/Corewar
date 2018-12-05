@@ -81,10 +81,10 @@ void	visual_init(WINDOW **win, t_flags *params,
 	while (i < (*params).bots_quantity)
 	{
 		y += 2;
-		wattron(*win, COLOR_PAIR(i + 1));
+		wattron(*win, COLOR_PAIR(bots[i].real_id + 1));
 		mvwprintw(*win, y, x, "Player: -%d : %s",
 			bots[i].id + 1, bots[i].prog_name);
-		wattroff(*win, COLOR_PAIR(i + 1));
+		wattroff(*win, COLOR_PAIR(bots[i].real_id + 1));
 		i++;
 		y += 4;
 	}
@@ -111,10 +111,6 @@ void	map_to_screen(unsigned char *map, t_cycle *main_cycle,
 	y = 2;
 	res = 0;
 	refresh();
-	wattron(win, COLOR_PAIR(12));
-	wborder(win, 42, 42, 42, 42, 42, 42, 42, 42);
-	mvwvline(win, 1, 196, 42, 70);
-	wattroff(win, COLOR_PAIR(12));
 	while (i < MEM_SIZE)
 	{
 		x = 3;
