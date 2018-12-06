@@ -61,32 +61,35 @@ int		if_correct_name(unsigned char *str, t_flags *params, int j)
 	return (1);
 }
 
-int		check_magic(unsigned char *str, t_flags *params, int j,
+void	check_magic(unsigned char *str, int j,
 	t_header bots[MAX_PLAYERS])
 {
 	unsigned int	magic;
 	unsigned int	buf;
+	int				i;
+	int				k;
 
+	i = 0;
 	magic = 0;
 	buf = 0;
-	buf = str[0] << 24;
-	magic |= buf;
-	buf = str[1] << 16;
-	magic |= buf;
-	buf = str[2] << 8;
-	magic |= buf;
-	magic |= str[3];
-	bots[j].magic = magic;
-	if (magic != COREWAR_EXEC_MAGIC)
+	k = MAGIC_S;
+	while (i < MAGIC_S)
 	{
-		ft_printf("Error: File %s has an invalid header\n",
-		(*params).players[j]);
-		return (0);
+		if (((k - 1) * 8) > 0)
+		{
+			buf = str[i] << (k - 1) * 8;
+			magic |= buf;
+		}
+		else
+			magic |= str[i];
+		k--;
+		i++;
 	}
-	return (1);
+	bots[j].magic = magic;
 }
 
-int		check_comment(unsigned char *str, t_flags *params, int j)
+int		check_comment(unsigned char *str, t_flags *params, int j,
+	t_header bots[MAX_PLAYERS])
 {
 	int		i;
 
@@ -97,6 +100,40 @@ int		check_comment(unsigned char *str, t_flags *params, int j)
 	{
 		ft_printf("Error: File %s has an invalid header\n",
 		(*params).players[j]);
+		return (0);
+	}
+	if (bots[j].magic != COREWAR_EXEC_MAGIC)
+	{
+		ft_printf("Error: File %s has an invalid header\n",
+		(*params).players[j]);
+		return (0);
+	}
+	return (1);
+}
+
+int		check_bot_size(int len, unsigned char *str, t_header bots[MAX_PLAYERS],
+	t_flags *params)
+{
+	if ((unsigned int)(len - PRE_EXEC_S) != bots[(*params).j].prog_size)
+	{
+		ft_printf("%s %s %s\n", "Error: File", (*params).players[(*params).j],
+		"has a code size that differ from what its header says");
+		ft_strdel((char **)(&str));
+		return (0);
+	}
+	if (bots[(*params).j].prog_size > CHAMP_MAX_SIZE)
+	{
+		ft_printf("Error: File %s has too large a code (%d bytes > %d bytes)\n",
+		(*params).players[(*params).j],
+		bots[(*params).j].prog_size, CHAMP_MAX_SIZE);
+		ft_strdel((char **)(&str));
+		return (0);
+	}
+	if ((*params).sum_bots > MEM_SIZE)
+	{
+		ft_printf("Error: %s %d MEM_SIZE for this game\n",
+		"Too small map size, you need at least",
+		(*params).sum_bots);
 		return (0);
 	}
 	return (1);

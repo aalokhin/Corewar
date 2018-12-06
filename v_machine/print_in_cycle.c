@@ -67,8 +67,8 @@ void	print_adv(t_cycle *main_cycle, t_proc *processes, t_flags *params,
 	int j;
 
 	j = 0;
-	(*main_cycle).indexes[(*processes).current_position % MEM_SIZE][1]
-	= NO_CARETKA;
+	(*main_cycle).indexes[(*processes).current_position % MEM_SIZE][1] =
+	NO_CARETKA;
 	if (((*params).v_verbosity >> 4) & 1 && (*main_cycle).shift > 0
 		&& !(*params).ncurses)
 	{

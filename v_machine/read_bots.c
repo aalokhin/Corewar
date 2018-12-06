@@ -12,51 +12,9 @@
 
 #include "../corewar.h"
 
-int		check_bot_size(int len, unsigned char *str, t_header bots[MAX_PLAYERS],
-	t_flags *params)
-{
-	if ((unsigned int)(len - PRE_EXEC_S) != bots[(*params).j].prog_size)
-	{
-		ft_printf("%s %s %s\n", "Error: File", (*params).players[(*params).j],
-		"has a code size that differ from what its header says");
-		ft_strdel((char **)(&str));
-		return (0);
-	}
-	if (bots[(*params).j].prog_size > CHAMP_MAX_SIZE)
-	{
-		ft_printf("Error: File %s has too large a code (%d bytes > %d bytes)\n",
-		(*params).players[(*params).j],
-		bots[(*params).j].prog_size, CHAMP_MAX_SIZE);
-		ft_strdel((char **)(&str));
-		return (0);
-	}
-	if ((*params).sum_bots > MEM_SIZE)
-	{
-		ft_printf("Error: %s %d MEM_SIZE for this game\n",
-		"Too small map size, you need at least",
-		(*params).sum_bots);
-		return (0);
-	}
-	return (1);
-}
-
-int		take_bots_params(unsigned char *str, t_flags *params, int len,
+int		take_bots_params2(unsigned char *str, t_flags *params, int len,
 	t_header bots[MAX_PLAYERS])
 {
-	unsigned int size;
-	unsigned int buf;
-
-	size = 0;
-	buf = 0;
-	buf = str[136] << 24;
-	size |= buf;
-	buf = str[137] << 16;
-	size |= buf;
-	buf = str[138] << 8;
-	size |= buf;
-	size |= str[139];
-	bots[(*params).j].prog_size = size;
-	(*params).sum_bots += size;
 	if (!check_bot_size(len, str, bots, params))
 		return (0);
 	ft_strncpy(bots[(*params).j].comment,
@@ -64,6 +22,36 @@ int		take_bots_params(unsigned char *str, t_flags *params, int len,
 		COMMENT_L);
 	bots[(*params).j].exec_part = (unsigned char *)malloc(sizeof(unsigned char)
 	* (bots[(*params).j].prog_size));
+	return (1);
+}
+
+int		take_bots_params(unsigned char *str, t_flags *params, int len,
+	t_header bots[MAX_PLAYERS])
+{
+	unsigned int	size;
+	unsigned int	buf;
+	int				i;
+	int				k;
+
+	i = PROG_NAME_L + MAGIC_S + NULL_S;
+	size = 0;
+	buf = 0;
+	k = EXEC_S;
+	while (i < PROG_NAME_L + MAGIC_S + NULL_S + EXEC_S)
+	{
+		if (((k - 1) * 8) > 0)
+		{
+			buf = str[i++] << (k - 1) * 8;
+			size |= buf;
+		}
+		else
+			size |= str[i++];
+		k--;
+	}
+	bots[(*params).j].prog_size = size;
+	(*params).sum_bots += size;
+	if (!take_bots_params2(str, params, len, bots))
+		return (0);
 	return (1);
 }
 
@@ -116,10 +104,10 @@ int		read_bots(t_flags *params, int fd, t_header bots[MAX_PLAYERS])
 		str = (unsigned char *)malloc(sizeof(unsigned char) * len + 1);
 		str[len] = '\0';
 		read(fd, str, len);
+		check_magic(str, (*params).j, bots);
 		if (!take_bots_params(str, params, len, bots) ||
-		!check_magic(str, params, (*params).j, bots) ||
 		!if_correct_name(str, params, (*params).j) ||
-		!check_comment(str, params, (*params).j))
+		!check_comment(str, params, (*params).j, bots))
 			return (0);
 		ft_strncpy(bots[(*params).j].prog_name,
 		(const char *)(&str[MAGIC_S]), PROG_NAME_L);

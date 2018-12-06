@@ -226,9 +226,10 @@ int					check_ldi_params(t_instr *inst_vars, unsigned char *map,
 void				take_bits_params(t_instr *inst_vars, unsigned char *map,
 						int i, int *dest);
 int					if_correct_name(unsigned char *str, t_flags *params, int j);
-int					check_magic(unsigned char *str, t_flags *params, int j,
+void				check_magic(unsigned char *str, int j,
 						t_header bots[MAX_PLAYERS]);
-int					check_comment(unsigned char *str, t_flags *params, int j);
+int					check_comment(unsigned char *str, t_flags *params, int j,
+						t_header bots[MAX_PLAYERS]);
 void				delete_unneeded(t_proc **head, t_cycle *main_cycle);
 void				fill_start_map_id(t_cycle *main_cycle,
 						t_header bots[MAX_PLAYERS], t_flags *params);
@@ -263,5 +264,6 @@ void				start_cycle(unsigned char *map, t_flags *params,
 void				print_map_info(WINDOW *win, t_cycle *main_cycle,
 						t_flags *params);
 int					check_if_norepeat_id(t_flags *params, int id_to_check, int if_start);
-
+int					check_bot_size(int len, unsigned char *str,
+						t_header bots[MAX_PLAYERS], t_flags *params);
 #endif
