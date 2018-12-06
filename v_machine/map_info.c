@@ -52,15 +52,7 @@ void	print_map_info2(WINDOW *win, t_cycle *main_cycle, int x, int y)
 
 void	print_map_info4(WINDOW *win, t_proc *processes, int x, int *y)
 {
-	if (!(*processes).if_live)
-	{
-		{
-			wattron(win, COLOR_PAIR((*processes).real_id + 1));
-			mvwprintw(win, *y, x, "PROCESS DIED");
-			wattroff(win, COLOR_PAIR((*processes).real_id + 1));
-		}
-	}
-	(*y) -= 2;
+	(*y) -= 1;
 	mvwprintw(win, (*y), x, "Lives in current period : %d ",
 		(*processes).lives);
 	(*y)--;
@@ -68,6 +60,10 @@ void	print_map_info4(WINDOW *win, t_proc *processes, int x, int *y)
 	mvwprintw(win, (*y), x, "Last live: %d ", (*processes).last_live_cycle);
 	wrefresh(win);
 	(*y) += 2;
+	wattron(win, COLOR_PAIR(12));
+	wborder(win, 42, 42, 42, 42, 42, 42, 42, 42);
+	mvwvline(win, 1, 196, 42, 70);
+	wattroff(win, COLOR_PAIR(12));
 }
 
 void	print_map_info(WINDOW *win, t_cycle *main_cycle, t_flags *params)
@@ -77,7 +73,7 @@ void	print_map_info(WINDOW *win, t_cycle *main_cycle, t_flags *params)
 	t_proc	*processes;
 
 	x = 201;
-	y = 9 + (6 * (*params).bots_quantity);
+	y = 9 + (5 * (*params).bots_quantity);
 	processes = (*main_cycle).head_proc;
 	while ((*processes).real_id != (*params).bots_quantity - 1)
 		processes = processes->next;
@@ -96,5 +92,5 @@ void	print_map_info(WINDOW *win, t_cycle *main_cycle, t_flags *params)
 		y -= 5;
 		processes = processes->next;
 	}
-	print_map_info2(win, main_cycle, x - 2, 11 + (6 * (*params).bots_quantity));
+	print_map_info2(win, main_cycle, x - 2, 11 + (5 * (*params).bots_quantity));
 }

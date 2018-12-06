@@ -87,6 +87,7 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 void	processes_init2(t_flags *params, t_header bots[MAX_PLAYERS],
 	unsigned char *map, t_proc *processes)
 {
+	clear_argv_arr(processes);
 	bots[(*params).i].id = (*processes).id;
 	(*processes).real_id = (*params).i;
 	bots[(*params).i].real_id = (*processes).real_id;
@@ -109,40 +110,12 @@ void	processes_init2(t_flags *params, t_header bots[MAX_PLAYERS],
 		(*processes).regs[(*params).j++] = 0;
 }
 
-int check_if_norepeat_id(t_flags *params, int id_to_check)
-{
-	int i;
-
-	i = 0;
-	while (i < MAX_PLAYERS)
-	{
-		if ((*params).pl_nbr[i][0] && id_to_check == (*params).pl_nbr[i][1] - 1)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int check_if_norepeat_id_in_list(t_proc *processes, int id_to_check)
-{
-	t_proc *tmp;
-
-	tmp = processes;
-	while (tmp)
-	{
-		if ((*tmp).id - 1 == id_to_check)
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
 t_proc	*processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
 	unsigned char *map)
 {
 	t_proc			*processes;
 	t_proc			*tmp;
-	int cur_id;
+	int				cur_id;
 
 	(*params).i = 0;
 	tmp = NULL;
@@ -154,26 +127,13 @@ t_proc	*processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
 			(*processes).id = (*params).pl_nbr[(*params).i][1] - 1;
 		else
 		{
-			while (check_if_norepeat_id(params, cur_id))
-			{
+			while (check_if_norepeat_id(params, cur_id, 0))
 				cur_id++;
-			}
 			(*processes).id = cur_id;
 			cur_id++;
 		}
-		/*if ((*params).pl_nbr[(*params).i][0] &&
-		(*params).pl_nbr[(*params).i][1] > 0)
-			(*processes).id = (*params).pl_nbr[(*params).i][1] - 1;
-		else if ((*params).pl_nbr[(*params).i][0] &&
-			(*params).pl_nbr[(*params).i][1] == 0)
-			(*processes).id = 0;
-		else if (!(*params).pl_nbr[(*params).i][0] && tmp)
-			(*processes).id = (*tmp).id + 1;
-		else
-			(*processes).id = (*params).i;*/
-		processes_init2(params, bots, map, processes);
 		(*processes).next = tmp;
-		clear_argv_arr(processes);
+		processes_init2(params, bots, map, processes);
 		(*processes).regs[0] = (unsigned int)(((*processes).id + 1) * -1);
 		tmp = processes;
 	}

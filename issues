@@ -311,3 +311,11 @@ t_proc  *processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
 }
 
 выводить эррор при попытке задать одинаковые н номера
+заменить ПРИНТФ!!!!!!
+
+Error: Can't read source file -1 пишется с лишней пустой строкой
+
+
+./corewar -nc vm_champs/champs/championships/2017/gnebie/ultima.cor  vm_champs/champs/Car.cor -n 2 vm_champs/champs/championships/2014/ekocevar/mandragore.cor -n 1 vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor
+
+Error: Process numbers must be unique zsh: segmentation fault  ./corewar -nc vm_champs/champs/championships/2017/gnebie/ultima.cor  -n 2  -n

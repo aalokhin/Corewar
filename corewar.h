@@ -262,5 +262,6 @@ void				start_cycle(unsigned char *map, t_flags *params,
 						WINDOW **win, t_cycle *main_cycle);
 void				print_map_info(WINDOW *win, t_cycle *main_cycle,
 						t_flags *params);
+int					check_if_norepeat_id(t_flags *params, int id_to_check, int if_start);
 
 #endif

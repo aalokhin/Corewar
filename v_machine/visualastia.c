@@ -86,7 +86,7 @@ void	visual_init(WINDOW **win, t_flags *params,
 			bots[i].id + 1, bots[i].prog_name);
 		wattroff(*win, COLOR_PAIR(bots[i].real_id + 1));
 		i++;
-		y += 4;
+		y += 3;
 	}
 }
 

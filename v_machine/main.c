@@ -128,6 +128,7 @@ int		main(int argc, char **argv)
 	params_init(&params);
 	if (check_flags_core(argc, argv, &params) <= 0)
 		exit(0);
+	params.j = 0;
 	init_bots(bots);
 	if (!read_bots(&params, fd, bots))
 		exit(0);

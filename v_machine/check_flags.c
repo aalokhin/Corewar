@@ -12,27 +12,45 @@
 
 #include "../corewar.h"
 
-int		check_flag_v(char **argv, int argc, t_flags *params)
+int		check_if_norepeat_id(t_flags *params, int id_to_check, int if_start)
 {
-	if (ft_strcmp(argv[(*params).i], "-v") == 0 && (*params).i + 1 < argc)
+	int i;
+	int id_to_check_tmp;
+
+	i = 0;
+	id_to_check_tmp = 0;
+	while (i < MAX_PLAYERS)
 	{
-		if (ft_atoi(argv[(*params).i + 1]) > 0)
-		{
-			(*params).v_verbosity = ft_atoi(argv[(*params).i + 1]);
-			(*params).i += 2;
-		}
+		if (if_start)
+			id_to_check_tmp = (*params).pl_nbr[i][1];
 		else
-			(*params).i++;
-		return (1);
+			id_to_check_tmp = (*params).pl_nbr[i][1] - 1;
+		if ((*params).pl_nbr[i][0] && id_to_check == id_to_check_tmp)
+			return (1);
+		i++;
 	}
-	else if (ft_strcmp(argv[(*params).i], "-n") == 0 && (*params).j
+	return (0);
+}
+
+int		check_flag_n(char **argv, int argc, t_flags *params)
+{
+	int res;
+
+	res = 0;
+	if (ft_strcmp(argv[(*params).i], "-n") == 0 && (*params).j
 		< MAX_PLAYERS && (*params).i + 1 < argc)
 	{
-		if (ft_atoi(argv[(*params).i + 1]) > 0)
+		res = ft_atoi(argv[(*params).i + 1]);
+		if (res > 0 && !check_if_norepeat_id(params, res, 1))
 		{
 			(*params).pl_nbr[(*params).j][0] = 1;
-			(*params).pl_nbr[(*params).j][1] = ft_atoi(argv[(*params).i + 1]);
+			(*params).pl_nbr[(*params).j][1] = res;
 			(*params).i += 2;
+		}
+		else if (check_if_norepeat_id(params, res, 1))
+		{
+			ft_printf("%s %s\n", "Error: Process numbers must be unique");
+			exit(0);
 		}
 		else
 			(*params).i++;
@@ -54,7 +72,18 @@ int		check_flags_with_nbr(char **argv, int argc, t_flags *params)
 			(*params).i++;
 		return (1);
 	}
-	else if (check_flag_v(argv, argc, params))
+	else if (ft_strcmp(argv[(*params).i], "-v") == 0 && (*params).i + 1 < argc)
+	{
+		if (ft_atoi(argv[(*params).i + 1]) > 0)
+		{
+			(*params).v_verbosity = ft_atoi(argv[(*params).i + 1]);
+			(*params).i += 2;
+		}
+		else
+			(*params).i++;
+		return (1);
+	}
+	else if (check_flag_n(argv, argc, params))
 		return (1);
 	return (0);
 }
@@ -112,6 +141,5 @@ int		check_flags_core(int argc, char **argv, t_flags *params)
 		print_usage();
 		return (-2);
 	}
-	(*params).j = 0;
 	return (1);
 }
