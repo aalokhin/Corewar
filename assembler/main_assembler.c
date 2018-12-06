@@ -22,6 +22,11 @@ void				init_bin(t_binfile *bin)
 	(*bin).arg_name = NULL;
 	(*bin).f_contents = NULL;
 	(*bin).labels_list = NULL;
+	(*bin).z[0] = DIRECT_CHAR;
+	(*bin).z[1] = LABEL_CHAR;
+	(*bin).z[2] = '\0';
+	(*bin).w[0] = LABEL_CHAR;
+	(*bin).w[1] = '\0';
 }
 
 int					init_check(t_binfile *bin)

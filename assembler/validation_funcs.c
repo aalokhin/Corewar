@@ -122,13 +122,13 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
 	if (size == t || t == 7 || (size < t && t - size != size &&
 		(t - size == T_REG || t - size == T_DIR ||  t - size == T_IND)))
 	{
-		if (ft_strstr(arg, "%:") || ft_strchr(arg, LABEL_CHAR))
+		if (ft_strstr(arg, file->z) || ft_strchr(arg, LABEL_CHAR))
 		{
-			str = ft_strstr(arg, "%:") ? ft_strjoin(arg + 2, ":") : ft_strjoin(arg + 1, ":");
+			str = ft_strstr(arg, file->z) ? ft_strjoin(arg + 2, file->w) : ft_strjoin(arg + 1, file->w);
 			if (!(ft_strstr(file->f_contents, str)))
 			{
 				ft_strdel(&str);
-				return (ft_strstr(arg, "%:") ? error_message_label(file, token, arg + 2, arg) : error_message_label(file, token, arg + 1, arg)); // error_message_label(file, token, arg + 1, arg));
+				return (ft_strstr(arg, file->z) ? error_message_label(file, token, arg + 2, arg) : error_message_label(file, token, arg + 1, arg)); // error_message_label(file, token, arg + 1, arg));
 			}
 			ft_strdel(&str);
 		}

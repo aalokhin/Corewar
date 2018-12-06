@@ -17,13 +17,13 @@ int				error_message_label(t_binfile *f, t_t *tk, char *l, char *arg)
 	int			colomn;
 
 	colomn = define_line_colomn(f->copy, arg, tk->line_num);
-	if (ft_strstr(arg, "%:"))
+	if (ft_strstr(arg, f->z))
 	{
 		ft_printf("No such label %s while attempting to dereference token ", l);
 		ft_printf("[TOKEN][%0.3d:%0.3d] %s \"%s\"\n", tk->line_num + 1,\
 		colomn + 1, "DIRECT_LABEL", arg);
 	}
-	else if (ft_strstr(arg, ":"))
+	else if (ft_strchr(arg, LABEL_CHAR))
 	{
 		ft_printf("No such label %s while attempting to dereference token ", l);
 		ft_printf("[TOKEN][%0.3d:%0.3d] %s \"%s\"\n", tk->line_num + 1,\
@@ -51,17 +51,17 @@ int				error_message(t_binfile *file, char *arg, int line_num)
 	if (ft_strchr(arg, 'r') && !(ft_strchr(arg, DIRECT_CHAR)) &&
 		!(ft_strchr(arg, LABEL_CHAR)))
 		e = ft_strdup("REGISTER");
-	else if (ft_strstr(arg, "%:"))
+	else if (ft_strstr(arg, file->z))
 		e = ft_strdup("DIRECT_LABEL");
-	else if (ft_strstr(arg, ":"))
+	else if (ft_strchr(arg, LABEL_CHAR))
 		e = ft_strdup("INDIRECT_LABEL");
-	else if (ft_strchr(arg, '%'))
+	else if (ft_strchr(arg, DIRECT_CHAR))
 		e = ft_strdup("DIRECT");
 	else if (ft_atoi(arg) != 0)
 		e = ft_strdup("INDIRECT");
 	else if (ft_strchr(arg, SEPARATOR_CHAR))
 		e = ft_strdup("SEPARATOR");
-	else if (ft_strchr(arg, ':'))
+	else if (ft_strchr(arg, LABEL_CHAR))
 		e = ft_strdup("LABEL");
 	else
 		e = ft_strdup("INSTRUCTION");

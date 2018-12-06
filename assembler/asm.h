@@ -65,6 +65,8 @@ typedef struct				s_lable
 
 typedef struct				s_binfile
 {
+	char 					z[3];
+	char 					w[2];
 	int						fd;//incoming file
 	int						fd_file_out;//resulting file
 	unsigned char			a[4];

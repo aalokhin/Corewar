@@ -39,11 +39,11 @@ int			find_arg_value(t_binfile *bin, char *str, t_t *c, t_lable *l)
 	t_lable	*tmp_lbl;
 
 	tmp_lbl = bin->labels_list;
-	if (ft_strstr(str, "%:") || ft_strchr(str, LABEL_CHAR))
+	if (ft_strstr(str, bin->z) || ft_strchr(str, LABEL_CHAR))
 	{
-		saved = ft_strstr(str, "%:") ? ft_strstr(str, "%:") + 2 :\
+		saved = ft_strstr(str, bin->z) ? ft_strstr(str, bin->z) + 2 :\
 	ft_strchr(str, LABEL_CHAR) + 1;
-		search = ft_strjoin(saved, ":");
+		search = ft_strjoin(saved, bin->w);
 		return (find_arg_value_help(tmp_lbl, search, c->bytes_above_i,\
 			l->bytes_above));
 	}
