@@ -84,6 +84,7 @@ typedef struct				s_binfile
 	char					champ_name[PROG_NAME_L + 1];
 	char					champ_comment[COMMENT_L + 1];
 	char					champ_size[4];
+	char					*comma;
 	char					*exec_code;//executable code
 	t_lable					*labels_list;
 }							t_binfile;

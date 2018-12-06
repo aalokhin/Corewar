@@ -86,16 +86,43 @@ int			arguments_filler(t_binfile *file, t_t *t, char **s, int *i)
 	return (1);
 }
 
+int			comma_checker(t_t *token, char *str)
+{
+	int		l = -1;
+	int 	k = -1;
+	int 	comma = 0;
+	char 	*string;
+
+	while (str[++l])
+		comma += str[l] == SEPARATOR_CHAR ? 1 : 0;
+	if (g_op_tab[token->c_name].nb_params == comma + 1)
+	{
+		string = ft_strstr(str, token->a[0]);
+		while (string[++k] && comma != 0)
+			comma -= string[k] == SEPARATOR_CHAR ? 1 : 0;
+		while (string[k])
+		{
+			if (!(WHITESPACE(string[k])))
+				return (1);
+			k++;
+		}
+	}
+	return (0);
+}
+
+
 int			parse_commands(t_binfile *file, int k, char **str_n, char **str)
 {
 	t_t		*token;
 	t_lable	*label;
+	char **comma;
 	int		i;
 
 	i = 0;
 	token = NULL;
 	label = NULL;
 	str_n = (ft_strsplit(file->f_contents, '\n'));
+	comma = (ft_strsplit(file->comma, '\n'));
 	if (!no_name_comment(file, str_n))
 		return (0);
 	while (str_n[++k])
@@ -114,6 +141,11 @@ int			parse_commands(t_binfile *file, int k, char **str_n, char **str)
 				|| (++i >= 0 && (!arguments_filler(file, token, str, &i))))
 				return (cmd_linker_add(file, label, token) ? clean(str, str_n) : 0);
 			token_to_add(label, token);
+			if (!comma_checker(token, comma[k]))
+			{
+				ft_printf("No/Extra SEPARATOR_CHAR - line [%0.3d]\n", token->line_num + 1);
+				return (0);
+			}
 		}
 		i = ft_clean_parse(str);
 	}

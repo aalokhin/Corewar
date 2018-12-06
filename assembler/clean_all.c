@@ -93,6 +93,7 @@ void			ft_clean_all(t_binfile *bin)
 	ft_strdel(&((*bin).res_arg_name));
 	ft_strdel(&((*bin).name));
 	ft_strdel(&((*bin).comment));
+	ft_strdel(&((*bin).comma));
 	if ((*bin).labels_list)
 		clean_labels(&((*bin).labels_list));
 }
