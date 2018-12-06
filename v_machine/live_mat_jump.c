@@ -12,6 +12,13 @@
 
 #include "../corewar.h"
 
+/*
+** If you want to see more similarities with original
+** VM, replace ft_printf phrase to:
+** ft_printf("Player %d (%s) is said to be alive\n",
+** (*child_proc).argv[0][1] + 1, (*tmp).name);
+*/
+
 void	live_dir_proc(t_proc *child_proc, t_proc *head_proc,
 	t_cycle *main_cycle)
 {
@@ -28,10 +35,8 @@ void	live_dir_proc(t_proc *child_proc, t_proc *head_proc,
 			if ((*tmp).if_live)
 				(*tmp).last_live_cycle = (*main_cycle).cycles;
 			if (((*main_cycle).verbose & 1) && !(*main_cycle).ncurses)
-				ft_printf("Player %d (%s) is said to be alive\n",
+				ft_printf("A process shows that player %d (%s) is alive\n",
 				(*child_proc).argv[0][1] + 1, (*tmp).name);
-				//ft_printf("A process shows that player %d (%s) is alive\n",
-				//(*child_proc).argv[0][1] + 1, (*tmp).name);
 		}
 	}
 }

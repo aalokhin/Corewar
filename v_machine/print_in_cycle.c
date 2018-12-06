@@ -59,14 +59,12 @@ void	after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
 	if (!(*params).ncurses && !main_cycle.processes)
 	{
 		if (main_cycle.winner_id >= 0)
-			ft_printf("Contestant %d, \"%s\", has won !\n",
+			ft_printf("Player %d (%s) won\n",
 			main_cycle.winner_id + 1, main_cycle.winner_name);
 		else
 			ft_printf("%s\n",
 				"There is no winner in this game. Friendship won:)");
 	}
-		//ft_printf("Player %d (%s) won\n",
-			//main_cycle.winner_id + 1, main_cycle.winner_name);
 }
 
 void	print_adv(t_cycle *main_cycle, t_proc *processes, t_flags *params,
