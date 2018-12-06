@@ -16,7 +16,7 @@ void	music_stop_pause(t_cycle *main_cycle, WINDOW **win)
 {
 	if ((*main_cycle).m == 0)
 	{
-		system("afplay  media/Game_of_Thrones.mp3 &> /dev/null &");
+		system("afplay music/epic.mp3 &> /dev/null &");
 		(*main_cycle).m = 1;
 		mvwprintw(*win, (*main_cycle).winner_str + 10, 199,
 			"=============> MUSIC  start <==============");

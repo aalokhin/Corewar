@@ -22,10 +22,10 @@ void	intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
 		visual_init(win, params, bots);
 	else
 	{
-		printf("%s\n", "Introducing contestants...");
+		ft_printf("%s\n", "Introducing contestants...");
 		while (i < (*params).bots_quantity)
 		{
-			printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+			ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
 			bots[i].id + 1, bots[i].prog_size,
 			bots[i].prog_name, bots[i].comment);
 			i++;
@@ -52,12 +52,12 @@ void	after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
 	if (!(*params).ncurses && !main_cycle.processes)
 	{
 		if (main_cycle.winner_id >= 0)
-			printf("Contestant %d, \"%s\", has won !\n",
+			ft_printf("Contestant %d, \"%s\", has won !\n",
 			main_cycle.winner_id + 1, main_cycle.winner_name);
 		else
-			printf("%s\n", "There is no winner in this game. Friendship won:)");
+			ft_printf("%s\n", "There is no winner in this game. Friendship won:)");
 	}
-		//printf("Player %d (%s) won\n",
+		//ft_printf("Player %d (%s) won\n",
 			//main_cycle.winner_id + 1, main_cycle.winner_name);
 }
 
@@ -72,16 +72,16 @@ void	print_adv(t_cycle *main_cycle, t_proc *processes, t_flags *params,
 	if (((*params).v_verbosity >> 4) & 1 && (*main_cycle).shift > 0
 		&& !(*params).ncurses)
 	{
-		printf("ADV %d (0x%.4x -> 0x%.4x) ", (*main_cycle).shift,
+		ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", (*main_cycle).shift,
 			(*processes).current_position, (*main_cycle).shift +
 			(*processes).current_position);
 		while (j < (*main_cycle).shift)
 		{
-			printf("%.2x ", map[((*processes).current_position
+			ft_printf("%.2x ", map[((*processes).current_position
 			+ j) % MEM_SIZE]);
 			j++;
 		}
-		printf("\n");
+		ft_printf("\n");
 	}
 	(*processes).current_position += (*main_cycle).shift;
 }
@@ -106,12 +106,12 @@ void	print_dump(unsigned char *map)
 	int i;
 
 	i = 0;
-	printf("0x0000 : ");
+	ft_printf("0x0000 : ");
 	while (i < MEM_SIZE)
 	{
-		printf("%.2x ", map[i]);
+		ft_printf("%.2x ", map[i]);
 		if (++i % 64 == 0 && i < MEM_SIZE)
-			printf("\n%#.4x : ", i);
+			ft_printf("\n%#.4x : ", i);
 	}
-	printf("\n");
+	ft_printf("\n");
 }

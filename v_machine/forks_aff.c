@@ -37,10 +37,10 @@ void	ffork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if ((*tmp).id + 1 <= 9999)
-			printf("P%5d | fork %d (%d)\n",
+			ft_printf("P%5d | fork %d (%d)\n",
 				(*tmp).id + 1, (*tmp).argv[0][1], i);
 		else
-			printf("P%6d | fork %d (%d)\n",
+			ft_printf("P%6d | fork %d (%d)\n",
 				(*tmp).id + 1, (*tmp).argv[0][1], i);
 	}
 	i = ((i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
@@ -64,10 +64,10 @@ void	long_fork(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if ((*tmp).id + 1 <= 9999)
-			printf("P%5d | lfork %d (%d)\n", (*tmp).id + 1,
+			ft_printf("P%5d | lfork %d (%d)\n", (*tmp).id + 1,
 			(*tmp).argv[0][1], i);
 		else
-			printf("P%6d | lfork %d (%d)\n", (*tmp).id + 1,
+			ft_printf("P%6d | lfork %d (%d)\n", (*tmp).id + 1,
 			(*tmp).argv[0][1], i);
 	}
 	i = ((i % MEM_SIZE) + MEM_SIZE) % MEM_SIZE;
@@ -86,8 +86,8 @@ void	aff(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((*tmp).argv[0][0] != REG_CODE || (*tmp).argv[0][1] < 1
 		|| (*tmp).argv[0][1] > REG_NUMBER)
 		return ;
-	printf("%s", "Aff: ");
-	printf("%c\n", ((*tmp).regs[(*tmp).argv[0][1] - 1] % 256));
+	ft_printf("%s", "Aff: ");
+	ft_printf("%c\n", ((*tmp).regs[(*tmp).argv[0][1] - 1] % 256));
 	(*main_cycle).cycles = (*main_cycle).cycles;
 	cur_proc = map[0];
 }

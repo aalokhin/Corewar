@@ -28,9 +28,9 @@ void	live_dir_proc(t_proc *child_proc, t_proc *head_proc,
 			if ((*tmp).if_live)
 				(*tmp).last_live_cycle = (*main_cycle).cycles;
 			if (((*main_cycle).verbose & 1) && !(*main_cycle).ncurses)
-				printf("Player %d (%s) is said to be alive\n",
+				ft_printf("Player %d (%s) is said to be alive\n",
 				(*child_proc).argv[0][1] + 1, (*tmp).name);
-				//printf("A process shows that player %d (%s) is alive\n",
+				//ft_printf("A process shows that player %d (%s) is alive\n",
 				//(*child_proc).argv[0][1] + 1, (*tmp).name);
 		}
 	}
@@ -51,10 +51,10 @@ void	live(t_proc *head_proc, int cur_proc, t_cycle *main_cycle,
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if ((*child_proc).id + 1 <= 9999)
-			printf("P%5d | live %d\n", (*child_proc).id + 1,
+			ft_printf("P%5d | live %d\n", (*child_proc).id + 1,
 		(*child_proc).argv[0][1]);
 		else
-			printf("P%6d | live %d\n", (*child_proc).id + 1,
+			ft_printf("P%6d | live %d\n", (*child_proc).id + 1,
 			(*child_proc).argv[0][1]);
 	}
 	if ((*child_proc).argv[0][0] && (*child_proc).argv[0][1] <= 0
@@ -83,10 +83,10 @@ void	addition(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
-			printf("P%5d | add r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
+			ft_printf("P%5d | add r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
 		(*tmp).argv[1][1], (*tmp).argv[2][1]);
 		else
-			printf("P%6d | add r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
+			ft_printf("P%6d | add r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
 		(*tmp).argv[1][1], (*tmp).argv[2][1]);
 	}
 	map[0] = map[0];
@@ -112,10 +112,10 @@ void	substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
-			printf("P%5d | sub r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
+			ft_printf("P%5d | sub r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
 			(*tmp).argv[1][1], (*tmp).argv[2][1]);
 		else
-			printf("P%6d | sub r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
+			ft_printf("P%6d | sub r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
 			(*tmp).argv[1][1], (*tmp).argv[2][1]);
 	}
 	map[0] = map[0];
@@ -142,9 +142,9 @@ void	zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
-			printf("P%5d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);
+			ft_printf("P%5d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);
 		else
-			printf("P%6d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);
+			ft_printf("P%6d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);
 	}
 	map[0] = map[0];
 }

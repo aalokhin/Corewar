@@ -35,6 +35,7 @@ void	print_winner(WINDOW **win, t_cycle *main_cycle)
 	wrefresh(*win);
 	nodelay(stdscr, FALSE);
 	c = (char)getch();
+	system("pkill afplay &> /dev/null &");
 	wclear(*win);
 	endwin();
 }

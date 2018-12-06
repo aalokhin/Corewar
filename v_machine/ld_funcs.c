@@ -34,10 +34,10 @@ void	load(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
-			printf("P%5d | ld %d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
+			ft_printf("P%5d | ld %d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
 		(*tmp).argv[1][1]);
 		else
-			printf("P%6d | ld %d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
+			ft_printf("P%6d | ld %d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
 		(*tmp).argv[1][1]);
 	}
 }
@@ -47,10 +47,10 @@ void	print_lld(t_cycle *main_cycle, int cur_proc, t_instr inst_vars)
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
-			printf("P%5d | lld %d r%d\n", cur_proc + 1,
+			ft_printf("P%5d | lld %d r%d\n", cur_proc + 1,
 		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1]);
 		else
-			printf("P%6d | lld %d r%d\n", cur_proc + 1,
+			ft_printf("P%6d | lld %d r%d\n", cur_proc + 1,
 		inst_vars.tmp->argv[0][1], inst_vars.tmp->argv[1][1]);
 	}
 }
@@ -91,7 +91,7 @@ void	load_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		print_ldi_instr(0, cur_proc, inst_vars);
-		printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|',
+		ft_printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|',
 		inst_vars.one, inst_vars.two, inst_vars.one + inst_vars.two,
 		inst_vars.i);
 	}
@@ -116,7 +116,7 @@ void	lload_ind(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		print_ldi_instr(1, cur_proc, inst_vars);
-		printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|',
+		ft_printf("%8c -> load from %d + %d = %d (with pc and mod %d)\n", '|',
 		inst_vars.one, inst_vars.two, inst_vars.one + inst_vars.two,
 		(inst_vars.one + inst_vars.two) + inst_vars.tmp->current_position);
 	}

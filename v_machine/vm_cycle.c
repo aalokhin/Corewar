@@ -111,7 +111,7 @@ void	start_cycle(unsigned char *map, t_flags *params,
 	while ((*main_cycle).processes > 0)
 	{
 		if ((((*params).v_verbosity >> 1) & 1) && !(*params).ncurses)
-			printf("%s%d\n", "It is now cycle ", (*main_cycle).cycles + 1);
+			ft_printf("%s%d\n", "It is now cycle ", (*main_cycle).cycles + 1);
 		processes = (*main_cycle).head_proc;
 		if ((*params).ncurses == 1)
 		{

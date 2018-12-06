@@ -39,10 +39,10 @@ void	print_ldi_instr(int what_func, int cur_proc, t_instr inst_vars)
 	else
 		tmp = "lldi";
 	if (cur_proc + 1 <= 9999)
-		printf("P%5d | %s %d %d r%d\n", cur_proc + 1, tmp, inst_vars.one,
+		ft_printf("P%5d | %s %d %d r%d\n", cur_proc + 1, tmp, inst_vars.one,
 		inst_vars.two, inst_vars.tmp->argv[2][1]);
 	else
-		printf("P%6d | %s %d %d r%d\n", cur_proc + 1, tmp, inst_vars.one,
+		ft_printf("P%6d | %s %d %d r%d\n", cur_proc + 1, tmp, inst_vars.one,
 		inst_vars.two, inst_vars.tmp->argv[2][1]);
 }
 

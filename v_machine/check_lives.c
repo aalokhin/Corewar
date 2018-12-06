@@ -15,14 +15,14 @@
 void	print_proc_die(t_proc *tmp, t_cycle *main_cycle)
 {
 	if ((*main_cycle).cycle_die < 0)
-		printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+		ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 		(*tmp).id + 1, 0, (*main_cycle).cycle_die);
 	else if ((*tmp).live_cycle == (*main_cycle).cycle_die)
-		printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+		ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 		(*tmp).id + 1, (*tmp).live_cycle,
 		(*main_cycle).cycle_die);
 	else
-		printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+		ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 			(*tmp).id + 1, (*tmp).live_cycle - 1,
 			(*main_cycle).cycle_die);
 }
@@ -90,7 +90,7 @@ void	cycle_period_check(int *cycle_counter, t_cycle *main_cycle,
 			(*main_cycle).cycle_die -= CYCLE_DELTA;
 			(*main_cycle).checks_if_die = MAX_CHECKS;
 			if ((((*params).v_verbosity >> 1) & 1) && !(*params).ncurses)
-				printf("%s%d\n", "Cycle to die is now ",
+				ft_printf("%s%d\n", "Cycle to die is now ",
 					(*main_cycle).cycle_die);
 		}
 		(*main_cycle).checks_if_die--;
