@@ -12,6 +12,21 @@
 
 #include "../corewar.h"
 
+int		ft_if_not_empty(unsigned char *str, int start, int end)
+{
+	int res;
+
+	res = 0;
+	while (start < end)
+	{
+		if (str[start] > 31 && str[start] < 127)
+			res++;
+		start++;
+	}
+	return (res);
+}
+
+
 int		if_correct_name(unsigned char *str, t_flags *params, int j)
 {
 	(*params).i = MAGIC_S;
@@ -70,13 +85,23 @@ int		check_comment(unsigned char *str, t_flags *params, int j)
 {
 	int		i;
 
-	i = 140;
+	i = PROG_NAME_L + MAGIC_S + NULL_S + EXEC_S;
 	while (str[i] && i < PRE_EXEC_S - NULL_S)
 		i++;
 	if (i == PRE_EXEC_S - NULL_S)
 	{
 		ft_printf("Error: File %s has an invalid header\n",
 		(*params).players[j]);
+		return (0);
+	}
+	if (!str[MAGIC_S])
+	{
+		ft_printf("%s\n", "Error: Player should has a name");
+		return (0);
+	}
+	if (!str[PROG_NAME_L + MAGIC_S + NULL_S + EXEC_S])
+	{
+		ft_printf("%s\n", "Error: Player should has a comment");
 		return (0);
 	}
 	return (1);

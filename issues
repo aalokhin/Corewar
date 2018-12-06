@@ -319,3 +319,6 @@ Error: Can't read source file -1 пишется с лишней пустой с�
 ./corewar -nc vm_champs/champs/championships/2017/gnebie/ultima.cor  vm_champs/champs/Car.cor -n 2 vm_champs/champs/championships/2014/ekocevar/mandragore.cor -n 1 vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor
 
 Error: Process numbers must be unique zsh: segmentation fault  ./corewar -nc vm_champs/champs/championships/2017/gnebie/ultima.cor  -n 2  -n
+кажется музыка не выключается если выйти из проги
+проверить валидацию бота и добавить чоб не пускало если нет кода
+а что если в коде только 1 символ, оно не зациклится? и если карта на 1 символ
