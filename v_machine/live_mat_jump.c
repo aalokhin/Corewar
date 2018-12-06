@@ -83,11 +83,11 @@ void	addition(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
-			ft_printf("P%5d | add r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
-		(*tmp).argv[1][1], (*tmp).argv[2][1]);
+			ft_printf("P%5d | add r%d r%d r%d\n", cur_proc + 1,
+			(*tmp).argv[0][1], (*tmp).argv[1][1], (*tmp).argv[2][1]);
 		else
-			ft_printf("P%6d | add r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
-		(*tmp).argv[1][1], (*tmp).argv[2][1]);
+			ft_printf("P%6d | add r%d r%d r%d\n", cur_proc + 1,
+			(*tmp).argv[0][1], (*tmp).argv[1][1], (*tmp).argv[2][1]);
 	}
 	map[0] = map[0];
 }
@@ -112,11 +112,11 @@ void	substraction(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
-			ft_printf("P%5d | sub r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
-			(*tmp).argv[1][1], (*tmp).argv[2][1]);
+			ft_printf("P%5d | sub r%d r%d r%d\n", cur_proc + 1,
+			(*tmp).argv[0][1], (*tmp).argv[1][1], (*tmp).argv[2][1]);
 		else
-			ft_printf("P%6d | sub r%d r%d r%d\n", cur_proc + 1, (*tmp).argv[0][1],
-			(*tmp).argv[1][1], (*tmp).argv[2][1]);
+			ft_printf("P%6d | sub r%d r%d r%d\n", cur_proc + 1,
+			(*tmp).argv[0][1], (*tmp).argv[1][1], (*tmp).argv[2][1]);
 	}
 	map[0] = map[0];
 }
@@ -142,9 +142,11 @@ void	zjmp(t_proc *processes, int cur_proc, t_cycle *main_cycle,
 	if ((((*main_cycle).verbose >> 2) & 1) && !(*main_cycle).ncurses)
 	{
 		if (cur_proc + 1 <= 9999)
-			ft_printf("P%5d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);
+			ft_printf("P%5d | zjmp %d %s\n", cur_proc + 1,
+				(*tmp).argv[0][1], res);
 		else
-			ft_printf("P%6d | zjmp %d %s\n", cur_proc + 1, (*tmp).argv[0][1], res);
+			ft_printf("P%6d | zjmp %d %s\n", cur_proc + 1,
+				(*tmp).argv[0][1], res);
 	}
 	map[0] = map[0];
 }

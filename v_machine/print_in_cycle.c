@@ -33,6 +33,13 @@ void	intro_print(t_flags *params, t_header bots[MAX_PLAYERS],
 	}
 }
 
+/*
+** If you want to see more similarities with original
+** VM, replace ft_printf phrase to:
+** ft_printf("Contestant %d, \"%s\", has won !\n",
+** main_cycle.winner_id + 1, main_cycle.winner_name);
+*/
+
 void	after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
 	t_cycle main_cycle, WINDOW **win)
 {
@@ -55,7 +62,8 @@ void	after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
 			ft_printf("Contestant %d, \"%s\", has won !\n",
 			main_cycle.winner_id + 1, main_cycle.winner_name);
 		else
-			ft_printf("%s\n", "There is no winner in this game. Friendship won:)");
+			ft_printf("%s\n",
+				"There is no winner in this game. Friendship won:)");
 	}
 		//ft_printf("Player %d (%s) won\n",
 			//main_cycle.winner_id + 1, main_cycle.winner_name);

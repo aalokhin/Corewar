@@ -120,7 +120,7 @@ int		main(int argc, char **argv)
 		print_usage();
 		return (0);
 	}
-	if (CHAMP_MAX_SIZE > MEM_SIZE)
+	if (CHAMP_MAX_SIZE > MEM_SIZE || MEM_SIZE < 16)
 	{
 		ft_printf("%s\n", "Error: Incorrect const values");
 		return (0);

@@ -290,6 +290,8 @@ t_proc  *processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
 
 заменить ПРИНТФ!!!!!!
 
+проверить лики
+проверить папку музыки перед пушем
 
 ./corewar -nc vm_champs/champs/championships/2017/gnebie/ultima.cor  vm_champs/champs/Car.cor -n 2 vm_champs/champs/championships/2014/ekocevar/mandragore.cor -n 1 vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor
 
