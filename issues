@@ -184,7 +184,6 @@ train
 проверить все индексы чтоб не было выхода за пределы
 везде заменить константы на соотв переменные
 
-сделать защиту чтоб сумма исполнительной части ботов была не больше размера карты
 проверить все комбинации флагов с отсутствием ботов и без, проверить валидацию бинарника
 сделать буквенную кнопку выходом из игры
 проверить или работает сравнение с размером карты размеров ботов
@@ -206,13 +205,6 @@ adenis не совпадает потому что у меня бере стар
 заититься от нуля в боте или в константах
 ничего не п0меняется если перед исполнительной частью нет налла, в оригинале тоже
 все константы должны быть дефолтными
-не должно быть макс размер бота больше размеру карты
-размер 325 ка ки у гагнанта, печатаются лишние символы
-
-ldesgoui 1561c1561
-< Contestant 1, "HoneyBadger", has won !
----
-> Contestant 0, "(null)", has won !
 
 
 tbillard
@@ -228,8 +220,6 @@ tbillard
 
 56 ботов, 15 не совпадает
 
-нет защиты если автоматом поставлен номер игрока, а потом такой же задан флагом, что делать?
-
 проверить айди плеера справа, возможно там не тот
 
 может все таки добавить +1 в строки и заналить вконце
@@ -237,19 +227,7 @@ tbillard
 что если вконце игры 2 одинаковых бота?
 проверить а флаг
 
-новый баг - при повторном айди через флаг чтото сбивается, данные печатаются не у первого а у того, с кем совпадает ид
-
-
-дважды печатает
-./corewar -nc vm_champs/champs/championships/2017/gnebie/ultima.cor  vm_champs/champs/Car.cor vm_champs/champs/championships/2014/ekocevar/mandragore.cor -n -1 vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor
-Error: Can't read source file -1
-Error: Can't read source file -1
-
-запрещен чемпион без имени, комента и исполн кода, исправить
 зачем в форме дают аш файл?
-баг с повторным айди, неправильно печатается содержимое, печатается задо наперед
-перестает открывать бота, если бот совпадает с айди повтор
-
 
 int check_if_norepeat_id(t_flags *params, int id_to_check)
 {
@@ -310,15 +288,38 @@ t_proc  *processes_init(t_flags *params, t_header bots[MAX_PLAYERS],
     return (processes);
 }
 
-выводить эррор при попытке задать одинаковые н номера
 заменить ПРИНТФ!!!!!!
-
-Error: Can't read source file -1 пишется с лишней пустой строкой
 
 
 ./corewar -nc vm_champs/champs/championships/2017/gnebie/ultima.cor  vm_champs/champs/Car.cor -n 2 vm_champs/champs/championships/2014/ekocevar/mandragore.cor -n 1 vm_champs/champs/championships/2017/agregoir/Kittystrophic.cor
 
 Error: Process numbers must be unique zsh: segmentation fault  ./corewar -nc vm_champs/champs/championships/2017/gnebie/ultima.cor  -n 2  -n
 кажется музыка не выключается если выйти из проги
-проверить валидацию бота и добавить чоб не пускало если нет кода
+
 а что если в коде только 1 символ, оно не зациклится? и если карта на 1 символ
+
+
+int     ft_if_not_empty(unsigned char *str, int start, int end)
+{
+    int res;
+
+    res = 0;
+    while (start < end)
+    {
+        if (str[start] > 31 && str[start] < 127)
+            res++;
+        start++;
+    }
+    return (res);
+}
+
+if (!str[MAGIC_S])
+    {
+        ft_printf("Error: Player %s should has a name\n", (*params).players[j]);
+        return (0);
+    }
+    if (!str[PROG_NAME_L + MAGIC_S + NULL_S + EXEC_S])
+    {
+        ft_printf("Error: Player %s should has a comment\n", (*params).players[j]);
+        return (0);
+    }

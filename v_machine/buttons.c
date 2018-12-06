@@ -12,35 +12,38 @@
 
 #include "../corewar.h"
 
+void	music_stop_pause(t_cycle *main_cycle, WINDOW **win)
+{
+	if ((*main_cycle).m == 0)
+	{
+		system("afplay  media/Game_of_Thrones.mp3 &> /dev/null &");
+		(*main_cycle).m = 1;
+		mvwprintw(*win, (*main_cycle).winner_str + 10, 199,
+			"=============> MUSIC  start <==============");
+		wrefresh(*win);
+	}
+	else if ((*main_cycle).m == 1)
+	{
+		system("pkill -STOP afplay  &> /dev/null &");
+		(*main_cycle).m = 2;
+		mvwprintw(*win, (*main_cycle).winner_str + 10, 199,
+			"=============> MUSIC  ON pause <==============");
+		wrefresh(*win);
+	}
+	else
+	{
+		system("pkill -CONT afplay  &> /dev/null &");
+		(*main_cycle).m = 1;
+		mvwprintw(*win, (*main_cycle).winner_str + 10, 199,
+			"=============> MUSIC  ON play <==============");
+		wrefresh(*win);
+	}
+}
+
 void	music_listener(char spc, t_cycle *main_cycle, WINDOW **win)
 {
 	if (spc == 'm')
-	{
-		if ((*main_cycle).m == 0)
-		{
-			system("afplay  media/Game_of_Thrones.mp3 &> /dev/null &");
-			(*main_cycle).m = 1;
-			mvwprintw(*win, (*main_cycle).winner_str + 10, 199,
-				"=============> MUSIC  start <==============");
-			wrefresh(*win);
-		}
-		else if ((*main_cycle).m == 1)
-		{
-			system("pkill -STOP afplay  &> /dev/null &");
-			(*main_cycle).m = 2;
-			mvwprintw(*win, (*main_cycle).winner_str + 10, 199,
-				"=============> MUSIC  ON pause <==============");
-			wrefresh(*win);
-		}
-		else
-		{
-			system("pkill -CONT afplay  &> /dev/null &");
-			(*main_cycle).m = 1;
-			mvwprintw(*win, (*main_cycle).winner_str + 10, 199,
-				"=============> MUSIC  ON play <==============");
-			wrefresh(*win);
-		}
-	}
+		music_stop_pause(main_cycle, win);
 	else if (spc == 'n')
 	{
 		system("pkill afplay &> /dev/null &");

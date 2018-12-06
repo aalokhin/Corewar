@@ -57,13 +57,8 @@ int		take_bots_params(unsigned char *str, t_flags *params, int len,
 	size |= str[139];
 	bots[(*params).j].prog_size = size;
 	(*params).sum_bots += size;
-	if (size <= 0 || !check_bot_size(len, str, bots, params))
-	{
-		if (size <= 0)
-			ft_printf("%s\n",
-			"Error: File is too small to be a champion");
+	if (!check_bot_size(len, str, bots, params))
 		return (0);
-	}
 	ft_strncpy(bots[(*params).j].comment, (const char *)(&str[140]),
 		COMMENT_L);
 	bots[(*params).j].exec_part = (unsigned char *)malloc(sizeof(unsigned char)

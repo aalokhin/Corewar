@@ -12,26 +12,6 @@
 
 #include "../corewar.h"
 
-int		check_if_norepeat_id(t_flags *params, int id_to_check, int if_start)
-{
-	int i;
-	int id_to_check_tmp;
-
-	i = 0;
-	id_to_check_tmp = 0;
-	while (i < MAX_PLAYERS)
-	{
-		if (if_start)
-			id_to_check_tmp = (*params).pl_nbr[i][1];
-		else
-			id_to_check_tmp = (*params).pl_nbr[i][1] - 1;
-		if ((*params).pl_nbr[i][0] && id_to_check == id_to_check_tmp)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 int		check_flag_n(char **argv, int argc, t_flags *params)
 {
 	int res;
@@ -59,27 +39,13 @@ int		check_flag_n(char **argv, int argc, t_flags *params)
 	return (0);
 }
 
-int		check_flags_with_nbr(char **argv, int argc, t_flags *params)
+int		check_flag_v(char **argv, int argc, t_flags *params)
 {
-	if (ft_strcmp(argv[(*params).i], "-dump") == 0 && (*params).i + 1 < argc)
+	if (ft_strcmp(argv[(*params).i], "-v") == 0 &&
+		(*params).i + 1 < argc)
 	{
-		if (ft_atoi(argv[(*params).i + 1]) > 0 && ft_atoi(argv[(*params).i + 1]) <= 65535)
-		{
-			(*params).d_dumps_memory = ft_atoi(argv[(*params).i + 1]);
-			(*params).i += 2;
-			return (1);
-		}
-		else
-		{
-			ft_printf("%s\n",
-			"Error: Dump number must be from 1 to 65535");
-			exit(0);
-		}
-		
-	}
-	else if (ft_strcmp(argv[(*params).i], "-v") == 0 && (*params).i + 1 < argc)
-	{
-		if (ft_atoi(argv[(*params).i + 1]) >= 0 && ft_atoi(argv[(*params).i + 1]) <= 65535)
+		if (ft_atoi(argv[(*params).i + 1]) >= 0 &&
+			ft_atoi(argv[(*params).i + 1]) <= 65535)
 		{
 			(*params).v_verbosity = ft_atoi(argv[(*params).i + 1]);
 			(*params).i += 2;
@@ -91,6 +57,29 @@ int		check_flags_with_nbr(char **argv, int argc, t_flags *params)
 		}
 		return (1);
 	}
+	return (0);
+}
+
+int		check_flags_with_nbr(char **argv, int argc, t_flags *params)
+{
+	if (ft_strcmp(argv[(*params).i], "-dump") == 0 && (*params).i + 1 < argc)
+	{
+		if (ft_atoi(argv[(*params).i + 1]) > 0 &&
+			ft_atoi(argv[(*params).i + 1]) <= 65535)
+		{
+			(*params).d_dumps_memory = ft_atoi(argv[(*params).i + 1]);
+			(*params).i += 2;
+			return (1);
+		}
+		else
+		{
+			ft_printf("%s\n",
+			"Error: Dump number must be from 1 to 65535");
+			exit(0);
+		}
+	}
+	else if (check_flag_v(argv, argc, params))
+		return (1);
 	else if (check_flag_n(argv, argc, params))
 		return (1);
 	return (0);
@@ -119,6 +108,7 @@ int		check_flags_nc_and_bots(char **argv, t_flags *params)
 	{
 		ft_printf("%s %s\n", "Error: Can't read source file",
 			argv[(*params).i]);
+		print_usage();
 		return (-1);
 	}
 }
