@@ -131,5 +131,11 @@ int		main(int argc, char **argv)
 	params.j = 0;
 	init_bots(bots);
 	if (!read_bots(&params, fd, bots))
+	{
+		//while (1)
+			//;
 		exit(0);
+	}
+	//while (1)
+			//;
 }
