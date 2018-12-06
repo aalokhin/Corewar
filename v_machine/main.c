@@ -74,7 +74,7 @@ void	create_map(t_header bots[MAX_PLAYERS], t_flags *params)
 		if (i == bots[j].start_index)
 		{
 			k = 0;
-			while (k < bots[j].prog_size)
+			while (k < bots[j].prog_size && i < MEM_SIZE)
 				map[i++] = bots[j].exec_part[k++];
 			j++;
 		}

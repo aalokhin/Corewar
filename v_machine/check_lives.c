@@ -38,7 +38,7 @@ void	live_or_die(t_proc *tmp, t_cycle *main_cycle, t_flags *params,
 		(*tmp).lives = 0;
 		if ((*tmp).id > (*main_cycle).max_id)
 			(*main_cycle).max_id = (*tmp).id;
-		(*main_cycle).indexes[(*tmp).current_position][1] = 0;
+		(*main_cycle).indexes[(*tmp).current_position % MEM_SIZE][1] = 0;
 		if ((((*params).v_verbosity >> 3) & 1) && !(*params).ncurses)
 			print_proc_die(tmp, main_cycle);
 	}

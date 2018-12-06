@@ -51,7 +51,7 @@ CYAN 		= 	\033[0;36m
 
 
 
-CC_FLAGS = -Wall -Wextra -Werror -g
+CC_FLAGS = -Wall -Wextra -Werror
 HEADER_FLAGS = -I $(LIBFT_INC)
 
 ASSEMBLER_FLAGS = -I .$(LIBFT_INC)

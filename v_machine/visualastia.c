@@ -92,9 +92,9 @@ void	visual_init(WINDOW **win, t_flags *params,
 
 int		id_count(t_cycle *main_cycle, t_flags *params, int i)
 {
-	if ((*main_cycle).indexes[i][0] >= 1 &&
-		(*main_cycle).indexes[i][0] <= (*params).bots_quantity)
-		return ((*main_cycle).indexes[i][0]);
+	if ((*main_cycle).indexes[i % MEM_SIZE][0] >= 1 &&
+		(*main_cycle).indexes[i % MEM_SIZE][0] <= (*params).bots_quantity)
+		return ((*main_cycle).indexes[i % MEM_SIZE][0]);
 	else
 		return (5);
 }

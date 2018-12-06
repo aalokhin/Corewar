@@ -59,7 +59,8 @@ int		take_bots_params(unsigned char *str, t_flags *params, int len,
 	(*params).sum_bots += size;
 	if (!check_bot_size(len, str, bots, params))
 		return (0);
-	ft_strncpy(bots[(*params).j].comment, (const char *)(&str[140]),
+	ft_strncpy(bots[(*params).j].comment,
+		(const char *)(&str[PROG_NAME_L + MAGIC_S + NULL_S + EXEC_S]),
 		COMMENT_L);
 	bots[(*params).j].exec_part = (unsigned char *)malloc(sizeof(unsigned char)
 	* (bots[(*params).j].prog_size));

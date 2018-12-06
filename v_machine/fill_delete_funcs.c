@@ -76,7 +76,8 @@ void	processes_add(t_proc **head, unsigned char *map,
 	tmp->current_position = (*main_cycle).fork_ind;
 	tmp->arg_counter = 0;
 	tmp->cmd = map[tmp->current_position];
-	(*main_cycle).indexes[(*main_cycle).fork_ind][1] = CARETKA;
+	(*main_cycle).indexes[(*main_cycle).fork_ind % MEM_SIZE][1]
+	= CARETKA;
 	if (tmp->cmd >= 1 && tmp->cmd <= CMD_NBR)
 		tmp->cycles_wait = g_op_tab[tmp->cmd - 1].cycles_wait;
 	else
