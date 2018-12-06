@@ -99,7 +99,7 @@ int 		arguments_add_validator(int size,  char *arg)
 	}
 	else if (size == T_REG)
 	{
-		if (!(arg + 1) || !(ft_isdigit(arg[1])) || !all_digits(arg + 1) || ft_atoi(arg + 1) > 100)// && arg[1] != '-'))
+		if (!(arg + 1) || !(ft_isdigit(arg[1])) || !all_digits(arg + 1) || ft_atoi(arg + 1) >= 100)// && arg[1] != '-'))
 			return (0);
 	}
 	else if (size == T_IND)

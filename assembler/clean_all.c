@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-void			ft_clean_parse(char **parse)
+int				ft_clean_parse(char **parse)
 {
 	int			i;
 
@@ -20,6 +20,7 @@ void			ft_clean_parse(char **parse)
 	while (parse[i])
 		ft_strdel(&parse[i++]);
 	free(parse);
+	return (0);
 }
 
 void			print_check(t_binfile *bin)

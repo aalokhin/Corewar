@@ -82,7 +82,7 @@ int				error_invalid_arg_type(t_t *command, int arg, int size)
 	else if (size == 3)
 	{
 		ft_printf("Invalid parameter count for instruction");
-		ft_printf("%s\n", command->name_c);
+		ft_printf(" %s\n", command->name_c);
 		return (0);
 	}
 	else

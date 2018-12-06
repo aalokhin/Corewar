@@ -29,13 +29,13 @@ ASM_SFILES :=  ./assembler/clean_all.c ./assembler/file_length_counter.c  ./asse
 ./assembler/validation_funcs.c ./assembler/labels_nastia.c ./assembler/main_assembler.c ./assembler/print_errors_usage.c \
 ./assembler/encoding_funcs.c ./assembler/output_to_file.c ./assembler/parse_file_funcs.c  ./assembler/parse_commands.c \
 ./assembler/commands_help_funcs.c ./assembler/errors_manager.c ./assembler/output_hlp_funcs.c ./assembler/print_basics.c\
-./assembler/flag_d.c ./assembler/parse_helper.c ./assembler/validation_helper.c
+./assembler/flag_d.c ./assembler/parse_helper.c ./assembler/validation_helper.c ./assembler/extra_parser.c ./assembler/extra_parser2.c  ./assembler/val_name_comm.c
 
 ASM_OFILES :=  ./assembler/clean_all.o ./assembler/file_length_counter.o ./assembler/a_printing.o ./assembler/a_flag_output_funcs.o \
 ./assembler/validation_funcs.o ./assembler/labels_nastia.o ./assembler/main_assembler.o \
 ./assembler/print_errors_usage.o  ./assembler/encoding_funcs.o ./assembler/output_to_file.o ./assembler/parse_file_funcs.o \
 ./assembler/parse_commands.o ./assembler/commands_help_funcs.o ./assembler/errors_manager.o ./assembler/output_hlp_funcs.o ./assembler/print_basics.o\
-./assembler/flag_d.o ./assembler/parse_helper.o ./assembler/validation_helper.o
+./assembler/flag_d.o ./assembler/parse_helper.o ./assembler/validation_helper.o ./assembler/extra_parser.o ./assembler/extra_parser2.o ./assembler/val_name_comm.o
 
 LIBFT = $(LIBFT_DIR)libftprintf.a
 LIBFT_DIR = $(LIB_DIR)

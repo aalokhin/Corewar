@@ -113,9 +113,8 @@ void						move_name_comment(char (*contents)[], size_t *i);
 void						clean_new_lines(t_binfile *bin, char (*contents)[]);
 void						fill_corfile_contents(t_binfile *bin);
 void						parse_file(t_binfile *bin, char (*contents)[]);
-void						ft_clean_parse(char **parse);
-int							parse_commands(t_binfile *file,\
-							int i, char **str, char **str_n);
+int							ft_clean_parse(char **parse);
+int							parse_commands(t_binfile *file,int i, char **str_n, char **str);
 int							ft_cmd_lbls(char	*c_name);
 int							label_name_is_valid(t_binfile *file,\
 							t_lable *label, char *str);
@@ -154,5 +153,15 @@ t_lable						*labels_linker(t_binfile *file, t_lable *label);
 void						command_linker(t_lable *label, t_t *token);
 char						*string_definer(char *str, int i);
 int							initial_validation(t_binfile *file);
+
+int		cmd_linker_add(t_binfile *file, t_lable *label, t_t *token);
+int		my_end(t_binfile *file, t_lable *label, char **str_n);
+void	token_to_add(t_lable *label, t_t *token);
+int		label_filler(t_binfile *file, t_lable **label, char **str, int *i);
+int		no_name_comment(t_binfile *file, char **str_n);
+int	clean(char **str, char **str_n);
+char	*space_adder(char **str);
+int	fill_command_name(t_binfile *file, t_t *token, char **str, int *i);
+int				val_n_c(char *file, int i, int j);
 
 #endif

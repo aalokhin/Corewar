@@ -30,7 +30,7 @@ int					init_check(t_binfile *bin)
 	{
 		return (0);
 	}
-	if (!(parse_commands(&(*bin), 0, NULL, NULL)))
+	if (!(parse_commands(&(*bin), -1, NULL, NULL)))
 	{
 		return (0);
 	}

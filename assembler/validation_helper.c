@@ -71,7 +71,7 @@ int		initial_validation(t_binfile *file)
 	str = file->f_contents;
 	if (!file->f_contents[i])
 	{
-		ft_printf("Syntax error at token [TOKEN][%d:001] END \"(null)\"\n", 12); // define line here please
+		ft_printf("Syntax error at token [TOKEN] END \"(null)\"\n"); // define line here please
 		return (0);
 	}
 	i = initial_validation_helper(file, str, 0, 0);

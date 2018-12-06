@@ -43,7 +43,8 @@ int					fill_name_comment(t_binfile *bin, size_t i, size_t tmp)
 {
 	char			*str;
 
-	if (ft_strstr(bin->f_contents, NAME_CMD_STRING) &&\
+	if (val_n_c((*bin).f_contents, 0, 0) &&\
+	ft_strstr(bin->f_contents, NAME_CMD_STRING) &&\
 	ft_strstr(bin->f_contents, COMMENT_CMD_STRING))
 	{
 		str = ft_strstr(bin->f_contents, NAME_CMD_STRING);
