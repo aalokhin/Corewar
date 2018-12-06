@@ -41,20 +41,20 @@ int		check_flag_n(char **argv, int argc, t_flags *params)
 		< MAX_PLAYERS && (*params).i + 1 < argc)
 	{
 		res = ft_atoi(argv[(*params).i + 1]);
-		if (res > 0 && !check_if_norepeat_id(params, res, 1))
+		if (res > 0 && !check_if_norepeat_id(params, res, 1)
+			&& res <= 65535)
 		{
 			(*params).pl_nbr[(*params).j][0] = 1;
 			(*params).pl_nbr[(*params).j][1] = res;
 			(*params).i += 2;
-		}
-		else if (check_if_norepeat_id(params, res, 1))
-		{
-			ft_printf("%s %s\n", "Error: Process numbers must be unique");
-			exit(0);
+			return (1);
 		}
 		else
-			(*params).i++;
-		return (1);
+		{
+			ft_printf("%s\n",
+			"Error: Process number must be from 1 to 65535 and unique");
+			exit(0);
+		}
 	}
 	return (0);
 }
@@ -63,24 +63,32 @@ int		check_flags_with_nbr(char **argv, int argc, t_flags *params)
 {
 	if (ft_strcmp(argv[(*params).i], "-dump") == 0 && (*params).i + 1 < argc)
 	{
-		if (ft_atoi(argv[(*params).i + 1]) > 0)
+		if (ft_atoi(argv[(*params).i + 1]) > 0 && ft_atoi(argv[(*params).i + 1]) <= 65535)
 		{
 			(*params).d_dumps_memory = ft_atoi(argv[(*params).i + 1]);
 			(*params).i += 2;
+			return (1);
 		}
 		else
-			(*params).i++;
-		return (1);
+		{
+			ft_printf("%s\n",
+			"Error: Dump number must be from 1 to 65535");
+			exit(0);
+		}
+		
 	}
 	else if (ft_strcmp(argv[(*params).i], "-v") == 0 && (*params).i + 1 < argc)
 	{
-		if (ft_atoi(argv[(*params).i + 1]) > 0)
+		if (ft_atoi(argv[(*params).i + 1]) >= 0 && ft_atoi(argv[(*params).i + 1]) <= 65535)
 		{
 			(*params).v_verbosity = ft_atoi(argv[(*params).i + 1]);
 			(*params).i += 2;
 		}
 		else
-			(*params).i++;
+		{
+			print_usage();
+			exit(0);
+		}
 		return (1);
 	}
 	else if (check_flag_n(argv, argc, params))
