@@ -64,10 +64,10 @@ $(NAME): $(LIBFT) $(OFILES)
 	@echo "$(BLUE)compiling virtual machine..."
 	$(CC) $(CC_FLAGS) $(OFILES) -lncurses $(LIBFT) -o $(NAME)
 	@echo "$(BLUE)Ready!"
-	@echo "$(PURPLE)comiling assembler ..."
+	@echo "$(PURPLE)compiling assembler ..."
 
 $(ASM): $(ASM_OFILES)
-	@echo "$(PURPLE)comiling assembler ..."
+	@echo "$(PURPLE)compiling assembler ..."
 	$(CC) $(CC_FLAGS) $(ASM_OFILES) $(LIBFT) -o $(ASM)
 	@echo "$(PURPLE)Assembler Ready!$(COLOR_OFF)"
 
