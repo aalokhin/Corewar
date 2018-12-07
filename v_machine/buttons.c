@@ -76,6 +76,7 @@ void	speed_listener(char spc, t_cycle *main_cycle, WINDOW **win)
 	else if (spc == 't' || spc == 'T')
 	{
 		delete_unneeded(&main_cycle->head_proc, main_cycle, 1);
+		system("pkill afplay &> /dev/null &");
 		exit(0);
 	}
 	else
