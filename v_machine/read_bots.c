@@ -21,7 +21,8 @@ int		take_bots_params2(unsigned char *str, t_flags *params, int len,
 		(const char *)(&str[PROG_NAME_L + MAGIC_S + NULL_S + EXEC_S]),
 		COMMENT_L);
 	bots[(*params).j].exec_part = (unsigned char *)malloc(sizeof(unsigned char)
-	* (bots[(*params).j].prog_size));
+	* (bots[(*params).j].prog_size + 1));
+	bots[(*params).j].exec_part[bots[(*params).j].prog_size] = 0;
 	return (1);
 }
 
