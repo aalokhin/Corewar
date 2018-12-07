@@ -53,7 +53,7 @@ void	print_map_info2(WINDOW *win, t_cycle *main_cycle, int x, int y)
 void	print_map_info4(WINDOW *win, t_proc *processes, int x, int *y)
 {
 	(*y) -= 1;
-	mvwprintw(win, (*y), x, "Lives in current period : %d ",
+	mvwprintw(win, (*y), x, "Lives in current period : %d    ",
 		(*processes).lives);
 	(*y)--;
 	wrefresh(win);
