@@ -56,7 +56,7 @@ int		take_bots_params(unsigned char *str, t_flags *params, int len,
 	return (1);
 }
 
-int		copy_bots_to_map(t_header bots[MAX_PLAYERS], unsigned char *str,
+void	copy_bots_to_map(t_header bots[MAX_PLAYERS], unsigned char *str,
 	t_flags *params)
 {
 	(*params).i = 0;
@@ -71,7 +71,7 @@ int		copy_bots_to_map(t_header bots[MAX_PLAYERS], unsigned char *str,
 	}
 	ft_strdel((char **)(&str));
 	(*params).j++;
-	return (1);
+	(*params).i = 0;
 }
 
 int		bot_open(int *fd, t_flags *params, unsigned int *len)
@@ -87,6 +87,7 @@ int		bot_open(int *fd, t_flags *params, unsigned int *len)
 	{
 		ft_printf("Error: File %s is too small to be a champion\n",
 			(*params).players[(*params).j]);
+		close(*fd);
 		return (0);
 	}
 	lseek(*fd, 0, SEEK_SET);
@@ -109,15 +110,14 @@ int		read_bots(t_flags *params, int fd, t_header bots[MAX_PLAYERS])
 		if (!take_bots_params(str, params, len, bots) ||
 		!if_correct_name(str, params, (*params).j) ||
 		!check_comment(str, params, (*params).j, bots))
+		{
+			close(fd);
 			return (0);
+		}
 		ft_strncpy(bots[(*params).j].prog_name,
 		(const char *)(&str[MAGIC_S]), PROG_NAME_L);
-		if (!copy_bots_to_map(bots, str, params))
-			return (0);
+		copy_bots_to_map(bots, str, params);
 		close(fd);
 	}
-	(*params).i = 0;
-	(*params).j = 0;
-	create_map(bots, params);
 	return (1);
 }

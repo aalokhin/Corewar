@@ -68,6 +68,7 @@ void	create_map(t_header bots[MAX_PLAYERS], t_flags *params)
 	i = 0;
 	j = 0;
 	k = 0;
+	(*params).i = 0;
 	ft_bzero(map, MEM_SIZE);
 	while (i < MEM_SIZE && j < (*params).bots_quantity)
 	{
@@ -133,4 +134,6 @@ int		main(int argc, char **argv)
 	init_bots(bots);
 	if (!read_bots(&params, fd, bots))
 		exit(0);
+	params.j = 0;
+	create_map(bots, &params);
 }
