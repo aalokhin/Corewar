@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_helper.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdynia <mdynia@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/07 01:26:21 by mdynia            #+#    #+#             */
+/*   Updated: 2018/12/07 01:26:23 by mdynia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "asm.h"
 
@@ -28,11 +39,10 @@ static t_op	g_op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-
-int 	token_codage(t_t *token, int i)
+int			token_codage(t_t *token, int i)
 {
-	int	dec;
-	int k;
+	int		dec;
+	int		k;
 
 	dec = 0;
 	k = 128;
@@ -49,16 +59,15 @@ int 	token_codage(t_t *token, int i)
 	return (dec);
 }
 
-int  command_name(char *name, t_t *token)
+int			command_name(char *name, t_t *token)
 {
 	token->c_name = 0;
-
 	while (g_op_tab[token->c_name].name)
 	{
 		if ((ft_strcmp(g_op_tab[token->c_name].name, name) == 0))
 		{
 			token->name_c = ft_strdup(name);
-			token->arguments =  g_op_tab[token->c_name].nb_params;
+			token->arguments = g_op_tab[token->c_name].nb_params;
 			token->lbl_size = ft_cmd_lbls(token->name_c);
 			token->has_codage = g_op_tab[token->c_name].has_pcode;
 			token->opcode = g_op_tab[token->c_name].opcode;
@@ -71,7 +80,7 @@ int  command_name(char *name, t_t *token)
 
 t_lable		*labels_linker(t_binfile *file, t_lable *label)
 {
-	t_lable		*tmp;
+	t_lable	*tmp;
 
 	if (!file->labels_list)
 	{
@@ -90,7 +99,7 @@ t_lable		*labels_linker(t_binfile *file, t_lable *label)
 	return (NULL);
 }
 
-void			command_linker(t_lable *label, t_t *token)
+void		command_linker(t_lable *label, t_t *token)
 {
 	t_t		*tmp;
 

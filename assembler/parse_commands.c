@@ -86,68 +86,55 @@ int			arguments_filler(t_binfile *file, t_t *t, char **s, int *i)
 	return (1);
 }
 
-int			comma_checker(t_t *token, char *str)
-{
-	int		l = -1;
-	int 	k = -1;
-	int 	comma = 0;
-	char 	*string;
-
-	while (str[++l])
-		comma += str[l] == SEPARATOR_CHAR ? 1 : 0;
-	if (g_op_tab[token->c_name].nb_params == comma + 1)
-	{
-		string = ft_strstr(str, token->a[0]);
-		while (string[++k] && comma != 0)
-			comma -= string[k] == SEPARATOR_CHAR ? 1 : 0;
-		while (string[k])
-		{
-			if (!(WHITESPACE(string[k])))
-				return (1);
-			k++;
-		}
-	}
-	return (0);
-}
-
-
-int			parse_commands(t_binfile *file, int k, char **str_n, char **str)
+int 		parse_set(t_binfile *file, t_lable **label, char **s, int i)
 {
 	t_t		*token;
+
+	token = NULL;
+	if (!(*label))
+		*label = (t_lable *)ft_memalloc(sizeof(t_lable));
+	token = (t_t *)ft_memalloc(sizeof(t_t));
+	//token->line_num = define_line_num(file->copy, str_n, 0, 0);
+	if ((!fill_command_name(file, token, &(s[i]), &i))\
+		|| (++i >= 0 && (!arguments_filler(file, token, s, &i))))
+	{
+		cmd_linker_add(file, *label, token);
+		return (0);
+	}
+	if (token->has_codage)
+		token->codage = token_codage(token, 0);
+	token_length(token, 0, *label);
+	command_linker(*label, token);
+	return (1);
+}
+
+int			parse_commands(t_binfile *file, int k, char **str_n, char **s)
+{
 	t_lable	*label;
-	char **comma;
+	char **c;
 	int		i;
 
 	i = 0;
-	token = NULL;
 	label = NULL;
 	str_n = (ft_strsplit(file->f_contents, '\n'));
-	comma = (ft_strsplit(file->comma, '\n'));
-	if (!no_name_comment(file, str_n))
+	c = ft_strsplit(file->comma, '\n');
+	if (!no_name_comment(file, str_n, c))
 		return (0);
 	while (str_n[++k])
 	{
-		str = ft_strsplit(str_n[k], ' ');
-		if (i == 0 && !(ft_strchr(str[i], DIRECT_CHAR)) &&\
-	(ft_strchr(str[i], LABEL_CHAR)) && !(label_filler(file, &label, str, &i)))
-			return (clean(str, str_n));
-		if (str[i])
+		s = ft_strsplit(str_n[k], ' ');
+		if (i == 0 && !(ft_strchr(s[i], DIRECT_CHAR)) &&\
+	(ft_strchr(s[i], LABEL_CHAR)) && !(label_filler(file, &label, s, &i)))
+			return (clean(s, str_n, c));
+		if (s[i])
 		{
-			if (!label)
-				label = (t_lable *)ft_memalloc(sizeof(t_lable));
-			token = (t_t *)ft_memalloc(sizeof(t_t));
-			token->line_num = define_line_num(file->copy, str_n[k], 0, 0);
-			if ((!fill_command_name(file, token, &(str[i]), &i))\
-				|| (++i >= 0 && (!arguments_filler(file, token, str, &i))))
-				return (cmd_linker_add(file, label, token) ? clean(str, str_n) : 0);
-			token_to_add(label, token);
-			if (!comma_checker(token, comma[k]))
-			{
-				ft_printf("No/Extra SEPARATOR_CHAR - line [%0.3d]\n", token->line_num + 1);
-				return (0);
-			}
+			if (!parse_set(file, &label, s, i))
+				return (clean(s, str_n, c));
+			//ft_printf("label->instruct %s. \n", label->instruct->name_c);
+			// if (!comma_checker(label->instruct, c[k]))
+			// 	return (0);
 		}
-		i = ft_clean_parse(str);
+		i = ft_clean_parse(s);
 	}
-	return (my_end(file, label, str_n));
+	return (my_end(file, label, str_n, c));
 }

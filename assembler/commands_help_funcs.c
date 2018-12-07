@@ -105,7 +105,6 @@ void				clean_spaces(t_binfile *bin, char (*contents)[])
 		i++;
 	}
 	ft_zero_what_left(bin, &j, contents);
-	// ft_clean_commas(contents);
 }
 
 void				clean_new_lines(t_binfile *bin, char (*contents)[])

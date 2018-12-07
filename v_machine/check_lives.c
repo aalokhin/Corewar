@@ -73,7 +73,7 @@ int		check_if_lives(t_cycle *main_cycle, t_flags *params)
 		live_or_die(tmp, main_cycle, params, &res);
 		tmp = tmp->next;
 	}
-	delete_unneeded(&main_cycle->head_proc, main_cycle, 0);
+	delete_unneeded(&main_cycle->head_proc, main_cycle); //0
 	return (res);
 }
 

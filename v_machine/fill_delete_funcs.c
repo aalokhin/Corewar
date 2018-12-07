@@ -102,16 +102,18 @@ void	clear_argv_arr(t_proc *processes)
 	}
 }
 
-void	delete_unneeded(t_proc **head, t_cycle *main_cycle,
-	int early_exit)
+//void	delete_unneeded(t_proc **head, t_cycle *main_cycle,
+	//int early_exit)
+void	delete_unneeded(t_proc **head, t_cycle *main_cycle)
 {
 	t_proc *prev;
 	t_proc *tmp;
 
 	tmp = *head;
 	prev = tmp;
-	while (tmp != NULL && (!tmp->if_live ||
-		(*main_cycle).cycles <= 0 || early_exit))
+	// while (tmp != NULL && (!tmp->if_live ||
+	// 	(*main_cycle).cycles <= 0 || early_exit))
+	while (tmp != NULL && (!tmp->if_live || (*main_cycle).cycles <= 0))
 	{
 		*head = tmp->next;
 		free(tmp);

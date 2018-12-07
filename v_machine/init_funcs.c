@@ -81,7 +81,7 @@ void	main_cycle_init(t_cycle *main_cycle, t_flags *params)
 	(*main_cycle).m = 0;
 	(*main_cycle).live_id = 0;
 	(*main_cycle).live_name = NULL;
-	(*main_cycle).early_exit = 0;
+//	(*main_cycle).early_exit = 0;
 }
 
 void	processes_init2(t_flags *params, t_header bots[MAX_PLAYERS],

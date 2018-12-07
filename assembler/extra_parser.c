@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-int		no_name_comment(t_binfile *file, char **str_n)
+int		no_name_comment(t_binfile *file, char **str_n, char **comma)
 {
 	char **str;
 
@@ -21,7 +21,7 @@ int		no_name_comment(t_binfile *file, char **str_n)
 	{
 		str = ft_strsplit(str_n[0], ' ');
 		error_message(file, str[0], define_line_num(file->copy, str[0], 0, 0));
-		return (clean(str, str_n));
+		return (clean(str, str_n, comma));
 	}
 	return (1);
 }
@@ -40,19 +40,26 @@ int		label_filler(t_binfile *file, t_lable **label, char **str, int *i)
 	return (1);
 }
 
-void	token_to_add(t_lable *label, t_t *token)
+int		token_to_add(t_lable *label, t_t *token, char *comma)
 {
 	if (token->has_codage)
 		token->codage = token_codage(token, 0);
 	command_linker(label, token);
 	token_length(token, 0, label);
+	if (!comma_checker(token, comma))
+	{
+		ft_printf("No/Extra SEPARATOR_CHAR - line [%0.3d]\n", token->line_num + 1);
+		return (0);
+	}
+	return (1);
 }
 
-int		my_end(t_binfile *file, t_lable *label, char **str_n)
+int		my_end(t_binfile *file, t_lable *label, char **str_n, char **comma)
 {
 	if (label)
 		labels_linker(file, label);
 	ft_clean_parse(str_n);
+	ft_clean_parse(comma);
 	file_length(file);
 	return (1);
 }

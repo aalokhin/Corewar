@@ -158,13 +158,14 @@ char						*string_definer(char *str, int i);
 int							initial_validation(t_binfile *file);
 
 int		cmd_linker_add(t_binfile *file, t_lable *label, t_t *token);
-int		my_end(t_binfile *file, t_lable *label, char **str_n);
-void	token_to_add(t_lable *label, t_t *token);
+int		my_end(t_binfile *file, t_lable *label, char **str_n, char **comma);
+int		token_to_add(t_lable *label, t_t *token, char *comma);
 int		label_filler(t_binfile *file, t_lable **label, char **str, int *i);
-int		no_name_comment(t_binfile *file, char **str_n);
-int	clean(char **str, char **str_n);
+int		no_name_comment(t_binfile *file, char **str_n, char **comma);
+int	clean(char **str, char **str_n, char **comma);
 char	*space_adder(char **str);
 int	fill_command_name(t_binfile *file, t_t *token, char **str, int *i);
 int				val_n_c(char *file, int i, int j);
+int			comma_checker(t_t *token, char *str);
 
 #endif

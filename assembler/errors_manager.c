@@ -14,17 +14,11 @@
 
 int			define_line_num_h(char *copy, char *str_n, int *f, int l)
 {
-	int		comma;
-
-	comma = 0;
 	while (copy[*f] && copy[*f] != '\n')
 	{
 		while ((WHITESPACE(copy[*f]) && (copy[*f] != '\n'))\
 			|| copy[*f] == SEPARATOR_CHAR)
-		{
-			comma += copy[*f] == SEPARATOR_CHAR ? 1 : 0;
 			(*f)++;
-		}
 		while (WHITESPACE(str_n[l]))
 			l++;
 		if (copy[*f] != str_n[l])

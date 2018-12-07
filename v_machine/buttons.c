@@ -99,11 +99,11 @@ void	char_listener(t_cycle *main_cycle, WINDOW **win)
 			nodelay(stdscr, TRUE);
 		}
 	}
-	else if (spc == 'x')
-	{
-		delete_unneeded(&main_cycle->head_proc, main_cycle, 1);
-		exit(0);
-	}
+	// else if (spc == 'x')
+	// {
+	// 	delete_unneeded(&main_cycle->head_proc, main_cycle, 1);
+	// 	exit(0);
+	// }
 	else
 		speed_listener(spc, main_cycle, win);
 }

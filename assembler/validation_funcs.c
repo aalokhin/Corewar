@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation_funcs.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdynia <mdynia@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/07 01:06:00 by mdynia            #+#    #+#             */
+/*   Updated: 2018/12/07 01:06:01 by mdynia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 static t_op	g_op_tab[17] =
@@ -30,6 +42,7 @@ static t_op	g_op_tab[17] =
 int			label_name_is_duplicate(t_binfile *file, char *label_name)
 {
 	t_lable	*tmp;
+
 	if (file->labels_list)
 	{
 		tmp = file->labels_list;
@@ -46,7 +59,7 @@ int			label_name_is_duplicate(t_binfile *file, char *label_name)
 	return (0);
 }
 
-int 	label_name_is_valid(t_binfile *file, t_lable *label, char *str)
+int			label_name_is_valid(t_binfile *file, t_lable *label, char *str)
 {
 	int		i;
 	char	*label_name;
@@ -73,7 +86,7 @@ int 	label_name_is_valid(t_binfile *file, t_lable *label, char *str)
 	return (1);
 }
 
-int 		all_digits(char *str)
+int			all_digits(char *str)
 {
 	int i;
 
@@ -84,27 +97,26 @@ int 		all_digits(char *str)
 			return (0);
 		i++;
 	}
-	// if (ft_strcmp(ft_itoa(ft_atoi(str)), str) != 0)
-	// 	return (0);
-	// if ()
 	return (1);
 }
 
-int 		arguments_add_validator(int size,  char *arg)
+int			arguments_add_validator(int size, char *arg)
 {
 	if (size == T_DIR)
 	{
-		if (!(arg + 1) || (!(ft_isdigit(arg[1])) &&  arg[1] != '-') || !all_digits(arg + 1))// && arg[1] != '-'))
+		if (!(arg + 1) || (!(ft_isdigit(arg[1])) &&  arg[1] != '-')
+			|| !all_digits(arg + 1))
 			return (0);
 	}
 	else if (size == T_REG)
 	{
-		if (!(arg + 1) || !(ft_isdigit(arg[1])) || !all_digits(arg + 1) || ft_atoi(arg + 1) >= 100)// && arg[1] != '-'))
+		if (!(arg + 1) || !(ft_isdigit(arg[1])) || !all_digits(arg + 1)
+			|| ft_atoi(arg + 1) >= 100)
 			return (0);
 	}
 	else if (size == T_IND)
 	{
-		 if (!all_digits(arg))
+		if (!all_digits(arg))
 			return (0);
 	}
 	return (1);
@@ -117,22 +129,26 @@ int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
 	char 	*str;
 
  	t = g_op_tab[token->c_name].param_types[i];
-	size = (ft_strchr(arg ,'r') && !(ft_strchr(arg, DIRECT_CHAR)))\
+	size = (ft_strchr(arg, 'r') && !(ft_strchr(arg, DIRECT_CHAR)))\
 	&& !(ft_strchr(arg, LABEL_CHAR)) ? 1 : ft_strchr(arg, DIRECT_CHAR) ? 2 : 4;
 	if (size == t || t == 7 || (size < t && t - size != size &&
 		(t - size == T_REG || t - size == T_DIR ||  t - size == T_IND)))
 	{
 		if (ft_strstr(arg, file->z) || ft_strchr(arg, LABEL_CHAR))
 		{
-			str = ft_strstr(arg, file->z) ? ft_strjoin(arg + 2, file->w) : ft_strjoin(arg + 1, file->w);
+			str = ft_strstr(arg, file->z) ? ft_strjoin(arg + 2, file->w)
+			: ft_strjoin(arg + 1, file->w);
 			if (!(ft_strstr(file->f_contents, str)))
 			{
 				ft_strdel(&str);
-				return (ft_strstr(arg, file->z) ? error_message_label(file, token, arg + 2, arg) : error_message_label(file, token, arg + 1, arg)); // error_message_label(file, token, arg + 1, arg));
+				return (ft_strstr(arg, file->z) ?
+			error_message_label(file, token, arg + 2, arg)
+			: error_message_label(file, token, arg + 1, arg));
 			}
 			ft_strdel(&str);
 		}
-		else if ((size == T_DIR || size == T_REG || size == T_IND) && (!(arguments_add_validator(size, arg))))
+		else if ((size == T_DIR || size == T_REG || size == T_IND) &&
+			(!(arguments_add_validator(size, arg))))
 			return (error_message(file, arg, token->line_num));
 		return (1);
 	}
