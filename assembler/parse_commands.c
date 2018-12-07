@@ -75,8 +75,10 @@ int			arguments_filler(t_binfile *file, t_t *t, char **s, int *i)
 		if (a == g_op_tab[t->c_name].nb_params)
 		{
 			if (s[*i + 1])
+			{
 				return (error_invalid_arg_type(t, *i,
 				argument_adder2(s[*i + 1])));
+			}
 			break ;
 		}
 		(*i)++;
@@ -86,7 +88,7 @@ int			arguments_filler(t_binfile *file, t_t *t, char **s, int *i)
 	return (1);
 }
 
-int 		parse_set(t_binfile *file, t_lable **label, char **s, int i)
+int			parse_set(t_binfile *file, t_lable **label, char **s, int i)
 {
 	t_t		*token;
 
@@ -94,7 +96,7 @@ int 		parse_set(t_binfile *file, t_lable **label, char **s, int i)
 	if (!(*label))
 		*label = (t_lable *)ft_memalloc(sizeof(t_lable));
 	token = (t_t *)ft_memalloc(sizeof(t_t));
-	//token->line_num = define_line_num(file->copy, str_n, 0, 0);
+	token->line_num = define_line_num(file->copy, file->str_n, 0, 0);
 	if ((!fill_command_name(file, token, &(s[i]), &i))\
 		|| (++i >= 0 && (!arguments_filler(file, token, s, &i))))
 	{
@@ -111,7 +113,7 @@ int 		parse_set(t_binfile *file, t_lable **label, char **s, int i)
 int			parse_commands(t_binfile *file, int k, char **str_n, char **s)
 {
 	t_lable	*label;
-	char **c;
+	char	**c;
 	int		i;
 
 	i = 0;
@@ -126,14 +128,11 @@ int			parse_commands(t_binfile *file, int k, char **str_n, char **s)
 		if (i == 0 && !(ft_strchr(s[i], DIRECT_CHAR)) &&\
 	(ft_strchr(s[i], LABEL_CHAR)) && !(label_filler(file, &label, s, &i)))
 			return (clean(s, str_n, c));
+		file->str_n = str_n[k];
 		if (s[i])
-		{
-			if (!parse_set(file, &label, s, i))
+			if (!parse_set(file, &label, s, i)
+				|| (!comma_checker(label->instruct, c[k], -1, -1)))
 				return (clean(s, str_n, c));
-			//ft_printf("label->instruct %s. \n", label->instruct->name_c);
-			// if (!comma_checker(label->instruct, c[k]))
-			// 	return (0);
-		}
 		i = ft_clean_parse(s);
 	}
 	return (my_end(file, label, str_n, c));

@@ -49,14 +49,12 @@ char				*join_name_path(char *curdir, char *file)
 	if (curdir[len - 1] == '/')
 	{
 		path = ft_strjoin(curdir, file);
-		//ft_strdel(&curdir);
 	}
 	else
 	{
 		new = ft_strnew(len + 1);
 		new = ft_strncpy(new, curdir, len);
 		new[len] = '/';
-		//ft_strdel(&curdir);
 		path = ft_strjoin(new, file);
 		ft_strdel(&new);
 	}

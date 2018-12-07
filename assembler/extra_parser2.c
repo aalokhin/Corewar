@@ -67,18 +67,21 @@ int			clean(char **str, char **str_n, char **comma)
 	return (0);
 }
 
-int			comma_checker(t_t *token, char *str)
+int			comma_checker(t_t *token, char *str, int l, int k)
 {
-	int		l = -1;
-	int 	k = -1;
-	int 	comma = 0;
-	char 	*string;
+	int		comma;
+	char	*string;
+	t_t		*tmp;
 
+	comma = 0;
+	tmp = token;
+	while (tmp->next)
+		tmp = tmp->next;
 	while (str[++l])
 		comma += str[l] == SEPARATOR_CHAR ? 1 : 0;
-	if (g_op_tab[token->c_name].nb_params == comma + 1)
+	if (g_op_tab[tmp->c_name].nb_params == comma + 1)
 	{
-		string = ft_strstr(str, token->a[0]);
+		string = ft_strstr(str, tmp->a[0]);
 		while (string[++k] && comma != 0)
 			comma -= string[k] == SEPARATOR_CHAR ? 1 : 0;
 		while (string[k])
@@ -88,7 +91,7 @@ int			comma_checker(t_t *token, char *str)
 			k++;
 		}
 	}
-	ft_printf("No/Extra SEPARATOR_CHAR - line [%0.3d]\n", token->line_num + 1);
+	ft_printf("No/Extra SEPARATOR_CHAR - line [%0.3d]\n", tmp->line_num + 1);
 	return (0);
 }
 
@@ -113,6 +116,20 @@ int			fill_command_name(t_binfile *file, t_t *token, char **str, int *i)
 	{
 		error_command(file, *str, token->line_num);
 		return (0);
+	}
+	return (1);
+}
+
+int			all_digits(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!(ft_isdigit(str[i])) && str[i] != '-')
+			return (0);
+		i++;
 	}
 	return (1);
 }

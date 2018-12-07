@@ -31,7 +31,7 @@ void					output_basics(t_binfile *bin)
 	size_t				i;
 
 	i = 0;
-	while (i < 4)
+	while (i < MAGIC_SIZE)
 	{
 		write(bin->fd_file_out, &bin->magic_start[i], 1);
 		i++;

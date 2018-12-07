@@ -18,9 +18,10 @@
 # include "../libft/get_next_line.h"
 # include "../op.h"
 # include <dirent.h>
-# define WHITESPACE(c)		(c == ' ' || c == '\t' || c =='\n') //augment
-# define NEW_LINE(c)			(c == '\n')
+# define WHITESPACE(c)		(c == ' ' || c == '\t' || c =='\n')
+# define NEW_LINE(c)		(c == '\n')
 # define CUR_DIR(c)			(c == '.')
+# define MAGIC_SIZE			4
 
 typedef struct				s_op
 {
@@ -34,19 +35,19 @@ typedef struct				s_op
 	int						has_idx;
 }							t_op;
 
-typedef struct				s_t  //minimum
+typedef struct				s_t
 {
-	int						c_name; // order number of "live"
+	int						c_name;
 	int						opcode;
 	char					*name_c;
-	char					*a[4]; // for codage T_REG r 01 T_DIR % 10 T_IND 11
-	int						arguments; //  {T_DIR} 1 || 2 || 3
-	int						lbl_size; //label size ===> 2 or 4
+	char					*a[4];
+	int						arguments;
+	int						lbl_size;
 	int						codage;
-	int						args[3][2]; // 0 - for codage T_REG r 01 T_DIR % 10 T_IND 11 /// 1 - distance
-	int						bytes_above_i; // in label length
+	int						args[3][2];
+	int						bytes_above_i;
 	int						has_codage;
-	int						c_len;//byte length of the instruction
+	int						c_len;
 	int						line_num;
 	struct s_t				*next;
 
@@ -54,38 +55,39 @@ typedef struct				s_t  //minimum
 
 typedef struct				s_lable
 {
-	t_t						*instruct; //
+	t_t						*instruct;
 	char					*label_name;
 	struct s_lable			*next;
 	struct s_lable			*prev;
-	int 					lbl_len; //length of lable
-	int 					bytes_above;
+	int						lbl_len;
+	int						bytes_above;
 	int						line_num;
 }							t_lable;
 
 typedef struct				s_binfile
 {
-	char 					z[3];
-	char 					w[2];
-	int						fd;//incoming file
-	int						fd_file_out;//resulting file
+	char					z[3];
+	char					w[2];
+	int						fd;
+	int						fd_file_out;
 	unsigned char			a[4];
-	char					*f_contents;//a buf where all the data is stored written as a single line
-	char					*copy; // copy of f_contents - will be used for validation
-	int						flag_a;//flag a
-	char					*arg_name;//string argv[i]
+	char					*f_contents;
+	char					*copy;
+	int						flag_a;
+	char					*arg_name;
 	char					*res_arg_name;
-	unsigned int			arg_length; //file length
-	unsigned int			file_length; // my file length
+	unsigned int			arg_length;
+	unsigned int			file_length;
 	char					*name;
 	char					*comment;
-	unsigned int			champ_size_nbr;//
+	unsigned int			champ_size_nbr;
 	char					magic_start[4];
 	char					champ_name[PROG_NAME_L + 1];
 	char					champ_comment[COMMENT_L + 1];
 	char					champ_size[4];
 	char					*comma;
-	char					*exec_code;//executable code
+	char					*exec_code;
+	char					*str_n;
 	t_lable					*labels_list;
 }							t_binfile;
 
@@ -96,7 +98,8 @@ void						ft_print_flag_a(t_binfile *bin);
 void						ft_print_inv_input();
 void						ft_print_success(t_binfile *bin);
 void						fill_magic_start(t_binfile *bin);
-int							fill_name_comment(t_binfile *bin, size_t i, size_t tmp);
+int							fill_name_comment(t_binfile *bin, size_t i,\
+							size_t tmp);
 int							ft_opening_file(char *s_file, int flag_a);
 void						init_bin(t_binfile	*bin);
 int							file_processing(t_binfile *bin);
@@ -117,7 +120,8 @@ void						clean_new_lines(t_binfile *bin, char (*contents)[]);
 void						fill_corfile_contents(t_binfile *bin);
 void						parse_file(t_binfile *bin, char (*contents)[]);
 int							ft_clean_parse(char **parse);
-int							parse_commands(t_binfile *file,int i, char **str_n, char **str);
+int							parse_commands(t_binfile *file, int i,\
+							char **str_n, char **str);
 int							ft_cmd_lbls(char	*c_name);
 int							label_name_is_valid(t_binfile *file,\
 							t_lable *label, char *str);
@@ -156,16 +160,21 @@ t_lable						*labels_linker(t_binfile *file, t_lable *label);
 void						command_linker(t_lable *label, t_t *token);
 char						*string_definer(char *str, int i);
 int							initial_validation(t_binfile *file);
-
-int		cmd_linker_add(t_binfile *file, t_lable *label, t_t *token);
-int		my_end(t_binfile *file, t_lable *label, char **str_n, char **comma);
-int		token_to_add(t_lable *label, t_t *token, char *comma);
-int		label_filler(t_binfile *file, t_lable **label, char **str, int *i);
-int		no_name_comment(t_binfile *file, char **str_n, char **comma);
-int	clean(char **str, char **str_n, char **comma);
-char	*space_adder(char **str);
-int	fill_command_name(t_binfile *file, t_t *token, char **str, int *i);
-int				val_n_c(char *file, int i, int j);
-int			comma_checker(t_t *token, char *str);
+int							cmd_linker_add(t_binfile *file, t_lable *label,\
+							t_t *token);
+int							my_end(t_binfile *file, t_lable *label,\
+							char **str_n, char **comma);
+int							label_filler(t_binfile *file, t_lable **label,\
+							char **str, int *i);
+int							no_name_comment(t_binfile *file, char **str_n,\
+							char **comma);
+int							clean(char **str, char **str_n, char **comma);
+char						*space_adder(char **str);
+int							fill_command_name(t_binfile *file, t_t *token,\
+							char **str, int *i);
+int							val_n_c(char *file, int i, int j);
+int							comma_checker(t_t *token, char *str, int l, int k);
+int							argument_adder2(char *str);
+int							all_digits(char *str);
 
 #endif

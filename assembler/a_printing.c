@@ -113,7 +113,8 @@ void				print_instr_args2(t_t *instruct)
 		}
 		else if (instruct->args[i][0] == 10 || instruct->args[i][0] == 11)
 		{
-			if (instruct->a[i][0] != DIRECT_CHAR && instruct->a[i][0] != LABEL_CHAR\
+			if (instruct->a[i][0] != DIRECT_CHAR\
+			&& instruct->a[i][0] != LABEL_CHAR\
 			&& instruct->a[i][0] != 'r')
 				ft_printf("%-18s", instruct->a[i]);
 			else

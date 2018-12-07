@@ -40,20 +40,6 @@ int		label_filler(t_binfile *file, t_lable **label, char **str, int *i)
 	return (1);
 }
 
-int		token_to_add(t_lable *label, t_t *token, char *comma)
-{
-	if (token->has_codage)
-		token->codage = token_codage(token, 0);
-	command_linker(label, token);
-	token_length(token, 0, label);
-	if (!comma_checker(token, comma))
-	{
-		ft_printf("No/Extra SEPARATOR_CHAR - line [%0.3d]\n", token->line_num + 1);
-		return (0);
-	}
-	return (1);
-}
-
 int		my_end(t_binfile *file, t_lable *label, char **str_n, char **comma)
 {
 	if (label)

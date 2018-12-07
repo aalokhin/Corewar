@@ -65,18 +65,15 @@ int					file_processing(t_binfile *bin)
 		ft_clean_all(bin);
 		return (0);
 	}
-	// system("leaks asm");
 	ft_strdel(&((*bin).f_contents));
 	(*bin).f_contents = ft_strdup(file_contents);
 	if (init_check(bin) == 0)
 	{
 		ft_clean_all(bin);
-		//system("leaks asm");
 		return (0);
 	}
 	create_cor_file(&(*bin));
 	close((*bin).fd);
-	// system("leaks asm");
 	ft_clean_all(bin);
 	return (1);
 }
@@ -96,8 +93,10 @@ int					parse_stdargs(int flag_a, int flag_d, char **argv, int argc)
 		else
 		{
 			if (!ft_opening_directory(argv[i], flag_d, flag_a))
-				if (!ft_opening_file(argv[i], flag_a))
-					return (0);
+			{
+				ft_printf("Make sure you have passed a folder\n");
+				return (0);
+			}
 		}
 		i++;
 	}

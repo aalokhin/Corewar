@@ -86,25 +86,11 @@ int			label_name_is_valid(t_binfile *file, t_lable *label, char *str)
 	return (1);
 }
 
-int			all_digits(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!(ft_isdigit(str[i])) && str[i] != '-')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 int			arguments_add_validator(int size, char *arg)
 {
 	if (size == T_DIR)
 	{
-		if (!(arg + 1) || (!(ft_isdigit(arg[1])) &&  arg[1] != '-')
+		if (!(arg + 1) || (!(ft_isdigit(arg[1])) && arg[1] != '-')
 			|| !all_digits(arg + 1))
 			return (0);
 	}
@@ -122,30 +108,37 @@ int			arguments_add_validator(int size, char *arg)
 	return (1);
 }
 
+int			arguments_lbl_validator(t_binfile *file, t_t *token, char *arg)
+{
+	char	*str;
+
+	str = ft_strstr(arg, file->z) ? ft_strjoin(arg + 2, file->w)
+	: ft_strjoin(arg + 1, file->w);
+	if (!(ft_strstr(file->f_contents, str)))
+	{
+		ft_strdel(&str);
+		return (ft_strstr(arg, file->z) ?
+			error_message_label(file, token, arg + 2, arg)
+			: error_message_label(file, token, arg + 1, arg));
+	}
+	ft_strdel(&str);
+	return (1);
+}
+
 int			arguments_validator(t_binfile *file, t_t *token, char *arg, int i)
 {
 	int		size;
 	int		t;
-	char 	*str;
 
- 	t = g_op_tab[token->c_name].param_types[i];
-	size = (ft_strchr(arg, 'r') && !(ft_strchr(arg, DIRECT_CHAR)))\
-	&& !(ft_strchr(arg, LABEL_CHAR)) ? 1 : ft_strchr(arg, DIRECT_CHAR) ? 2 : 4;
+	t = g_op_tab[token->c_name].param_types[i];
+	size = argument_adder2(arg) == 3 ? 4 : argument_adder2(arg);
 	if (size == t || t == 7 || (size < t && t - size != size &&
-		(t - size == T_REG || t - size == T_DIR ||  t - size == T_IND)))
+		(t - size == T_REG || t - size == T_DIR || t - size == T_IND)))
 	{
 		if (ft_strstr(arg, file->z) || ft_strchr(arg, LABEL_CHAR))
 		{
-			str = ft_strstr(arg, file->z) ? ft_strjoin(arg + 2, file->w)
-			: ft_strjoin(arg + 1, file->w);
-			if (!(ft_strstr(file->f_contents, str)))
-			{
-				ft_strdel(&str);
-				return (ft_strstr(arg, file->z) ?
-			error_message_label(file, token, arg + 2, arg)
-			: error_message_label(file, token, arg + 1, arg));
-			}
-			ft_strdel(&str);
+			if (!arguments_lbl_validator(file, token, arg))
+				return (0);
 		}
 		else if ((size == T_DIR || size == T_REG || size == T_IND) &&
 			(!(arguments_add_validator(size, arg))))
