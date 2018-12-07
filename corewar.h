@@ -84,6 +84,7 @@ typedef struct		s_cycle
 	int				live_id;
 	int				live_if_change;
 	char			*live_name;
+	int				early_exit;
 	t_proc			*head_proc;
 }					t_cycle;
 
@@ -230,7 +231,8 @@ void				check_magic(unsigned char *str, int j,
 						t_header bots[MAX_PLAYERS]);
 int					check_comment(unsigned char *str, t_flags *params, int j,
 						t_header bots[MAX_PLAYERS]);
-void				delete_unneeded(t_proc **head, t_cycle *main_cycle);
+void				delete_unneeded(t_proc **head, t_cycle *main_cycle,
+						int early_exit);
 void				fill_start_map_id(t_cycle *main_cycle,
 						t_header bots[MAX_PLAYERS], t_flags *params);
 void				intro_print(t_flags *params, t_header bots[MAX_PLAYERS],

@@ -120,7 +120,8 @@ int		main(int argc, char **argv)
 		print_usage();
 		return (0);
 	}
-	if (CHAMP_MAX_SIZE > MEM_SIZE || MEM_SIZE < 16)
+	if (CHAMP_MAX_SIZE > MEM_SIZE || MEM_SIZE < 16
+		|| IDX_MOD <= 1 || MAX_PLAYERS <= 1 || REG_NUMBER < 1)
 	{
 		ft_printf("%s\n", "Error: Incorrect const values");
 		return (0);
@@ -131,11 +132,5 @@ int		main(int argc, char **argv)
 	params.j = 0;
 	init_bots(bots);
 	if (!read_bots(&params, fd, bots))
-	{
-		//while (1)
-			//;
 		exit(0);
-	}
-	//while (1)
-			//;
 }

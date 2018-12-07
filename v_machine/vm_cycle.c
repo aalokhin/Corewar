@@ -124,6 +124,5 @@ void	start_cycle(unsigned char *map, t_flags *params,
 		cycle_period_check(&main_cycle->cycle_counter, main_cycle, params);
 		if (!external_cycle_pass(main_cycle, map, params))
 			break ;
-
 	}
 }
