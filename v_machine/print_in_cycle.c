@@ -52,8 +52,6 @@ void	after_cycle(t_flags *params, t_header bots[MAX_PLAYERS],
 		bots[i].exec_part = NULL;
 		i++;
 	}
-	if (main_cycle.early_exit)
-		return ;
 	if ((*params).ncurses == 1)
 	{
 		print_winner(win, &main_cycle);
