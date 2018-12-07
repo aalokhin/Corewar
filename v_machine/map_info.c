@@ -36,14 +36,14 @@ void	print_map_info2(WINDOW *win, t_cycle *main_cycle, int x, int y)
 	y_0 += 3;
 	mvwprintw(win, y_0, x_0, "Cycles: %d", (*main_cycle).cycles);
 	y_0 += 2;
-	mvwprintw(win, y_0, x_0, "Processes: %d", (*main_cycle).processes);
-	mvwprintw(win, y, x, "CYCLE_TO_DIE : %d", (*main_cycle).cycle_die);
+	mvwprintw(win, y_0, x_0, "Processes: %d  ", (*main_cycle).processes);
+	mvwprintw(win, y, x, "CYCLE_TO_DIE : %d   ", (*main_cycle).cycle_die);
 	y += 2;
 	mvwprintw(win, y, x, "CYCLE_DELTA : %d", CYCLE_DELTA);
 	y += 2;
 	mvwprintw(win, y, x, "NBR_LIVE : %d", NBR_LIVE);
 	y += 2;
-	mvwprintw(win, y, x, "MAX_CHECKS : %d", (*main_cycle).checks_if_die);
+	mvwprintw(win, y, x, "MAX_CHECKS : %d ", (*main_cycle).checks_if_die);
 	y += 2;
 	print_map_info3(win, main_cycle, x, y);
 	(*main_cycle).winner_str = y + 2;
